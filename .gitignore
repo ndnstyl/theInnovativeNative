@@ -1,49 +1,191 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ===========================================
+# Second Brain Skills Template - .gitignore
+# ===========================================
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# ------------------------------------------
+# PROPRIETARY/PERSONAL CONTENT (EXCLUDE)
+# ------------------------------------------
 
-# testing
-/coverage
+# Your personal projects and business data
+law_firm_RAG/
+websiteStuff/
+specs/
+rizeToAirtable.md
 
-# next.js
-/.next/
-/out/
+# Personal/proprietary feature specs (keep templates, exclude your data)
+.specify/features/dea-data-silo/
+.specify/features/lawfirm-rag-content-campaign/
+.specify/features/tin-internal-airtable/
+.specify/features/tin-database-expansion/
+.specify/features/n8n-health-monitoring/
+.specify/features/asliceofhaven/
 
-# production
-/build
+# Session logs and reports (contain personal data)
+.specify/memory/reports/
+.specify/memory/projects/time-log.json
+.specify/features/**/session-log.md
 
-# misc
-.DS_Store
+# ------------------------------------------
+# SECRETS & CREDENTIALS (NEVER COMMIT)
+# ------------------------------------------
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# API keys, tokens, credentials
 *.pem
+*.key
+secrets/
+credentials/
 
-# debug
+# ------------------------------------------
+# DEPENDENCIES
+# ------------------------------------------
+
+# Node modules (reinstall via npm/yarn)
+node_modules/
+**/node_modules/
+
+# Package lock files (optional - some prefer to include)
+# package-lock.json
+# yarn.lock
+
+# ------------------------------------------
+# BUILD OUTPUTS & CACHES
+# ------------------------------------------
+
+# Build directories
+dist/
+build/
+.next/
+out/
+.output/
+
+# Cache directories
+.cache/
+*.cache
+.turbo/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# ------------------------------------------
+# EDITOR & IDE
+# ------------------------------------------
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains (IntelliJ, WebStorm, etc.)
+.idea/
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ------------------------------------------
+# OS GENERATED
+# ------------------------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ------------------------------------------
+# LOGS & DEBUG
+# ------------------------------------------
+
+# Log files
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Debug
+.debug/
 
-# vercel
-.vercel
+# ------------------------------------------
+# REMOTION SPECIFIC
+# ------------------------------------------
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Remotion build outputs
+remotion-videos/out/
+remotion-videos/.remotion/
 
-# backups (large binary files)
-/backups/*.gz
-/backups/*.zip
+# Keep the remotion source but not node_modules
+remotion-videos/node_modules/
 
-# WordPress uploads and cache
-/wp-content/uploads/
-/wp-content/cache/
+# ------------------------------------------
+# BACKUPS
+# ------------------------------------------
+
+# Backup files
+*.bak
+*.backup
+backups/
+
+# ------------------------------------------
+# TEMPORARY FILES
+# ------------------------------------------
+
+# Temp directories
+tmp/
+temp/
+.tmp/
+
+# ------------------------------------------
+# SENSITIVE AIRTABLE DATA
+# ------------------------------------------
+
+# Airtable exports (may contain sensitive data)
+*.airtable.json
+
+# ------------------------------------------
+# WHAT TO INCLUDE (Override ignores)
+# ------------------------------------------
+
+# Keep template files even if parent is ignored
+!.specify/templates/
+!.specify/templates/**
+
+# Keep example/sample features
+!.specify/features/.gitkeep
+
+# Keep the skill structure
+!.claude/skills/
+!.claude/skills/**
+
+# Keep constitution and shared learnings (they're the template)
+!.specify/memory/constitution.md
+!.specify/memory/learnings/shared-learnings.md
+
+# Keep agent learnings structure (template value)
+!.specify/memory/learnings/*-learnings.md
+
+# Keep escalation matrix template
+!.specify/memory/escalation-matrix.json
+
+# Keep agent roster structure
+!.specify/memory/agents/roster.json
+
+# Keep project registry structure (but sanitize content)
+!.specify/memory/projects/registry.json

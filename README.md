@@ -1,38 +1,211 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Second Brain Skills for Claude Code
 
-## Getting Started
+A modular multi-agent skill system for Claude Code, implementing a "second brain" architecture with hierarchical agents, feedback loops, and persistent learning.
 
-First, run the development server:
+Inspired by [second-brain-skills](https://github.com/coleam00/second-brain-skills).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## What This Is
+
+This is a **template** for building a team of AI agents that:
+- Follow a constitution (rules and principles)
+- Learn from mistakes and share knowledge
+- Route tasks through a hierarchy
+- Log their work for visibility
+- Maintain persistent memory across sessions
+
+## Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      CEO (Level 5)                          │
+│                    Strategic Oversight                       │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                  Senior Staff (Level 4)                      │
+│   Drew (PM) │ Jenna (Ops) │ Patricia (QA) │ Chris (Content) │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                  Project Leads (Level 3)                     │
+│       Haven │ Trinity │ Aurora │ Muse │ Scales │ etc.       │
+└─────────────────────────────────────────────────────────────┘
+                              │
+┌─────────────────────────────────────────────────────────────┐
+│                     Workers (Level 2)                        │
+│  Tab (Airtable) │ Neo (n8n) │ Spike (Video) │ Rex (Git)    │
+│  Sage (Notion) │ Ada (Python) │ Echo (Slack) │ etc.        │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 1. Constitution-Driven
+Every agent follows a single source of truth (`.specify/memory/constitution.md`) that defines:
+- Non-negotiable principles
+- Task routing rules
+- Performance standards
+- Learning requirements
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 2. Feedback Loops
+```
+Startup → Load Constitution → Load Learnings → Do Work → Update Learnings → Log Time → Shutdown
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Every agent must:
+- Read the constitution on startup
+- Check shared learnings before starting
+- Document new patterns discovered
+- Log all work to the tracking system
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 3. Persistent Learning
+```
+.specify/memory/learnings/
+├── shared-learnings.md      # Cross-agent discoveries
+├── drew-learnings.md        # Drew's personal learnings
+├── tab-learnings.md         # Tab's personal learnings
+└── ...                      # Each agent has their own file
+```
 
-## Learn More
+### 4. Spec Kit Model
+Every feature/project requires documentation:
+- `spec.md` - Requirements and success criteria
+- `plan.md` - Implementation approach
+- `tasks.md` - Task breakdown with status
 
-To learn more about Next.js, take a look at the following resources:
+**No spec kit = No work starts**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Quick Start
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 1. Clone and Configure
 
-## Deploy on Vercel
+```bash
+git clone https://github.com/YOUR_USERNAME/second-brain-skills.git
+cd second-brain-skills
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Set Up Your Tracking System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Create an Airtable base (or use another system) with these tables:
+- **Agents** - Your agent roster
+- **Projects** - Active projects
+- **Tasks** - Work items
+- **Time Entries** - Time tracking
+- **Deliverables** - Outputs
+
+### 3. Configure CLAUDE.md
+
+Update `CLAUDE.md` with your:
+- Airtable Base ID
+- Table IDs
+- API Token (keep secure!)
+- Agent Record IDs
+
+### 4. Customize Your Agents
+
+Edit the skill files in `.claude/skills/` to match your needs:
+- Rename agents
+- Adjust responsibilities
+- Add/remove workers
+
+### 5. Update the Constitution
+
+Modify `.specify/memory/constitution.md` with your:
+- Specific principles
+- Channel ownership
+- Performance standards
+- Learning requirements
+
+## Directory Structure
+
+```
+.
+├── CLAUDE.md                    # Claude Code instructions (your config)
+├── .gitignore                   # Excludes sensitive/personal data
+│
+├── .claude/
+│   └── skills/                  # Agent skill definitions
+│       ├── staff/               # Senior staff (Level 4)
+│       │   ├── drew-project-manager/
+│       │   ├── patricia-dea-lead/
+│       │   └── ...
+│       ├── leads/               # Project leads (Level 3)
+│       │   ├── haven-asliceofhaven/
+│       │   └── ...
+│       ├── workers/             # Workers (Level 2)
+│       │   ├── tab-airtable/
+│       │   ├── neo-n8n/
+│       │   └── ...
+│       └── infrastructure/      # System skills
+│
+└── .specify/
+    ├── memory/
+    │   ├── constitution.md      # Source of truth
+    │   ├── escalation-matrix.json
+    │   ├── agents/
+    │   │   └── roster.json
+    │   ├── learnings/           # Agent learning files
+    │   └── projects/
+    │       └── registry.json
+    ├── features/                # Your project specs
+    ├── templates/               # Spec kit templates
+    └── sops/                    # Standard operating procedures
+```
+
+## Agent Types
+
+### Staff (Level 4)
+| Agent | Role | Responsibilities |
+|-------|------|------------------|
+| Drew | Project Manager | Task routing, QA, health checks, weekly reports |
+| Patricia | QA Lead | Quality assurance, reviews all worker completions |
+| Jenna | Office Manager | File organization, git hygiene, scheduling |
+| Chris | Storyteller | Content creation, brand voice enforcement |
+| Risa | Finance | Invoicing, financial tracking |
+
+### Workers (Level 2)
+| Agent | Domain | Integration |
+|-------|--------|-------------|
+| Tab | Airtable | airtable-mcp |
+| Neo | n8n Workflows | n8n-mcp |
+| Spike | Video (Remotion) | Remotion framework |
+| Rex | Git Operations | GitHub CLI |
+| Sage | Documentation | notion-mcp |
+| Ada | Python Scripts | Python runtime |
+| Echo | Slack | slack-mcp |
+| Iris | Google Workspace | google-drive-mcp |
+| Maya | Content Ideation | - |
+| Cash | Stripe/Billing | stripe-mcp |
+| Cal | Calendar | google-calendar-mcp |
+
+## Usage Examples
+
+### Invoke an Agent
+```
+@drew check project health
+@tab create a new record in the Projects table
+@neo build a webhook workflow
+@patricia review the last completed task
+```
+
+### Routing Rules
+- All task requests flow through Drew (PM)
+- Exceptions: Jenna→Rex (git), Jenna→Sage (docs), Risa→Cash (billing)
+- CEO can assign directly to anyone
+
+## Contributing
+
+PRs welcome! Please:
+1. Follow the skill structure conventions
+2. Include learnings documentation
+3. Update the constitution if adding new principles
+4. Test your changes
+
+## License
+
+MIT
+
+## Credits
+
+- Inspired by [coleam00/second-brain-skills](https://github.com/coleam00/second-brain-skills)
+- Built for [Claude Code](https://claude.ai/claude-code)

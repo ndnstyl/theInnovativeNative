@@ -1,0 +1,140 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-04",
+  "escalationPaths": {
+    "projectHealth": {
+      "description": "Project health score drops below threshold",
+      "triggers": [
+        {
+          "condition": "healthScore < 60",
+          "severity": "critical",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#cerebro-alerts"],
+          "responseTime": "1 hour"
+        },
+        {
+          "condition": "healthScore < 80",
+          "severity": "warning",
+          "escalateTo": "project-lead",
+          "notifyChannels": ["slack:#project-updates"],
+          "responseTime": "4 hours"
+        }
+      ]
+    },
+    "timeAllocation": {
+      "description": "Project falling behind weekly time target",
+      "triggers": [
+        {
+          "condition": "weeklyHours < 2 AND weekProgress > 50%",
+          "severity": "warning",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#project-updates"],
+          "responseTime": "24 hours"
+        },
+        {
+          "condition": "weeklyHours < 4 AND weekProgress > 80%",
+          "severity": "critical",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#cerebro-alerts"],
+          "responseTime": "4 hours"
+        }
+      ]
+    },
+    "blockers": {
+      "description": "Task blocked for extended period",
+      "triggers": [
+        {
+          "condition": "blockedDuration > 24 hours",
+          "severity": "warning",
+          "escalateTo": "project-lead",
+          "notifyChannels": ["slack:#project-updates"],
+          "responseTime": "4 hours"
+        },
+        {
+          "condition": "blockedDuration > 48 hours",
+          "severity": "critical",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#cerebro-alerts"],
+          "responseTime": "2 hours"
+        }
+      ]
+    },
+    "workerErrors": {
+      "description": "Worker agent experiencing repeated failures",
+      "triggers": [
+        {
+          "condition": "errorRate > 10%",
+          "severity": "warning",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#cerebro-alerts"],
+          "responseTime": "4 hours"
+        },
+        {
+          "condition": "errorRate > 25%",
+          "severity": "critical",
+          "escalateTo": "ceo",
+          "notifyChannels": ["slack:#cerebro-alerts", "email"],
+          "responseTime": "1 hour"
+        }
+      ]
+    },
+    "clientCommunication": {
+      "description": "Client communication SLA breach",
+      "triggers": [
+        {
+          "condition": "responseTime > 4 hours",
+          "severity": "warning",
+          "escalateTo": "risa",
+          "notifyChannels": ["slack:#project-updates"],
+          "responseTime": "2 hours"
+        },
+        {
+          "condition": "responseTime > 24 hours",
+          "severity": "critical",
+          "escalateTo": "drew",
+          "notifyChannels": ["slack:#cerebro-alerts"],
+          "responseTime": "1 hour"
+        }
+      ]
+    }
+  },
+  "routingRules": {
+    "default": {
+      "description": "Standard task routing through Drew",
+      "path": ["requester", "drew", "assigned-worker"],
+      "exceptions": [
+        {
+          "from": "jenna",
+          "to": "rex",
+          "reason": "Git cleanup is immediate"
+        },
+        {
+          "from": "jenna",
+          "to": "sage",
+          "reason": "Documentation updates"
+        },
+        {
+          "from": "ceo",
+          "to": "any",
+          "reason": "CEO override authority"
+        }
+      ]
+    }
+  },
+  "notificationPreferences": {
+    "critical": {
+      "channels": ["slack:#cerebro-alerts", "email"],
+      "immediateNotification": true
+    },
+    "warning": {
+      "channels": ["slack:#project-updates"],
+      "immediateNotification": false,
+      "batchInterval": "4 hours"
+    },
+    "info": {
+      "channels": ["slack:#project-updates"],
+      "immediateNotification": false,
+      "batchInterval": "daily"
+    }
+  }
+}

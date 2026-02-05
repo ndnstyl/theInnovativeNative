@@ -1,159 +1,102 @@
-# The Innovative Native - AI Assistant Context
+# Second Brain Skills - Claude Code Instructions
 
-> This file provides context for AI assistants working on this project.
+## Overview
 
-## Project Overview
+This is a multi-agent skill system for Claude Code, implementing a "second brain" architecture with hierarchical agents, feedback loops, and persistent learning.
 
-A dual-purpose consultant portfolio website for Michael Soto:
-1. **Home Page** - Attracts consulting clients (AI automation, n8n, growth)
-2. **Careers Page** - Engages recruiters with downloadable resumes
-3. **Portfolio Page** - Filterable grid showcasing work
+## MANDATORY: Agent Protocol (Constitution Compliance)
 
-**Domain:** theinnovativenative.com
-**Framework:** WordPress + Pro Theme (Cornerstone builder)
-**Hosting:** hosting.com (cPanel access)
-**Repo:** https://github.com/ndnstyl/theInnovativeNative.git
+### Startup Checklist (BEFORE ANY WORK)
+1. Read `.specify/memory/constitution.md` - understand rules
+2. Read `.specify/memory/learnings/shared-learnings.md` - learn from others' mistakes
+3. Verify your integration connections (Airtable, Slack, etc.)
+4. Identify which Project this work belongs to (or create one if new)
+
+### Shutdown Checklist (BEFORE ENDING SESSION)
+- [ ] Log Time Entry to your tracking system (Entry Date, Agent, Project, Hours, Description, Tokens)
+- [ ] Log Task if work >5 min or produced deliverable
+- [ ] Update `.specify/memory/learnings/shared-learnings.md` if lesson learned
+- [ ] Verify PM (Drew) has visibility on completed work
+
+### Critical Rule
+**Local .md files are for planning. Your tracking system is for visibility.**
+Drew only sees the tracking system. If it's not logged there, it doesn't exist to Drew.
 
 ---
 
-## Site Architecture
+## Airtable Quick Reference (CONFIGURE YOUR OWN)
 
 ```
-theinnovativenative.com
-├── / (Home - Consulting Focus)
-├── /careers (Recruiter Focus)
-└── /portfolio (Filterable Grid)
+Base: YOUR_BASE_NAME (YOUR_BASE_ID)
+API Token: YOUR_API_TOKEN (store securely, never commit)
+
+Key Tables (create these in your base):
+- Projects: YOUR_PROJECTS_TABLE_ID
+- Tasks: YOUR_TASKS_TABLE_ID
+- Time Entries: YOUR_TIME_ENTRIES_TABLE_ID
+- Agents: YOUR_AGENTS_TABLE_ID
+- Deliverables: YOUR_DELIVERABLES_TABLE_ID
+
+Key Agent Record IDs (populate after creating agents):
+- Drew (PM): YOUR_DREW_RECORD_ID
+- Tab (Airtable): YOUR_TAB_RECORD_ID
+- CEO: YOUR_CEO_RECORD_ID
 ```
 
 ---
 
-## Key Files
+## Project Structure
 
-| File | Purpose |
-|------|---------|
-| `/docs/SETUP.md` | LocalWP installation and backup import |
-| `/docs/DEPLOYMENT.md` | How to deploy to production |
-| `/docs/CONTENT.md` | Portfolio content inventory |
-| `/docs/PAGES.md` | Page content specifications |
-| `/content/myBackground.md` | Professional narrative (20 years pattern recognition) |
-| `/content/Case Studies.md` | 4 anonymized case studies with metrics |
-| `/content/Systems Architecture*.md` | n8n orchestration philosophy |
-| `/wp-content/themes/` | Theme customizations (track in git) |
-| `/assets/` | Screenshots, thumbnails, videos |
-| `/backups/` | UpdraftPlus backup (2026-01-29) - ready to import |
+```
+.specify/
+├── memory/
+│   ├── constitution.md      # Source of truth for all rules
+│   ├── escalation-matrix.json # Escalation triggers and routing
+│   ├── agents/
+│   │   └── roster.json      # Agent definitions
+│   ├── learnings/           # Cross-agent lessons
+│   │   ├── shared-learnings.md
+│   │   └── <agent>-learnings.md
+│   └── projects/
+│       └── registry.json    # Project definitions
+├── features/                # Feature spec kits (spec.md, plan.md, tasks.md)
+├── templates/               # Spec kit templates
+└── sops/                    # Standard operating procedures
 
----
-
-## Content Assets (In This Repo)
-
-| Asset Type | Location |
-|------------|----------|
-| Professional Background | `/content/myBackground.md` |
-| Case Studies (4) | `/content/Case Studies.md` |
-| Systems Architecture | `/content/Systems Architecture*.md` |
-| WordPress Backup | `/backups/` (db, themes, plugins, uploads) |
-
-## Related Project Assets
-
-Content assets from the jobHunt project:
-
-| Asset Type | Location |
-|------------|----------|
-| n8n Workflows | `/Users/makwa/jobHunt/n8nWorkflow/` |
-| Resumes | `/Users/makwa/jobHunt/Resume/personas/docx/` |
-| Brand Voice | `/Users/makwa/jobHunt/brandVoice.md` |
-| Recommendations | `/Users/makwa/jobHunt/LOR/` |
+.claude/
+└── skills/                  # Agent skill definitions
+    ├── staff/               # Senior staff (Level 4)
+    ├── leads/               # Project leads (Level 3)
+    ├── workers/             # Workers (Level 2)
+    └── infrastructure/      # System skills
+```
 
 ---
 
-## Development Workflow
+## Quick Setup for Your Deployment
 
-1. **Local Development:** Use LocalWP at `theinnovativenative.local`
-2. **Version Control:** Track theme changes in `/wp-content/themes/`
-3. **Deployment:** SFTP or UpdraftPlus to production
-
----
-
-## Current Status
-
-### Phase 1: Setup ✅
-- [x] Git repository initialized
-- [x] Project documentation created
-- [x] Content inventory completed
-- [x] WordPress backup downloaded (in `/backups/`)
-- [x] Professional content added (background, case studies, systems architecture)
-
-### Phase 2: Local Environment (Manual Steps)
-- [ ] Install LocalWP (https://localwp.com/)
-- [x] ~~Create backup from live site~~ (backup files in `/backups/`)
-- [ ] Import backup to LocalWP
-- [ ] Copy theme files to this repo
-
-### Phase 3: Portfolio Page (Build First)
-- [ ] Create portfolio page in Cornerstone
-- [ ] Set up filter categories
-- [ ] Add portfolio items
-- [ ] Create screenshots/thumbnails
-
-### Phase 4: Home Page
-- [ ] Update hero section
-- [ ] Add services section
-- [ ] Add featured work section
-- [ ] Keep Calendly integration
-
-### Phase 5: Careers Page
-- [ ] Create new page
-- [ ] Add resume download section
-- [ ] Add career highlights
-- [ ] Link to portfolio
+1. **Clone this repo**
+2. **Configure your Airtable base** (or other tracking system)
+3. **Update this CLAUDE.md** with your real IDs (keep this file in .gitignore or use env vars)
+4. **Customize agent names** in `.claude/skills/` to match your team
+5. **Update constitution** with your specific rules
+6. **Create your project registry** in `.specify/memory/projects/registry.json`
 
 ---
 
-## Brand Voice
+## Integration Notes
 
-From `/content/myBackground.md` and `/Users/makwa/jobHunt/brandVoice.md`:
-
-| Attribute | Guideline |
-|-----------|-----------|
-| Tone | Direct, practical, no-fluff |
-| Attitude | Confident without arrogance, comfortable saying no |
-| Style | Plain language, short sentences, economically justified |
-| Energy | Grounded operator with pattern recognition expertise |
-
-**Core Messaging:**
-- "I build systems that survive contact with reality"
-- "Most teams don't need more effort. They need less guessing."
-- "I diagnose where systems are lying"
-- "If a system requires constant narrative defense, it is already broken"
-
-**What Mike Optimizes For:**
-- Economic durability
-- Decision clarity under uncertainty
-- Systems that don't collapse when attention moves elsewhere
+- n8n: Never test workflows with Apify HTTP nodes (user tests manually)
+- Airtable: Always check existing data before schema changes
+- Database migrations: Check existing data first
+- MCP servers: Configure in your Claude Code settings
 
 ---
 
-## Technical Notes
+## Key Principles
 
-### WordPress/Cornerstone
-- Pro Theme uses Cornerstone page builder
-- Edit pages via WP Admin → Pages → Edit with Cornerstone
-- Theme files in `wp-content/themes/pro-child/` (or similar)
-
-### Portfolio Implementation Options
-1. Cornerstone native grid elements
-2. Essential Grid plugin
-3. Custom post type with taxonomy filters
-
-### SEO Targets
-- Home: "AI automation consultant", "n8n developer"
-- Portfolio: Project-specific keywords
-- Careers: Consider `noindex` for privacy
-
----
-
-## Contact & Hosting
-
-- **Hosting Provider:** hosting.com
-- **cPanel Access:** Via hosting.com login
-- **Domain Registrar:** (check hosting.com or separate)
+1. **Constitution First** - Load on every startup
+2. **Slower is Faster** - Quality over speed
+3. **No Spec Kit = No Work** - Document before executing
+4. **Feedback Loops** - Log learnings after every session
+5. **Visibility** - If it's not logged, it doesn't exist
