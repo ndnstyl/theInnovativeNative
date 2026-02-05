@@ -12,13 +12,12 @@ websiteStuff/
 specs/
 rizeToAirtable.md
 
-# Personal/proprietary feature specs (keep templates, exclude your data)
-.specify/features/dea-data-silo/
-.specify/features/lawfirm-rag-content-campaign/
-.specify/features/tin-internal-airtable/
-.specify/features/tin-database-expansion/
-.specify/features/n8n-health-monitoring/
-.specify/features/asliceofhaven/
+# Personal/proprietary feature specs (ALL personal data)
+# The folder structure is preserved via templates
+.specify/features/
+
+# Agent performance tracking (personal data)
+.specify/memory/agents/performance.json
 
 # Session logs and reports (contain personal data)
 .specify/memory/reports/
@@ -127,12 +126,9 @@ lerna-debug.log*
 # REMOTION SPECIFIC
 # ------------------------------------------
 
-# Remotion build outputs
-remotion-videos/out/
-remotion-videos/.remotion/
-
-# Keep the remotion source but not node_modules
-remotion-videos/node_modules/
+# Entire remotion-videos folder (contains personal video content)
+# Remove this line if you want to include your Remotion projects
+remotion-videos/
 
 # ------------------------------------------
 # BACKUPS
@@ -167,8 +163,8 @@ temp/
 !.specify/templates/
 !.specify/templates/**
 
-# Keep example/sample features
-!.specify/features/.gitkeep
+# Keep a README in features to explain structure
+!.specify/features/README.md
 
 # Keep the skill structure
 !.claude/skills/
@@ -187,5 +183,5 @@ temp/
 # Keep agent roster structure
 !.specify/memory/agents/roster.json
 
-# Keep project registry structure (but sanitize content)
-!.specify/memory/projects/registry.json
+# Project registry and logs contain personal data - exclude
+.specify/memory/projects/
