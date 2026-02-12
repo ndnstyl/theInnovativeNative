@@ -1,6 +1,6 @@
 # Creative - Visual & Content Production Learnings
 
-## Last Updated: 2026-02-06
+## Last Updated: 2026-02-11
 
 *Consolidated from Spike (Remotion), Pixel (Graphics), and Maya (Ideation)*
 
@@ -288,6 +288,35 @@ Full component structure for Cerebro Legal RAG interface at:
 ### Skills Gap
 - No gap for Remotion component creation
 - Gap: Cannot generate Red Nose character images or audio stingers (requires Gemini Imagen / Midjourney / DAW)
+
+---
+
+## Session: BowTie Video Pipeline — Post-Production & Assembly (2026-02-11)
+
+### Editor Agent Skill Pattern
+- **Post-production as storytelling**: The editor agent doesn't just concatenate clips — it makes editorial decisions (pacing, emphasis, breathing room)
+- Skill structure: receives raw assets (VO, music, B-roll, graphics) + episode script/EDL → outputs final assembled video
+- Decision points the editor owns: transition timing, music cue placement, caption style, color grade intensity
+- This separates "content creation" (what to say) from "content assembly" (how to present it) — different skills, different agents
+
+### 5-Layer Audio Mix Hierarchy
+- Layer order (bottom to top, mixed in this priority):
+  1. **Ambience/Room tone** — subtle bed, -30dB, always present for continuity
+  2. **Music** — background score, -18dB baseline, ducked to -30dB under VO via sidechaincompress
+  3. **SFX** — sound effects/transitions, -12dB, point-specific placement
+  4. **Voiceover** — primary narration, normalized to -16 LUFS (YouTube standard)
+  5. **Emphasis SFX** — whooshes/hits synced to text reveals or stat callouts, -8dB peak
+- All levels are starting points — final mix adjusted by ear per episode
+- VO is king: everything else exists to support the narration, never compete with it
+
+### Ken Burns Zoompan FFMPEG Filter Parameters
+- Filter: `zoompan=z='min(zoom+0.0015,1.5)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=125:s=1920x1080:fps=25`
+- `z='min(zoom+0.0015,1.5)'` — zoom increment per frame, capped at 1.5x. Lower = subtler. 0.0015 is gentle for 5s clips
+- `d=125` — duration in frames (5s at 25fps). Must match clip duration exactly or you get frozen frames
+- `s=1920x1080` — output resolution. Input image should be 2x output (3840x2160) to allow zoom headroom without pixelation
+- `x` and `y` — center-point zoom. For pan effects, use linear interpolation: `x='trunc((iw-iw/zoom)/2 + on*(iw/zoom)/d)'`
+- **Common mistake**: Using 30fps d value with 25fps timeline — causes speed mismatch. Always calculate `d = seconds * fps`
+- For variety, alternate between: zoom-in (0.0015), zoom-out (start at 1.5, subtract), and pan-left/pan-right
 
 ---
 

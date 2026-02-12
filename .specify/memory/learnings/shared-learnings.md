@@ -2,7 +2,7 @@
 
 Cross-agent discoveries and patterns that apply to multiple agents.
 
-## Last Updated: 2026-02-09
+## Last Updated: 2026-02-11
 
 ---
 
@@ -116,6 +116,46 @@ TIN Marketing/
 - **AAVE orthography for TTS (2026-02-11)**: TTS engines (ElevenLabs AND Qwen3) over-enunciate when scripts use standard English. Fix: spell words how the character says them (sleepin', outta, ain't, folk). ~65% AAVE density for measured characters. Full rules in `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md`.
 - **TTS engine selection (2026-02-11)**: ElevenLabs wins for production quality. Qwen3-TTS (local, MLX) useful for prototyping/iteration but has robotic quality and pronunciation issues. The AAVE script rewrite benefits both engines equally — it's the real lever.
 - **Qwen3-TTS voice cloning (2026-02-11)**: Never trim reference audio — longer clips give better clone quality via ECAPA-TDNN speaker encoder. ICL mode auto-overrides repetition_penalty to minimum 1.5. Provide full matching transcript for best results.
+
+## Session Learnings (2026-02-11) — BowTie Video Pipeline
+
+### Remotion interpolate() Gotcha (CRITICAL)
+- **`inputRange` must be STRICTLY monotonically increasing** — duplicate values crash the render with a non-obvious error
+- Example: `[0, 30, 30, 60]` FAILS. Must be `[0, 30, 31, 60]`
+- This commonly happens when adjacent animation keyframes share a boundary frame. Always offset by +1 frame.
+
+### Parallel Agent Deployment (5 Agents)
+- Deployed 5 agents simultaneously for pipeline completion — worked well for independent workstreams
+- Each agent owned a distinct slice (Remotion components, FFMPEG assembly, audio mix, ComfyUI setup, brand assets)
+- Key success factor: clear task boundaries with no shared file conflicts
+
+### ComfyUI Embedded Git Repo
+- ComfyUI clones custom nodes as full git repos inside `comfyUI/custom_nodes/`
+- Cannot `git add` a directory that contains its own `.git/` — parent repo silently treats it as a submodule reference
+- **Options**: (1) Use `git submodule add` formally, (2) Add only specific output files, (3) Add `comfyUI/` to `.gitignore` and track separately
+- We chose `.gitignore` approach — ComfyUI is local tooling, not deployable code
+
+### ProRes Codec Selection for 2D Cel-Shaded Art
+- **ProRes 4444 LT with `yuva444p` (8-bit alpha)** is sufficient for 2D cel-shaded art with flat colors and hard edges
+- ProRes 4444 with 10-bit (`yuva444p10le`) is overkill — extra bitdepth only matters for photographic footage with subtle gradients
+- LT profile saves ~40% file size vs standard 4444 with no visible quality loss on cel art
+
+### Timeline EDL JSON Schema for Video Assembly
+- Instead of building FFMPEG commands directly from episode data, generate an intermediate EDL (Edit Decision List) as JSON
+- Schema includes: clips array (source, in/out points, track, transitions), audio mix levels, output settings
+- Benefits: human-readable, versionable, replayable, decouples editorial decisions from FFMPEG implementation
+- FFMPEG command builder reads EDL JSON and generates the complex filter graph
+
+### FFMPEG Sidechain Compress for VO-Triggered Music Ducking
+- Pattern: music volume automatically dips when voiceover is speaking, returns to normal during pauses
+- Filter: `[music][vo]sidechaincompress=threshold=0.02:ratio=8:attack=50:release=800`
+- `threshold=0.02` — triggers on any VO signal (low threshold catches quiet speech)
+- `ratio=8` — aggressive ducking (music drops to ~12% during VO)
+- `attack=50ms` — fast duck when VO starts
+- `release=800ms` — slow return so music doesn't pump between phrases
+- Apply AFTER VO normalization (`loudnorm`) so threshold is consistent
+
+---
 
 ## Session Learnings (2026-02-05)
 - MCP config desync discovered: skill config had old API key, home config had valid key

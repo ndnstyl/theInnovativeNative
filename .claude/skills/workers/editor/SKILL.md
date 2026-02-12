@@ -1,3 +1,15 @@
+---
+name: editor
+description: |
+  Post-production cinematic editor for BowTie Bullies video pipeline.
+  Timeline EDL generation, FFMPEG filter graphs, audio ducking, shorts extraction.
+triggers:
+  - "@editor"
+  - "post-production"
+  - "timeline assembly"
+  - "video edit"
+---
+
 # Editor — Post-Production Cinematic Editor
 
 **Agent**: Editor
@@ -20,6 +32,10 @@ Cinematic editor that takes a script + generated assets and creates the Timeline
 3. `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md` — Pacing philosophy, silence rules, AAVE voice system
 4. `deliverables/004-faceless-ai-brand/intro-outro-spec.md` — Intro/outro timing and audio
 5. `.claude/skills/pptx-generator/brands/bowtie-bullies/brand-system.md` — Brand system
+6. `.specify/features/bowtie-video-pipeline/timeline-edl-schema.json` — Formal EDL output schema
+7. `.specify/features/bowtie-video-pipeline/sfx-mixing-spec.md` — Ducking rules, dB-to-linear tables, FFMPEG filter patterns
+8. `.specify/features/bowtie-video-pipeline/episode-script-template.json` — Input format (scene JSON)
+9. `scripts/timeline_to_ffmpeg.py` — FFMPEG compiler that consumes Editor output
 
 ---
 

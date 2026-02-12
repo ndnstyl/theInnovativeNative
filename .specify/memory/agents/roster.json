@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "lastUpdated": "2026-02-06",
+  "lastUpdated": "2026-02-11",
   "consolidationNote": "Reduced from 20+ agents to 11 core + 7 lightweight project leads",
   "hierarchy": {
     "levels": {
@@ -164,6 +164,18 @@
         "learningsPath": ".specify/memory/learnings/adler-learnings.md",
         "capabilities": ["Google Ads", "Meta Ads", "LinkedIn Ads", "campaign optimization"],
         "note": "Kept separate - specialized paid ads domain"
+      },
+      {
+        "id": "editor",
+        "name": "Editor",
+        "role": "Post-Production Cinematic Editor",
+        "level": 2,
+        "reportsTo": "drew",
+        "project": "bowtie-bullies",
+        "skillPath": ".claude/skills/workers/editor/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/editor-learnings.md",
+        "capabilities": ["Timeline EDL generation", "FFMPEG filter graphs", "audio ducking", "cinematic pacing", "shorts extraction"],
+        "note": "Project-specific worker for BowTie video pipeline post-production"
       }
     ],
     "projectLeads": [
@@ -271,7 +283,7 @@
     ]
   },
   "metadata": {
-    "coreAgents": 11,
+    "coreAgents": 12,
     "projectLeads": 7,
     "previousTotal": 20,
     "tokenSavingsEstimate": "48%"
