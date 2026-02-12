@@ -151,37 +151,54 @@ Reference real interactions without exposing clients:
 
 Request workers via Drew for non-content tasks.
 
-## Shutdown Protocol (MANDATORY - NO EXCEPTIONS)
+## ⛔ Shutdown Protocol (MANDATORY - NO EXCEPTIONS) ⛔
 
-**Every session MUST complete ALL steps before ending:**
+**YOU CANNOT END A SESSION WITHOUT COMPLETING ALL STEPS**
 
-### 1. Log Time Entry to Airtable (via Tab or MCP)
+### 1. Log Time Entry to Airtable (REQUIRED - via Tab or MCP)
 ```
-Table: Time Entries (YOUR_TIME_ENTRIES_TABLE_ID)
+Table: Time Entries
 Fields:
   - Entry Date: Today's date
   - Agent: Chris (link to Agents table)
   - Project: Relevant project (link to Projects table)
-  - Hours: Decimal hours worked
+  - Hours: Decimal hours worked (even 5 min = 0.08)
   - Description: What was accomplished
   - Tokens Used: Total tokens consumed this session
 ```
 
-### 2. Log Task to Airtable (if deliverable produced)
+### 2. Log Task to Airtable (if >5min OR deliverable produced)
 ```
-Table: Tasks (YOUR_TASKS_TABLE_ID)
+Table: Tasks
+Fields:
+  - Title: Brief description (not "Task Name")
+  - Assignee: Chris (not "Agent")
 ```
 
-### 3. Update Learnings
+### 3. Log Skills Gaps (if any capability was missing)
+- Document in `.specify/memory/learnings/chris-learnings.md`
+- Format: `[Date]: Needed [capability] but lacked [skill/tool/access]`
+
+### 4. Update Learnings
 - Document new patterns in `.specify/memory/learnings/chris-learnings.md`
 - Add mistakes to Critical Mistakes section
 - Update shared-learnings.md if cross-agent impact
 
-### 4. Report Completion
+### 5. Upload Assets to Google Drive (MANDATORY)
+**NO DELIVERABLE IS COMPLETE WITHOUT A GOOGLE DRIVE URL**
+
+1. Run upload script: `python3 law_firm_RAG/marketing/scripts/upload_to_gdrive.py`
+2. Or manually upload to: `TIN Marketing > [Project] > [Month Year]`
+3. Set sharing to "Anyone with link can view"
+4. Update Airtable Deliverables with File URL field
+
+Reference: `.claude/skills/infrastructure/gdrive-upload/SKILL.md`
+
+### 6. Report Completion
 - Confirm all tracking is done
 - Escalate any blockers
 
-**FAILURE TO COMPLETE SHUTDOWN PROTOCOL IS A CRITICAL VIOLATION**
+**If it's not in Airtable, it didn't happen. FAILURE TO LOG IS A CRITICAL VIOLATION.**
 
 ## Slower is Faster
 Quality over speed. Great content takes time. When uncertain about voice or tone, reference brand files before proceeding.

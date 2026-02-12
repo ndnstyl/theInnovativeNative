@@ -1,0 +1,63 @@
+{
+  "output": {
+    "directory": "output/haven",
+    "naming": "{name}-{date}",
+    "keep_parts": false
+  },
+  "generation": {
+    "slides_per_batch": 5,
+    "auto_combine": true,
+    "open_after_generate": false
+  },
+  "defaults": {
+    "slide_width_inches": 6.075,
+    "slide_height_inches": 10.8
+  },
+  "video": {
+    "resolution": "1080x1920",
+    "aspect_ratio": "9:16",
+    "codec": "libx264",
+    "audio_codec": "aac",
+    "max_duration_seconds": 60,
+    "target_duration_seconds": 30,
+    "fps": 30,
+    "crf": 18,
+    "pixel_format": "yuv420p",
+    "max_file_size_mb": 100
+  },
+  "platforms": {
+    "instagram_reels": {
+      "resolution": "1080x1920",
+      "max_duration": 90,
+      "max_size_mb": 100
+    },
+    "tiktok": {
+      "resolution": "1080x1920",
+      "max_duration": 180,
+      "max_size_mb": 287
+    }
+  },
+  "elevenlabs": {
+    "voice_id": "M6ic45wruJGWAxLFEMNK",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.5,
+    "similarity_boost": 0.75,
+    "style": 0.3
+  },
+  "gemini": {
+    "image_model": "gemini-2.0-flash-exp",
+    "vision_model": "gemini-2.0-flash-exp",
+    "consistency_threshold": 7,
+    "max_regen_attempts": 3
+  },
+  "ffmpeg": {
+    "ken_burns_zoom_range": [1.0, 1.15],
+    "ken_burns_duration_seconds": 4,
+    "crossfade_duration": 1.0,
+    "text_font": "Inter",
+    "text_size": 56,
+    "music_volume": 0.4,
+    "voice_volume": 1.0,
+    "fade_duration": 0.5
+  }
+}

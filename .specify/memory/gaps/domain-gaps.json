@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-06",
+  "description": "Registry of domain capability gaps identified during agent handoffs. Used to track when no agent matches a requested domain or capability.",
+  "gaps": [
+    {
+      "id": "GAP-2026-02-06-001",
+      "date": "2026-02-06",
+      "feature": "cerebro-competitive-research",
+      "task": {
+        "id": "T001",
+        "description": "Harvey AI competitive pain point research - gather verbatim quotes from review sites",
+        "requestedAgent": "Maya"
+      },
+      "resolution": {
+        "status": "unresolved",
+        "suggestedAgents": [],
+        "drewNotified": false,
+        "resolvedBy": null,
+        "resolvedAgent": null,
+        "resolvedDate": null,
+        "notes": "WebSearch and WebFetch tools blocked (permissions denied). Cannot access G2, Capterra, Above the Law, Reddit for competitive research. Research requires manual data collection. Template populated with hypothesis pain points based on knowledge cutoff."
+      },
+      "metadata": {
+        "domain": "Web Research / Competitive Intelligence",
+        "capabilities_needed": ["WebSearch", "WebFetch", "Review Site Access"],
+        "priority": "high"
+      }
+    }
+  ],
+  "statistics": {
+    "totalGapsLogged": 1,
+    "unresolvedGaps": 1,
+    "resolvedGaps": 0,
+    "mostRequestedDomains": ["Web Research"]
+  },
+  "schema": {
+    "gap": {
+      "id": "GAP-YYYY-MM-DD-NNN",
+      "date": "YYYY-MM-DD",
+      "feature": "feature-directory-name",
+      "task": {
+        "id": "TXXX",
+        "description": "Task description",
+        "requestedAgent": "AgentName or domain keyword"
+      },
+      "resolution": {
+        "status": "unresolved | resolved | deferred",
+        "suggestedAgents": ["Agent1", "Agent2"],
+        "drewNotified": true,
+        "resolvedBy": "drew | ceo | null",
+        "resolvedAgent": "AgentName | null",
+        "resolvedDate": "YYYY-MM-DD | null",
+        "notes": "Resolution notes"
+      },
+      "metadata": {
+        "domain": "Domain category",
+        "capabilities_needed": ["Capability 1", "Capability 2"],
+        "priority": "high | medium | low"
+      }
+    }
+  },
+  "resolutionWorkflow": {
+    "steps": [
+      "1. Gap logged automatically by /handoff command",
+      "2. Drew notified via Airtable escalation",
+      "3. Drew reviews and suggests resolution",
+      "4. Resolution options: assign existing agent, request new capability, escalate to CEO",
+      "5. Gap marked resolved with chosen agent or deferred for future"
+    ],
+    "escalationTriggers": [
+      "High priority task blocked by gap",
+      "Multiple tasks in same domain blocked",
+      "Gap unresolved for >48 hours"
+    ]
+  }
+}

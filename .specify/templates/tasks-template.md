@@ -12,11 +12,37 @@ description: "Task list template for feature implementation"
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
-## Format: `[ID] [P?] [Story] Description`
+## Format: `[ID] [P?] [Story] Description (Agent)`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
 - **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
+- **(Agent)**: Agent assigned to execute this task (e.g., Neo, Tab, Pixel)
 - Include exact file paths in descriptions
+
+### Agent Assignment
+Assign agents by adding their name in parentheses at the end of the task:
+```markdown
+- [ ] T001 [US1] Set up n8n workflow (Neo)
+- [ ] T002 [US1] Create Airtable schema (Tab)
+- [ ] T003 [P] [US1] Design graphics for dashboard (Pixel)
+```
+
+**Available Agents** (see `.specify/memory/agents/roster.json` for full list):
+- **Neo**: n8n workflows, automation
+- **Tab**: Airtable operations, schema management
+- **Pixel**: Visual graphics, thumbnails, banners
+- **Spike**: Remotion video creation
+- **Maya**: Content ideation, research
+- **Echo**: Slack communications
+- **Iris**: Email handling, Gmail
+- **Sage**: Notion documentation
+- **Ada**: Python scripts, automation
+- **Rex**: Git operations, CI/CD
+- **Adler**: Paid ads (Google, Meta, LinkedIn)
+
+Tasks without `(Agent)` remain unassigned and will be routed through Drew.
+
+After task creation, run `/handoff` to create Airtable records and generate agent invocation commands.
 
 ## Path Conventions
 

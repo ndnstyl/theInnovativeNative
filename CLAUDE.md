@@ -4,7 +4,9 @@
 
 This is a multi-agent skill system for Claude Code, implementing a "second brain" architecture with hierarchical agents, feedback loops, and persistent learning.
 
-## MANDATORY: Agent Protocol (Constitution Compliance)
+## ⛔ MANDATORY: Agent Protocol (Constitution Compliance) ⛔
+
+### THIS IS NON-NEGOTIABLE - EVERY AGENT, EVERY SESSION
 
 ### Startup Checklist (BEFORE ANY WORK)
 1. Read `.specify/memory/constitution.md` - understand rules
@@ -12,15 +14,25 @@ This is a multi-agent skill system for Claude Code, implementing a "second brain
 3. Verify your integration connections (Airtable, Slack, etc.)
 4. Identify which Project this work belongs to (or create one if new)
 
-### Shutdown Checklist (BEFORE ENDING SESSION)
-- [ ] Log Time Entry to your tracking system (Entry Date, Agent, Project, Hours, Description, Tokens)
-- [ ] Log Task if work >5 min or produced deliverable
-- [ ] Update `.specify/memory/learnings/shared-learnings.md` if lesson learned
-- [ ] Verify PM (Drew) has visibility on completed work
+### Shutdown Checklist (BEFORE ENDING SESSION) - ALL ITEMS REQUIRED
+- [ ] **Time Entry** → Airtable Time Entries table (Entry Date, Agent, Project, Hours, Description, Tokens)
+- [ ] **Task** → Airtable Tasks table (if work >5 min OR produced deliverable)
+- [ ] **Skills Gaps** → Your learnings.md (if any capability was missing)
+- [ ] **Learnings** → Update if new pattern/mistake/gotcha discovered
+- [ ] **Shared Learnings** → Update if cross-agent impact
+- [ ] **Drew Visibility** → Verify PM can see your completed work in Airtable
 
-### Critical Rule
-**Local .md files are for planning. Your tracking system is for visibility.**
-Drew only sees the tracking system. If it's not logged there, it doesn't exist to Drew.
+### Critical Rules
+1. **If it's not in Airtable, it didn't happen.** Drew only sees Airtable. CEO only sees Airtable.
+2. **Local .md files are for planning.** Airtable is for visibility and accountability.
+3. **Even 5-minute sessions get logged.** No work is too small to track.
+4. **Skills gaps feed training priorities.** If you lacked a capability, log it.
+
+### Historical Failure (2026-02-04)
+A session created 9 Airtable tables but logged NOTHING to tracking. Drew had zero visibility. This caused downstream planning failures. **This must NEVER happen again.**
+
+### Enforcement
+Agents who skip logging are broken agents. The shutdown checklist is not optional.
 
 ---
 
@@ -100,3 +112,12 @@ Key Agent Record IDs (populate after creating agents):
 3. **No Spec Kit = No Work** - Document before executing
 4. **Feedback Loops** - Log learnings after every session
 5. **Visibility** - If it's not logged, it doesn't exist
+
+## Active Technologies
+- N/A (content products + no-code integrations) + Stan Store (storefront), PPTX Generator skill (PDF creation), n8n (webhook pipeline), Airtable (lead tracking) (002-stan-store-lawfirm-funnel)
+- Airtable (lead records), Google Drive (deliverable PDFs), Stan Store (product hosting) (002-stan-store-lawfirm-funnel)
+- Gemini API (image generation + scoring), Google Drive API (storage), Airtable API (mission control), FFMPEG (video assembly) (003-haven-ugc-broll)
+- Airtable (pipeline state) + Google Drive (media files) (003-haven-ugc-broll)
+
+## Recent Changes
+- 002-stan-store-lawfirm-funnel: Added N/A (content products + no-code integrations) + Stan Store (storefront), PPTX Generator skill (PDF creation), n8n (webhook pipeline), Airtable (lead tracking)

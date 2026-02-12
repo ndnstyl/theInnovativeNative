@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Arial, sans-serif;
+  }
+
+  .thumbnail {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    background: linear-gradient(135deg, #0a0a1a 0%, #0d1b2a 30%, #1b2838 60%, #0a0a1a 100%);
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* Subtle grid pattern overlay */
+  .thumbnail::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+  }
+
+  /* Glowing orb top-right */
+  .glow-1 {
+    position: absolute;
+    top: -80px;
+    right: -60px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,107,53,0.25) 0%, rgba(255,107,53,0.08) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  /* Glowing orb bottom-left */
+  .glow-2 {
+    position: absolute;
+    bottom: -120px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(56,189,248,0.05) 40%, transparent 70%);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  /* Left content area */
+  .left {
+    flex: 1;
+    padding: 60px 50px 60px 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+    max-width: 720px;
+  }
+
+  /* Top badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,53,0.15);
+    border: 1px solid rgba(255,107,53,0.4);
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff6b35;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255,107,53,0.8);
+  }
+
+  .badge-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ff6b35;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Main headline */
+  .headline {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .headline .accent {
+    color: #ff6b35;
+  }
+
+  .headline .accent-blue {
+    color: #38bdf8;
+  }
+
+  /* Subtitle */
+  .subtitle {
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    max-width: 520px;
+  }
+
+  .subtitle strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* Right visual area — flow diagram */
+  .right {
+    width: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: relative;
+    padding-right: 40px;
+  }
+
+  /* Flow nodes */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+  }
+
+  .flow-node {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 22px;
+    backdrop-filter: blur(10px);
+    min-width: 340px;
+    transition: all 0.3s;
+  }
+
+  .flow-node.active {
+    border-color: rgba(255,107,53,0.5);
+    background: rgba(255,107,53,0.08);
+    box-shadow: 0 0 25px rgba(255,107,53,0.15);
+  }
+
+  .flow-node.blue {
+    border-color: rgba(56,189,248,0.4);
+    background: rgba(56,189,248,0.06);
+    box-shadow: 0 0 25px rgba(56,189,248,0.1);
+  }
+
+  .node-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .node-icon.scrape { background: rgba(168,85,247,0.25); color: #c084fc; }
+  .node-icon.ai { background: rgba(255,107,53,0.25); color: #ff6b35; }
+  .node-icon.data { background: rgba(56,189,248,0.25); color: #38bdf8; }
+  .node-icon.play { background: rgba(74,222,128,0.25); color: #4ade80; }
+
+  .node-label {
+    font-size: 17px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.3;
+  }
+
+  .node-sub {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
+  }
+
+  /* Connector lines between nodes */
+  .connector {
+    width: 2px;
+    height: 18px;
+    background: linear-gradient(to bottom, rgba(255,107,53,0.4), rgba(56,189,248,0.4));
+    margin-left: 42px;
+    margin-top: -18px;
+    margin-bottom: -18px;
+    z-index: 5;
+    position: relative;
+  }
+
+  /* Bottom bar */
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #ff6b35, #38bdf8, #c084fc, #4ade80);
+    z-index: 20;
+  }
+
+  /* n8n wordmark bottom-right */
+  .n8n-mark {
+    position: absolute;
+    bottom: 24px;
+    right: 35px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .n8n-logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: -1px;
+  }
+
+  .n8n-logo span {
+    color: #ff6b35;
+  }
+
+</style>
+</head>
+<body>
+<div class="thumbnail">
+
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="left">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <div class="badge-text">Live Demo</div>
+    </div>
+    <div class="headline">
+      I Built an <span class="accent">AI</span> That Finds <span class="accent-blue">Viral Trends</span>
+    </div>
+    <div class="subtitle">
+      <strong>n8n + Airtable + AI</strong> — fully automated trend scraping, sentiment analysis, and playbook generation
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="flow">
+
+      <div class="flow-node active">
+        <div class="node-icon scrape">&#x1F50D;</div>
+        <div>
+          <div class="node-label">Scrape Trends</div>
+          <div class="node-sub">TikTok, IG, YouTube, LinkedIn</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="flow-node active">
+        <div class="node-icon ai">&#x2728;</div>
+        <div>
+          <div class="node-label">AI Sentiment Analysis</div>
+          <div class="node-sub">Comments, questions, insights</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="flow-node blue">
+        <div class="node-icon data">&#x1F4CA;</div>
+        <div>
+          <div class="node-label">Airtable Database</div>
+          <div class="node-sub">Engagement metrics + scoring</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <div class="flow-node blue">
+        <div class="node-icon play">&#x25B6;</div>
+        <div>
+          <div class="node-label">Auto-Generate Playbook</div>
+          <div class="node-sub">What's working and why</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-bar"></div>
+
+  <div class="n8n-mark">
+    <div class="n8n-logo"><span>n8n</span> Automation</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,12 +1,13 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-02-04",
+  "version": "2.0.0",
+  "lastUpdated": "2026-02-06",
+  "consolidationNote": "Reduced from 20+ agents to 11 core + 7 lightweight project leads",
   "hierarchy": {
     "levels": {
       "5": "CEO - Full authority, strategic oversight",
       "4": "Senior Staff - Management and specialized roles",
-      "3": "Project Leads - Project-specific ownership",
-      "2": "Workers - Discipline-specific executors"
+      "3": "Project Leads - Lightweight project context (not full agents)",
+      "2": "Workers - Consolidated discipline executors"
     }
   },
   "agents": {
@@ -20,57 +21,57 @@
         "Final approvals",
         "Resource allocation",
         "Vision and direction"
-      ],
-      "authority": [
-        "Override any decision",
-        "Direct assignment to any agent",
-        "Budget approval",
-        "New project approval"
       ]
     },
     "seniorStaff": [
       {
+        "id": "mike",
+        "name": "Mike",
+        "role": "Chief Marketing Officer (CMO)",
+        "level": 4,
+        "reportsTo": "ceo",
+        "skillPath": ".claude/skills/staff/mike-cmo/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/mike-learnings.md",
+        "responsibilities": [
+          "Marketing strategy and vision",
+          "Brand positioning and messaging",
+          "Campaign performance oversight",
+          "Marketing budget allocation"
+        ],
+        "delegatesTo": ["drew", "chris", "creative", "ads"]
+      },
+      {
         "id": "jenna",
         "name": "Jenna",
-        "role": "Office Manager",
+        "role": "Office Manager + Finance/Admin",
         "level": 4,
         "reportsTo": "ceo",
         "skillPath": ".claude/skills/staff/jenna-office-manager/SKILL.md",
         "learningsPath": ".specify/memory/learnings/jenna-learnings.md",
         "responsibilities": [
           "Scheduling and calendar coordination",
-          "File organization",
-          "Git hygiene and branch cleanup",
-          "System cleanliness"
+          "File organization and git hygiene",
+          "Financial tracking and invoicing",
+          "Admin overflow handling"
         ],
-        "delegatesTo": ["risa", "rex", "sage"],
-        "kpis": {
-          "fileOrganizationScore": 95,
-          "gitHygieneScore": 95,
-          "schedulingAccuracy": 95
-        }
+        "delegatesTo": ["builder", "comms", "data"],
+        "absorbedFrom": ["risa"]
       },
       {
         "id": "drew",
         "name": "Drew",
         "role": "Project Manager",
         "level": 4,
-        "reportsTo": "ceo",
+        "reportsTo": "mike",
         "skillPath": ".claude/skills/staff/drew-project-manager/SKILL.md",
         "learningsPath": ".specify/memory/learnings/drew-learnings.md",
         "responsibilities": [
           "QA across all projects",
           "Task delegation and routing",
           "Health checks and monitoring",
-          "Weekly status reports",
-          "Time tracking oversight"
+          "Weekly status reports"
         ],
-        "delegatesTo": ["all-project-leads", "all-workers"],
-        "kpis": {
-          "projectsAtTarget": 90,
-          "healthScoresAvg": 80,
-          "escalationsResolved": 95
-        }
+        "delegatesTo": ["all-project-leads", "all-workers"]
       },
       {
         "id": "patricia",
@@ -85,38 +86,14 @@
           "Close CRM sync management",
           "Payment reconciliation"
         ],
-        "delegatesTo": ["tab", "neo"],
-        "kpis": {
-          "deliverablesOnTime": 95,
-          "dataQualityScore": 95
-        }
-      },
-      {
-        "id": "risa",
-        "name": "Risa",
-        "role": "Finance & Admin",
-        "level": 4,
-        "reportsTo": "jenna",
-        "skillPath": ".claude/skills/staff/risa-finance-admin/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/risa-learnings.md",
-        "responsibilities": [
-          "Financial tracking",
-          "Admin overflow from Jenna",
-          "Invoicing",
-          "Financial reporting"
-        ],
-        "delegatesTo": ["tab", "iris"],
-        "kpis": {
-          "invoiceAccuracy": 99,
-          "reportsOnTime": 100
-        }
+        "delegatesTo": ["data", "builder"]
       },
       {
         "id": "chris",
         "name": "Chris",
         "role": "Chief Storyteller",
         "level": 4,
-        "reportsTo": "drew",
+        "reportsTo": "mike",
         "skillPath": ".claude/skills/staff/chris-storyteller/SKILL.md",
         "learningsPath": ".specify/memory/learnings/chris-learnings.md",
         "responsibilities": [
@@ -124,230 +101,179 @@
           "Scripts and narrative content",
           "Brand voice enforcement"
         ],
-        "delegatesTo": ["maya", "sage"],
-        "kpis": {
-          "contentPiecesPerWeek": 3,
-          "brandVoiceCompliance": 95,
-          "engagementLift": 10
-        }
-      }
-    ],
-    "projectLeads": [
-      {
-        "id": "nigel",
-        "name": "Nigel",
-        "role": "UK Directory Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "uk-directory",
-        "skillPath": ".claude/skills/leads/nigel-uk-directory/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/nigel-learnings.md"
-      },
-      {
-        "id": "trinity",
-        "name": "Trinity",
-        "role": "BuildMyTribe.AI Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "buildmytribe-ai",
-        "skillPath": ".claude/skills/leads/trinity-buildmytribe/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/trinity-learnings.md"
-      },
-      {
-        "id": "aurora",
-        "name": "Aurora",
-        "role": "VisionSpark Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "visionspark",
-        "skillPath": ".claude/skills/leads/aurora-visionspark/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/aurora-learnings.md"
-      },
-      {
-        "id": "haven",
-        "name": "Haven",
-        "role": "aSliceOfHaven Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "asliceofhaven",
-        "skillPath": ".claude/skills/leads/haven-asliceofhaven/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/haven-learnings.md"
-      },
-      {
-        "id": "scales",
-        "name": "Scales",
-        "role": "Law Firm RAG Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "lawfirm-rag",
-        "skillPath": ".claude/skills/leads/scales-lawfirm-rag/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/scales-learnings.md"
-      },
-      {
-        "id": "ozhi",
-        "name": "Ozhi",
-        "role": "OzhiApp CRM Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "ozhiapp-crm",
-        "skillPath": ".claude/skills/leads/ozhi-ozhiapp/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/ozhi-learnings.md"
-      },
-      {
-        "id": "muse",
-        "name": "Muse",
-        "role": "TheInnovativeNative Lead",
-        "level": 3,
-        "reportsTo": "drew",
-        "project": "theinnovativenative",
-        "skillPath": ".claude/skills/leads/muse-theinnovativenative/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/muse-learnings.md"
+        "delegatesTo": ["creative"]
       }
     ],
     "workers": [
       {
-        "id": "neo",
-        "name": "Neo",
-        "role": "n8n Workflows",
+        "id": "builder",
+        "name": "Builder",
+        "role": "Technical Automation",
         "level": 2,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/neo-n8n/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/neo-learnings.md",
+        "skillPath": ".claude/skills/workers/builder/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/builder-learnings.md",
         "mcpIntegration": "n8n-mcp",
-        "capabilities": ["Build/modify workflows", "Node configuration", "Webhook setup"],
-        "kpis": {
-          "workflowsBuilt": 5,
-          "errorRate": 5,
-          "executionSuccess": 95
-        }
+        "capabilities": ["n8n workflows", "python scripts", "git operations", "API integrations"],
+        "mergedFrom": ["neo", "ada", "rex"]
       },
       {
-        "id": "tab",
-        "name": "Tab",
-        "role": "Airtable Operations",
+        "id": "data",
+        "name": "Data",
+        "role": "Data Operations",
         "level": 2,
         "reportsTo": "drew",
         "skillPath": ".claude/skills/workers/tab-airtable/SKILL.md",
         "learningsPath": ".specify/memory/learnings/tab-learnings.md",
         "mcpIntegration": "airtable-mcp",
-        "capabilities": ["CRUD operations", "Schema management", "Automation triggers"],
-        "kpis": {
-          "recordsProcessed": 100,
-          "syncFreshness": 1
-        }
+        "capabilities": ["Airtable CRUD", "schema management", "database operations"],
+        "note": "Kept as Tab for Airtable MCP specificity"
       },
       {
-        "id": "echo",
-        "name": "Echo",
-        "role": "Slack Communications",
+        "id": "creative",
+        "name": "Creative",
+        "role": "Visual & Content Production",
         "level": 2,
-        "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/echo-slack/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/echo-learnings.md",
-        "mcpIntegration": "slack-mcp",
-        "capabilities": ["Channel messaging", "Notifications", "Alerts", "Team updates"],
-        "kpis": {
-          "messagesSent": 50,
-          "responseTime": 5,
-          "deliveryRate": 99
-        }
+        "reportsTo": "chris",
+        "team": "marketing",
+        "skillPath": ".claude/skills/workers/creative/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/creative-learnings.md",
+        "capabilities": ["Remotion video", "graphics", "thumbnails", "ideation"],
+        "mergedFrom": ["spike", "pixel", "maya"]
       },
       {
-        "id": "iris",
-        "name": "Iris",
-        "role": "Email Handler",
+        "id": "comms",
+        "name": "Comms",
+        "role": "Communications & Documentation",
         "level": 2,
-        "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/iris-gmail/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/iris-learnings.md",
-        "mcpIntegration": "gmail-mcp",
-        "capabilities": ["Inbox management", "Drafts", "Templates", "Filters"],
-        "kpis": {
-          "emailsProcessed": 100,
-          "inboxZeroDays": 5
-        }
+        "reportsTo": "jenna",
+        "skillPath": ".claude/skills/workers/comms/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/comms-learnings.md",
+        "mcpIntegration": ["slack-mcp", "google-drive-mcp", "notion-mcp"],
+        "capabilities": ["Slack messaging", "email", "Google Drive", "Notion documentation"],
+        "mergedFrom": ["echo", "iris", "sage"]
       },
       {
-        "id": "sage",
-        "name": "Sage",
-        "role": "Notion Documentation",
+        "id": "ads",
+        "name": "Ads",
+        "role": "Paid Ads Specialist",
         "level": 2,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/sage-notion/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/sage-learnings.md",
-        "mcpIntegration": "notion-mcp",
-        "capabilities": ["Documentation", "Knowledge base", "Project wikis"],
-        "kpis": {
-          "pagesUpdated": 20,
-          "linkHealth": 95
-        }
+        "team": "marketing",
+        "skillPath": ".claude/skills/workers/adler-paid-ads/SKILL.md",
+        "learningsPath": ".specify/memory/learnings/adler-learnings.md",
+        "capabilities": ["Google Ads", "Meta Ads", "LinkedIn Ads", "campaign optimization"],
+        "note": "Kept separate - specialized paid ads domain"
+      }
+    ],
+    "projectLeads": [
+      {
+        "id": "scales",
+        "name": "Scales",
+        "project": "lawfirm-rag",
+        "level": 3,
+        "reportsTo": "drew",
+        "skillPath": ".claude/skills/leads/scales-lawfirm-rag/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
       },
       {
-        "id": "maya",
-        "name": "Maya",
-        "role": "Content Ideation",
-        "level": 2,
+        "id": "haven",
+        "name": "Haven",
+        "project": "asliceofhaven",
+        "level": 3,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/maya-ideation/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/maya-learnings.md",
-        "mcpIntegration": null,
-        "capabilities": ["Idea generation", "Research", "Content calendar", "Trending topics"],
-        "kpis": {
-          "ideasGenerated": 10,
-          "ideasApproved": 30
-        }
+        "skillPath": ".claude/skills/leads/haven-asliceofhaven/SKILL.md",
+        "deploymentAuthority": ["linkedin", "instagram", "tiktok"],
+        "note": "Lightweight context file - 50 lines"
       },
       {
-        "id": "spike",
-        "name": "Spike",
-        "role": "Remotion Video",
-        "level": 2,
+        "id": "aurora",
+        "name": "Aurora",
+        "project": "visionspark",
+        "level": 3,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/spike-remotion/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/spike-learnings.md",
-        "mcpIntegration": null,
-        "capabilities": ["Video creation", "Animations", "Compositions", "Exports"],
-        "kpis": {
-          "videosRendered": 3,
-          "exportSuccess": 100
-        }
+        "skillPath": ".claude/skills/leads/aurora-visionspark/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
       },
       {
-        "id": "ada",
-        "name": "Ada",
-        "role": "Python Coder",
-        "level": 2,
+        "id": "trinity",
+        "name": "Trinity",
+        "project": "buildmytribe-ai",
+        "level": 3,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/ada-python/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/ada-learnings.md",
-        "mcpIntegration": null,
-        "capabilities": ["Scripts", "Data processing", "API integrations", "Automation"],
-        "kpis": {
-          "scriptsWritten": 5,
-          "testCoverage": 80
-        }
+        "skillPath": ".claude/skills/leads/trinity-buildmytribe/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
       },
       {
-        "id": "rex",
-        "name": "Rex",
-        "role": "Git Manager",
-        "level": 2,
+        "id": "nigel",
+        "name": "Nigel",
+        "project": "uk-directory",
+        "level": 3,
         "reportsTo": "drew",
-        "skillPath": ".claude/skills/workers/rex-git/SKILL.md",
-        "learningsPath": ".specify/memory/learnings/rex-learnings.md",
-        "mcpIntegration": null,
-        "capabilities": ["Branch strategy", "PRs", "CI/CD", "Code review"],
-        "kpis": {
-          "prsManaged": 10,
-          "ciPasses": 95
-        }
+        "skillPath": ".claude/skills/leads/nigel-uk-directory/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
+      },
+      {
+        "id": "ozhi",
+        "name": "Ozhi",
+        "project": "ozhiapp-crm",
+        "level": 3,
+        "reportsTo": "drew",
+        "skillPath": ".claude/skills/leads/ozhi-ozhiapp/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
+      },
+      {
+        "id": "muse",
+        "name": "Muse",
+        "project": "theinnovativenative",
+        "level": 3,
+        "reportsTo": "drew",
+        "skillPath": ".claude/skills/leads/muse-theinnovativenative/SKILL.md",
+        "note": "Lightweight context file - 50 lines"
       }
     ]
   },
+  "teams": {
+    "marketing": {
+      "lead": "mike",
+      "manager": "drew",
+      "members": ["chris", "creative", "ads"],
+      "description": "Marketing arm responsible for content, visuals, and paid ads"
+    }
+  },
+  "consolidation": {
+    "mergedAgents": {
+      "builder": {
+        "absorbedAgents": ["neo", "ada", "rex"],
+        "capabilities": ["n8n", "python", "git"]
+      },
+      "creative": {
+        "absorbedAgents": ["spike", "pixel", "maya"],
+        "capabilities": ["remotion", "graphics", "ideation"]
+      },
+      "comms": {
+        "absorbedAgents": ["echo", "iris", "sage"],
+        "capabilities": ["slack", "email", "drive", "notion"]
+      },
+      "jenna": {
+        "absorbedAgents": ["risa"],
+        "capabilities": ["office management", "finance", "admin"]
+      }
+    },
+    "deletedAgentPaths": [
+      ".claude/skills/workers/ada-python/",
+      ".claude/skills/workers/rex-git/",
+      ".claude/skills/workers/echo-slack/",
+      ".claude/skills/workers/sage-notion/",
+      ".claude/skills/workers/maya-ideation/",
+      ".claude/skills/workers/pixel-graphics/",
+      ".claude/skills/staff/risa-finance-admin/"
+    ]
+  },
   "metadata": {
-    "totalAgents": 17,
-    "seniorStaffCount": 5,
-    "projectLeadsCount": 7,
-    "workersCount": 9
+    "coreAgents": 11,
+    "projectLeads": 7,
+    "previousTotal": 20,
+    "tokenSavingsEstimate": "48%"
   }
 }

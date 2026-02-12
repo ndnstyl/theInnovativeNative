@@ -1,0 +1,48 @@
+{
+  "name": "A Slice of Haven",
+  "description": "Havenly Sent kitchen lifestyle and home organization — warm, authentic UGC content for everyday product discovery.",
+
+  "colors": {
+    "background": "FFF8F0",
+    "background_alt": "FFF1E6",
+    "text": "2C1810",
+    "text_secondary": "6B4D3A",
+    "accent": "D4956A",
+    "accent_secondary": "8B6F47",
+    "accent_tertiary": "E8B898",
+    "code_bg": "F5EDE5",
+    "card_bg": "FFFFFF",
+    "card_bg_alt": "FFF5ED"
+  },
+
+  "fonts": {
+    "heading": "Playfair Display",
+    "body": "Inter",
+    "code": "JetBrains Mono"
+  },
+
+  "ugc_overlay": {
+    "hook_font": "Inter",
+    "hook_weight": "800",
+    "hook_color": "FFFFFF",
+    "hook_shadow": "000000",
+    "caption_font": "Inter",
+    "caption_weight": "700",
+    "caption_bg": "D4956A",
+    "caption_text": "FFFFFF",
+    "cta_bg": "2C1810",
+    "cta_text": "FFFFFF"
+  },
+
+  "assets": {
+    "logo": null,
+    "logo_dark": null,
+    "icon": null,
+    "avatar_references": [
+      "cinema_knowledge/Gemini_Generated_Image_ldehz9ldehz9ldeh.jpg",
+      "cinema_knowledge/Gemini_Generated_Image_mzngjjmzngjjmzng.png",
+      "cinema_knowledge/Gemini_Generated_Image_snx956snx956snx9.png",
+      "cinema_knowledge/Gemini_Generated_Image_15fp7x15fp7x15fp.png"
+    ]
+  }
+}

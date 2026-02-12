@@ -26,7 +26,7 @@
 
 ### The Innovative Native Mark
 
-No logo currently configured. Add a logo to `assets/logo.png` when available.
+512x512 PNG with transparency.
 
 **Logo file**: `.claude/skills/pptx-generator/brands/innovative-native/assets/logo.png`
 
@@ -246,12 +246,74 @@ Neural brain iconography, wireframe structures, minimalist geometric overlays. S
 
 ## Artistic Style Signature
 
-The artistic identity is **retro-futurist digital surrealism**.
+The artistic identity is **high-end futuristic SaaS / AI automation cinematic**. It blends cyberpunk neon aesthetics, enterprise SaaS UI mockups, and clean product-marketing polish. It feels expensive, technical, and modern — not chaotic sci-fi.
 
 - **Influences:** Synthwave visual culture, 80s sci-fi futurism, modern cinematic motion graphics
 - **Lighting:** Glowing neon gradients, chiaroscuro silhouettes
 - **Composition:** Symmetry, centered subjects, strong geometric tension
 - **Cinematic language:** Evokes sci-fi futurist films and digital dreamscapes
+- **Render quality:** Ultra-clean, smooth gradients, 3D render / Unreal Engine / Octane Render quality. Corporate-grade, not playful or cartoonish.
+
+---
+
+## Cinematic Composition & Layout
+
+### Framing
+- **Wide cinematic framing** (16:9) for thumbnails, headers, and hero images
+- **Central anchor object** — a glowing square/rounded-square node (logo, product icon, or system node)
+- **Left and right panels** — floating UI screens or monitors at slight perspective angle (not flat head-on)
+
+### Visual Flow
+- Data streams, light trails, or particle lines flowing **left → center → right**
+- Clear directional storytelling communicating automation, orchestration, pipelines at a glance
+
+---
+
+## UI & Object Styling
+
+### Floating Screens
+- Clean SaaS dashboard UI with minimal clutter
+- Dark UI themes consistent with brand palette
+- Framed by neon outlines with soft glow borders
+- Slightly elevated, not touching the ground
+- Subtle depth of field for separation between layers
+
+---
+
+## Lighting & Effects
+
+- **Neon glow halos** around frames and key elements
+- **Light trails** styled as fiber-optic cables, particle streams, or energy paths
+- **Floor reflections** mirror the neon colors on glossy black surface
+- **No harsh shadows** — everything feels polished and intentional
+- **Strong glow effects** with soft neon rim lighting
+
+---
+
+## Texture & Finish
+
+- **Ultra-clean** — no grain, no noise
+- **Smooth gradients** throughout
+- **Render quality:** 3D render / Unreal Engine / Octane Render feel
+- **Corporate-grade**, not playful or cartoonish
+- Think dark mode + neon edge glow, never bright backgrounds
+
+---
+
+## Emotional & Brand Feel
+
+The brand should evoke:
+- **Intelligent** — systems that think
+- **Scalable** — architecture that grows
+- **Automated** — "this system runs without humans watching it"
+- **Powerful** — enterprise-grade capability
+
+### Target Audience Resonance
+Visuals should appeal to:
+- AI builders and automation engineers
+- SaaS founders and technical operators
+- Enterprise buyers evaluating automation solutions
+- Law firm managing partners seeking modern operations
 
 ---
 
@@ -266,4 +328,48 @@ The brand universe is a **neon-lit future horizon**.
 
 ---
 
-*Last updated: 2026-02-03*
+## Cinema Knowledge & UGC Direction
+
+**Reference Library**: `cinema_knowledge/`
+
+This is a living library of cinematic production knowledge used for Remotion video, AI-generated imagery, and UGC content creation. It will grow over time.
+
+### Available References
+
+| File | Contents |
+|------|----------|
+| `Camera Movement & Framing.md` | 10 camera movement types (static, pan, tilt, zoom, dolly, dolly zoom, tracking, truck, arc, whip pan) with descriptions, use cases, and emotional effects |
+| `Lighting Styles & Techniques.md` | 9 lighting patterns (key, Rembrandt, butterfly, loop, split, short, broad, rim, clamshell) with cinematic application notes |
+| `Visual Composition Roles.md` | 5-agent visual pipeline: Mood Board, Shot List, Production Design, Wardrobe, Style Synthesis Director — each with responsibilities and deliverables |
+| `*.png / *.jpg` | AI-generated UGC reference images — consistent character across poses, lighting reference sheets, camera movement guides |
+
+### UGC Content Direction
+
+The brand uses **AI-generated photorealistic UGC** (user-generated content style) for marketing, social media, and Stan Store product imagery. The goal is content that feels genuinely human — not stock, not obviously AI.
+
+**Character Consistency Rules:**
+- Maintain consistent character appearance across all generated images in a campaign
+- Multiple poses, outfits, and settings for the same character
+- Reference images in `cinema_knowledge/` establish the baseline look
+
+**UGC Style Guidelines:**
+- Natural lighting preferred for "human" feeling (supplement with brand neon for hybrid shots)
+- Professional but approachable — business casual to professional wardrobes
+- Clean backgrounds that don't compete with the subject
+- Confidence and competence in posing — these represent the target audience (law firm professionals)
+
+**Hybrid Approach (UGC + Brand Aesthetic):**
+- UGC-style photos for social proof, testimonials, and relatable content
+- Brand neon/cinematic style for thumbnails, hero images, and system diagrams
+- Both styles coexist — UGC builds trust, cinematic builds authority
+
+### Cinematic Application for Remotion
+
+When creating video content, reference the cinema knowledge files for:
+- **Camera movement selection** based on emotional intent (e.g., dolly-in for engagement, arc for spatial immersion)
+- **Lighting pattern** matching brand mood (rim lighting for brand separation, Rembrandt for drama)
+- **Visual composition pipeline** for structured production planning
+
+---
+
+*Last updated: 2026-02-06*

@@ -106,43 +106,48 @@ triggers:
 - Consider when planning operations
 - Document formula dependencies
 
-## Shutdown Protocol (MANDATORY - NO EXCEPTIONS)
+## ⛔ Shutdown Protocol (MANDATORY - NO EXCEPTIONS) ⛔
 
-**Every session MUST complete ALL steps before ending:**
+**YOU CANNOT END A SESSION WITHOUT COMPLETING ALL STEPS**
 
-### 1. Log Time Entry to Airtable
+### 1. Log Time Entry to Airtable (REQUIRED)
 ```
-Table: Time Entries (YOUR_TIME_ENTRIES_TABLE_ID)
+Table: Time Entries
 Fields:
   - Entry Date: Today's date
   - Agent: Tab (link to Agents table)
   - Project: Relevant project (link to Projects table)
-  - Hours: Decimal hours worked
+  - Hours: Decimal hours worked (even 5 min = 0.08)
   - Description: What was accomplished
   - Tokens Used: Total tokens consumed this session
 ```
 
-### 2. Log Task to Airtable (if deliverable produced)
+### 2. Log Task to Airtable (if >5min OR deliverable produced)
 ```
-Table: Tasks (YOUR_TASKS_TABLE_ID)
+Table: Tasks
 Fields:
-  - Task Name: Brief title
-  - Agent: Tab
+  - Title: Brief title (not "Task Name")
+  - Assignee: Tab (not "Agent")
   - Project: Relevant project
   - Status: Complete/In Progress
   - Description: Details of work done
 ```
 
-### 3. Update Learnings
+### 3. Log Skills Gaps (if any capability was missing)
+- Document in `.specify/memory/learnings/tab-learnings.md`
+- Format: `[Date]: Needed [capability] but lacked [skill/tool/access]`
+- This feeds training priorities
+
+### 4. Update Learnings
 - Document new patterns in `.specify/memory/learnings/tab-learnings.md`
 - Add mistakes to Critical Mistakes section
 - Update shared-learnings.md if cross-agent impact
 
-### 4. Report Completion
+### 5. Report Completion
 - Confirm all tracking is done
 - Escalate any blockers
 
-**FAILURE TO COMPLETE SHUTDOWN PROTOCOL IS A CRITICAL VIOLATION**
+**If it's not in Airtable, it didn't happen. FAILURE TO LOG IS A CRITICAL VIOLATION.**
 
 ## Slower is Faster
 Quality over speed. Data integrity is paramount. Verify before bulk operations.
