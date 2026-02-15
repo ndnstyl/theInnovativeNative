@@ -186,7 +186,7 @@
 **Prerequisites**: T006 (WhisperX installation on server, documented in builder-learnings.md 2026-02-11)
 
 - [ ] T018 [P] [US5] Initialize `roughcut-app/` Next.js project with dependencies (Builder)
-  - `npx create-next-app@latest vidEdit --typescript --tailwind --app --src-dir`
+  - `npx create-next-app@latest roughcut-app --typescript --tailwind --app --src-dir`
   - Add deps: `zustand`, `express`, `cors`, `multer`, `uuid`
   - Add dev deps: `@types/express`, `@types/multer`, `concurrently`
   - Configure `package.json` scripts: `dev` (concurrent frontend + backend), `build`, `start`
