@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.42 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+Spoke some things into the universe and they appeared.<break time="200ms"/> Not 'cause the universe owed me nothin'.<break time="200ms"/> 'Cause I put the work behind the words.
+</prosody>
+<break time="600ms"/>
+<prosody rate="90%" volume="medium">
+Vision without labor is just a daydream.<break time="200ms"/> But labor without vision?<break time="200ms"/> That's a prison.<break time="600ms"/> You need both.<break time="200ms"/> And you need to believe you deserve what you're buildin'.
+</prosody>
+</speak>

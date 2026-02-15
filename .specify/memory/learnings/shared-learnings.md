@@ -98,7 +98,17 @@ TIN Marketing/
 
 ---
 
+### ⚠️ CRITICAL FAILURE: Unverified n8n Deployment (2026-02-13)
+Agent deployed WF-1 Scene Prep 3 times. Every time said "ready to test."
+Every time broke on a different error (binary parse, field name mismatch).
+Root cause: Zero post-deploy verification. Agent never checked if Airtable
+fields existed, never validated schema match, never confirmed Drive file
+was accessible as JSON. User had to manually test and report each bug.
+FIX: Builder MUST self-verify before reporting "ready to test." See
+Builder SKILL.md "n8n Deployment Verification (MANDATORY)" section.
+
 ## Integration Gotchas
+- **⛔ n8n: Local workflow JSON is USELESS. Always deploy to the live n8n instance via API. If it's not deployed, it doesn't exist.** (Added 2026-02-13 after wasted session editing local JSON that was never pushed to n8n)
 - n8n: Never test workflows with Apify HTTP nodes
 - Airtable: Always check for existing data before schema changes
 - Database migrations: Check existing data first (Hostinger, n8n, etc.)
@@ -113,9 +123,64 @@ TIN Marketing/
 - **n8n parallel branch synchronization (2026-02-09)**: When a trigger fans out to N parallel nodes that must ALL complete before a downstream node fires, insert a Merge node (`n8n-nodes-base.merge` v3.2, `mode: "append"`, `numberInputs: N`). NEVER connect multiple parallel branches to the same input index of a downstream node — n8n fires on first arrival, not when all arrive. This caused a runtime crash in the Haven B-Roll pipeline.
 - **n8n executeWorkflow v1.3 implicit data passing (2026-02-09)**: Empty `workflowInputs.value: {}` in Execute Workflow nodes passes upstream data through implicitly. No explicit field mappings needed. Confirmed across 3 sub-workflow calls in WF-001.
 - **n8n sub-workflow error taxonomy (2026-02-09)**: Two classes — (1) pre-flight validation errors from outdated node versions/deprecated parameters, (2) runtime execution errors from incorrect connection topology. Pre-flight doesn't catch connection logic issues.
-- **AAVE orthography for TTS (2026-02-11)**: TTS engines (ElevenLabs AND Qwen3) over-enunciate when scripts use standard English. Fix: spell words how the character says them (sleepin', outta, ain't, folk). ~65% AAVE density for measured characters. Full rules in `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md`.
+- **AAVE orthography for TTS (2026-02-11)**: TTS engines (ElevenLabs AND Qwen3) over-enunciate when scripts use standard English. Fix: spell words how the character says them (sleepin', outta, ain't, folk). ~65% AAVE density for measured characters. Full rules in `projects/004-bowtie-bullies/brand/tyrone-voice-guide.md`.
 - **TTS engine selection (2026-02-11)**: ElevenLabs wins for production quality. Qwen3-TTS (local, MLX) useful for prototyping/iteration but has robotic quality and pronunciation issues. The AAVE script rewrite benefits both engines equally — it's the real lever.
 - **Qwen3-TTS voice cloning (2026-02-11)**: Never trim reference audio — longer clips give better clone quality via ECAPA-TDNN speaker encoder. ICL mode auto-overrides repetition_penalty to minimum 1.5. Provide full matching transcript for best results.
+
+## Session Learnings (2026-02-12) — BowTie Pose Generator img2img + Workflow Patterns
+
+### n8n Workflow Updates via API — NEVER Overwrite (CRITICAL)
+- **ALWAYS** `GET` the live workflow first, patch specific node parameters, then `PUT` back
+- **NEVER** push local JSON blindly — it will wipe user-added nodes and real credentials
+- n8n `PUT` payload must only include `name`, `nodes`, `connections`, `settings` — extra fields like `tags`, `pinData`, `staticData` cause 400 errors
+- Credential IDs are workflow-specific — they reference n8n's credential store, not the credential values themselves
+
+### n8n Native Node vs HTTP Request Pattern
+- Native n8n nodes (e.g., `@n8n/n8n-nodes-langchain.googleGemini`) wrap APIs but don't expose all options
+- When a native node lacks a setting (e.g., `imageConfig.aspectRatio` for Gemini), use an HTTP Request node instead
+- Pattern: **Code node** (builds full JSON payload) → **HTTP Request node** (sends it)
+- The Code node can use `this.helpers.getBinaryDataBuffer(itemIndex, key)` to get binary data from upstream nodes
+
+### n8n Binary Data in Database Mode (CRITICAL)
+- When `binaryDataMode: "database"`, binary data in `$binary.data.data` is a **reference ID**, not actual base64
+- To get actual bytes: `const buffer = await this.helpers.getBinaryDataBuffer(0, 'data');` (custom nodes only — NOT available in Code nodes)
+- To create proper binary for downstream nodes: `await this.helpers.prepareBinaryData(buffer, filename, mimeType)`
+- Without `prepareBinaryData()`, downstream nodes (Google Drive Upload) receive corrupt 6-byte files
+- **Code node workaround (2026-02-13)**: If you need to read a Drive file as JSON in a Code node, do NOT use Google Drive Download → binary parse. Instead use HTTP Request node with `authentication: "predefinedCredentialType"`, `nodeCredentialType: "googleDriveOAuth2Api"`, URL: `https://www.googleapis.com/drive/v3/files/{fileId}?alt=media`. Returns parsed JSON directly — no binary, no Buffer, no database mode issues. Then Code node reads `$input.first().json`.
+
+### Airtable Image Preview from Google Drive
+- Use `multipleAttachments` field type in Airtable
+- Set value to: `[{"url": "https://drive.google.com/uc?export=download&id=FILE_ID"}]`
+- The `uc?export=download` URL format returns the raw file, which Airtable can thumbnail
+- Standard `drive.google.com/file/d/ID/view` URLs do NOT work for Airtable previews
+- Applied to: Generated Poses (`tblcqlsc7x8BkULT4`), B-Roll Assets (`tblZFXmecddrm4YGD`), Thumbnails (`tbl578fcxEG7aOuyJ`)
+
+### Gemini Model Selection for Image Generation
+- `gemini-2.5-flash-image` (Nano Banana) → cel-shaded/2D style results (correct for BowTie)
+- `gemini-2.0-flash-exp-image-generation` → photorealistic 3D (wrong for animated characters)
+- For img2img editing: same `generateContent` endpoint, but include `inline_data` in `parts` array alongside text prompt
+- Edit prompts should describe what to CHANGE, not what the character looks like (since reference image already IS the character)
+- `imageConfig.aspectRatio` supported values: `"1:1"`, `"2:3"`, `"3:2"`, `"3:4"`, `"4:3"`, `"9:16"`, `"16:9"`, `"21:9"`
+
+### Key BowTie Infrastructure IDs
+| Resource | ID |
+|----------|-----|
+| Airtable Base | `appTO7OCRB2XbAlak` |
+| Generated Poses table | `tblcqlsc7x8BkULT4` |
+| B-Roll Assets table | `tblZFXmecddrm4YGD` |
+| Thumbnails table | `tbl578fcxEG7aOuyJ` |
+| Airtable credential (n8n) | `YCWFwTIXwnTpVy2y` |
+| Google Drive OAuth (n8n) | `53ssDoT9mG1Dtejj` |
+| Google Gemini API (n8n) | `JbBNLCe83ER3tCwD` |
+| Pose Generator v1 workflow | `fDU4JRB3oq9A9DtE` |
+| Pose Generator v2 workflow | `IhKukcOuQCdiIoyG` |
+| B-Roll Generator workflow | `YR81CwKhgnnSy7u7` |
+| Thumbnail Generator workflow | `UpZfvLShM9xABmuq` |
+| **Drive: BowTie Bullies Root (TIN Marketing)** | **`1JVHhmZLK3Rv2pK3W4ZlfYkF6xdeW1a2p`** |
+| Drive: Character References | `1gaXKQsJgurac7d7OhZdFzBVy-yrqPGhc` |
+| Drive: Generated Poses | `1uZUZYqv0HKNuxRQztS80g0XWMW1nIce8` |
+
+---
 
 ## Session Learnings (2026-02-11) — BowTie Video Pipeline
 

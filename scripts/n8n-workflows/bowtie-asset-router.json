@@ -1,0 +1,601 @@
+{
+  "name": "BowTie Asset Router",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-asset-generator-master",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "wh-asset-router",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-asset-generator-master"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract scene_records from webhook body\nconst input = $input.first().json.body || $input.first().json;\nconst episode_id = input.episode_id || 'UNKNOWN';\nconst scene_records = input.scene_records || [];\n\nreturn scene_records.map(scene => ({\n  json: {\n    episode_id,\n    scene_id: scene.scene_id || scene.fields?.scene_id || '',\n    airtable_record_id: scene.id || scene.airtable_record_id || '',\n    visual_backend: (scene.visual_backend || scene.fields?.visual_backend || 'skip').toLowerCase(),\n    visual_prompt: scene.visual_prompt || scene.fields?.visual_prompt || '',\n    pose_variant: scene.pose_variant || scene.fields?.pose_variant || '',\n    scene_type: scene.scene_type || scene.fields?.scene_type || '',\n    scene_number: scene.scene_number || scene.fields?.scene_number || 0\n  }\n}));"
+      },
+      "id": "parse-scene-records",
+      "name": "Parse Scene Records",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-batches",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [620, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "outputKey": "kie_ai",
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.visual_backend }}",
+                    "rightValue": "kie_ai",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "outputKey": "gemini",
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.visual_backend }}",
+                    "rightValue": "gemini",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "outputKey": "remotion",
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.visual_backend }}",
+                    "rightValue": "remotion",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ],
+          "fallbackOutput": "extra"
+        },
+        "options": {}
+      },
+      "id": "switch-visual-backend",
+      "name": "Switch Visual Backend",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [820, 300]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-kie-rate-limit",
+      "name": "Wait — Kie Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1020, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.N8N_URL }}/webhook/bowtie-pose-generator",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"poses\": [\"{{ $('SplitInBatches').item.json.pose_variant }}\"],\n  \"orientations\": [\"16:9\"],\n  \"batch_name\": \"{{ $('SplitInBatches').item.json.episode_id }}_{{ $('SplitInBatches').item.json.scene_id }}\",\n  \"visual_prompt\": \"{{ $('SplitInBatches').item.json.visual_prompt }}\"\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "http-pose-generator",
+      "name": "HTTP Pose Generator",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1220, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract image URL from Pose Generator response\nconst response = $input.first().json;\nconst sceneData = $('SplitInBatches').first().json;\n\nconst image_url = response.image_url || response.drive_url || response.url || '';\n\nreturn [{\n  json: {\n    ...sceneData,\n    image_url,\n    generator: 'kie_ai',\n    generation_status: image_url ? 'success' : 'failed'\n  }\n}];"
+      },
+      "id": "extract-pose-result",
+      "name": "Extract Pose Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1420, 100]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-gemini-rate-limit",
+      "name": "Wait — Gemini Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1020, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.N8N_URL }}/webhook/bowtie-broll-generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"visual_prompt\": \"{{ $('SplitInBatches').item.json.visual_prompt }}\",\n  \"batch_name\": \"{{ $('SplitInBatches').item.json.episode_id }}_{{ $('SplitInBatches').item.json.scene_id }}\",\n  \"aspect_ratio\": \"16:9\"\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "http-broll-generator",
+      "name": "HTTP B-Roll Generator",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1220, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract image URL from B-Roll Generator response\nconst response = $input.first().json;\nconst sceneData = $('SplitInBatches').first().json;\n\nconst image_url = response.image_url || response.drive_url || response.url || '';\n\nreturn [{\n  json: {\n    ...sceneData,\n    image_url,\n    generator: 'gemini',\n    generation_status: image_url ? 'success' : 'failed'\n  }\n}];"
+      },
+      "id": "extract-broll-result",
+      "name": "Extract B-Roll Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1420, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#bowtie-pipeline",
+        "text": "=:warning: *Manual Remotion render needed*\n\nEpisode: `{{ $('SplitInBatches').item.json.episode_id }}`\nScene: `{{ $('SplitInBatches').item.json.scene_id }}` (Scene #{{ $('SplitInBatches').item.json.scene_number }})\nType: `{{ $('SplitInBatches').item.json.scene_type }}`\nPrompt: {{ $('SplitInBatches').item.json.visual_prompt }}",
+        "otherOptions": {}
+      },
+      "id": "slack-remotion-notify",
+      "name": "Slack — Remotion Needed",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [1020, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Remotion scenes don't generate images — pass through with manual flag\nconst sceneData = $('SplitInBatches').first().json;\n\nreturn [{\n  json: {\n    ...sceneData,\n    image_url: '',\n    generator: 'remotion',\n    generation_status: 'manual_required'\n  }\n}];"
+      },
+      "id": "remotion-passthrough",
+      "name": "Remotion Passthrough",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1220, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Default/skip — no generation needed\nconst sceneData = $('SplitInBatches').first().json;\n\nreturn [{\n  json: {\n    ...sceneData,\n    image_url: '',\n    generator: 'skipped',\n    generation_status: 'skipped'\n  }\n}];"
+      },
+      "id": "skip-passthrough",
+      "name": "Skip — No Generation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1020, 700]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Merge point — normalize output from all branches\nconst item = $input.first().json;\n\nreturn [{\n  json: {\n    airtable_record_id: item.airtable_record_id,\n    scene_id: item.scene_id,\n    episode_id: item.episode_id,\n    image_url: item.image_url || '',\n    generator: item.generator || 'unknown',\n    generation_status: item.generation_status || 'unknown',\n    scene_number: item.scene_number,\n    visual_backend: item.visual_backend\n  }\n}];"
+      },
+      "id": "merge-branches",
+      "name": "Merge Branches",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1620, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "id": "={{ $json.airtable_record_id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Image File URL": "={{ $json.image_url }}",
+            "Image Preview": "={{ $json.image_url ? [{ url: $json.image_url }] : [] }}",
+            "status": "={{ $json.generation_status === 'success' ? 'image_generated' : ($json.generation_status === 'manual_required' ? 'awaiting_manual' : $json.generation_status) }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Image File URL",
+              "displayName": "Image File URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image Preview",
+              "displayName": "Image Preview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "array",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "airtable-update-scene",
+      "name": "Airtable — Update Scene",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1820, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Collect all results from the loop and return summary\nconst allItems = $('Airtable — Update Scene').all();\n\nconst summary = {\n  total_scenes: allItems.length,\n  generated: allItems.filter(i => i.json.generation_status === 'success').length,\n  manual_required: allItems.filter(i => i.json.generation_status === 'manual_required').length,\n  skipped: allItems.filter(i => i.json.generation_status === 'skipped').length,\n  failed: allItems.filter(i => i.json.generation_status === 'failed').length,\n  scenes: allItems.map(i => ({\n    scene_id: i.json.scene_id,\n    generator: i.json.generator,\n    status: i.json.generation_status,\n    image_url: i.json.image_url\n  }))\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "build-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2220, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [2420, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.generation_status }}",
+              "rightValue": "skipped",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "leftValue": "={{ $json.airtable_record_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-should-update",
+      "name": "IF — Should Update Airtable",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1620, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// No Airtable update needed — pass data through to loop back\nconst item = $input.first().json;\nreturn [{ json: item }];"
+      },
+      "id": "no-update-passthrough",
+      "name": "No Update Needed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1820, 600]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Parse Scene Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Scene Records": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Visual Backend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Visual Backend": {
+      "main": [
+        [
+          {
+            "node": "Wait — Kie Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait — Gemini Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack — Remotion Needed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skip — No Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Kie Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "HTTP Pose Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Pose Generator": {
+      "main": [
+        [
+          {
+            "node": "Extract Pose Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Pose Result": {
+      "main": [
+        [
+          {
+            "node": "Merge Branches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Gemini Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "HTTP B-Roll Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP B-Roll Generator": {
+      "main": [
+        [
+          {
+            "node": "Extract B-Roll Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract B-Roll Result": {
+      "main": [
+        [
+          {
+            "node": "Merge Branches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack — Remotion Needed": {
+      "main": [
+        [
+          {
+            "node": "Remotion Passthrough",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remotion Passthrough": {
+      "main": [
+        [
+          {
+            "node": "Merge Branches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skip — No Generation": {
+      "main": [
+        [
+          {
+            "node": "Merge Branches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Branches": {
+      "main": [
+        [
+          {
+            "node": "IF — Should Update Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Should Update Airtable": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Scene",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Update Needed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Scene": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No Update Needed": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "bowtie-pipeline"
+    }
+  ],
+  "triggerCount": 1
+}

@@ -1,0 +1,1479 @@
+{
+  "episode_id": "EP-001",
+  "title": "The Marathon Continues — Each One Teach One",
+  "fps": 24,
+  "target_duration_seconds": 1020,
+  "computed_duration_seconds": 635.5,
+  "tracks": {
+    "video": [
+      {
+        "id": "v-intro",
+        "type": "video",
+        "source": "out/bowtie/intro-16x9.mov",
+        "in": -3.5,
+        "out": 0.0
+      },
+      {
+        "id": "v-001",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-001.png",
+        "in": 0.0,
+        "out": 6.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-002",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-002.png",
+        "in": 7.5,
+        "out": 17.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-003",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-003.png",
+        "in": 19.5,
+        "out": 27.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-004",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-004.png",
+        "in": 29.0,
+        "out": 41.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-005",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-005.png",
+        "in": 42.5,
+        "out": 56.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-006",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-006.mov",
+        "composition": "TelemetryOverlay",
+        "props": {
+          "fragments": [
+            "LIEN LAWS",
+            "CREDIT SYSTEMS",
+            "PROPERTY RECORDS"
+          ],
+          "style": "quick_cuts"
+        },
+        "in": 58.0,
+        "out": 63.0
+      },
+      {
+        "id": "v-007",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-007.png",
+        "in": 65.0,
+        "out": 77.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-008",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-008.png",
+        "in": 78.5,
+        "out": 88.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-009",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-009.png",
+        "in": 90.5,
+        "out": 98.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-010",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-009.png",
+        "in": 100.0,
+        "out": 108.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-011",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-011.png",
+        "in": 110.0,
+        "out": 120.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-012",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 123.0,
+        "out": 126.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-013",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-013.png",
+        "in": 126.0,
+        "out": 144.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-014",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-014.png",
+        "in": 145.5,
+        "out": 161.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-015",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-015.png",
+        "in": 163.0,
+        "out": 181.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-016",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-016.png",
+        "in": 183.0,
+        "out": 195.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-017",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 196.5,
+        "out": 198.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-018",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-018.png",
+        "in": 198.5,
+        "out": 214.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-019",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-019.png",
+        "in": 216.0,
+        "out": 230.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-020",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-020.png",
+        "in": 231.5,
+        "out": 247.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-021",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-021.png",
+        "in": 249.0,
+        "out": 261.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-022",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 263.0,
+        "out": 265.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-023",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-023.png",
+        "in": 265.0,
+        "out": 283.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-024",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-024.mov",
+        "composition": "BowTieQuoteCardV2",
+        "props": {
+          "quote": "**Ownership** is everything. Own your **mind**, mind your **own**.",
+          "attribution": "— T"
+        },
+        "in": 284.5,
+        "out": 289.5
+      },
+      {
+        "id": "v-025",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-025.png",
+        "in": 291.5,
+        "out": 307.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-026",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-026.png",
+        "in": 309.0,
+        "out": 323.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-027",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-027.mov",
+        "composition": "BowTieQuoteCardV2",
+        "props": {
+          "quote": "Spoke some things into the **universe** and they **appeared**.",
+          "attribution": "— T"
+        },
+        "in": 325.0,
+        "out": 330.0
+      },
+      {
+        "id": "v-028",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-028.png",
+        "in": 332.0,
+        "out": 348.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-029",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-029.mov",
+        "composition": "BowTieQuoteCardV2",
+        "props": {
+          "quote": "The **highest** thing you can do is **inspire**.",
+          "attribution": "— T"
+        },
+        "in": 350.0,
+        "out": 355.0
+      },
+      {
+        "id": "v-030",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 357.0,
+        "out": 359.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-031",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-031.png",
+        "in": 359.5,
+        "out": 381.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-032",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-032.png",
+        "in": 383.5,
+        "out": 401.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-033",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-033.mov",
+        "composition": "BowTieQuoteCardV2",
+        "props": {
+          "quote": "Each one **teach** one. That's how **knowledge** survived.",
+          "attribution": "— T"
+        },
+        "in": 403.5,
+        "out": 408.5
+      },
+      {
+        "id": "v-034",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-034.png",
+        "in": 410.5,
+        "out": 430.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-035",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-035.png",
+        "in": 432.5,
+        "out": 446.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-036",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 448.0,
+        "out": 450.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-037",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-037.png",
+        "in": 450.0,
+        "out": 458.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-038",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-038.png",
+        "in": 458.0,
+        "out": 493.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-039",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-039.png",
+        "in": 494.5,
+        "out": 510.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-040",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-040.png",
+        "in": 512.0,
+        "out": 526.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-041",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-041.png",
+        "in": 527.5,
+        "out": 541.5,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-042",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-042.png",
+        "in": 543.0,
+        "out": 563.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-043",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-043.mov",
+        "composition": "BowTieStatCallout",
+        "props": {
+          "value": 92,
+          "label": "of Black households hold zero business equity",
+          "suffix": "%"
+        },
+        "in": 565.0,
+        "out": 571.0
+      },
+      {
+        "id": "v-044",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-044.mov",
+        "composition": "BowTieQuoteCard",
+        "props": {
+          "quote": "None of these require venture capital.",
+          "attribution": "— T"
+        },
+        "in": 573.0,
+        "out": 578.0
+      },
+      {
+        "id": "v-045",
+        "type": "ken_burns",
+        "source": "assets/black.png",
+        "in": 580.0,
+        "out": 583.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.0
+        }
+      },
+      {
+        "id": "v-046",
+        "type": "ken_burns",
+        "source": "assets/EP-001/scene-046.png",
+        "in": 583.0,
+        "out": 613.0,
+        "ken_burns": {
+          "zoom_start": 1.0,
+          "zoom_end": 1.08
+        }
+      },
+      {
+        "id": "v-047",
+        "type": "remotion_overlay",
+        "source": "out/bowtie/EP-001-scene-047.mov",
+        "composition": "BowTieQuoteCardV2",
+        "props": {
+          "quote": "The **marathon** continues. Pay **attention**.",
+          "attribution": "— T"
+        },
+        "in": 616.0,
+        "out": 622.0
+      },
+      {
+        "id": "v-outro",
+        "type": "video",
+        "source": "out/bowtie/outro-16x9.mov",
+        "in": 625.0,
+        "out": 632.0
+      }
+    ],
+    "voiceover": [
+      {
+        "id": "vo-001",
+        "source": "assets/EP-001/vo/scene-001.wav",
+        "in": 0.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-002",
+        "source": "assets/EP-001/vo/scene-002.wav",
+        "in": 7.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-003",
+        "source": "assets/EP-001/vo/scene-003.wav",
+        "in": 19.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-004",
+        "source": "assets/EP-001/vo/scene-004.wav",
+        "in": 29.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-005",
+        "source": "assets/EP-001/vo/scene-005.wav",
+        "in": 42.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-006",
+        "source": "assets/EP-001/vo/scene-006.wav",
+        "in": 58.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-007",
+        "source": "assets/EP-001/vo/scene-007.wav",
+        "in": 65.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-008",
+        "source": "assets/EP-001/vo/scene-008.wav",
+        "in": 78.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-009",
+        "source": "assets/EP-001/vo/scene-009.wav",
+        "in": 90.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-010",
+        "source": "assets/EP-001/vo/scene-010.wav",
+        "in": 100.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-011",
+        "source": "assets/EP-001/vo/scene-011.wav",
+        "in": 110.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-013",
+        "source": "assets/EP-001/vo/scene-013.wav",
+        "in": 126.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-014",
+        "source": "assets/EP-001/vo/scene-014.wav",
+        "in": 145.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-015",
+        "source": "assets/EP-001/vo/scene-015.wav",
+        "in": 163.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-016",
+        "source": "assets/EP-001/vo/scene-016.wav",
+        "in": 183.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-018",
+        "source": "assets/EP-001/vo/scene-018.wav",
+        "in": 198.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-019",
+        "source": "assets/EP-001/vo/scene-019.wav",
+        "in": 216.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-020",
+        "source": "assets/EP-001/vo/scene-020.wav",
+        "in": 231.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-021",
+        "source": "assets/EP-001/vo/scene-021.wav",
+        "in": 249.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-023",
+        "source": "assets/EP-001/vo/scene-023.wav",
+        "in": 265.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-025",
+        "source": "assets/EP-001/vo/scene-025.wav",
+        "in": 291.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-026",
+        "source": "assets/EP-001/vo/scene-026.wav",
+        "in": 309.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-028",
+        "source": "assets/EP-001/vo/scene-028.wav",
+        "in": 332.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-031",
+        "source": "assets/EP-001/vo/scene-031.wav",
+        "in": 359.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-032",
+        "source": "assets/EP-001/vo/scene-032.wav",
+        "in": 383.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-034",
+        "source": "assets/EP-001/vo/scene-034.wav",
+        "in": 410.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-035",
+        "source": "assets/EP-001/vo/scene-035.wav",
+        "in": 432.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-037",
+        "source": "assets/EP-001/vo/scene-037.wav",
+        "in": 450.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-038",
+        "source": "assets/EP-001/vo/scene-038.wav",
+        "in": 458.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-039",
+        "source": "assets/EP-001/vo/scene-039.wav",
+        "in": 494.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-040",
+        "source": "assets/EP-001/vo/scene-040.wav",
+        "in": 512.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-041",
+        "source": "assets/EP-001/vo/scene-041.wav",
+        "in": 527.5,
+        "level_db": -13
+      },
+      {
+        "id": "vo-042",
+        "source": "assets/EP-001/vo/scene-042.wav",
+        "in": 543.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-043",
+        "source": "assets/EP-001/vo/scene-043.wav",
+        "in": 565.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-046-a",
+        "source": "assets/EP-001/vo/scene-046-a.wav",
+        "in": 583.0,
+        "level_db": -13
+      },
+      {
+        "id": "vo-046-b",
+        "source": "assets/EP-001/vo/scene-046-b.wav",
+        "in": 600.0,
+        "level_db": -13
+      }
+    ],
+    "sfx": [
+      {
+        "id": "sfx-001-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 0.0,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-002-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 7.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-003-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 19.5,
+        "level_db": -34.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-004-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 29.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-005-elevator_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/elevator_hum.wav",
+        "in": 42.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-006-data_stream_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/data_stream_hum.wav",
+        "in": 58.0,
+        "level_db": -30.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-007-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 65.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-008-wind_chainlink",
+        "source": "projects/004-bowtie-bullies/media/SFX/wind_chainlink.wav",
+        "in": 78.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-009-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 90.5,
+        "level_db": -34.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-010-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 100.0,
+        "level_db": -36.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-011-wind_chainlink",
+        "source": "projects/004-bowtie-bullies/media/SFX/wind_chainlink.wav",
+        "in": 110.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-013-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 126.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-013-police_siren_distant",
+        "source": "projects/004-bowtie-bullies/media/SFX/police_siren_distant.wav",
+        "in": 136.0,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-014-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 145.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-015-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 163.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-015-notification_ping",
+        "source": "projects/004-bowtie-bullies/media/SFX/notification_ping.wav",
+        "in": 171.0,
+        "level_db": -30.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-016-elevator_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/elevator_hum.wav",
+        "in": 183.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-018-elevator_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/elevator_hum.wav",
+        "in": 198.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-018-keyboard_typing",
+        "source": "projects/004-bowtie-bullies/media/SFX/keyboard_typing.wav",
+        "in": 203.5,
+        "level_db": -28.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-019-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 216.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-020-building_hallway",
+        "source": "projects/004-bowtie-bullies/media/SFX/building_hallway.wav",
+        "in": 231.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-021-wind_chainlink",
+        "source": "projects/004-bowtie-bullies/media/SFX/wind_chainlink.wav",
+        "in": 249.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-023-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 265.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-024-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 284.5,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-025-wind_chainlink",
+        "source": "projects/004-bowtie-bullies/media/SFX/wind_chainlink.wav",
+        "in": 291.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-026-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 309.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-027-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 325.0,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-028-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 332.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-029-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 350.0,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-031-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 359.5,
+        "level_db": -34.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-032-elevator_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/elevator_hum.wav",
+        "in": 383.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-033-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 403.5,
+        "level_db": -32.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-034-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 410.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-034-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 410.5,
+        "level_db": -34.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-035-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 432.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-037-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 450.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-037-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 450.0,
+        "level_db": -34.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-038-building_hallway",
+        "source": "projects/004-bowtie-bullies/media/SFX/building_hallway.wav",
+        "in": 458.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-039-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 494.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-040-elevator_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/elevator_hum.wav",
+        "in": 512.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-040-keyboard_typing",
+        "source": "projects/004-bowtie-bullies/media/SFX/keyboard_typing.wav",
+        "in": 517.0,
+        "level_db": -28.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-041-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 527.5,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-041-door_slam",
+        "source": "projects/004-bowtie-bullies/media/SFX/door_slam.wav",
+        "in": 527.5,
+        "level_db": -26.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-042-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 543.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-043-data_stream_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/data_stream_hum.wav",
+        "in": 565.0,
+        "level_db": -28.0,
+        "type": "event"
+      },
+      {
+        "id": "sfx-044-distant_traffic",
+        "source": "projects/004-bowtie-bullies/media/SFX/distant_traffic.wav",
+        "in": 573.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-045-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 580.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-046-wind_chainlink",
+        "source": "projects/004-bowtie-bullies/media/SFX/wind_chainlink.wav",
+        "in": 583.0,
+        "level_db": -24,
+        "type": "bed"
+      },
+      {
+        "id": "sfx-047-sub_bass_hum",
+        "source": "projects/004-bowtie-bullies/media/SFX/sub_bass_hum.wav",
+        "in": 616.0,
+        "level_db": -30.0,
+        "type": "event"
+      }
+    ],
+    "music": [
+      {
+        "id": "mus-somber-001",
+        "source": "projects/004-bowtie-bullies/media/music/somber.wav",
+        "in": 0.0,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-tense-002",
+        "source": "projects/004-bowtie-bullies/media/music/tense.wav",
+        "in": 126.0,
+        "level_db": -28.0
+      },
+      {
+        "id": "mus-reflective-003",
+        "source": "projects/004-bowtie-bullies/media/music/reflective.wav",
+        "in": 198.5,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-defiant-004",
+        "source": "projects/004-bowtie-bullies/media/music/defiant.wav",
+        "in": 265.0,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-reflective-005",
+        "source": "projects/004-bowtie-bullies/media/music/reflective.wav",
+        "in": 332.0,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-somber-006",
+        "source": "projects/004-bowtie-bullies/media/music/somber.wav",
+        "in": 359.5,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-defiant-007",
+        "source": "projects/004-bowtie-bullies/media/music/defiant.wav",
+        "in": 410.5,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-reflective-008",
+        "source": "projects/004-bowtie-bullies/media/music/reflective.wav",
+        "in": 512.0,
+        "level_db": -28.0
+      },
+      {
+        "id": "mus-defiant-009",
+        "source": "projects/004-bowtie-bullies/media/music/defiant.wav",
+        "in": 527.5,
+        "level_db": -28.0
+      },
+      {
+        "id": "mus-reflective-010",
+        "source": "projects/004-bowtie-bullies/media/music/reflective.wav",
+        "in": 543.0,
+        "level_db": -26.0
+      },
+      {
+        "id": "mus-tense-011",
+        "source": "projects/004-bowtie-bullies/media/music/tense.wav",
+        "in": 565.0,
+        "level_db": -32.0
+      },
+      {
+        "id": "mus-reflective-012",
+        "source": "projects/004-bowtie-bullies/media/music/reflective.wav",
+        "in": 573.0,
+        "level_db": -26.0
+      }
+    ],
+    "silence": [
+      {
+        "id": "sil-pause-001",
+        "in": 6.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-002",
+        "in": 17.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-003",
+        "in": 27.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-004",
+        "in": 41.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-005",
+        "in": 56.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-006",
+        "in": 63.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-007",
+        "in": 77.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-008",
+        "in": 88.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-009",
+        "in": 98.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-010",
+        "in": 108.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-011",
+        "in": 120.0,
+        "duration": 3.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-012",
+        "in": 123.0,
+        "duration": 3.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-013",
+        "in": 144.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-014",
+        "in": 161.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-015",
+        "in": 181.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-016",
+        "in": 195.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-017",
+        "in": 196.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-018",
+        "in": 214.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-019",
+        "in": 230.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-020",
+        "in": 247.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-021",
+        "in": 261.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-022",
+        "in": 263.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-023",
+        "in": 283.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-024",
+        "in": 289.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-025",
+        "in": 307.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-026",
+        "in": 323.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-027",
+        "in": 330.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-028",
+        "in": 348.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-029",
+        "in": 355.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-030",
+        "in": 357.0,
+        "duration": 2.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-031",
+        "in": 381.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-032",
+        "in": 401.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-033",
+        "in": 408.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-034",
+        "in": 430.5,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-035",
+        "in": 446.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-036",
+        "in": 448.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-038",
+        "in": 493.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-039",
+        "in": 510.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-040",
+        "in": 526.0,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-041",
+        "in": 541.5,
+        "duration": 1.5,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-042",
+        "in": 563.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-043",
+        "in": 571.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-044",
+        "in": 578.0,
+        "duration": 2.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-045",
+        "in": 580.0,
+        "duration": 3.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-046",
+        "in": 613.0,
+        "duration": 3.0,
+        "music_level_db": -40
+      },
+      {
+        "id": "sil-pause-047",
+        "in": 622.0,
+        "duration": 3.0,
+        "music_level_db": -40
+      }
+    ]
+  },
+  "master_output": {
+    "codec_video": "libx264",
+    "crf": 18,
+    "codec_audio": "aac",
+    "bitrate_audio": "128k",
+    "normalization": "-14 LUFS",
+    "true_peak": "-1 dBTP",
+    "color_grade": "eq=saturation=0.75:contrast=1.15:brightness=-0.03"
+  }
+}

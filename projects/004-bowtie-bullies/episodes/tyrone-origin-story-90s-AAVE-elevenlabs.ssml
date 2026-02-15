@@ -1,0 +1,115 @@
+<speak>
+
+<prosody rate="90%" volume="medium">
+Mama lost the house in oh-three.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="95%" volume="medium">
+Wasn't no warnin'. <break time="200ms"/> Just a letter. <break time="200ms"/> Then a lock on the door.
+</prosody>
+
+<break time="600ms"/>
+
+<prosody rate="95%" volume="medium">
+She went down south. Family in Louisiana said they had room.
+</prosody>
+
+<break time="1500ms"/>
+
+<emphasis level="strong">
+<prosody rate="85%" pitch="low">
+I stayed.
+</prosody>
+</emphasis>
+
+<break time="2000ms"/>
+
+<prosody rate="90%" volume="medium">
+Seventeen. <break time="400ms"/> Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="95%" volume="medium">
+Three years like that. <break time="200ms"/> Couches. <break time="200ms"/> Cars. <break time="200ms"/> Places nobody should be closin' they eyes.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="95%" volume="medium">
+But that laptop... <break time="400ms"/> that changed somethin'.
+</prosody>
+
+<break time="600ms"/>
+
+<prosody rate="95%" volume="medium">
+Library WiFi. <break time="200ms"/> Community center when they'd let me in. <break time="400ms"/> Started readin' things I wasn't suppose to understan'.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="95%" volume="medium">
+Tax codes. <break time="200ms"/> Lien laws. <break time="200ms"/> How credit actually work. <break time="200ms"/> How bail bonds make money. <break time="400ms"/> Who own what in which neighborhood, <break time="200ms"/> and why.
+</prosody>
+
+<break time="1500ms"/>
+
+<emphasis level="strong">
+<prosody rate="90%">
+Same way some folk hear music <break time="400ms"/> I started hearin' systems.
+</prosody>
+</emphasis>
+
+<break time="2000ms"/>
+
+<prosody rate="95%" volume="medium">
+Tried to put folk on. <break time="400ms"/> Ran workshops outta barbershops. <break time="400ms"/> Explained how to fight an eviction. <break time="200ms"/> How to read a contract 'fore you sign your life away.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="90%" volume="medium">
+Half them nights ended wrong. <break time="400ms"/> T-T-P drama. <break time="200ms"/> Somebody owed somebody. <break time="400ms"/> Guns where there shoulda been questions.
+</prosody>
+
+<break time="2000ms"/>
+
+<prosody rate="90%" volume="soft">
+But the dog stayed.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="85%" volume="soft">
+Through all that. <break time="400ms"/> He stayed.
+</prosody>
+
+<break time="2000ms"/>
+
+<prosody rate="95%" volume="medium">
+Ain't get a record deal. <break time="200ms"/> Ain't get a scholarship. <break time="200ms"/> Ain't get saved by nobody.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="90%" volume="soft">
+I just learned how things work. <break time="600ms"/> And I ain't never forgot what it felt like not to know.
+</prosody>
+
+<break time="2000ms"/>
+
+<prosody rate="85%" volume="soft" pitch="low">
+That's The Aftermath. <break time="600ms"/> Already lived through the collapse.
+</prosody>
+
+<break time="1500ms"/>
+
+<prosody rate="85%" volume="soft" pitch="low">
+That's why I see it comin' for everybody else.
+</prosody>
+
+<break time="2000ms"/>
+
+</speak>

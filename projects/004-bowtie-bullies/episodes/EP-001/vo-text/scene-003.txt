@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.44 | Similarity: 0.75 | Style: 0.30 | Speaker Boost: ON
+
+<speak>
+<prosody rate="86%" volume="x-soft">
+Seventeen.<break time="200ms"/> Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop.
+</prosody>
+</speak>

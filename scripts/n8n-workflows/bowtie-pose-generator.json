@@ -1,0 +1,375 @@
+{
+  "name": "BowTie Pose Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-pose-generator",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-pose-generator"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.first().json.body || $input.first().json;\nconst poses = inputData.poses || ['P1', 'P2', 'P3-A', 'P4', 'P5', 'P6-A'];\nconst orientations = inputData.orientations || ['16:9'];\nconst batch_name = inputData.batch_name || 'default';\n\n// img2img edit prompts — repose the existing character, don't describe from scratch\nconst posePrompts = {\n  'P1': {\n    name: 'The Watch',\n    refImage: 'tyroneFullBody_frontal.jpg',\n    '16:9': 'Repose this character sitting upright in 3/4 angle, looking off-frame to the right. Composed, dignified, alert. Place him in a dark urban environment with a single rust-orange sodium vapor light from upper left. Dark steel background. Heavy vignette. Film grain 20%. Cinematic Roger Deakins lighting. Keep the character\\'s exact appearance, clothing, and features identical. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Repose this character sitting upright in 3/4 angle, looking off-frame to the right. Composed, dignified, alert. Place him in a dark urban environment with a single rust-orange sodium vapor light from upper left. Dark steel background. Heavy vignette. Film grain 20%. Cinematic Roger Deakins lighting. Keep the character\\'s exact appearance, clothing, and features identical. 9:16 vertical.'\n  },\n  'P2': {\n    name: 'The Guard',\n    refImage: 'tyroneFullBody_frontal.jpg',\n    '16:9': 'Repose this character standing and facing the camera directly, shot from slightly below eye level. Powerful upright posture. Dark steel background with harsh overhead light casting dramatic downward shadows. Heavy vignette. Film grain 20%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Repose this character standing and facing the camera directly, shot from slightly below eye level. Powerful upright posture. Dark steel background with harsh overhead light casting dramatic downward shadows. Heavy vignette. Film grain 20%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 9:16 vertical.'\n  },\n  'P3-A': {\n    name: 'The Companion — Journal and Radio',\n    refImage: 'tyroneFullBody_frontal.jpg',\n    '16:9': 'Repose this character lying on his side on a dark concrete floor beside a weathered leather journal and a hand-crank emergency radio. Head up, resting on one front paw. Eyes open, alert. Single dramatic overhead light from upper left. Rust-orange warmth. Dark steel background. Film grain 20%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Repose this character lying on his side on a dark concrete floor beside a weathered leather journal and a hand-crank emergency radio. Head up, resting on one front paw. Eyes open, alert. Single dramatic overhead light from upper left. Rust-orange warmth. Dark steel background. Film grain 20%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 9:16 vertical.'\n  },\n  'P4': {\n    name: 'The Silhouette',\n    refImage: 'tyroneFullBody_frontal.jpg',\n    '16:9': 'Transform this into a silhouette scene: the character sitting at the edge of an urban rooftop overlooking city lights below. Night. Backlit so only the silhouette and rim light are visible. City sprawl in rust-orange and ash gray tones below. Atmospheric fog. Film grain 22%. Cinematic. Keep the character\\'s overall shape and clothing recognizable in silhouette. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Transform this into a silhouette scene: the character sitting at the edge of an urban rooftop overlooking city lights below. Night. Backlit so only the silhouette and rim light are visible. City sprawl in rust-orange and ash gray tones below. Atmospheric fog. Film grain 22%. Cinematic. Keep the character\\'s overall shape and clothing recognizable in silhouette. 9:16 vertical.'\n  },\n  'P5': {\n    name: 'The Close',\n    refImage: 'tyrone_redNose_headshot.jpg',\n    '16:9': 'Create an extreme close-up of this character\\'s face. Show one amber eye fully visible as the focal anchor, the scar across left brow, and the edge of coveralls at bottom. Shallow depth of field f/1.4. Dark steel background. Rust-orange light from right creating catchlight in the eye. Film grain 20%. Intimate and dramatic. Keep the character\\'s exact features identical. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Create an extreme close-up of this character\\'s face. Show one amber eye fully visible as the focal anchor, the scar across left brow, and the edge of coveralls at bottom. Shallow depth of field f/1.4. Dark steel background. Rust-orange light from right creating catchlight in the eye. Film grain 20%. Intimate and dramatic. Keep the character\\'s exact features identical. 9:16 vertical.'\n  },\n  'P6-A': {\n    name: 'The Aftermath — Empty Street',\n    refImage: 'tyroneFullBody_frontal.jpg',\n    '16:9': 'Repose this character walking through an empty urban street at night, mid-stride. Wet asphalt reflecting sodium vapor streetlights. Fog in background. No other figures present. 3/4 angle from front-left. Single dominant rust-orange light from streetlight above-right. Film grain 22%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 16:9 widescreen.',\n    '9:16': 'Portrait orientation 9:16. Vertical composition, subject in upper-center. Repose this character walking through an empty urban street at night, mid-stride. Wet asphalt reflecting sodium vapor streetlights. Fog in background. No other figures present. 3/4 angle from front-left. Single dominant rust-orange light from streetlight above-right. Film grain 22%. Cinematic. Keep the character\\'s exact appearance, clothing, and features identical. 9:16 vertical.'\n  }\n};\n\n// Style-only negatives (no character description negatives needed for img2img)\nconst negativePrompt = 'bright colors, neon, saturated, cheerful, suburban, clean corporate, stock photo, 3D render, watermark, text, logo, photorealistic photograph';\n\n// Reference image Drive file IDs (uploaded via upload_canonical_images.py 2026-02-12)\nconst refImageDriveIds = {\n  'tyroneFullBody_frontal.jpg': '1hesQCwGlHw1pqpxK5LlDmSNpVmkcJrEd',\n  'tyrone_redNose_headshot.jpg': '1JGzUAlO1p0IumXiuHSCLJe77V9SO8kVd',\n  'tyroneFullBody_quarterTurn.jpg': '1opAGD5SPmFdYwrwzFCMPta8JpwXTBxJB',\n  'tyroneFullBody_hisLeftSide.jpg': '1cavcWSd4aX_eau6B11fmBMO7oRXUMpgy',\n  'tyroneFullBody_hisRightSide.jpg': '1xPAu86eDcv72qOmKHsEgZpkBF1jPTCMk',\n};\n\n// Aspect ratio mapping for Gemini imageConfig\nconst aspectRatioMap = {\n  '16:9': '16:9',\n  '9:16': '9:16',\n  '1:1': '1:1',\n};\n\nconst items = [];\n\nfor (const pose_id of poses) {\n  for (const orientation of orientations) {\n    const poseData = posePrompts[pose_id];\n    if (!poseData) continue;\n    const prompt_text = poseData[orientation];\n    if (!prompt_text) continue;\n\n    const refImageName = poseData.refImage;\n    const refImageDriveId = refImageDriveIds[refImageName] || refImageDriveIds['tyroneFullBody_frontal.jpg'];\n\n    items.push({\n      json: {\n        pose_id,\n        pose_name: poseData.name,\n        orientation,\n        aspect_ratio: aspectRatioMap[orientation] || '16:9',\n        prompt_text,\n        negative_prompt: negativePrompt,\n        ref_image_name: refImageName,\n        ref_image_drive_id: refImageDriveId,\n        batch_name,\n        timestamp: Date.now()\n      }\n    });\n  }\n}\n\nreturn items;"
+      },
+      "id": "expand-pose-matrix",
+      "name": "Expand Pose Matrix",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-in-batches",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.ref_image_drive_id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "gdrive-download-ref",
+      "name": "Download Reference Image",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [880, 400],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-rate-limit",
+      "name": "Wait — Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1100, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build Gemini img2img request payload with reference image + edit prompt\nconst poseData = $('SplitInBatches').first().json;\nconst binaryData = $('Download Reference Image').first().binary.data;\n\n// Get the base64 image data from the downloaded reference\nconst imageBase64 = binaryData.data;\nconst imageMimeType = binaryData.mimeType || 'image/jpeg';\n\nconst payload = {\n  contents: [{\n    parts: [\n      {\n        text: `${poseData.prompt_text}\\n\\nDo NOT include: ${poseData.negative_prompt}`\n      },\n      {\n        inline_data: {\n          mime_type: imageMimeType,\n          data: imageBase64\n        }\n      }\n    ]\n  }],\n  generationConfig: {\n    responseModalities: ['TEXT', 'IMAGE'],\n    imageConfig: {\n      aspectRatio: poseData.aspect_ratio || '16:9'\n    }\n  }\n};\n\nreturn [{\n  json: {\n    ...poseData,\n    gemini_payload: payload\n  }\n}];"
+      },
+      "id": "build-gemini-payload",
+      "name": "Build Gemini Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1320, 400]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.gemini_payload) }}",
+        "options": {}
+      },
+      "id": "gemini-generate",
+      "name": "Google Gemini — Edit Pose",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1540, 400],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini (PaLM) API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst poseData = $('Build Gemini Payload').first().json;\n\nlet imageBase64 = '';\nlet mimeType = 'image/png';\n\n// Extract image from Gemini response — may contain both text and image parts\nif (response.candidates && response.candidates[0]) {\n  const parts = response.candidates[0].content.parts;\n  for (const part of parts) {\n    if (part.inlineData) {\n      imageBase64 = part.inlineData.data;\n      mimeType = part.inlineData.mimeType || 'image/png';\n      break;\n    }\n  }\n}\n\nif (!imageBase64) {\n  throw new Error('No image data returned from Gemini for pose ' + poseData.pose_id);\n}\n\nconst orientationSlug = poseData.orientation.replace(':', 'x');\nconst fileExt = mimeType.includes('png') ? 'png' : 'jpg';\nconst filename = `bowtie-pose-${poseData.pose_id}-${orientationSlug}-${poseData.batch_name}-${poseData.timestamp}.${fileExt}`;\n\nreturn [\n  {\n    json: {\n      pose_id: poseData.pose_id,\n      pose_name: poseData.pose_name,\n      orientation: poseData.orientation,\n      batch_name: poseData.batch_name,\n      filename: filename,\n      timestamp: poseData.timestamp\n    },\n    binary: {\n      data: {\n        data: imageBase64,\n        mimeType: mimeType,\n        fileName: filename,\n        fileExtension: fileExt\n      }\n    }\n  }\n];"
+      },
+      "id": "convert-to-file",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1760, 400]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.filename }}",
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $env.BOWTIE_GDRIVE_POSES_FOLDER_ID }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "gdrive-upload",
+      "name": "Google Drive Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1980, 400],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "={{ $env.AIRTABLE_BASE_ID }}",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "={{ $env.BOWTIE_POSES_TABLE_ID }}",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Pose ID": "={{ $('Convert to File').item.json.pose_id }}",
+            "Pose Name": "={{ $('Convert to File').item.json.pose_name }}",
+            "Orientation": "={{ $('Convert to File').item.json.orientation }}",
+            "Batch Name": "={{ $('Convert to File').item.json.batch_name }}",
+            "Drive URL": "={{ $json.webViewLink }}",
+            "Drive File ID": "={{ $json.id }}",
+            "Status": "Generated",
+            "Generated Date": "={{ $now.toISO() }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "airtable-log",
+      "name": "Airtable — Log Pose",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2200, 400],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "",
+          "name": "Airtable Personal Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2420, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $('Airtable — Log Pose').all();\n\nconst totalGenerated = allItems.length;\nconst poseIds = [...new Set(allItems.map(i => i.json['Pose ID'] || i.json.pose_id))];\nconst orientations = [...new Set(allItems.map(i => i.json['Orientation'] || i.json.orientation))];\nconst batchName = allItems[0]?.json['Batch Name'] || allItems[0]?.json.batch_name || 'unknown';\n\nconst summary = [\n  `*BowTie Pose Generator Complete (img2img)*`,\n  ``,\n  `Batch: \\`${batchName}\\``,\n  `Total images generated: *${totalGenerated}*`,\n  `Poses: ${poseIds.join(', ')}`,\n  `Orientations: ${orientations.join(', ')}`,\n  ``,\n  `Drive folder: https://drive.google.com/drive/folders/${$env.BOWTIE_GDRIVE_POSES_FOLDER_ID}`\n].join('\\n');\n\nreturn [{ json: { summary, totalGenerated, poseIds, orientations, batchName } }];"
+      },
+      "id": "build-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 140]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $env.BOWTIE_SLACK_CHANNEL_ID }}",
+          "mode": "id"
+        },
+        "text": "={{ $json.summary }}",
+        "otherOptions": {}
+      },
+      "id": "slack-summary",
+      "name": "Slack — Send Summary",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [1100, 140],
+      "credentials": {
+        "slackApi": {
+          "id": "",
+          "name": "Slack API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Expand Pose Matrix",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Pose Matrix": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Download Reference Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Reference Image": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "Build Gemini Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Gemini Payload": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini — Edit Pose",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini — Edit Pose": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Upload": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Log Pose",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Log Pose": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Slack — Send Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Bullies"
+    },
+    {
+      "name": "Image Generation"
+    },
+    {
+      "name": "Video Pipeline"
+    }
+  ],
+  "pinData": {}
+}

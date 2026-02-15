@@ -20,7 +20,7 @@
 - **Text shadow mandatory**: 2px 2px 8px rgba(0,0,0,0.6) on all video text for readability regardless of background.
 
 ### Avatar Consistency
-- **4 reference images established**: Front face, 3/4 profile, full body front, styled outfit. All in `cinema_knowledge/`.
+- **4 reference images established**: Front face, 3/4 profile, full body front, styled outfit. All in `projects/006-ai-editing/references/`.
 - **Consistency markers for every prompt**: "young woman, mid-20s, warm medium-brown skin, curly/coily brown hair with golden highlights shoulder-length, brown eyes, natural makeup, warm confident expression"
 - **Negative prompts critical**: "straight hair, blonde hair, pale skin, blue eyes, heavy makeup, exaggerated expressions, cartoonish, anime style, different person"
 

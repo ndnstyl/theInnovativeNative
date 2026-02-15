@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.36 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+Wasn't no colors on me.<break time="200ms"/> But I knew everybody who wore 'em.<break time="200ms"/> You grow up where I grew up, you don't choose a side<break time="200ms"/> you just live in the crossfire.<break time="600ms"/> Half my block was blue.<break time="200ms"/> Other half was business.<break time="200ms"/> I stayed between the cracks.
+</prosody>
+</speak>

@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.52 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+This ain't fear.<break time="200ms"/> Ain't hype.<break time="200ms"/> Ain't motivation that wear off by Wednesday.<break time="600ms"/> This is what I know.<break time="200ms"/> Delivered how I know it.<break time="200ms"/> In the voice I grew up with.<break time="200ms"/> <emphasis level="strong">For the people nobody else is talkin' to.</emphasis>
+</prosody>
+</speak>

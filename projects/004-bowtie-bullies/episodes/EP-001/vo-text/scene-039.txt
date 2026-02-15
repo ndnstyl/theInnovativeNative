@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.48 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+Number two.<break time="200ms"/> A side business.<break time="200ms"/> Don't gotta be big.<break time="200ms"/> A pressure washin' rig.<break time="200ms"/> A notary service.<break time="200ms"/> Somethin' that got your name on it.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+I know a dude who started sellin' plates outta his mama kitchen.<break time="200ms"/> Now he got two food trucks and a catering contract with the city.<break time="200ms"/> <emphasis level="strong">He own that.</emphasis>
+</prosody>
+</speak>

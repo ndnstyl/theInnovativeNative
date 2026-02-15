@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+Started runnin' workshops again.<break time="200ms"/> This time smarter.<break time="200ms"/> Smaller rooms.<break time="200ms"/> Folks who actually wanted to learn.<break time="200ms"/> Showed 'em how to read a lease.<break time="200ms"/> How to file a dispute.<break time="200ms"/> How to stop payin' interest they didn't owe.<break time="600ms"/> Some folk listened.<break time="200ms"/> And them folk?<break time="200ms"/> They still out here.<break time="200ms"/> <emphasis level="strong">Building.</emphasis>
+</prosody>
+</speak>

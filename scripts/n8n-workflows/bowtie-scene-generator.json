@@ -1,0 +1,1340 @@
+{
+  "updatedAt": "2026-02-14T19:41:35.333Z",
+  "createdAt": "2026-02-13T20:55:59.460Z",
+  "id": "dsxy3Cij6MnfC8lC",
+  "name": "BowTie Scene Generator",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-scene-generator",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "scene-gen-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "webhookId": "bowtie-scene-generator"
+    },
+    {
+      "parameters": {},
+      "id": "scene-gen-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Default inputs for manual trigger testing\nreturn [{\n  json: {\n    body: {\n      episode_id: 'EP-001',\n      batch_size: 5,\n      scene_from: null,\n      scene_to: null,\n      regenerate: false\n    }\n  }\n}];"
+      },
+      "id": "scene-gen-manual-defaults",
+      "name": "Manual Defaults",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "={{ $json.formula }}",
+        "sort": {
+          "property": [
+            {
+              "field": "scene_number",
+              "direction": "asc"
+            }
+          ]
+        },
+        "limit": "={{ $json.batch_size || 10 }}",
+        "options": {}
+      },
+      "id": "scene-gen-airtable-fetch",
+      "name": "Airtable \u2014 Fetch Ready",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-empty-check",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "scene-gen-if-empty",
+      "name": "IF \u2014 Empty",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'nothing_to_generate', message: 'No records with generation_status=ready_for_generation found', checked_at: new Date().toISOString() }) }}",
+        "options": {}
+      },
+      "id": "scene-gen-empty-respond",
+      "name": "Respond \u2014 Nothing",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "scene-gen-split",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        880,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.gemini_payload) }}",
+        "options": {
+          "timeout": 60000
+        },
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi"
+      },
+      "id": "scene-gen-gemini",
+      "name": "Gemini \u2014 Generate Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        500
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini(PaLM) Api Billing Connected"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract base64 image data from Gemini response and convert to binary\nconst geminiResponse = $input.first().json;\nconst sceneData = $('SplitInBatches').first().json;\n\n// Extract the base64 image from Gemini response\nlet base64Data;\nlet mimeType = 'image/png';\ntry {\n  const part = geminiResponse.candidates[0].content.parts[0];\n  base64Data = part.inlineData.data;\n  mimeType = part.inlineData.mimeType || 'image/png';\n} catch (e) {\n  // Generation failed \u2014 return error marker for downstream IF node\n  return [{\n    json: {\n      ...sceneData,\n      generation_failed: true,\n      error: `Failed to extract image: ${e.message}`,\n      raw_response: JSON.stringify(geminiResponse).substring(0, 500)\n    }\n  }];\n}\n\nconst filename = sceneData.target_filename || sceneData.fields?.target_filename || `scene-unknown-${Date.now()}.png`;\n\n// Convert base64 to binary\nconst binaryData = Buffer.from(base64Data, 'base64');\n\nreturn {\n  json: {\n    ...sceneData,\n    generation_failed: false,\n    filename: filename,\n    generated_at: new Date().toISOString(),\n    mime_type: mimeType\n  },\n  binary: {\n    data: await this.helpers.prepareBinaryData(\n      binaryData,\n      filename,\n      mimeType\n    )\n  }\n};"
+      },
+      "id": "scene-gen-extract-binary",
+      "name": "Extract Binary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1420,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-gen-failed",
+              "leftValue": "={{ $json.generation_failed }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "scene-gen-if-failed",
+      "name": "IF \u2014 Generation Failed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "generation_status": "generation_failed",
+            "id": "={{ $json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ]
+        },
+        "options": {}
+      },
+      "id": "scene-gen-airtable-fail",
+      "name": "Airtable \u2014 Mark Failed",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1760,
+        380
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.filename }}",
+        "folderId": {
+          "__rl": true,
+          "value": "1HeTmehM2FwYL2FKQ_uaCBCEjo3YRzCXA",
+          "mode": "id"
+        },
+        "options": {
+          "simplifyOutput": true
+        }
+      },
+      "id": "scene-gen-gdrive-upload",
+      "name": "Google Drive \u2014 Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        620
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "generation_status": "image_generated",
+            "image_drive_id": "={{ $(\"Google Drive \u2014 Upload\").first().json.id }}",
+            "image_url": "=https://drive.google.com/file/d/{{ $(\"Google Drive \u2014 Upload\").first().json.id }}/view",
+            "generated_at": "={{ $('Extract Binary').first().json.generated_at }}",
+            "id": "={{ $('SplitInBatches').first().json.id }}",
+            "Image Preview": "={{ [{\"url\": \"https://drive.google.com/uc?export=download&id=\" + $(\"Google Drive \u2014 Upload\").first().json.id}] }}"
+          },
+          "matchingColumns": [
+            "id"
+          ]
+        },
+        "options": {}
+      },
+      "id": "scene-gen-airtable-update",
+      "name": "Airtable \u2014 Update Generated",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2100,
+        620
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "scene-gen-wait",
+      "name": "Wait \u2014 Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2200,
+        500
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "scene-gen-loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2420,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allUpdated = $('Airtable \u2014 Update Generated').all();\nconst allFailed = $('Airtable \u2014 Mark Failed').all();\nconst episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001';\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "scene-gen-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "scene-gen-respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build Gemini payload \u2014 pass structured prompt directly (style slots already included)\nconst scene = $input.first().json;\nconst prompt = scene.visual_prompt_full || scene.fields?.visual_prompt_full || '';\n\nconst payload = {\n  contents: [\n    {\n      role: \"user\",\n      parts: [\n        {\n          text: prompt\n        }\n      ]\n    }\n  ],\n  generationConfig: {\n    responseModalities: [\"IMAGE\"],\n    imageConfig: {\n      aspectRatio: \"16:9\",\n      imageSize: \"2K\"\n    }\n  }\n};\n\nreturn [{ json: { ...scene, gemini_payload: payload } }];"
+      },
+      "id": "scene-gen-build-payload",
+      "name": "Build Gemini Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        990,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.id }}/permissions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"type\":\"anyone\",\"role\":\"reader\"}",
+        "options": {}
+      },
+      "id": "scene-gen-share-file",
+      "name": "Share File \u2014 Public",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1870,
+        620
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst episodeId = body.episode_id || 'EP-001';\nconst batchSize = body.batch_size || 10;\nconst sceneFrom = body.scene_from ? Number(body.scene_from) : null;\nconst sceneTo = body.scene_to ? Number(body.scene_to) : null;\nconst regenerate = body.regenerate === true || body.regenerate === 'true';\n\nconst clauses = [];\nclauses.push(`{episode_id}=\"${episodeId}\"`);\nif (!regenerate) clauses.push(`{generation_status}=\"ready_for_generation\"`);\nif (sceneFrom !== null) clauses.push(`{scene_number}>=${sceneFrom}`);\nif (sceneTo !== null) clauses.push(`{scene_number}<=${sceneTo}`);\n\nconst formula = clauses.length === 1 ? clauses[0] : `AND(${clauses.join(', ')})`;\n\nreturn [{ json: { formula, batch_size: batchSize, episode_id: episodeId,\n                   scene_from: sceneFrom, scene_to: sceneTo, regenerate } }];"
+      },
+      "id": "scene-gen-build-filter",
+      "name": "Build Filter Formula",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Build Filter Formula",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Manual Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Defaults": {
+      "main": [
+        [
+          {
+            "node": "Build Filter Formula",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Ready": {
+      "main": [
+        [
+          {
+            "node": "IF \u2014 Empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 Empty": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build Gemini Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini \u2014 Generate Image": {
+      "main": [
+        [
+          {
+            "node": "Extract Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Binary": {
+      "main": [
+        [
+          {
+            "node": "IF \u2014 Generation Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 Generation Failed": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Mark Failed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive \u2014 Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Failed": {
+      "main": [
+        [
+          {
+            "node": "Wait \u2014 Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive \u2014 Upload": {
+      "main": [
+        [
+          {
+            "node": "Share File \u2014 Public",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Update Generated": {
+      "main": [
+        [
+          {
+            "node": "Wait \u2014 Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait \u2014 Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Gemini Payload": {
+      "main": [
+        [
+          {
+            "node": "Gemini \u2014 Generate Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share File \u2014 Public": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Update Generated",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Filter Formula": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "767551f0-9597-4b1c-812d-405edea80e82",
+  "activeVersionId": "767551f0-9597-4b1c-812d-405edea80e82",
+  "versionCounter": 22,
+  "triggerCount": 1,
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-14T19:41:35.357Z",
+    "createdAt": "2026-02-14T19:41:35.357Z",
+    "versionId": "767551f0-9597-4b1c-812d-405edea80e82",
+    "workflowId": "dsxy3Cij6MnfC8lC",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "bowtie-scene-generator",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "id": "scene-gen-webhook",
+        "name": "Webhook Trigger",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          220,
+          300
+        ],
+        "webhookId": "bowtie-scene-generator"
+      },
+      {
+        "parameters": {},
+        "id": "scene-gen-manual",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          220,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Default inputs for manual trigger testing\nreturn [{\n  json: {\n    body: {\n      episode_id: 'EP-001',\n      batch_size: 5,\n      scene_from: null,\n      scene_to: null,\n      regenerate: false\n    }\n  }\n}];"
+        },
+        "id": "scene-gen-manual-defaults",
+        "name": "Manual Defaults",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          440,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "search",
+          "base": {
+            "__rl": true,
+            "value": "appTO7OCRB2XbAlak",
+            "mode": "id"
+          },
+          "table": {
+            "__rl": true,
+            "value": "tblHsBzmt8Skvq2jX",
+            "mode": "id"
+          },
+          "filterByFormula": "={{ $json.formula }}",
+          "sort": {
+            "property": [
+              {
+                "field": "scene_number",
+                "direction": "asc"
+              }
+            ]
+          },
+          "limit": "={{ $json.batch_size || 10 }}",
+          "options": {}
+        },
+        "id": "scene-gen-airtable-fetch",
+        "name": "Airtable \u2014 Fetch Ready",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          660,
+          300
+        ],
+        "credentials": {
+          "airtableTokenApi": {
+            "id": "YCWFwTIXwnTpVy2y",
+            "name": "Airtable Personal Access Token account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "condition-empty-check",
+                "leftValue": "={{ $input.all().length }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "scene-gen-if-empty",
+        "name": "IF \u2014 Empty",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          880,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ status: 'nothing_to_generate', message: 'No records with generation_status=ready_for_generation found', checked_at: new Date().toISOString() }) }}",
+          "options": {}
+        },
+        "id": "scene-gen-empty-respond",
+        "name": "Respond \u2014 Nothing",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          880,
+          180
+        ]
+      },
+      {
+        "parameters": {
+          "batchSize": 1,
+          "options": {}
+        },
+        "id": "scene-gen-split",
+        "name": "SplitInBatches",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          880,
+          400
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($json.gemini_payload) }}",
+          "options": {
+            "timeout": 60000
+          },
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googlePalmApi"
+        },
+        "id": "scene-gen-gemini",
+        "name": "Gemini \u2014 Generate Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1200,
+          500
+        ],
+        "credentials": {
+          "googlePalmApi": {
+            "id": "JbBNLCe83ER3tCwD",
+            "name": "Google Gemini(PaLM) Api Billing Connected"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Extract base64 image data from Gemini response and convert to binary\nconst geminiResponse = $input.first().json;\nconst sceneData = $('SplitInBatches').first().json;\n\n// Extract the base64 image from Gemini response\nlet base64Data;\nlet mimeType = 'image/png';\ntry {\n  const part = geminiResponse.candidates[0].content.parts[0];\n  base64Data = part.inlineData.data;\n  mimeType = part.inlineData.mimeType || 'image/png';\n} catch (e) {\n  // Generation failed \u2014 return error marker for downstream IF node\n  return [{\n    json: {\n      ...sceneData,\n      generation_failed: true,\n      error: `Failed to extract image: ${e.message}`,\n      raw_response: JSON.stringify(geminiResponse).substring(0, 500)\n    }\n  }];\n}\n\nconst filename = sceneData.target_filename || sceneData.fields?.target_filename || `scene-unknown-${Date.now()}.png`;\n\n// Convert base64 to binary\nconst binaryData = Buffer.from(base64Data, 'base64');\n\nreturn {\n  json: {\n    ...sceneData,\n    generation_failed: false,\n    filename: filename,\n    generated_at: new Date().toISOString(),\n    mime_type: mimeType\n  },\n  binary: {\n    data: await this.helpers.prepareBinaryData(\n      binaryData,\n      filename,\n      mimeType\n    )\n  }\n};"
+        },
+        "id": "scene-gen-extract-binary",
+        "name": "Extract Binary",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1420,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "condition-gen-failed",
+                "leftValue": "={{ $json.generation_failed }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "scene-gen-if-failed",
+        "name": "IF \u2014 Generation Failed",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          1640,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "base": {
+            "__rl": true,
+            "value": "appTO7OCRB2XbAlak",
+            "mode": "id"
+          },
+          "table": {
+            "__rl": true,
+            "value": "tblHsBzmt8Skvq2jX",
+            "mode": "id"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "generation_status": "generation_failed",
+              "id": "={{ $json.id }}"
+            },
+            "matchingColumns": [
+              "id"
+            ]
+          },
+          "options": {}
+        },
+        "id": "scene-gen-airtable-fail",
+        "name": "Airtable \u2014 Mark Failed",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          1760,
+          380
+        ],
+        "credentials": {
+          "airtableTokenApi": {
+            "id": "YCWFwTIXwnTpVy2y",
+            "name": "Airtable Personal Access Token account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "name": "={{ $json.filename }}",
+          "folderId": {
+            "__rl": true,
+            "value": "1HeTmehM2FwYL2FKQ_uaCBCEjo3YRzCXA",
+            "mode": "id"
+          },
+          "options": {
+            "simplifyOutput": true
+          }
+        },
+        "id": "scene-gen-gdrive-upload",
+        "name": "Google Drive \u2014 Upload",
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          1760,
+          620
+        ],
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "53ssDoT9mG1Dtejj",
+            "name": "newGoogleDriveAPI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "base": {
+            "__rl": true,
+            "value": "appTO7OCRB2XbAlak",
+            "mode": "id"
+          },
+          "table": {
+            "__rl": true,
+            "value": "tblHsBzmt8Skvq2jX",
+            "mode": "id"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "generation_status": "image_generated",
+              "image_drive_id": "={{ $json.id }}",
+              "image_url": "=https://drive.google.com/file/d/{{ $json.id }}/view",
+              "generated_at": "={{ $('Extract Binary').first().json.generated_at }}",
+              "id": "={{ $('SplitInBatches').first().json.id }}",
+              "Image Preview": "={{ [{\"url\": \"https://drive.google.com/uc?export=download&id=\" + $(\"Google Drive \u2014 Upload\").first().json.id}] }}"
+            },
+            "matchingColumns": [
+              "id"
+            ]
+          },
+          "options": {}
+        },
+        "id": "scene-gen-airtable-update",
+        "name": "Airtable \u2014 Update Generated",
+        "type": "n8n-nodes-base.airtable",
+        "typeVersion": 2.1,
+        "position": [
+          2100,
+          620
+        ],
+        "credentials": {
+          "airtableTokenApi": {
+            "id": "YCWFwTIXwnTpVy2y",
+            "name": "Airtable Personal Access Token account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 5,
+          "unit": "seconds"
+        },
+        "id": "scene-gen-wait",
+        "name": "Wait \u2014 Rate Limit",
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2200,
+          500
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "scene-gen-loop-back",
+        "name": "Loop Back",
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2420,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const allUpdated = $('Airtable \u2014 Update Generated').all();\nconst allFailed = $('Airtable \u2014 Mark Failed').all();\nconst episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001';\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+        },
+        "id": "scene-gen-summary",
+        "name": "Build Summary",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1100,
+          140
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify($json) }}",
+          "options": {}
+        },
+        "id": "scene-gen-respond",
+        "name": "Respond to Webhook",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.1,
+        "position": [
+          1320,
+          140
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Build Gemini payload \u2014 pass structured prompt directly (style slots already included)\nconst scene = $input.first().json;\nconst prompt = scene.visual_prompt_full || scene.fields?.visual_prompt_full || '';\n\nconst payload = {\n  contents: [\n    {\n      role: \"user\",\n      parts: [\n        {\n          text: prompt\n        }\n      ]\n    }\n  ],\n  generationConfig: {\n    responseModalities: [\"IMAGE\"],\n    imageConfig: {\n      aspectRatio: \"16:9\",\n      imageSize: \"2K\"\n    }\n  }\n};\n\nreturn [{ json: { ...scene, gemini_payload: payload } }];"
+        },
+        "id": "scene-gen-build-payload",
+        "name": "Build Gemini Payload",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          990,
+          500
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.id }}/permissions",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googleDriveOAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\"type\":\"anyone\",\"role\":\"reader\"}",
+          "options": {}
+        },
+        "id": "scene-gen-share-file",
+        "name": "Share File \u2014 Public",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1870,
+          620
+        ],
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "53ssDoT9mG1Dtejj",
+            "name": "newGoogleDriveAPI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst episodeId = body.episode_id || 'EP-001';\nconst batchSize = body.batch_size || 10;\nconst sceneFrom = body.scene_from ? Number(body.scene_from) : null;\nconst sceneTo = body.scene_to ? Number(body.scene_to) : null;\nconst regenerate = body.regenerate === true || body.regenerate === 'true';\n\nconst clauses = [];\nclauses.push(`{episode_id}=\"${episodeId}\"`);\nif (!regenerate) clauses.push(`{generation_status}=\"ready_for_generation\"`);\nif (sceneFrom !== null) clauses.push(`{scene_number}>=${sceneFrom}`);\nif (sceneTo !== null) clauses.push(`{scene_number}<=${sceneTo}`);\n\nconst formula = clauses.length === 1 ? clauses[0] : `AND(${clauses.join(', ')})`;\n\nreturn [{ json: { formula, batch_size: batchSize, episode_id: episodeId,\n                   scene_from: sceneFrom, scene_to: sceneTo, regenerate } }];"
+        },
+        "id": "scene-gen-build-filter",
+        "name": "Build Filter Formula",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          440,
+          300
+        ]
+      }
+    ],
+    "connections": {
+      "Webhook Trigger": {
+        "main": [
+          [
+            {
+              "node": "Build Filter Formula",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Manual Trigger": {
+        "main": [
+          [
+            {
+              "node": "Manual Defaults",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Manual Defaults": {
+        "main": [
+          [
+            {
+              "node": "Build Filter Formula",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Airtable \u2014 Fetch Ready": {
+        "main": [
+          [
+            {
+              "node": "IF \u2014 Empty",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF \u2014 Empty": {
+        "main": [
+          [
+            {
+              "node": "Respond \u2014 Nothing",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "SplitInBatches",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "SplitInBatches": {
+        "main": [
+          [
+            {
+              "node": "Build Summary",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Build Gemini Payload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Gemini \u2014 Generate Image": {
+        "main": [
+          [
+            {
+              "node": "Extract Binary",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Binary": {
+        "main": [
+          [
+            {
+              "node": "IF \u2014 Generation Failed",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "IF \u2014 Generation Failed": {
+        "main": [
+          [
+            {
+              "node": "Airtable \u2014 Mark Failed",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Google Drive \u2014 Upload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Airtable \u2014 Mark Failed": {
+        "main": [
+          [
+            {
+              "node": "Wait \u2014 Rate Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Drive \u2014 Upload": {
+        "main": [
+          [
+            {
+              "node": "Share File \u2014 Public",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Airtable \u2014 Update Generated": {
+        "main": [
+          [
+            {
+              "node": "Wait \u2014 Rate Limit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait \u2014 Rate Limit": {
+        "main": [
+          [
+            {
+              "node": "Loop Back",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Back": {
+        "main": [
+          [
+            {
+              "node": "SplitInBatches",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Summary": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Gemini Payload": {
+        "main": [
+          [
+            {
+              "node": "Gemini \u2014 Generate Image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Share File \u2014 Public": {
+        "main": [
+          [
+            {
+              "node": "Airtable \u2014 Update Generated",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Filter Formula": {
+        "main": [
+          [
+            {
+              "node": "Airtable \u2014 Fetch Ready",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Mike Soto",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  }
+}

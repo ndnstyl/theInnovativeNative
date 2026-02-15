@@ -1,0 +1,24 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.48 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+Number one.<break time="200ms"/> A skill nobody can automate.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+I'm not talkin' about learning to code<break time="200ms"/> everybody say that.<break time="200ms"/> And half of 'em gonna be out a job in two years 'cause the AI write better code than they do.<break time="200ms"/> I'm talkin' about somethin' you do with your hands or your mind that a machine can't replicate.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+Cuttin' hair.<break time="200ms"/> Readin' a room.<break time="200ms"/> Fixin' what's broke.<break time="200ms"/> Negotiatin' when the numbers don't add up.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+A barber in my neighborhood been cuttin' hair forty years.<break time="200ms"/> Ain't never worried about a robot takin' his chair.<break time="200ms"/> Know why?<break time="400ms"/> 'Cause people don't sit in his chair for the haircut.<break time="200ms"/> They sit there for the conversation.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+<emphasis level="strong">That's yours.</emphasis><break time="200ms"/> Nobody can download it.
+</prosody>
+</speak>

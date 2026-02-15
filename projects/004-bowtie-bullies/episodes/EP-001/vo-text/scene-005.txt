@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.45 | Similarity: 0.75 | Style: 0.34 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+Library WiFi.<break time="200ms"/> Community center when they'd let me in.<break time="200ms"/> Started readin' things I wasn't suppose to understan'.<break time="200ms"/> Tax codes.<break time="200ms"/> Lien laws.<break time="200ms"/> How credit actually work.<break time="200ms"/> How bail bonds make money.<break time="200ms"/> Who own what in which neighborhood, and why.
+</prosody>
+</speak>

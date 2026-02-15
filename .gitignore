@@ -126,9 +126,48 @@ lerna-debug.log*
 # REMOTION SPECIFIC
 # ------------------------------------------
 
-# Entire remotion-videos folder (contains personal video content)
-# Remove this line if you want to include your Remotion projects
+# Remotion video content
 remotion-videos/
+projects/006-ai-editing/remotion/
+
+# ------------------------------------------
+# LARGE BINARY / MEDIA DIRECTORIES
+# ------------------------------------------
+
+# ComfyUI models and outputs
+comfyUI/
+output/
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Video editing project auto-saves and previews
+projects/006-ai-editing/premiere/Adobe Premiere Pro Auto-Save/
+projects/006-ai-editing/premiere/Adobe Premiere Pro Audio Previews/
+
+# BowTie Bullies media assets (large binaries, stored on GDrive)
+projects/004-bowtie-bullies/media/
+projects/004-bowtie-bullies/assets/canonical-characters/
+projects/004-bowtie-bullies/assets/EP-001/
+projects/004-bowtie-bullies/assets/overlays/
+projects/004-bowtie-bullies/assets/*.zip
+
+# 006-ai-editing reference images (large, keep in GDrive)
+projects/006-ai-editing/references/*.png
+projects/006-ai-editing/references/*.jpg
+
+# Legacy paths (kept until old dirs fully removed)
+deliverables/004-faceless-ai-brand/broll/
+deliverables/004-faceless-ai-brand/scenes/
+deliverables/004-faceless-ai-brand/SFX/
+deliverables/004-faceless-ai-brand/music/
+deliverables/004-faceless-ai-brand/canonicalCharacter/
+deliverables/004-faceless-ai-brand/assets/
 
 # ------------------------------------------
 # BACKUPS

@@ -1,0 +1,542 @@
+{
+  "name": "BowTie Scene QC",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-scene-qc",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "scene-qc-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-scene-qc"
+    },
+    {
+      "parameters": {},
+      "id": "scene-qc-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Default inputs for manual trigger testing\nreturn [{\n  json: {\n    body: {\n      episode_id: 'EP-001'\n    }\n  }\n}];"
+      },
+      "id": "scene-qc-manual-defaults",
+      "name": "Manual Defaults",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 500]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "AND({episode_id}=\"{{ $json.body?.episode_id || 'EP-001' }}\", {generation_status}=\"image_generated\", {qc_status}=\"\")",
+        "options": {}
+      },
+      "id": "scene-qc-airtable-fetch",
+      "name": "Airtable — Fetch Unscored",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [440, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-empty-qc",
+              "leftValue": "={{ $input.all().length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "scene-qc-if-empty",
+      "name": "IF — Empty",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ status: 'nothing_to_qc', message: 'No unscored images found', checked_at: new Date().toISOString() }) }}",
+        "options": {}
+      },
+      "id": "scene-qc-empty-respond",
+      "name": "Respond — Nothing",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [880, 180]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "scene-qc-split",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [880, 400]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.image_drive_id || $json.fields?.image_drive_id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "scene-qc-gdrive-download",
+      "name": "Google Drive — Download",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1100, 500],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={{$credentials.googleGeminiApi.apiKey}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"inlineData\": {\n            \"mimeType\": \"{{ $binary.data.mimeType || 'image/png' }}\",\n            \"data\": \"{{ $binary.data.data }}\"\n          }\n        },\n        {\n          \"text\": \"Score this image 1-10 on the following criteria for the BowTie Bullies brand. Return JSON only, no markdown.\\n\\n1. Character consistency (coat color reddish-brown copper, red/liver nose, natural uncropped rose ears, scar left brow, black coveralls) — weight 3x\\n2. Mood match (dark, cinematic, not cheerful) — weight 2x\\n3. Art style (2D cel-shaded, not photorealistic, not 3D) — weight 2x\\n4. Composition quality (lighting, framing, vignette) — weight 1x\\n5. No banned elements (bowties, bright colors, multiple dogs, text, watermarks) — weight 3x\\n\\nFor environment/b-roll images (no character), score criterion 1 as 10 (n/a) and focus on criteria 2-5.\\n\\nReturn: {\\\"scores\\\": {\\\"consistency\\\": N, \\\"mood\\\": N, \\\"style\\\": N, \\\"composition\\\": N, \\\"banned_check\\\": N}, \\\"weighted_total\\\": N, \\\"pass\\\": true/false, \\\"notes\\\": \\\"...\\\"}\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseMimeType\": \"application/json\"\n  }\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "scene-qc-gemini-score",
+      "name": "Gemini — Score Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 500],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const geminiResponse = $input.first().json;\nconst sceneData = $('SplitInBatches').first().json;\n\nlet scoreData;\ntry {\n  // Gemini returns JSON in candidates[0].content.parts[0].text\n  const rawText = geminiResponse.candidates[0].content.parts[0].text;\n  scoreData = JSON.parse(rawText);\n} catch (e) {\n  // If scoring fails, default to manual review\n  return [{\n    json: {\n      ...sceneData,\n      qc_score: 0,\n      qc_pass: false,\n      qc_notes: `Score parsing failed: ${e.message}`,\n      force_manual_review: true\n    }\n  }];\n}\n\n// Calculate weighted total if Gemini didn't\nconst scores = scoreData.scores || {};\nconst weights = { consistency: 3, mood: 2, style: 2, composition: 1, banned_check: 3 };\nconst totalWeight = 3 + 2 + 2 + 1 + 3; // 11\nlet weightedTotal = scoreData.weighted_total;\n\nif (!weightedTotal && scores) {\n  weightedTotal = (\n    (scores.consistency || 0) * 3 +\n    (scores.mood || 0) * 2 +\n    (scores.style || 0) * 2 +\n    (scores.composition || 0) * 1 +\n    (scores.banned_check || 0) * 3\n  ) / totalWeight;\n  weightedTotal = Math.round(weightedTotal * 100) / 100;\n}\n\nconst pass = weightedTotal >= 7.0;\nconst attempts = (sceneData.generation_attempts || sceneData.fields?.generation_attempts || 0);\n\nreturn [{\n  json: {\n    ...sceneData,\n    qc_score: weightedTotal,\n    qc_pass: pass,\n    qc_notes: scoreData.notes || '',\n    qc_scores_detail: scores,\n    generation_attempts: attempts,\n    force_manual_review: false\n  }\n}];"
+      },
+      "id": "scene-qc-parse-score",
+      "name": "Parse Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1540, 500]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-qc-pass",
+              "leftValue": "={{ $json.qc_pass }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "scene-qc-if-pass",
+      "name": "IF — Pass",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1760, 500]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "id": "={{ $json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "qc_status": "passed",
+            "qc_score": "={{ $json.qc_score }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "scene-qc-airtable-pass",
+      "name": "Airtable — Mark Passed",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1980, 380],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst attempts = (item.generation_attempts || 0) + 1;\nconst maxAttempts = 3;\n\nif (item.force_manual_review || attempts >= maxAttempts) {\n  // Max retries exhausted or parse failure → manual review\n  return [{\n    json: {\n      ...item,\n      update_status: 'manual_review',\n      generation_attempts: attempts\n    }\n  }];\n} else {\n  // Under max retries → send back for regeneration\n  return [{\n    json: {\n      ...item,\n      update_status: 'retry',\n      generation_attempts: attempts\n    }\n  }];\n}"
+      },
+      "id": "scene-qc-retry-logic",
+      "name": "Retry Logic",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1980, 620]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "id": "={{ $json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "generation_status": "={{ $json.update_status === 'retry' ? 'ready_for_generation' : 'image_generated' }}",
+            "qc_status": "={{ $json.update_status === 'manual_review' ? 'manual_review' : '' }}",
+            "qc_score": "={{ $json.qc_score }}",
+            "generation_attempts": "={{ $json.generation_attempts }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "scene-qc-airtable-fail",
+      "name": "Airtable — Mark Fail/Retry",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2200, 620],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3,
+        "unit": "seconds"
+      },
+      "id": "scene-qc-wait",
+      "name": "Wait — Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2420, 500]
+    },
+    {
+      "parameters": {},
+      "id": "scene-qc-loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2640, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const passed = $('Airtable — Mark Passed').all();\nconst failRetry = $('Airtable — Mark Fail/Retry').all();\nconst episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001';\n\nconst retries = failRetry.filter(i => (i.json.update_status || i.json.fields?.update_status) === 'retry');\nconst manualReview = failRetry.filter(i => (i.json.update_status || i.json.fields?.update_status) === 'manual_review');\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_scored: passed.length + failRetry.length,\n  passed: passed.length,\n  sent_for_retry: retries.length,\n  flagged_manual_review: manualReview.length,\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "scene-qc-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 140]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "scene-qc-respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1100, 140]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Unscored",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Manual Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Defaults": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Unscored",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Unscored": {
+      "main": [
+        [
+          {
+            "node": "IF — Empty",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Empty": {
+      "main": [
+        [
+          {
+            "node": "Respond — Nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive — Download",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Download": {
+      "main": [
+        [
+          {
+            "node": "Gemini — Score Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini — Score Image": {
+      "main": [
+        [
+          {
+            "node": "Parse Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Score": {
+      "main": [
+        [
+          {
+            "node": "IF — Pass",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Pass": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Mark Passed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Mark Passed": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Logic": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Mark Fail/Retry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Mark Fail/Retry": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Bullies"
+    },
+    {
+      "name": "Image Generation"
+    },
+    {
+      "name": "Quality Control"
+    },
+    {
+      "name": "Video Pipeline"
+    }
+  ],
+  "pinData": {}
+}

@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.40 | Similarity: 0.75 | Style: 0.30 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="soft">
+I just learned how things work.<break time="200ms"/> And I ain't never forgot what it felt like not to know.
+</prosody>
+</speak>

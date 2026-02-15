@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.44 | Similarity: 0.75 | Style: 0.34 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+Tried to put folk on.<break time="200ms"/> Ran workshops outta barbershops.<break time="200ms"/> Explained how to fight an eviction.<break time="200ms"/> How to read a contract 'fore you sign your life away.
+</prosody>
+<break time="600ms"/>
+<prosody rate="88%" volume="medium">
+Half them nights ended wrong.<break time="200ms"/> TTP drama.<break time="200ms"/> Somebody owed somebody.<break time="200ms"/> Guns where there shoulda been questions.
+</prosody>
+</speak>

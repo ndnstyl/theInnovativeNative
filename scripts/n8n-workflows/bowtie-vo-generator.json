@@ -1,0 +1,382 @@
+{
+  "name": "BowTie VO Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-vo-generator",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-vo-generator"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "={{ 'OR(' + $json.body.scene_record_ids.map(id => 'RECORD_ID() = \"' + id + '\"').join(', ') + ')' }}",
+        "options": {}
+      },
+      "id": "airtable-fetch-scenes",
+      "name": "Airtable — Fetch Scenes",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [440, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst episodeId = $('Webhook Trigger').first().json.body.episode_id;\n\n// Attach episode_id to each scene record for downstream use\nreturn items.map(item => {\n  return {\n    json: {\n      ...item.json,\n      episode_id: episodeId\n    }\n  };\n});"
+      },
+      "id": "enrich-scene-data",
+      "name": "Enrich Scene Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-in-batches",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [880, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const scene = $input.first().json;\nconst narrationText = scene.narration_text || scene.fields?.narration_text || '';\n\n// Strip editorial pause markers — these are timeline cues, not spoken words.\n// Pauses are handled by pause_after field in timeline assembly, not TTS.\nlet voText = narrationText;\nvoText = voText.replace(/\\[2 second pause\\]/gi, '');\nvoText = voText.replace(/\\[1\\.5 second pause\\]/gi, '');\nvoText = voText.replace(/\\[1 second pause\\]/gi, '');\nvoText = voText.replace(/\\[beat\\]/gi, '');\nvoText = voText.replace(/\\[pause\\]/gi, '');\n\n// Clean up any double spaces or leading/trailing whitespace from stripped markers\nvoText = voText.replace(/  +/g, ' ').trim();\n\n// Send raw AAVE text to ElevenLabs — no SSML.\n// Scripts are already written in AAVE orthography per tyrone-voice-guide.md.\n// ElevenLabs voice settings (stability 0.50, style 0.36) handle natural cadence.\nreturn [{\n  json: {\n    ...scene,\n    vo_text: voText\n  }\n}];"
+      },
+      "id": "prepare-vo-text",
+      "name": "Prepare VO Text",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 400]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-rate-limit",
+      "name": "Wait — Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1320, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/rWyjfFeMZ6PxkHqD3wGC",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ text: $json.vo_text, model_id: 'eleven_multilingual_v2', voice_settings: $json.voice_settings || { stability: 0.50, similarity_boost: 0.75, style: 0.36, speed: 0.92, use_speaker_boost: true } }) }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "elevenlabs-tts",
+      "name": "ElevenLabs — TTS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1540, 400],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "ElevenLabs API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const scene = $('Prepare VO Text').first().json;\nconst binaryData = $input.first().binary.data;\nconst sceneNumber = scene.scene_number || scene.fields?.scene_number || '000';\nconst filename = 'scene-' + sceneNumber + '-vo.mp3';\n\nreturn [{\n  json: {\n    ...scene,\n    vo_filename: filename\n  },\n  binary: {\n    data: {\n      ...binaryData,\n      fileName: filename,\n      mimeType: 'audio/mpeg',\n      fileExtension: 'mp3'\n    }\n  }\n}];"
+      },
+      "id": "prepare-upload",
+      "name": "Prepare Upload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1760, 400]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.vo_filename }}",
+        "folderId": {
+          "__rl": true,
+          "value": "1Psw7peo5pO6rfHk7t9mm4SB9oorl9Ujs",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "gdrive-upload-vo",
+      "name": "Google Drive — Upload VO",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1980, 400],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "id": "={{ $('Prepare VO Text').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "vo_file_url": "={{ $json.webViewLink }}",
+            "vo_drive_file_id": "={{ $json.id }}",
+            "status": "vo_generated"
+          }
+        },
+        "options": {}
+      },
+      "id": "airtable-update-scene",
+      "name": "Airtable — Update Scene",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2200, 400],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2420, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $('Airtable — Update Scene').all();\nconst episodeId = $('Webhook Trigger').first().json.body.episode_id;\n\nconst totalGenerated = allItems.length;\nconst sceneNumbers = allItems.map(i => i.json.scene_number || i.json.fields?.scene_number || 'unknown');\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_vo_files: totalGenerated,\n  scenes_processed: sceneNumbers,\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "build-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 140]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond-to-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1320, 140]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Scenes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Scenes": {
+      "main": [
+        [
+          {
+            "node": "Enrich Scene Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich Scene Data": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare VO Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare VO Text": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs — TTS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs — TTS": {
+      "main": [
+        [
+          {
+            "node": "Prepare Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Upload": {
+      "main": [
+        [
+          {
+            "node": "Google Drive — Upload VO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Upload VO": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Scene",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Scene": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Bullies"
+    },
+    {
+      "name": "VO Generation"
+    },
+    {
+      "name": "Video Pipeline"
+    }
+  ],
+  "pinData": {}
+}

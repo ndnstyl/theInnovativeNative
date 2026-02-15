@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+So let's talk about what you can own.<break time="200ms"/> Startin' from nothin'.<break time="200ms"/> No trust fund.<break time="200ms"/> No connections.<break time="200ms"/> No degree required.
+</prosody>
+</speak>

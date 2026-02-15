@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.42 | Similarity: 0.75 | Style: 0.30 | Speaker Boost: ON
+
+<speak>
+<prosody rate="86%" volume="x-soft">
+Wasn't no warnin'.<break time="200ms"/> Just a letter.<break time="200ms"/> Then a lock on the door.<break time="200ms"/> She went down south.<break time="200ms"/> Family in Louisiana said they had room.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="x-soft">
+<emphasis level="strong">I stayed.</emphasis>
+</prosody>
+</speak>

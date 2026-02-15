@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.36 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+Number three.<break time="200ms"/> Intellectual property.<break time="200ms"/> That sound complicated but it ain't.<break time="200ms"/> You write a course?<break time="200ms"/> That's <emphasis level="strong">IP</emphasis>.<break time="200ms"/> You record a tutorial?<break time="200ms"/> <emphasis level="strong">IP</emphasis>.<break time="200ms"/> You build a template other folk use?<break time="200ms"/> <emphasis level="strong">IP</emphasis>.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+The internet let you sell what you know to people you'll never meet.<break time="200ms"/> That's ownership without inventory.
+</prosody>
+</speak>

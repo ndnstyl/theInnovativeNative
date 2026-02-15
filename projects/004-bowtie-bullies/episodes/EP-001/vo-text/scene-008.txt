@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.40 | Similarity: 0.75 | Style: 0.35 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="soft">
+But the dog stayed.<break time="200ms"/> Through all that.<break time="200ms"/> <emphasis level="strong">He stayed.</emphasis>
+</prosody>
+</speak>

@@ -199,7 +199,7 @@ Full component structure for Cerebro Legal RAG interface at:
 - **Solution**: Spell words the way the character says them — make the writing do the heavy lifting
 - **Impact**: Both ElevenLabs and Qwen3 improved with AAVE scripts
 - **Target density**: ~65% AAVE (Tyrone is measured, not loose)
-- **Full rules**: `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md` → "AAVE Writing Rules" section
+- **Full rules**: `projects/004-bowtie-bullies/brand/tyrone-voice-guide.md` → "AAVE Writing Rules" section
 
 ### Qwen3-TTS Voice Cloning Deep Dive
 
@@ -324,5 +324,5 @@ Full component structure for Cerebro Legal RAG interface at:
 - Platform Specs: `.claude/skills/marketing/platforms/`
 - Brand System: `.claude/skills/pptx-generator/brands/innovative-native/brand-system.md`
 - Deliverable Format SOP: `.specify/sops/deliverable-format-requirements.md`
-- BowTie Bullies Voice Guide: `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md`
+- BowTie Bullies Voice Guide: `projects/004-bowtie-bullies/brand/tyrone-voice-guide.md`
 - BowTie Bullies Brand System: `.claude/skills/pptx-generator/brands/bowtie-bullies/`

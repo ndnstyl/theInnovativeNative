@@ -1,0 +1,16 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.42 | Similarity: 0.75 | Style: 0.45 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+Number five.<break time="200ms"/> Community equity.<break time="200ms"/> This the one folk sleep on.
+</prosody>
+<break time="600ms"/>
+<prosody rate="88%" volume="medium">
+When your name mean somethin' on your block<break time="200ms"/> when people trust you, send they kids to you, call you first when somethin' need fixin'<break time="200ms"/> that's equity.<break time="200ms"/> Can't put it on a balance sheet.
+</prosody>
+<break time="600ms"/>
+<prosody rate="88%" volume="medium">
+But it's the reason some folk can buy the plaza.<break time="200ms"/> The community back 'em 'cause they backed the community first.
+</prosody>
+</speak>

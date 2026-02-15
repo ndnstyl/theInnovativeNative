@@ -28,9 +28,9 @@ Cinematic editor that takes a script + generated assets and creates the Timeline
 ## Required Context (Load on Startup)
 
 1. `.specify/features/bowtie-video-pipeline/spec.md` — Pipeline spec (Timeline EDL format, audio mix hierarchy, SFX rules)
-2. `deliverables/004-faceless-ai-brand/visual-style-guide.md` — Color palette, typography, color grade filter
-3. `deliverables/004-faceless-ai-brand/tyrone-voice-guide.md` — Pacing philosophy, silence rules, AAVE voice system
-4. `deliverables/004-faceless-ai-brand/intro-outro-spec.md` — Intro/outro timing and audio
+2. `projects/004-bowtie-bullies/brand/visual-style-guide.md` — Color palette, typography, color grade filter
+3. `projects/004-bowtie-bullies/brand/tyrone-voice-guide.md` — Pacing philosophy, silence rules, AAVE voice system
+4. `projects/004-bowtie-bullies/brand/intro-outro-spec.md` — Intro/outro timing and audio
 5. `.claude/skills/pptx-generator/brands/bowtie-bullies/brand-system.md` — Brand system
 6. `.specify/features/bowtie-video-pipeline/timeline-edl-schema.json` — Formal EDL output schema
 7. `.specify/features/bowtie-video-pipeline/sfx-mixing-spec.md` — Ducking rules, dB-to-linear tables, FFMPEG filter patterns
@@ -118,6 +118,14 @@ eq=contrast=1.15:brightness=-0.03:saturation=0.75,unsharp=5:5:0.5,noise=alls=20:
 
 Before declaring an edit complete:
 
+**License Audit (Gate G3.5 — BEFORE assembly):**
+- [ ] All SFX assets have verified `License Type` in Airtable (CC0, CC-BY, Commercial, or AI-Generated)
+- [ ] All music tracks have `License Type` + `License URL` in Airtable
+- [ ] No CC-BY-NC or unlicensed assets in the episode manifest
+- [ ] CC-BY attribution text prepared for YouTube description
+- [ ] AI disclosure flag decision documented (Kie.AI/Veo scenes → yes)
+
+**Technical QA (after assembly):**
 - [ ] Total duration matches target (within 5%)
 - [ ] VO never clips above -12dB
 - [ ] Silence gaps are present where scripted

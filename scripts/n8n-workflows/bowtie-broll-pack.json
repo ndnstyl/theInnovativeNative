@@ -1,0 +1,358 @@
+{
+  "name": "BowTie B-Roll Pack",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-broll-pack",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "broll-pack-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-broll-pack"
+    },
+    {
+      "parameters": {},
+      "id": "broll-pack-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Default inputs for manual trigger testing\nreturn [{\n  json: {\n    body: {\n      episode_id: 'EP-001',\n      act: 'ACT_1'\n    }\n  }\n}];"
+      },
+      "id": "broll-pack-manual-defaults",
+      "name": "Manual Defaults",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst episodeId = body.episode_id || 'EP-001';\nconst targetAct = body.act || 'ALL';\n\nconst STYLE = `Dark steel (#1E1E20) palette. Rust-orange sodium vapor accent. Film grain 20%. Heavy vignette. Cinematic. 1920x1080.`;\nconst NEGATIVE = `Blue nose, black nose, gray coat, brindle, white coat, cropped ears, aggressive snarling, teeth showing, cute puppy, playful, tongue out, bright colors, butterfly bowtie, fabric bowtie, silk bowtie, bowtie at collar, exaggerated bodybuilder, beast mode, suburban setting, grass yard, dog park, stock photo, cheerful, multiple dogs, human face, neon, photorealistic, 3D render, watermark, text, logo`;\n\nconst BROLL_LIBRARY = {\n  ACT_1: {\n    mood: 'Dark, isolated, survival',\n    prompts: [\n      'City skyline at night, distant sodium vapor glow on low clouds, silhouetted buildings',\n      'Rain falling on cracked concrete, pooling in uneven surface, sodium vapor light reflecting in puddles',\n      'Chain-link fence shadow pattern cast by streetlight on empty sidewalk',\n      'Sodium vapor streetlight pool of orange on empty wet asphalt, darkness beyond',\n      'Empty urban street at 3am, single working streetlight, abandoned storefronts',\n      'Heavy padlock on rusted chain-link gate, peeling paint, night',\n      'Cracked concrete wall with water stains, harsh side-lighting',\n      'Distant emergency lights glow reflecting off wet street, no vehicles visible',\n      'Wet asphalt reflecting sodium vapor orange, shallow puddles, tire tracks',\n      'Lone streetlight illuminating empty intersection, deep shadows all around',\n      'Abandoned lot with weeds through concrete, chain-link perimeter, night',\n      'Rooftop edge silhouette against distant city glow, dark foreground'\n    ]\n  },\n  ACT_2A: {\n    mood: 'Wry, observational',\n    prompts: [\n      'Neon check-cashing sign reflected in wet window, urban night',\n      'Surveillance camera mounted on brick corner, harsh overhead light',\n      'Liquor store neon signs glowing through dirty glass, iron security bars',\n      'Sidewalk cracks in extreme close-up, weeds pushing through, sodium light',\n      'Empty bus stop bench under flickering fluorescent shelter light',\n      'Graffiti wall in deep shadow, single spray-painted tag illuminated by distant light',\n      'Bodega awning dripping rain, neon OPEN sign casting red glow on wet sidewalk'\n    ]\n  },\n  ACT_2B: {\n    mood: 'Warm, building',\n    prompts: [\n      'Warm kitchen light spilling through window onto dark exterior wall',\n      'Barbershop interior details — leather chair, mirror, warm incandescent light',\n      'Golden hour light on urban street, long shadows, warm tones breaking through steel',\n      'Concrete stoop with single potted plant, warm light from doorway behind',\n      'Dog-eared paperback book open on worn wooden surface, warm lamplight',\n      'Coffee steam rising in morning light, cup on windowsill, city visible outside',\n      'Warm light through curtain, casting soft pattern on interior wall'\n    ]\n  },\n  ACT_2C: {\n    mood: 'Conviction, community',\n    prompts: [\n      'Community garden plot with young plants, chain-link fence, early morning light',\n      'Railroad tracks converging to vanishing point, dawn light on horizon',\n      'Community bulletin board covered in flyers and notices, pin-light illumination',\n      'Sunrise over rooftops, warm orange breaking through dark steel sky',\n      'Open book pages in warm directional light, text blurred, moody',\n      'Single candle flame in dark room, warm glow on surrounding surfaces',\n      'Hands holding open book, close-up, warm light, no face visible'\n    ]\n  },\n  ACT_3A: {\n    mood: 'Historical, reverent',\n    prompts: [\n      'Old photograph edges curling, sepia tones, on dark wooden surface',\n      'Candlelight flickering on brick wall, warm shadows, reverent mood',\n      'Worn book pages extreme close-up, yellowed paper, printed text, soft focus',\n      'Old brick building facade, historical architecture, overcast light',\n      'Church steeple silhouette against dusk sky, muted colors',\n      'Archive texture — stacked old documents, leather binding, dust particles in light beam'\n    ]\n  },\n  ACT_3B: {\n    mood: 'Confident, practical',\n    prompts: [\n      'Laptop screen glow in dim room, code or course interface visible, modern',\n      'Food truck service window at night, warm interior light, menu board',\n      'Apartment windows grid pattern at night, various warm lights in each',\n      'Online course interface on screen, progress bar, clean modern design',\n      'Garden harvest — fresh vegetables in wooden crate, golden hour light',\n      'City panorama from elevated position, dawn, possibility and scale',\n      'Stack of books beside laptop, warm desk lamp, study setup',\n      'Hand writing in notebook, close-up, warm lamplight, no face'\n    ]\n  }\n};\n\nconst records = [];\nconst actsToProcess = targetAct === 'ALL' ? Object.keys(BROLL_LIBRARY) : [targetAct];\n\nfor (const act of actsToProcess) {\n  const data = BROLL_LIBRARY[act];\n  if (!data) continue;\n\n  data.prompts.forEach((prompt, idx) => {\n    const brollNum = String(idx + 1).padStart(2, '0');\n    const actLower = act.toLowerCase().replace('_', '');\n    records.push({\n      episode_id: episodeId,\n      act: act,\n      broll_index: idx + 1,\n      mood: data.mood,\n      visual_prompt_full: `${prompt}\\n\\n${STYLE}\\n\\nNegative: ${NEGATIVE}`,\n      target_filename: `broll-${actLower}-${brollNum}.png`,\n      scene_type: 'broll'\n    });\n  });\n}\n\nreturn records.map(r => ({ json: r }));"
+      },
+      "id": "broll-pack-build-prompts",
+      "name": "Build B-Roll Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "broll-pack-split",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [660, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={{$credentials.googleGeminiApi.apiKey}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"text\": \"Generate an image in 16:9 widescreen landscape format (1920x1080). {{ $json.visual_prompt_full }}\\n\\nDo NOT include any text, watermarks, or logos in the image.\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseModalities\": [\"IMAGE\"],\n    \"imageConfig\": {\n      \"aspectRatio\": \"16:9\",\n      \"imageSize\": \"2K\"\n    }\n  }\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "broll-pack-gemini",
+      "name": "Gemini — Generate Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 400],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract base64 image data from Gemini response and convert to binary\nconst geminiResponse = $input.first().json;\nconst brollData = $('SplitInBatches').first().json;\n\nlet base64Data;\nlet mimeType = 'image/png';\ntry {\n  const part = geminiResponse.candidates[0].content.parts[0];\n  base64Data = part.inlineData.data;\n  mimeType = part.inlineData.mimeType || 'image/png';\n} catch (e) {\n  throw new Error(`Failed to extract image from Gemini response: ${e.message}. Response: ${JSON.stringify(geminiResponse).substring(0, 500)}`);\n}\n\nconst filename = brollData.target_filename;\nconst binaryData = Buffer.from(base64Data, 'base64');\n\nreturn {\n  json: {\n    ...brollData,\n    filename: filename,\n    generated_at: new Date().toISOString(),\n    mime_type: mimeType\n  },\n  binary: {\n    data: await this.helpers.prepareBinaryData(\n      binaryData,\n      filename,\n      mimeType\n    )\n  }\n};"
+      },
+      "id": "broll-pack-extract-binary",
+      "name": "Extract Binary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 400]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.filename }}",
+        "folderId": {
+          "__rl": true,
+          "value": "={{ ({'ACT_1':'1LBDSLOu4vgLLg_59KWqdMWjeMHidwDB_','ACT_2A':'1O-adOcdGwENRSVU_GSVIVTRvHu1MX2gy','ACT_2B':'1b78p2aDoD8UvI6IeptRaUVgog4JyFPBC','ACT_2C':'15iWzkmjKjG0rjI78b_FpDadYr75hupOy','ACT_3A':'1wRy9vhU6evJSAaDTIagSRXZwkKvBcRLA','ACT_3B':'1ehLmcO9f1eFCODAAhePTwDhQw-QchUMp'})[$json.act] || '13EkWpELDevixZZFdDn18VcO6Se87Pd1I' }}",
+          "mode": "id"
+        },
+        "options": {
+          "simplifyOutput": true
+        }
+      },
+      "id": "broll-pack-gdrive-upload",
+      "name": "Google Drive — Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1320, 400],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "episode_id": "={{ $('Extract Binary').first().json.episode_id }}",
+            "scene_type": "broll",
+            "act": "={{ $('Extract Binary').first().json.act }}",
+            "variant_id": "={{ $('Extract Binary').first().json.broll_index }}",
+            "target_filename": "={{ $('Extract Binary').first().json.filename }}",
+            "visual_prompt_full": "={{ $('Extract Binary').first().json.visual_prompt_full }}",
+            "generation_status": "image_generated",
+            "image_drive_id": "={{ $json.id }}",
+            "image_url": "=https://drive.google.com/file/d/{{ $json.id }}/view",
+            "generated_at": "={{ $('Extract Binary').first().json.generated_at }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "broll-pack-airtable-create",
+      "name": "Airtable — Create Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1540, 400],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "broll-pack-wait",
+      "name": "Wait — Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1760, 400]
+    },
+    {
+      "parameters": {},
+      "id": "broll-pack-loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1980, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $('Airtable — Create Record').all();\nconst body = $('Webhook Trigger').first().json.body || $('Webhook Trigger').first().json;\n\n// Count by act\nconst actCounts = {};\nfor (const item of allItems) {\n  const act = item.json.act || item.json.fields?.act || 'unknown';\n  actCounts[act] = (actCounts[act] || 0) + 1;\n}\n\nconst summary = {\n  status: 'complete',\n  episode_id: body.episode_id || 'EP-001',\n  act_requested: body.act || 'ALL',\n  total_broll_generated: allItems.length,\n  counts_by_act: actCounts,\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "broll-pack-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 140]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "broll-pack-respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1100, 140]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Build B-Roll Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Manual Defaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Defaults": {
+      "main": [
+        [
+          {
+            "node": "Build B-Roll Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build B-Roll Prompts": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gemini — Generate Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini — Generate Image": {
+      "main": [
+        [
+          {
+            "node": "Extract Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Binary": {
+      "main": [
+        [
+          {
+            "node": "Google Drive — Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Upload": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Create Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Record": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Bullies"
+    },
+    {
+      "name": "Image Generation"
+    },
+    {
+      "name": "B-Roll"
+    },
+    {
+      "name": "Video Pipeline"
+    }
+  ],
+  "pinData": {}
+}

@@ -1,0 +1,1309 @@
+{
+  "name": "WF-BT-MASTER — BowTie Master Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough",
+        "options": {}
+      },
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "filterByFormula": "={Episode ID}='{{ $json.episode_id }}'",
+        "options": {}
+      },
+      "id": "fetch-episode",
+      "name": "Airtable — Fetch Episode",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [460, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value": "planning",
+              "output": 0
+            },
+            {
+              "value": "scripting",
+              "output": 1
+            },
+            {
+              "value": "vo_generation",
+              "output": 2
+            },
+            {
+              "value": "asset_generation",
+              "output": 3
+            },
+            {
+              "value": "assembly",
+              "output": 4
+            },
+            {
+              "value": "review",
+              "output": 5
+            },
+            {
+              "value": "published",
+              "output": 5
+            }
+          ]
+        },
+        "dataType": "string",
+        "value1": "={{ $json.fields.Status }}",
+        "fallbackOutput": "extra",
+        "options": {}
+      },
+      "id": "status-router",
+      "name": "Switch — Status Router",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {},
+      "id": "noop-done",
+      "name": "NoOp — Done",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [960, 900]
+    },
+    {
+      "parameters": {
+        "jsCode": "const episode = $input.first().json;\n\nconst prompt = `You are a scriptwriter for BowTie Bullies: The Aftermath, a YouTube channel about financial survival.\n\nCHARACTER: Tyrone narrates. He's calm, measured, uses AAVE at ~65% density. Short-short-medium sentence rhythm. 110-125 WPM delivery. Pauses carry weight.\n\nEPISODE: ${episode.fields['Title']}\nCONTENT PILLAR: ${episode.fields['Content Pillar']}\nTARGET DURATION: ${episode.fields['Target Duration (min)']} minutes\n\nBRIEF:\n${episode.fields['Brief']}\n\nTALKING POINTS:\n${episode.fields['Talking Points']}\n\nCOLD OPEN (use as Scene 1 hook):\n${episode.fields['Cold Open']}\n\nKEY STAT (use for stat_callout scene):\n${episode.fields['Key Stat']}\n\nVOICE RULES:\n- AAVE orthography: sleepin', readin', outta, shoulda, folk, ain't\n- Code-switch: technical/financial terms stay standard English\n- Short to medium sentences, one thought at a time\n- Silence/pauses: ~25-30% of content time\n- Target word count: 1,100-1,250 words total narration\n\nSCENE TYPES (use these exactly):\n- hook: AI video clip, 5-8s, opens the episode\n- narration_stills: Ken Burns over stills, 30-90s per segment (the meat)\n- stat_callout: Animated number (Remotion), 3-4s\n- quote_card: Tyrone quote with typing animation (Remotion), 4-6s\n- transition_beat: Fade to black with silence, 1.5-3s\n- topic_pivot: AI video clip in new context, 5-8s\n- closer: Closing visual, 5-8s\n\nOUTPUT FORMAT: Return valid JSON matching this schema exactly:\n{\n  \"episode_id\": \"${episode.fields['Episode ID']}\",\n  \"title\": \"${episode.fields['Title']}\",\n  \"content_pillar\": \"${episode.fields['Content Pillar']}\",\n  \"target_duration_seconds\": ${(episode.fields['Target Duration (min)'] || 15) * 60},\n  \"scenes\": [\n    {\n      \"scene_number\": 1,\n      \"scene_type\": \"hook\",\n      \"narration_text\": \"AAVE narration here\",\n      \"visual_prompt\": \"Gemini image prompt\",\n      \"visual_backend\": \"kie_ai|gemini|remotion\",\n      \"pose_variant\": \"P1-P6 or null\",\n      \"duration_seconds\": 6,\n      \"sfx_bed\": \"distant_traffic\",\n      \"sfx_events\": [],\n      \"music_mood\": \"tense|somber|reflective|defiant|triumphant\",\n      \"pause_after\": 0,\n      \"transition_out\": \"fade_to_black|hard_cut|dissolve\",\n      \"reuse_asset_id\": null\n    }\n  ]\n}\n\nGenerate 30-35 scenes. Include transition_beats between major sections. Use stat_callout for the key stat. Use quote_card for impactful Tyrone lines. Start with hook (cold open), end with closer.\n\nFor visual_backend:\n- hook/topic_pivot/closer → \"kie_ai\" (character scenes)\n- narration_stills → \"gemini\" (environments/b-roll)\n- stat_callout/quote_card → \"remotion\"\n- transition_beat → \"gemini\" (or null)\n\nReturn ONLY valid JSON. No markdown. No explanation.`;\n\nreturn [{ json: { prompt, episode } }];"
+      },
+      "id": "build-gemini-prompt",
+      "name": "Code — Build Gemini Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleGeminiApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $credentials.googleGeminiApi.apiKey }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [{\"role\": \"user\", \"parts\": [{\"text\": {{ JSON.stringify($json.prompt) }} }]}],\n  \"generationConfig\": {\n    \"responseMimeType\": \"application/json\",\n    \"temperature\": 0.8\n  }\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "gemini-script-gen",
+      "name": "HTTP Request — Gemini 2.5 Flash",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1200, 300],
+      "credentials": {
+        "googleGeminiApi": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst text = response.candidates[0].content.parts[0].text;\nconst script = JSON.parse(text);\n\nif (!script.scenes || !Array.isArray(script.scenes)) {\n  throw new Error('Invalid script: missing scenes array');\n}\n\nreturn [{ json: { script, scene_count: script.scenes.length } }];"
+      },
+      "id": "parse-script-json",
+      "name": "Code — Parse Script JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1440, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "driveId": {
+          "__rl": true,
+          "value": "myDrive",
+          "mode": "list"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ 'Episodes/' + $json.script.episode_id + '/scripts' }}",
+          "mode": "name"
+        },
+        "name": "={{ $json.script.episode_id }}-script.json",
+        "content": "={{ JSON.stringify($json.script, null, 2) }}",
+        "options": {
+          "mimeType": "application/json"
+        }
+      },
+      "id": "gdrive-save-script",
+      "name": "Google Drive — Save Script JSON",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1680, 300],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare scenes array for SplitInBatches\nconst scriptNode = $('Code — Parse Script JSON').first().json;\nconst script = scriptNode.script;\nconst episodeRecordId = $('Airtable — Fetch Episode').first().json.id;\nconst episodeId = script.episode_id;\n\nreturn script.scenes.map(scene => ({\n  json: {\n    ...scene,\n    episode_record_id: episodeRecordId,\n    episode_id: episodeId\n  }\n}));"
+      },
+      "id": "prepare-scenes-for-batch",
+      "name": "Code — Prepare Scenes Array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1920, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-scene-records",
+      "name": "SplitInBatches — Create Scene Records",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [2160, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Scene Number": "={{ $json.scene_number }}",
+            "Scene Type": "={{ $json.scene_type }}",
+            "Narration Text": "={{ $json.narration_text }}",
+            "Visual Prompt": "={{ $json.visual_prompt }}",
+            "Visual Backend": "={{ $json.visual_backend }}",
+            "Pose Variant": "={{ $json.pose_variant }}",
+            "Duration (seconds)": "={{ $json.duration_seconds }}",
+            "SFX Bed": "={{ $json.sfx_bed }}",
+            "Music Mood": "={{ $json.music_mood }}",
+            "Pause After (ms)": "={{ $json.pause_after }}",
+            "Transition Out": "={{ $json.transition_out }}",
+            "Reuse Asset ID": "={{ $json.reuse_asset_id }}",
+            "Episode": ["={{ $json.episode_record_id }}"],
+            "Status": "pending"
+          }
+        },
+        "options": {}
+      },
+      "id": "airtable-create-scene",
+      "name": "Airtable — Create Scene Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2400, 400],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable — Fetch Episode').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "scripting",
+            "Current Phase": "Phase 1 — Script Generation Complete",
+            "Resume URL": "={{ $execution.resumeUrl }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-episode-scripting",
+      "name": "Airtable — Update Episode (scripting)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2640, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "wait-g1",
+      "name": "Wait — G1 Approval Gate",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2880, 300]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "=AND({Episode}='{{ $('Airtable — Fetch Episode').first().json.fields['Episode ID'] }}', {Narration Text}!='')",
+        "options": {}
+      },
+      "id": "fetch-scenes-narration",
+      "name": "Airtable — Fetch Scenes with Narration",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [960, 600],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const scenes = $input.all();\nconst episode_id = scenes[0].json.fields['Episode'][0];\nconst scene_record_ids = scenes.map(s => s.json.id);\nreturn [{ json: { episode_id, scene_record_ids } }];"
+      },
+      "id": "prepare-vo-request",
+      "name": "Code — Prepare VO Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 600]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.N8N_WEBHOOK_BASE_URL || 'http://localhost:5678' }}/webhook/bowtie-vo-generator",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "call-vo-generator",
+      "name": "HTTP Request — Call WF-BT-002",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1440, 600]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable — Fetch Episode').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "vo_generation",
+            "Current Phase": "Phase 1.5 — VO Generation Complete",
+            "Resume URL": "={{ $execution.resumeUrl }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-episode-vo",
+      "name": "Airtable — Update Episode (vo_generation)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1680, 600],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "wait-g15",
+      "name": "Wait — G1.5 Approval Gate",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1920, 600]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "=AND({Episode}='{{ $('Airtable — Fetch Episode').first().json.fields['Episode ID'] }}', {Visual Backend}!='remotion', {Status}!='image_generated')",
+        "options": {}
+      },
+      "id": "fetch-scenes-visuals",
+      "name": "Airtable — Fetch Scenes Needing Visuals",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [960, 900],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const scenes = $input.all();\nconst episodeId = $('Airtable — Fetch Episode').first().json.fields['Episode ID'];\nconst scenePayloads = scenes.map(s => ({\n  record_id: s.json.id,\n  scene_number: s.json.fields['Scene Number'],\n  visual_prompt: s.json.fields['Visual Prompt'],\n  visual_backend: s.json.fields['Visual Backend'],\n  pose_variant: s.json.fields['Pose Variant'],\n  scene_type: s.json.fields['Scene Type']\n}));\n\nreturn [{ json: { episode_id: episodeId, scenes: scenePayloads } }];"
+      },
+      "id": "prepare-asset-request",
+      "name": "Code — Prepare Asset Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 900]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.N8N_WEBHOOK_BASE_URL || 'http://localhost:5678' }}/webhook/bowtie-asset-generator-master",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "call-asset-generator",
+      "name": "HTTP Request — Call WF-BT-003",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1440, 900]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable — Fetch Episode').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "asset_generation",
+            "Current Phase": "Phase 2 — Asset Generation Complete",
+            "Resume URL": "={{ $execution.resumeUrl }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-episode-assets",
+      "name": "Airtable — Update Episode (asset_generation)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1680, 900],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "wait-g2",
+      "name": "Wait — G2 Approval Gate",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1920, 900]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "filterByFormula": "=AND({Episode}='{{ $('Airtable — Fetch Episode').first().json.fields['Episode ID'] }}')",
+        "sort": {
+          "property": [
+            {
+              "field": "Scene Number",
+              "direction": "asc"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-approved-scenes",
+      "name": "Airtable — Fetch All Approved Scenes",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [960, 1200],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build timeline EDL from approved scenes\nconst scenes = $input.all();\nconst episodeData = $('Airtable — Fetch Episode').first().json;\nconst episodeId = episodeData.fields['Episode ID'];\nconst episodeTitle = episodeData.fields['Title'];\n\nlet currentTime = 0;\nconst videoClips = [];\nconst voClips = [];\n\n// Add intro\nvideoClips.push({\n  id: 'V000', type: 'intro',\n  source: 'out/bowtie/intro.mp4',\n  in: 0, out: 3.5\n});\ncurrentTime = 3.5;\n\nfor (const scene of scenes) {\n  const s = scene.json.fields || scene.json;\n  const duration = s['Duration (seconds)'] || 10;\n  const pauseAfter = (s['Pause After (ms)'] || 0) / 1000;\n\n  const clipId = `V${String(videoClips.length).padStart(3, '0')}`;\n\n  if (s['Visual Backend'] === 'remotion') {\n    videoClips.push({\n      id: clipId, type: 'remotion_overlay',\n      source: `out/bowtie/remotion/${s['Scene Number']}.mov`,\n      in: currentTime, out: currentTime + duration\n    });\n  } else {\n    videoClips.push({\n      id: clipId, type: 'ken_burns',\n      source: s['Image File URL'] || 'MISSING',\n      in: currentTime, out: currentTime + duration,\n      ken_burns: { zoom_start: 1.0, zoom_end: 1.08, pan: 'slow_push' }\n    });\n  }\n\n  if (s['VO File URL']) {\n    voClips.push({\n      id: `VO${String(voClips.length).padStart(3, '0')}`,\n      source: s['VO File URL'],\n      in: currentTime,\n      out: currentTime + duration,\n      level_db: -13\n    });\n  }\n\n  currentTime += duration + pauseAfter;\n}\n\n// Add outro\nvideoClips.push({\n  id: `V${String(videoClips.length).padStart(3, '0')}`,\n  type: 'outro',\n  source: 'out/bowtie/outro.mp4',\n  in: currentTime, out: currentTime + 7\n});\n\nconst edl = {\n  episode_id: episodeId,\n  title: episodeTitle,\n  format: 'longform_16x9',\n  fps: 24,\n  target_duration_seconds: currentTime + 7,\n  tracks: { video: videoClips, voiceover: voClips, sfx: [], music: [], silence: [] },\n  master_output: {\n    normalization: '-14 LUFS',\n    true_peak: '-1 dBTP',\n    codec_video: 'libx264',\n    crf: 18,\n    codec_audio: 'aac',\n    bitrate_audio: '128k',\n    color_grade: 'eq=contrast=1.15:brightness=-0.03:saturation=0.75,unsharp=5:5:0.5'\n  }\n};\n\nreturn [{ json: { edl, edl_json: JSON.stringify(edl, null, 2) } }];"
+      },
+      "id": "generate-timeline-edl",
+      "name": "Code — Generate Timeline EDL",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 1200]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { edl_json } = $input.first().json;\nconst fs = require('fs');\nconst path = '/tmp/edl.json';\nfs.writeFileSync(path, edl_json, 'utf8');\nreturn [{ json: { edl_path: path, edl_json } }];"
+      },
+      "id": "write-edl-file",
+      "name": "Code — Write EDL to File",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1440, 1200]
+    },
+    {
+      "parameters": {
+        "command": "python3 scripts/timeline_to_ffmpeg.py /tmp/edl.json --output /tmp/render.sh",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "exec-timeline-to-ffmpeg",
+      "name": "Execute Command — timeline_to_ffmpeg.py",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1680, 1200]
+    },
+    {
+      "parameters": {
+        "command": "bash /tmp/render.sh",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "exec-render",
+      "name": "Execute Command — Render",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1920, 1200]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "driveId": {
+          "__rl": true,
+          "value": "myDrive",
+          "mode": "list"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ 'Episodes/' + $('Airtable — Fetch Episode').first().json.fields['Episode ID'] + '/video' }}",
+          "mode": "name"
+        },
+        "name": "={{ $('Airtable — Fetch Episode').first().json.fields['Episode ID'] }}-final.mp4",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "id": "gdrive-upload-final",
+      "name": "Google Drive — Upload Final Video",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [2160, 1200],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable — Fetch Episode').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "assembly",
+            "Current Phase": "Phase 3 — Assembly Complete",
+            "Final Video URL": "={{ $json.webViewLink || $json.webContentLink || '' }}",
+            "Resume URL": "={{ $execution.resumeUrl }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-episode-assembly",
+      "name": "Airtable — Update Episode (assembly)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2400, 1200],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "options": {}
+      },
+      "id": "wait-g4",
+      "name": "Wait — G4 Approval Gate",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2640, 1200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the script JSON to find shorts-worthy segments\n// Look for scenes that are good standalone clips: hooks, quote_cards, stat_callouts, topic_pivots\nconst episodeData = $('Airtable — Fetch Episode').first().json;\nconst episodeId = episodeData.fields['Episode ID'];\n\n// Re-fetch the script from the scenes to build timestamps\nconst scenes = $('Airtable — Fetch All Approved Scenes').all();\n\nlet currentTime = 3.5; // after intro\nconst shorts = [];\nlet shortSegmentStart = null;\nlet shortSegmentTitle = null;\nlet segmentScenes = [];\n\nfor (const scene of scenes) {\n  const s = scene.json.fields || scene.json;\n  const duration = s['Duration (seconds)'] || 10;\n  const pauseAfter = (s['Pause After (ms)'] || 0) / 1000;\n  const sceneType = s['Scene Type'];\n\n  // Start a new short segment on hook, topic_pivot, or quote_card\n  if (['hook', 'topic_pivot', 'quote_card'].includes(sceneType)) {\n    // If we have an accumulated segment that's long enough (30-90s), save it\n    if (shortSegmentStart !== null && segmentScenes.length >= 3) {\n      const segmentEnd = currentTime;\n      const segmentDuration = segmentEnd - shortSegmentStart;\n      if (segmentDuration >= 30 && segmentDuration <= 90) {\n        const startH = Math.floor(shortSegmentStart / 3600);\n        const startM = Math.floor((shortSegmentStart % 3600) / 60);\n        const startS = Math.floor(shortSegmentStart % 60);\n        const endH = Math.floor(segmentEnd / 3600);\n        const endM = Math.floor((segmentEnd % 3600) / 60);\n        const endS = Math.floor(segmentEnd % 60);\n        shorts.push({\n          start: `${String(startH).padStart(2,'0')}:${String(startM).padStart(2,'0')}:${String(startS).padStart(2,'0')}`,\n          end: `${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}:${String(endS).padStart(2,'0')}`,\n          title: `${episodeId}-short-${shorts.length + 1}-${shortSegmentTitle}`\n        });\n      }\n    }\n    shortSegmentStart = currentTime;\n    shortSegmentTitle = (s['Narration Text'] || sceneType).substring(0, 30).replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();\n    segmentScenes = [];\n  }\n\n  segmentScenes.push(s);\n  currentTime += duration + pauseAfter;\n}\n\n// Capture last segment\nif (shortSegmentStart !== null && segmentScenes.length >= 3) {\n  const segmentEnd = currentTime;\n  const segmentDuration = segmentEnd - shortSegmentStart;\n  if (segmentDuration >= 30 && segmentDuration <= 90) {\n    const startH = Math.floor(shortSegmentStart / 3600);\n    const startM = Math.floor((shortSegmentStart % 3600) / 60);\n    const startS = Math.floor(shortSegmentStart % 60);\n    const endH = Math.floor(segmentEnd / 3600);\n    const endM = Math.floor((segmentEnd % 3600) / 60);\n    const endS = Math.floor(segmentEnd % 60);\n    shorts.push({\n      start: `${String(startH).padStart(2,'0')}:${String(startM).padStart(2,'0')}:${String(startS).padStart(2,'0')}`,\n      end: `${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}:${String(endS).padStart(2,'0')}`,\n      title: `${episodeId}-short-${shorts.length + 1}-${shortSegmentTitle}`\n    });\n  }\n}\n\n// Limit to top 5 shorts\nconst finalShorts = shorts.slice(0, 5);\n\nreturn [{ json: { shorts: finalShorts, episode_id: episodeId, shorts_count: finalShorts.length } }];"
+      },
+      "id": "extract-shorts-timestamps",
+      "name": "Code — Extract Shorts Timestamps",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 1500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { shorts, episode_id } = $input.first().json;\nconst fs = require('fs');\nconst path = `/tmp/${episode_id}-shorts-timestamps.json`;\nfs.writeFileSync(path, JSON.stringify(shorts, null, 2), 'utf8');\nreturn [{ json: { timestamps_path: path, shorts, episode_id } }];"
+      },
+      "id": "write-timestamps-json",
+      "name": "Code — Write Timestamps JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 1500]
+    },
+    {
+      "parameters": {
+        "command": "={{ 'bash scripts/extract_shorts.sh out/bowtie/' + $json.episode_id + '-final.mp4 ' + $json.timestamps_path + ' out/bowtie/shorts' }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "exec-extract-shorts",
+      "name": "Execute Command — extract_shorts.sh",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1440, 1500]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare shorts list for upload loop\nconst { shorts, episode_id } = $('Code — Write Timestamps JSON').first().json;\nreturn shorts.map(s => ({\n  json: {\n    title: s.title,\n    file_path: `out/bowtie/shorts/${s.title}.mp4`,\n    episode_id: episode_id,\n    start: s.start,\n    end: s.end\n  }\n}));"
+      },
+      "id": "prepare-shorts-for-upload",
+      "name": "Code — Prepare Shorts for Upload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1680, 1500]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-shorts-upload",
+      "name": "SplitInBatches — Upload Shorts",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1920, 1500]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "driveId": {
+          "__rl": true,
+          "value": "myDrive",
+          "mode": "list"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ 'Episodes/' + $('Airtable — Fetch Episode').first().json.fields['Episode ID'] + '/shorts' }}",
+          "mode": "name"
+        },
+        "name": "={{ $json.title }}.mp4",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "id": "gdrive-upload-short",
+      "name": "Google Drive — Upload Short",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [2160, 1600],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbluPmeXdA4by2Utz",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $('SplitInBatches — Upload Shorts').context.currentItem.json.title }}",
+            "Episode ID": "={{ $('SplitInBatches — Upload Shorts').context.currentItem.json.episode_id }}",
+            "Start Timestamp": "={{ $('SplitInBatches — Upload Shorts').context.currentItem.json.start }}",
+            "End Timestamp": "={{ $('SplitInBatches — Upload Shorts').context.currentItem.json.end }}",
+            "File URL": "={{ $json.webViewLink || $json.webContentLink || '' }}",
+            "Status": "draft"
+          }
+        },
+        "options": {}
+      },
+      "id": "airtable-create-short",
+      "name": "Airtable — Create Shorts Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2400, 1600],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblh3Mrp7HhQ4wPQ5",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable — Fetch Episode').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "review",
+            "Current Phase": "Phase 4 — Shorts Extraction Complete"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-episode-review",
+      "name": "Airtable — Update Episode (review)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2640, 1500],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#bowtie-pipeline",
+        "text": "={{ '🎬 ' + $('Airtable — Fetch Episode').first().json.fields['Episode ID'] + ' — ' + $('Airtable — Fetch Episode').first().json.fields['Title'] + ' production complete. Ready for review.' }}",
+        "otherOptions": {}
+      },
+      "id": "slack-notification",
+      "name": "Slack — Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [2880, 1500]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Episode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Episode": {
+      "main": [
+        [
+          {
+            "node": "Switch — Status Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch — Status Router": {
+      "main": [
+        [
+          {
+            "node": "Code — Build Gemini Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Fetch Scenes with Narration",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Fetch Scenes Needing Visuals",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Fetch All Approved Scenes",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code — Extract Shorts Timestamps",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NoOp — Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Build Gemini Prompt": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Gemini 2.5 Flash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Gemini 2.5 Flash": {
+      "main": [
+        [
+          {
+            "node": "Code — Parse Script JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Parse Script JSON": {
+      "main": [
+        [
+          {
+            "node": "Google Drive — Save Script JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Save Script JSON": {
+      "main": [
+        [
+          {
+            "node": "Code — Prepare Scenes Array",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Prepare Scenes Array": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Create Scene Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches — Create Scene Records": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Episode (scripting)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Create Scene Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Scene Record": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Create Scene Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Episode (scripting)": {
+      "main": [
+        [
+          {
+            "node": "Wait — G1 Approval Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — G1 Approval Gate": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Scenes with Narration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Scenes with Narration": {
+      "main": [
+        [
+          {
+            "node": "Code — Prepare VO Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Prepare VO Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Call WF-BT-002",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Call WF-BT-002": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Episode (vo_generation)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Episode (vo_generation)": {
+      "main": [
+        [
+          {
+            "node": "Wait — G1.5 Approval Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — G1.5 Approval Gate": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch Scenes Needing Visuals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Scenes Needing Visuals": {
+      "main": [
+        [
+          {
+            "node": "Code — Prepare Asset Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Prepare Asset Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Call WF-BT-003",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Call WF-BT-003": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Episode (asset_generation)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Episode (asset_generation)": {
+      "main": [
+        [
+          {
+            "node": "Wait — G2 Approval Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — G2 Approval Gate": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Fetch All Approved Scenes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch All Approved Scenes": {
+      "main": [
+        [
+          {
+            "node": "Code — Generate Timeline EDL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Generate Timeline EDL": {
+      "main": [
+        [
+          {
+            "node": "Code — Write EDL to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Write EDL to File": {
+      "main": [
+        [
+          {
+            "node": "Execute Command — timeline_to_ffmpeg.py",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command — timeline_to_ffmpeg.py": {
+      "main": [
+        [
+          {
+            "node": "Execute Command — Render",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command — Render": {
+      "main": [
+        [
+          {
+            "node": "Google Drive — Upload Final Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Upload Final Video": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Episode (assembly)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Episode (assembly)": {
+      "main": [
+        [
+          {
+            "node": "Wait — G4 Approval Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — G4 Approval Gate": {
+      "main": [
+        [
+          {
+            "node": "Code — Extract Shorts Timestamps",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Extract Shorts Timestamps": {
+      "main": [
+        [
+          {
+            "node": "Code — Write Timestamps JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Write Timestamps JSON": {
+      "main": [
+        [
+          {
+            "node": "Execute Command — extract_shorts.sh",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command — extract_shorts.sh": {
+      "main": [
+        [
+          {
+            "node": "Code — Prepare Shorts for Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Prepare Shorts for Upload": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Upload Shorts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches — Upload Shorts": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Episode (review)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Drive — Upload Short",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive — Upload Short": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Create Shorts Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Shorts Record": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Upload Shorts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Episode (review)": {
+      "main": [
+        [
+          {
+            "node": "Slack — Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Pipeline"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2026-02-12T00:00:00.000Z",
+  "versionId": "1"
+}

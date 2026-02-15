@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.40 | Similarity: 0.75 | Style: 0.25 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="x-soft">
+That's <emphasis level="strong">The Aftermath</emphasis>.<break time="200ms"/> Already lived through the collapse.<break time="600ms"/> That's why I see it comin' for everybody else.
+</prosody>
+</speak>

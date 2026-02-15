@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.44 | Similarity: 0.75 | Style: 0.32 | Speaker Boost: ON
+
+<speak>
+<prosody rate="86%" volume="x-soft">
+Three years like that.<break time="200ms"/> Couches.<break time="200ms"/> Cars.<break time="200ms"/> Places nobody should be closin' they eyes.<break time="600ms"/> But that laptop<break time="400ms"/> that changed somethin'.
+</prosody>
+</speak>

@@ -1,0 +1,484 @@
+{
+  "episode_id": "EP-001",
+  "title": "The Marathon Continues \u2014 Each One Teach One",
+  "voice_id": "rWyjfFeMZ6PxkHqD3wGC",
+  "model_id": "eleven_multilingual_v2",
+  "output_format": "mp3_44100_128",
+  "output_dir": "assets/EP-001/vo",
+  "summary": {
+    "total_scenes": 36,
+    "total_characters": 7704,
+    "estimated_credits_perfect": 7704,
+    "estimated_credits_30pct_retakes": 10015
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "output_file": "scene-001.mp3",
+      "text": "Mama lost the house in oh-three.",
+      "voice_settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.75,
+        "style": 0.28,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Near-whisper. A fact being placed on the table."
+    },
+    {
+      "scene_number": 2,
+      "output_file": "scene-002.mp3",
+      "text": "Wasn't no warnin'. Just a letter. Then a lock on the door. She went down south. Family in Louisiana said they had room. I stayed.",
+      "voice_settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.75,
+        "style": 0.30,
+        "speed": 0.86,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "'I stayed.' \u2014 Full stop. Isolation. Not a boast."
+    },
+    {
+      "scene_number": 3,
+      "output_file": "scene-003.mp3",
+      "text": "Seventeen. Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop.",
+      "voice_settings": {
+        "stability": 0.44,
+        "similarity_boost": 0.75,
+        "style": 0.30,
+        "speed": 0.86,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Specificity. He remembers the exact car."
+    },
+    {
+      "scene_number": 4,
+      "output_file": "scene-004.mp3",
+      "text": "Three years like that. Couches. Cars. Places nobody should be closin' they eyes. But that laptop... that changed somethin'.",
+      "voice_settings": {
+        "stability": 0.44,
+        "similarity_boost": 0.75,
+        "style": 0.32,
+        "speed": 0.86,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Listing facts, then a turn at 'that laptop...'"
+    },
+    {
+      "scene_number": 5,
+      "output_file": "scene-005.mp3",
+      "text": "Library WiFi. Community center when they'd let me in. Started readin' things I wasn't suppose to understan'. Tax codes. Lien laws. How credit actually work. How bail bonds make money. Who own what in which neighborhood, and why.",
+      "voice_settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.75,
+        "style": 0.34,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Acceleration. Technical terms stay standard English."
+    },
+    {
+      "scene_number": 6,
+      "output_file": "scene-006.mp3",
+      "text": "Same way some folk hear music \u2014 I started hearin' systems.",
+      "voice_settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.75,
+        "style": 0.35,
+        "speed": 0.86,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Quiet discovery. Let the em dash create the breath."
+    },
+    {
+      "scene_number": 7,
+      "output_file": "scene-007.mp3",
+      "text": "Tried to put folk on. Ran workshops outta barbershops. Explained how to fight an eviction. How to read a contract 'fore you sign your life away. Half them nights ended wrong. TTP drama. Somebody owed somebody. Guns where there shoulda been questions.",
+      "voice_settings": {
+        "stability": 0.44,
+        "similarity_boost": 0.75,
+        "style": 0.34,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Two beats: pride in teaching, then violence. No dramatic shift between them."
+    },
+    {
+      "scene_number": 8,
+      "output_file": "scene-008.mp3",
+      "text": "But the dog stayed. Through all that. He stayed.",
+      "voice_settings": {
+        "stability": 0.40,
+        "similarity_boost": 0.75,
+        "style": 0.35,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Tenderness. The only soft moment in Act 1."
+    },
+    {
+      "scene_number": 9,
+      "output_file": "scene-009.mp3",
+      "text": "Ain't get a record deal. Ain't get a scholarship. Ain't get saved by nobody.",
+      "voice_settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.75,
+        "style": 0.30,
+        "speed": 0.86,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Declarative. Three 'ain't get' repetitions \u2014 rhythmic, building."
+    },
+    {
+      "scene_number": 10,
+      "output_file": "scene-010.mp3",
+      "text": "I just learned how things work. And I ain't never forgot what it felt like not to know.",
+      "voice_settings": {
+        "stability": 0.40,
+        "similarity_boost": 0.75,
+        "style": 0.30,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Volume drops. Emotional thesis of the origin story."
+    },
+    {
+      "scene_number": 11,
+      "output_file": "scene-011.mp3",
+      "text": "That's The Aftermath. Already lived through the collapse. That's why I see it comin' for everybody else.",
+      "voice_settings": {
+        "stability": 0.40,
+        "similarity_boost": 0.75,
+        "style": 0.25,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Near whisper. Title drop. Barely audible on 'Already lived through the collapse.'"
+    },
+    {
+      "scene_number": 13,
+      "output_file": "scene-013.mp3",
+      "text": "Wasn't no colors on me. But I knew everybody who wore 'em. You grow up where I grew up, you don't choose a side \u2014 you just live in the crossfire. Half my block was blue. Other half was business. I stayed between the cracks.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.36,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Conversational. Explaining geography, not bragging."
+    },
+    {
+      "scene_number": 14,
+      "output_file": "scene-014.mp3",
+      "text": "Some folk sold. Some folk used. I just watched. The money was fast. The consequences was faster. I seen dudes go from Jordans to jumpsuits in the same summer. Ain't sayin' I was an angel. Just sayin' I was strategic.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.36,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Wry. Almost dismissive. Half-smile on 'Just sayin' I was strategic.'"
+    },
+    {
+      "scene_number": 15,
+      "output_file": "scene-015.mp3",
+      "text": "Check-cashin' on Fridays. Rent-to-own for a TV I couldn't afford. No bank account 'cause nobody told me I needed one. Every dollar I earned went right back into somebody else's pocket. I was grindin' and leakin' at the same time. That's what they don't show you \u2014 you can work hard and still be broke if nobody taught you how money actually move.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Teaching mode emerging. Self-aware. Final sentence slightly slower."
+    },
+    {
+      "scene_number": 16,
+      "output_file": "scene-016.mp3",
+      "text": "The system got plenty of folk who look like me. Decided early it wasn't gonna get me. Not 'cause I was better. 'Cause I was watchin'. And what I saw told me: get smart or get got.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.36,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Direct. 'Get smart or get got' \u2014 definitive, drops in pitch."
+    },
+    {
+      "scene_number": 18,
+      "output_file": "scene-018.mp3",
+      "text": "That stolen laptop became a library. A law school. A business plan. YGs think the goal is respect. Respect don't pay rent. What pay rent is knowin' how to make a dollar work while you sleep. I started learnin' that on a cracked screen in a parkin' lot.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Reflective. Laptop callback. 'YGs' \u2014 teaching voice, not judgment."
+    },
+    {
+      "scene_number": 19,
+      "output_file": "scene-019.mp3",
+      "text": "Got to a point where it wasn't about me no more. Family eatin' next month. Kids not repeatin' the same mistakes. Breakin' the cycle ain't a motivational poster \u2014 it's a Tuesday. It's choosin' the library over the corner every single day.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.40,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Warmest delivery so far. 'It's a Tuesday' \u2014 understated, real."
+    },
+    {
+      "scene_number": 20,
+      "output_file": "scene-020.mp3",
+      "text": "Started runnin' workshops again. This time smarter. Smaller rooms. Folks who actually wanted to learn. Showed 'em how to read a lease. How to file a dispute. How to stop payin' interest they didn't owe. Some folk listened. And them folk? They still out here. Building.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Confidence building. 'Building.' \u2014 full stop is the point."
+    },
+    {
+      "scene_number": 21,
+      "output_file": "scene-021.mp3",
+      "text": "Everybody left at some point. The homies. The family. The women. Everybody got a reason. But the dog never did. It's about who stayed when you had nothin'. That's loyalty you can't buy. Can't fake. Can't replace.",
+      "voice_settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.75,
+        "style": 0.40,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Tender but not sentimental. Dog is the emotional anchor."
+    },
+    {
+      "scene_number": 23,
+      "output_file": "scene-023.mp3",
+      "text": "I started understandin' somethin'. Ownership is everything. Own your mind, mind your own. Don't wait for somebody to hand you a lane \u2014 lay your own brick. Every day. One at a time. Eventually you look up and you got a wall. You got a foundation. You got somethin' they can't take.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.40,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Conviction. Building metaphor should accelerate slightly."
+    },
+    {
+      "scene_number": 25,
+      "output_file": "scene-025.mp3",
+      "text": "Spoke some things into the universe and they appeared. Not 'cause the universe owed me nothin'. 'Cause I put the work behind the words. Vision without labor is just a daydream. But labor without vision? That's a prison. You need both. And you need to believe you deserve what you're buildin'.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.42,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Almost reverent. Closest to spiritual. Still grounded."
+    },
+    {
+      "scene_number": 26,
+      "output_file": "scene-026.mp3",
+      "text": "We playin' the long game. Not the quick flip. Not the overnight success story. The kind where you build so solid, what you made outlives you. Generational. The kind of wealth they can't foreclose on, can't repo, can't delete with an algorithm.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.40,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Patient. Long-game energy. 'Generational' gets its own beat."
+    },
+    {
+      "scene_number": 28,
+      "output_file": "scene-028.mp3",
+      "text": "The highest thing you can do is inspire. Not motivate \u2014 that wear off. Inspire. Light somethin' inside somebody that don't go out when you leave the room. That's the currency that matters. That's the investment that compounds forever. Luck is just bein' prepared when the door opens. Stay ready. The door always comes.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.42,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Warmest, most openly inspirational. 'Inspire' appears twice \u2014 second slower."
+    },
+    {
+      "scene_number": 31,
+      "output_file": "scene-031.mp3",
+      "text": "There's a proverb. Goes back to when our people were property. When learnin' to read was a crime. South Carolina, 1740 \u2014 made it illegal to teach a slave to write. Virginia. Alabama. Same laws. Same fear. They knew if we could read, we could think. And if we could think, we'd never stay chained.",
+      "voice_settings": {
+        "stability": 0.52,
+        "similarity_boost": 0.75,
+        "style": 0.35,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Voice drops lower. Historical register. Dates like indictments."
+    },
+    {
+      "scene_number": 32,
+      "output_file": "scene-032.mp3",
+      "text": "So they passed knowledge in secret. Whispered lessons in the fields. Scratched letters in the dirt. Each person who learned turned around and taught another. One by one. In the dark. At risk of death. Each one teach one. That's how knowledge survived when the system tried to kill it.",
+      "voice_settings": {
+        "stability": 0.55,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Getting quieter. Near-whisper on 'In the dark. At risk of death.' Title spoken first time."
+    },
+    {
+      "scene_number": 34,
+      "output_file": "scene-034.mp3",
+      "text": "That's what this channel is. A barbershop workshop that never closes. Each one teach one \u2014 but louder. Not a course. Not a brand deal. Not a rented Lamborghini in the thumbnail sellin' you a dream I ain't even livin'. This is witness testimony. From somebody who slept in a Cutlass Supreme and read tax codes by flashlight. And decided the people who look like him deserve to know what he learned.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.40,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Energy returns. 'Witness testimony' is the mission statement."
+    },
+    {
+      "scene_number": 35,
+      "output_file": "scene-035.mp3",
+      "text": "This ain't fear. Ain't hype. Ain't motivation that wear off by Wednesday. This is what I know. Delivered how I know it. In the voice I grew up with. For the people nobody else is talkin' to.",
+      "voice_settings": {
+        "stability": 0.52,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.90,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Staccato. Four 'ain't' declarations. Direct and final."
+    },
+    {
+      "scene_number": 37,
+      "output_file": "scene-037.mp3",
+      "text": "So let's talk about what you can own. Startin' from nothin'. No trust fund. No connections. No degree required.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Energy shifts up. About to teach something practical."
+    },
+    {
+      "scene_number": 38,
+      "output_file": "scene-038.mp3",
+      "text": "Number one. A skill nobody can automate. I'm not talkin' about learning to code \u2014 everybody say that. And half of 'em gonna be out a job in two years 'cause the AI write better code than they do. I'm talkin' about somethin' you do with your hands or your mind that a machine can't replicate. Cuttin' hair. Readin' a room. Fixin' what's broke. Negotiatin' when the numbers don't add up. A barber in my neighborhood been cuttin' hair forty years. Ain't never worried about a robot takin' his chair. Know why? 'Cause people don't sit in his chair for the haircut. They sit there for the conversation. That's yours. Nobody can download it.",
+      "voice_settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Conversational. Barber story feels personal."
+    },
+    {
+      "scene_number": 39,
+      "output_file": "scene-039.mp3",
+      "text": "Number two. A side business. Don't gotta be big. A pressure washin' rig. A notary service. Somethin' that got your name on it. I know a dude who started sellin' plates outta his mama kitchen. Now he got two food trucks and a catering contract with the city. He own that.",
+      "voice_settings": {
+        "stability": 0.48,
+        "similarity_boost": 0.75,
+        "style": 0.38,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "'He own that.' \u2014 definitive."
+    },
+    {
+      "scene_number": 40,
+      "output_file": "scene-040.mp3",
+      "text": "Number three. Intellectual property. That sound complicated but it ain't. You write a course? That's IP. You record a tutorial? IP. You build a template other folk use? IP. The internet let you sell what you know to people you'll never meet. That's ownership without inventory.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.36,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "'That's IP' / 'IP' / 'IP' \u2014 accelerating rhythm."
+    },
+    {
+      "scene_number": 41,
+      "output_file": "scene-041.mp3",
+      "text": "Number four. A rental arrangement. I ain't talkin' about buyin' a buildin' \u2014 that come later. I'm talkin' about rentin' somethin' you control. A room. A parkin' spot. A storage unit you lease to somebody else. You don't need a mortgage. You need leverage.",
+      "voice_settings": {
+        "stability": 0.50,
+        "similarity_boost": 0.75,
+        "style": 0.36,
+        "speed": 0.92,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "'You need leverage.' \u2014 reframe."
+    },
+    {
+      "scene_number": 42,
+      "output_file": "scene-042.mp3",
+      "text": "Number five. Community equity. This the one folk sleep on. When your name mean somethin' on your block \u2014 when people trust you, send they kids to you, call you first when somethin' need fixin' \u2014 that's equity. Can't put it on a balance sheet. But it's the reason some folk can buy the plaza. The community back 'em 'cause they backed the community first.",
+      "voice_settings": {
+        "stability": 0.42,
+        "similarity_boost": 0.75,
+        "style": 0.45,
+        "speed": 0.88,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Heart of the list. AAVE density peaks. Warmest delivery."
+    },
+    {
+      "scene_number": 43,
+      "output_file": "scene-043.mp3",
+      "text": "Ninety-two percent of Black households hold zero business equity. Zero.",
+      "voice_settings": {
+        "stability": 0.60,
+        "similarity_boost": 0.75,
+        "style": 0.25,
+        "speed": 0.95,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Standard English. Clinical. Let the number land."
+    },
+    {
+      "scene_number": "46a",
+      "output_file": "scene-046a.mp3",
+      "text": "The hood already taught me what survival look like. What it feel like to stretch ten dollars into a week. What it mean to watch doors close and figure out which window to climb through. AI just made it urgent for everybody else.",
+      "voice_settings": {
+        "stability": 0.40,
+        "similarity_boost": 0.75,
+        "style": 0.45,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Building. Survival callback. Three 'What it...' build rhythm."
+    },
+    {
+      "scene_number": "46b",
+      "output_file": "scene-046b.mp3",
+      "text": "Each one teach one. The marathon continues. Pay attention.",
+      "voice_settings": {
+        "stability": 0.40,
+        "similarity_boost": 0.75,
+        "style": 0.45,
+        "speed": 0.85,
+        "use_speaker_boost": true
+      },
+      "delivery_notes": "Three final statements: reverent, certain, direct."
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "name": "BowTie Scene Prep",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-scene-prep",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "scene-prep-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "bowtie-scene-prep"
+    },
+    {
+      "parameters": {},
+      "id": "scene-prep-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 500]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://www.googleapis.com/drive/v3/files/1yfbkV_bvmcnPk486flWS1XqYk5d8eggt?alt=media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "id": "scene-prep-drive-download",
+      "name": "Fetch Pipeline JSON",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 400],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pipeline JSON arrives directly from HTTP Request (no binary parsing needed)\nconst pipeline = $input.first().json;\nconst scenes = pipeline.scenes || [];\nconst episodeId = pipeline.episode_id || 'EP-001';\n\n// ── Structured prompt slot constants (style-first, no negatives) ──\n// Medium FIRST — sets generation mode before scene content\nconst MEDIUM = '2D cel-shaded illustration, flat color fills, clean ink outlines, hand-drawn animation frame';\nconst TEXTURE = '35mm film grain 20% opacity, high contrast, shallow depth of field';\nconst FORMAT = '16:9 widescreen, cinematic composition';\n\n// ── Act-keyed palette & lighting (narrative arc drives emotional temperature) ──\nconst ACT_MOOD = {\n  ACT_1: {\n    palette: 'Dark steel #1E1E20 dominant, rust-orange #9A4C22 sodium vapor only. Desaturated, muted, cold',\n    lighting: 'Single rust-orange sodium vapor light source, Roger Deakins cinematography, dramatic hard shadows, heavy vignette'\n  },\n  ACT_2A: {\n    palette: 'Dark steel #1E1E20 base, rust-orange #9A4C22 sodium vapor, neon accent bleeds from signage. Desaturated with pops of neon color',\n    lighting: 'Sodium vapor primary light, neon sign color spill, harsh urban shadows, heavy vignette'\n  },\n  ACT_2B: {\n    palette: 'Dark steel #1E1E20 softened, warm golden #D4A843 accent bleeding in, amber tones, honey highlights. Warmth emerging from darkness',\n    lighting: 'Warm practical light from interior sources — barber lamps, kitchen windows, porch lights. Softer shadows, medium vignette'\n  },\n  ACT_2C: {\n    palette: 'Dark steel #1E1E20 receding, warm golden #D4A843 dominant, amber and honey tones, late afternoon warmth. Community and conviction',\n    lighting: 'Golden hour directional light, long warm shadows, medium vignette. Hopeful but grounded'\n  },\n  ACT_3A: {\n    palette: 'Dark steel #1E1E20 with warm amber #C4873B candlelight, sepia undertones, aged paper warmth. Reverent and historical',\n    lighting: 'Warm candlelight glow, soft amber directional light, gentle shadows, light vignette'\n  },\n  ACT_3B: {\n    palette: 'Dark steel #1E1E20 foundation, warm golden #D4A843 and dawn orange, bone white #E7E7E1 highlights expanding. Practical hope',\n    lighting: 'Early morning dawn light, warm and expanding, practical interior lighting, light vignette. Confident and clear'\n  },\n  UNKNOWN: {\n    palette: 'Dark steel #1E1E20, rust-orange #9A4C22 sodium vapor accent, desaturated earth tones',\n    lighting: 'Single rust-orange sodium vapor light source, dramatic hard shadows, heavy vignette'\n  }\n};\n\n// ── Strip existing style cues from pipeline visual_prompt (they now live in slots) ──\nfunction cleanScenePrompt(raw) {\n  return raw\n    .replace(/,?\\s*2D cel-shaded style/gi, '')\n    .replace(/,?\\s*film grain \\d+%/gi, '')\n    .replace(/,?\\s*heavy vignette/gi, '')\n    .replace(/,?\\s*16:9\\.?/gi, '')\n    .replace(/,?\\s*1920x1080\\.?/gi, '')\n    .replace(/,?\\s*Dark steel palette/gi, '')\n    .replace(/,?\\s*Rust[- ]orange and dark steel only/gi, '')\n    .replace(/,?\\s*cinematic\\.?/gi, '')\n    .replace(/\\.\\s*$/, '')\n    .trim();\n}\n\n// ── Build structured prompt: slots joined, no labels, no negatives ──\nfunction buildPrompt(scene, shotOverride, act) {\n  const mood = ACT_MOOD[act] || ACT_MOOD.UNKNOWN;\n  const cleanedScene = cleanScenePrompt(scene);\n  const parts = [MEDIUM, mood.palette, cleanedScene];\n  if (shotOverride) parts.push(shotOverride);\n  parts.push(mood.lighting, TEXTURE, FORMAT);\n  return parts.join('. ') + '.';\n}\n\n// ── Shot variants with continuity anchors ──\nconst SHOTS = {\n  a: null,\n  b: 'Same exact scene and location described above. Camera pushes in to extreme close-up of the most prominent foreground subject or object. Background elements remain consistent and visible in soft focus. Same lighting direction and color temperature',\n  c: 'Same exact scene and location described above. Camera pulls back to wide establishing shot revealing full environment. Every described element visible in frame. Same lighting direction and color temperature'\n};\n\n// ── Canonical character asset map (pose_variant → filename) ──\nconst CANONICAL_MAP = {\n  P1: 'tyroneStanding_armsBySide_transparent.png',\n  P2: 'tyrone_Standing_armsCrossed_transparent.png',\n  P3: 'tyroneFullBody_frontal_transparent.png',\n  P4: 'tyroneFullBody_quarterTurn_transparent.png',\n  P5: 'tyrone_flexing_biceps_transparent.png',\n  P6: 'tyrone_crouching_transparent.png'\n};\n\n// ── Act mapping for B-roll ──\nfunction normalizeAct(actStr) {\n  if (!actStr) return 'UNKNOWN';\n  if (actStr.includes('ACT 1')) return 'ACT_1';\n  if (actStr.includes('ACT 2A')) return 'ACT_2A';\n  if (actStr.includes('ACT 2B')) return 'ACT_2B';\n  if (actStr.includes('ACT 2C')) return 'ACT_2C';\n  if (actStr.includes('ACT 3A')) return 'ACT_3A';\n  if (actStr.includes('ACT 3B')) return 'ACT_3B';\n  return 'UNKNOWN';\n}\n\n// ── Variant builder ──\nfunction buildVariants(scene) {\n  const isChar = !!scene.pose_variant;\n  const base = scene.visual_prompt;\n  const sceneNum = String(scene.scene_number).padStart(3, '0');\n  const act = normalizeAct(scene.act);\n\n  // ── CHARACTER SCENES: generate 3 bg plate variants for compositing ──\n  if (isChar) {\n    const canonicalFile = CANONICAL_MAP[scene.pose_variant] || CANONICAL_MAP.P1;\n    const cleanedBg = cleanScenePrompt(base) + ' — environment and atmosphere only, empty scene, no characters, no animals';\n    const charShots = {\n      'bg-a': { desc: 'primary-bg-plate', shot: null },\n      'bg-b': { desc: 'close-up-bg-plate', shot: 'Same exact scene and location described above. Camera pushes in to tight framing suitable for close-up character overlay. Background details in soft focus. Same lighting direction and color temperature' },\n      'bg-c': { desc: 'wide-bg-plate', shot: 'Same exact scene and location described above. Camera pulls back to wide establishing shot. Leave compositional space in lower-third for character overlay — keep visual weight in upper two-thirds. Same lighting direction and color temperature' }\n    };\n    return Object.entries(charShots).map(([id, config]) => ({\n      episode_id: episodeId,\n      scene_number: scene.scene_number,\n      variant_id: id,\n      variant_desc: config.desc,\n      visual_prompt_full: buildPrompt(cleanedBg, config.shot, act),\n      target_filename: `scene-${sceneNum}-${id}.png`,\n      generation_status: 'ready_for_generation',\n      scene_type: 'environment',\n      act: act,\n      pose_variant: scene.pose_variant || null,\n      canonical_source: canonicalFile,\n      generation_attempts: 0\n    }));\n  }\n\n  // ── NON-CHARACTER SCENES: 3 variants (primary, close-up, wide) ──\n  return Object.entries(SHOTS).map(([id, shotOverride]) => ({\n    episode_id: episodeId,\n    scene_number: scene.scene_number,\n    variant_id: id,\n    variant_desc: id === 'a' ? 'primary' : id === 'b' ? 'close-up' : 'wide',\n    visual_prompt_full: buildPrompt(base, shotOverride, act),\n    target_filename: `scene-${sceneNum}-${id}.png`,\n    generation_status: 'ready_for_generation',\n    scene_type: scene.scene_type === 'narration_stills' ? 'environment' : 'detail',\n    act: act,\n    pose_variant: null,\n    canonical_source: null,\n    generation_attempts: 0\n  }));\n}\n\n// ── Per-Act B-Roll prompts ──\nconst BROLL_LIBRARY = {\n  ACT_1: {\n    mood: 'Dark, isolated, survival',\n    prompts: [\n      'City skyline at night, distant sodium vapor glow on low clouds, silhouetted buildings',\n      'Rain falling on cracked concrete, pooling in uneven surface, sodium vapor light reflecting in puddles',\n      'Chain-link fence shadow pattern cast by streetlight on empty sidewalk',\n      'Sodium vapor streetlight pool of orange on empty wet asphalt, darkness beyond',\n      'Empty urban street at 3am, single working streetlight, abandoned storefronts',\n      'Heavy padlock on rusted chain-link gate, peeling paint, night',\n      'Cracked concrete wall with water stains, harsh side-lighting',\n      'Distant emergency lights glow reflecting off wet street, no vehicles visible',\n      'Wet asphalt reflecting sodium vapor orange, shallow puddles, tire tracks',\n      'Lone streetlight illuminating empty intersection, deep shadows all around',\n      'Abandoned lot with weeds through concrete, chain-link perimeter, night',\n      'Rooftop edge silhouette against distant city glow, dark foreground'\n    ]\n  },\n  ACT_2A: {\n    mood: 'Wry, observational',\n    prompts: [\n      'Neon check-cashing sign reflected in wet window, urban night',\n      'Surveillance camera mounted on brick corner, harsh overhead light',\n      'Liquor store neon signs glowing through dirty glass, iron security bars',\n      'Sidewalk cracks in extreme close-up, weeds pushing through, sodium light',\n      'Empty bus stop bench under flickering fluorescent shelter light',\n      'Graffiti wall in deep shadow, single spray-painted tag illuminated by distant light',\n      'Bodega awning dripping rain, neon OPEN sign casting red glow on wet sidewalk'\n    ]\n  },\n  ACT_2B: {\n    mood: 'Warm, building',\n    prompts: [\n      'Warm kitchen light spilling through window onto dark exterior wall',\n      'Barbershop interior details — leather chair, mirror, warm incandescent light',\n      'Golden hour light on urban street, long shadows, warm tones breaking through steel',\n      'Concrete stoop with single potted plant, warm light from doorway behind',\n      'Dog-eared paperback book open on worn wooden surface, warm lamplight',\n      'Coffee steam rising in morning light, cup on windowsill, city visible outside',\n      'Warm light through curtain, casting soft pattern on interior wall'\n    ]\n  },\n  ACT_2C: {\n    mood: 'Conviction, community',\n    prompts: [\n      'Community garden plot with young plants, chain-link fence, early morning light',\n      'Railroad tracks converging to vanishing point, dawn light on horizon',\n      'Community bulletin board covered in flyers and notices, pin-light illumination',\n      'Sunrise over rooftops, warm orange breaking through dark steel sky',\n      'Open book pages in warm directional light, text blurred, moody',\n      'Single candle flame in dark room, warm glow on surrounding surfaces',\n      'Hands holding open book, close-up, warm light, no face visible'\n    ]\n  },\n  ACT_3A: {\n    mood: 'Historical, reverent',\n    prompts: [\n      'Old photograph edges curling, sepia tones, on dark wooden surface',\n      'Candlelight flickering on brick wall, warm shadows, reverent mood',\n      'Worn book pages extreme close-up, yellowed paper, printed text, soft focus',\n      'Old brick building facade, historical architecture, overcast light',\n      'Church steeple silhouette against dusk sky, muted colors',\n      'Archive texture — stacked old documents, leather binding, dust particles in light beam'\n    ]\n  },\n  ACT_3B: {\n    mood: 'Confident, practical',\n    prompts: [\n      'Laptop screen glow in dim room, code or course interface visible, modern',\n      'Food truck service window at night, warm interior light, menu board',\n      'Apartment windows grid pattern at night, various warm lights in each',\n      'Online course interface on screen, progress bar, clean modern design',\n      'Garden harvest — fresh vegetables in wooden crate, golden hour light',\n      'City panorama from elevated position, dawn, possibility and scale',\n      'Stack of books beside laptop, warm desk lamp, study setup',\n      'Hand writing in notebook, close-up, warm lamplight, no face'\n    ]\n  }\n};\n\n// ── Process all scenes ──\nconst allRecords = [];\nconst stats = { character: 0, environment: 0, detail: 0, remotion: 0, transition: 0, reuse: 0, broll: 0 };\n\nfor (const scene of scenes) {\n  if (!scene.visual_prompt || scene.visual_backend !== 'gemini') {\n    if (scene.visual_backend === 'remotion') stats.remotion++;\n    else if (!scene.visual_prompt && !scene.visual_backend) stats.transition++;\n    continue;\n  }\n\n  const variants = buildVariants(scene);\n  const type = variants[0].scene_type;\n  stats[type] = (stats[type] || 0) + variants.length;\n  allRecords.push(...variants);\n}\n\n// ── Add B-Roll records (same structured template) ──\nfor (const [act, data] of Object.entries(BROLL_LIBRARY)) {\n  data.prompts.forEach((prompt, idx) => {\n    const brollNum = String(idx + 1).padStart(2, '0');\n    const actLower = act.toLowerCase().replace('_', '');\n    allRecords.push({\n      episode_id: episodeId,\n      scene_number: null,\n      variant_id: brollNum,\n      variant_desc: `broll-${data.mood.toLowerCase().split(',')[0].trim()}`,\n      visual_prompt_full: buildPrompt(prompt, null, act),\n      target_filename: `broll-${actLower}-${brollNum}.png`,\n      generation_status: 'ready_for_generation',\n      scene_type: 'broll',\n      act: act,\n      pose_variant: null,\n      generation_attempts: 0\n    });\n    stats.broll++;\n  });\n}\n\nreturn allRecords.map(record => ({ json: record }));"
+      },
+      "id": "scene-prep-expand-variants",
+      "name": "Expand Variants",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 400]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "scene-prep-split",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [880, 400]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHsBzmt8Skvq2jX",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "episode_id": "={{ $json.episode_id }}",
+            "scene_number": "={{ $json.scene_number }}",
+            "variant_id": "={{ $json.variant_id }}",
+            "variant_desc": "={{ $json.variant_desc }}",
+            "visual_prompt_full": "={{ $json.visual_prompt_full }}",
+            "target_filename": "={{ $json.target_filename }}",
+            "generation_status": "={{ $json.generation_status }}",
+            "scene_type": "={{ $json.scene_type }}",
+            "act": "={{ $json.act }}",
+            "pose_variant": "={{ $json.pose_variant }}",
+            "canonical_source": "={{ $json.canonical_source }}",
+            "generation_attempts": "={{ $json.generation_attempts }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "scene-prep-airtable-upsert",
+      "name": "Airtable — Create Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1100, 500],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 0.2,
+        "unit": "seconds"
+      },
+      "id": "scene-prep-wait",
+      "name": "Wait — Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1320, 500]
+    },
+    {
+      "parameters": {},
+      "id": "scene-prep-loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1540, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const allItems = $('Airtable — Create Record').all();\nconst episodeId = allItems[0]?.json?.episode_id || 'unknown';\n\n// Count by scene_type\nconst counts = {};\nfor (const item of allItems) {\n  const type = item.json.scene_type || item.json.fields?.scene_type || 'unknown';\n  counts[type] = (counts[type] || 0) + 1;\n}\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_records_created: allItems.length,\n  counts_by_type: counts,\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "scene-prep-summary",
+      "name": "Build Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "scene-prep-respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1320, 200]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Pipeline JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Pipeline JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Pipeline JSON": {
+      "main": [
+        [
+          {
+            "node": "Expand Variants",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expand Variants": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Build Summary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Create Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Record": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Summary": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "BowTie Bullies"
+    },
+    {
+      "name": "Image Generation"
+    },
+    {
+      "name": "Scene Prep"
+    },
+    {
+      "name": "Video Pipeline"
+    }
+  ],
+  "pinData": {}
+}

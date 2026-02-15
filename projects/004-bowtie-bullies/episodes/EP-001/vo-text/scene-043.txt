@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.60 | Similarity: 0.75 | Style: 0.25 | Speaker Boost: ON
+
+<speak>
+<prosody rate="95%" volume="medium">
+Ninety-two percent of Black households hold <emphasis level="strong">zero</emphasis> business equity.<break time="600ms"/> <emphasis level="strong">Zero.</emphasis>
+</prosody>
+</speak>

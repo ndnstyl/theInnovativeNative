@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.36 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+The system got plenty of folk who look like me.<break time="200ms"/> Decided early it wasn't gonna get me.<break time="200ms"/> Not 'cause I was better.<break time="200ms"/> 'Cause I was watchin'.<break time="200ms"/> And what I saw told me:
+</prosody>
+<break time="400ms"/>
+<prosody rate="86%" volume="medium" pitch="-3%">
+<emphasis level="strong">get smart or get got.</emphasis>
+</prosody>
+</speak>
