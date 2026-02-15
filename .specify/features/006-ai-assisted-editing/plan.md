@@ -191,7 +191,7 @@ Premiere Pro XML (`<xmeml version="4">`) structure:
             <out>{clip_frames}</out>
             <file id="file-v-001">
               <name>scene-001.png</name>
-              <pathurl>file:///path/to/01-Video/Stills/scene-001.png</pathurl>
+              <pathurl>file://localhost/path/to/01-Video/Stills/scene-001.png</pathurl>
               <media>
                 <video>
                   <samplecharacteristics>
@@ -213,16 +213,20 @@ Premiere Pro XML (`<xmeml version="4">`) structure:
             <start>{start_frame}</start>
             <end>{end_frame}</end>
             <file id="file-vo-001">
-              <pathurl>file:///path/to/02-VO/scene-001.wav</pathurl>
+              <pathurl>file://localhost/path/to/02-VO/scene-001.wav</pathurl>
             </file>
             <filter>
               <effect>
-                <name>Audio Levels</name>
-                <effectid>audiolevels</effectid>
-                <parameter>
-                  <parameterid>level</parameterid>
-                  <name>Level</name>
-                  <value>{linear_gain}</value>
+                <name>Gain</name>
+                <effectid>{61756678, 4761696e, 4b657947}</effectid>
+                <effecttype>filter</effecttype>
+                <mediatype>audio</mediatype>
+                <parameter authoringApp="PremierePro">
+                  <parameterid>Gain(dB)</parameterid>
+                  <name>Gain(dB)</name>
+                  <valuemin>-96</valuemin>
+                  <valuemax>96</valuemax>
+                  <value>{dB_value}</value>
                 </parameter>
               </effect>
             </filter>
@@ -247,10 +251,11 @@ Premiere Pro XML (`<xmeml version="4">`) structure:
 - `end_frame = int((clip_out + INTRO_DURATION) * fps)`
 - Clip duration frames = `end_frame - start_frame`
 
-**Volume encoding**:
-- Each audio clip gets a `<filter>` with `<effect>` containing `<parameter>` for level
-- Linear gain = `10 ** (level_db / 20)` (same as FFMPEG pipeline)
-- Example: `-13 dB` → `10^(-13/20)` = `0.2239`
+**Volume encoding** (verified from Premiere Pro 2026 reference XML):
+- Each audio clip with non-zero gain gets a `<filter>` block with Premiere-native effectid
+- `<effectid>{61756678, 4761696e, 4b657947}</effectid>` and `<parameterid>Gain(dB)</parameterid>`
+- Value is raw dB (e.g. `<value>-6</value>`), NOT linear
+- Clips at 0 dB (default gain): omit `<filter>` block entirely
 
 **Ken Burns hint**:
 - XML cannot encode Motion keyframes natively

@@ -204,9 +204,9 @@ As a power user, I want to send my sequence directly to Premiere Pro via Adobe A
 - **FR-002**: XML MUST map tracks as: V1 (video), A1 (voiceover), A2 (SFX beds), A3 (SFX events), A4 (music), A5 (empty/reserved).
 - **FR-003**: XML MUST use frame-based timecodes (`start_frame = int(seconds * fps)`).
 - **FR-004**: XML MUST shift negative intro times so intro starts at frame 0; all subsequent clips shift by `INTRO_DURATION * fps` frames.
-- **FR-005**: XML MUST encode clip volume as static gain: `<parameter>` with linear value = `10^(dB/20)`.
+- **FR-005**: XML MUST encode clip volume as Premiere-native gain: `<effectid>{61756678, 4761696e, 4b657947}</effectid>` with `<parameterid>Gain(dB)</parameterid>` and raw dB `<value>`. Omit `<filter>` block entirely for clips at 0 dB (default gain).
 - **FR-006**: Ken Burns clips MUST include zoom hint in clip name: `"scene-001 [KB→108%]"`.
-- **FR-007**: XML `<pathurl>` MUST use `file://` URI scheme with absolute paths from `--base-path`.
+- **FR-007**: XML `<pathurl>` MUST use `file://localhost/` URI scheme with absolute paths from `--base-path`.
 - **FR-008**: `prep_premiere_assets.py` MUST create the 6-folder bin structure with physical copies (default) or symlinks (`--symlink`).
 - **FR-009**: `prep_premiere_assets.py` MUST generate `manifest.txt` listing all files with track assignments.
 - **FR-010**: `hald_to_cube.py` MUST convert a graded HALD identity image to a 33x33x33 .cube LUT file.

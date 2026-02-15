@@ -87,7 +87,7 @@
   - **Timecode shift**: `INTRO_DURATION = 3.5` seconds. All clip `in`/`out` shifted by `+INTRO_DURATION` so intro starts at frame 0
   - **Track mapping**: V1 (video), A1 (voiceover), A2 (SFX beds), A3 (SFX events), A4 (music), A5 (empty/reserved)
   - **Audio duration inference**: For each audio track, compute `clip_end = next_clip.in` (or `computed_duration_seconds` for last clip). Log WARNING if inferred duration < 0.5s.
-  - **Volume**: Static clip gain via `<filter><effect><parameter>` — linear = `10^(dB/20)`
+  - **Volume**: Premiere-native gain via `<effectid>{61756678, 4761696e, 4b657947}</effectid>`, `<parameterid>Gain(dB)</parameterid>`, raw dB `<value>`. Omit `<filter>` block at 0 dB.
   - **Ken Burns labels**: `f"scene-{sid} [KB→{int(zoom_end*100)}%]"` for clips with `zoom_end > 1.0`
   - **File paths**: `<pathurl>file:///{base_path}/{subfolder}/{filename}</pathurl>` using `--base-path` arg
   - **Sequence metadata**: `<name>`, `<duration>`, `<rate>` from timeline JSON
