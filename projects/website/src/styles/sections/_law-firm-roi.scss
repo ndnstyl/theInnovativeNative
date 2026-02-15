@@ -1,0 +1,891 @@
+/* ====
+ --------- Law Firm ROI Calculator Styles ---------
+ ==== */
+
+$roi-accent: var(--primary-color);
+$roi-bg-dark: var(--tertiary-color);
+$roi-bg-darker: var(--quaternary-color);
+$roi-text-muted: var(--secondary-color);
+$roi-border: rgba(255, 255, 255, 0.1);
+
+// ===================================
+// Hero Section
+// ===================================
+.roi-hero {
+  position: relative;
+  z-index: 1;
+  padding-top: 180px;
+  padding-bottom: 100px;
+  background: linear-gradient(180deg, var(--quaternary-color) 0%, var(--black) 100%);
+  overflow: hidden;
+
+  .sub-title {
+    color: $roi-accent;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    i { margin-left: 8px; }
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0;
+  }
+
+  &__subtitle {
+    font-size: 1.25rem;
+    color: $roi-text-muted;
+    margin-top: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    strong { color: var(--white); }
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $roi-border;
+    border-radius: 8px;
+    flex-wrap: wrap;
+
+    .stat-item {
+      text-align: center;
+      .stat-value {
+        display: block;
+        font-size: 2rem;
+        font-weight: 800;
+        color: $roi-accent;
+      }
+      .stat-label {
+        display: block;
+        font-size: 13px;
+        color: $roi-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 4px;
+      }
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: $roi-border;
+    }
+  }
+
+  &__ctas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    .btn {
+      min-width: 200px;
+      i { margin-left: 8px; }
+    }
+  }
+
+  &__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.08) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .container { position: relative; z-index: 2; }
+}
+
+// ===================================
+// Problem Section
+// ===================================
+.roi-problem {
+  position: relative;
+  z-index: 1;
+  background-color: $roi-bg-dark;
+
+  .title { font-size: clamp(2rem, 4vw, 3rem); }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: $roi-text-muted;
+    margin-top: 16px;
+  }
+
+  &__card {
+    background: var(--quaternary-color);
+    border: 1px solid $roi-border;
+    border-radius: 8px;
+    padding: 32px;
+    height: 100%;
+    transition: var(--transition);
+
+    &:hover {
+      border-color: rgba(0, 255, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    &-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      i { font-size: 24px; color: $roi-accent; }
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    &-stat {
+      font-size: 13px;
+      color: $roi-accent;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: $roi-text-muted;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
+
+// ===================================
+// Practice Area Selector
+// ===================================
+.roi-practice-selector {
+  position: relative;
+  z-index: 1;
+  background-color: var(--black);
+
+  .title { font-size: clamp(2rem, 4vw, 3rem); }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: $roi-text-muted;
+    margin-top: 16px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: $roi-bg-dark;
+    border: 2px solid $roi-border;
+    border-radius: 12px;
+    padding: 40px 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    width: 100%;
+
+    &:hover {
+      border-color: rgba(0, 255, 255, 0.4);
+      transform: translateY(-4px);
+    }
+
+    &--active {
+      border-color: $roi-accent;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, $roi-bg-dark 100%);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+    }
+
+    &-icon {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      i { font-size: 28px; color: $roi-accent; }
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      color: $roi-text-muted;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+
+  &__check {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $roi-accent;
+    border-radius: 50%;
+    i { font-size: 14px; color: var(--black); }
+  }
+}
+
+// ===================================
+// Calculator Wizard
+// ===================================
+.roi-wizard {
+  position: relative;
+  z-index: 1;
+  background-color: $roi-bg-dark;
+
+  &__card {
+    background: var(--quaternary-color);
+    border: 1px solid $roi-border;
+    border-radius: 12px;
+    padding: 40px;
+
+    @media (max-width: 768px) { padding: 24px 16px; }
+  }
+
+  &__progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    gap: 8px;
+  }
+
+  &__step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex: 1;
+    padding: 0;
+
+    &--active .roi-wizard__step-num {
+      background: $roi-accent;
+      color: var(--black);
+      border-color: $roi-accent;
+    }
+
+    &--done .roi-wizard__step-num {
+      background: rgba(0, 255, 255, 0.2);
+      color: $roi-accent;
+      border-color: rgba(0, 255, 255, 0.4);
+    }
+  }
+
+  &__step-num {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid $roi-border;
+    font-size: 14px;
+    font-weight: 700;
+    color: $roi-text-muted;
+    transition: var(--transition);
+  }
+
+  &__step-label {
+    font-size: 12px;
+    color: $roi-text-muted;
+    text-align: center;
+    @media (max-width: 576px) { display: none; }
+  }
+
+  &__step-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  &__step-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 10px;
+    i { font-size: 20px; color: $roi-accent; }
+  }
+
+  &__step-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin: 0;
+  }
+
+  &__step-subtitle {
+    font-size: 14px;
+    color: $roi-text-muted;
+    margin: 4px 0 0;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+
+    .btn {
+      min-width: 140px;
+      i { margin: 0 6px; }
+    }
+  }
+
+  &__mobile-preview {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--quaternary-color);
+    border-top: 1px solid rgba(0, 255, 255, 0.3);
+    font-size: 14px;
+    color: $roi-text-muted;
+  }
+
+  &__mobile-total {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $roi-accent;
+  }
+}
+
+// ===================================
+// Input Field
+// ===================================
+.roi-input-field {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  &__tooltip-btn {
+    background: none;
+    border: none;
+    color: $roi-text-muted;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    transition: var(--transition);
+    &:hover { color: $roi-accent; }
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--black);
+    border: 1px solid $roi-accent;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+    width: 300px;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  }
+
+  &__input-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $roi-border;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+
+    &:focus-within {
+      border-color: $roi-accent;
+      box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.15);
+    }
+  }
+
+  &__prefix,
+  &__suffix {
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $roi-accent;
+    background: rgba(0, 255, 255, 0.05);
+  }
+
+  &__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    color: var(--white);
+    font-family: var(--inter);
+    outline: none;
+    width: 100%;
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &__pro-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 10px 14px;
+    background: rgba(0, 255, 255, 0.04);
+    border-radius: 6px;
+    font-size: 13px;
+    color: $roi-text-muted;
+    line-height: 1.5;
+
+    i {
+      color: #ffc107;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// ===================================
+// Live Preview Sidebar
+// ===================================
+.roi-live-preview {
+  position: sticky;
+  top: 100px;
+  background: var(--quaternary-color);
+  border: 1px solid $roi-border;
+  border-radius: 12px;
+  padding: 28px;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $roi-border;
+  }
+
+  &__label {
+    display: block;
+    font-size: 12px;
+    color: $roi-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  &__total {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $roi-accent;
+    line-height: 1;
+  }
+
+  &__per-year {
+    font-size: 14px;
+    font-weight: 400;
+    color: $roi-text-muted;
+  }
+
+  &__phases {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  &__phase-name {
+    font-size: 13px;
+    color: $roi-text-muted;
+  }
+
+  &__phase-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  &__bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    background: $roi-accent;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+    min-width: 2px;
+  }
+
+  &__monthly {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid $roi-border;
+    font-size: 14px;
+    color: $roi-text-muted;
+
+    span:last-child {
+      font-weight: 600;
+      color: var(--white);
+    }
+  }
+}
+
+// ===================================
+// Results Dashboard
+// ===================================
+.roi-results {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(180deg, $roi-bg-dark 0%, var(--black) 50%, $roi-bg-dark 100%);
+
+  &__badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $roi-accent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+
+  &__total {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+    color: $roi-accent;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  &__per-year {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $roi-text-muted;
+  }
+
+  &__monthly {
+    font-size: 1.125rem;
+    color: $roi-text-muted;
+    strong { color: var(--white); }
+  }
+
+  // Phase Cards
+  &__phase-card {
+    background: var(--quaternary-color);
+    border: 1px solid $roi-border;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    height: 100%;
+    transition: var(--transition);
+    &:hover { border-color: rgba(0, 255, 255, 0.3); }
+  }
+
+  &__phase-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  &__phase-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: $roi-accent;
+    margin-bottom: 16px;
+  }
+
+  &__phase-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  &__phase-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, $roi-accent, rgba(0, 255, 255, 0.5));
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  &__phase-label {
+    font-size: 12px;
+    color: $roi-text-muted;
+    margin: 0;
+  }
+
+  // Insights
+  &__insights {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, rgba(0, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 32px;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 20px;
+      i { color: $roi-accent; margin-right: 10px; }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    li {
+      font-size: 15px;
+      color: var(--white);
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      &::before {
+        content: "\2192";
+        color: $roi-accent;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  // Scenarios
+  &__scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__scenario {
+    background: var(--quaternary-color);
+    border: 1px solid $roi-border;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+
+    &:hover { border-color: rgba(0, 255, 255, 0.3); }
+
+    &--recommended {
+      border-color: $roi-accent;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, var(--quaternary-color) 100%);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+  }
+
+  &__scenario-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 16px;
+    background: $roi-accent;
+    color: var(--black);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 20px;
+  }
+
+  &__scenario-cost {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $roi-accent;
+    margin-bottom: 20px;
+  }
+
+  &__scenario-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+
+    > div { text-align: center; }
+  }
+
+  &__scenario-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--white);
+  }
+
+  &__scenario-label {
+    display: block;
+    font-size: 11px;
+    color: $roi-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  // CTA
+  &__cta {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, rgba(0, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 48px;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: $roi-text-muted;
+      margin-bottom: 24px;
+      strong { color: var(--white); }
+    }
+  }
+
+  &__cta-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+
+    .btn {
+      min-width: 200px;
+      i { margin-left: 8px; }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      .btn { width: 100%; }
+    }
+  }
+
+  &__trust-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    span {
+      font-size: 14px;
+      color: $roi-text-muted;
+      i { color: $roi-accent; margin-right: 6px; }
+    }
+  }
+}
+
+// ===================================
+// Responsive
+// ===================================
+@media (max-width: 991px) {
+  .roi-hero {
+    padding-top: 140px;
+    padding-bottom: 80px;
+
+    &__stats {
+      gap: 24px;
+      .stat-divider { display: none; }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .roi-hero__ctas {
+    flex-direction: column;
+    .btn { width: 100%; }
+  }
+
+  .roi-wizard__card { padding: 20px 16px; }
+  .roi-wizard__progress { gap: 4px; }
+  .roi-wizard__step-num { width: 32px; height: 32px; font-size: 12px; }
+}

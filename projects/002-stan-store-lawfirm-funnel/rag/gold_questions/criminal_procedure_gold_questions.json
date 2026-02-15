@@ -1,0 +1,797 @@
+{
+  "practice_area": "criminal_procedure",
+  "version": "1.0",
+  "created": "2026-02-06",
+  "questions": [
+    {
+      "id": "cp-001",
+      "category": "test_rule",
+      "query": "What is the test for a valid Terry stop under the Fourth Amendment?",
+      "must_cite": [
+        "Terry v. Ohio, 392 U.S. 1 (1968)"
+      ],
+      "must_include_elements": [
+        "reasonable articulable suspicion",
+        "criminal activity afoot",
+        "brief investigatory stop",
+        "limited scope"
+      ],
+      "must_not_say": [
+        "probable cause required"
+      ],
+      "notes": "Terry established reasonable suspicion standard"
+    },
+    {
+      "id": "cp-002",
+      "category": "test_rule",
+      "query": "What are the Miranda warnings required before custodial interrogation?",
+      "must_cite": [
+        "Miranda v. Arizona, 384 U.S. 436 (1966)"
+      ],
+      "must_include_elements": [
+        "right to remain silent",
+        "anything said can be used against you",
+        "right to attorney",
+        "attorney appointed if cannot afford"
+      ],
+      "must_not_say": [],
+      "notes": "Four core Miranda warnings"
+    },
+    {
+      "id": "cp-003",
+      "category": "test_rule",
+      "query": "What is the test for determining whether someone is in custody for Miranda purposes?",
+      "must_cite": [
+        "Thompson v. Keohane, 516 U.S. 99 (1995)",
+        "J.D.B. v. North Carolina, 564 U.S. 261 (2011)"
+      ],
+      "must_include_elements": [
+        "objective test",
+        "reasonable person",
+        "free to leave",
+        "totality of circumstances"
+      ],
+      "must_not_say": [],
+      "notes": "Objective test, age may be considered"
+    },
+    {
+      "id": "cp-004",
+      "category": "test_rule",
+      "query": "What is the automobile exception to the warrant requirement?",
+      "must_cite": [
+        "Carroll v. United States, 267 U.S. 132 (1925)",
+        "California v. Carney, 471 U.S. 386 (1985)"
+      ],
+      "must_include_elements": [
+        "probable cause",
+        "readily mobile vehicle",
+        "reduced expectation of privacy"
+      ],
+      "must_not_say": [
+        "warrant required"
+      ],
+      "notes": "Vehicle may be searched without warrant if PC exists"
+    },
+    {
+      "id": "cp-005",
+      "category": "test_rule",
+      "query": "What is the exclusionary rule?",
+      "must_cite": [
+        "Mapp v. Ohio, 367 U.S. 643 (1961)",
+        "Weeks v. United States, 232 U.S. 383 (1914)"
+      ],
+      "must_include_elements": [
+        "illegally obtained evidence excluded",
+        "fruit of the poisonous tree",
+        "deterrent purpose"
+      ],
+      "must_not_say": [],
+      "notes": "Applied to states through Mapp"
+    },
+    {
+      "id": "cp-006",
+      "category": "test_rule",
+      "query": "What is the good faith exception to the exclusionary rule?",
+      "must_cite": [
+        "United States v. Leon, 468 U.S. 897 (1984)"
+      ],
+      "must_include_elements": [
+        "objectively reasonable reliance",
+        "facially valid warrant",
+        "good faith of officers"
+      ],
+      "must_not_say": [],
+      "notes": "Leon exception for warrant defects"
+    },
+    {
+      "id": "cp-007",
+      "category": "test_rule",
+      "query": "What is the test for a valid consent search?",
+      "must_cite": [
+        "Schneckloth v. Bustamonte, 412 U.S. 218 (1973)"
+      ],
+      "must_include_elements": [
+        "voluntary consent",
+        "totality of circumstances",
+        "knowledge of right to refuse not required"
+      ],
+      "must_not_say": [],
+      "notes": "Voluntariness is the key inquiry"
+    },
+    {
+      "id": "cp-008",
+      "category": "test_rule",
+      "query": "What is the plain view doctrine?",
+      "must_cite": [
+        "Horton v. California, 496 U.S. 128 (1990)"
+      ],
+      "must_include_elements": [
+        "lawful presence",
+        "immediately apparent contraband",
+        "lawful access"
+      ],
+      "must_not_say": [
+        "inadvertent discovery required"
+      ],
+      "notes": "Inadvertence no longer required after Horton"
+    },
+    {
+      "id": "cp-009",
+      "category": "test_rule",
+      "query": "What is the test for the search incident to arrest exception?",
+      "must_cite": [
+        "Chimel v. California, 395 U.S. 752 (1969)",
+        "Arizona v. Gant, 556 U.S. 332 (2009)"
+      ],
+      "must_include_elements": [
+        "lawful arrest",
+        "contemporaneous with arrest",
+        "within arrestee's reach",
+        "Gant vehicle limitations"
+      ],
+      "must_not_say": [],
+      "notes": "Gant limited vehicle searches incident to arrest"
+    },
+    {
+      "id": "cp-010",
+      "category": "test_rule",
+      "query": "When does the Sixth Amendment right to counsel attach?",
+      "must_cite": [
+        "Rothgery v. Gillespie County, 554 U.S. 191 (2008)",
+        "Brewer v. Williams, 430 U.S. 387 (1977)"
+      ],
+      "must_include_elements": [
+        "initiation of adversarial proceedings",
+        "first appearance before magistrate",
+        "offense specific"
+      ],
+      "must_not_say": [],
+      "notes": "Attaches at formal charging or first appearance"
+    },
+    {
+      "id": "cp-011",
+      "category": "test_rule",
+      "query": "What is the test for ineffective assistance of counsel?",
+      "must_cite": [
+        "Strickland v. Washington, 466 U.S. 668 (1984)"
+      ],
+      "must_include_elements": [
+        "deficient performance",
+        "fell below objective standard of reasonableness",
+        "prejudice",
+        "reasonable probability of different outcome"
+      ],
+      "must_not_say": [],
+      "notes": "Two-prong Strickland test"
+    },
+    {
+      "id": "cp-012",
+      "category": "test_rule",
+      "query": "What is the standard for determining probable cause?",
+      "must_cite": [
+        "Illinois v. Gates, 462 U.S. 213 (1983)"
+      ],
+      "must_include_elements": [
+        "totality of circumstances",
+        "fair probability",
+        "practical common sense"
+      ],
+      "must_not_say": [
+        "Aguilar-Spinelli two-prong test"
+      ],
+      "notes": "Gates replaced rigid two-prong test"
+    },
+    {
+      "id": "cp-013",
+      "category": "test_rule",
+      "query": "What is the hot pursuit exception to the warrant requirement?",
+      "must_cite": [
+        "Warden v. Hayden, 387 U.S. 294 (1967)",
+        "United States v. Santana, 427 U.S. 38 (1976)"
+      ],
+      "must_include_elements": [
+        "immediate pursuit of fleeing suspect",
+        "exigent circumstances",
+        "serious offense"
+      ],
+      "must_not_say": [],
+      "notes": "Hot pursuit creates exigency"
+    },
+    {
+      "id": "cp-014",
+      "category": "standard_review",
+      "query": "What is the standard for granting a motion to suppress?",
+      "must_cite": [
+        "Franks v. Delaware, 438 U.S. 154 (1978)"
+      ],
+      "must_include_elements": [
+        "burden on defendant",
+        "substantial preliminary showing",
+        "hearing required"
+      ],
+      "must_not_say": [],
+      "notes": "Franks hearing for warrant challenges"
+    },
+    {
+      "id": "cp-015",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing a denial of habeas corpus?",
+      "must_cite": [
+        "28 U.S.C. § 2254(d)",
+        "Williams v. Taylor, 529 U.S. 362 (2000)"
+      ],
+      "must_include_elements": [
+        "contrary to clearly established law",
+        "unreasonable application",
+        "AEDPA deference"
+      ],
+      "must_not_say": [],
+      "notes": "AEDPA sets deferential standard"
+    },
+    {
+      "id": "cp-016",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing sufficiency of the evidence?",
+      "must_cite": [
+        "Jackson v. Virginia, 443 U.S. 307 (1979)"
+      ],
+      "must_include_elements": [
+        "rational trier of fact",
+        "beyond reasonable doubt",
+        "view evidence in light most favorable"
+      ],
+      "must_not_say": [],
+      "notes": "Jackson standard for sufficiency review"
+    },
+    {
+      "id": "cp-017",
+      "category": "edge_case",
+      "query": "Can police search a cell phone incident to arrest without a warrant?",
+      "must_cite": [
+        "Riley v. California, 573 U.S. 373 (2014)"
+      ],
+      "must_include_elements": [
+        "warrant required for cell phone",
+        "vast storage capacity",
+        "privacy interests"
+      ],
+      "must_not_say": [
+        "search incident exception applies"
+      ],
+      "notes": "Riley requires warrant for cell phones"
+    },
+    {
+      "id": "cp-018",
+      "category": "edge_case",
+      "query": "What is the attenuation doctrine?",
+      "must_cite": [
+        "Wong Sun v. United States, 371 U.S. 471 (1963)",
+        "Utah v. Strieff, 579 U.S. 232 (2016)"
+      ],
+      "must_include_elements": [
+        "causal chain broken",
+        "intervening circumstances",
+        "temporal proximity",
+        "flagrancy of violation"
+      ],
+      "must_not_say": [],
+      "notes": "Strieff applied attenuation to warrant discovery"
+    },
+    {
+      "id": "cp-019",
+      "category": "edge_case",
+      "query": "What is the inevitable discovery exception?",
+      "must_cite": [
+        "Nix v. Williams, 467 U.S. 431 (1984)"
+      ],
+      "must_include_elements": [
+        "would have been discovered lawfully",
+        "preponderance of evidence",
+        "independent source"
+      ],
+      "must_not_say": [],
+      "notes": "Inevitable discovery saves tainted evidence"
+    },
+    {
+      "id": "cp-020",
+      "category": "test_rule",
+      "query": "What is the standard for a traffic stop?",
+      "must_cite": [
+        "Whren v. United States, 517 U.S. 806 (1996)"
+      ],
+      "must_include_elements": [
+        "objective justification",
+        "actual traffic violation",
+        "subjective intent irrelevant"
+      ],
+      "must_not_say": [],
+      "notes": "Pretextual stops permitted under Whren"
+    },
+    {
+      "id": "cp-021",
+      "category": "test_rule",
+      "query": "What are the requirements for a valid waiver of Miranda rights?",
+      "must_cite": [
+        "Berghuis v. Thompkins, 560 U.S. 370 (2010)"
+      ],
+      "must_include_elements": [
+        "knowing and voluntary",
+        "implied waiver possible",
+        "uncoerced statement after warnings"
+      ],
+      "must_not_say": [],
+      "notes": "Thompkins allowed implied waiver"
+    },
+    {
+      "id": "cp-022",
+      "category": "test_rule",
+      "query": "What is the public safety exception to Miranda?",
+      "must_cite": [
+        "New York v. Quarles, 467 U.S. 649 (1984)"
+      ],
+      "must_include_elements": [
+        "immediate threat to public safety",
+        "questions limited to neutralize threat",
+        "objectively reasonable"
+      ],
+      "must_not_say": [],
+      "notes": "Quarles exception for urgent safety questions"
+    },
+    {
+      "id": "cp-023",
+      "category": "test_rule",
+      "query": "What is the exigent circumstances exception?",
+      "must_cite": [
+        "Kentucky v. King, 563 U.S. 452 (2011)",
+        "Missouri v. McNeely, 569 U.S. 141 (2013)"
+      ],
+      "must_include_elements": [
+        "urgent need for action",
+        "destruction of evidence",
+        "hot pursuit",
+        "imminent danger"
+      ],
+      "must_not_say": [],
+      "notes": "Police cannot create exigency impermissibly"
+    },
+    {
+      "id": "cp-024",
+      "category": "test_rule",
+      "query": "What is the scope of a protective sweep?",
+      "must_cite": [
+        "Maryland v. Buie, 494 U.S. 325 (1990)"
+      ],
+      "must_include_elements": [
+        "incident to arrest",
+        "reasonable suspicion of danger",
+        "limited cursory inspection",
+        "areas where person could be hiding"
+      ],
+      "must_not_say": [],
+      "notes": "Buie authorized limited protective sweeps"
+    },
+    {
+      "id": "cp-025",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing a guilty plea?",
+      "must_cite": [
+        "Boykin v. Alabama, 395 U.S. 238 (1969)"
+      ],
+      "must_include_elements": [
+        "knowing and voluntary",
+        "understanding of rights waived",
+        "factual basis"
+      ],
+      "must_not_say": [],
+      "notes": "Boykin requires affirmative showing on record"
+    },
+    {
+      "id": "cp-026",
+      "category": "standard_review",
+      "query": "What is the standard for judicial review of sentencing?",
+      "must_cite": [
+        "Gall v. United States, 552 U.S. 38 (2007)"
+      ],
+      "must_include_elements": [
+        "abuse of discretion",
+        "procedural reasonableness",
+        "substantive reasonableness"
+      ],
+      "must_not_say": [],
+      "notes": "Post-Booker advisory guidelines"
+    },
+    {
+      "id": "cp-027",
+      "category": "edge_case",
+      "query": "What is the third-party doctrine?",
+      "must_cite": [
+        "Smith v. Maryland, 442 U.S. 735 (1979)",
+        "Carpenter v. United States, 585 U.S. 296 (2018)"
+      ],
+      "must_include_elements": [
+        "no reasonable expectation of privacy",
+        "information shared with third party",
+        "Carpenter cell-site exception"
+      ],
+      "must_not_say": [],
+      "notes": "Carpenter limited third-party doctrine for CSLI"
+    },
+    {
+      "id": "cp-028",
+      "category": "edge_case",
+      "query": "When can police use drug-sniffing dogs?",
+      "must_cite": [
+        "Illinois v. Caballes, 543 U.S. 405 (2005)",
+        "Florida v. Jardines, 569 U.S. 1 (2013)"
+      ],
+      "must_include_elements": [
+        "during lawful traffic stop",
+        "no extension of stop",
+        "front porch is curtilage"
+      ],
+      "must_not_say": [],
+      "notes": "Jardines limited dog sniffs at home"
+    },
+    {
+      "id": "cp-029",
+      "category": "test_rule",
+      "query": "What is the knock and announce rule?",
+      "must_cite": [
+        "Wilson v. Arkansas, 514 U.S. 927 (1995)",
+        "Hudson v. Michigan, 547 U.S. 586 (2006)"
+      ],
+      "must_include_elements": [
+        "reasonableness requirement",
+        "wait reasonable time",
+        "exceptions for exigency"
+      ],
+      "must_not_say": [],
+      "notes": "Hudson: violation does not require suppression"
+    },
+    {
+      "id": "cp-030",
+      "category": "test_rule",
+      "query": "What is the test for determining if force was excessive under the Fourth Amendment?",
+      "must_cite": [
+        "Graham v. Connor, 490 U.S. 386 (1989)"
+      ],
+      "must_include_elements": [
+        "objective reasonableness",
+        "totality of circumstances",
+        "perspective of reasonable officer",
+        "21-second rule rejected"
+      ],
+      "must_not_say": [],
+      "notes": "Graham rejected subjective intent inquiry"
+    },
+    {
+      "id": "cp-031",
+      "category": "test_rule",
+      "query": "What is the test for a valid inventory search?",
+      "must_cite": [
+        "Colorado v. Bertine, 479 U.S. 367 (1987)"
+      ],
+      "must_include_elements": [
+        "standard procedures",
+        "not pretextual",
+        "protect property"
+      ],
+      "must_not_say": [],
+      "notes": "Must follow standardized procedures"
+    },
+    {
+      "id": "cp-032",
+      "category": "standard_review",
+      "query": "What is the standard for prosecutorial misconduct claims?",
+      "must_cite": [
+        "Berger v. United States, 295 U.S. 78 (1935)",
+        "Donnelly v. DeChristoforo, 416 U.S. 637 (1974)"
+      ],
+      "must_include_elements": [
+        "fundamentally unfair",
+        "substantial prejudice",
+        "harmless error analysis"
+      ],
+      "must_not_say": [],
+      "notes": "High bar for reversal"
+    },
+    {
+      "id": "cp-033",
+      "category": "edge_case",
+      "query": "What is the fruit of the poisonous tree doctrine?",
+      "must_cite": [
+        "Wong Sun v. United States, 371 U.S. 471 (1963)"
+      ],
+      "must_include_elements": [
+        "derivative evidence excluded",
+        "but-for causation",
+        "sufficient attenuation breaks chain"
+      ],
+      "must_not_say": [],
+      "notes": "Wong Sun established doctrine"
+    },
+    {
+      "id": "cp-034",
+      "category": "test_rule",
+      "query": "What is the confrontation clause test?",
+      "must_cite": [
+        "Crawford v. Washington, 541 U.S. 36 (2004)"
+      ],
+      "must_include_elements": [
+        "testimonial statements",
+        "prior opportunity for cross-examination",
+        "unavailability of declarant"
+      ],
+      "must_not_say": [
+        "Roberts reliability test"
+      ],
+      "notes": "Crawford replaced Roberts"
+    },
+    {
+      "id": "cp-035",
+      "category": "test_rule",
+      "query": "What is the Batson test for discriminatory jury selection?",
+      "must_cite": [
+        "Batson v. Kentucky, 476 U.S. 79 (1986)"
+      ],
+      "must_include_elements": [
+        "prima facie case of discrimination",
+        "race-neutral explanation",
+        "determination of pretext"
+      ],
+      "must_not_say": [],
+      "notes": "Three-step Batson framework"
+    },
+    {
+      "id": "cp-036",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing a motion for new trial?",
+      "must_cite": [
+        "Fed. R. Crim. P. 33"
+      ],
+      "must_include_elements": [
+        "interest of justice",
+        "newly discovered evidence",
+        "abuse of discretion review"
+      ],
+      "must_not_say": [],
+      "notes": "Discretionary with court"
+    },
+    {
+      "id": "cp-037",
+      "category": "edge_case",
+      "query": "Can GPS tracking be used without a warrant?",
+      "must_cite": [
+        "United States v. Jones, 565 U.S. 400 (2012)"
+      ],
+      "must_include_elements": [
+        "physical trespass constitutes search",
+        "warrant required",
+        "fourth amendment protection"
+      ],
+      "must_not_say": [],
+      "notes": "Jones: attachment of GPS is search"
+    },
+    {
+      "id": "cp-038",
+      "category": "test_rule",
+      "query": "What is the standard for determining if a confession is voluntary?",
+      "must_cite": [
+        "Schneckloth v. Bustamonte, 412 U.S. 218 (1973)",
+        "Colorado v. Connelly, 479 U.S. 157 (1986)"
+      ],
+      "must_include_elements": [
+        "totality of circumstances",
+        "police coercion required",
+        "free will overborne"
+      ],
+      "must_not_say": [],
+      "notes": "Connelly requires police overreach"
+    },
+    {
+      "id": "cp-039",
+      "category": "test_rule",
+      "query": "What is the two-pronged test for standing to challenge a search?",
+      "must_cite": [
+        "Rakas v. Illinois, 439 U.S. 128 (1978)"
+      ],
+      "must_include_elements": [
+        "subjective expectation of privacy",
+        "expectation society recognizes as reasonable",
+        "legitimate presence insufficient alone"
+      ],
+      "must_not_say": [],
+      "notes": "Rakas refined standing analysis"
+    },
+    {
+      "id": "cp-040",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing a conviction for structural error?",
+      "must_cite": [
+        "Arizona v. Fulminante, 499 U.S. 279 (1991)"
+      ],
+      "must_include_elements": [
+        "automatic reversal",
+        "no harmless error analysis",
+        "affects entire trial framework"
+      ],
+      "must_not_say": [],
+      "notes": "Structural errors are never harmless"
+    },
+    {
+      "id": "cp-041",
+      "category": "edge_case",
+      "query": "What protections apply to attorney-client communications in prison?",
+      "must_cite": [
+        "Weatherford v. Bursey, 429 U.S. 545 (1977)"
+      ],
+      "must_include_elements": [
+        "privileged communications protected",
+        "purposeful intrusion violates right",
+        "prejudice analysis"
+      ],
+      "must_not_say": [],
+      "notes": "Right to counsel extends to confidential communications"
+    },
+    {
+      "id": "cp-042",
+      "category": "test_rule",
+      "query": "What is the test for determining if a stop has become an arrest?",
+      "must_cite": [
+        "Florida v. Royer, 460 U.S. 491 (1983)"
+      ],
+      "must_include_elements": [
+        "scope and duration",
+        "least intrusive means",
+        "diligent investigation"
+      ],
+      "must_not_say": [],
+      "notes": "Stop must be temporary and limited"
+    },
+    {
+      "id": "cp-043",
+      "category": "test_rule",
+      "query": "What is the automobile exception scope for containers?",
+      "must_cite": [
+        "California v. Acevedo, 500 U.S. 565 (1991)"
+      ],
+      "must_include_elements": [
+        "search all containers where contraband could be",
+        "no distinction between vehicle and container PC",
+        "probable cause extends to containers"
+      ],
+      "must_not_say": [],
+      "notes": "Acevedo unified container/vehicle rules"
+    },
+    {
+      "id": "cp-044",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing Fourth Amendment claims on habeas?",
+      "must_cite": [
+        "Stone v. Powell, 428 U.S. 465 (1976)"
+      ],
+      "must_include_elements": [
+        "full and fair opportunity in state court",
+        "federal habeas limited",
+        "costs of exclusion considered"
+      ],
+      "must_not_say": [],
+      "notes": "Stone bars most Fourth Amendment habeas claims"
+    },
+    {
+      "id": "cp-045",
+      "category": "edge_case",
+      "query": "What are the limits on questioning after a suspect invokes counsel?",
+      "must_cite": [
+        "Edwards v. Arizona, 451 U.S. 477 (1981)",
+        "Maryland v. Shatzer, 559 U.S. 98 (2010)"
+      ],
+      "must_include_elements": [
+        "questioning must cease",
+        "cannot reinitiate",
+        "14-day break-in-custody exception"
+      ],
+      "must_not_say": [],
+      "notes": "Shatzer created 14-day rule"
+    },
+    {
+      "id": "cp-046",
+      "category": "test_rule",
+      "query": "What is the community caretaking exception?",
+      "must_cite": [
+        "Cady v. Dombrowski, 413 U.S. 433 (1973)",
+        "Caniglia v. Strom, 593 U.S. 194 (2021)"
+      ],
+      "must_include_elements": [
+        "limited to vehicles",
+        "does not apply to homes",
+        "separate from criminal investigation"
+      ],
+      "must_not_say": [
+        "applies to homes"
+      ],
+      "notes": "Caniglia limited exception to vehicles"
+    },
+    {
+      "id": "cp-047",
+      "category": "standard_review",
+      "query": "What is the standard for Brady material disclosure?",
+      "must_cite": [
+        "Brady v. Maryland, 373 U.S. 83 (1963)",
+        "Giglio v. United States, 405 U.S. 150 (1972)"
+      ],
+      "must_include_elements": [
+        "material to guilt or punishment",
+        "suppression by prosecution",
+        "prejudice to defendant"
+      ],
+      "must_not_say": [],
+      "notes": "Giglio extended to impeachment evidence"
+    },
+    {
+      "id": "cp-048",
+      "category": "edge_case",
+      "query": "What is the special needs exception to the warrant requirement?",
+      "must_cite": [
+        "Vernonia School District 47J v. Acton, 515 U.S. 646 (1995)"
+      ],
+      "must_include_elements": [
+        "beyond normal law enforcement needs",
+        "balancing test",
+        "administrative purpose"
+      ],
+      "must_not_say": [],
+      "notes": "Applied to school drug testing"
+    },
+    {
+      "id": "cp-049",
+      "category": "test_rule",
+      "query": "What is the border search exception?",
+      "must_cite": [
+        "United States v. Flores-Montano, 541 U.S. 149 (2004)"
+      ],
+      "must_include_elements": [
+        "no warrant or suspicion required",
+        "routine searches at border",
+        "sovereignty interest"
+      ],
+      "must_not_say": [],
+      "notes": "Routine border searches need no suspicion"
+    },
+    {
+      "id": "cp-050",
+      "category": "edge_case",
+      "query": "When does double jeopardy attach?",
+      "must_cite": [
+        "Crist v. Bretz, 437 U.S. 28 (1978)"
+      ],
+      "must_include_elements": [
+        "jury trial: when jury empaneled and sworn",
+        "bench trial: when first witness sworn",
+        "guilty plea: when plea accepted"
+      ],
+      "must_not_say": [],
+      "notes": "Different attachment points for different proceedings"
+    }
+  ]
+}

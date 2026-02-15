@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headline -->
+    <filter id="strongGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M 54 0 L 0 0 0 54" fill="none" stroke="rgba(0, 255, 255, 0.06)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Subtle vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.5" />
+    </radialGradient>
+
+    <!-- CTA button gradient -->
+    <linearGradient id="ctaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#00FFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:0.2" />
+    </linearGradient>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1080" height="1080" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1080" height="1080" fill="url(#gridFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1080" height="1080" fill="url(#vignette)"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M 60 0 L 0 0 L 0 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1020 0 L 1080 0 L 1080 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 1020 L 0 1080 L 60 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1080 1020 L 1080 1080 L 1020 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- "The Fix" badge -->
+  <g transform="translate(440, 100)">
+    <rect x="0" y="0" width="200" height="50" fill="url(#ctaGradient)" stroke="#00FFFF" stroke-width="2"/>
+    <text x="100" y="35" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#00FFFF" text-anchor="middle">THE FIX</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="540" y="240" font-family="'Playfair Display', serif" font-size="64" font-weight="700" fill="#00FFFF" text-anchor="middle" filter="url(#strongGlow)">
+    See it in action.
+  </text>
+
+  <!-- Horizontal accent line -->
+  <line x1="290" y1="280" x2="790" y2="280" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+  <!-- Feature checklist -->
+  <g transform="translate(260, 340)">
+    <!-- Check 1 -->
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+    <path d="M 18 30 L 26 38 L 42 22" stroke="#00FFFF" stroke-width="3" fill="none"/>
+    <text x="70" y="38" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#F5F5F5">Your documents first</text>
+  </g>
+
+  <g transform="translate(260, 420)">
+    <!-- Check 2 -->
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+    <path d="M 18 30 L 26 38 L 42 22" stroke="#00FFFF" stroke-width="3" fill="none"/>
+    <text x="70" y="38" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#F5F5F5">Verified citations only</text>
+  </g>
+
+  <g transform="translate(260, 500)">
+    <!-- Check 3 -->
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+    <path d="M 18 30 L 26 38 L 42 22" stroke="#00FFFF" stroke-width="3" fill="none"/>
+    <text x="70" y="38" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#F5F5F5">Authority-aware ranking</text>
+  </g>
+
+  <g transform="translate(260, 580)">
+    <!-- Check 4 -->
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+    <path d="M 18 30 L 26 38 L 42 22" stroke="#00FFFF" stroke-width="3" fill="none"/>
+    <text x="70" y="38" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#F5F5F5">Full audit trail</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="290" y1="680" x2="790" y2="680" stroke="#00FFFF" stroke-width="1" opacity="0.3"/>
+
+  <!-- Pilot CTA -->
+  <text x="540" y="760" font-family="'Playfair Display', serif" font-size="48" font-weight="700" fill="#F5F5F5" text-anchor="middle">
+    10 pilot slots
+  </text>
+  <text x="540" y="820" font-family="'Inter', sans-serif" font-size="28" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    for February
+  </text>
+
+  <!-- CTA Button -->
+  <g transform="translate(340, 880)">
+    <rect x="0" y="0" width="400" height="70" fill="url(#ctaGradient)" stroke="#00FFFF" stroke-width="2" rx="4" ry="4"/>
+    <text x="200" y="46" font-family="'Inter', sans-serif" font-size="22" font-weight="700" fill="#00FFFF" text-anchor="middle" filter="url(#cyanGlow)">
+      LINK IN BIO
+    </text>
+  </g>
+
+  <!-- Cerebro branding -->
+  <text x="540" y="1040" font-family="'Inter', sans-serif" font-size="16" font-weight="600" fill="#00FFFF" text-anchor="middle" filter="url(#cyanGlow)">
+    CEREBRO
+  </text>
+
+</svg>

@@ -1,0 +1,234 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow effects for lanes -->
+    <filter id="laneGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Glow for data flow -->
+    <filter id="dataGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="360" fill="url(#bgGradient)"/>
+
+  <!-- Main workflow area -->
+  <g id="workflowLanes">
+
+    <!-- TikTok Lane -->
+    <g id="tiktokLane">
+      <rect x="20" y="30" width="600" height="42" fill="#e74c3c" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="55" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#e74c3c" opacity="0.9">TIKTOK</text>
+      <!-- Nodes -->
+      <rect x="120" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="160" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="200" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="240" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="280" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="320" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="360" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="400" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="440" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="480" y="38" width="28" height="26" fill="#e74c3c" opacity="0.5" rx="3" stroke="#e74c3c" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="51" x2="160" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="51" x2="200" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="51" x2="240" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="51" x2="280" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="51" x2="320" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="51" x2="360" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="51" x2="400" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="51" x2="440" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <line x1="468" y1="51" x2="480" y2="51" stroke="#e74c3c" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="154" cy="51" r="1.5" fill="#e74c3c" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="234" cy="51" r="1.5" fill="#e74c3c" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="394" cy="51" r="1.5" fill="#e74c3c" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+    <!-- YouTube Lane -->
+    <g id="youtubeLane">
+      <rect x="20" y="78" width="600" height="42" fill="#c0392b" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="103" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#c0392b" opacity="0.9">YOUTUBE</text>
+      <!-- Nodes -->
+      <rect x="120" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="160" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="200" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="240" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="280" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="320" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="360" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="400" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="440" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="480" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <rect x="520" y="86" width="28" height="26" fill="#c0392b" opacity="0.5" rx="3" stroke="#c0392b" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="99" x2="160" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="99" x2="200" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="99" x2="240" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="99" x2="280" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="99" x2="320" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="99" x2="360" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="99" x2="400" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="99" x2="440" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="468" y1="99" x2="480" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <line x1="508" y1="99" x2="520" y2="99" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="194" cy="99" r="1.5" fill="#c0392b" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="354" cy="99" r="1.5" fill="#c0392b" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+    <!-- LinkedIn Lane -->
+    <g id="linkedinLane">
+      <rect x="20" y="126" width="600" height="42" fill="#2980b9" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="151" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#2980b9" opacity="0.9">LINKEDIN</text>
+      <!-- Nodes -->
+      <rect x="120" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="160" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="200" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="240" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="280" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="320" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="360" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="400" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <rect x="440" y="134" width="28" height="26" fill="#2980b9" opacity="0.5" rx="3" stroke="#2980b9" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="147" x2="160" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="147" x2="200" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="147" x2="240" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="147" x2="280" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="147" x2="320" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="147" x2="360" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="147" x2="400" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="147" x2="440" y2="147" stroke="#2980b9" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="274" cy="147" r="1.5" fill="#2980b9" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="434" cy="147" r="1.5" fill="#2980b9" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+    <!-- Facebook Lane -->
+    <g id="facebookLane">
+      <rect x="20" y="174" width="600" height="42" fill="#27ae60" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="199" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#27ae60" opacity="0.9">FACEBOOK</text>
+      <!-- Nodes -->
+      <rect x="120" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="160" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="200" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="240" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="280" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="320" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="360" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="400" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="440" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="480" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="520" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <rect x="560" y="182" width="28" height="26" fill="#27ae60" opacity="0.5" rx="3" stroke="#27ae60" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="195" x2="160" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="195" x2="200" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="195" x2="240" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="195" x2="280" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="195" x2="320" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="195" x2="360" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="195" x2="400" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="195" x2="440" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="468" y1="195" x2="480" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="508" y1="195" x2="520" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <line x1="548" y1="195" x2="560" y2="195" stroke="#27ae60" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="214" cy="195" r="1.5" fill="#27ae60" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="414" cy="195" r="1.5" fill="#27ae60" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+    <!-- Instagram Lane -->
+    <g id="instagramLane">
+      <rect x="20" y="222" width="600" height="42" fill="#e67e22" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="247" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#e67e22" opacity="0.9">INSTAGRAM</text>
+      <!-- Nodes -->
+      <rect x="120" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="160" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="200" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="240" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="280" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="320" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="360" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="400" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="440" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <rect x="480" y="230" width="28" height="26" fill="#e67e22" opacity="0.5" rx="3" stroke="#e67e22" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="243" x2="160" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="243" x2="200" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="243" x2="240" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="243" x2="280" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="243" x2="320" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="243" x2="360" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="243" x2="400" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="243" x2="440" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <line x1="468" y1="243" x2="480" y2="243" stroke="#e67e22" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="254" cy="243" r="1.5" fill="#e67e22" opacity="0.8" filter="url(#dataGlow)"/>
+      <circle cx="454" cy="243" r="1.5" fill="#e67e22" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+    <!-- Twitter Lane -->
+    <g id="twitterLane">
+      <rect x="20" y="270" width="600" height="42" fill="#8e6e53" opacity="0.15" rx="4" filter="url(#laneGlow)"/>
+      <text x="35" y="295" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#8e6e53" opacity="0.9">TWITTER</text>
+      <!-- Nodes -->
+      <rect x="120" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="160" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="200" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="240" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="280" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="320" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="360" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="400" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <rect x="440" y="278" width="28" height="26" fill="#8e6e53" opacity="0.5" rx="3" stroke="#8e6e53" stroke-width="1"/>
+      <!-- Connection lines -->
+      <line x1="148" y1="291" x2="160" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="188" y1="291" x2="200" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="228" y1="291" x2="240" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="268" y1="291" x2="280" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="308" y1="291" x2="320" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="348" y1="291" x2="360" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="388" y1="291" x2="400" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <line x1="428" y1="291" x2="440" y2="291" stroke="#8e6e53" stroke-width="1.5" opacity="0.6"/>
+      <!-- Flow dots -->
+      <circle cx="334" cy="291" r="1.5" fill="#8e6e53" opacity="0.8" filter="url(#dataGlow)"/>
+    </g>
+
+  </g>
+
+  <!-- Bottom info badges -->
+  <g id="infoBadges">
+    <!-- n8n Workflow badge -->
+    <rect x="25" y="325" width="95" height="22" fill="#00FFFF" opacity="0.2" rx="11"/>
+    <rect x="26" y="326" width="93" height="20" fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.6" rx="10"/>
+    <text x="43" y="340" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#00FFFF" opacity="0.95" letter-spacing="0.5">n8n WORKFLOW</text>
+
+    <!-- 6 Platforms badge -->
+    <rect x="130" y="325" width="85" height="22" fill="#ffffff" opacity="0.1" rx="11"/>
+    <text x="147" y="340" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#ffffff" opacity="0.85">6 Platforms</text>
+
+    <!-- 100+ Nodes badge -->
+    <rect x="225" y="325" width="85" height="22" fill="#ffffff" opacity="0.1" rx="11"/>
+    <text x="242" y="340" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#ffffff" opacity="0.85">100+ Nodes</text>
+  </g>
+
+</svg>

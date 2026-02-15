@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headlines -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0, 255, 255, 0.05)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0" />
+    </linearGradient>
+
+    <!-- Bottom gradient fade -->
+    <linearGradient id="bottomFade" x1="0%" y1="100%" x2="0%" y2="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0" />
+    </linearGradient>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.5" />
+    </radialGradient>
+
+    <!-- Red warning glow -->
+    <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1080" height="1080" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1080" height="1080" fill="url(#gridFade)"/>
+
+  <!-- Bottom fade for depth -->
+  <rect width="1080" height="300" y="780" fill="url(#bottomFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1080" height="1080" fill="url(#vignette)"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M 1000 0 L 1080 0 L 1080 80" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 1000 L 0 1080 L 80 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Warning Icon - X mark in circle -->
+  <g transform="translate(540, 180)">
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#FF6B6B" stroke-width="3" filter="url(#redGlow)"/>
+    <line x1="-25" y1="-25" x2="25" y2="25" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+    <line x1="25" y1="-25" x2="-25" y2="25" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="540" y="340" font-family="'Playfair Display', serif" font-size="58" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+    Stop Verifying
+  </text>
+  <text x="540" y="410" font-family="'Playfair Display', serif" font-size="58" font-weight="700" fill="#00FFFF" filter="url(#strongGlow)" text-anchor="middle">
+    AI Hallucinations
+  </text>
+
+  <!-- Divider line -->
+  <line x1="340" y1="460" x2="740" y2="460" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+  <!-- Problem Statement -->
+  <text x="540" y="520" font-family="'Inter', sans-serif" font-size="24" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    Generic AI makes up citations.
+  </text>
+  <text x="540" y="560" font-family="'Inter', sans-serif" font-size="24" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    Your team spends hours verifying.
+  </text>
+
+  <!-- Solution Points -->
+  <g transform="translate(180, 640)">
+    <text x="0" y="0" font-family="'Inter', sans-serif" font-size="22" font-weight="600" fill="#00FFFF">
+      <tspan fill="#00FFFF" filter="url(#cyanGlow)">&#x2192;</tspan>
+      <tspan dx="15" fill="#F5F5F5">Your documents indexed first</tspan>
+    </text>
+    <text x="0" y="50" font-family="'Inter', sans-serif" font-size="22" font-weight="600" fill="#00FFFF">
+      <tspan fill="#00FFFF" filter="url(#cyanGlow)">&#x2192;</tspan>
+      <tspan dx="15" fill="#F5F5F5">Every citation verified</tspan>
+    </text>
+    <text x="0" y="100" font-family="'Inter', sans-serif" font-size="22" font-weight="600" fill="#00FFFF">
+      <tspan fill="#00FFFF" filter="url(#cyanGlow)">&#x2192;</tspan>
+      <tspan dx="15" fill="#F5F5F5">Full audit trail</tspan>
+    </text>
+  </g>
+
+  <!-- CTA Box -->
+  <g transform="translate(540, 870)">
+    <rect x="-200" y="-35" width="400" height="70" rx="8" fill="#00FFFF" filter="url(#cyanGlow)"/>
+    <text x="0" y="8" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#0A0A14" text-anchor="middle">
+      10 Pilot Slots for February
+    </text>
+  </g>
+
+  <!-- Footer -->
+  <text x="540" y="1000" font-family="'Inter', sans-serif" font-size="14" font-weight="400" fill="#666666" text-anchor="middle">
+    theinnovativenative.com/law-firm-rag
+  </text>
+
+  <!-- TIN Logo -->
+  <text x="980" y="1050" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#00FFFF" filter="url(#cyanGlow)">
+    TIN
+  </text>
+
+</svg>

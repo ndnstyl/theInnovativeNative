@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headline -->
+    <filter id="strongGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M 54 0 L 0 0 0 54" fill="none" stroke="rgba(0, 255, 255, 0.06)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Subtle vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.6" />
+    </radialGradient>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1080" height="1080" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1080" height="1080" fill="url(#gridFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1080" height="1080" fill="url(#vignette)"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M 60 0 L 0 0 L 0 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1020 0 L 1080 0 L 1080 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 1020 L 0 1080 L 60 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1080 1020 L 1080 1080 L 1020 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Slide number -->
+  <g transform="translate(60, 60)">
+    <circle cx="30" cy="30" r="28" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+    <text x="30" y="40" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#00FFFF" text-anchor="middle">2</text>
+  </g>
+
+  <!-- Hierarchy visual - Equal signs becoming pyramid -->
+  <g transform="translate(290, 150)">
+    <!-- Three equal boxes showing no hierarchy -->
+    <rect x="0" y="0" width="150" height="80" fill="none" stroke="#808080" stroke-width="2" opacity="0.5"/>
+    <text x="75" y="50" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#808080" text-anchor="middle">District</text>
+
+    <text x="175" y="50" font-family="'Inter', sans-serif" font-size="24" fill="#808080">=</text>
+
+    <rect x="200" y="0" width="150" height="80" fill="none" stroke="#808080" stroke-width="2" opacity="0.5"/>
+    <text x="275" y="50" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#808080" text-anchor="middle">Circuit</text>
+
+    <text x="375" y="50" font-family="'Inter', sans-serif" font-size="24" fill="#808080">=</text>
+
+    <rect x="400" y="0" width="150" height="80" fill="none" stroke="#808080" stroke-width="2" opacity="0.5"/>
+    <text x="475" y="50" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#808080" text-anchor="middle">SCOTUS</text>
+
+    <!-- X mark over the equals -->
+    <line x1="0" y1="100" x2="550" y2="100" stroke="#FF00FF" stroke-width="3" opacity="0.6"/>
+  </g>
+
+  <!-- Wrong indicator -->
+  <g transform="translate(480, 280)">
+    <circle cx="60" cy="30" r="25" fill="none" stroke="#FF00FF" stroke-width="2" opacity="0.7"/>
+    <line x1="45" y1="15" x2="75" y2="45" stroke="#FF00FF" stroke-width="3"/>
+    <line x1="75" y1="15" x2="45" y2="45" stroke="#FF00FF" stroke-width="3"/>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="540" y="420" font-family="'Playfair Display', serif" font-size="56" font-weight="700" fill="#F5F5F5" text-anchor="middle">
+    It treats all law equally.
+  </text>
+
+  <!-- Horizontal accent line -->
+  <line x1="240" y1="460" x2="840" y2="460" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+  <!-- Body copy -->
+  <text x="540" y="530" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    District court opinion?
+  </text>
+  <text x="540" y="575" font-family="'Inter', sans-serif" font-size="26" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    Supreme Court precedent?
+  </text>
+
+  <text x="540" y="650" font-family="'Inter', sans-serif" font-size="24" font-weight="600" fill="#F5F5F5" text-anchor="middle">
+    Generic AI doesn't know the difference.
+  </text>
+
+  <!-- Proper hierarchy pyramid hint -->
+  <g transform="translate(340, 720)">
+    <!-- Proper pyramid structure -->
+    <polygon points="200,0 400,120 0,120" fill="none" stroke="#00FFFF" stroke-width="2" opacity="0.3"/>
+    <line x1="100" y1="120" x2="300" y2="120" stroke="#00FFFF" stroke-width="1" opacity="0.2"/>
+    <line x1="50" y1="160" x2="350" y2="160" stroke="#00FFFF" stroke-width="1" opacity="0.2"/>
+    <text x="200" y="70" font-family="'Inter', sans-serif" font-size="14" font-weight="400" fill="#00FFFF" text-anchor="middle" opacity="0.5">SCOTUS</text>
+    <text x="200" y="145" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#00FFFF" text-anchor="middle" opacity="0.4">Circuit</text>
+    <text x="200" y="185" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#00FFFF" text-anchor="middle" opacity="0.3">District</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="540" y="920" font-family="'Inter', sans-serif" font-size="20" font-weight="400" fill="#666666" text-anchor="middle">
+    Your research gets buried in irrelevant results.
+  </text>
+
+  <!-- Swipe indicator -->
+  <g transform="translate(470, 960)">
+    <path d="M 70 0 L 85 12 L 70 24" stroke="#666666" stroke-width="2" fill="none"/>
+    <path d="M 85 0 L 100 12 L 85 24" stroke="#666666" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- Cerebro branding -->
+  <text x="540" y="1040" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#00FFFF" text-anchor="middle" filter="url(#cyanGlow)">
+    CEREBRO
+  </text>
+
+</svg>
