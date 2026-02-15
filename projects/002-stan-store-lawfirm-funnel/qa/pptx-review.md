@@ -68,7 +68,7 @@ Slide structure shows good variety:
 
 ### CONTENT ACCURACY: A
 
-Cross-referenced against `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/scorecard-copy.md`:
+Cross-referenced against `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/scorecard-copy.md`:
 
 **Slide 1 - Title:**
 - ✅ "The Law Firm Automation Readiness Scorecard" (matches)
@@ -178,7 +178,7 @@ Excellent variety across 30 slides:
 
 ### CONTENT ACCURACY: A-
 
-Cross-referenced against `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/blueprint-copy.md`:
+Cross-referenced against `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/blueprint-copy.md`:
 
 **Slide 1 - Title:**
 - ✅ "The Automated Law Firm Blueprint" (matches)
@@ -463,7 +463,7 @@ Yes, but I'd fix the percentage discrepancy and font inheritance issue first. Th
 **Generated:** 2026-02-06
 **QA Agent:** Adversarial Reviewer
 **Files Inspected:**
-- `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/scorecard/automation-readiness-scorecard.pptx`
-- `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/blueprint/automated-lawfirm-blueprint.pptx`
-- `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/scorecard-copy.md`
-- `/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/blueprint-copy.md`
+- `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/scorecard/automation-readiness-scorecard.pptx`
+- `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/blueprint/automated-lawfirm-blueprint.pptx`
+- `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/scorecard-copy.md`
+- `/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/blueprint-copy.md`

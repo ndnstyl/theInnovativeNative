@@ -45,7 +45,7 @@
 - **Practice Areas**: Bankruptcy, Criminal Defense, Administrative Law (each with realistic baseline values)
 - **ROI Calculation Pattern**: Phase-specific improvements with cumulative annual projection
 - **Documentation Quality**: Full CEO instructions for Google Sheets implementation, maintenance notes, disclaimer text
-- **File Location**: /Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/roi-calculator-spec.md
+- **File Location**: /Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/roi-calculator-spec.md
 - **Next Steps**: User builds Google Sheets from spec, uploads to Google Drive, logs deliverable URL to Airtable
 
 ## Session Learnings (2026-02-11 - BowTie Bullies Data Ops)

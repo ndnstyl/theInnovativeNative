@@ -28,7 +28,7 @@ uv run --with python-pptx==1.0.2 python -c "import pptx; print('Ready')"
 Run each batch script in order:
 
 ```bash
-cd /Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/blueprint
+cd /Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/blueprint
 
 # Batch 1 (Slides 1-5)
 uv run --with python-pptx==1.0.2 python generate-batch1.py

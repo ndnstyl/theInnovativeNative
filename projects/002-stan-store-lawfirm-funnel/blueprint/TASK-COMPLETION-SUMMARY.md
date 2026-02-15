@@ -91,7 +91,7 @@ This task should be handed off to the **Builder** agent, who has Python/script e
 ```
 @builder - Please complete T012. Creative has designed the 30-slide blueprint presentation and created the generation framework. You need to:
 
-1. Review deliverables/002-stan-store-lawfirm-funnel/blueprint/GENERATION-INSTRUCTIONS.md
+1. Review projects/002-stan-store-lawfirm-funnel/blueprint/GENERATION-INSTRUCTIONS.md
 2. Create generate-batch2.py through generate-batch6.py following the pattern in generate-batch1.py
 3. Create combine-all.py to merge all parts
 4. Execute all scripts with: uv run --with python-pptx==1.0.2 python [script].py
@@ -105,7 +105,7 @@ Detailed slide plan and content mapping are in TASK-COMPLETION-SUMMARY.md.
 If handoff is not possible, the user can execute the scripts directly:
 
 ```bash
-cd /Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/blueprint
+cd /Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/blueprint
 
 # Install if needed
 uv run --with python-pptx==1.0.2 python -c "import pptx"
@@ -165,7 +165,7 @@ uv run --with python-pptx==1.0.2 python generate-batch1.py
 ### Files Created
 
 ```
-deliverables/002-stan-store-lawfirm-funnel/blueprint/
+projects/002-stan-store-lawfirm-funnel/blueprint/
 ├── GENERATION-INSTRUCTIONS.md       (✅ Complete - 180 lines)
 ├── TASK-COMPLETION-SUMMARY.md       (✅ This file - 200 lines)
 ├── generate-batch1.py               (✅ Complete - 300 lines)

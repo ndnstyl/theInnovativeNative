@@ -161,13 +161,16 @@ projects/004-bowtie-bullies/assets/*.zip
 projects/006-ai-editing/references/*.png
 projects/006-ai-editing/references/*.jpg
 
-# Legacy paths (kept until old dirs fully removed)
-deliverables/004-faceless-ai-brand/broll/
-deliverables/004-faceless-ai-brand/scenes/
-deliverables/004-faceless-ai-brand/SFX/
-deliverables/004-faceless-ai-brand/music/
-deliverables/004-faceless-ai-brand/canonicalCharacter/
-deliverables/004-faceless-ai-brand/assets/
+# Entire old deliverables/ directory (all tracked files moved to projects/)
+# Untracked media remains until manually cleaned — gitignored here
+deliverables/
+
+# Premiere Pro project files (large binaries, not in git)
+projects/006-ai-editing/premiere/*.prproj
+projects/006-ai-editing/premiere/*.prin
+projects/006-ai-editing/premiere/Motion Graphics Template Media/
+projects/006-ai-editing/premiere/Premiere Composer Files/
+projects/006-ai-editing/premiere/templates/
 
 # ------------------------------------------
 # BACKUPS

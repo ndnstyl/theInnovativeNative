@@ -76,6 +76,12 @@ T013 (StatCallout/QuoteCard) ✓ → used by T016 (FFMPEG compiler) ✓
 
 ---
 
+## n8n Workflow Deployment
+
+- [ ] **T022**: Deploy simplified WF-1 Scene Prep to live n8n instance (Builder) — Local JSON at `scripts/n8n-workflows/bowtie-scene-prep.json` was simplified (11→9 nodes: removed broken `Manual Defaults` + `Load Pipeline JSON` Code nodes, replaced with native Google Drive Download node). Must deploy via n8n API. If workflow already exists in n8n, GET→patch→PUT. If new, POST to create. Verify: Manual Trigger → Drive Download → Expand Variants → SplitInBatches → Airtable creates records.
+
+---
+
 ## Remaining Human Actions
 
 These tasks require human execution (running generation tools, sourcing files):
@@ -102,3 +108,74 @@ These tasks require human execution (running generation tools, sourcing files):
 5. ~~**P2**: T004-T005 (ComfyUI workflows)~~ ✓
 6. ~~**P3**: T007-T008 (SFX library strategy), T010-T011 (AAVE linting, SSML template)~~ ✓ (T007 awaits human sourcing)
 7. ~~**P3**: T019-T021 (Shorts extraction, orchestration)~~ ✓
+
+---
+
+## Phase 3: Foundation & Migration [US5]
+
+- [x] **T023** [P] [US5] Audit existing Airtable records — 155 total (152 image_generated, 3 generation_failed). Variants: 10 bg (char), 22 each a/b/c (env), 47 broll. (Builder)
+- [x] **T024** [P] [US5] Added 5 new fields to Scenes table (`batch`, `user_rejection_notes`, `visual_prompt_revised`, `prompt_quality`, `composite_drive_id`). All 155 records tagged `batch: 1`. (Builder)
+- [x] **T025** [US4] Fix QC workflow bugs + deployed to n8n. ID: `Nsy2qgF76UvSj5Aq`. (Builder)
+- [ ] **T026** [US5] Run QC workflow on batch 1 images to identify keepers. (Human action — user triggers)
+
+## Phase 4: Prompt Rewrites [US1 — MVP]
+
+- [x] **T027** [US1] Draft prompt revision staging doc (`EP-001-prompt-revisions.md`) with side-by-side comparison for all scenes needing narrative-enriched rewrites. (Builder)
+- [ ] **T028** [US1] User review and approval of staged prompts. (Human action — approval gate)
+- [x] **T029** [US1] Merge approved prompts into pipeline JSON. (Builder) — 22 prompts merged 2026-02-14. Google Drive upload pending (T031 deploy).
+
+## Phase 5: Variant Expansion [US2]
+
+- [x] **T030** [US2] Modify `buildVariants()` in WF-1 Expand Variants node: character scenes produce `bg-a`, `bg-b`, `bg-c` with compositional space guidance for wide variants. (Builder)
+- [x] **T031** [US2] Deployed updated WF-1 to live n8n. ID: `zYEYLsFUnOsOmYqT`, 10 nodes. (Builder — user tests)
+- [ ] **T032** [P] [US5] Pre-delete failed/un-QC'd batch 1 records. Preserve passed records. (Builder)
+- [ ] **T033** [US1+US2] Re-run WF-1 Scene Prep with revised pipeline JSON. Verify Airtable record counts (expect ~96 scene + ~47 B-roll). (Human action — user triggers)
+
+## Phase 6: Compositor [US3]
+
+- [x] **T034** [US3] Build `scripts/bowtie_compositor.py` — Pillow-based, `POSE_PROFILES` dict, 3 angle modes (wide/primary/close-up). (Builder)
+- [ ] **T035** [P] [US3] Test compositor: 3 poses × 3 angles = 9 test composites. Upload to Drive. Visual inspection by user. (Builder + Human)
+- [ ] **T036** [US3] Integration: compositor reads from Airtable (character scenes with images), uploads composites to Drive, writes `composite_drive_id` to Airtable. (Builder)
+
+## Phase 7: QA/QC Loop [US4]
+
+- [ ] **T037** [P] [US4] Create 3 Airtable views on Scenes table (manual — Airtable API doesn't support filtered view creation). Filters: "Needs Review" (`qc_status=manual_review`), "All Passed" (`qc_status=passed`), "Rejected" (`qc_status=rejected`). (Human action)
+- [x] **T038** [US4] Built `scripts/bowtie_prompt_reviser.py` — `draft`/`approve`/`status` commands. Reads rejected records, drafts revised prompts, applies approved revisions. (Builder)
+- [x] **T039** [US4] Documented QA/QC SOP at `.specify/sops/bowtie-qaqc-sop.md`. (Builder)
+
+## Phase 8: Integration & Polish
+
+- [ ] **T040** [US1–5] End-to-end smoke test: 3 scenes (1 character, 1 environment, 1 barbershop) through full pipeline: revised prompt → Scene Prep → Generate → QC → Composite → Review. (Builder + Human)
+- [x] **T041** [P] Update spec.md with QA/QC section, compositor spec, revised pipeline flow. (Builder)
+- [x] **T042** [P] Update tasks.md with all new tasks and dependency graph. (Builder)
+- [ ] **T043** Log all work to Airtable: Time Entry, Tasks, Deliverables. (Builder)
+
+---
+
+## Phase 3–8 Dependency Graph
+
+```
+T023 + T024 + T025 + T027 ─── can start in parallel
+         │         │              │
+         └─── T026 (QC batch 1)  │
+                   │              │
+                   └──── T032 (pre-delete failed)
+                                  │
+              T028 (user approves prompts)
+                   │
+              T029 (merge to JSON)
+                   │
+T030 (fix buildVariants) ─── T031 (deploy WF-1)
+                                  │
+                             T033 (re-run Scene Prep)
+                                  │
+              T034 (compositor) ──┤── T037 (Airtable views) ─── T038 (revision script)
+                   │              │
+              T035 (test)         └── T039 (SOP doc)
+                   │
+              T036 (integration)
+                   │
+              T040 (end-to-end smoke test)
+                   │
+         T041 + T042 + T043 (polish)
+```

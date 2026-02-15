@@ -281,9 +281,9 @@ return [{
 
 **T002 - Google Drive Folder Structure: COMPLETED**
 - Created 155 folders via direct Google Drive REST API (MCP was broken)
-- Root: `BowTie Bullies` (ID: `1zN16sMUS_lYmCPwnln9Ey74OZAhchAxn`)
-- Episodes folder: `1H74BftFcDoVzY841TAaIDryoz7Kfk91Z`
-- 22 episode folders (EP01-EP22) each with 6 subfolders (scripts, audio, images, overlays, video, shorts)
+- Root: `TIN Marketing > BowTie Bullies` (ID: `1JVHhmZLK3Rv2pK3W4ZlfYkF6xdeW1a2p`) — single source of truth
+- ~~Orphaned root `1zN16sMUS_lYmCPwnln9Ey74OZAhchAxn` — superseded, delete after confirming all content migrated~~
+- Episodes folder under root with EP01-EP22, each with 6 subfolders (scripts, audio, images, overlays, video, shorts)
 - Pattern: When MCP server writes INFO logs to stdout, it breaks JSON-RPC. Fallback to direct REST API with OAuth2 refresh token
 
 **T003 - ElevenLabs Credential: PARTIALLY VERIFIED**
@@ -302,25 +302,25 @@ return [{
 **T005 - Server Font Installation: DOCUMENTED (needs SSH)**
 ```bash
 # Download from Google Fonts
+curl -L "https://fonts.google.com/download?family=Bangers" -o /tmp/bangers.zip
+curl -L "https://fonts.google.com/download?family=Montserrat" -o /tmp/montserrat.zip
 curl -L "https://fonts.google.com/download?family=Anton" -o /tmp/anton.zip
-curl -L "https://fonts.google.com/download?family=Space+Mono" -o /tmp/spacemono.zip
-curl -L "https://fonts.google.com/download?family=JetBrains+Mono" -o /tmp/jetbrainsmono.zip
 
 # Install
 sudo mkdir -p /usr/local/share/fonts/bowtie
+sudo unzip /tmp/bangers.zip -d /usr/local/share/fonts/bowtie/
+sudo unzip /tmp/montserrat.zip -d /usr/local/share/fonts/bowtie/
 sudo unzip /tmp/anton.zip -d /usr/local/share/fonts/bowtie/
-sudo unzip /tmp/spacemono.zip -d /usr/local/share/fonts/bowtie/
-sudo unzip /tmp/jetbrainsmono.zip -d /usr/local/share/fonts/bowtie/
 sudo fc-cache -fv
 
 # Verify
+fc-list | grep -i bangers
+fc-list | grep -i montserrat
 fc-list | grep -i anton
-fc-list | grep -i "space.mono"
-fc-list | grep -i jetbrains
 
 # FFMPEG drawtext paths:
-# fontfile=/usr/local/share/fonts/bowtie/Anton-Regular.ttf
-# fontfile=/usr/local/share/fonts/bowtie/SpaceMono-Regular.ttf
+# fontfile=/usr/local/share/fonts/bowtie/Bangers-Regular.ttf
+# fontfile=/usr/local/share/fonts/bowtie/Montserrat-Regular.ttf
 ```
 
 **T006 - WhisperX Installation: DOCUMENTED (needs SSH)**
@@ -365,3 +365,52 @@ python3 -c "import whisperx; print('WhisperX ready')"
 **Google Drive MCP Broken**: The `mcp-google-drive` package also writes INFO logs to stdout, breaking JSON-RPC. Direct REST API via OAuth2 refresh token works as fallback.
 
 **Google Drive Folder Creation Rate**: No rate limiting observed when creating 155 folders sequentially via REST API. Brief 1s pauses every 5 episodes as precaution were sufficient.
+
+## Session Learnings (2026-02-12)
+
+### BowTie Pose Generator — txt2img → img2img Conversion
+
+**Pattern: Native Gemini Node vs HTTP Request Node**
+- The native `@n8n/n8n-nodes-langchain.googleGemini` "Edit an image" node uses `gemini-2.5-flash-image` (display name "Nano Banana") and produces good cel-shaded/2D results
+- The HTTP Request node gives control over `generationConfig` (aspect ratio, response modalities) but requires the exact model name in the URL
+- **Model names differ between native node and REST API**: `gemini-2.0-flash-exp-image-generation` produces photorealistic 3D garbage; `gemini-2.5-flash-image` produces the correct cel-shaded style
+- **Best approach**: Use HTTP Request with `models/gemini-2.5-flash-image:generateContent` endpoint to get both the right model AND full API control
+- **Aspect ratio limitation**: `gemini-2.0-flash-exp-image-generation` does NOT support `imageConfig.aspectRatio`. For `gemini-2.5-flash-image`, test separately. Fallback: specify in prompt text.
+
+**Pattern: n8n Binary Data in Database Mode (`binaryDataMode: "database"`)**
+- When n8n stores binary in database, `binary.data.data` returns a **reference ID**, not base64
+- Must use `this.helpers.getBinaryDataBuffer(itemIndex, binaryKey)` to get actual Buffer
+- Then `buffer.toString('base64')` for API payloads that need base64
+- For file output (Drive upload), use `this.helpers.prepareBinaryData(buffer, filename, mimeType)` — this creates proper binary metadata so Google Drive generates thumbnails/previews
+- **Without prepareBinaryData**: Files upload but are unopenable (6-byte garbage) and have no thumbnails
+
+**Pattern: Airtable Image Preview from Google Drive**
+- Add `multipleAttachments` field to Airtable table
+- In n8n Airtable node, set attachment value to: `[{"url": "https://drive.google.com/uc?export=download&id=FILE_ID"}]`
+- Airtable fetches the image and renders inline preview/thumbnail
+- Requires file to be shared (anyone with link = viewer)
+
+**Pattern: n8n Workflow Updates via API — Never Overwrite**
+- ALWAYS pull current workflow state via GET before updating via PUT
+- The PUT endpoint replaces the ENTIRE workflow — pushing a local JSON overwrites user's manual changes (credentials, new nodes, connections)
+- Workflow history is NOT available via REST API (`/history` returns 404), only via n8n UI
+- Valid PUT payload keys: `name`, `nodes`, `connections`, `settings` only — `tags`, `pinData`, `staticData` cause 400 error
+- **Critical**: Credential IDs are instance-specific. Never replace them with empty strings.
+
+**Pattern: PNG → JPEG Compression for LLM Reference Images**
+- `ffmpeg -i input.png -q:v 3 output.jpg` compresses at ~85% quality
+- 6MB PNGs → 200-300KB JPEGs — LLMs don't need full resolution
+- Faster API calls (smaller base64 payloads), faster Drive downloads
+
+### Key IDs Reference (BowTie)
+- **BowTie Bullies root (TIN Marketing)**: `1JVHhmZLK3Rv2pK3W4ZlfYkF6xdeW1a2p`
+- Pose Generator v1 (native Gemini): `fDU4JRB3oq9A9DtE`
+- Pose Generator v2 (HTTP Request): `IhKukcOuQCdiIoyG`
+- Generated Poses Airtable table: `tblcqlsc7x8BkULT4`
+- Generated Poses Drive folder: `1uZUZYqv0HKNuxRQztS80g0XWMW1nIce8`
+- Character References Drive folder: `1gaXKQsJgurac7d7OhZdFzBVy-yrqPGhc`
+- Frontal reference image: `1hesQCwGlHw1pqpxK5LlDmSNpVmkcJrEd`
+- Headshot reference image: `1JGzUAlO1p0IumXiuHSCLJe77V9SO8kVd`
+- Gemini credential (billing): `JbBNLCe83ER3tCwD`
+- Google Drive OAuth: `53ssDoT9mG1Dtejj`
+- Airtable PAT: `YCWFwTIXwnTpVy2y`

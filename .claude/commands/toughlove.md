@@ -28,7 +28,7 @@ This command runs two phases: **Adversarial QA** then **Shutdown Logging**. No p
 
 If user specified a feature directory, use it. Otherwise:
 - Run `.specify/scripts/bash/check-prerequisites.sh --json` to find active feature
-- Scan `deliverables/` for the matching directory
+- Scan `projects/` for the matching directory
 - If no deliverables found: ERROR "Nothing to review. Build something first."
 
 ### 1.2 Deploy QA Agents (Parallel)
@@ -36,7 +36,7 @@ If user specified a feature directory, use it. Otherwise:
 Launch **3 adversarial review agents** simultaneously using the Task tool:
 
 #### Agent A: Copy & Content QA
-**What to review**: All `.md` files in `deliverables/{feature}/assets/` and `deliverables/{feature}/content/`
+**What to review**: All `.md` files in `projects/{feature}/assets/` and `projects/{feature}/content/`
 
 **Checklist** (fail any = flag it):
 - [ ] **Legibility**: No walls of text. Paragraphs <4 sentences. Headers every 3-5 paragraphs.
@@ -47,13 +47,13 @@ Launch **3 adversarial review agents** simultaneously using the Task tool:
 - [ ] **Completeness**: No unfilled placeholders (`REPLACE`, `TODO`, `[YOUR_X]`). No broken references.
 - [ ] **Spelling/Grammar**: Zero tolerance. Every typo is a brand hit.
 
-**Output**: `deliverables/{feature}/qa/copy-review.md`
+**Output**: `projects/{feature}/qa/copy-review.md`
 - Grade each file A-F
 - List specific issues with quotes
 - End with "Critical Fixes" (must-fix before launch)
 
 #### Agent B: Visual/PPTX QA
-**What to review**: All `.pptx` files in `deliverables/{feature}/`
+**What to review**: All `.pptx` files in `projects/{feature}/`
 
 Use python-pptx to programmatically inspect every slide:
 
@@ -72,7 +72,7 @@ from pptx import Presentation
 - [ ] **Slide count**: Matches spec requirements
 - [ ] **CTA slides**: Present and have correct links/info
 
-**Output**: `deliverables/{feature}/qa/pptx-review.md`
+**Output**: `projects/{feature}/qa/pptx-review.md`
 - Grade each presentation A-F
 - List slide-by-slide issues
 - End with "Critical Fixes"
@@ -88,7 +88,7 @@ from pptx import Presentation
 - [ ] **Missing connections**: Any spec references something undefined elsewhere
 - [ ] **Data model alignment**: Schema docs match implementation specs
 
-**Output**: `deliverables/{feature}/qa/integration-review.md`
+**Output**: `projects/{feature}/qa/integration-review.md`
 - Grade each spec A-F
 - End with "Critical Mismatches"
 
@@ -96,7 +96,7 @@ from pptx import Presentation
 
 After all 3 agents complete, read their reports and compile:
 
-**Output**: `deliverables/{feature}/qa/SUMMARY.md`
+**Output**: `projects/{feature}/qa/SUMMARY.md`
 
 ```markdown
 # QA Summary: {Feature Name}

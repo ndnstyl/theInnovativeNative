@@ -658,7 +658,7 @@ ws3.merge_cells(f"A{dr}:E{dr}")
 ws3.cell(row=dr + 1, column=1, value="© 2026 The Innovative Native LLC").font = note_font
 
 # Save
-output = "/Users/makwa/theinnovativenative/deliverables/002-stan-store-lawfirm-funnel/assets/roi-calculator-automated-lawfirm-blueprint.xlsx"
+output = "/Users/makwa/theinnovativenative/projects/002-stan-store-lawfirm-funnel/assets/roi-calculator-automated-lawfirm-blueprint.xlsx"
 wb.save(output)
 print(f"Created: {output}")
 print("v2: All percentages accept whole numbers. Hover tooltips on every field.")

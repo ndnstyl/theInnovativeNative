@@ -98,6 +98,7 @@ Key Agent Record IDs (populate after creating agents):
 
 ## Integration Notes
 
+- **⛔ n8n: Local workflow JSON is USELESS. If it's not deployed to the live n8n instance, it doesn't exist.** Always deploy via n8n API after any workflow change. n8n work MUST be handed off to Builder agent (the n8n domain expert), not done inline by the orchestrator.
 - n8n: Never test workflows with Apify HTTP nodes (user tests manually)
 - Airtable: Always check existing data before schema changes
 - Database migrations: Check existing data first

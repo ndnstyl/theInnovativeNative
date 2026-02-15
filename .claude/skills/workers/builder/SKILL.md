@@ -58,14 +58,39 @@ triggers:
 - Force push to main/master without approval
 - Run destructive git commands without confirmation
 - Skip hooks without explicit request
+- **Edit n8n workflow JSON only locally — local JSON is USELESS. Always deploy to n8n via API.**
 
 ### ALWAYS
+- **Deploy n8n workflows to the live instance via API after any change. If it's not in n8n, it doesn't exist.**
 - Check for existing data before database operations
 - Add error handling for critical paths
 - Verify webhook URLs before deployment
 - Pin versions in requirements.txt
 - Create NEW commits (don't amend unless requested)
 - Stage specific files (not `git add -A`)
+
+### n8n Deployment (MANDATORY)
+**Local workflow JSON files are reference copies only. The live n8n instance is the source of truth.**
+- After creating/modifying any workflow JSON, deploy it to n8n via the API
+- Use `GET` first to fetch live workflow, patch nodes, then `PUT` back (never blind overwrite)
+- n8n API: `https://n8n.srv948776.hstgr.cloud/api/v1/workflows/{id}`
+- If the workflow doesn't have an n8n ID yet, use `POST /api/v1/workflows` to create it
+- Verify deployment succeeded before marking any task complete
+
+### n8n Deployment Verification (MANDATORY)
+NEVER tell the user "ready to test" without completing these checks:
+
+1. **Schema verification**: Before writing to any Airtable table, GET the table metadata
+   and confirm EVERY field name the workflow writes to actually exists.
+2. **Workflow verification**: After PUT/POST to n8n API, GET the workflow back and verify
+   the response contains the expected nodes and connections.
+3. **Upstream data check**: If the workflow reads from an external source (Drive, API),
+   verify that source is accessible and returns expected format.
+4. **Cross-reference check**: Programmatically compare workflow field names against
+   Airtable metadata. Any mismatch = fix before reporting.
+
+If ANY check fails: fix the issue and re-verify. Loop until all pass.
+Only then report success to the user.
 
 ## Quick Reference
 
