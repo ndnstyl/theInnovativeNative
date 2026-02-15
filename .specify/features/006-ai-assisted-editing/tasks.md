@@ -323,7 +323,7 @@ Phase 1 (Setup) ─── no deps ───────────────�
 Phase 2 (Tier 1 MVP) ─── depends on Phase 1
     │   T005→T006 (LUT script → generate .cube)
     │   T007→T008 (asset prep → test)
-    │   T009→T010→T011 (XML script → test → Premiere import)
+    │   T010.5 (human ref XML) → T009→T010→T011 (XML script → test → Premiere import)
     │   T012→T013 (SOP → technical review)
     │   Note: T005-T006 should complete first (T007 copies .cube into prep folder)
     │   Note: T007 can run in parallel with T009 (different files)
@@ -350,6 +350,7 @@ Phase 7 (Polish) ─── depends on ALL previous phases
 ### Parallel Opportunities (Tier 1 — Maximum Parallelism)
 
 **Wave 1** (start immediately):
+- Human: T010.5 (generate reference XML from Premiere Pro — blocks T009)
 - Editor: T005 (hald_to_cube.py) + T003 (validate fixture)
 - Builder: T001 (env check) + T002 (create grade dir) + T004 (import test)
 - Chris: T012 (SOP draft — can write from plan.md without waiting for code)
@@ -380,7 +381,7 @@ Phase 7 (Polish) ─── depends on ALL previous phases
 | Data | T015, T017 | 1 | 1h |
 | Comms | T016 | 1 | 0.5h |
 | Drew | T035, T037 | QA | 1-2h |
-| Human | T011, T034 | Manual test | 0.5h |
+| Human | T010.5, T011, T034 | Manual test | 1h |
 
 ---
 

@@ -238,6 +238,8 @@ Premiere Pro XML (`<xmeml version="4">`) structure:
 </xmeml>
 ```
 
+**Track mapping**: V1 (video), A1 (voiceover), A2 (SFX beds), A3 (SFX events), A4 (music), A5 (empty/reserved).
+
 **Timecode math**:
 - All timeline JSON `in`/`out` values are in seconds
 - The intro clip has `in: -3.5` — we shift everything by `+INTRO_DURATION` so intro starts at frame 0
