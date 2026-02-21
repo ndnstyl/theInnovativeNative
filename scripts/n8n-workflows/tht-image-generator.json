@@ -1,0 +1,411 @@
+{
+  "name": "WF-THT-IMAGE \u2014 Image Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tht-image",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "tht-img-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        400
+      ],
+      "webhookId": "tht-image"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.body ? $json.body.recordId : $json.recordId }}"
+      },
+      "id": "tht-img-fetch-project",
+      "name": "Airtable \u2014 Fetch Project",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+            "Status": "images_generating",
+            "Images Done": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Images Done",
+              "displayName": "Images Done",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "tht-img-mark-generating",
+      "name": "Airtable \u2014 Mark Generating",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "filterByFormula": "AND({Asset Type}='image', {Generation Status}='pending', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
+        "returnAll": true,
+        "options": {
+          "sort": {
+            "property": [
+              {
+                "field": "Phase Number",
+                "direction": "asc"
+              }
+            ]
+          }
+        }
+      },
+      "id": "tht-img-fetch-prompts",
+      "name": "Airtable \u2014 Fetch Image Prompts",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build NBP fire-and-forget jobs for each image prompt\nconst items = $input.all();\nconst projectId = $('Airtable \u2014 Fetch Project').first().json.id;\n\nreturn items.map(item => {\n  const record = item.json;\n  const promptText = record['Prompt Text'];\n  const phaseNumber = record['Phase Number'];\n  const recordId = record.id;\n\n  const callbackUrl = 'https://n8n.srv948776.hstgr.cloud/webhook/kie-callback'\n    + '?type=tht_image'\n    + '&table=tblWExmILcFYnW9ze'\n    + '&record=' + encodeURIComponent(recordId)\n    + '&project=' + encodeURIComponent(projectId)\n    + '&phase=' + encodeURIComponent(phaseNumber);\n\n  return {\n    json: {\n      model: 'nano-banana-pro',\n      callBackUrl: callbackUrl,\n      input: {\n        prompt: promptText,\n        aspect_ratio: '9:16',\n        resolution: '2K',\n        output_format: 'png'\n      },\n      _meta: {\n        record_id: recordId,\n        project_id: projectId,\n        phase: phaseNumber\n      }\n    }\n  };\n});"
+      },
+      "id": "tht-img-build-jobs",
+      "name": "Code \u2014 Build NBP Jobs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "tht-img-batch",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "id": "={{ $json._meta.record_id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json._meta.record_id }}",
+            "Generation Status": "generating"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Generation Status",
+              "displayName": "Generation Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "tht-img-mark-prompt",
+      "name": "Airtable \u2014 Mark Prompt Generating",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/jobs/createTask",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $('SplitInBatches').first().json.model, callBackUrl: $('SplitInBatches').first().json.callBackUrl, input: $('SplitInBatches').first().json.input }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "tht-img-submit",
+      "name": "HTTP \u2014 Submit to Kie.AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        500
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "EFETRZwIsMkjex1c",
+          "name": "kieAI-NB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return success response after all jobs submitted\nconst projectId = $('Airtable \u2014 Fetch Project').first().json.id;\nconst brandName = $('Airtable \u2014 Fetch Project').first().json['Brand Name'];\nreturn [{\n  json: {\n    status: 'submitted',\n    message: `All 8 image jobs submitted for ${brandName}. Callbacks will update records as images complete.`,\n    projectId: projectId\n  }\n}];"
+      },
+      "id": "tht-img-done",
+      "name": "Code \u2014 Done Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        260
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Project": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Mark Generating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Generating": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Image Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Image Prompts": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build NBP Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build NBP Jobs": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Done Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Mark Prompt Generating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Prompt Generating": {
+      "main": [
+        [
+          {
+            "node": "HTTP \u2014 Submit to Kie.AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Submit to Kie.AI": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "THT Pipeline"
+    }
+  ]
+}

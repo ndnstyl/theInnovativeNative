@@ -1,0 +1,493 @@
+{
+  "name": "WF-THT-VIDEO \u2014 Video Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tht-video",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "tht-vid-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        400
+      ],
+      "webhookId": "tht-video"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.body ? $json.body.recordId : $json.recordId }}"
+      },
+      "id": "tht-vid-fetch-project",
+      "name": "Airtable \u2014 Fetch Project",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+            "Status": "videos_generating",
+            "Videos Done": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Videos Done",
+              "displayName": "Videos Done",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "tht-vid-mark-generating",
+      "name": "Airtable \u2014 Mark Generating",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        660,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "filterByFormula": "AND({Asset Type}='image', {Generation Status}='generated', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
+        "returnAll": true,
+        "options": {
+          "sort": {
+            "property": [
+              {
+                "field": "Phase Number",
+                "direction": "asc"
+              }
+            ]
+          }
+        }
+      },
+      "id": "tht-vid-fetch-images",
+      "name": "Airtable \u2014 Fetch Generated Images",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "filterByFormula": "AND({Asset Type}='video', {Generation Status}='pending', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
+        "returnAll": true,
+        "options": {
+          "sort": {
+            "property": [
+              {
+                "field": "Phase Number",
+                "direction": "asc"
+              }
+            ]
+          }
+        }
+      },
+      "id": "tht-vid-fetch-prompts",
+      "name": "Airtable \u2014 Fetch Video Prompts",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build Veo3 fire-and-forget jobs: first+last frame for each video\n// Images are sorted by phase (1-8). Videos pair them:\n//   Video 1: Image 1 (start) + Image 2 (end)\n//   Video 2: Image 3 (start) + Image 4 (end)\n//   Video 3: Image 5 (start) + Image 6 (end)\n//   Video 4: Image 7 (start) + Image 8 (end)\n\nconst images = $('Airtable \\u2014 Fetch Generated Images').all().map(i => i.json);\nconst videoPrompts = $('Airtable \\u2014 Fetch Video Prompts').all().map(v => v.json);\nconst projectId = $('Airtable \\u2014 Fetch Project').first().json.id;\n\nif (images.length < 8) {\n  throw new Error(`Expected 8 generated images, got ${images.length}. All images must be generated before video stage.`);\n}\nif (videoPrompts.length < 4) {\n  throw new Error(`Expected 4 video prompts, got ${videoPrompts.length}.`);\n}\n\nreturn videoPrompts.map((vp, idx) => {\n  // Video N uses images at index (N*2) and (N*2+1)\n  const startImage = images[idx * 2];\n  const endImage = images[idx * 2 + 1];\n  const startUrl = startImage['Drive URL'];\n  const endUrl = endImage['Drive URL'];\n  const promptText = vp['Prompt Text'];\n  const phaseNumber = vp['Phase Number'];\n  const recordId = vp.id;\n\n  if (!startUrl || !endUrl) {\n    throw new Error(`Missing Drive URL for video ${idx + 1}. Start image: ${startImage.id}, End image: ${endImage.id}`);\n  }\n\n  const callbackUrl = 'https://n8n.srv948776.hstgr.cloud/webhook/kie-callback'\n    + '?type=tht_video'\n    + '&table=tblWExmILcFYnW9ze'\n    + '&record=' + encodeURIComponent(recordId)\n    + '&project=' + encodeURIComponent(projectId)\n    + '&phase=' + encodeURIComponent(phaseNumber);\n\n  return {\n    json: {\n      prompt: promptText,\n      imageUrls: [startUrl, endUrl],\n      model: 'veo3',\n      generationType: 'FIRST_AND_LAST_FRAMES_2_VIDEO',\n      aspect_ratio: '9:16',\n      callBackUrl: callbackUrl,\n      _meta: {\n        record_id: recordId,\n        project_id: projectId,\n        phase: phaseNumber,\n        start_image_id: startImage.id,\n        end_image_id: endImage.id\n      }\n    }\n  };\n});"
+      },
+      "id": "tht-vid-build-jobs",
+      "name": "Code \u2014 Build Veo3 Jobs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1210,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "options": {}
+      },
+      "id": "tht-vid-merge",
+      "name": "Merge \u2014 Wait For Both",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1100,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "tht-vid-batch",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1320,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "id": "={{ $json._meta.record_id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json._meta.record_id }}",
+            "Generation Status": "generating"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Generation Status",
+              "displayName": "Generation Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "tht-vid-mark-prompt",
+      "name": "Airtable \u2014 Mark Prompt Generating",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.kie.ai/api/v1/veo/generate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ prompt: $('SplitInBatches').first().json.prompt, imageUrls: $('SplitInBatches').first().json.imageUrls, model: $('SplitInBatches').first().json.model, generationType: $('SplitInBatches').first().json.generationType, aspect_ratio: $('SplitInBatches').first().json.aspect_ratio, callBackUrl: $('SplitInBatches').first().json.callBackUrl }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "tht-vid-submit",
+      "name": "HTTP \u2014 Submit to Kie.AI Veo3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        500
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "EFETRZwIsMkjex1c",
+          "name": "kieAI-NB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return success response after all video jobs submitted\nconst projectId = $('Airtable \\u2014 Fetch Project').first().json.id;\nconst brandName = $('Airtable \\u2014 Fetch Project').first().json['Brand Name'];\nreturn [{\n  json: {\n    status: 'submitted',\n    message: `All 4 video jobs submitted for ${brandName}. Callbacks will update records as videos complete.`,\n    projectId: projectId\n  }\n}];"
+      },
+      "id": "tht-vid-done",
+      "name": "Code \u2014 Done Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        260
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Project": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Mark Generating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Generating": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Generated Images",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable \u2014 Fetch Video Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Generated Images": {
+      "main": [
+        [
+          {
+            "node": "Merge \u2014 Wait For Both",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Merge \u2014 Wait For Both",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge \u2014 Wait For Both": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build Veo3 Jobs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build Veo3 Jobs": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Done Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Mark Prompt Generating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Prompt Generating": {
+      "main": [
+        [
+          {
+            "node": "HTTP \u2014 Submit to Kie.AI Veo3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Submit to Kie.AI Veo3": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "THT Pipeline"
+    }
+  ]
+}

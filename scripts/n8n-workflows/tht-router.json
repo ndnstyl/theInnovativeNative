@@ -1,0 +1,366 @@
+{
+  "name": "WF-THT-ROUTER \u2014 Webhook Dispatcher",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tht-router",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "tht-router-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        400
+      ],
+      "webhookId": "tht-router"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract fields from webhook body\nconst body = $json.body || $json;\nconst recordId = body.recordId || '';\nconst status = body.status || '';\nconst brandName = body.brandName || '';\nconst brandConcept = body.brandConcept || '';\nconst projectName = body.projectName || '';\n\nif (!recordId) {\n  throw new Error('Missing recordId in webhook payload');\n}\nif (!status) {\n  throw new Error('Missing status in webhook payload');\n}\n\nreturn [{\n  json: {\n    recordId,\n    status,\n    brandName,\n    brandConcept,\n    projectName,\n    receivedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "tht-router-extract",
+      "name": "Code \u2014 Extract Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Code — Extract Payload').first().json.recordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Run Next Stage": false
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Run Next Stage",
+              "displayName": "Run Next Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        }
+      },
+      "id": "tht-router-uncheck",
+      "name": "Airtable \u2014 Uncheck Box",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        640,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "rule-prompt",
+                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
+                    "rightValue": "structure_selected",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "prompt"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "rule-image",
+                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
+                    "rightValue": "prompts_approved",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "rule-video",
+                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
+                    "rightValue": "images_approved",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "rule-reel",
+                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
+                    "rightValue": "videos_approved",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "reel"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "tht-router-switch",
+      "name": "Switch \u2014 Route by Status",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        860,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-prompt",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId, brandName: $('Code — Extract Payload').first().json.brandName, brandConcept: $('Code — Extract Payload').first().json.brandConcept }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "tht-router-call-prompt",
+      "name": "HTTP \u2014 Call PROMPT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-image",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "tht-router-call-image",
+      "name": "HTTP \u2014 Call IMAGE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-video",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "tht-router-call-video",
+      "name": "HTTP \u2014 Call VIDEO",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-reel",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "tht-router-call-reel",
+      "name": "HTTP \u2014 Call REEL",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const extracted = $('Code — Extract Payload').first().json;\nreturn [{\n  json: {\n    status: 'no_action',\n    message: `No stage workflow for status: ${extracted.status}`,\n    recordId: extracted.recordId,\n    validStatuses: ['structure_selected', 'prompts_approved', 'images_approved', 'videos_approved']\n  }\n}];"
+      },
+      "id": "tht-router-noop",
+      "name": "Code \u2014 No Action",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        1000
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Extract Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Extract Payload": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Uncheck Box",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Uncheck Box": {
+      "main": [
+        [
+          {
+            "node": "Switch \u2014 Route by Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch \u2014 Route by Status": {
+      "main": [
+        [
+          {
+            "node": "HTTP \u2014 Call PROMPT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP \u2014 Call IMAGE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP \u2014 Call VIDEO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP \u2014 Call REEL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code \u2014 No Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,0 +1,794 @@
+{
+  "name": "WF-THT-REEL \u2014 Reel Assembly",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tht-reel",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "tht-reel-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        400
+      ],
+      "webhookId": "tht-reel"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.body ? $json.body.recordId : '' }}"
+      },
+      "id": "tht-reel-fetch-project",
+      "name": "Airtable \u2014 Fetch Project",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-empty",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-empty",
+      "name": "IF \u2014 No Project Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        660,
+        400
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "tht-reel-noop-exit",
+      "name": "NoOp \u2014 Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        880,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "reel_assembling"
+          }
+        }
+      },
+      "id": "tht-reel-mark-assembling",
+      "name": "Airtable \u2014 Mark Assembling",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        500
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "filterByFormula": "AND({Asset Type}='video', {Generation Status}='generated', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
+        "returnAll": true,
+        "options": {
+          "sort": {
+            "property": [
+              {
+                "field": "Phase Number",
+                "direction": "asc"
+              }
+            ]
+          }
+        }
+      },
+      "id": "tht-reel-fetch-videos",
+      "name": "Airtable \u2014 Fetch Video Records",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1100,
+        440
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblcvKwDfxc46QW5Y",
+          "mode": "id"
+        },
+        "filterByFormula": "FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project}))",
+        "limit": 1
+      },
+      "id": "tht-reel-fetch-reel",
+      "name": "Airtable \u2014 Fetch Reel Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1100,
+        620
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: Pre-flight check \u2014 4 Veo 3.1 clips + music\nconst videoRecords = $('Airtable \u2014 Fetch Video Records').all();\nconst reelRecord = $('Airtable \u2014 Fetch Reel Record').first().json;\nconst project = $('Airtable \u2014 Fetch Project').first().json;\nconst projectId = project.id.replace(/[^a-zA-Z0-9]/g, '');\n\n// Validate 4 video records (was 5)\nif (videoRecords.length < 4) {\n  throw new Error(`Expected 4 video records, found ${videoRecords.length}`);\n}\n\n// Sort by phase number\nconst sorted = videoRecords.sort((a, b) =>\n  a.json['Phase Number'] - b.json['Phase Number']\n);\n\n// Extract Drive File IDs for 4 clips\nconst driveFileIds = sorted.map(r => r.json['Drive File ID']);\nfor (let i = 0; i < 4; i++) {\n  if (!driveFileIds[i]) {\n    throw new Error(`Video ${i + 1} missing Drive File ID`);\n  }\n}\n\n// Get music track selection\nconst musicTrack = reelRecord['Music Track'] || 'swing_pop';\n\nconst musicDriveIds = {\n  'swing_pop': '1Wx2Je-Ohtl9Wwk8Ga4J8IXn-IP58JpVV',\n  'ambient_build': '1BGL2u2ZQl9LROg5-6vpWAvvU-B8NX-XW',\n  'cinematic_progress': '16Li5bzMLaLvAZSbDJ9tePfBgB-qNlhuz'\n};\n\nconst musicDriveId = musicDriveIds[musicTrack];\nif (!musicDriveId || musicDriveId.startsWith('REPLACE')) {\n  throw new Error(`Music track '${musicTrack}' Drive ID not configured`);\n}\n\nconst workDir = `/tmp/tht-${projectId}`;\n\nreturn [{\n  json: {\n    workDir,\n    projectId,\n    projectRecordId: project.id,\n    reelRecordId: reelRecord.id,\n    driveFileIds,\n    musicDriveId,\n    musicTrack,\n    brandName: project['Brand Name'],\n    clipCount: 4\n  }\n}];"
+      },
+      "id": "tht-reel-preflight",
+      "name": "Code \u2014 Pre-flight Check",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1430,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "command": "={{ 'mkdir -p ' + $json.workDir }}"
+      },
+      "id": "tht-reel-mkdir",
+      "name": "Execute Command \u2014 Create Work Dir",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1650,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: Download 4 video clips + music file from Google Drive\nconst data = $('Code \u2014 Pre-flight Check').first().json;\nconst workDir = data.workDir;\nconst driveFileIds = data.driveFileIds;\nconst musicDriveId = data.musicDriveId;\n\n// Build download commands for 4 clips + 1 music file\nconst downloads = [];\nfor (let i = 0; i < driveFileIds.length; i++) {\n  const fileId = driveFileIds[i];\n  const outFile = `${workDir}/clip_${i + 1}.mp4`;\n  // BUG-6 FIX: confirm=t bypasses Google virus scan page\n  downloads.push(\n    `curl -L -o ${outFile} \"https://drive.google.com/uc?export=download&confirm=t&id=${fileId}\" && ` +\n    `file ${outFile} | grep -qv 'HTML' || (echo \"FAIL: clip_${i + 1} is HTML\" && exit 1)`\n  );\n}\n\n// Download music\ndownloads.push(\n  `curl -L -o ${workDir}/music.mp3 \"https://drive.google.com/uc?export=download&confirm=t&id=${musicDriveId}\" && ` +\n  `file ${workDir}/music.mp3 | grep -qv 'HTML' || (echo \"FAIL: music is HTML\" && exit 1)`\n);\n\nconst downloadCmd = downloads.join(' && ');\n\nreturn [{\n  json: {\n    downloadCmd,\n    workDir,\n    projectRecordId: data.projectRecordId,\n    reelRecordId: data.reelRecordId,\n    brandName: data.brandName,\n    clipCount: data.clipCount\n  }\n}];"
+      },
+      "id": "tht-reel-build-download",
+      "name": "Code \u2014 Build Download Commands",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1870,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.downloadCmd }}",
+        "timeout": 300
+      },
+      "id": "tht-reel-download",
+      "name": "Execute Command \u2014 Download Assets",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2090,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: Normalize 4 clips to 1080x1920 30fps h264\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\nconst clipCount = $('Code \u2014 Build Download Commands').first().json.clipCount || 4;\n\nconst cmds = [];\nfor (let i = 1; i <= clipCount; i++) {\n  cmds.push(\n    `ffmpeg -y -i ${workDir}/clip_${i}.mp4 ` +\n    `-vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" ` +\n    `-r 30 -c:v libx264 -crf 18 -pix_fmt yuv420p -an ${workDir}/norm_${i}.mp4`\n  );\n}\nconst normalizeCmd = cmds.join(' && ');\n\nreturn [{\n  json: {\n    normalizeCmd,\n    workDir\n  }\n}];"
+      },
+      "id": "tht-reel-build-normalize",
+      "name": "Code \u2014 Build Normalize Commands",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2310,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.normalizeCmd }}",
+        "timeout": 300
+      },
+      "id": "tht-reel-normalize",
+      "name": "Execute Command \u2014 Normalize Clips",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2530,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: FFMPEG stitch 4 clips with 3 crossfades + music\n// Veo 3.1 clips are ~8s each\n// Offsets: clip1_dur - fade = 7.5, then 7.5+8-0.5=15.0, then 15.0+8-0.5=22.5\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\n\nconst filterComplex = [\n  '[0:v][1:v]xfade=transition=fade:duration=0.5:offset=7.5[v01]',\n  '[v01][2:v]xfade=transition=fade:duration=0.5:offset=15.0[v012]',\n  '[v012][3:v]xfade=transition=fade:duration=0.5:offset=22.5[vfinal]',\n  '[4:a]volume=0.4,afade=t=in:st=0:d=1,afade=t=out:st=28:d=1.5[afinal]'\n].join(';');\n\nconst ffmpegCmd = `ffmpeg -y ` +\n  `-i ${workDir}/norm_1.mp4 ` +\n  `-i ${workDir}/norm_2.mp4 ` +\n  `-i ${workDir}/norm_3.mp4 ` +\n  `-i ${workDir}/norm_4.mp4 ` +\n  `-i ${workDir}/music.mp3 ` +\n  `-filter_complex \"${filterComplex}\" ` +\n  `-map \"[vfinal]\" -map \"[afinal]\" ` +\n  `-c:v libx264 -crf 18 -profile:v main -level 4.1 ` +\n  `-r 30 -pix_fmt yuv420p ` +\n  `-c:a aac -b:a 128k ` +\n  `-movflags +faststart ` +\n  `-shortest ` +\n  `${workDir}/reel_final.mp4`;\n\nreturn [{\n  json: {\n    ffmpegCmd,\n    workDir\n  }\n}];"
+      },
+      "id": "tht-reel-build-stitch",
+      "name": "Code \u2014 Build Stitch Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2750,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.ffmpegCmd }}",
+        "timeout": 300
+      },
+      "id": "tht-reel-stitch",
+      "name": "Execute Command \u2014 Stitch Reel",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        2970,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate output with ffprobe\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\nconst validateCmd = `ffprobe -v quiet -print_format json -show_format -show_streams ${workDir}/reel_final.mp4`;\n\nreturn [{\n  json: {\n    validateCmd,\n    workDir\n  }\n}];"
+      },
+      "id": "tht-reel-build-validate",
+      "name": "Code \u2014 Build Validate Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3190,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "command": "={{ $json.validateCmd }}",
+        "timeout": 60
+      },
+      "id": "tht-reel-validate",
+      "name": "Execute Command \u2014 Validate Output",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        3410,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse ffprobe output and validate specs\nconst output = $input.first().json.stdout;\nconst probe = JSON.parse(output);\nconst videoStream = probe.streams.find(s => s.codec_type === 'video');\nconst audioStream = probe.streams.find(s => s.codec_type === 'audio');\n\nconst errors = [];\n\nif (videoStream) {\n  if (videoStream.width !== 1080 || videoStream.height !== 1920) {\n    errors.push(`Resolution: ${videoStream.width}x${videoStream.height} (expected 1080x1920)`);\n  }\n  if (videoStream.codec_name !== 'h264') {\n    errors.push(`Video codec: ${videoStream.codec_name} (expected h264)`);\n  }\n} else {\n  errors.push('No video stream found');\n}\n\nif (!audioStream) {\n  errors.push('No audio stream found');\n}\n\n// Check file size\nconst fileSizeBytes = parseInt(probe.format.size || '0');\nconst fileSizeMB = fileSizeBytes / (1024 * 1024);\nif (fileSizeMB > 100) {\n  errors.push(`File size: ${fileSizeMB.toFixed(1)}MB (must be <100MB)`);\n}\n\nconst duration = parseFloat(probe.format.duration || '0');\n\nif (errors.length > 0) {\n  throw new Error(`Validation failed: ${errors.join('; ')}`);\n}\n\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\n\nreturn [{\n  json: {\n    valid: true,\n    duration: Math.round(duration),\n    fileSizeMB: fileSizeMB.toFixed(1),\n    resolution: `${videoStream.width}x${videoStream.height}`,\n    codec: videoStream.codec_name,\n    reelPath: `${workDir}/reel_final.mp4`,\n    projectRecordId: $('Code \u2014 Build Download Commands').first().json.projectRecordId,\n    reelRecordId: $('Code \u2014 Build Download Commands').first().json.reelRecordId,\n    brandName: $('Code \u2014 Build Download Commands').first().json.brandName\n  }\n}];"
+      },
+      "id": "tht-reel-check-validate",
+      "name": "Code \u2014 Check Validation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3630,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "name": "=THT_Reel_{{ $('Code \u2014 Check Validation').first().json.brandName.replace(/[^a-zA-Z0-9]/g, '_') }}.mp4",
+        "folderId": {
+          "__rl": true,
+          "value": "19xzIaZt5yIDMF7yBCF3Y2X6gKvokHiZB",
+          "mode": "id"
+        },
+        "options": {
+          "simplifyOutput": true
+        }
+      },
+      "id": "tht-reel-drive-upload",
+      "name": "Google Drive \u2014 Upload Reel",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        4070,
+        530
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.id }}/permissions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"type\":\"anyone\",\"role\":\"reader\"}"
+      },
+      "id": "tht-reel-share",
+      "name": "HTTP Request \u2014 Share File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4290,
+        530
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblcvKwDfxc46QW5Y",
+          "mode": "id"
+        },
+        "id": "={{ $('Code \u2014 Check Validation').first().json.reelRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Reel Status": "assembled",
+            "Reel Drive ID": "={{ $('Google Drive \u2014 Upload Reel').first().json.id }}",
+            "Reel URL": "=https://drive.google.com/file/d/{{ $('Google Drive \u2014 Upload Reel').first().json.id }}/view",
+            "Duration (s)": "={{ $('Code \u2014 Check Validation').first().json.duration }}"
+          }
+        }
+      },
+      "id": "tht-reel-update-reel",
+      "name": "Airtable \u2014 Update Reel Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        4510,
+        530
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Code \u2014 Check Validation').first().json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "reel_assembled"
+          }
+        }
+      },
+      "id": "tht-reel-update-project",
+      "name": "Airtable \u2014 Update Project Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        4730,
+        530
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'rm -rf ' + $('Code \u2014 Build Download Commands').first().json.workDir }}"
+      },
+      "id": "tht-reel-cleanup",
+      "name": "Execute Command \u2014 Cleanup",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        4950,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "options": {}
+      },
+      "id": "tht-reel-merge-data",
+      "name": "Merge \u2014 Wait For Both",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1210,
+        530
+      ]
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $('Code \u2014 Check Validation').first().json.reelPath }}"
+      },
+      "id": "tht-reel-read-binary",
+      "name": "Read Binary File \u2014 Reel",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        3850,
+        530
+      ]
+    }
+  ],
+  "connections": {
+    "Airtable \u2014 Fetch Project": {
+      "main": [
+        [
+          {
+            "node": "IF \u2014 No Project Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 No Project Found": {
+      "main": [
+        [
+          {
+            "node": "NoOp \u2014 Exit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Mark Assembling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Assembling": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Video Records",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Airtable \u2014 Fetch Reel Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Video Records": {
+      "main": [
+        [
+          {
+            "node": "Merge \u2014 Wait For Both",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Fetch Reel Record": {
+      "main": [
+        [
+          {
+            "node": "Merge \u2014 Wait For Both",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Pre-flight Check": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Create Work Dir",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Create Work Dir": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build Download Commands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build Download Commands": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Download Assets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Download Assets": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build Normalize Commands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build Normalize Commands": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Normalize Clips",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Normalize Clips": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build Stitch Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build Stitch Command": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Stitch Reel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Stitch Reel": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build Validate Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build Validate Command": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Validate Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Validate Output": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Check Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Check Validation": {
+      "main": [
+        [
+          {
+            "node": "Read Binary File \u2014 Reel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive \u2014 Upload Reel": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request \u2014 Share File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request \u2014 Share File": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Update Reel Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Update Reel Record": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Update Project Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Update Project Status": {
+      "main": [
+        [
+          {
+            "node": "Execute Command \u2014 Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge \u2014 Wait For Both": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Pre-flight Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary File \u2014 Reel": {
+      "main": [
+        [
+          {
+            "node": "Google Drive \u2014 Upload Reel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "THT Pipeline"
+    }
+  ]
+}

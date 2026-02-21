@@ -1,0 +1,337 @@
+{
+  "name": "WF-005 Haven Batch QA Gate",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "wf005-trigger",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        0,
+        300
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Download all scene images from Google Drive to /tmp\nconst fs = require('fs');\nconst input = $input.first().json;\nconst scenes = input.scenes;\nconst ts = Date.now();\nconst qaDir = '/tmp/haven-qa-' + ts;\n\n// Create temp directory\nfs.mkdirSync(qaDir, { recursive: true });\n\n// Download each scene image using Google Drive API\nconst results = [];\nfor (const scene of scenes) {\n    const fileId = scene.asset_drive_file_id;\n    if (!fileId) {\n        results.push({ scene_number: scene.number, error: 'No drive file ID' });\n        continue;\n    }\n\n    try {\n        // Use n8n's built-in HTTP helper to download from Drive\n        const response = await this.helpers.httpRequestWithAuthentication.call(\n            this, 'googleDriveOAuth2Api', {\n                method: 'GET',\n                url: 'https://www.googleapis.com/drive/v3/files/' + fileId + '?alt=media',\n                encoding: 'arraybuffer',\n                returnFullResponse: true\n            }\n        );\n\n        const filePath = qaDir + '/scene-' + scene.number + '.png';\n        fs.writeFileSync(filePath, Buffer.from(response.body));\n\n        results.push({\n            scene_number: scene.number,\n            label: scene.label || 'scene-' + scene.number,\n            file_path: filePath,\n            quality_score: scene.quality_score || 0,\n            expects_haven: scene.expects_haven || false,\n            image_prompt: scene.image_prompt || ''\n        });\n    } catch (err) {\n        results.push({\n            scene_number: scene.number,\n            error: 'Download failed: ' + err.message\n        });\n    }\n}\n\nreturn [{json: {\n    qa_dir: qaDir,\n    timestamp: ts,\n    scene_images: results,\n    script_record_id: input.script_record_id,\n    playbook_id: input.playbook_id,\n    product_name: input.product_name,\n    product_image_url: input.product_image_url || '',\n    scene_count: scenes.length\n}}];"
+      },
+      "id": "wf005-download-scenes",
+      "name": "Download Scene Images",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        260,
+        300
+      ],
+      "typeVersion": 2,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.product_image_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "wf005-download-product",
+      "name": "Download Product Reference",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        520,
+        300
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "jsCode": "// Base64-encode all scene images + product reference for Gemini multimodal\nconst fs = require('fs');\nconst sceneData = $('Download Scene Images').first().json;\nconst scenes = sceneData.scene_images.filter(s => !s.error);\n\n// Build parts array for Gemini\nconst parts = [];\n\n// Add scoring prompt as text\nparts.push({\n    text: `You are a professional video QA reviewer for UGC product showcase videos.\n\nYou will receive:\n1. A product reference photo (the REAL product from Amazon)\n2. Multiple scene images (6-8) that will be assembled into a 25-35 second video\n\nScore each dimension 1-8. Return ONLY valid JSON, no markdown.\n\n## Scoring Dimensions\n\n### 1. Cross-Scene Diversity (1-8)\nDo the scenes look visually distinct from each other? Different angles, compositions, lighting?\n- 1-2: 3+ scenes are nearly identical\n- 3-4: Some repetition but majority distinct\n- 5-6: Good variety with minor similarities\n- 7-8: Every scene is visually unique\n\n### 2. Product Accuracy (1-8)\nDoes the product in the scenes match the reference photo? Correct shape, color, details?\n- 1-2: Wrong product entirely or unrecognizable\n- 3-4: Vaguely similar but key details wrong\n- 5-6: Recognizable but minor inaccuracies\n- 7-8: Exact match to reference photo\n\n### 3. Physics & Realism (1-8)\nAre objects placed naturally? Correct scale, shadows, interactions?\n- 1-2: Multiple floating objects, wrong scale, impossible physics\n- 3-4: Some unnatural placements\n- 5-6: Mostly realistic with minor issues\n- 7-8: Photorealistic, natural object interactions\n\n### 4. Setting Consistency (1-8)\nDo the scenes feel like they're in the same home/room?\n- 1-2: Completely different environments across scenes\n- 3-4: Mostly consistent with some jarring changes\n- 5-6: Good consistency, minor differences acceptable\n- 7-8: Coherent environment throughout\n\n### 5. Visual Storytelling (1-8)\nDo the scenes flow as a video? Hook\u2192detail\u2192context\u2192CTA progression?\n- 1-2: Random unrelated shots\n- 3-4: Some logical order but weak flow\n- 5-6: Reasonable progression\n- 7-8: Clear narrative arc from hook to CTA\n\n## Output Format\n{\n  \"scores\": {\n    \"cross_scene_diversity\": <int 1-8>,\n    \"product_accuracy\": <int 1-8>,\n    \"physics_realism\": <int 1-8>,\n    \"setting_consistency\": <int 1-8>,\n    \"visual_storytelling\": <int 1-8>\n  },\n  \"overall_score\": <int sum of all 5>,\n  \"max_score\": 40,\n  \"flagged_scenes\": [\n    {\n      \"scene_number\": <int>,\n      \"issues\": [\"description of issue\"],\n      \"suggestion\": \"how to fix\"\n    }\n  ],\n  \"summary\": \"1-2 sentence overall assessment\"\n}`\n});\n\n// Add product reference image (from HTTP Request binary)\ntry {\n    const productBuf = await this.helpers.getBinaryDataBuffer(0, 'data');\n    if (productBuf && productBuf.length > 100) {\n        parts.push({ text: \"PRODUCT REFERENCE PHOTO (this is the real product):\" });\n        parts.push({\n            inline_data: {\n                mime_type: \"image/jpeg\",\n                data: productBuf.toString('base64')\n            }\n        });\n    }\n} catch (e) {\n    parts.push({ text: \"NOTE: Product reference image unavailable. Score product accuracy based on product name: \" + sceneData.product_name });\n}\n\n// Add each scene image\nfor (const scene of scenes) {\n    parts.push({ text: \"SCENE \" + scene.scene_number + \" (\" + scene.label + \"):\" });\n    const imgBuf = fs.readFileSync(scene.file_path);\n    parts.push({\n        inline_data: {\n            mime_type: \"image/png\",\n            data: imgBuf.toString('base64')\n        }\n    });\n}\n\nparts.push({ text: \"Now score all \" + scenes.length + \" scenes together. Return ONLY valid JSON.\" });\n\nreturn [{json: {\n    gemini_payload: {\n        contents: [{ parts: parts }],\n        generationConfig: {\n            temperature: 0.1,\n            maxOutputTokens: 2048,\n            responseMimeType: \"application/json\"\n        }\n    },\n    scene_count: scenes.length,\n    qa_dir: sceneData.qa_dir,\n    script_record_id: sceneData.script_record_id,\n    playbook_id: sceneData.playbook_id,\n    product_name: sceneData.product_name,\n    scene_images: scenes\n}}];"
+      },
+      "id": "wf005-build-payload",
+      "name": "Build QA Payload",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        780,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.gemini_payload) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "wf005-gemini-qa",
+      "name": "Gemini Batch QA",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1040,
+        300
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Gemini response and calculate verdict\nconst geminiResponse = $input.first().json;\nconst prevData = $('Build QA Payload').first().json;\n\nlet qaResult;\ntry {\n    // Extract text from Gemini response\n    const text = geminiResponse.candidates[0].content.parts[0].text;\n    // Parse JSON (handle markdown code blocks if present)\n    const cleaned = text.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    qaResult = JSON.parse(cleaned);\n} catch (e) {\n    return [{json: {\n        status: 'error',\n        error_message: 'Failed to parse Gemini QA response: ' + e.message,\n        raw_response: JSON.stringify(geminiResponse).substring(0, 500),\n        qa_dir: prevData.qa_dir,\n        playbook_id: prevData.playbook_id\n    }}];\n}\n\nconst scores = qaResult.scores || {};\nconst overallScore = qaResult.overall_score ||\n    (scores.cross_scene_diversity || 0) +\n    (scores.product_accuracy || 0) +\n    (scores.physics_realism || 0) +\n    (scores.setting_consistency || 0) +\n    (scores.visual_storytelling || 0);\n\nconst maxScore = 40;\nconst pct = (overallScore / maxScore) * 100;\n\n// Check for any single dimension < 4 (hard rule)\nconst dims = Object.values(scores);\nconst anyBelowThreshold = dims.some(d => d < 4);\n\n// Determine verdict\nlet verdict;\nif (pct >= 80 && !anyBelowThreshold) {\n    verdict = 'pass';\n} else if (pct >= 60 && !anyBelowThreshold) {\n    verdict = 'conditional';\n} else if (anyBelowThreshold && pct >= 60) {\n    verdict = 'conditional'; // Hard rule: any dim < 4 forces conditional\n} else {\n    verdict = 'fail';\n}\n\n// Build regeneration prompts for flagged scenes\nconst scenesToRegenerate = [];\nconst regenerationPrompts = {};\nif (qaResult.flagged_scenes) {\n    for (const flagged of qaResult.flagged_scenes) {\n        scenesToRegenerate.push(flagged.scene_number);\n        regenerationPrompts[String(flagged.scene_number)] = flagged.suggestion || 'Improve quality';\n    }\n}\n\nreturn [{json: {\n    status: verdict,\n    overall_score: overallScore,\n    max_score: maxScore,\n    percentage: Math.round(pct),\n    scores: scores,\n    any_dimension_below_4: anyBelowThreshold,\n    flagged_scenes: qaResult.flagged_scenes || [],\n    scenes_to_regenerate: scenesToRegenerate,\n    regeneration_prompts: regenerationPrompts,\n    summary: qaResult.summary || '',\n    script_record_id: prevData.script_record_id,\n    playbook_id: prevData.playbook_id,\n    product_name: prevData.product_name,\n    scene_images: prevData.scene_images,\n    qa_dir: prevData.qa_dir\n}}];"
+      },
+      "id": "wf005-parse-results",
+      "name": "Parse QA Results",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1300,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appWVJhdylvNm07nv",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblQ4xl6Gd0jYs6vN",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Review Title": "={{ 'Batch QA - ' + $json.product_name + ' - ' + new Date().toISOString().split('T')[0] }}",
+            "Review Date": "={{ new Date().toISOString() }}",
+            "Reviewer": "WF-005 Gemini Batch QA",
+            "Total Score": "={{ $json.overall_score }}",
+            "Scores Breakdown": "={{ JSON.stringify($json.scores, null, 2) }}",
+            "Verdict": "={{ $json.status === 'pass' ? 'Pass' : $json.status === 'conditional' ? 'Conditional' : 'Fail' }}",
+            "Notes": "={{ $json.summary + '\\n\\nFlagged scenes: ' + JSON.stringify($json.scenes_to_regenerate) + '\\nPercentage: ' + $json.percentage + '%' + ($json.any_dimension_below_4 ? '\\n\u26a0\ufe0f Hard rule triggered: dimension below 4' : '') }}",
+            "Revision Requested": "={{ $json.status === 'conditional' }}",
+            "Gate Number": "G3"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "wf005-create-qa-record",
+      "name": "Create QA Review Record",
+      "type": "n8n-nodes-base.airtable",
+      "position": [
+        1560,
+        300
+      ],
+      "typeVersion": 2.1,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Update each Asset record with QA status\n// Note: This uses Airtable REST API via httpRequestWithAuthentication\nconst qaData = $('Parse QA Results').first().json;\nconst qaRecord = $input.first().json;\nconst qaRecordId = qaRecord.id || '';\n\nconst verdict = qaData.status;\nconst flaggedNums = new Set(qaData.scenes_to_regenerate);\n\n// We can't do per-asset Airtable updates in one Code node efficiently,\n// so we'll output items for downstream processing if needed.\n// For now, return the final result with the QA record ID.\n\nreturn [{json: {\n    status: qaData.status,\n    overall_score: qaData.overall_score,\n    max_score: qaData.max_score,\n    percentage: qaData.percentage,\n    scores: qaData.scores,\n    scenes_to_regenerate: qaData.scenes_to_regenerate,\n    regeneration_prompts: qaData.regeneration_prompts,\n    flagged_scenes: qaData.flagged_scenes,\n    summary: qaData.summary,\n    qa_review_record_id: qaRecordId,\n    script_record_id: qaData.script_record_id,\n    playbook_id: qaData.playbook_id,\n    qa_dir: qaData.qa_dir\n}}];"
+      },
+      "id": "wf005-update-assets",
+      "name": "Update Asset QA Status",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1820,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "// Remove temporary QA image files\nconst fs = require('fs');\nconst data = $input.first().json;\nconst qaDir = data.qa_dir;\n\ntry {\n    if (qaDir && qaDir.startsWith('/tmp/haven-qa-')) {\n        // Remove all files in the directory\n        const files = fs.readdirSync(qaDir);\n        for (const file of files) {\n            fs.unlinkSync(qaDir + '/' + file);\n        }\n        fs.rmdirSync(qaDir);\n    }\n} catch (e) {\n    // Non-fatal \u2014 tmp files will be cleaned up by OS eventually\n}\n\nreturn [{json: {\n    ...data,\n    cleanup: 'done'\n}}];"
+      },
+      "id": "wf005-cleanup",
+      "name": "Cleanup Temp Files",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2080,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return final WF-005 output to caller (WF-001)\nconst data = $input.first().json;\n\nreturn [{json: {\n    status: data.status,\n    overall_score: data.overall_score,\n    max_score: data.max_score,\n    percentage: data.percentage,\n    scores: data.scores,\n    scenes_to_regenerate: data.scenes_to_regenerate,\n    regeneration_prompts: data.regeneration_prompts,\n    qa_review_record_id: data.qa_review_record_id,\n    summary: data.summary\n}}];"
+      },
+      "id": "wf005-return-output",
+      "name": "Return Output",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2340,
+        300
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {},
+      "id": "wf005-error-trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "position": [
+        0,
+        600
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "// Cleanup and return structured error\nconst fs = require('fs');\nconst error = $input.first().json;\n\n// Try to clean up temp files\ntry {\n    const glob = require('child_process').execSync(\n        'ls -d /tmp/haven-qa-* 2>/dev/null || true',\n        {encoding: 'utf-8'}\n    ).trim();\n    if (glob) {\n        for (const dir of glob.split('\\n')) {\n            if (dir.startsWith('/tmp/haven-qa-')) {\n                require('child_process').execSync('rm -rf ' + dir);\n            }\n        }\n    }\n} catch (e) {\n    // Non-fatal\n}\n\nreturn [{json: {\n    status: 'error',\n    error_message: error.message || error.error_message || 'Unknown WF-005 error',\n    error_node: error.node || 'unknown',\n    timestamp: new Date().toISOString()\n}}];"
+      },
+      "id": "wf005-error-handler",
+      "name": "Error Handler",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        260,
+        600
+      ],
+      "typeVersion": 2
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download Scene Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Scene Images": {
+      "main": [
+        [
+          {
+            "node": "Download Product Reference",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Product Reference": {
+      "main": [
+        [
+          {
+            "node": "Build QA Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build QA Payload": {
+      "main": [
+        [
+          {
+            "node": "Gemini Batch QA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Batch QA": {
+      "main": [
+        [
+          {
+            "node": "Parse QA Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse QA Results": {
+      "main": [
+        [
+          {
+            "node": "Create QA Review Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create QA Review Record": {
+      "main": [
+        [
+          {
+            "node": "Update Asset QA Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Asset QA Status": {
+      "main": [
+        [
+          {
+            "node": "Cleanup Temp Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleanup Temp Files": {
+      "main": [
+        [
+          {
+            "node": "Return Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Error Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  }
+}

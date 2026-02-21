@@ -17,7 +17,7 @@ from googleapiclient.http import MediaFileUpload
 
 GDRIVE_FILE_ID = "1yfbkV_bvmcnPk486flWS1XqYk5d8eggt"
 LOCAL_PATH = os.path.join(
-    os.path.dirname(__file__), "..",
+    os.path.dirname(__file__), "..", "..",
     "projects/004-bowtie-bullies/episodes/EP-001/EP-001-marathon-continues-pipeline.json",
 )
 

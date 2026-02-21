@@ -1,0 +1,675 @@
+{
+  "name": "WF-THT-PROMPT \u2014 Prompt Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tht-prompt",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "tht-prompt-webhook",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        220,
+        300
+      ],
+      "webhookId": "tht-prompt"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.body ? $json.body.recordId : '' }}"
+      },
+      "id": "tht-prompt-fetch-project",
+      "name": "Airtable \u2014 Fetch Project",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-empty",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-prompt-if-empty",
+      "name": "IF \u2014 No Project Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "tht-prompt-noop-exit",
+      "name": "NoOp \u2014 Exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        880,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+            "Status": "prompts_generating"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-mark-generating",
+      "name": "Airtable \u2014 Mark Generating",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build LLM prompt for brand timelapse \u2014 V2: 8 images, 4 videos\nconst project = $('Airtable \u2014 Fetch Project').first().json;\nconst brandName = project['Brand Name'];\nconst brandConcept = project['Brand Concept'];\n\nconst systemPrompt = `You are a hyper-realistic architectural construction timelapse prompt engineer.\n\nYou generate structured image and video prompts for AI image/video generation tools.\nAll prompts describe a SINGLE iconic brand building being constructed from raw land to full activation.\n\n## GLOBAL RULES \u2014 Apply to EVERY image prompt:\n- Fixed drone-level viewpoint: ~100 feet altitude, 30-40 degree downward angle, static camera\n- Same plot of land, same camera position, same lens across ALL 8 images (except Image 8 which is a push-in detail shot)\n- 9:16 vertical aspect ratio (portrait orientation)\n- HYPER-REALISTIC and PHOTOREALISTIC \u2014 NOT cartoonish, NOT cel-shaded, NOT stylized\n- Architecturally sound with real physics \u2014 structures must look constructionally plausible\n- Consistent dusk/blue-hour lighting across all images\n- The brand's recognizable visual elements (logo, colors, structural style) incorporated naturally\n\n## IMAGE PHASES (8 total \u2014 paired as start+end for 4 video stages):\n\n### Stage 1: Earth to Foundation\n1. **Excavated Lot** \u2014 Empty excavated dirt lot. Construction fencing around perimeter. Bulldozers, dump trucks, workers in hard hats. Raw exposed earth, no vegetation in center. Same surrounding trees/landscape that will appear in the final image.\n2. **Construction Starting** \u2014 Foundation concrete visible. Rebar grid and structural base emerging from ground. Crane base installed at center. Construction materials staged. First signs of the building footprint taking shape.\n\n### Stage 2: Building Rises\n3. **Mid Construction** \u2014 Steel/concrete framework rising to ~40-50% of final height. Scaffolding wrapping the structure. Glass/cladding panels beginning on lower floors. Multiple cranes active. The brand's architectural form becoming recognizable in the skeleton.\n4. **Structure Nearly Complete** \u2014 Building at ~85-90%. Most exterior cladding/glass installed. Brand's signature architectural features clearly visible. Scaffolding still on upper portions. Surrounding site work (driveways, walkways) being laid.\n\n### Stage 3: Polish and Finish\n5. **Detail & Finishing** \u2014 Scaffolding removed from most areas. Workers doing exterior finishing \u2014 cleaning glass, installing trim, mounting signage hardware. Some panels or details still incomplete. Close to done but not pristine. The building's form is complete.\n6. **Fully Polished** \u2014 Building 100% complete. Every surface clean and finished. Brand signage/logo elements mounted but NOT illuminated. No cars, no people, no interior lights. Empty surroundings. Pure architectural beauty in natural light.\n\n### Stage 4: Activation & Reveal\n7. **Coming to Life** \u2014 Same wide drone viewpoint. Building complete. Interior lights beginning to glow warm through windows. Dusk sky deepening. The first signs of activation \u2014 a few cars appearing, exterior lighting warming up. Setting the stage for the grand reveal.\n8. **Iconic Brand Reveal (PUSH-IN)** \u2014 CAMERA MOVES: slow push-in toward the building's most iconic brand element (the logo, the signature architectural feature). Full activation \u2014 all lights blazing, cars in lot, people at entrance, landscaping lush and mature. The brand symbol is the hero of the shot. This is the money shot.\n\n## VIDEO TRANSITION PROMPTS (4 total):\nEach video uses Veo 3.1 first+last frame interpolation. The model receives the start image and end image and generates smooth motion between them. The prompt describes WHAT HAPPENS during the transition.\n\n- Videos 1-3: Camera remains COMPLETELY STATIC (same drone position)\n- Video 4: Camera performs a slow, cinematic PUSH-IN toward the brand symbol\n- All motion must be gradual, physically realistic \u2014 construction workers moving, cranes operating, materials being placed\n- NO teleportation, NO snapping, NO time-lapse jitter\n\n## OUTPUT FORMAT:\nReturn a JSON object with this exact structure:\n{\n  \"images\": [\n    { \"phase\": 1, \"label\": \"Excavated Lot\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Construction Starting\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Mid Construction\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Structure Nearly Complete\", \"prompt\": \"...\" },\n    { \"phase\": 5, \"label\": \"Detail and Finishing\", \"prompt\": \"...\" },\n    { \"phase\": 6, \"label\": \"Fully Polished\", \"prompt\": \"...\" },\n    { \"phase\": 7, \"label\": \"Coming to Life\", \"prompt\": \"...\" },\n    { \"phase\": 8, \"label\": \"Iconic Brand Reveal\", \"prompt\": \"...\" }\n  ],\n  \"videos\": [\n    { \"phase\": 1, \"label\": \"Excavated Lot to Construction Starting\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Mid Construction to Structure Nearly Complete\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Detail and Finishing to Fully Polished\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Coming to Life to Iconic Brand Reveal\", \"prompt\": \"...\" }\n  ]\n}\n\nEach prompt should be 3-5 sentences of vivid, specific, cinematic description. Include the brand name and recognizable brand elements in every prompt. Image prompts should describe a STILL PHOTOGRAPH. Video prompts should describe MOTION and ACTIVITY.`;\n\nconst userPrompt = \"Generate construction timelapse prompts for: \" + brandName + \"\\n\\nArchitectural Concept: \" + brandConcept + \"\\n\\nGenerate all 8 image prompts and 4 video transition prompts following the rules above. Make the building unmistakably \" + brandName + \" \u2014 incorporate their logo, signature colors, and architectural style naturally into a hyper-realistic construction sequence.\";\n\nreturn [{\n  json: {\n    prompt: userPrompt,\n    systemPrompt: systemPrompt,\n    brandName: brandName,\n    brandConcept: brandConcept,\n    projectRecordId: $('Airtable \u2014 Fetch Project').first().json.id\n  }\n}];"
+      },
+      "id": "tht-prompt-build-gemini",
+      "name": "Code \u2014 Build LLM Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.1-70b-versatile\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.prompt) }} }\n  ],\n  \"temperature\": 0.7,\n  \"response_format\": {\"type\": \"json_object\"}\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "tht-prompt-llm-call",
+      "name": "HTTP Request \u2014 Groq LLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1320,
+        400
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "GROQ_CREDENTIAL_ID",
+          "name": "Groq API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse LLM structured JSON response \u2014 V2: 8 images + 4 videos = 12 records\nconst llmResponse = $input.first().json;\nconst projectRecordId = $('Code \u2014 Build LLM Prompt').first().json.projectRecordId;\nconst brandName = $('Code \u2014 Build LLM Prompt').first().json.brandName;\n\ntry {\n  // Groq/OpenAI format: choices[0].message.content\n  const rawText = llmResponse.choices[0].message.content;\n  const data = typeof rawText === 'object' ? rawText : JSON.parse(rawText);\n\n  if (!data.images || data.images.length !== 8) {\n    throw new Error(`Expected 8 image prompts, got ${data.images ? data.images.length : 0}`);\n  }\n  if (!data.videos || data.videos.length !== 4) {\n    throw new Error(`Expected 4 video prompts, got ${data.videos ? data.videos.length : 0}`);\n  }\n\n  const records = [];\n\n  for (const img of data.images) {\n    records.push({\n      json: {\n        projectRecordId,\n        phaseNumber: img.phase,\n        assetType: 'image',\n        phaseLabel: img.label,\n        promptLabel: `${brandName} - Phase ${img.phase} (image)`,\n        promptText: img.prompt,\n        brandName\n      }\n    });\n  }\n\n  for (const vid of data.videos) {\n    records.push({\n      json: {\n        projectRecordId,\n        phaseNumber: vid.phase,\n        assetType: 'video',\n        phaseLabel: vid.label,\n        promptLabel: `${brandName} - Phase ${vid.phase} (video)`,\n        promptText: vid.prompt,\n        brandName\n      }\n    });\n  }\n\n  return records;\n} catch (error) {\n  return [{\n    json: {\n      projectRecordId,\n      parseError: true,\n      errorMessage: `Failed to parse LLM response: ${error.message}`\n    }\n  }];\n}"
+      },
+      "id": "tht-prompt-parse-json",
+      "name": "Code \u2014 Parse Prompt JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "tht-prompt-split",
+      "name": "SplitInBatches \u2014 Create Prompts",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1870,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblWExmILcFYnW9ze",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Project": [
+              "={{ $json.projectRecordId }}"
+            ],
+            "Phase Number": "={{ $json.phaseNumber }}",
+            "Asset Type": "={{ $json.assetType }}",
+            "Phase Label": "={{ $json.phaseLabel }}",
+            "Prompt Label": "={{ $json.promptLabel }}",
+            "Prompt Text": "={{ $json.promptText }}",
+            "Generation Status": "pending"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Project",
+              "displayName": "Project",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phase Number",
+              "displayName": "Phase Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Asset Type",
+              "displayName": "Asset Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Phase Label",
+              "displayName": "Phase Label",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prompt Label",
+              "displayName": "Prompt Label",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prompt Text",
+              "displayName": "Prompt Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Generation Status",
+              "displayName": "Generation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-create-record",
+      "name": "Airtable \u2014 Create Prompt Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2090,
+        600
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 0.5,
+        "unit": "seconds"
+      },
+      "id": "tht-prompt-wait-rate",
+      "name": "Wait \u2014 Rate Limit",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2310,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+            "Status": "prompts_generated"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-update-status",
+      "name": "Airtable \u2014 Update Project Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2090,
+        360
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-parse-error",
+              "leftValue": "={{ $json.parseError }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-prompt-if-parse-error",
+      "name": "IF \u2014 Parse Error",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1650,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.projectRecordId }}",
+            "Status": "structure_selected"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-revert-status",
+      "name": "Airtable \u2014 Revert Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1870,
+        280
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Airtable \u2014 Fetch Project": {
+      "main": [
+        [
+          {
+            "node": "IF \u2014 No Project Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 No Project Found": {
+      "main": [
+        [
+          {
+            "node": "NoOp \u2014 Exit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Mark Generating",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Mark Generating": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Build LLM Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Build LLM Prompt": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request \u2014 Groq LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request \u2014 Groq LLM": {
+      "main": [
+        [
+          {
+            "node": "Code \u2014 Parse Prompt JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code \u2014 Parse Prompt JSON": {
+      "main": [
+        [
+          {
+            "node": "IF \u2014 Parse Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches \u2014 Create Prompts": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Update Project Status",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Create Prompt Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Create Prompt Record": {
+      "main": [
+        [
+          {
+            "node": "Wait \u2014 Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait \u2014 Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches \u2014 Create Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 Parse Error": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Revert Status",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SplitInBatches \u2014 Create Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Fetch Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "THT Pipeline"
+    }
+  ]
+}
