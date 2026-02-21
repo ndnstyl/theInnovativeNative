@@ -2,11 +2,11 @@
   "$schema": "episode-script-template",
   "version": "1.0",
   "episode_id": "EP-001",
-  "title": "The Marathon Continues \u2014 Each One Teach One",
+  "title": "The Marathon Continues — Each One Teach One",
   "content_pillar": "1C Wealth Building (Channel Thesis)",
   "target_duration_seconds": 1020,
   "thumbnail_prompt": "American Red Nose Pitbull in sleeveless black coveralls, facing camera directly, low angle shot from below, urban rooftop at dusk, city lights behind, arms crossed, confident watchful expression, amber eyes glowing. Bold text 'THE MARATHON CONTINUES' in bone white with 'CONTINUES' in rust orange. Dark steel palette, rust-orange sodium vapor accent, heavy vignette, 2D cel-shaded style, 1280x720 16:9",
-  "description": "Mama lost the house in oh-three. I stayed. Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop. This is the origin story. The anti-hero arc. The 'Each One Teach One' promise. Five things you can own starting from zero \u2014 before AI finishes the race without you.",
+  "description": "Mama lost the house in oh-three. I stayed. Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop. This is the origin story. The anti-hero arc. The 'Each One Teach One' promise. Five things you can own starting from zero — before AI finishes the race without you.",
   "tags": [
     "origin story",
     "each one teach one",
@@ -21,16 +21,22 @@
     {
       "scene_number": 1,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Mama lost the house in oh-three.",
       "narration_aave": true,
-      "aave_density": 0.50,
+      "aave_density": 0.5,
       "visual_prompt": "Boarded-up row house at night, plywood screwed over windows, faded foreclosure notice stapled to front door, overturned porch chair, forgotten child's shoe on cracked walkway, dead potted plant by steps, sodium vapor streetlight casting rust-orange light on facade. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "pose_variant": null,
       "duration_seconds": 6,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-32dB",
       "pause_after": "1500ms",
@@ -41,15 +47,25 @@
         "style": 0.28,
         "speed": 0.85,
         "use_speaker_boost": true
+      },
+      "visual_anchors": {
+        "must_include": [
+          "overturned porch chair",
+          "foreclosure notice",
+          "dead potted plant",
+          "child's shoe"
+        ],
+        "scene_signature": "Boarded-up row house at night — Mama lost the house in oh-three",
+        "lighting_override": "sodium vapor streetlight casting rust-orange light on facade"
       }
     },
     {
       "scene_number": 2,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Wasn't no warnin'. Just a letter. Then a lock on the door. She went down south. Family in Louisiana said they had room. I stayed.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": "Extreme close-up of heavy padlock and new chain on residential door handle, official eviction letter wedged in door jamb, envelope with county seal visible, peeling paint on door frame, sodium vapor streetlight casting harsh orange from above, shallow depth of field. Rust orange and dark steel only, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "pose_variant": null,
@@ -63,24 +79,60 @@
       "voice_settings": {
         "stability": 0.42,
         "similarity_boost": 0.75,
-        "style": 0.30,
+        "style": 0.3,
         "speed": 0.86,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "2a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Wasn't no warnin'. Just a letter. Then a lock on the door.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded extreme close-up: heavy padlock and new chain on a residential door handle, official eviction letter wedged in the door jamb, envelope with county seal visible, peeling paint on door frame, sodium vapor orange from above, shallow depth of field",
+          "story_function": "The eviction — sudden, cold, institutional"
+        },
+        {
+          "beat_id": "2b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "She went down south. Family in Louisiana said they had room. I stayed.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: back of a woman walking away down a dark sidewalk toward a distant Greyhound bus at the end of the block, single suitcase in hand, sodium vapor streetlight casting her long shadow back toward the viewer, the row house dark behind her, finality",
+          "story_function": "Mama leaving — he chose to stay"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "padlock and new chain",
+          "eviction letter",
+          "heavy padlock",
+          "county seal"
+        ],
+        "scene_signature": "Extreme close-up of heavy padlock and new chain on residential door handle — Wasn't no warnin'",
+        "lighting_override": "sodium vapor streetlight casting harsh orange from above",
+        "composition": "Extreme close-up"
       }
     },
     {
       "scene_number": 3,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Seventeen. Sleepin' in a Cutlass Supreme with a pit bull and a stolen laptop.",
       "narration_aave": true,
       "aave_density": 0.55,
       "visual_prompt": "Red Nose Pitbull extreme close-up (P5), one amber eye visible, scar across left brow, still and watching, rust-orange light on copper coat. Dark steel background, 2D cel-shaded style, film grain 20%, heavy vignette, 16:9.",
+      "bg_environment": "Interior of 1980s Oldsmobile Cutlass Supreme back seat at night, cracked vinyl bench seat, fogged windows, sodium vapor streetlight casting rust-orange stripe through rear window, closed laptop wedged against door panel, crumpled blanket, claustrophobic framing",
       "visual_backend": "gemini",
       "pose_variant": "P5",
       "duration_seconds": 8,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-34dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-34dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-28dB",
       "pause_after": "1500ms",
@@ -88,19 +140,25 @@
       "voice_settings": {
         "stability": 0.44,
         "similarity_boost": 0.75,
-        "style": 0.30,
+        "style": 0.3,
         "speed": 0.86,
         "use_speaker_boost": true
+      },
+      "visual_anchors": {
+        "scene_signature": "Cutlass Supreme interior at night — Seventeen",
+        "lighting_override": "rust-orange light on copper coat",
+        "composition": "Extreme close-up"
       }
     },
     {
       "scene_number": 4,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Three years like that. Couches. Cars. Places nobody should be closin' they eyes. But that laptop... that changed somethin'.",
       "narration_aave": true,
       "aave_density": 0.65,
       "visual_prompt": "Red Nose Pitbull (P3 variant) lying on cracked concrete beside closed laptop, head on paws, one eye open, single sodium vapor light casting long shadow. Dark room, 2D cel-shaded style, film grain 20%, 16:9.",
+      "bg_environment": "Cracked concrete floor in dark abandoned room, closed laptop on ground, single sodium vapor light casting long shadow across floor from unseen window, dust particles in light beam, darkness surrounding the pool of light",
       "visual_backend": "gemini",
       "pose_variant": "P3",
       "duration_seconds": 12,
@@ -116,12 +174,34 @@
         "style": 0.32,
         "speed": 0.86,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "4a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Three years like that. Couches. Cars. Places nobody should be closin' they eyes.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: row of tents and sleeping bags on an urban sidewalk at night, chain-link fence behind, sodium vapor streetlight casting harsh orange across the scene, a crumpled blanket on a park bench, shopping cart with belongings, the reality of homelessness",
+          "story_function": "The reality — not a metaphor, actual homelessness"
+        },
+        {
+          "beat_id": "4b",
+          "timecode": "5.0-12.0",
+          "narration_fragment": "But that laptop... that changed somethin'.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: cracked concrete floor in a dark abandoned room, closed laptop on the ground with a single sodium vapor light beam hitting it from an unseen window, dust particles floating in the light, the laptop glows faintly — the only promise in the darkness",
+          "story_function": "The laptop as lifeline — the thing that changed everything"
+        }
+      ],
+      "visual_anchors": {
+        "scene_signature": "Dark room, cracked concrete, closed laptop — Three years like that",
+        "lighting_override": "single sodium vapor light casting long shadow"
       }
     },
     {
       "scene_number": 5,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Library WiFi. Community center when they'd let me in. Started readin' things I wasn't suppose to understan'. Tax codes. Lien laws. How credit actually work. How bail bonds make money. Who own what in which neighborhood, and why.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -141,26 +221,72 @@
         "style": 0.34,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "5a",
+          "timecode": "0.0-4.0",
+          "narration_fragment": "Library WiFi. Community center when they'd let me in.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: public library interior at night, cracked laptop open on a worn wooden desk, bone-white screen glow as only light source, library card and handwritten notes beside it, stack of law books in shadow, institutional fluorescent lights off — after hours, stolen WiFi",
+          "story_function": "The library as secret classroom — stealing access to knowledge"
+        },
+        {
+          "beat_id": "5b",
+          "timecode": "4.0-8.0",
+          "narration_fragment": "Started readin' things I wasn't suppose to understan'. Tax codes. Lien laws.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded extreme close-up: laptop screen showing dense legal text, IRS tax form printout beside it with sections highlighted in yellow, handwritten notes translating legal jargon into plain English, pen mid-mark, the glow illuminating determination",
+          "story_function": "Reading above his station — decoding the system's language"
+        },
+        {
+          "beat_id": "5c",
+          "timecode": "8.0-14.0",
+          "narration_fragment": "How credit actually work. How bail bonds make money. Who own what in which neighborhood, and why.",
+          "concept_type": "infographic",
+          "visual_concept": "2D cel-shaded infographic: credit score gauge climbing from 300 to 850, bail bond flow chart showing money flowing from defendants to bondsmen to courts, property ownership map of a neighborhood with color-coded blocks showing who owns what, educational diagram style with bold labels and arrows, clean graphic design on dark background",
+          "story_function": "The systems revealed — credit, bail, property ownership as mechanisms"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "legal document",
+          "laptop screen",
+          "IRS tax form",
+          "library card"
+        ],
+        "scene_signature": "Worn wooden desk in dark corner of public library after hours — Library WiFi",
+        "lighting_override": "laptop screen casting bone-white glow"
       }
     },
     {
       "scene_number": 6,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
-      "narration_text": "Same way some folk hear music \u2014 I started hearin' systems.",
+      "act": "ACT 1 — COLD OPEN",
+      "narration_text": "Same way some folk hear music — I started hearin' systems.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": null,
       "visual_backend": "remotion",
       "remotion_composition": "TelemetryOverlay",
       "remotion_props": {
-        "fragments": ["LIEN LAWS", "CREDIT SYSTEMS", "PROPERTY RECORDS"],
+        "fragments": [
+          "LIEN LAWS",
+          "CREDIT SYSTEMS",
+          "PROPERTY RECORDS"
+        ],
         "style": "quick_cuts"
       },
       "pose_variant": null,
       "duration_seconds": 5,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "data_stream_hum", "level": "-30dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "data_stream_hum",
+          "level": "-30dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-28dB",
       "pause_after": "2000ms",
@@ -176,13 +302,14 @@
     {
       "scene_number": 7,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Tried to put folk on. Ran workshops outta barbershops. Explained how to fight an eviction. How to read a contract 'fore you sign your life away. Half them nights ended wrong. TTP drama. Somebody owed somebody. Guns where there shoulda been questions.",
       "narration_aave": true,
-      "aave_density": 0.70,
-      "visual_prompt": "Barbershop converted to makeshift classroom, folding metal chairs in semicircle facing a whiteboard, handwritten notes on whiteboard reading 'KNOW YOUR RIGHTS', photocopied handouts stacked on barber station counter, lease agreement pinned to mirror with tape, warm incandescent barbershop lighting. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "aave_density": 0.7,
+      "visual_prompt": "Barbershop converted to makeshift classroom, folding metal chairs in semicircle facing a whiteboard, handwritten notes on whiteboard reading 'KNOW YOUR RIGHTS', photocopied handouts stacked on barber station counter, lease agreement pinned to mirror with tape, three faceless silhouetted figures seated in folding chairs, seen from behind, backlit by barbershop lighting, non-descript, no facial features, warm incandescent barbershop lighting. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "pose_variant": "P1",
+      "bg_environment": "Barbershop converted to makeshift classroom, folding metal chairs in semicircle facing a whiteboard reading 'KNOW YOUR RIGHTS', photocopied handouts stacked on barber station counter, lease agreement pinned to mirror with tape, warm incandescent barbershop lighting, no people, empty room",
       "duration_seconds": 12,
       "sfx_bed": "distant_traffic",
       "sfx_events": [],
@@ -196,16 +323,47 @@
         "style": 0.34,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "7a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Tried to put folk on. Ran workshops outta barbershops. Explained how to fight an eviction. How to read a contract 'fore you sign your life away.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: barbershop converted to makeshift classroom, folding metal chairs in semicircle facing a whiteboard reading 'KNOW YOUR RIGHTS', photocopied handouts on barber counter, lease agreement pinned to mirror, silhouetted figures seated and leaning in, warm incandescent barbershop light",
+          "story_function": "The barbershop workshop — teaching what school never did"
+        },
+        {
+          "beat_id": "7b",
+          "timecode": "5.0-12.0",
+          "narration_fragment": "Half them nights ended wrong. TTP drama. Somebody owed somebody. Guns where there shoulda been questions.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: close-up of a handgun being pointed at someone inside a car at night, cel-shaded graphic novel style, sodium vapor orange through the car window, tension and threat, the violence that interrupted the teaching",
+          "story_function": "The violence — guns where there shoulda been questions"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "photocopied handouts",
+          "folding metal chairs",
+          "handwritten notes",
+          "KNOW YOUR RIGHTS",
+          "lease agreement",
+          "silhouetted figures in chairs"
+        ],
+        "scene_signature": "Barbershop converted to makeshift classroom — Tried to put folk on",
+        "lighting_override": "warm incandescent barbershop lighting"
       }
     },
     {
       "scene_number": 8,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "But the dog stayed. Through all that. He stayed.",
       "narration_aave": true,
-      "aave_density": 0.50,
+      "aave_density": 0.5,
       "visual_prompt": "Red Nose Pitbull (P6) walking through empty urban street at night, mid-stride, sodium vapor streetlight casting long shadow behind. Cracked pavement, abandoned storefronts. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "bg_environment": "Empty urban street at night, cracked pavement stretching to vanishing point, abandoned storefronts with dark windows, sodium vapor streetlight casting long shadow on wet asphalt, compositional space for character overlay",
       "visual_backend": "gemini",
       "pose_variant": "P6",
       "duration_seconds": 10,
@@ -216,26 +374,47 @@
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.40,
+        "stability": 0.4,
         "similarity_boost": 0.75,
         "style": 0.35,
         "speed": 0.85,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "8a",
+          "timecode": "0.0-10.0",
+          "narration_fragment": "But the dog stayed. Through all that. He stayed.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone sitting at a bus stop bench at dusk, back slightly hunched, petting a small dark Red Nose Pitbull sitting beside him, graffiti on the bus shelter wall, sodium vapor streetlight casting warm orange, quiet moment of bond, the dog looking up at him, loyalty in the silence",
+          "story_function": "The dog stayed — emotional anchor, the one who never left"
+        }
+      ],
+      "visual_anchors": {
+        "scene_signature": "Bus stop at dusk — But the dog stayed",
+        "lighting_override": "sodium vapor streetlight casting warm orange"
       }
     },
     {
       "scene_number": 9,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "Ain't get a record deal. Ain't get a scholarship. Ain't get saved by nobody.",
       "narration_aave": true,
       "aave_density": 0.75,
       "visual_prompt": "Red Nose Pitbull stopped walking, head turned toward camera, one eye catching rust-orange light, ears folded back, scar visible. Hold shot. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "bg_environment": "Same empty urban street, slightly different angle, sodium vapor light pooling on cracked asphalt, rust-orange reflection on wet ground, dark steel buildings framing both sides, space for character in center frame",
       "visual_backend": "gemini",
       "pose_variant": "P6",
       "duration_seconds": 8,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-34dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-34dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-28dB",
       "pause_after": "1500ms",
@@ -243,15 +422,20 @@
       "voice_settings": {
         "stability": 0.45,
         "similarity_boost": 0.75,
-        "style": 0.30,
+        "style": 0.3,
         "speed": 0.86,
         "use_speaker_boost": true
+      },
+      "visual_anchors": {
+        "scene_signature": "Urban street, sodium vapor light — Ain't get a record deal",
+        "lighting_override": "one eye catching rust-orange light",
+        "composition": "Static hold"
       }
     },
     {
       "scene_number": 10,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "I just learned how things work. And I ain't never forgot what it felt like not to know.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -261,15 +445,21 @@
       "pose_variant": "P6",
       "duration_seconds": 8,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-36dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-36dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-30dB",
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.40,
+        "stability": 0.4,
         "similarity_boost": 0.75,
-        "style": 0.30,
+        "style": 0.3,
         "speed": 0.85,
         "use_speaker_boost": true
       },
@@ -278,11 +468,12 @@
     {
       "scene_number": 11,
       "scene_type": "cold_open",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": "That's The Aftermath. Already lived through the collapse. That's why I see it comin' for everybody else.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": "Red Nose Pitbull sitting at rooftop edge (P4 silhouette), back to camera, city lights below, orange sodium vapor glow, night, fog. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "bg_environment": "Urban rooftop edge at night, concrete ledge in foreground, city lights spread below in bokeh, orange sodium vapor glow on low fog layer, dark sky above, silhouette-friendly composition with bright city behind dark foreground",
       "visual_backend": "gemini",
       "pose_variant": "P4",
       "duration_seconds": 10,
@@ -293,18 +484,33 @@
       "pause_after": "3000ms",
       "transition_out": "fade_to_black",
       "voice_settings": {
-        "stability": 0.40,
+        "stability": 0.4,
         "similarity_boost": 0.75,
         "style": 0.25,
         "speed": 0.85,
         "use_speaker_boost": true
       },
-      "notes": "Near whisper. Title drop. Fade to black, hold 3 seconds."
+      "notes": "Near whisper. Title drop. Fade to black, hold 3 seconds.",
+      "visual_beats": [
+        {
+          "beat_id": "11a",
+          "timecode": "0.0-10.0",
+          "narration_fragment": "That's The Aftermath. Already lived through the collapse. That's why I see it comin' for everybody else.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone sitting on a rooftop ledge, back to camera, looking out over city lights spread below, orange sodium vapor glow on low fog layer, silhouette against the bright city, concrete ledge under him, wind in the air, the title drop moment — he's already been through it all",
+          "story_function": "THE title drop shot — That's The Aftermath, the rooftop closer"
+        }
+      ],
+      "visual_anchors": {
+        "scene_signature": "Rooftop edge silhouette, city lights below — That's The Aftermath",
+        "lighting_override": "city lights below, orange sodium vapor glow on fog",
+        "composition": "Silhouette composition, back to camera"
+      }
     },
     {
       "scene_number": 12,
       "scene_type": "transition_beat",
-      "act": "ACT 1 \u2014 COLD OPEN",
+      "act": "ACT 1 — COLD OPEN",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -320,35 +526,75 @@
     {
       "scene_number": 13,
       "scene_type": "narration_stills",
-      "act": "ACT 2A \u2014 THE HOOD LIFE",
-      "narration_text": "Wasn't no colors on me. But I knew everybody who wore 'em. You grow up where I grew up, you don't choose a side \u2014 you just live in the crossfire. Half my block was blue. Other half was business. I stayed between the cracks.",
+      "act": "ACT 2A — THE HOOD LIFE",
+      "narration_text": "Wasn't no colors on me. But I knew everybody who wore 'em. You grow up where I grew up, you don't choose a side — you just live in the crossfire. Half my block was blue. Other half was business. I stayed between the cracks.",
       "narration_aave": true,
       "aave_density": 0.65,
-      "visual_prompt": "Urban intersection at night, two different graffiti tags on opposing walls of an alleyway entrance, sodium vapor light pooling on wet pavement between them, chain-link fence with torn fabric caught in wire, narrow walkway between tagged walls suggesting a path walked carefully, cracked pavement with old spray paint marks. No humans. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "visual_prompt": "Urban intersection at night, two different graffiti tags on opposing walls of an alleyway entrance, sodium vapor light pooling on wet pavement between them, chain-link fence with torn fabric caught in wire, narrow walkway between tagged walls suggesting a path walked carefully, cracked pavement with old spray paint marks, two distant faceless silhouetted figures at far end of alley, non-descript, barely visible in sodium vapor glow. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 18,
       "sfx_bed": "distant_traffic",
-      "sfx_events": [{"trigger": "10.0s", "sfx": "police_siren_distant", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "10.0s",
+          "sfx": "police_siren_distant",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "tense",
       "music_level": "-28dB",
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.36,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "13a",
+          "timecode": "0.0-6.0",
+          "narration_fragment": "Wasn't no colors on me. But I knew everybody who wore 'em.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone (back to camera) standing at a playground fence, watching a group of guys in red bandanas and jerseys on the court beyond, sodium vapor streetlight casting his shadow through the chain-link, he's observing — not participating",
+          "story_function": "Red Nose watching the block — he knew everybody but stayed out"
+        },
+        {
+          "beat_id": "13b",
+          "timecode": "6.0-12.0",
+          "narration_fragment": "You grow up where I grew up, you don't choose a side — you just live in the crossfire. Half my block was blue. Other half was business.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: urban intersection at night, two different graffiti tags on opposing walls of an alleyway entrance, sodium vapor light pooling on wet pavement between them, narrow walkway between tagged walls — the literal crossfire zone, tense and still",
+          "story_function": "The crossfire — navigating between factions"
+        },
+        {
+          "beat_id": "13c",
+          "timecode": "12.0-18.0",
+          "narration_fragment": "I stayed between the cracks.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: empty alleyway at night shot from above, a single figure walking down the narrow space between two buildings, sodium vapor orange from one end, neon blue from the other, the figure walking the line between two worlds",
+          "story_function": "Between the cracks — the narrow path of survival"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "graffiti tags",
+          "distant silhouetted figures"
+        ],
+        "scene_signature": "Urban intersection at night — Wasn't no colors on me",
+        "lighting_override": "sodium vapor light pooling on wet pavement between them"
       }
     },
     {
       "scene_number": 14,
       "scene_type": "narration_stills",
-      "act": "ACT 2A \u2014 THE HOOD LIFE",
+      "act": "ACT 2A — THE HOOD LIFE",
       "narration_text": "Some folk sold. Some folk used. I just watched. The money was fast. The consequences was faster. I seen dudes go from Jordans to jumpsuits in the same summer. Ain't sayin' I was an angel. Just sayin' I was strategic.",
       "narration_aave": true,
-      "aave_density": 0.70,
-      "visual_prompt": "Concrete stoop at night, single expensive sneaker abandoned on top step, empty cash-counting band beside it, cigarette still smoldering in ashtray, court summons paper crumpled and discarded, sodium vapor light casting long shadows down the steps. No humans. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
+      "aave_density": 0.7,
+      "visual_prompt": "Concrete stoop at night, single expensive sneaker abandoned on top step, empty cash-counting band beside it, cigarette still smoldering in ashtray, court summons paper crumpled and discarded, sodium vapor light casting long shadows down the steps, distant silhouetted figure on far end of stoop, non-descript, faceless, barely visible in shadow. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 16,
       "sfx_bed": "distant_traffic",
@@ -358,41 +604,129 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.36,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "14a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Some folk sold. Some folk used. I just watched. The money was fast.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: two figures outside a liquor store at night, one handing something to the other under neon light, old cars parked at the curb, sodium vapor and neon mixing, a street-level transaction happening in plain sight",
+          "story_function": "The street economy — selling and using, he just watched"
+        },
+        {
+          "beat_id": "14b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "The consequences was faster. I seen dudes go from Jordans to jumpsuits in the same summer.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded split screen: LEFT side shows a young man in a Bulls jersey and fresh Jordans on a sunny street corner, confident stance. RIGHT side shows the same man in an orange jumpsuit in a jail cell, head down. The split divides the frame vertically — same summer, two realities",
+          "story_function": "Jordans to jumpsuits — THE visual metaphor of the fast-money pipeline"
+        },
+        {
+          "beat_id": "14c",
+          "timecode": "10.0-16.0",
+          "narration_fragment": "Ain't sayin' I was an angel. Just sayin' I was strategic.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone leaning against a brick wall in shadow, arms crossed, watching the street from a distance, sodium vapor light hitting the scene in front of him but not reaching him — he's in the dark, observing, strategic, separate from the action",
+          "story_function": "Strategic distance — watching, not participating"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "cash-counting band",
+          "expensive sneaker",
+          "court summons",
+          "ashtray",
+          "distant silhouetted figure"
+        ],
+        "scene_signature": "Concrete stoop at night — Some folk sold",
+        "lighting_override": "sodium vapor light casting long shadows down the steps"
       }
     },
     {
       "scene_number": 15,
       "scene_type": "narration_stills",
-      "act": "ACT 2A \u2014 THE HOOD LIFE",
-      "narration_text": "Check-cashin' on Fridays. Rent-to-own for a TV I couldn't afford. No bank account 'cause nobody told me I needed one. Every dollar I earned went right back into somebody else's pocket. I was grindin' and leakin' at the same time. That's what they don't show you \u2014 you can work hard and still be broke if nobody taught you how money actually move.",
+      "act": "ACT 2A — THE HOOD LIFE",
+      "narration_text": "Check-cashin' on Fridays. Rent-to-own for a TV I couldn't afford. No bank account 'cause nobody told me I needed one. Every dollar I earned went right back into somebody else's pocket. I was grindin' and leakin' at the same time. That's what they don't show you — you can work hard and still be broke if nobody taught you how money actually move.",
       "narration_aave": true,
-      "aave_density": 0.70,
+      "aave_density": 0.7,
       "visual_prompt": "Check-cashing storefront at night, neon 'CHECKS CASHED' sign buzzing, iron security bars on windows, 'RENT-TO-OWN — NO CREDIT CHECK' poster in window, payday loan rate sheet taped to glass door, ATM fee notice ($3.50), receipts blowing across sidewalk in wind. No humans. Dark steel palette with neon accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 18,
       "sfx_bed": "distant_traffic",
-      "sfx_events": [{"trigger": "8.0s", "sfx": "notification_ping", "level": "-30dB"}],
+      "sfx_events": [
+        {
+          "trigger": "8.0s",
+          "sfx": "notification_ping",
+          "level": "-30dB"
+        }
+      ],
       "music_mood": "tense",
       "music_level": "-28dB",
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.38,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "15a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Check-cashin' on Fridays. Rent-to-own for a TV I couldn't afford. No bank account 'cause nobody told me I needed one.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: check-cashing storefront at night, neon 'CHECKS CASHED' sign buzzing, iron security bars on windows, 'RENT-TO-OWN — NO CREDIT CHECK' poster in window, receipts blowing across sidewalk, predatory neon glow",
+          "story_function": "The predatory economy — check cashing as the only option"
+        },
+        {
+          "beat_id": "15b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "Every dollar I earned went right back into somebody else's pocket.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: hands counting cash in a dim room, bills fanning out on a table, stacks visible, but the money is clearly flowing OUT — rent receipt, ATM fee receipt ($3.50), utility bill all visible beside the shrinking stack, the money leaking away",
+          "story_function": "Tactile money — every dollar going to somebody else"
+        },
+        {
+          "beat_id": "15c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "I was grindin' and leakin' at the same time.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone from behind facing an ATM screen reading 'OVERDRAWN' in red letters, graffiti on the wall beside the ATM, harsh streetlight from above, the moment of realization — grinding but still broke",
+          "story_function": "The ATM OVERDRAWN moment — grinding and leaking"
+        },
+        {
+          "beat_id": "15d",
+          "timecode": "14.0-18.0",
+          "narration_fragment": "That's what they don't show you — you can work hard and still be broke if nobody taught you how money actually move.",
+          "concept_type": "infographic",
+          "visual_concept": "2D cel-shaded infographic: APR 29.99% in bold red text, climbing interest rate graph, credit card debt bar chart growing taller, dollar signs flowing from a small figure at bottom to large institutional buildings at top, educational visual showing HOW money actually moves — from poor to rich",
+          "story_function": "The system explained — how money moves from poor to rich"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "RENT-TO-OWN — NO CREDIT CHECK",
+          "neon 'CHECKS CASHED' sign",
+          "iron security bars",
+          "ATM fee notice",
+          "CHECKS CASHED"
+        ],
+        "scene_signature": "Check-cashing storefront at night — Check-cashin' on Fridays",
+        "lighting_override": "neon 'CHECKS CASHED' sign buzzing. Dark steel palette with neon accent"
       }
     },
     {
       "scene_number": 16,
       "scene_type": "narration_stills",
-      "act": "ACT 2A \u2014 THE HOOD LIFE",
+      "act": "ACT 2A — THE HOOD LIFE",
       "narration_text": "The system got plenty of folk who look like me. Decided early it wasn't gonna get me. Not 'cause I was better. 'Cause I was watchin'. And what I saw told me: get smart or get got.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -406,17 +740,43 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.36,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "16a",
+          "timecode": "0.0-6.0",
+          "narration_fragment": "The system got plenty of folk who look like me.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: overhead view of a prison basketball court, dozens of figures in orange jumpsuits milling around, guard towers at corners, chain-link topped with razor wire, institutional scale — this is the system, not one camera but an entire machine",
+          "story_function": "Systemic scale — the prison-industrial complex in one image"
+        },
+        {
+          "beat_id": "16b",
+          "timecode": "6.0-12.0",
+          "narration_fragment": "Decided early it wasn't gonna get me. Not 'cause I was better. 'Cause I was watchin'. And what I saw told me: get smart or get got.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone standing at a chain-link fence looking through it at the prison yard on the other side, his fingers gripping the fence links, the institutional world visible through the diamond pattern — he's on the outside looking in, making his choice",
+          "story_function": "The choice — watching through the fence, choosing to stay out"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "AREA UNDER 24HR VIDEO SURVEILLANCE",
+          "surveillance cameras"
+        ],
+        "scene_signature": "Multiple surveillance cameras on a single pole at urban intersection — The system got plenty of folk who look like me",
+        "lighting_override": "harsh cold blue-white floodlight from above"
       }
     },
     {
       "scene_number": 17,
       "scene_type": "transition_beat",
-      "act": "ACT 2A \u2014 THE HOOD LIFE",
+      "act": "ACT 2A — THE HOOD LIFE",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -432,7 +792,7 @@
     {
       "scene_number": 18,
       "scene_type": "narration_stills",
-      "act": "ACT 2B \u2014 THE TRANSITION",
+      "act": "ACT 2B — THE TRANSITION",
       "narration_text": "That stolen laptop became a library. A law school. A business plan. YGs think the goal is respect. Respect don't pay rent. What pay rent is knowin' how to make a dollar work while you sleep. I started learnin' that on a cracked screen in a parkin' lot.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -440,24 +800,75 @@
       "visual_backend": "gemini",
       "duration_seconds": 16,
       "sfx_bed": "elevator_hum",
-      "sfx_events": [{"trigger": "5.0s", "sfx": "keyboard_typing", "level": "-28dB"}],
+      "sfx_events": [
+        {
+          "trigger": "5.0s",
+          "sfx": "keyboard_typing",
+          "level": "-28dB"
+        }
+      ],
       "music_mood": "reflective",
       "music_level": "-28dB",
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.38,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "18a",
+          "timecode": "0.0-4.0",
+          "narration_fragment": "That stolen laptop became a library. A law school.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: cracked laptop screen in a dark parking lot, the screen showing rows of library bookshelves morphing into a law school building facade — the laptop IS the institution, warm bone-white glow as only light source, car dashboard visible at edges",
+          "story_function": "The laptop as transformation — library, law school in one device"
+        },
+        {
+          "beat_id": "18b",
+          "timecode": "4.0-8.0",
+          "narration_fragment": "A business plan.",
+          "concept_type": "infographic",
+          "visual_concept": "2D cel-shaded: hand drawing a business plan mind map on paper, central circle reading 'BUSINESS PLAN', branches to SWOT analysis, Marketing Plan, Operations, Revenue Model, arrows connecting concepts, pen mid-stroke, warm desk lamp light, pedagogical and practical",
+          "story_function": "What a business plan actually looks like — pedagogical"
+        },
+        {
+          "beat_id": "18c",
+          "timecode": "8.0-12.0",
+          "narration_fragment": "YGs think the goal is respect. Respect don't pay rent. What pay rent is knowin' how to make a dollar work while you sleep.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: split image — LEFT shows hands holding stacks of cash but the money is evaporating/dissolving upward (respect that doesn't last). RIGHT shows a small seed in soil with dollar signs growing from it like a plant (money working while you sleep), warm amber tones",
+          "story_function": "Respect vs. real wealth — the fundamental lesson"
+        },
+        {
+          "beat_id": "18d",
+          "timecode": "12.0-16.0",
+          "narration_fragment": "I started learnin' that on a cracked screen in a parkin' lot.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: interior of the Cutlass Supreme at night, cracked laptop open on the passenger seat, screen glow illuminating the interior, parking lot visible through fogged windows, sodium vapor outside, sticky notes on the dashboard — the parking lot classroom",
+          "story_function": "Full circle — back to the car, the cracked screen, the beginning"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "cracked laptop screen",
+          "legal document",
+          "laptop screen",
+          "sticky notes"
+        ],
+        "scene_signature": "Close-up of cracked laptop screen glowing in dark room — That stolen laptop became a library",
+        "lighting_override": "warm bone-white glow illuminating scattered notes",
+        "composition": "Close-up"
       }
     },
     {
       "scene_number": 19,
       "scene_type": "narration_stills",
-      "act": "ACT 2B \u2014 THE TRANSITION",
-      "narration_text": "Got to a point where it wasn't about me no more. Family eatin' next month. Kids not repeatin' the same mistakes. Breakin' the cycle ain't a motivational poster \u2014 it's a Tuesday. It's choosin' the library over the corner every single day.",
+      "act": "ACT 2B — THE TRANSITION",
+      "narration_text": "Got to a point where it wasn't about me no more. Family eatin' next month. Kids not repeatin' the same mistakes. Breakin' the cycle ain't a motivational poster — it's a Tuesday. It's choosin' the library over the corner every single day.",
       "narration_aave": true,
       "aave_density": 0.65,
       "visual_prompt": "Kitchen table at dawn, two plates set with simple breakfast, child's crayon drawing of a house taped to refrigerator, packed school lunch bag on counter, coffee mug beside open notebook with budget written in pen, morning light through thin curtains, calendar on wall with bills-due dates circled. No humans. Dark steel palette with warm dawn accent, 2D cel-shaded style, film grain 20%, 16:9.",
@@ -470,21 +881,58 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
-        "style": 0.40,
-        "speed": 0.90,
+        "style": 0.4,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "19a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Got to a point where it wasn't about me no more. Family eatin' next month. Kids not repeatin' the same mistakes.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: kitchen table at dawn, two plates set with simple breakfast, child's crayon drawing of a house taped to refrigerator, packed school lunch bag on counter, coffee mug beside open notebook with budget written in pen, morning light through thin curtains — a home being held together",
+          "story_function": "The family kitchen — it's not about him anymore"
+        },
+        {
+          "beat_id": "19b",
+          "timecode": "5.0-9.0",
+          "narration_fragment": "Breakin' the cycle ain't a motivational poster — it's a Tuesday.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a framed motivational poster on a wall reading 'BELIEVE IN YOURSELF' with dust on the frame, NEXT TO IT a calendar showing Tuesday with items checked off — grocery list, pay electric bill, kids school pickup, the mundane reality of breaking cycles",
+          "story_function": "Breaking cycles is Tuesday — not inspiration, just showing up"
+        },
+        {
+          "beat_id": "19c",
+          "timecode": "9.0-14.0",
+          "narration_fragment": "It's choosin' the library over the corner every single day.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: street corner at dawn, two paths visible — left leads to a lit public library entrance, right leads to the usual corner with figures in shadow, a single figure walking toward the library, morning light on the library side, darkness on the corner side",
+          "story_function": "The daily choice — library over corner, every single day"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "child's crayon drawing",
+          "budget written in pen",
+          "school lunch bag",
+          "coffee mug",
+          "notebook"
+        ],
+        "scene_signature": "Kitchen table at dawn — Got to a point where it wasn't about me no more",
+        "lighting_override": "Kitchen table at dawn. morning light through thin curtains"
       }
     },
     {
       "scene_number": 20,
       "scene_type": "narration_stills",
-      "act": "ACT 2B \u2014 THE TRANSITION",
+      "act": "ACT 2B — THE TRANSITION",
       "narration_text": "Started runnin' workshops again. This time smarter. Smaller rooms. Folks who actually wanted to learn. Showed 'em how to read a lease. How to file a dispute. How to stop payin' interest they didn't owe. Some folk listened. And them folk? They still out here. Building.",
       "narration_aave": true,
       "aave_density": 0.65,
-      "visual_prompt": "Barbershop converted to small workshop space, three folding chairs in tight semicircle, whiteboard propped against mirror reading 'HOW TO FILE A DISPUTE', photocopied lease agreements spread across barber counter, highlighter and pen on top of documents, warm incandescent light from vintage barbershop fixtures, clippers pushed aside to make room for handouts. No humans. Dark steel palette with warm golden accent, 2D cel-shaded style, film grain 20%, 16:9.",
+      "visual_prompt": "Barbershop converted to small workshop space, three folding chairs in tight semicircle, whiteboard propped against mirror reading 'HOW TO FILE A DISPUTE', photocopied lease agreements spread across barber counter, highlighter and pen on top of documents, two faceless silhouetted figures seated in chairs, seen from behind, leaning in toward whiteboard, backlit, non-descript, warm incandescent light from vintage barbershop fixtures, clippers pushed aside to make room for handouts. Dark steel palette with warm golden accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 16,
       "sfx_bed": "building_hallway",
@@ -494,17 +942,54 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.38,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "20a",
+          "timecode": "0.0-6.0",
+          "narration_fragment": "Started runnin' workshops again. This time smarter. Smaller rooms. Folks who actually wanted to learn.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: barbershop workshop, three folding chairs in tight semicircle, whiteboard reading 'HOW TO FILE A DISPUTE', photocopied lease agreements on barber counter, silhouetted figures leaning in, warm incandescent barbershop light — smaller, tighter, serious",
+          "story_function": "Workshops 2.0 — smaller rooms, real learners"
+        },
+        {
+          "beat_id": "20b",
+          "timecode": "6.0-11.0",
+          "narration_fragment": "Showed 'em how to read a lease. How to file a dispute. How to stop payin' interest they didn't owe.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: extreme close-up of a lease agreement on a barbershop counter, yellow highlighter marking a specific clause, pen circling hidden fees, handwritten note in margin reading 'THIS IS THE TRAP', warm light on the document — actually teaching, not lecturing",
+          "story_function": "Teaching the specific skills — reading the fine print"
+        },
+        {
+          "beat_id": "20c",
+          "timecode": "11.0-16.0",
+          "narration_fragment": "Some folk listened. And them folk? They still out here. Building.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: two Black men at a backyard BBQ, shaking hands with genuine smiles, grills smoking behind them, community gathered, warm golden hour light — the folk who listened are still out here building together",
+          "story_function": "Community as warmth — the people who listened are still building"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "HOW TO FILE A DISPUTE",
+          "lease agreement",
+          "folding chairs",
+          "whiteboard",
+          "silhouetted figures in chairs"
+        ],
+        "scene_signature": "Barbershop converted to small workshop space — Started runnin' workshops again",
+        "lighting_override": "highlighter and pen on top of documents. warm incandescent light from vintage barbershop fixtures"
       }
     },
     {
       "scene_number": 21,
       "scene_type": "narration_stills",
-      "act": "ACT 2B \u2014 THE TRANSITION",
+      "act": "ACT 2B — THE TRANSITION",
       "narration_text": "Everybody left at some point. The homies. The family. The women. Everybody got a reason. But the dog never did. It's about who stayed when you had nothin'. That's loyalty you can't buy. Can't fake. Can't replace.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -521,15 +1006,41 @@
       "voice_settings": {
         "stability": 0.48,
         "similarity_boost": 0.75,
-        "style": 0.40,
+        "style": 0.4,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "21a",
+          "timecode": "0.0-6.0",
+          "narration_fragment": "Everybody left at some point. The homies. The family. The women. Everybody got a reason.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: empty concrete stoop at night, two chairs but only one shows wear marks, faded welcome mat, dead plants in cracked pots, porch light buzzing, quiet street — the evidence of everyone who left",
+          "story_function": "The emptiness — everybody left"
+        },
+        {
+          "beat_id": "21b",
+          "timecode": "6.0-12.0",
+          "narration_fragment": "But the dog never did. It's about who stayed when you had nothin'. That's loyalty you can't buy. Can't fake. Can't replace.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone sitting on the stoop in the worn chair, Red Nose Pitbull lying at his feet, one window lit warmly from inside, the porch light the only other illumination, quiet and still — the one who stayed when everyone else left",
+          "story_function": "The dog stayed — loyalty that can't be bought"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "welcome mat",
+          "ashtray"
+        ],
+        "scene_signature": "Empty concrete stoop at night — Everybody left at some point",
+        "lighting_override": "single bare porch light buzzing. one window lit warmly from inside suggesting someone stayed"
       }
     },
     {
       "scene_number": 22,
       "scene_type": "transition_beat",
-      "act": "ACT 2B \u2014 THE TRANSITION",
+      "act": "ACT 2B — THE TRANSITION",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -545,8 +1056,8 @@
     {
       "scene_number": 23,
       "scene_type": "narration_stills",
-      "act": "ACT 2C \u2014 THE SPIRIT",
-      "narration_text": "I started understandin' somethin'. Ownership is everything. Own your mind, mind your own. Don't wait for somebody to hand you a lane \u2014 lay your own brick. Every day. One at a time. Eventually you look up and you got a wall. You got a foundation. You got somethin' they can't take.",
+      "act": "ACT 2C — THE SPIRIT",
+      "narration_text": "I started understandin' somethin'. Ownership is everything. Own your mind, mind your own. Don't wait for somebody to hand you a lane — lay your own brick. Every day. One at a time. Eventually you look up and you got a wall. You got a foundation. You got somethin' they can't take.",
       "narration_aave": true,
       "aave_density": 0.65,
       "visual_prompt": "Small urban commercial plaza at golden hour, barbershop with hand-lettered 'ESTABLISHED 2006' on glass, clothing store with 'BLACK OWNED' sticker in window, hand-painted murals on brick between storefronts, warm golden light on clean sidewalk, small sandwich board sign outside with hours written in marker. No humans. Dark steel palette with warm golden accent, 2D cel-shaded style, film grain 20%, 16:9.",
@@ -559,17 +1070,61 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
-        "style": 0.40,
+        "style": 0.4,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "23a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "I started understandin' somethin'. Ownership is everything. Own your mind, mind your own.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: small urban commercial plaza at golden hour, barbershop with 'ESTABLISHED 2006' on glass, clothing store with 'BLACK OWNED' sticker, hand-painted murals on brick, warm golden light — Black-owned businesses standing proud",
+          "story_function": "Ownership visualized — the Black-owned block"
+        },
+        {
+          "beat_id": "23b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "Don't wait for somebody to hand you a lane — lay your own brick. Every day. One at a time.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: close-up of hands laying a brick onto a wall under construction, mortar being spread with a trowel, golden hour light on the mason's hands, each brick deliberate and solid — laying your own foundation, literally",
+          "story_function": "Lay your own brick — the daily discipline of building"
+        },
+        {
+          "beat_id": "23c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "Eventually you look up and you got a wall. You got a foundation.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: completed brick building at golden hour, fresh mortar, hand-painted sign going up on the facade, scaffolding partially removed, the building BUILT — you look up and there it is",
+          "story_function": "The wall built — the result of daily bricks"
+        },
+        {
+          "beat_id": "23d",
+          "timecode": "14.0-18.0",
+          "narration_fragment": "You got somethin' they can't take.",
+          "concept_type": "historical_reference",
+          "visual_concept": "2D cel-shaded: historical group photo style — a multi-generational Black family standing proudly in front of a Black-owned savings bank, 'ST. LUKE SAVINGS BANK' on the building, early 1900s dress, warm sepia tones with golden light, heritage and ownership",
+          "story_function": "Historical weight — Black-owned institutions that endured"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "sandwich board sign",
+          "hand-painted mural",
+          "ESTABLISHED 2006",
+          "BLACK OWNED"
+        ],
+        "scene_signature": "Small urban commercial plaza at golden hour — I started understandin' somethin'",
+        "lighting_override": "Small urban commercial plaza at golden hour. warm golden light on clean sidewalk"
       }
     },
     {
       "scene_number": 24,
       "scene_type": "quote_card_v2",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -577,12 +1132,22 @@
       "remotion_composition": "BowTieQuoteCardV2",
       "remotion_props": {
         "quote": "**Ownership** is everything. Own your **mind**, mind your **own**.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
-      "quote_highlight_words": ["Ownership", "mind", "own"],
+      "quote_highlight_words": [
+        "Ownership",
+        "mind",
+        "own"
+      ],
       "duration_seconds": 5,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "defiant",
       "music_level": "-30dB",
       "pause_after": "2000ms",
@@ -591,10 +1156,10 @@
     {
       "scene_number": 25,
       "scene_type": "narration_stills",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": "Spoke some things into the universe and they appeared. Not 'cause the universe owed me nothin'. 'Cause I put the work behind the words. Vision without labor is just a daydream. But labor without vision? That's a prison. You need both. And you need to believe you deserve what you're buildin'.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": "Urban rooftop at sunrise, city skyline emerging from fog, warm golden light cutting through haze. No character. Contemplative vastness. Dark steel palette with warm dawn accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 16,
@@ -605,20 +1170,50 @@
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.42,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "25a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Spoke some things into the universe and they appeared. Not 'cause the universe owed me nothin'. 'Cause I put the work behind the words.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: urban rooftop at sunrise, city skyline emerging from fog, warm golden light cutting through haze, contemplative vastness, the moment of dawn breaking — speaking things into existence",
+          "story_function": "The sunrise — speaking things into existence, dawn of a new chapter"
+        },
+        {
+          "beat_id": "25b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "Vision without labor is just a daydream. But labor without vision? That's a prison.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: split composition — LEFT shows a thought bubble floating away like a cloud (vision without labor, dissolving). RIGHT shows a figure on a hamster wheel in darkness (labor without vision, going nowhere). Golden light breaking through between them",
+          "story_function": "The balance — vision AND labor, not one without the other"
+        },
+        {
+          "beat_id": "25c",
+          "timecode": "10.0-16.0",
+          "narration_fragment": "You need both. And you need to believe you deserve what you're buildin'.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: architect's desk at dawn, blueprints spread out showing a building plan, coffee mug, pencil mid-sketch, morning light streaming through a window onto the plans — the belief that you deserve to build something real",
+          "story_function": "Believing you deserve it — the blueprint and the belief"
+        }
+      ],
+      "visual_anchors": {
+        "scene_signature": "Urban rooftop at sunrise — Spoke some things into the universe and they appeared",
+        "lighting_override": "Urban rooftop at sunrise. warm golden light cutting through haze"
       }
     },
     {
       "scene_number": 26,
       "scene_type": "narration_stills",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": "We playin' the long game. Not the quick flip. Not the overnight success story. The kind where you build so solid, what you made outlives you. Generational. The kind of wealth they can't foreclose on, can't repo, can't delete with an algorithm.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": "Railroad tracks stretching into golden distance, converging at vanishing point. Warm light. Historical weight but hopeful. Dark steel palette with warm rust accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 14,
@@ -629,17 +1224,48 @@
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
-        "style": 0.40,
-        "speed": 0.90,
+        "style": 0.4,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "26a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "We playin' the long game. Not the quick flip. Not the overnight success story.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: railroad tracks stretching into golden distance, converging at vanishing point, warm light on the rails, historical weight but hopeful, the long road ahead",
+          "story_function": "The long game — the road that stretches to the horizon"
+        },
+        {
+          "beat_id": "26b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "The kind where you build so solid, what you made outlives you. Generational.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: multi-generational Black family standing proudly in front of a brick estate, grandmother, parents, children, golden hour light, manicured lawn — the RESULT of generational building, actual wealth that outlives you",
+          "story_function": "Generational wealth visualized — a family in front of what they built"
+        },
+        {
+          "beat_id": "26c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "The kind of wealth they can't foreclose on, can't repo, can't delete with an algorithm.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a strong brick wall with 'FAMILY' carved into the keystone, foreclosure notice crumpled at its base, a repo truck driving away empty, a computer cursor hovering over a 'DELETE' button but the wall standing firm — wealth they can't take",
+          "story_function": "Unbreakable wealth — can't foreclose, can't repo, can't delete"
+        }
+      ],
+      "visual_anchors": {
+        "scene_signature": "Railroad tracks stretching into golden distance — We playin' the long game",
+        "lighting_override": "Warm light",
+        "composition": "Vanishing point composition"
       }
     },
     {
       "scene_number": 27,
       "scene_type": "quote_card_v2",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -647,12 +1273,21 @@
       "remotion_composition": "BowTieQuoteCardV2",
       "remotion_props": {
         "quote": "Spoke some things into the **universe** and they **appeared**.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
-      "quote_highlight_words": ["universe", "appeared"],
+      "quote_highlight_words": [
+        "universe",
+        "appeared"
+      ],
       "duration_seconds": 5,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "defiant",
       "music_level": "-30dB",
       "pause_after": "2000ms",
@@ -661,11 +1296,11 @@
     {
       "scene_number": 28,
       "scene_type": "narration_stills",
-      "act": "ACT 2C \u2014 THE SPIRIT",
-      "narration_text": "The highest thing you can do is inspire. Not motivate \u2014 that wear off. Inspire. Light somethin' inside somebody that don't go out when you leave the room. That's the currency that matters. That's the investment that compounds forever. Luck is just bein' prepared when the door opens. Stay ready. The door always comes.",
+      "act": "ACT 2C — THE SPIRIT",
+      "narration_text": "The highest thing you can do is inspire. Not motivate — that wear off. Inspire. Light somethin' inside somebody that don't go out when you leave the room. That's the currency that matters. That's the investment that compounds forever. Luck is just bein' prepared when the door opens. Stay ready. The door always comes.",
       "narration_aave": true,
-      "aave_density": 0.60,
-      "visual_prompt": "Community garden in formerly empty urban lot, raised beds with vegetables growing through chain-link fence border, hand-painted sign reading 'COMMUNITY PLOT — TAKE WHAT YOU NEED', single sunflower taller than the fence, late afternoon golden light casting long shadows, freshly turned soil in new beds being prepared. No humans. Dark steel palette with warm golden-green accent, 2D cel-shaded style, film grain 20%, 16:9.",
+      "aave_density": 0.6,
+      "visual_prompt": "Community garden in formerly empty urban lot, raised beds with vegetables growing through chain-link fence border, hand-painted sign reading 'COMMUNITY PLOT — TAKE WHAT YOU NEED', single sunflower taller than the fence, late afternoon golden light casting long shadows, freshly turned soil in new beds being prepared, single faceless silhouetted figure tending raised bed in middle distance, non-descript, warm backlit outline. Dark steel palette with warm golden-green accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 16,
       "sfx_bed": "distant_traffic",
@@ -675,17 +1310,53 @@
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.42,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "28a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "The highest thing you can do is inspire. Not motivate — that wear off. Inspire. Light somethin' inside somebody that don't go out when you leave the room.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a single candle flame lighting another candle, the second candle lighting a third, a chain of flames growing brighter, warm amber light building in a dark room — inspiration that doesn't go out when you leave",
+          "story_function": "Inspiration as a chain of light — one flame lighting the next"
+        },
+        {
+          "beat_id": "28b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "That's the currency that matters. That's the investment that compounds forever.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: coaches working with a youth football team on a community field, one coach kneeling to adjust a kid's stance, golden hour light, the proverb lived in action — each one teach one in real time",
+          "story_function": "Teaching in action — the investment that compounds"
+        },
+        {
+          "beat_id": "28c",
+          "timecode": "10.0-16.0",
+          "narration_fragment": "Luck is just bein' prepared when the door opens. Stay ready. The door always comes.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a heavy wooden door slightly ajar, warm golden light pouring through the crack, a figure standing ready in the shadow with tools in hand — not waiting for the door to open, standing READY for when it does",
+          "story_function": "Stay ready — the door always comes, be prepared when it does"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "COMMUNITY PLOT — TAKE WHAT YOU NEED",
+          "raised beds",
+          "sunflower",
+          "silhouetted figure tending bed"
+        ],
+        "scene_signature": "Community garden in formerly empty urban lot — The highest thing you can do is inspire",
+        "lighting_override": "late afternoon golden light casting long shadows"
       }
     },
     {
       "scene_number": 29,
       "scene_type": "quote_card_v2",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -693,12 +1364,21 @@
       "remotion_composition": "BowTieQuoteCardV2",
       "remotion_props": {
         "quote": "The **highest** thing you can do is **inspire**.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
-      "quote_highlight_words": ["highest", "inspire"],
+      "quote_highlight_words": [
+        "highest",
+        "inspire"
+      ],
       "duration_seconds": 5,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "reflective",
       "music_level": "-30dB",
       "pause_after": "2000ms",
@@ -707,7 +1387,7 @@
     {
       "scene_number": 30,
       "scene_type": "transition_beat",
-      "act": "ACT 2C \u2014 THE SPIRIT",
+      "act": "ACT 2C — THE SPIRIT",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -723,15 +1403,21 @@
     {
       "scene_number": 31,
       "scene_type": "narration_stills",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
-      "narration_text": "There's a proverb. Goes back to when our people were property. When learnin' to read was a crime. South Carolina, 1740 \u2014 made it illegal to teach a slave to write. Virginia. Alabama. Same laws. Same fear. They knew if we could read, we could think. And if we could think, we'd never stay chained.",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
+      "narration_text": "There's a proverb. Goes back to when our people were property. When learnin' to read was a crime. South Carolina, 1740 — made it illegal to teach a slave to write. Virginia. Alabama. Same laws. Same fear. They knew if we could read, we could think. And if we could think, we'd never stay chained.",
       "narration_aave": true,
       "aave_density": 0.55,
       "visual_prompt": "Dark interior lit by single candle on rough-hewn wooden table, leather-bound book open to handwritten pages, quill pen and dried ink beside it, letters scratched into the wooden table surface, warm amber candlelight creating intimate glow, reverent and quiet, historical weight without exploitation. Dark steel palette with warm amber accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 22,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-34dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-34dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-26dB",
       "pause_after": "2000ms",
@@ -743,12 +1429,63 @@
         "speed": 0.85,
         "use_speaker_boost": true
       },
-      "notes": "Voice drops lower. Historical register. Dates listed like indictments."
+      "notes": "Voice drops lower. Historical register. Dates listed like indictments.",
+      "visual_beats": [
+        {
+          "beat_id": "31a",
+          "timecode": "0.0-4.0",
+          "narration_fragment": "There's a proverb. Goes back to when our people were property.",
+          "concept_type": "historical_reference",
+          "visual_concept": "2D cel-shaded illustration of iron shackles and chains resting on a wooden auction block, sepia-toned, single candle casting long shadows, heavy darkness surrounding, no people visible, historical weight and gravity",
+          "story_function": "Our people were literally property"
+        },
+        {
+          "beat_id": "31b",
+          "timecode": "4.0-8.0",
+          "narration_fragment": "When learnin' to read was a crime.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: an open book chained shut with a heavy padlock, sitting on a dark wooden table, single candle casting shadows of prison bars across the pages, warm amber on near-black",
+          "story_function": "Knowledge itself was criminalized"
+        },
+        {
+          "beat_id": "31c",
+          "timecode": "8.0-11.0",
+          "narration_fragment": "South Carolina, 1740.",
+          "concept_type": "geographic_reference",
+          "visual_concept": "2D cel-shaded: dark plantation scene with Spanish moss hanging from trees, South Carolina state outline glowing faintly as a translucent overlay in the sky, candlelit cabin window in distance, 1740s colonial architecture, oppressive night",
+          "story_function": "Specific place, specific year — this was law"
+        },
+        {
+          "beat_id": "31d",
+          "timecode": "11.0-15.0",
+          "narration_fragment": "Virginia. Alabama. Same laws. Same fear.",
+          "concept_type": "geographic_reference",
+          "visual_concept": "2D cel-shaded: colonial village at night, Virginia state outline overlay glowing on the left side, Alabama state outline overlay glowing on the right side, both dim and somber, dark candlelight palette, same sepia warmth as previous beats",
+          "story_function": "It was everywhere — systematic, not isolated"
+        },
+        {
+          "beat_id": "31e",
+          "timecode": "15.0-22.0",
+          "narration_fragment": "They knew if we could read, we could think. And if we could think, we'd never stay chained.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: enslaved family huddled around a single candle in a wooden cabin, adult pointing at words in a worn open book, child's face illuminated by warm candlelight, learning in secret, moonlight through a crack in the wall, intimate and reverent",
+          "story_function": "The forbidden act — reading as liberation"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "candle on rough-hewn wooden table, leath",
+          "leather-bound book",
+          "quill pen"
+        ],
+        "scene_signature": "Dark interior lit by single candle on rough-hewn wooden table — There's a proverb",
+        "lighting_override": "Dark interior lit by single candle on rough-hewn wooden table. warm amber candlelight creating intimate glow"
+      }
     },
     {
       "scene_number": 32,
       "scene_type": "narration_stills",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
       "narration_text": "So they passed knowledge in secret. Whispered lessons in the fields. Scratched letters in the dirt. Each person who learned turned around and taught another. One by one. In the dark. At risk of death. Each one teach one. That's how knowledge survived when the system tried to kill it.",
       "narration_aave": true,
       "aave_density": 0.55,
@@ -768,12 +1505,55 @@
         "speed": 0.85,
         "use_speaker_boost": true
       },
-      "notes": "Getting quieter. Near-whisper on 'In the dark. At risk of death.' Title spoken for first time."
+      "notes": "Getting quieter. Near-whisper on 'In the dark. At risk of death.' Title spoken for first time.",
+      "visual_beats": [
+        {
+          "beat_id": "32a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "So they passed knowledge in secret. Whispered lessons in the fields.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: two figures crouched low in a dark field at night, one whispering to another, moonlight on tall grass around them, plantation silhouette far in background, secretive and tense, candlelight warmth in faces only",
+          "story_function": "Knowledge passed in secret — the risk was real"
+        },
+        {
+          "beat_id": "32b",
+          "timecode": "5.0-9.0",
+          "narration_fragment": "Scratched letters in the dirt.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded extreme close-up: a dark-skinned finger tracing the letter 'A' into red-brown dirt, moonlight catching the grooves, rough wooden floor visible at edges, intimate and sacred",
+          "story_function": "The primal act — writing in dirt when paper is forbidden"
+        },
+        {
+          "beat_id": "32c",
+          "timecode": "9.0-13.0",
+          "narration_fragment": "Each person who learned turned around and taught another. One by one. In the dark.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a chain of small candle flames stretching into darkness, each flame lighting the next one, forming a line that disappears into the black distance, warm amber glow spreading outward from each point of light",
+          "story_function": "Each one teach one — the chain of knowledge"
+        },
+        {
+          "beat_id": "32d",
+          "timecode": "13.0-18.0",
+          "narration_fragment": "At risk of death. Each one teach one. That's how knowledge survived when the system tried to kill it.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: aged open book lying on rough dirt floor, yellowed pages with faded handwritten text, a single candle burning on top of the pages casting warm light, the book's shadow forms the shape of broken chains on the ground, dust motes in amber light beam, reverent",
+          "story_function": "Knowledge survived — the book endures, the chains broke"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "finger-drawn letters",
+          "wax seal"
+        ],
+        "scene_signature": "Extreme close-up of aged open book — So they passed knowledge in secret",
+        "lighting_override": "dust motes caught in warm amber light beam. reverent candlelight atmosphere",
+        "composition": "Extreme close-up"
+      }
     },
     {
       "scene_number": 33,
       "scene_type": "quote_card_v2",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -781,12 +1561,21 @@
       "remotion_composition": "BowTieQuoteCardV2",
       "remotion_props": {
         "quote": "Each one **teach** one. That's how **knowledge** survived.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
-      "quote_highlight_words": ["teach", "knowledge"],
+      "quote_highlight_words": [
+        "teach",
+        "knowledge"
+      ],
       "duration_seconds": 5,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-32dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-32dB"
+        }
+      ],
       "music_mood": "somber",
       "music_level": "-30dB",
       "pause_after": "2000ms",
@@ -795,35 +1584,85 @@
     {
       "scene_number": 34,
       "scene_type": "narration_stills",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
-      "narration_text": "That's what this channel is. A barbershop workshop that never closes. Each one teach one \u2014 but louder. Not a course. Not a brand deal. Not a rented Lamborghini in the thumbnail sellin' you a dream I ain't even livin'. This is witness testimony. From somebody who slept in a Cutlass Supreme and read tax codes by flashlight. And decided the people who look like him deserve to know what he learned.",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
+      "narration_text": "That's what this channel is. A barbershop workshop that never closes. Each one teach one — but louder. Not a course. Not a brand deal. Not a rented Lamborghini in the thumbnail sellin' you a dream I ain't even livin'. This is witness testimony. From somebody who slept in a Cutlass Supreme and read tax codes by flashlight. And decided the people who look like him deserve to know what he learned.",
       "narration_aave": true,
       "aave_density": 0.65,
-      "visual_prompt": "Urban intersection at dawn, barbershop on corner with lights still on inside from a late-night session, whiteboard visible through window, 'OPEN' sign still lit, first morning light breaking over rooftops, fresh wheat-paste poster on utility pole, empty street with sense of possibility, warm dawn colors breaking through dark steel sky. Dark steel palette with warm dawn accent, 2D cel-shaded style, film grain 20%, 16:9.",
+      "visual_prompt": "Urban intersection at dawn, barbershop on corner with lights still on inside from a late-night session, whiteboard visible through window, 'OPEN' sign still lit, first morning light breaking over rooftops, fresh wheat-paste poster on utility pole, a few faceless silhouetted figures visible through barbershop window, non-descript, warm light on their outlines, empty street with sense of possibility, warm dawn colors breaking through dark steel sky. Dark steel palette with warm dawn accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "pose_variant": "P2",
       "duration_seconds": 20,
       "sfx_bed": "distant_traffic",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-34dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-34dB"
+        }
+      ],
       "music_mood": "defiant",
       "music_level": "-26dB",
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
-        "style": 0.40,
-        "speed": 0.90,
+        "style": 0.4,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "34a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "That's what this channel is. A barbershop workshop that never closes. Each one teach one — but louder.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: barbershop at dawn with lights still on inside, whiteboard visible through window, 'OPEN' sign lit, silhouetted figures through window still learning at 5am, warm dawn light breaking over rooftops — the workshop that never closes",
+          "story_function": "The channel IS the barbershop workshop — always open"
+        },
+        {
+          "beat_id": "34b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "Not a course. Not a brand deal. Not a rented Lamborghini in the thumbnail sellin' you a dream I ain't even livin'.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a YouTube thumbnail showing a rented Lamborghini and stacks of cash with 'GET RICH QUICK' text, but the thumbnail is crumpled and thrown in a trash can, the barbershop whiteboard visible behind it — rejecting the fake, keeping the real",
+          "story_function": "What this channel is NOT — rejecting the hustle-porn model"
+        },
+        {
+          "beat_id": "34c",
+          "timecode": "10.0-16.0",
+          "narration_fragment": "This is witness testimony. From somebody who slept in a Cutlass Supreme and read tax codes by flashlight.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: the Cutlass Supreme interior at night, a flashlight illuminating a printed tax code document on the dashboard, Red Nose Pitbull sleeping on the back seat, fogged windows — witness testimony from the source",
+          "story_function": "Credibility — he lived this, reading tax codes by flashlight in a car"
+        },
+        {
+          "beat_id": "34d",
+          "timecode": "16.0-20.0",
+          "narration_fragment": "And decided the people who look like him deserve to know what he learned.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: a recording setup — a microphone, laptop with editing software, simple desk with notes, the barbershop visible through a window behind — the channel being built, the decision to teach",
+          "story_function": "Building the channel — the decision to share what he learned"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "wheat-paste poster",
+          "whiteboard",
+          "OPEN",
+          "silhouetted figures through window"
+        ],
+        "scene_signature": "Urban intersection at dawn — That's what this channel is",
+        "lighting_override": "Urban intersection at dawn. barbershop on corner with lights still on inside from a late-night session"
       }
     },
     {
       "scene_number": 35,
       "scene_type": "narration_stills",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
       "narration_text": "This ain't fear. Ain't hype. Ain't motivation that wear off by Wednesday. This is what I know. Delivered how I know it. In the voice I grew up with. For the people nobody else is talkin' to.",
       "narration_aave": true,
-      "aave_density": 0.70,
+      "aave_density": 0.7,
       "visual_prompt": "Urban street at night, row of storefronts — one boarded up, one with faded 'GOING OUT OF BUSINESS' sign, one with hand-painted 'WE'RE STILL HERE' on plywood, single working streetlight casting orange pool on wet pavement, bus stop with no bench just a pole and sign, real and unglamorous. No humans. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 14,
@@ -837,14 +1676,47 @@
         "stability": 0.52,
         "similarity_boost": 0.75,
         "style": 0.38,
-        "speed": 0.90,
+        "speed": 0.9,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "35a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "This ain't fear. Ain't hype. Ain't motivation that wear off by Wednesday.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: urban street at night, row of storefronts — one boarded up, one with 'GOING OUT OF BUSINESS', one with 'WE'RE STILL HERE' on plywood, single streetlight casting orange pool on wet pavement, real and unglamorous",
+          "story_function": "The real street — no glamour, no hype, just reality"
+        },
+        {
+          "beat_id": "35b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "This is what I know. Delivered how I know it. In the voice I grew up with.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: close-up of a hand writing in a notebook with a pen, the handwriting is real and imperfect, the words visible reading 'WHAT I KNOW', warm desk lamp light, honest and direct — delivered in his own voice",
+          "story_function": "Authenticity — what he knows, how he knows it, in his voice"
+        },
+        {
+          "beat_id": "35c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "For the people nobody else is talkin' to.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: bus stop with no bench, just a pole and sign, a single figure waiting in the orange streetlight pool, headphones in, looking at a phone — the people nobody else talks to, waiting at bus stops at night",
+          "story_function": "The audience — the people waiting at bus stops, ignored by everyone else"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "GOING OUT OF BUSINESS"
+        ],
+        "scene_signature": "Urban street at night — This ain't fear",
+        "lighting_override": "single working streetlight casting orange pool on wet pavement"
       }
     },
     {
       "scene_number": 36,
       "scene_type": "transition_beat",
-      "act": "ACT 3A \u2014 EACH ONE TEACH ONE",
+      "act": "ACT 3A — EACH ONE TEACH ONE",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -860,36 +1732,49 @@
     {
       "scene_number": 37,
       "scene_type": "topic_pivot",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": "So let's talk about what you can own. Startin' from nothin'. No trust fund. No connections. No degree required.",
       "narration_aave": true,
-      "aave_density": 0.60,
+      "aave_density": 0.6,
       "visual_prompt": "Concrete stoop transformed into teaching perch, worn steps with notebook and pen left on top step, hand-chalked '5 THINGS' on sidewalk pavement below, warm streetlight overhead casting circle of light like a spotlight, dawn light starting to appear on horizon behind buildings, energy shifting from night to morning. Dark steel palette, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "pose_variant": "P1",
       "duration_seconds": 8,
       "sfx_bed": "distant_traffic",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-34dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-34dB"
+        }
+      ],
       "music_mood": "defiant",
       "music_level": "-26dB",
       "pause_after": "0ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.38,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_anchors": {
+        "must_include": [
+          "notebook"
+        ],
+        "scene_signature": "Concrete stoop transformed into teaching perch — So let's talk about what you can own",
+        "lighting_override": "warm streetlight overhead casting circle of light like a spotlight. dawn light starting to appear on horizon behind buildings"
       }
     },
     {
       "scene_number": 38,
       "scene_type": "narration_stills",
-      "act": "ACT 3B \u2014 FIVE THINGS",
-      "narration_text": "Number one. A skill nobody can automate. I'm not talkin' about learning to code \u2014 everybody say that. And half of 'em gonna be out a job in two years 'cause the AI write better code than they do. I'm talkin' about somethin' you do with your hands or your mind that a machine can't replicate. Cuttin' hair. Readin' a room. Fixin' what's broke. Negotiatin' when the numbers don't add up. A barber in my neighborhood been cuttin' hair forty years. Ain't never worried about a robot takin' his chair. Know why? 'Cause people don't sit in his chair for the haircut. They sit there for the conversation. That's yours. Nobody can download it.",
+      "act": "ACT 3B — FIVE THINGS",
+      "narration_text": "Number one. A skill nobody can automate. I'm not talkin' about learning to code — everybody say that. And half of 'em gonna be out a job in two years 'cause the AI write better code than they do. I'm talkin' about somethin' you do with your hands or your mind that a machine can't replicate. Cuttin' hair. Readin' a room. Fixin' what's broke. Negotiatin' when the numbers don't add up. A barber in my neighborhood been cuttin' hair forty years. Ain't never worried about a robot takin' his chair. Know why? 'Cause people don't sit in his chair for the haircut. They sit there for the conversation. That's yours. Nobody can download it.",
       "narration_aave": true,
       "aave_density": 0.65,
-      "visual_prompt": "Decades-old barbershop interior, worn leather chair polished smooth from forty years of use, wall covered in faded photographs from different eras — polaroids mixed with newer prints, hand-lettered 'SINCE 1984' sign above mirror, community service awards and framed newspaper clippings on wall, straight razor on folded towel, talc powder tin with vintage label, warm golden light from fixtures that haven't changed in decades. No humans. Warm golden tones on dark steel base, 2D cel-shaded style, film grain 20%, 16:9.",
+      "visual_prompt": "Decades-old barbershop interior, worn leather chair polished smooth from forty years of use, wall covered in faded photographs from different eras — polaroids mixed with newer prints, hand-lettered 'SINCE 1984' sign above mirror, community service awards and framed newspaper clippings on wall, straight razor on folded towel, talc powder tin with vintage label, silhouetted barber figure behind chair, faceless client seated, both non-descript outlines backlit by warm golden light, suggesting conversation and trust, warm golden light from fixtures that haven't changed in decades. Warm golden tones on dark steel base, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 35,
       "sfx_bed": "building_hallway",
@@ -904,15 +1789,77 @@
         "style": 0.38,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "38a",
+          "timecode": "0.0-4.0",
+          "narration_fragment": "Number one. A skill nobody can automate.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: bold text '1. A SKILL' emerging from darkness, dawn light behind, graphic title card style with the Bowtie Bullies dark steel palette, confident and direct",
+          "story_function": "Title card — Number One"
+        },
+        {
+          "beat_id": "38b",
+          "timecode": "4.0-9.0",
+          "narration_fragment": "I'm not talkin' about learning to code — everybody say that. And half of 'em gonna be out a job in two years 'cause the AI write better code than they do.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a computer screen showing lines of code, but a robot hand is typing faster than the human hand next to it, the human hand pulling away — AI replacing coders, the skill everyone says to learn becoming automated",
+          "story_function": "The coding myth — AI writes better code, that's not the answer"
+        },
+        {
+          "beat_id": "38c",
+          "timecode": "9.0-14.0",
+          "narration_fragment": "I'm talkin' about somethin' you do with your hands or your mind that a machine can't replicate. Cuttin' hair. Readin' a room. Fixin' what's broke. Negotiatin' when the numbers don't add up.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: barbershop interior, skilled barber hands with clippers making a precise fade cut on a client, the barber's face reflected in the mirror showing focus and artistry, warm golden light from vintage fixtures — a skill a machine can't replicate",
+          "story_function": "The irreplaceable skill — hands, mind, human connection"
+        },
+        {
+          "beat_id": "38d",
+          "timecode": "14.0-20.0",
+          "narration_fragment": "A barber in my neighborhood been cuttin' hair forty years. Ain't never worried about a robot takin' his chair.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: decades-old barbershop interior, worn leather chair polished smooth, wall of faded photographs from different eras — polaroids and newer prints, 'SINCE 1984' hand-lettered above mirror, community service awards, straight razor on towel, forty years of mastery in one room",
+          "story_function": "The 40-year barber — mastery that no robot threatens"
+        },
+        {
+          "beat_id": "38e",
+          "timecode": "20.0-27.0",
+          "narration_fragment": "Know why? 'Cause people don't sit in his chair for the haircut. They sit there for the conversation.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: barbershop from a wide angle, barber leaning on the back of the chair talking to a client, both laughing, other clients waiting and listening, community gathered — they come for the conversation, the human connection",
+          "story_function": "The conversation — the real product is human connection"
+        },
+        {
+          "beat_id": "38f",
+          "timecode": "27.0-35.0",
+          "narration_fragment": "That's yours. Nobody can download it.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: extreme close-up of a barber's hands holding clippers and a comb, the tools of a master craftsman, warm golden light reflecting off the chrome, the hands are the skill — nobody can download this",
+          "story_function": "Nobody can download it — the irreplaceable human skill"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "community service awards",
+          "newspaper clippings",
+          "talc powder tin",
+          "straight razor",
+          "SINCE 1984",
+          "silhouetted barber and client"
+        ],
+        "scene_signature": "Decades-old barbershop interior — Number one",
+        "lighting_override": "warm golden light from fixtures that haven't changed in decades"
       }
     },
     {
       "scene_number": 39,
       "scene_type": "narration_stills",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": "Number two. A side business. Don't gotta be big. A pressure washin' rig. A notary service. Somethin' that got your name on it. I know a dude who started sellin' plates outta his mama kitchen. Now he got two food trucks and a catering contract with the city. He own that.",
       "narration_aave": true,
-      "aave_density": 0.70,
+      "aave_density": 0.7,
       "visual_prompt": "Two food trucks parked side by side in urban lot at night, both with matching hand-painted branding, serving windows lit with warm light, steam rising from grills, hand-painted menu board with home-style food items, catering-size aluminum pans stacked near truck, city permit sticker visible on window, warm entrepreneurial energy. No humans. Dark steel palette with warm food-truck light accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 16,
@@ -928,12 +1875,46 @@
         "style": 0.38,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "39a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Number two. A side business. Don't gotta be big. A pressure washin' rig. A notary service. Somethin' that got your name on it.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: a pressure washing rig on a small trailer in a driveway, hand-painted business name on the side, business cards in a small holder, a notary stamp on a folding table — small businesses with YOUR name on them, dawn light",
+          "story_function": "A side business — something small with your name on it"
+        },
+        {
+          "beat_id": "39b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "I know a dude who started sellin' plates outta his mama kitchen.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: close-up of hands preparing food plates in a home kitchen, aluminum foil containers lined up, handwritten menu taped to the refrigerator, steam rising, mama's kitchen as the first restaurant — the origin story of a food business",
+          "story_function": "Mama's kitchen — where the food truck empire started"
+        },
+        {
+          "beat_id": "39c",
+          "timecode": "10.0-16.0",
+          "narration_fragment": "Now he got two food trucks and a catering contract with the city. He own that.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: two food trucks parked side by side in urban lot, matching hand-painted branding, serving windows lit with warm light, steam rising, city permit sticker visible, catering pans stacked — he OWN that, the scaling story complete",
+          "story_function": "Two food trucks and a city contract — ownership from nothing"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "city permit sticker",
+          "food trucks"
+        ],
+        "scene_signature": "Two food trucks parked side by side in urban lot at night — Number two",
+        "lighting_override": "serving windows lit with warm light. Dark steel palette with warm food-truck light accent"
       }
     },
     {
       "scene_number": 40,
       "scene_type": "narration_stills",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": "Number three. Intellectual property. That sound complicated but it ain't. You write a course? That's IP. You record a tutorial? IP. You build a template other folk use? IP. The internet let you sell what you know to people you'll never meet. That's ownership without inventory.",
       "narration_aave": true,
       "aave_density": 0.65,
@@ -941,51 +1922,135 @@
       "visual_backend": "gemini",
       "duration_seconds": 14,
       "sfx_bed": "elevator_hum",
-      "sfx_events": [{"trigger": "5.0s", "sfx": "keyboard_typing", "level": "-28dB"}],
+      "sfx_events": [
+        {
+          "trigger": "5.0s",
+          "sfx": "keyboard_typing",
+          "level": "-28dB"
+        }
+      ],
       "music_mood": "reflective",
       "music_level": "-28dB",
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.36,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "40a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Number three. Intellectual property. That sound complicated but it ain't. You write a course? That's IP. You record a tutorial? IP. You build a template other folk use? IP.",
+          "concept_type": "infographic",
+          "visual_concept": "2D cel-shaded infographic: three icons arranged horizontally — a video play button labeled 'TUTORIAL', a document labeled 'COURSE', a grid labeled 'TEMPLATE' — each with a small copyright symbol, bold clean design, educational diagram showing what IP actually looks like",
+          "story_function": "What IP actually is — courses, tutorials, templates, demystified"
+        },
+        {
+          "beat_id": "40b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "The internet let you sell what you know to people you'll never meet.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: laptop screen showing a course platform dashboard with modules, progress bars, and a sales counter ticking up, warm desk lamp beside it, notebook with handwritten course outline — selling knowledge to strangers around the world",
+          "story_function": "The internet as distribution — sell what you know globally"
+        },
+        {
+          "beat_id": "40c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "That's ownership without inventory.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: split image — LEFT shows a warehouse full of boxes (traditional inventory). RIGHT shows a single laptop with a glowing screen and dollar signs floating up from it (digital ownership, no inventory). The laptop side is brighter, lighter, freer",
+          "story_function": "Ownership without inventory — the digital advantage"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "handwritten notes",
+          "laptop screen",
+          "notebook"
+        ],
+        "scene_signature": "Number three",
+        "lighting_override": "warm desk lamp. Dark steel palette with warm screen glow accent",
+        "composition": "Close-up"
       }
     },
     {
       "scene_number": 41,
       "scene_type": "narration_stills",
-      "act": "ACT 3B \u2014 FIVE THINGS",
-      "narration_text": "Number four. A rental arrangement. I ain't talkin' about buyin' a buildin' \u2014 that come later. I'm talkin' about rentin' somethin' you control. A room. A parkin' spot. A storage unit you lease to somebody else. You don't need a mortgage. You need leverage.",
+      "act": "ACT 3B — FIVE THINGS",
+      "narration_text": "Number four. A rental arrangement. I ain't talkin' about buyin' a buildin' — that come later. I'm talkin' about rentin' somethin' you control. A room. A parkin' spot. A storage unit you lease to somebody else. You don't need a mortgage. You need leverage.",
       "narration_aave": true,
-      "aave_density": 0.70,
+      "aave_density": 0.7,
       "visual_prompt": "Small urban property at early morning, hand-written 'ROOM FOR RENT' sign in ground-floor window, separate 'PARKING — $75/MO' sign on chain-link fence around small lot, storage unit row visible in background with padlocks, brick building with fire escape, modest but controlled — evidence of small-scale ownership generating income. No humans. Dark steel palette with warm dawn accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 14,
       "sfx_bed": "distant_traffic",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "door_slam", "level": "-26dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "door_slam",
+          "level": "-26dB"
+        }
+      ],
       "music_mood": "defiant",
       "music_level": "-28dB",
       "pause_after": "1500ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.50,
+        "stability": 0.5,
         "similarity_boost": 0.75,
         "style": 0.36,
         "speed": 0.92,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "41a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Number four. A rental arrangement. I ain't talkin' about buyin' a buildin' — that come later. I'm talkin' about rentin' somethin' you control.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: small urban property at early morning, 'ROOM FOR RENT' sign in window, 'PARKING — $75/MO' on chain-link fence, storage units with padlocks in background, modest but controlled — small-scale ownership generating income",
+          "story_function": "Rental leverage — you don't need a mortgage, you need control"
+        },
+        {
+          "beat_id": "41b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "A room. A parkin' spot. A storage unit you lease to somebody else.",
+          "concept_type": "infographic",
+          "visual_concept": "2D cel-shaded infographic: three rental income streams shown as simple diagrams — a room icon ($800/mo), a parking spot icon ($75/mo), a storage unit icon ($150/mo), arrows showing money flowing from each to a central piggy bank, clean graphic design, educational",
+          "story_function": "The rental math — small things that generate income"
+        },
+        {
+          "beat_id": "41c",
+          "timecode": "10.0-14.0",
+          "narration_fragment": "You don't need a mortgage. You need leverage.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a lever (like a simple machine) with a small figure on one end lifting a building on the other end — leverage, not capital, the mechanical advantage of smart positioning",
+          "story_function": "Leverage over capital — the mechanical advantage"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "ROOM FOR RENT' sign",
+          "PARKING — $75/MO",
+          "ROOM FOR RENT",
+          "storage unit"
+        ],
+        "scene_signature": "Small urban property at early morning — Number four",
+        "lighting_override": "Dark steel palette with warm dawn accent"
       }
     },
     {
       "scene_number": 42,
       "scene_type": "narration_stills",
-      "act": "ACT 3B \u2014 FIVE THINGS",
-      "narration_text": "Number five. Community equity. This the one folk sleep on. When your name mean somethin' on your block \u2014 when people trust you, send they kids to you, call you first when somethin' need fixin' \u2014 that's equity. Can't put it on a balance sheet. But it's the reason some folk can buy the plaza. The community back 'em 'cause they backed the community first.",
+      "act": "ACT 3B — FIVE THINGS",
+      "narration_text": "Number five. Community equity. This the one folk sleep on. When your name mean somethin' on your block — when people trust you, send they kids to you, call you first when somethin' need fixin' — that's equity. Can't put it on a balance sheet. But it's the reason some folk can buy the plaza. The community back 'em 'cause they backed the community first.",
       "narration_aave": true,
       "aave_density": 0.75,
-      "visual_prompt": "Small urban plaza at late afternoon golden hour, community bulletin board covered in thank-you notes and event flyers, barbershop with 'COMMUNITY MEETING TONIGHT' sign in window, children's basketball hoop mounted on utility pole, hand-painted mural on brick wall depicting neighborhood history, sense of a place where everyone knows your name. No humans. Dark steel palette with warm golden-green accent, 2D cel-shaded style, film grain 20%, 16:9.",
+      "visual_prompt": "Small urban plaza at late afternoon golden hour, community bulletin board covered in thank-you notes and event flyers, barbershop with 'COMMUNITY MEETING TONIGHT' sign in window, children's basketball hoop mounted on utility pole, hand-painted mural on brick wall depicting neighborhood history, sense of a place where everyone knows your name, a few faceless silhouetted figures near bulletin board, non-descript, warm golden outlines, community presence. Dark steel palette with warm golden-green accent, 2D cel-shaded style, film grain 20%, 16:9.",
       "visual_backend": "gemini",
       "duration_seconds": 20,
       "sfx_bed": "distant_traffic",
@@ -1000,12 +2065,58 @@
         "style": 0.45,
         "speed": 0.88,
         "use_speaker_boost": true
+      },
+      "visual_beats": [
+        {
+          "beat_id": "42a",
+          "timecode": "0.0-5.0",
+          "narration_fragment": "Number five. Community equity. This the one folk sleep on.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: backyard BBQ in full swing, two Black men shaking hands over a grill, genuine smiles, neighbors gathered with plates of food, kids playing in the yard, golden hour light — community as warmth, not a bulletin board",
+          "story_function": "Community equity — the BBQ handshake, real human connection"
+        },
+        {
+          "beat_id": "42b",
+          "timecode": "5.0-10.0",
+          "narration_fragment": "When your name mean somethin' on your block — when people trust you, send they kids to you, call you first when somethin' need fixin' — that's equity.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: a front stoop at golden hour, a man sitting on steps as a neighbor walks up with a kid, the kid being handed off for babysitting, trust visible in the body language, the kind of community where people send their kids to you — that's equity",
+          "story_function": "Your name means something — trust that can't be bought"
+        },
+        {
+          "beat_id": "42c",
+          "timecode": "10.0-15.0",
+          "narration_fragment": "Can't put it on a balance sheet. But it's the reason some folk can buy the plaza.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: the small urban plaza at golden hour — barbershop, clothing store, mural — but now a 'SOLD' sign is being replaced with the owner's name, community members gathered for a ribbon cutting, the plaza BOUGHT because the community backed the buyer",
+          "story_function": "Buying the plaza — community equity converted to real ownership"
+        },
+        {
+          "beat_id": "42d",
+          "timecode": "15.0-20.0",
+          "narration_fragment": "The community back 'em 'cause they backed the community first.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: wide shot of the plaza at golden hour, community gathering, hand-painted mural on the wall, kids playing near the basketball hoop, the bulletin board covered in thank-you notes — the community alive because somebody invested in it first",
+          "story_function": "Full circle — backing the community, the community backs you"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "COMMUNITY MEETING TONIGHT",
+          "community bulletin board",
+          "hand-painted mural",
+          "thank-you notes",
+          "basketball hoop",
+          "silhouetted figures near bulletin board"
+        ],
+        "scene_signature": "Small urban plaza at late afternoon golden hour — Number five",
+        "lighting_override": "Small urban plaza at late afternoon golden hour"
       }
     },
     {
       "scene_number": 43,
       "scene_type": "stat_callout",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": "Ninety-two percent of Black households hold zero business equity. Zero.",
       "narration_aave": false,
       "aave_density": 0.0,
@@ -1019,13 +2130,19 @@
       },
       "duration_seconds": 6,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "data_stream_hum", "level": "-28dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "data_stream_hum",
+          "level": "-28dB"
+        }
+      ],
       "music_mood": "tense",
       "music_level": "-32dB",
       "pause_after": "2000ms",
       "transition_out": "hard_cut",
       "voice_settings": {
-        "stability": 0.60,
+        "stability": 0.6,
         "similarity_boost": 0.75,
         "style": 0.25,
         "speed": 0.95,
@@ -1035,7 +2152,7 @@
     {
       "scene_number": 44,
       "scene_type": "quote_card",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -1043,7 +2160,7 @@
       "remotion_composition": "BowTieQuoteCard",
       "remotion_props": {
         "quote": "None of these require venture capital.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
       "duration_seconds": 5,
       "sfx_bed": "distant_traffic",
@@ -1056,7 +2173,7 @@
     {
       "scene_number": 45,
       "scene_type": "transition_beat",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -1072,7 +2189,7 @@
     {
       "scene_number": 46,
       "scene_type": "closer",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": "The hood already taught me what survival look like. What it feel like to stretch ten dollars into a week. What it mean to watch doors close and figure out which window to climb through. AI just made it urgent for everybody else. [2 second pause] Each one teach one. The marathon continues. Pay attention.",
       "narration_aave": true,
       "aave_density": 0.75,
@@ -1087,7 +2204,7 @@
       "pause_after": "3000ms",
       "transition_out": "fade_to_black",
       "voice_settings": {
-        "stability": 0.40,
+        "stability": 0.4,
         "similarity_boost": 0.75,
         "style": 0.45,
         "speed": 0.85,
@@ -1095,12 +2212,70 @@
       },
       "vo_split": true,
       "vo_split_marker": "AI just made it urgent for everybody else.",
-      "notes": "Split into 2 VO files at '[2 second pause]'. Pause added in FFMPEG assembly, not TTS."
+      "notes": "Split into 2 VO files at '[2 second pause]'. Pause added in FFMPEG assembly, not TTS.",
+      "visual_beats": [
+        {
+          "beat_id": "46a",
+          "timecode": "0.0-6.0",
+          "narration_fragment": "The hood already taught me what survival look like. What it feel like to stretch ten dollars into a week.",
+          "concept_type": "close_up_tactile",
+          "visual_concept": "2D cel-shaded: hands counting out crumpled bills on a kitchen table, sorting coins into piles, a grocery list beside them with items crossed off and prices calculated, $10 visible — stretching ten dollars into a week, the math of survival",
+          "story_function": "Survival math — stretching $10 into a week"
+        },
+        {
+          "beat_id": "46b",
+          "timecode": "6.0-12.0",
+          "narration_fragment": "What it mean to watch doors close and figure out which window to climb through.",
+          "concept_type": "visual_metaphor",
+          "visual_concept": "2D cel-shaded: a heavy door slamming shut (motion blur), but beside it a window is cracked open with warm light spilling through, a figure's hand reaching for the window — when doors close, find the window",
+          "story_function": "Doors close, windows open — the resourcefulness of survival"
+        },
+        {
+          "beat_id": "46c",
+          "timecode": "12.0-16.0",
+          "narration_fragment": "AI just made it urgent for everybody else.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: a Wall Street trading floor with monitors showing AI stock charts and automation alerts, suited figures watching screens with concern, the institutional world now facing the same disruption the hood always faced — AI made it urgent for everybody",
+          "story_function": "AI urgency — what was always true for the hood is now true for everyone"
+        },
+        {
+          "beat_id": "46d",
+          "timecode": "16.0-22.0",
+          "narration_fragment": "[2 second pause] Each one teach one.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Tyrone sitting on the rooftop at pre-dawn, back to camera, city skyline with lights fading as warm dawn orange appears on the horizon, coffee cup and notebook beside him on the concrete ledge — the final rooftop shot, contemplative, earned",
+          "story_function": "The rooftop return — full circle from scene 11, earned this time"
+        },
+        {
+          "beat_id": "46e",
+          "timecode": "22.0-26.0",
+          "narration_fragment": "The marathon continues.",
+          "concept_type": "literal_scene",
+          "visual_concept": "2D cel-shaded: dawn breaking fully over the city skyline, warm orange light flooding the rooftop, the sky transitioning from dark steel to warm dawn, the city waking up below — the marathon continues, a new day",
+          "story_function": "The marathon continues — dawn, a new day, the work goes on"
+        },
+        {
+          "beat_id": "46f",
+          "timecode": "26.0-30.0",
+          "narration_fragment": "Pay attention.",
+          "concept_type": "character_in_context",
+          "visual_concept": "2D cel-shaded: Red Nose Pitbull in silhouette on the rooftop edge, facing camera directly, amber eyes catching the dawn light, confident and watchful, the final image — pay attention",
+          "story_function": "Pay attention — the final frame, the dog watching, the brand image"
+        }
+      ],
+      "visual_anchors": {
+        "must_include": [
+          "coffee cup",
+          "notebook"
+        ],
+        "scene_signature": "Urban rooftop at pre-dawn — The hood already taught me what survival look like",
+        "lighting_override": "Urban rooftop at pre-dawn. city skyline with lights beginning to fade as first warm light appears on eastern horizon"
+      }
     },
     {
       "scene_number": 47,
       "scene_type": "quote_card_v2",
-      "act": "ACT 3B \u2014 FIVE THINGS",
+      "act": "ACT 3B — FIVE THINGS",
       "narration_text": null,
       "narration_aave": false,
       "visual_prompt": null,
@@ -1108,12 +2283,21 @@
       "remotion_composition": "BowTieQuoteCardV2",
       "remotion_props": {
         "quote": "The **marathon** continues. Pay **attention**.",
-        "attribution": "\u2014 T"
+        "attribution": "— T"
       },
-      "quote_highlight_words": ["marathon", "attention"],
+      "quote_highlight_words": [
+        "marathon",
+        "attention"
+      ],
       "duration_seconds": 6,
       "sfx_bed": "none",
-      "sfx_events": [{"trigger": "0.0s", "sfx": "sub_bass_hum", "level": "-30dB"}],
+      "sfx_events": [
+        {
+          "trigger": "0.0s",
+          "sfx": "sub_bass_hum",
+          "level": "-30dB"
+        }
+      ],
       "music_mood": "reflective",
       "music_level": "-32dB",
       "pause_after": "3000ms",

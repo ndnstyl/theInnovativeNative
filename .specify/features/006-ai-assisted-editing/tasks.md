@@ -15,12 +15,12 @@
 
 **Purpose**: Project structure, dependencies, environment validation
 
-- [ ] T001 [P] Verify Python 3.9+ available on editor workstation; verify `xml.etree.ElementTree` import works (Builder)
-- [ ] T002 [P] Create `projects/004-bowtie-bullies/media/grade/` directory (Builder)
+- [x] T001 [P] Verify Python 3.9+ available on editor workstation; verify `xml.etree.ElementTree` import works (Builder)
+- [x] T002 [P] Create `projects/004-bowtie-bullies/media/grade/` directory (Builder)
 - [ ] T002.5 [P] Run `prep_premiere_assets.py --dry-run` against EP-001 to audit asset availability on disk (Editor)
   - Non-blocking — script handles missing files gracefully with warnings
-- [ ] T003 [P] Verify existing Timeline EDL JSON fixture is valid: `projects/004-bowtie-bullies/episodes/EP-001/EP-001-marathon-continues-timeline.json` — confirm `episode_id`, `fps`, `tracks`, `master_output` keys present (Editor)
-- [ ] T004 [P] Verify `scripts/timeline_to_ffmpeg.py` `load_timeline()` is importable from sibling script (test `from timeline_to_ffmpeg import load_timeline`) (Builder) (scripts are now in scripts/shared/)
+- [x] T003 [P] Verify existing Timeline EDL JSON fixture is valid: `projects/004-bowtie-bullies/episodes/EP-001/EP-001-marathon-continues-timeline.json` — confirm `episode_id`, `fps`, `tracks`, `master_output` keys present (Editor)
+- [x] T004 [P] Verify `scripts/timeline_to_ffmpeg.py` `load_timeline()` is importable from sibling script (test `from timeline_to_ffmpeg import load_timeline`) (Builder) (scripts are now in scripts/shared/)
 
 **Checkpoint**: Environment validated, ready for implementation
 
@@ -34,7 +34,7 @@
 **Independent Test**: Load .cube in Premiere Lumetri, compare against FFMPEG reference frame
 **Agent**: Editor (post-production domain)
 
-- [ ] T005 [US3] Create `scripts/shared/hald_to_cube.py` — mathematical LUT generator (~60 lines) (Editor)
+- [x] T005 [US3] Create `scripts/shared/hald_to_cube.py` — mathematical LUT generator (~60 lines) (Editor)
   - Pure Python stdlib (no PIL, no FFMPEG dependency)
   - Compute `eq=saturation=0.75:contrast=1.15:brightness=-0.03` mathematically:
     - For each (r,g,b) in normalized 0-1 range on a 33³ grid:
@@ -45,7 +45,7 @@
     - Clamp to [0,1]
   - Output format: standard `.cube` with `TITLE`, `LUT_3D_SIZE 33`, RGB triplets
   - CLI: `python scripts/shared/hald_to_cube.py --output BowTie-Grade.cube --size 33 --saturation 0.75 --contrast 1.15 --brightness -0.03`
-- [ ] T006 [US3] Generate `projects/004-bowtie-bullies/media/grade/BowTie-Grade.cube` using `hald_to_cube.py` (Editor)
+- [x] T006 [US3] Generate `projects/004-bowtie-bullies/media/grade/BowTie-Grade.cube` using `hald_to_cube.py` (Editor)
   - Run the script with BowTie parameters
   - Validate: file loads in any .cube viewer, 33³ = 35,937 RGB lines + header
 - [ ] T005.5 [US3] Compare HALD pipeline output against pure-math output — both vs FFMPEG reference frame (Editor)
@@ -59,7 +59,7 @@
 **Independent Test**: Run against EP-001 timeline, verify folder tree + manifest
 **Agent**: Builder (Python/automation domain) + Editor (track mapping knowledge)
 
-- [ ] T007 [US2] Create `scripts/shared/prep_premiere_assets.py` (~120 lines) (Builder)
+- [x] T007 [US2] Create `scripts/shared/prep_premiere_assets.py` (~120 lines) (Builder)
   - Import `load_timeline()` from `timeline_to_ffmpeg.py`
   - argparse CLI: `prep_premiere_assets.py timeline.json --output dir [--symlink] [--base-path dir]`
   - Create 6-folder bin structure per plan.md
@@ -71,7 +71,7 @@
   - Default: `shutil.copy2()` (physical copy); `--symlink`: `os.symlink()` (relative, opt-in)
   - Generate `manifest.txt` with columns: `Track | Subfolder | Filename | Source Path`
   - Handle missing source files: print WARNING, continue (non-fatal)
-- [ ] T008 [US2] Test `prep_premiere_assets.py` against EP-001 timeline fixture (Editor)
+- [x] T008 [US2] Test `prep_premiere_assets.py` against EP-001 timeline fixture (Editor)
   - Run: `python scripts/shared/prep_premiere_assets.py projects/004-bowtie-bullies/episodes/EP-001/EP-001-marathon-continues-timeline.json --output premiere-prep/EP-001`
   - Verify: folder structure created, manifest.txt has all entries, warnings for missing source files are clear
 
@@ -81,7 +81,7 @@
 **Independent Test**: Import XML into Premiere Pro 2026, verify clip placement
 **Agent**: Editor (Premiere XML domain) + Builder (Python implementation)
 
-- [ ] T009 [US1] Create `scripts/shared/timeline_to_premiere_xml.py` (~350 lines) (Editor)
+- [x] T009 [US1] Create `scripts/shared/timeline_to_premiere_xml.py` (~350 lines) (Editor)
   - Import `load_timeline()` from `timeline_to_ffmpeg.py`
   - Functions per plan.md: `seconds_to_frames()`, `build_video_track_xml()`, `build_audio_track_xml()`, `make_clip_element()`, `make_file_element()`, `apply_volume()`, `compile_xmeml()`, `main()`
   - **Timecode shift**: `INTRO_DURATION = 3.5` seconds. All clip `in`/`out` shifted by `+INTRO_DURATION` so intro starts at frame 0
@@ -96,12 +96,12 @@
     - `timeline_to_premiere_xml.py timeline.json -o output.xml --base-path /path`
     - `timeline_to_premiere_xml.py timeline.json --dry-run` (print track summary)
     - `timeline_to_premiere_xml.py timeline.json --validate` (parse + structural check)
-- [ ] T010 [US1] Test XML generation against EP-001 timeline (Editor)
+- [x] T010 [US1] Test XML generation against EP-001 timeline (Editor)
   - `--dry-run`: verify track summary matches expected clip counts (48 video, 35 VO, 45 SFX, 12 music)
   - `--validate`: verify XML parses without errors
   - Generate actual XML, verify with `python -c "import xml.etree.ElementTree as ET; ET.parse('test.xml')"`
   - Spot-check: intro at frame 0, first scene at frame 84 (3.5s * 24fps), outro near end
-- [ ] T010.5 [US1] **HUMAN**: Generate reference xmeml from Premiere Pro (Human)
+- [x] T010.5 [US1] **HUMAN**: Generate reference xmeml from Premiere Pro (Human)
   - Create 3-clip test sequence in Premiere Pro 2026: 1 video clip, 1 audio clip with custom gain, 1 audio clip with default gain
   - File → Export → Final Cut Pro XML
   - Commit as `tests/fixtures/reference-3clip.xml`
@@ -119,7 +119,7 @@
 **Independent Test**: Follow SOP end-to-end on EP-001, complete in <20 min
 **Agent**: Chris (documentation/storytelling) + Editor (technical accuracy)
 
-- [ ] T012 [P] [US4] Create `projects/004-bowtie-bullies/brand/premiere-editing-sop.md` (Chris)
+- [x] T012 [P] [US4] Create `projects/004-bowtie-bullies/brand/premiere-editing-sop.md` (Chris)
   - Phase 0: Automation — exact CLI commands for pipeline → timeline → asset prep → XML
   - Phase 0 one-liner variant for experienced users
   - Phase 1: Import & Verify (2 min) — Cmd+I, check offline media, verify duration
@@ -145,7 +145,7 @@
 
 **Purpose**: Connect CLI tools to existing n8n pipeline, upload deliverables
 
-- [ ] T014 [US1] Design n8n BowTie Master Orchestrator extension spec (parallel branch for Premiere XML) (Builder)
+- [x] T014 [US1] Design n8n BowTie Master Orchestrator extension spec (parallel branch for Premiere XML) (Builder)
   - Spec document: describe parallel branch after Timeline EDL JSON Code node
   - New nodes: Execute Command (prep_premiere_assets.py), Execute Command (timeline_to_premiere_xml.py), Google Drive Upload (XML), Airtable Update (Premiere XML URL)
   - Use Merge v3.2 pattern to sync FFMPEG and Premiere branches before final status update

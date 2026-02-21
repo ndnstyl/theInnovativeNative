@@ -20,9 +20,9 @@
 - **Text shadow mandatory**: 2px 2px 8px rgba(0,0,0,0.6) on all video text for readability regardless of background.
 
 ### Avatar Consistency
-- **4 reference images established**: Front face, 3/4 profile, full body front, styled outfit. All in `projects/006-ai-editing/references/`.
-- **Consistency markers for every prompt**: "young woman, mid-20s, warm medium-brown skin, curly/coily brown hair with golden highlights shoulder-length, brown eyes, natural makeup, warm confident expression"
-- **Negative prompts critical**: "straight hair, blonde hair, pale skin, blue eyes, heavy makeup, exaggerated expressions, cartoonish, anime style, different person"
+- **4 reference images established**: Front face, 3/4 profile, full body front, styled outfit. Stored in Google Drive Reference Images folder (`1aURPY12WofNfKH2LK2ykqS7sVVcj0-UZ`) and linked in Airtable Character Sheets (`tbl8pQ9WlCikdesYf`).
+- **Consistency markers for every prompt**: "young woman, mid-20s, warm medium-brown skin, curly/coily sandy blonde hair with golden highlights shoulder-length, piercing green eyes, very faint cleft chin, full lips, natural makeup, warm confident expression"
+- **Negative prompts critical**: "straight hair, pale skin, brown eyes, dark eyes, amber eyes, heavy makeup, exaggerated expressions, cartoonish, anime style, different person"
 
 ### Video Production
 - **Ken Burns zoom range**: 1.0x to 1.15x (subtle). Larger zooms look nauseating.
@@ -73,9 +73,10 @@
 | 0A | Brand System | COMPLETE |
 | 0B | Airtable Mission Control | COMPLETE (3 tables created, 5 existed, 1 product seeded) |
 | 0C | Visual Identity Lock-In | COMPLETE (2 Character Sheets + 4 reference images uploaded + 4 Asset records) |
-| 0D | Infrastructure Validation | PARTIAL (Drive folders done, n8n/ElevenLabs/FFMPEG → Builder handoff) |
+| 0D | Infrastructure Validation | EFFECTIVELY COMPLETE (see 2026-02-18 audit below) |
 | 0E | Project Files | COMPLETE |
-| 1 | MVP B-Roll Pipeline | COMPLETE (4 workflows deployed, runtime fixes applied 2026-02-09) |
+| 1 | MVP B-Roll Pipeline | COMPLETE (4 workflows deployed, runtime fixes applied 2026-02-09) — **4 CRITICAL BUGS in WF-006** (see audit report) |
+| 1.5 | WF-006 Bug Fixes | NOT STARTED — FFMPEG assembly spec written 2026-02-18, waiting for Builder handoff |
 | 2 | Talking Head + Voice | NOT STARTED |
 | 3 | Cinematic + QA Loop | NOT STARTED |
 | 4 | Trend Automation | NOT STARTED |
@@ -139,3 +140,91 @@ This logs every shell command to the node's output JSON, making n8n execution da
 
 **Fix 3 — Font Path Alignment:**
 Font check workflow (`R4OrfgtnzmWmSGIy`) was checking `Inter-Bold.ttf` at `/home/node/fonts/`, but Text Overlays uses `DejaVuSans-Bold.ttf` at `/usr/share/fonts/truetype/dejavu/`. Pre-flight validation now checks the correct DejaVuSans path. DejaVuSans is the canonical font for WF-006.
+
+## Session Learnings (2026-02-18) — Progress Check & Spec Kit Reconciliation
+
+### Spec Kit Reconciliation Decision
+
+**Three competing spec kits existed:**
+1. `.specify/features/asliceofhaven/` — Phase 0 Foundation (93% done, ARCHIVED)
+2. `.specify/features/haven-video-pipeline/` — Kie.AI Evolution (0/40 tasks, CANONICAL going forward)
+3. `projects/003-haven-ugc-broll/specs/` — Original Ken Burns B-Roll (0/70 tasks, DEPRECATED)
+
+**Decision:** `haven-video-pipeline` is the canonical spec kit. It replaces Ken Burns with Kie.AI Veo3.1 video generation. The 70-task Ken Burns spec (#3) had ~55 tasks effectively completed but 0 checked off — a tracking failure from the rapid 2026-02-09 build session.
+
+**Key insight:** The existing Ken Burns workflows (WF-001/003/004/006) should be KEPT as fallback during Kie.AI development. New workflows get new IDs (WF-V01 through WF-V06).
+
+### Phase 0D Infrastructure — Effectively Complete
+
+| Task | Status | Evidence |
+|------|--------|----------|
+| HAVEN-021 (audit n8n workflows) | EFFECTIVELY DONE | WF-001/003/004/006 were not just audited but REPLACED by new ones. Original workflow IDs `BT2CpVpzW432seZ6` and `m7m9f9Qu5nekiZke` superseded. |
+| HAVEN-022 (test ElevenLabs voice) | DEFERRED | Haven pipeline uses Qwen3-TTS (local) not ElevenLabs. Voice ID `M6ic45wruJGWAxLFEMNK` exists but is BowTie-focused. Haven voice needs own reference recording. |
+| HAVEN-023 (validate FFMPEG) | EFFECTIVELY DONE | WF-006 pre-flight validation confirms ffmpeg, ffprobe, zoompan, xfade, drawtext, DejaVuSans font all present on n8n server. |
+| HAVEN-025 (music tracks) | DONE | 3 optimized tracks already in Drive Music folder: `afternoon-coffee-40s-128k.mp3`, `raspberrymusic-lofi-40s-128k.mp3`, `dreamy-lofi-hiphop-40s-128k.mp3`. Schema map has Drive IDs. |
+
+### Phase 1 Setup Tasks — Partial Satisfaction
+
+Tasks T001 (bedroom/living room prompts) and T002 (rewrite broll-script-prompt.md) are already SATISFIED — the brand-system.md has full room descriptions and the prompt template was rewritten for the 3-scene video structure. T003 (talking-head-script-prompt.md) is SUPERSEDED — T002's rewrite handles both B-Roll and Talking Head via `{{scene_type}}` variable.
+
+**Remaining real work:**
+- T004: Add Bedroom/Living Space Character Sheet Airtable records (Data agent, ~30 min)
+- T033-T037: Airtable schema additions (Data agent, ~90 min, CEO approval needed for Playbooks table — 6 new fields exceeds 3-field threshold)
+- T038: Font resolution — DejaVuSans-Bold.ttf is actual font on server, but spec references Inter-Bold.ttf. Decision: install Inter Bold or update spec.
+
+### WF-006 FFMPEG Assembly Spec Written
+
+FFMPEG assembly spec produced at `projects/003-haven-ugc-broll/specs/ffmpeg-assembly-spec.md` resolving all 4 critical bugs + 5 moderate issues:
+- C1: Ken Burns zoom — dynamic formula `0.15 / (duration_seconds * fps)` replaces hardcoded 0.00375
+- C2: Font — Inter Bold primary (`/usr/share/fonts/truetype/inter/Inter-Bold.ttf`), DejaVu fallback
+- C3: Background box — per-type styling: Hook (shadow only), Caption (#D4956A@0.85), CTA (#2C1810@0.90)
+- C4: Scene download — SplitInBatches + Google Drive API node replaces raw curl
+- M2: Crossfade — single-pass filter_complex eliminates re-encoding loss
+- Per-type font sizes canonized: Hook 64px, Caption 48px, CTA 56px, Subtitle 44px
+
+### Feature 007 (Local AI) — Complements, Doesn't Compete
+
+ComfyUI + Qwen3-TTS is a cost-saving supplement for asset creation, NOT a replacement for the cloud pipeline. No integration path exists yet between local output and n8n pipeline. Blocked on user model downloads from CivitAI.
+
+### Critical Pattern: Task Tracking Discipline
+
+~55 tasks were executed in the 2026-02-09 build session without checking off a single task in any spec kit. This made the progress check significantly harder and created confusion about what's done vs not done. **Rule: Check off tasks AS they're completed, not after.**
+
+## Session Learnings (2026-02-19) — Full Cross-Workflow Audit & Fix
+
+### Root Cause: WF-001 Never Completed End-to-End
+
+After 10 days of incremental deployment (Feb 9-19), WF-001 had never completed a successful run. Every execution hit a different Airtable error. Root cause: **schema mismatches deployed across sessions with no comprehensive validation pass**.
+
+### 5 Critical Mismatches Found & Fixed
+
+| ID | Workflow | Problem | Fix |
+|----|----------|---------|-----|
+| C1 | WF-001 | Status "Awaiting Script Approval" not valid in Content Pipeline | Added `typecast: true` to node options (auto-creates option on write) |
+| C2 | WF-004 | QA Status "Flagged" not valid in Assets table | Changed to "Revision Needed" (valid option) |
+| C3 | WF-004 | Field "Generation Prompt" doesn't exist in Assets table | Removed from node mapping |
+| C4 | WF-004 | Field "Scene Number" doesn't exist in Assets table | Removed from node mapping |
+| C5 | WF-003 | Gemini may return music_mood values not in Airtable select options | Added mapping logic to normalize any Gemini output to valid option |
+
+### Audit Pattern (REUSABLE — ALL PIPELINE PROJECTS)
+
+**Script**: `scripts/003-haven/audit_fix_all_workflows.py`
+
+Pattern for auditing n8n ↔ Airtable alignment:
+1. Pull full Airtable schema via Metadata API (`GET /meta/bases/{baseId}/tables`)
+2. Pull all workflow JSON via n8n API (`GET /api/v1/workflows/{id}`)
+3. For every Airtable node in every workflow:
+   - Verify table ID exists in schema
+   - Verify every written field name exists in that table
+   - Verify every static singleSelect value is in the valid options list
+   - Check if `typecast: true` is set (allows auto-creating missing options)
+4. Output pass/fail per node
+
+This caught 5 bugs that 10 days of incremental deployment missed.
+
+### Key Learnings
+
+- **n8n Airtable node `typecast` option**: Setting `options.typecast = true` in the node parameters tells Airtable API to auto-create select options that don't exist. Useful for pipeline status values that only the orchestrator uses.
+- **Field mapping drift**: When node mappings are written from Code node output (e.g., `generation_prompt`, `scene_number`), the fields may not exist in the target table. Always verify the mapping against the live schema, not just the code.
+- **Gemini output → Airtable select**: Gemini may return free-text values for fields that map to Airtable select options. Always add a normalization step between Gemini output and Airtable writes.
+- **Single-pass audit > incremental fixes**: A single comprehensive audit across all workflows found more bugs in 1 minute than 10 days of per-execution debugging.

@@ -25,9 +25,11 @@
 ## Haven Avatar — Character Identity
 
 ### Physical Description (Canonical Reference)
-- **Hair**: Medium-length curly/coily brown hair with golden-brown highlights, natural texture
+- **Hair**: Medium-length curly/coily sandy blonde hair with golden highlights, natural texture
 - **Skin**: Warm medium-brown complexion
-- **Eyes**: Brown, expressive
+- **Eyes**: Piercing green, expressive
+- **Chin**: Very faint cleft chin
+- **Lips**: Full lips
 - **Build**: Average/athletic build
 - **Age appearance**: Mid-20s to early 30s
 - **Expression default**: Warm, confident, approachable — slight knowing smile
@@ -70,13 +72,13 @@ Located in `cinema_knowledge/`:
 These must appear in EVERY avatar generation prompt:
 ```
 Consistent character: young woman, mid-20s, warm medium-brown skin,
-curly/coily brown hair with golden highlights shoulder-length,
-brown eyes, natural makeup, warm confident expression.
+curly/coily sandy blonde hair with golden highlights shoulder-length,
+piercing green eyes, very faint cleft chin, full lips, natural makeup, warm confident expression.
 ```
 
 ### Negative Prompt (always include)
 ```
-Negative: straight hair, blonde hair, pale skin, blue eyes,
+Negative: straight hair, dark hair, pale skin, brown eyes, dark eyes, amber eyes,
 heavy makeup, exaggerated expressions, cartoonish, anime style,
 different person, inconsistent features
 ```
