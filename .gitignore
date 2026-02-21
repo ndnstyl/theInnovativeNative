@@ -138,6 +138,12 @@ projects/006-ai-editing/remotion/
 comfyUI/
 output/
 
+# _comfyUI local installation (43GB — ENTIRE directory excluded)
+_comfyUI/
+
+# Qwen3 voice-over models (1.8GB)
+qwen3_VO/
+
 # Python virtual environment
 venv/
 
@@ -152,10 +158,11 @@ projects/006-ai-editing/premiere/Adobe Premiere Pro Audio Previews/
 
 # BowTie Bullies media assets (large binaries, stored on GDrive)
 projects/004-bowtie-bullies/media/
-projects/004-bowtie-bullies/assets/canonical-characters/
-projects/004-bowtie-bullies/assets/EP-001/
-projects/004-bowtie-bullies/assets/overlays/
-projects/004-bowtie-bullies/assets/*.zip
+projects/004-bowtie-bullies/assets/
+projects/004-bowtie-bullies/brand/assets/
+
+# Haven UGC B-roll assets (binary, stored on GDrive)
+projects/003-haven-ugc-broll/assets/
 
 # 006-ai-editing reference images (large, keep in GDrive)
 projects/006-ai-editing/references/*.png
@@ -165,12 +172,14 @@ projects/006-ai-editing/references/*.jpg
 # Untracked media remains until manually cleaned — gitignored here
 deliverables/
 
-# Premiere Pro project files (large binaries, not in git)
-projects/006-ai-editing/premiere/*.prproj
-projects/006-ai-editing/premiere/*.prin
-projects/006-ai-editing/premiere/Motion Graphics Template Media/
-projects/006-ai-editing/premiere/Premiere Composer Files/
-projects/006-ai-editing/premiere/templates/
+# Pipeline output (generated bins, copied media, XML)
+premiere-prep/
+
+# Premiere Pro project files and renders (large binaries, not in git)
+projects/006-ai-editing/premiere/
+
+# Haven cache files
+scripts/003-haven/ootd_cache.json
 
 # ------------------------------------------
 # BACKUPS
@@ -211,6 +220,10 @@ temp/
 # Keep the skill structure
 !.claude/skills/
 !.claude/skills/**
+
+# BUT exclude MCP config references that contain real credentials
+.claude/skills/mcp-client/references/mcp-config.json
+.claude/skills/mcp-client/scripts/__pycache__/
 
 # Keep constitution and shared learnings (they're the template)
 !.specify/memory/constitution.md

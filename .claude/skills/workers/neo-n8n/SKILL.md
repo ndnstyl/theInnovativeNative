@@ -3,10 +3,6 @@ name: neo-n8n
 description: |
   DEPRECATED: Neo has been consolidated into Builder.
   Use @builder for n8n workflows, Python scripts, and Git operations.
-triggers:
-  - "@neo"
-  - "n8n workflow"
-redirect: builder
 ---
 
 # Neo - DEPRECATED

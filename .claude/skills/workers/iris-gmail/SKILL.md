@@ -3,11 +3,6 @@ name: iris-gmail
 description: |
   DEPRECATED: Iris has been consolidated into Comms.
   Use @comms for email, Slack, Google Drive, and Notion.
-triggers:
-  - "@iris"
-  - "email"
-  - "gmail"
-redirect: comms
 ---
 
 # Iris - DEPRECATED

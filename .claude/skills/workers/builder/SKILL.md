@@ -135,6 +135,116 @@ EOF
 )"
 ```
 
+## n8n Quick Reference — Common Gotchas
+
+These patterns are the most frequently re-learned. Check here first before building any n8n workflow.
+
+### Google Drive: Search vs List
+
+Use `resource: "fileFolder"` + `operation: "search"` — **NOT** `operation: "list"`.
+
+```json
+{
+  "resource": "fileFolder",
+  "operation": "search",
+  "queryString": "'FOLDER_ID' in parents and (mimeType contains 'image/')"
+}
+```
+
+The `list` operation doesn't support query strings. This mistake has been made 3+ times.
+
+### Google Drive: Share Permissions
+
+Use `operation: "share"` — **NOT** `resource: "permission"`.
+
+```json
+{
+  "operation": "share",
+  "fileId": "={{ $json.id }}",
+  "permissionsUi": {
+    "permissionsValues": { "role": "reader", "type": "anyone" }
+  }
+}
+```
+
+### Airtable: matchingColumns for Updates
+
+When using `operation: "update"`, you must specify the record `id` or use `matchingColumns`. Omitting both silently fails.
+
+### Airtable: typecast for New Select Values
+
+Set `options.typecast = true` to auto-create missing singleSelect values:
+
+```json
+{ "options": { "typecast": true } }
+```
+
+### Webhook Callback + Wait Node + Polling Fallback
+
+Pattern for APIs that support callbacks (Kie.ai, etc.):
+
+```
+HTTP Request (POST with callbackUrl: $execution.resumeUrl)
+  → Wait node (resume: "webhook", timeout: 600s)
+  → Code (extract result from callback body)
+  → IF (needs_polling)
+    ├── YES → HTTP Request (GET poll endpoint) → Extract result
+    └── NO → Continue
+```
+
+### Binary Data Loss Through Code/IF Nodes
+
+Code nodes and IF nodes do NOT forward binary data. Re-fetch with `$()` selector:
+
+```javascript
+const imageNode = $('Generate Image with Gemini').first();
+return [{ json: $input.first().json, binary: imageNode.binary }];
+```
+
+### Binary Data in Database Mode
+
+`$binary.data.data` is a reference ID, not base64. Use:
+
+```javascript
+const buffer = await this.helpers.getBinaryDataBuffer(0, 'data');
+require('fs').writeFileSync('/tmp/file.png', buffer);
+```
+
+### Parallel Branch Synchronization
+
+When N parallel branches must ALL complete before a downstream node, use Merge v3.2:
+
+```json
+{
+  "mode": "append",
+  "options": { "numberInputs": N }
+}
+```
+
+**NEVER** connect multiple parallel branches to the same input index — n8n fires on first arrival.
+
+### SplitInBatches Done-Branch Data Loss
+
+When SplitInBatches fires its "done" output (index 0), `$('Split Node').all()` returns the done-signal — NOT accumulated items. Reference a guaranteed upstream node instead:
+
+```javascript
+const data = $('Create Temp Directory').first().json; // upstream node with full payload
+```
+
+### executeWorkflow Implicit Data Passing
+
+Empty `workflowInputs.value: {}` passes upstream data through implicitly. No explicit field mappings needed.
+
+### Workflow Updates via API — NEVER Overwrite
+
+1. `GET` the live workflow first
+2. Patch specific node parameters
+3. `PUT` back with only `name`, `nodes`, `connections`, `settings`
+
+Extra fields like `tags`, `pinData`, `staticData` cause 400 errors. Pushing local JSON blindly wipes user-added nodes and credentials.
+
+---
+
 ## Shutdown Protocol (MANDATORY)
 
 ### 1. Log Time Entry to Airtable

@@ -1,5 +1,17 @@
 # Second Brain Skills - Claude Code Instructions
 
+## ⛔ HARD RULES — NEVER VIOLATE ⛔
+
+### BowTie Bullies / EP-001 Image Generation
+
+1. **NEVER include "Red Nose Pitbull", "Pitbull", "Tyrone", or ANY character reference in text-to-image prompts.** The main character is ALWAYS composited from pre-made canonical PNG assets. Text-to-image (Gemini) NEVER generates the character. Every prompt function MUST strip character references. This has been violated 3+ times — it is the #1 priority rule.
+
+2. **NEVER include "vignette" in any text-to-image prompt.** Vignette is trivial to add in Premiere Pro but extremely hard to remove when it detracts. All vignette must be post-production only.
+
+3. **NEVER include style directives (cel-shaded, film grain, palette) in pipeline visual_prompt fields.** Style is assembled from structured slots in the scene-prep workflow. Pipeline prompts describe STORY CONTENT only.
+
+---
+
 ## Overview
 
 This is a multi-agent skill system for Claude Code, implementing a "second brain" architecture with hierarchical agents, feedback loops, and persistent learning.
@@ -80,6 +92,9 @@ Key Agent Record IDs (populate after creating agents):
     ├── staff/               # Senior staff (Level 4)
     ├── leads/               # Project leads (Level 3)
     ├── workers/             # Workers (Level 2)
+    ├── knowledge/           # Domain knowledge skills
+    │   ├── 3d-web-experience/   # Spline, Three.js, R3F, WebGL, Spell AI
+    │   └── frontend-design/     # Anti-slop UI/UX, GSAP, typography, layout
     └── infrastructure/      # System skills
 ```
 
@@ -119,6 +134,13 @@ Key Agent Record IDs (populate after creating agents):
 - Airtable (lead records), Google Drive (deliverable PDFs), Stan Store (product hosting) (002-stan-store-lawfirm-funnel)
 - Gemini API (image generation + scoring), Google Drive API (storage), Airtable API (mission control), FFMPEG (video assembly) (003-haven-ugc-broll)
 - Airtable (pipeline state) + Google Drive (media files) (003-haven-ugc-broll)
+- JavaScript (n8n Code nodes) + FFMPEG (CLI on n8n server) + n8n workflow engine, Kie.AI API (NBP + Veo 3.1), n8n Basic LLM Chain (Groq), Google Drive API, Airtable API (008-tiny-home-timelapse)
+- Airtable (state management), Google Drive (asset storage) (008-tiny-home-timelapse)
+
+## Knowledge Skills
+- **3d-web-experience**: Spline (variables, webhooks, real-time API, Spell AI, MCP server), Three.js, React Three Fiber, R3F+Spline hybrid, shaders, physics (Rapier), Remotion+Spline, multi-platform export (iOS/Android/Web/AR)
+- **frontend-design**: Anti-slop UI/UX rules, GSAP motion choreography, typography (anti-generic font pairing), color strategy, asymmetric layouts, background atmosphere, responsive patterns
 
 ## Recent Changes
+- Knowledge skills: Added 3d-web-experience (Spline + Three.js + R3F) and frontend-design (anti-slop UI/UX) knowledge skills
 - 002-stan-store-lawfirm-funnel: Added N/A (content products + no-code integrations) + Stan Store (storefront), PPTX Generator skill (PDF creation), n8n (webhook pipeline), Airtable (lead tracking)

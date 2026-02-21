@@ -1,3 +1,11 @@
+---
+name: gdrive-upload
+description: |
+  Upload file deliverables to Google Drive with proper folder organization and shareable links.
+  Covers Python script upload, manual upload, and MCP methods.
+  Includes Airtable Deliverables integration and format verification.
+---
+
 # Google Drive Upload Skill
 
 ## Overview
@@ -26,12 +34,12 @@ Use this skill whenever:
 
 ### Method 1: Python Script (Preferred for Automation)
 
-**Script Location:** `law_firm_RAG/marketing/scripts/upload_to_gdrive.py`
+**Script Location:** `scripts/shared/upload_pipeline_to_gdrive.py`
 
 **Usage:**
 ```bash
 cd /Users/makwa/theinnovativenative
-python law_firm_RAG/marketing/scripts/upload_to_gdrive.py
+python scripts/shared/upload_pipeline_to_gdrive.py
 ```
 
 **What the script does:**

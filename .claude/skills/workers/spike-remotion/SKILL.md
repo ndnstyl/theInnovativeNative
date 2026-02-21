@@ -3,10 +3,6 @@ name: spike-remotion
 description: |
   DEPRECATED: Spike has been consolidated into Creative.
   Use @creative for Remotion video, graphics, and ideation.
-triggers:
-  - "@spike"
-  - "remotion video"
-redirect: creative
 ---
 
 # Spike - DEPRECATED

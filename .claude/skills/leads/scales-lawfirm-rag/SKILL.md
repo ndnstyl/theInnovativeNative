@@ -27,7 +27,7 @@ Legal document processing and RAG system for law firms. Focus areas:
 ## Key Resources
 - Spec Path: `.specify/features/lawfirm-rag/`
 - Learnings: `.specify/memory/learnings/scales-learnings.md`
-- n8n Spec: `law_firm_RAG/scripts/n8n-customization-spec.md`
+- n8n Spec: (migrated — check `.specify/features/lawfirm-rag/` for current specs)
 
 ## Delegation (via Drew)
 - Builder: Python scripts, n8n workflows
