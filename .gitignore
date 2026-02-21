@@ -131,6 +131,50 @@ remotion-videos/
 projects/006-ai-editing/remotion/
 
 # ------------------------------------------
+# MEDIA FILES — GLOBAL (NEVER commit binary media)
+# ------------------------------------------
+
+# Video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wmv
+*.flv
+*.m4v
+
+# Audio files
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.m4a
+*.flac
+*.wma
+
+# Image files (raster)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.tiff
+*.tif
+*.ico
+*.psd
+*.ai
+
+# EXCEPTIONS: Keep SVGs (vector, text-based, small)
+!*.svg
+
+# EXCEPTIONS: Keep specific small brand assets needed by skills
+!.claude/skills/pptx-generator/brands/*/assets/*.png
+!.claude/skills/pptx-generator/brands/*/assets/*.jpg
+!.claude/skills/pptx-generator/brands/*/*.png
+
+# ------------------------------------------
 # LARGE BINARY / MEDIA DIRECTORIES
 # ------------------------------------------
 
@@ -164,12 +208,10 @@ projects/004-bowtie-bullies/brand/assets/
 # Haven UGC B-roll assets (binary, stored on GDrive)
 projects/003-haven-ugc-broll/assets/
 
-# 006-ai-editing reference images (large, keep in GDrive)
-projects/006-ai-editing/references/*.png
-projects/006-ai-editing/references/*.jpg
+# 006-ai-editing reference images
+projects/006-ai-editing/references/
 
 # Entire old deliverables/ directory (all tracked files moved to projects/)
-# Untracked media remains until manually cleaned — gitignored here
 deliverables/
 
 # Pipeline output (generated bins, copied media, XML)
