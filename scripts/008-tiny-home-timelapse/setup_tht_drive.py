@@ -3,7 +3,7 @@
 Create Google Drive folder structure for THT pipeline.
 Creates: TIN Marketing / TinyHomeTimelapse / {Images, Videos, Reels}
 
-Usage: python scripts/008-tht/setup_tht_drive.py
+Usage: python scripts/008-tiny-home-timelapse/setup_tht_drive.py
 """
 
 import json

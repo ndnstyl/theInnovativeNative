@@ -72,8 +72,8 @@
       "position": [880, 400],
       "credentials": {
         "httpCustomAuth": {
-          "id": "GEMINI_CREDENTIAL_ID",
-          "name": "Google Gemini"
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini API"
         }
       }
     },

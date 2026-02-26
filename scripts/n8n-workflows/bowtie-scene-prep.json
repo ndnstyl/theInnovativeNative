@@ -1,5 +1,5 @@
 {
-  "_RETIRED": "2026-02-16 — Replaced by scripts/004-bowtie/bowtie_scene_compiler.py. This workflow's prompt assembly logic now runs locally. Kept for reference only. Do NOT deploy to n8n.",
+  "_RETIRED": "2026-02-16 — Replaced by scripts/004-bowtie-bullies/bowtie_scene_compiler.py. This workflow's prompt assembly logic now runs locally. Kept for reference only. Do NOT deploy to n8n.",
   "name": "BowTie Scene Prep [RETIRED]",
   "nodes": [
     {
@@ -95,10 +95,7 @@
             "canonical_source": "={{ $json.canonical_source }}",
             "generation_attempts": "={{ $json.generation_attempts }}",
             "narrative_anchors": "={{ $json.narrative_anchors }}",
-            "scene_signature": "={{ $json.scene_signature }}",
-            "timeline_sequence": "={{ $json.timeline_sequence }}",
-            "beat_timecode": "={{ $json.beat_timecode }}",
-            "narration_fragment": "={{ $json.narration_fragment }}"
+            "scene_signature": "={{ $json.scene_signature }}"
           }
         },
         "options": {}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RETIRED 2026-02-16 — Replaced by scripts/004-bowtie/bowtie_scene_compiler.py
+RETIRED 2026-02-16 — Replaced by scripts/004-bowtie-bullies/bowtie_scene_compiler.py
 which writes directly to Airtable, eliminating the Google Drive intermediary.
 
 Original purpose:

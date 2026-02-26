@@ -6,9 +6,9 @@ Generates warm, approachable female voiceover audio using Qwen3-TTS
 with voice cloning from a Haven reference audio sample.
 
 Usage:
-    python scripts/003-haven/haven_qwen3_vo.py <script.json> [--output-dir ./preview]
-    python scripts/003-haven/haven_qwen3_vo.py <script.json> --scene 3      # single scene
-    python scripts/003-haven/haven_qwen3_vo.py <script.json> --stats-only   # word count only
+    python scripts/003-haven-ugc-broll/haven_qwen3_vo.py <script.json> [--output-dir ./preview]
+    python scripts/003-haven-ugc-broll/haven_qwen3_vo.py <script.json> --scene 3      # single scene
+    python scripts/003-haven-ugc-broll/haven_qwen3_vo.py <script.json> --stats-only   # word count only
 
 Requirements:
     pip install mlx-audio soundfile numpy
@@ -231,16 +231,16 @@ def main():
         epilog="""
 Examples:
   # Full episode preview
-  python scripts/003-haven/haven_qwen3_vo.py scripts/haven-script.json
+  python scripts/003-haven-ugc-broll/haven_qwen3_vo.py scripts/haven-script.json
 
   # Just see word counts
-  python scripts/003-haven/haven_qwen3_vo.py scripts/haven-script.json --stats-only
+  python scripts/003-haven-ugc-broll/haven_qwen3_vo.py scripts/haven-script.json --stats-only
 
   # Preview a single scene
-  python scripts/003-haven/haven_qwen3_vo.py scripts/haven-script.json --scene 3
+  python scripts/003-haven-ugc-broll/haven_qwen3_vo.py scripts/haven-script.json --scene 3
 
   # Custom output directory
-  python scripts/003-haven/haven_qwen3_vo.py scripts/haven-script.json -o ./haven-vo-drafts
+  python scripts/003-haven-ugc-broll/haven_qwen3_vo.py scripts/haven-script.json -o ./haven-vo-drafts
         """
     )
     parser.add_argument("script", help="Path to episode script JSON")

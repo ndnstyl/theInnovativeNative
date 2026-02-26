@@ -1,5 +1,5 @@
 {
-  "name": "WF-THT-ROUTER \u2014 Webhook Dispatcher",
+  "name": "WF-THT-ROUTER \u2014 Stage-Based Dispatcher",
   "nodes": [
     {
       "parameters": {
@@ -20,7 +20,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Extract fields from webhook body\nconst body = $json.body || $json;\nconst recordId = body.recordId || '';\nconst status = body.status || '';\nconst brandName = body.brandName || '';\nconst brandConcept = body.brandConcept || '';\nconst projectName = body.projectName || '';\n\nif (!recordId) {\n  throw new Error('Missing recordId in webhook payload');\n}\nif (!status) {\n  throw new Error('Missing status in webhook payload');\n}\n\nreturn [{\n  json: {\n    recordId,\n    status,\n    brandName,\n    brandConcept,\n    projectName,\n    receivedAt: new Date().toISOString()\n  }\n}];"
+        "jsCode": "// Extract fields from webhook body\nconst body = $json.body || $json;\nconst recordId = body.recordId || '';\nconst action = body.action || '';\nconst stage = body.stage || '';\nconst status = body.status || '';\nconst brandName = body.brandName || '';\nconst brandConcept = body.brandConcept || '';\nconst projectName = body.projectName || '';\nconst regenRecordId = body.regenRecordId || '';\n\nif (!recordId) {\n  throw new Error('Missing recordId in webhook payload');\n}\n\nreturn [{\n  json: {\n    recordId,\n    action,\n    stage,\n    status,\n    brandName,\n    brandConcept,\n    projectName,\n    regenRecordId,\n    receivedAt: new Date().toISOString()\n  }\n}];"
       },
       "id": "tht-router-extract",
       "name": "Code \u2014 Extract Payload",
@@ -28,6 +28,80 @@
       "typeVersion": 2,
       "position": [
         420,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Code \u2014 Extract Payload').first().json.recordId }}"
+      },
+      "id": "tht-router-fetch",
+      "name": "Airtable \u2014 Fetch Project",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        640,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Detect action and validate prerequisites for stage-based routing\nconst payload = $('Code \\u2014 Extract Payload').first().json;\nconst project = $('Airtable \\u2014 Fetch Project').first().json;\nconst status = project.Status || payload.status || '';\nconst now = new Date().toISOString().slice(0, 16).replace('T', ' ');\n\n// --- Action Detection (from Run Action dropdown via payload) ---\nconst actionMap = {\n  'Canon Upload': 'upload_canon',\n  'Prompts': 'prompts',\n  'Stage 1': 'stage_1', 'Stage 2': 'stage_2',\n  'Stage 3': 'stage_3', 'Stage 4': 'stage_4',\n  'Video 1': 'video_1', 'Video 2': 'video_2',\n  'Video 3': 'video_3', 'Video 4': 'video_4',\n  'Reels': 'reels'\n};\nlet action = actionMap[payload.action] || payload.action || '';\n\n// Fallback: check Regenerate checkbox on project (separate from Run Action)\nif (!action && project['Regenerate']) {\n  action = 'regen';\n}\n\n// --- Labels ---\nconst labels = {\n  upload_canon: 'Canon Upload',\n  prompts: 'Prompt Generation',\n  stage_1: 'Stage 1 Image Generation',\n  stage_2: 'Stage 2 Image Generation',\n  stage_3: 'Stage 3 Image Generation',\n  stage_4: 'Stage 4 Image Generation',\n  video_1: 'Stage 1 Video Generation',\n  video_2: 'Stage 2 Video Generation',\n  video_3: 'Stage 3 Video Generation',\n  video_4: 'Stage 4 Video Generation',\n  regen: 'Image Regeneration',\n  reels: 'Reel Assembly'\n};\nconst label = labels[action] || action;\n\n// --- Validation ---\nlet error = '';\n\nif (!action) {\n  error = `No action detected. Status: ${status}. Check a Run button or provide an action in the payload.`;\n} else if (action === 'upload_canon') {\n  // Requires Canon Image attachment to exist\n  const canonImg = project['Canon Image'];\n  if (!canonImg || (Array.isArray(canonImg) && canonImg.length === 0)) {\n    error = `Cannot upload canon \\u2014 no Canon Image attachment found on the project record.`;\n  }\n} else if (action === 'prompts') {\n  if (!['canon_uploaded', 'prompts_failed'].includes(status)) {\n    error = `Cannot run prompts \\u2014 status is \"${status}\". Requires \"canon_uploaded\".`;\n  }\n} else if (action === 'stage_1') {\n  if (!['prompts_approved', 'stage_1_failed'].includes(status)) {\n    error = `Cannot run stage_1 \\u2014 status is \"${status}\". Requires \"prompts_approved\".`;\n  }\n} else if (action === 'stage_2') {\n  if (!['stage_1_approved', 'stage_2_failed'].includes(status)) {\n    error = `Cannot run stage_2 \\u2014 status is \"${status}\". Requires \"stage_1_approved\".`;\n  }\n} else if (action === 'stage_3') {\n  if (!['stage_2_approved', 'stage_3_failed'].includes(status)) {\n    error = `Cannot run stage_3 \\u2014 status is \"${status}\". Requires \"stage_2_approved\".`;\n  }\n} else if (action === 'stage_4') {\n  if (!['stage_3_approved', 'stage_4_failed'].includes(status)) {\n    error = `Cannot run stage_4 \\u2014 status is \"${status}\". Requires \"stage_3_approved\".`;\n  }\n} else if (action === 'video_1') {\n  const ok1 = ['stage_1_approved','stage_2_approved','stage_3_approved','stage_4_approved','stage_1_review','stage_2_review','stage_3_review','stage_4_review'];\n  if (!ok1.includes(status)) {\n    error = `Cannot run video_1 \\u2014 status is \"${status}\". Requires at least stage_1 images approved.`;\n  }\n} else if (action === 'video_2') {\n  const ok2 = ['stage_2_approved','stage_3_approved','stage_4_approved','stage_2_review','stage_3_review','stage_4_review'];\n  if (!ok2.includes(status)) {\n    error = `Cannot run video_2 \\u2014 status is \"${status}\". Requires at least stage_2 images approved.`;\n  }\n} else if (action === 'video_3') {\n  const ok3 = ['stage_3_approved','stage_4_approved','stage_3_review','stage_4_review'];\n  if (!ok3.includes(status)) {\n    error = `Cannot run video_3 \\u2014 status is \"${status}\". Requires at least stage_3 images approved.`;\n  }\n} else if (action === 'video_4') {\n  if (!['stage_4_approved', 'stage_4_review'].includes(status)) {\n    error = `Cannot run video_4 \\u2014 status is \"${status}\". Requires stage_4 images approved.`;\n  }\n} else if (action === 'regen') {\n  const regenId = payload.regenRecordId;\n  if (!regenId) {\n    error = `Cannot regenerate \\u2014 no regenRecordId provided in payload.`;\n  }\n} else if (action === 'reels') {\n  if (status !== 'stage_4_approved') {\n    error = `Cannot run reels \\u2014 status is \"${status}\". All 4 stages must be approved (requires \"stage_4_approved\").`;\n  }\n}\n\nreturn [{\n  json: {\n    action,\n    label,\n    valid: !error,\n    error,\n    logEntry: error\n      ? `[${now}] \\u2717 ${error}`\n      : `[${now}] \\u25b6 Dispatched: ${label}`,\n    recordId: payload.recordId,\n    regenRecordId: payload.regenRecordId || '',\n    brandName: payload.brandName || project['Brand Name'] || '',\n    brandConcept: payload.brandConcept || project['Brand Concept'] || '',\n    currentStatus: status,\n    existingLog: project['Pipeline Log'] || ''\n  }\n}];"
+      },
+      "id": "tht-router-validate",
+      "name": "Code \u2014 Detect Action & Validate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "valid-check",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-router-if-valid",
+      "name": "IF \u2014 Valid Action?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
         400
       ]
     },
@@ -44,35 +118,47 @@
           "value": "tbl4JgciFENe184jo",
           "mode": "id"
         },
-        "id": "={{ $('Code — Extract Payload').first().json.recordId }}",
+        "id": "={{ $('Code \u2014 Detect Action & Validate').first().json.recordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Run Next Stage": false
+            "Run Action": null,
+            "Pipeline Log": "={{ $('Code \u2014 Detect Action & Validate').first().json.existingLog ? $('Code \u2014 Detect Action & Validate').first().json.existingLog + '\\n' + $('Code \u2014 Detect Action & Validate').first().json.logEntry : $('Code \u2014 Detect Action & Validate').first().json.logEntry }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "Run Next Stage",
-              "displayName": "Run Next Stage",
+              "id": "Run Action",
+              "displayName": "Run Action",
               "required": false,
               "defaultMatch": false,
               "canBeUsedToMatch": true,
               "display": true,
-              "type": "boolean",
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Pipeline Log",
+              "displayName": "Pipeline Log",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": false,
+              "display": true,
+              "type": "string",
               "readOnly": false,
               "removed": false
             }
           ]
         }
       },
-      "id": "tht-router-uncheck",
-      "name": "Airtable \u2014 Uncheck Box",
+      "id": "tht-router-uncheck-log",
+      "name": "Airtable \u2014 Clear Action & Log",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        640,
-        400
+        1300,
+        300
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -94,9 +180,32 @@
                 },
                 "conditions": [
                   {
+                    "id": "rule-canon",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "upload_canon",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "canon"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
                     "id": "rule-prompt",
-                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
-                    "rightValue": "structure_selected",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "prompts",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -118,11 +227,11 @@
                 "conditions": [
                   {
                     "id": "rule-image",
-                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
-                    "rightValue": "prompts_approved",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "stage_",
                     "operator": {
                       "type": "string",
-                      "operation": "equals"
+                      "operation": "contains"
                     }
                   }
                 ],
@@ -141,11 +250,11 @@
                 "conditions": [
                   {
                     "id": "rule-video",
-                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
-                    "rightValue": "images_approved",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "video_",
                     "operator": {
                       "type": "string",
-                      "operation": "equals"
+                      "operation": "contains"
                     }
                   }
                 ],
@@ -163,9 +272,32 @@
                 },
                 "conditions": [
                   {
+                    "id": "rule-regen",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "regen",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "regen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
                     "id": "rule-reel",
-                    "leftValue": "={{ $('Code — Extract Payload').first().json.status }}",
-                    "rightValue": "videos_approved",
+                    "leftValue": "={{ $('Code \u2014 Detect Action & Validate').first().json.action }}",
+                    "rightValue": "reels",
                     "operator": {
                       "type": "string",
                       "operation": "equals"
@@ -184,13 +316,34 @@
         }
       },
       "id": "tht-router-switch",
-      "name": "Switch \u2014 Route by Status",
+      "name": "Switch \u2014 Route by Action",
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        860,
-        400
+        1520,
+        300
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-canon-upload",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "tht-router-call-canon",
+      "name": "HTTP \u2014 Call CANON UPLOAD",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        -100
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -198,7 +351,7 @@
         "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-prompt",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId, brandName: $('Code — Extract Payload').first().json.brandName, brandConcept: $('Code — Extract Payload').first().json.brandConcept }) }}",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId, brandName: $('Code \u2014 Detect Action & Validate').first().json.brandName, brandConcept: $('Code \u2014 Detect Action & Validate').first().json.brandConcept }) }}",
         "options": {
           "timeout": 300000
         }
@@ -208,9 +361,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1120,
-        200
-      ]
+        1740,
+        100
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -218,9 +372,9 @@
         "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-image",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId, stage: parseInt($('Code \u2014 Detect Action & Validate').first().json.action.split('_')[1]) }) }}",
         "options": {
-          "timeout": 600000
+          "timeout": 60000
         }
       },
       "id": "tht-router-call-image",
@@ -228,9 +382,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1120,
-        400
-      ]
+        1740,
+        300
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -238,9 +393,9 @@
         "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-video",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId, stage: parseInt($('Code \u2014 Detect Action & Validate').first().json.action.split('_')[1]) }) }}",
         "options": {
-          "timeout": 600000
+          "timeout": 60000
         }
       },
       "id": "tht-router-call-video",
@@ -248,9 +403,31 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1120,
-        600
-      ]
+        1740,
+        500
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-image",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId, regenRecordId: $('Code \u2014 Detect Action & Validate').first().json.regenRecordId, regen: true }) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "tht-router-call-regen",
+      "name": "HTTP \u2014 Call REGEN",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        700
+      ],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -258,7 +435,7 @@
         "url": "https://n8n.srv948776.hstgr.cloud/webhook/tht-reel",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ recordId: $('Code — Extract Payload').first().json.recordId }) }}",
+        "jsonBody": "={{ JSON.stringify({ recordId: $('Code \u2014 Detect Action & Validate').first().json.recordId }) }}",
         "options": {
           "timeout": 600000
         }
@@ -268,21 +445,97 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1120,
-        800
+        1740,
+        900
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const v = $('Code \\u2014 Detect Action & Validate').first().json;\nreturn [{\n  json: {\n    status: 'dispatched',\n    action: v.action,\n    label: v.label,\n    recordId: v.recordId,\n    message: `${v.label} dispatched successfully`\n  }\n}];"
+      },
+      "id": "tht-router-respond-ok",
+      "name": "Respond \u2014 Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1960,
+        400
       ]
     },
     {
       "parameters": {
-        "jsCode": "const extracted = $('Code — Extract Payload').first().json;\nreturn [{\n  json: {\n    status: 'no_action',\n    message: `No stage workflow for status: ${extracted.status}`,\n    recordId: extracted.recordId,\n    validStatuses: ['structure_selected', 'prompts_approved', 'images_approved', 'videos_approved']\n  }\n}];"
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Code \u2014 Detect Action & Validate').first().json.recordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Run Action": null,
+            "Pipeline Log": "={{ $('Code \u2014 Detect Action & Validate').first().json.existingLog ? $('Code \u2014 Detect Action & Validate').first().json.existingLog + '\\n' + $('Code \u2014 Detect Action & Validate').first().json.logEntry : $('Code \u2014 Detect Action & Validate').first().json.logEntry }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Run Action",
+              "displayName": "Run Action",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Pipeline Log",
+              "displayName": "Pipeline Log",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        }
       },
-      "id": "tht-router-noop",
-      "name": "Code \u2014 No Action",
+      "id": "tht-router-log-error",
+      "name": "Airtable \u2014 Log Error",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1300,
+        600
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const v = $('Code \\u2014 Detect Action & Validate').first().json;\nreturn [{\n  json: {\n    status: 'error',\n    error: v.error,\n    recordId: v.recordId,\n    currentStatus: v.currentStatus,\n    validStatuses: {\n      upload_canon: 'any (requires Canon Image attachment)',\n      prompts: 'canon_uploaded',\n      stage_1: 'prompts_approved',\n      stage_2: 'stage_1_approved',\n      stage_3: 'stage_2_approved',\n      stage_4: 'stage_3_approved',\n      video_1: 'stage_1_approved or stage_1_review',\n      video_2: 'stage_2_approved or stage_2_review',\n      video_3: 'stage_3_approved or stage_3_review',\n      video_4: 'stage_4_approved or stage_4_review',\n      regen: 'requires regenRecordId',\n      reels: 'stage_4_approved'\n    }\n  }\n}];"
+      },
+      "id": "tht-router-respond-error",
+      "name": "Respond \u2014 Error",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1120,
-        1000
+        1520,
+        600
       ]
     }
   ],
@@ -302,26 +555,73 @@
       "main": [
         [
           {
-            "node": "Airtable \u2014 Uncheck Box",
+            "node": "Airtable \u2014 Fetch Project",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Airtable \u2014 Uncheck Box": {
+    "Airtable \u2014 Fetch Project": {
       "main": [
         [
           {
-            "node": "Switch \u2014 Route by Status",
+            "node": "Code \u2014 Detect Action & Validate",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Switch \u2014 Route by Status": {
+    "Code \u2014 Detect Action & Validate": {
       "main": [
+        [
+          {
+            "node": "IF \u2014 Valid Action?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF \u2014 Valid Action?": {
+      "main": [
+        [
+          {
+            "node": "Airtable \u2014 Clear Action & Log",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable \u2014 Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Clear Action & Log": {
+      "main": [
+        [
+          {
+            "node": "Switch \u2014 Route by Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch \u2014 Route by Action": {
+      "main": [
+        [
+          {
+            "node": "HTTP \u2014 Call CANON UPLOAD",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "HTTP \u2014 Call PROMPT",
@@ -345,6 +645,13 @@
         ],
         [
           {
+            "node": "HTTP \u2014 Call REGEN",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "HTTP \u2014 Call REEL",
             "type": "main",
             "index": 0
@@ -352,7 +659,84 @@
         ],
         [
           {
-            "node": "Code \u2014 No Action",
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call CANON UPLOAD": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call PROMPT": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call IMAGE": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call VIDEO": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call REGEN": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP \u2014 Call REEL": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error": {
+      "main": [
+        [
+          {
+            "node": "Respond \u2014 Error",
             "type": "main",
             "index": 0
           }
@@ -362,5 +746,11 @@
   },
   "settings": {
     "executionOrder": "v1"
-  }
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "THT Pipeline"
+    }
+  ]
 }

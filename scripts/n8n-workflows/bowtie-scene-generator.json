@@ -360,7 +360,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const allUpdated = $('Airtable \u2014 Update Generated').all();\nconst allFailed = $('Airtable \u2014 Mark Failed').all();\nconst episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001';\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+        "jsCode": "// Safe references to nodes that may not have executed\nlet allUpdated = [];\nlet allFailed = [];\nlet episodeId = 'EP-001';\n\ntry { allUpdated = $('Airtable \\u2014 Update Generated').all(); } catch(e) {}\ntry { allFailed = $('Airtable \\u2014 Mark Failed').all(); } catch(e) {}\n\n// Support both webhook and manual trigger\ntry { episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001'; } catch(e) {}\ntry { if (episodeId === 'EP-001') { episodeId = $('Manual Defaults').first().json.body?.episode_id || episodeId; } } catch(e) {}\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
       },
       "id": "scene-gen-summary",
       "name": "Build Summary",
@@ -1032,7 +1032,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const allUpdated = $('Airtable \u2014 Update Generated').all();\nconst allFailed = $('Airtable \u2014 Mark Failed').all();\nconst episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001';\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
+          "jsCode": "// Safe references to nodes that may not have executed\nlet allUpdated = [];\nlet allFailed = [];\nlet episodeId = 'EP-001';\n\ntry { allUpdated = $('Airtable \\u2014 Update Generated').all(); } catch(e) {}\ntry { allFailed = $('Airtable \\u2014 Mark Failed').all(); } catch(e) {}\n\n// Support both webhook and manual trigger\ntry { episodeId = $('Webhook Trigger').first().json.body?.episode_id || 'EP-001'; } catch(e) {}\ntry { if (episodeId === 'EP-001') { episodeId = $('Manual Defaults').first().json.body?.episode_id || episodeId; } } catch(e) {}\n\nconst summary = {\n  status: 'complete',\n  episode_id: episodeId,\n  total_generated: allUpdated.length,\n  total_failed: allFailed.length,\n  generated_files: allUpdated.map(i => i.json.target_filename || i.json.fields?.target_filename || 'unknown'),\n  completed_at: new Date().toISOString()\n};\n\nreturn [{ json: summary }];"
         },
         "id": "scene-gen-summary",
         "name": "Build Summary",

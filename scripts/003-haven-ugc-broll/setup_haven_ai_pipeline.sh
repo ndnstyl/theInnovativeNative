@@ -7,8 +7,8 @@
 #   2. Qwen3-TTS dependencies for voice generation
 #
 # Usage:
-#   chmod +x scripts/003-haven/setup_haven_ai_pipeline.sh
-#   ./scripts/003-haven/setup_haven_ai_pipeline.sh
+#   chmod +x scripts/003-haven-ugc-broll/setup_haven_ai_pipeline.sh
+#   ./scripts/003-haven-ugc-broll/setup_haven_ai_pipeline.sh
 # =============================================================================
 
 set -euo pipefail
@@ -139,7 +139,7 @@ echo "    → Opens at http://127.0.0.1:8188"
 echo ""
 echo "  Haven VO Preview:"
 echo "    source $COMFYUI_DIR/venv/bin/activate"
-echo "    python scripts/003-haven/haven_qwen3_vo.py <script.json>"
+echo "    python scripts/003-haven-ugc-broll/haven_qwen3_vo.py <script.json>"
 echo ""
 echo "  Load Workflow:"
 echo "    In ComfyUI UI → Load → select:"

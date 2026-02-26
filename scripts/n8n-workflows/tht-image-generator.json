@@ -12,253 +12,194 @@
       "name": "Webhook Trigger",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [
-        220,
-        400
-      ],
+      "position": [220, 400],
       "webhookId": "tht-image"
     },
     {
       "parameters": {
+        "jsCode": "// Extract recordId and stage from webhook body\nconst body = $input.first().json.body || $input.first().json;\nconst recordId = body.recordId || '';\nconst stage = body.stage ? parseInt(body.stage, 10) : null;\n\nconst STAGE_MAP = {\n  1: { start: 7, ref: 8, stop: 7 },\n  2: { start: 6, ref: 7, stop: 5 },\n  3: { start: 4, ref: 5, stop: 3 },\n  4: { start: 2, ref: 3, stop: 1 }\n};\n\nif (!recordId) {\n  return [{ json: { error: true, stage: 'Image Generation', message: 'Missing recordId in request body.', recordId: '' } }];\n}\n\nif (stage !== null && !STAGE_MAP[stage]) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Invalid stage \"${stage}\". Must be 1-4.`, recordId } }];\n}\n\nconst stageInfo = stage ? STAGE_MAP[stage] : null;\n\nreturn [{ json: { error: false, recordId, stage: stage, stageInfo } }];"
+      },
+      "id": "tht-img-parse-input",
+      "name": "Code \u2014 Parse Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [{ "id": "input-ok", "leftValue": "={{ $json.error }}", "rightValue": false, "operator": { "type": "boolean", "operation": "false" } }],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-img-if-input-ok",
+      "name": "IF \u2014 Input Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [620, 400]
+    },
+    {
+      "parameters": {
         "operation": "get",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $json.body ? $json.body.recordId : $json.recordId }}"
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $('Code \u2014 Parse Input').first().json.recordId }}"
       },
       "id": "tht-img-fetch-project",
       "name": "Airtable \u2014 Fetch Project",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        440,
-        400
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
-      }
+      "position": [840, 400],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
-            "Status": "images_generating",
-            "Images Done": 0
-          },
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": false,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": true,
-              "removed": false
-            },
-            {
-              "id": "Status",
-              "displayName": "Status",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Images Done",
-              "displayName": "Images Done",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
+        "jsCode": "// Validate project and Canon Drive URL\nconst project = $input.first().json;\nconst parsed = $('Code \u2014 Parse Input').first().json;\nconst recordId = parsed.recordId;\nconst stage = parsed.stage;\nconst stageInfo = parsed.stageInfo;\n\nif (!project || !project.id) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Failed to fetch project record ${recordId}. Check that the record exists in Airtable.`, recordId } }];\n}\n\nconst projectName = project['Project Name'] || '';\nconst brandName = project['Brand Name'] || '';\nconst canonDriveUrl = project['Canon Drive URL'] || '';\nconst existingLog = project['Pipeline Log'] || '';\n\n// For stage 1, the reference is the Canon Drive URL (Phase 8)\nif (stage === 1 && !canonDriveUrl) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Canon Drive URL is empty for project \"${projectName}\". Upload the canon image first.`, recordId, existingLog } }];\n}\n\nreturn [{ json: { error: false, recordId: project.id, projectName, brandName, canonDriveUrl, existingLog, stage, stageInfo } }];"
       },
-      "id": "tht-img-mark-generating",
-      "name": "Airtable \u2014 Mark Generating",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2.1,
-      "position": [
-        660,
-        400
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
+      "id": "tht-img-validate-project",
+      "name": "Code \u2014 Validate Project",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1060, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [{ "id": "no-error", "leftValue": "={{ $json.error }}", "rightValue": false, "operator": { "type": "boolean", "operation": "false" } }],
+          "combinator": "and"
         }
-      }
+      },
+      "id": "tht-img-if-project-ok",
+      "name": "IF \u2014 Project Found?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1280, 400]
     },
     {
       "parameters": {
         "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblWExmILcFYnW9ze",
-          "mode": "id"
-        },
-        "filterByFormula": "AND({Asset Type}='image', {Generation Status}='pending', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
-        "returnAll": true,
-        "options": {
-          "sort": {
-            "property": [
-              {
-                "field": "Phase Number",
-                "direction": "asc"
-              }
-            ]
-          }
-        }
-      },
-      "id": "tht-img-fetch-prompts",
-      "name": "Airtable \u2014 Fetch Image Prompts",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2.1,
-      "position": [
-        880,
-        400
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Build NBP fire-and-forget jobs for each image prompt\nconst items = $input.all();\nconst projectId = $('Airtable \u2014 Fetch Project').first().json.id;\n\nreturn items.map(item => {\n  const record = item.json;\n  const promptText = record['Prompt Text'];\n  const phaseNumber = record['Phase Number'];\n  const recordId = record.id;\n\n  const callbackUrl = 'https://n8n.srv948776.hstgr.cloud/webhook/kie-callback'\n    + '?type=tht_image'\n    + '&table=tblWExmILcFYnW9ze'\n    + '&record=' + encodeURIComponent(recordId)\n    + '&project=' + encodeURIComponent(projectId)\n    + '&phase=' + encodeURIComponent(phaseNumber);\n\n  return {\n    json: {\n      model: 'nano-banana-pro',\n      callBackUrl: callbackUrl,\n      input: {\n        prompt: promptText,\n        aspect_ratio: '9:16',\n        resolution: '2K',\n        output_format: 'png'\n      },\n      _meta: {\n        record_id: recordId,\n        project_id: projectId,\n        phase: phaseNumber\n      }\n    }\n  };\n});"
-      },
-      "id": "tht-img-build-jobs",
-      "name": "Code \u2014 Build NBP Jobs",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1100,
-        400
-      ]
-    },
-    {
-      "parameters": {
-        "batchSize": 1,
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblWExmILcFYnW9ze", "mode": "id" },
+        "filterByFormula": "={{ 'AND({Phase Number}=' + $('Code \\u2014 Validate Project').first().json.stageInfo.start + ',{Asset Type}=\"image\",FIND(\"' + $('Code \\u2014 Validate Project').first().json.projectName + '\",ARRAYJOIN({Project})))' }}",
         "options": {}
       },
-      "id": "tht-img-batch",
-      "name": "SplitInBatches",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        1320,
-        400
-      ]
+      "id": "tht-img-fetch-start-prompt",
+      "name": "Airtable \u2014 Fetch Start Prompt",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1500, 300],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblWExmILcFYnW9ze", "mode": "id" },
+        "filterByFormula": "={{ 'AND({Phase Number}=' + $('Code \\u2014 Validate Project').first().json.stageInfo.ref + ',{Asset Type}=\"image\",FIND(\"' + $('Code \\u2014 Validate Project').first().json.projectName + '\",ARRAYJOIN({Project})))' }}",
+        "options": {}
+      },
+      "id": "tht-img-fetch-ref-prompt",
+      "name": "Airtable \u2014 Fetch Ref Prompt",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1500, 500],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "numberInputs": 2
+      },
+      "id": "tht-img-merge-prompts",
+      "name": "Merge \u2014 Sync Prompts",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [1720, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate both prompt records and build the Kie.AI job\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst stage = project.stage;\nconst stageInfo = project.stageInfo;\nconst startPhase = stageInfo.start;\nconst refPhase = stageInfo.ref;\nconst stopPhase = stageInfo.stop;\n\n// Get start phase prompt from native Airtable search\nconst startItems = $('Airtable \\u2014 Fetch Start Prompt').all();\nif (startItems.length === 0) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `No image prompt record found for Phase ${startPhase} in project \"${project.projectName}\".`, recordId: project.recordId, existingLog: project.existingLog } }];\n}\nconst startFields = startItems[0].json;\nconst startRecordId = startFields.id;\nconst genStatus = startFields['Generation Status'] || '';\n\nif (genStatus !== 'pending' && genStatus !== 'failed') {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Phase ${startPhase} prompt has Generation Status \"${genStatus}\" (expected \"pending\" or \"failed\").`, recordId: project.recordId, existingLog: project.existingLog } }];\n}\n\nconst editPromptText = startFields['Prompt Text'] || '';\nif (!editPromptText) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Phase ${startPhase} prompt has empty Prompt Text.`, recordId: project.recordId, existingLog: project.existingLog } }];\n}\n\n// Determine reference image URL\nlet referenceImageDriveUrl = '';\nif (refPhase === 8) {\n  // Canon image - use project's Canon Drive URL directly\n  referenceImageDriveUrl = project.canonDriveUrl;\n} else {\n  // Use the reference phase's Drive URL\n  const refItems = $('Airtable \\u2014 Fetch Ref Prompt').all();\n  if (refItems.length === 0) {\n    return [{ json: { error: true, stage: 'Image Generation', message: `No image prompt record found for reference Phase ${refPhase} in project \"${project.projectName}\".`, recordId: project.recordId, existingLog: project.existingLog } }];\n  }\n  const refFields = refItems[0].json;\n  const driveFileId = refFields['Drive File ID'] || '';\n  if (!driveFileId) {\n    return [{ json: { error: true, stage: 'Image Generation', message: `Reference Phase ${refPhase} has no Drive File ID. Generate that phase first.`, recordId: project.recordId, existingLog: project.existingLog } }];\n  }\n  referenceImageDriveUrl = `https://drive.google.com/uc?export=download&id=${driveFileId}`;\n}\n\nif (!referenceImageDriveUrl) {\n  return [{ json: { error: true, stage: 'Image Generation', message: `Could not determine reference image URL for stage ${stage}.`, recordId: project.recordId, existingLog: project.existingLog } }];\n}\n\n// Build the Flux 2 Pro img2img callback URL\nconst callbackUrl = 'https://n8n.srv948776.hstgr.cloud/webhook/kie-callback'\n  + '?type=tht_image'\n  + '&table=tblWExmILcFYnW9ze'\n  + '&record=' + encodeURIComponent(startRecordId)\n  + '&project=' + encodeURIComponent(project.recordId)\n  + '&phase=' + encodeURIComponent(startPhase)\n  + '&chain=true'\n  + '&next_phase=' + encodeURIComponent(startPhase - 1)\n  + '&stop_phase=' + encodeURIComponent(stopPhase)\n  + '&stage=' + encodeURIComponent(stage);\n\nreturn [{\n  json: {\n    error: false,\n    promptRecordId: startRecordId,\n    referenceImageDriveUrl,\n    editPromptText,\n    callbackUrl,\n    startPhase,\n    refPhase,\n    stopPhase,\n    stage,\n    projectId: project.recordId,\n    projectName: project.projectName,\n    existingLog: project.existingLog,\n    recordId: project.recordId\n  }\n}];"
+      },
+      "id": "tht-img-validate-and-build",
+      "name": "Code \u2014 Validate & Build Job",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1940, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [{ "id": "job-ok", "leftValue": "={{ $json.error }}", "rightValue": false, "operator": { "type": "boolean", "operation": "false" } }],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-img-if-job-ok",
+      "name": "IF \u2014 Job Valid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [2160, 400]
     },
     {
       "parameters": {
         "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblWExmILcFYnW9ze",
-          "mode": "id"
-        },
-        "id": "={{ $json._meta.record_id }}",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $('Code \u2014 Validate & Build Job').first().json.recordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "id": "={{ $json._meta.record_id }}",
-            "Generation Status": "generating"
+            "Status": "={{ 'stage_' + $('Code \u2014 Validate & Build Job').first().json.stage + '_generating' }}",
+            "Current Stage": "={{ $('Code \u2014 Validate & Build Job').first().json.stage }}",
+            "Current Chain Phase": "={{ $('Code \u2014 Validate & Build Job').first().json.startPhase }}"
           },
-          "matchingColumns": [
-            "id"
-          ],
+          "matchingColumns": [],
           "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": false,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": true,
-              "removed": false
-            },
-            {
-              "id": "Generation Status",
-              "displayName": "Generation Status",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+            { "id": "Status", "displayName": "Status", "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "readOnly": false, "removed": false },
+            { "id": "Current Stage", "displayName": "Current Stage", "required": false, "defaultMatch": false, "canBeUsedToMatch": false, "display": true, "type": "number", "readOnly": false, "removed": false },
+            { "id": "Current Chain Phase", "displayName": "Current Chain Phase", "required": false, "defaultMatch": false, "canBeUsedToMatch": false, "display": true, "type": "number", "readOnly": false, "removed": false }
+          ]
         },
-        "options": {}
+        "options": { "typecast": true }
       },
-      "id": "tht-img-mark-prompt",
+      "id": "tht-img-update-project-status",
+      "name": "Airtable \u2014 Update Project Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2380, 400],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblWExmILcFYnW9ze", "mode": "id" },
+        "id": "={{ $('Code \u2014 Validate & Build Job').first().json.promptRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Generation Status": "generating",
+            "Reference Image URL": "={{ $('Code \u2014 Validate & Build Job').first().json.referenceImageDriveUrl }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Generation Status", "displayName": "Generation Status", "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "readOnly": false, "removed": false },
+            { "id": "Reference Image URL", "displayName": "Reference Image URL", "required": false, "defaultMatch": false, "canBeUsedToMatch": false, "display": true, "type": "string", "readOnly": false, "removed": false }
+          ]
+        },
+        "options": { "typecast": true }
+      },
+      "id": "tht-img-mark-prompt-generating",
       "name": "Airtable \u2014 Mark Prompt Generating",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        1540,
-        500
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
-      }
+      "position": [2600, 400],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } }
     },
     {
       "parameters": {
@@ -268,144 +209,138 @@
         "nodeCredentialType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: $('SplitInBatches').first().json.model, callBackUrl: $('SplitInBatches').first().json.callBackUrl, input: $('SplitInBatches').first().json.input }) }}",
-        "options": {
-          "timeout": 30000
-        }
+        "jsonBody": "={{ JSON.stringify({ model: 'nano-banana-pro', callBackUrl: $('Code \\u2014 Validate & Build Job').first().json.callbackUrl, input: { prompt: $('Code \\u2014 Validate & Build Job').first().json.editPromptText, image_input: [$('Code \\u2014 Validate & Build Job').first().json.referenceImageDriveUrl], aspect_ratio: '9:16', resolution: '2K', output_format: 'png' } }) }}",
+        "options": { "timeout": 30000 }
       },
       "id": "tht-img-submit",
       "name": "HTTP \u2014 Submit to Kie.AI",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [
-        1760,
-        500
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "EFETRZwIsMkjex1c",
-          "name": "kieAI-NB"
-        }
-      }
+      "position": [2820, 400],
+      "credentials": { "httpHeaderAuth": { "id": "EFETRZwIsMkjex1c", "name": "kieAI-NB" } },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// Return success response after all jobs submitted\nconst projectId = $('Airtable \u2014 Fetch Project').first().json.id;\nconst brandName = $('Airtable \u2014 Fetch Project').first().json['Brand Name'];\nreturn [{\n  json: {\n    status: 'submitted',\n    message: `All 8 image jobs submitted for ${brandName}. Callbacks will update records as images complete.`,\n    projectId: projectId\n  }\n}];"
+        "jsCode": "// Return success response\nconst job = $('Code \\u2014 Validate & Build Job').first().json;\nreturn [{\n  json: {\n    status: 'submitted',\n    message: `Stage ${job.stage} image job submitted for ${job.projectName}. Phase ${job.startPhase} generating with Phase ${job.refPhase} as reference. Callback chain will continue to Phase ${job.stopPhase}.`,\n    projectId: job.projectId,\n    stage: job.stage,\n    startPhase: job.startPhase,\n    refPhase: job.refPhase,\n    stopPhase: job.stopPhase\n  }\n}];"
       },
       "id": "tht-img-done",
       "name": "Code \u2014 Done Response",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        1540,
-        260
-      ]
+      "position": [3040, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Error handler: write error to Pipeline Log and RESET status so user can retry\nconst now = new Date().toISOString().slice(0, 16).replace('T', ' ');\nlet errorData;\n\n// Collect error info from whichever validation failed\ntry { errorData = $('Code \\u2014 Parse Input').first().json; } catch(e) {}\nif (!errorData?.error) try { errorData = $('Code \\u2014 Validate Project').first().json; } catch(e) {}\nif (!errorData?.error) try { errorData = $('Code \\u2014 Validate & Build Job').first().json; } catch(e) {}\nif (!errorData) errorData = { message: 'Unknown error in Image Generator', recordId: '', existingLog: '' };\n\nconst logEntry = `[${now}] \\u2717 IMAGE ERROR: ${errorData.message}`;\nconst fullLog = errorData.existingLog ? errorData.existingLog + '\\n' + logEntry : logEntry;\n\n// Reset status to prompts_approved so user can just click Stage 1 again\nreturn [{\n  json: {\n    recordId: errorData.recordId,\n    logEntry,\n    fullLog,\n    status: 'prompts_approved',\n    errorMessage: errorData.message\n  }\n}];"
+      },
+      "id": "tht-img-error-handler",
+      "name": "Code \u2014 Build Error Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2160, 700]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.recordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.status }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            { "id": "Status", "displayName": "Status", "required": false, "defaultMatch": false, "canBeUsedToMatch": true, "display": true, "type": "string", "readOnly": false, "removed": false },
+            { "id": "Pipeline Log", "displayName": "Pipeline Log", "required": false, "defaultMatch": false, "canBeUsedToMatch": false, "display": true, "type": "string", "readOnly": false, "removed": false }
+          ]
+        },
+        "options": { "typecast": true }
+      },
+      "id": "tht-img-write-error",
+      "name": "Airtable \u2014 Log Error",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2380, 700],
+      "credentials": { "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const err = $('Code \\u2014 Build Error Log').first().json;\nreturn [{\n  json: {\n    status: 'error',\n    stage: 'Image Generation',\n    error: err.errorMessage,\n    recordId: err.recordId,\n    pipelineLog: err.logEntry\n  }\n}];"
+      },
+      "id": "tht-img-respond-error",
+      "name": "Respond \u2014 Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2600, 700]
     }
   ],
   "connections": {
     "Webhook Trigger": {
+      "main": [[{ "node": "Code \u2014 Parse Input", "type": "main", "index": 0 }]]
+    },
+    "Code \u2014 Parse Input": {
+      "main": [[{ "node": "IF \u2014 Input Valid?", "type": "main", "index": 0 }]]
+    },
+    "IF \u2014 Input Valid?": {
       "main": [
-        [
-          {
-            "node": "Airtable \u2014 Fetch Project",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Airtable \u2014 Fetch Project", "type": "main", "index": 0 }],
+        [{ "node": "Code \u2014 Build Error Log", "type": "main", "index": 0 }]
       ]
     },
     "Airtable \u2014 Fetch Project": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Mark Generating",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Code \u2014 Validate Project", "type": "main", "index": 0 }]]
     },
-    "Airtable \u2014 Mark Generating": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Fetch Image Prompts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+    "Code \u2014 Validate Project": {
+      "main": [[{ "node": "IF \u2014 Project Found?", "type": "main", "index": 0 }]]
     },
-    "Airtable \u2014 Fetch Image Prompts": {
+    "IF \u2014 Project Found?": {
       "main": [
         [
-          {
-            "node": "Code \u2014 Build NBP Jobs",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build NBP Jobs": {
-      "main": [
-        [
-          {
-            "node": "SplitInBatches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SplitInBatches": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Done Response",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Airtable \u2014 Fetch Start Prompt", "type": "main", "index": 0 },
+          { "node": "Airtable \u2014 Fetch Ref Prompt", "type": "main", "index": 0 }
         ],
-        [
-          {
-            "node": "Airtable \u2014 Mark Prompt Generating",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        [{ "node": "Code \u2014 Build Error Log", "type": "main", "index": 0 }]
       ]
+    },
+    "Airtable \u2014 Fetch Start Prompt": {
+      "main": [[{ "node": "Merge \u2014 Sync Prompts", "type": "main", "index": 0 }]]
+    },
+    "Airtable \u2014 Fetch Ref Prompt": {
+      "main": [[{ "node": "Merge \u2014 Sync Prompts", "type": "main", "index": 1 }]]
+    },
+    "Merge \u2014 Sync Prompts": {
+      "main": [[{ "node": "Code \u2014 Validate & Build Job", "type": "main", "index": 0 }]]
+    },
+    "Code \u2014 Validate & Build Job": {
+      "main": [[{ "node": "IF \u2014 Job Valid?", "type": "main", "index": 0 }]]
+    },
+    "IF \u2014 Job Valid?": {
+      "main": [
+        [{ "node": "Airtable \u2014 Update Project Status", "type": "main", "index": 0 }],
+        [{ "node": "Code \u2014 Build Error Log", "type": "main", "index": 0 }]
+      ]
+    },
+    "Airtable \u2014 Update Project Status": {
+      "main": [[{ "node": "Airtable \u2014 Mark Prompt Generating", "type": "main", "index": 0 }]]
     },
     "Airtable \u2014 Mark Prompt Generating": {
-      "main": [
-        [
-          {
-            "node": "HTTP \u2014 Submit to Kie.AI",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "HTTP \u2014 Submit to Kie.AI", "type": "main", "index": 0 }]]
     },
     "HTTP \u2014 Submit to Kie.AI": {
-      "main": [
-        [
-          {
-            "node": "SplitInBatches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
+      "main": [[{ "node": "Code \u2014 Done Response", "type": "main", "index": 0 }]]
+    },
+    "Code \u2014 Build Error Log": {
+      "main": [[{ "node": "Airtable \u2014 Log Error", "type": "main", "index": 0 }]]
+    },
+    "Airtable \u2014 Log Error": {
+      "main": [[{ "node": "Respond \u2014 Error", "type": "main", "index": 0 }]]
     }
   },
-  "settings": {
-    "executionOrder": "v1"
-  },
+  "settings": { "executionOrder": "v1" },
   "staticData": null,
-  "tags": [
-    {
-      "name": "THT Pipeline"
-    }
-  ]
+  "tags": [{ "name": "THT Pipeline" }]
 }

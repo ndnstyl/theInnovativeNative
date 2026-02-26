@@ -6,16 +6,16 @@ One-time script to populate OOTD records from Pinterest data.
 
 Usage:
     # From existing Apify dataset (already scraped)
-    GROQ_API_KEY=gsk_... python3 scripts/003-haven/ootd_batch_import.py
+    GROQ_API_KEY=gsk_... python3 scripts/003-haven-ugc-broll/ootd_batch_import.py
 
     # From a new Pinterest board (triggers Apify scrape)
-    GROQ_API_KEY=gsk_... python3 scripts/003-haven/ootd_batch_import.py --board-url https://www.pinterest.com/user/board/
+    GROQ_API_KEY=gsk_... python3 scripts/003-haven-ugc-broll/ootd_batch_import.py --board-url https://www.pinterest.com/user/board/
 
     # Re-push cached results (skip re-analysis)
-    python3 scripts/003-haven/ootd_batch_import.py --from-cache
+    python3 scripts/003-haven-ugc-broll/ootd_batch_import.py --from-cache
 
     # Dry run
-    GROQ_API_KEY=gsk_... python3 scripts/003-haven/ootd_batch_import.py --dry-run
+    GROQ_API_KEY=gsk_... python3 scripts/003-haven-ugc-broll/ootd_batch_import.py --dry-run
 """
 
 import argparse

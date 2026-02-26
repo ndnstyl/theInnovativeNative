@@ -3,7 +3,7 @@
 Set up Airtable schema for the Iconic Brand Timelapse (THT) pipeline.
 Repurposes existing Table 1 → THT Projects, creates THT Prompts and THT Reels.
 
-Usage: python scripts/008-tht/setup_tht_airtable.py
+Usage: python scripts/008-tiny-home-timelapse/setup_tht_airtable.py
 """
 
 import json

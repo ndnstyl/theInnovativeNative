@@ -12,99 +12,84 @@
       "name": "Webhook Trigger",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [
-        220,
-        400
-      ],
+      "position": [220, 400],
       "webhookId": "tht-reel"
     },
     {
       "parameters": {
         "operation": "get",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $json.body ? $json.body.recordId : '' }}"
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.body ? $json.body.recordId : $json.recordId }}",
+        "options": {}
       },
       "id": "tht-reel-fetch-project",
       "name": "Airtable \u2014 Fetch Project",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        440,
-        400
-      ],
+      "position": [440, 400],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
-      }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate project record exists and extract key fields\n// T016: Added industry + RE branding fields passthrough\nconst input = $input.first().json;\n\n// Check if Airtable returned an error or empty\nif (!input || !input.id || input.error) {\n  return [{ json: { error: true, message: `Project not found or Airtable error. Input: ${JSON.stringify(input).slice(0, 200)}` } }];\n}\n\nconst projectName = input['Project Name'];\nif (!projectName) {\n  return [{ json: { error: true, message: 'Project record has no Project Name field' } }];\n}\n\nreturn [{ json: {\n  error: false,\n  projectRecordId: input.id,\n  projectName: projectName,\n  brandName: input['Brand Name'] || projectName,\n  pipelineLog: input['Pipeline Log'] || '',\n  status: input['Status'] || '',\n  industry: (input['Industry'] || '').toLowerCase().trim(),\n  agentBranding: {\n    logoUrl: input['Agent Logo URL'] || '',\n    brokerageName: input['Brokerage Name'] || '',\n    mlsNumber: input['MLS Number'] || ''\n  }\n} }];"
+      },
+      "id": "tht-reel-validate-project",
+      "name": "Code \u2014 Validate Project",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 400]
     },
     {
       "parameters": {
         "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
           "conditions": [
             {
-              "id": "check-empty",
-              "leftValue": "={{ $json.id }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "empty",
-                "singleValue": true
-              }
+              "id": "project-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
             }
           ],
           "combinator": "and"
         }
       },
-      "id": "tht-reel-if-empty",
-      "name": "IF \u2014 No Project Found",
+      "id": "tht-reel-if-project-ok",
+      "name": "IF \u2014 Project Found?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
-      "position": [
-        660,
-        400
-      ]
+      "position": [880, 400]
     },
     {
-      "parameters": {},
-      "id": "tht-reel-noop-exit",
-      "name": "NoOp \u2014 Exit",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        880,
-        280
-      ]
+      "parameters": {
+        "jsCode": "// Build error log entry for project not found\nconst data = $('Code \u2014 Validate Project').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = data.message || 'Unknown project validation error';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\n\nreturn [{ json: {\n  logEntry,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: null,\n  pipelineLog: ''\n} }];"
+      },
+      "id": "tht-reel-build-error-project",
+      "name": "Code \u2014 Build Error (Project)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 260]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response to webhook caller\nconst data = $input.first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage || 'Reel assembly failed',\n  stage: 'validation'\n} }];"
+      },
+      "id": "tht-reel-respond-error-project",
+      "name": "Code \u2014 Respond Error (Project)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1320, 260]
     },
     {
       "parameters": {
         "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $('Code \u2014 Validate Project').first().json.projectRecordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
@@ -116,39 +101,22 @@
       "name": "Airtable \u2014 Mark Assembling",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        880,
-        500
-      ],
+      "position": [1100, 500],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
       }
     },
     {
       "parameters": {
         "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblWExmILcFYnW9ze",
-          "mode": "id"
-        },
-        "filterByFormula": "AND({Asset Type}='video', {Generation Status}='generated', FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project})))",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblWExmILcFYnW9ze", "mode": "id" },
+        "filterByFormula": "={{ `AND({Asset Type}='video', {Generation Status}='generated', FIND('${$('Code \\u2014 Validate Project').first().json.projectName}', ARRAYJOIN({Project})))` }}",
         "returnAll": true,
         "options": {
           "sort": {
             "property": [
-              {
-                "field": "Phase Number",
-                "direction": "asc"
-              }
+              { "field": "Phase Number", "direction": "asc" }
             ]
           }
         }
@@ -157,86 +125,164 @@
       "name": "Airtable \u2014 Fetch Video Records",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        1100,
-        440
-      ],
+      "position": [1320, 440],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
       }
     },
     {
       "parameters": {
         "operation": "search",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblcvKwDfxc46QW5Y",
-          "mode": "id"
-        },
-        "filterByFormula": "FIND('{{ $('Airtable \u2014 Fetch Project').first().json.id }}', ARRAYJOIN({Project}))",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblcvKwDfxc46QW5Y", "mode": "id" },
+        "filterByFormula": "={{ `FIND('${$('Code \\u2014 Validate Project').first().json.projectName}', ARRAYJOIN({Project}))` }}",
         "limit": 1
       },
       "id": "tht-reel-fetch-reel",
       "name": "Airtable \u2014 Fetch Reel Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        1100,
-        620
-      ],
+      "position": [1320, 620],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
       }
     },
     {
       "parameters": {
-        "jsCode": "// V2: Pre-flight check \u2014 4 Veo 3.1 clips + music\nconst videoRecords = $('Airtable \u2014 Fetch Video Records').all();\nconst reelRecord = $('Airtable \u2014 Fetch Reel Record').first().json;\nconst project = $('Airtable \u2014 Fetch Project').first().json;\nconst projectId = project.id.replace(/[^a-zA-Z0-9]/g, '');\n\n// Validate 4 video records (was 5)\nif (videoRecords.length < 4) {\n  throw new Error(`Expected 4 video records, found ${videoRecords.length}`);\n}\n\n// Sort by phase number\nconst sorted = videoRecords.sort((a, b) =>\n  a.json['Phase Number'] - b.json['Phase Number']\n);\n\n// Extract Drive File IDs for 4 clips\nconst driveFileIds = sorted.map(r => r.json['Drive File ID']);\nfor (let i = 0; i < 4; i++) {\n  if (!driveFileIds[i]) {\n    throw new Error(`Video ${i + 1} missing Drive File ID`);\n  }\n}\n\n// Get music track selection\nconst musicTrack = reelRecord['Music Track'] || 'swing_pop';\n\nconst musicDriveIds = {\n  'swing_pop': '1Wx2Je-Ohtl9Wwk8Ga4J8IXn-IP58JpVV',\n  'ambient_build': '1BGL2u2ZQl9LROg5-6vpWAvvU-B8NX-XW',\n  'cinematic_progress': '16Li5bzMLaLvAZSbDJ9tePfBgB-qNlhuz'\n};\n\nconst musicDriveId = musicDriveIds[musicTrack];\nif (!musicDriveId || musicDriveId.startsWith('REPLACE')) {\n  throw new Error(`Music track '${musicTrack}' Drive ID not configured`);\n}\n\nconst workDir = `/tmp/tht-${projectId}`;\n\nreturn [{\n  json: {\n    workDir,\n    projectId,\n    projectRecordId: project.id,\n    reelRecordId: reelRecord.id,\n    driveFileIds,\n    musicDriveId,\n    musicTrack,\n    brandName: project['Brand Name'],\n    clipCount: 4\n  }\n}];"
+        "mode": "append",
+        "options": {}
+      },
+      "id": "tht-reel-merge-data",
+      "name": "Merge \u2014 Wait For Both",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [1540, 530]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: Pre-flight check \u2014 4 Veo 3.1 clips + music\n// Returns error object instead of throwing\nconst videoRecords = $('Airtable \\u2014 Fetch Video Records').all();\nconst reelItems = $('Airtable \\u2014 Fetch Reel Record').all();\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst projectId = project.projectRecordId.replace(/[^a-zA-Z0-9]/g, '');\n\n// Validate reel record exists\nif (!reelItems.length || !reelItems[0].json.id) {\n  return [{ json: { error: true, message: `No Reel record found for project '${project.projectName}'` } }];\n}\nconst reelRecord = reelItems[0].json;\n\n// Validate 4 video records\nif (videoRecords.length < 4) {\n  return [{ json: { error: true, message: `Expected 4 video records, found ${videoRecords.length}` } }];\n}\n\n// Sort by phase number\nconst sorted = videoRecords.sort((a, b) =>\n  a.json['Phase Number'] - b.json['Phase Number']\n);\n\n// Extract Drive File IDs for 4 clips\nconst driveFileIds = sorted.map(r => r.json['Drive File ID']);\nfor (let i = 0; i < 4; i++) {\n  if (!driveFileIds[i]) {\n    return [{ json: { error: true, message: `Video ${i + 1} (Phase ${sorted[i].json['Phase Number']}) missing Drive File ID` } }];\n  }\n}\n\n// Get music track selection\nconst musicTrack = reelRecord['Music Track'] || 'swing_pop';\n\nconst musicDriveIds = {\n  'swing_pop': '1Wx2Je-Ohtl9Wwk8Ga4J8IXn-IP58JpVV',\n  'ambient_build': '1BGL2u2ZQl9LROg5-6vpWAvvU-B8NX-XW',\n  'cinematic_progress': '16Li5bzMLaLvAZSbDJ9tePfBgB-qNlhuz',\n  're_luxury_ambient': 'REPLACE_WITH_RE_MUSIC_DRIVE_ID'\n};\n\nconst musicDriveId = musicDriveIds[musicTrack];\nif (!musicDriveId || musicDriveId.startsWith('REPLACE')) {\n  return [{ json: { error: true, message: `Music track '${musicTrack}' Drive ID not configured` } }];\n}\n\nconst workDir = `/tmp/tht-${projectId}`;\n\nreturn [{\n  json: {\n    error: false,\n    workDir,\n    projectId,\n    projectRecordId: project.projectRecordId,\n    reelRecordId: reelRecord.id,\n    driveFileIds,\n    musicDriveId,\n    musicTrack,\n    brandName: project.brandName,\n    clipCount: 4,\n    pipelineLog: project.pipelineLog,\n    industry: project.industry || '',\n    agentBranding: project.agentBranding || {}\n  }\n}];"
       },
       "id": "tht-reel-preflight",
       "name": "Code \u2014 Pre-flight Check",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        1430,
-        530
-      ]
+      "position": [1760, 530]
     },
     {
       "parameters": {
-        "command": "={{ 'mkdir -p ' + $json.workDir }}"
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "preflight-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-preflight-ok",
+      "name": "IF \u2014 Pre-flight OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1980, 530]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log for pre-flight failure and reset status\nconst data = $('Code \\u2014 Pre-flight Check').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = data.message || 'Pre-flight validation failed';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\nconst existingLog = project.pipelineLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  logEntry,\n  fullLog: newLog,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: project.projectRecordId\n} }];"
+      },
+      "id": "tht-reel-build-error-preflight",
+      "name": "Code \u2014 Build Error (Pre-flight)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2200, 380]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.statusReset }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-error-preflight",
+      "name": "Airtable \u2014 Log Error (Pre-flight)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2420, 380],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response to webhook caller\nconst data = $('Code \\u2014 Build Error (Pre-flight)').first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage,\n  stage: 'pre-flight'\n} }];"
+      },
+      "id": "tht-reel-respond-error-preflight",
+      "name": "Code \u2014 Respond Error (Pre-flight)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2640, 380]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Log dispatch to Pipeline Log before starting FFMPEG chain\nconst data = $('Code \\u2014 Pre-flight Check').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst logEntry = `[${now}] \\u25b6 Dispatched: Reel Assembly (${data.clipCount} clips, music: ${data.musicTrack})`;\nconst existingLog = project.pipelineLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  fullLog: newLog,\n  projectRecordId: data.projectRecordId\n} }];"
+      },
+      "id": "tht-reel-build-dispatch-log",
+      "name": "Code \u2014 Build Dispatch Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2200, 620]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-dispatch",
+      "name": "Airtable \u2014 Log Dispatch",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [2420, 620],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'mkdir -p ' + $('Code \\u2014 Pre-flight Check').first().json.workDir }}"
       },
       "id": "tht-reel-mkdir",
       "name": "Execute Command \u2014 Create Work Dir",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        1650,
-        530
-      ]
+      "position": [2640, 620]
     },
     {
       "parameters": {
-        "jsCode": "// V2: Download 4 video clips + music file from Google Drive\nconst data = $('Code \u2014 Pre-flight Check').first().json;\nconst workDir = data.workDir;\nconst driveFileIds = data.driveFileIds;\nconst musicDriveId = data.musicDriveId;\n\n// Build download commands for 4 clips + 1 music file\nconst downloads = [];\nfor (let i = 0; i < driveFileIds.length; i++) {\n  const fileId = driveFileIds[i];\n  const outFile = `${workDir}/clip_${i + 1}.mp4`;\n  // BUG-6 FIX: confirm=t bypasses Google virus scan page\n  downloads.push(\n    `curl -L -o ${outFile} \"https://drive.google.com/uc?export=download&confirm=t&id=${fileId}\" && ` +\n    `file ${outFile} | grep -qv 'HTML' || (echo \"FAIL: clip_${i + 1} is HTML\" && exit 1)`\n  );\n}\n\n// Download music\ndownloads.push(\n  `curl -L -o ${workDir}/music.mp3 \"https://drive.google.com/uc?export=download&confirm=t&id=${musicDriveId}\" && ` +\n  `file ${workDir}/music.mp3 | grep -qv 'HTML' || (echo \"FAIL: music is HTML\" && exit 1)`\n);\n\nconst downloadCmd = downloads.join(' && ');\n\nreturn [{\n  json: {\n    downloadCmd,\n    workDir,\n    projectRecordId: data.projectRecordId,\n    reelRecordId: data.reelRecordId,\n    brandName: data.brandName,\n    clipCount: data.clipCount\n  }\n}];"
+        "jsCode": "// V2: Download 4 video clips + music file from Google Drive\nconst data = $('Code \\u2014 Pre-flight Check').first().json;\nconst workDir = data.workDir;\nconst driveFileIds = data.driveFileIds;\nconst musicDriveId = data.musicDriveId;\n\n// Build download commands for 4 clips + 1 music file\nconst downloads = [];\nfor (let i = 0; i < driveFileIds.length; i++) {\n  const fileId = driveFileIds[i];\n  const outFile = `${workDir}/clip_${i + 1}.mp4`;\n  // BUG-6 FIX: confirm=t bypasses Google virus scan page\n  downloads.push(\n    `curl -L -o ${outFile} \"https://drive.google.com/uc?export=download&confirm=t&id=${fileId}\" && ` +\n    `file ${outFile} | grep -qv 'HTML' || (echo \"FAIL: clip_${i + 1} is HTML\" && exit 1)`\n  );\n}\n\n// Download music\ndownloads.push(\n  `curl -L -o ${workDir}/music.mp3 \"https://drive.google.com/uc?export=download&confirm=t&id=${musicDriveId}\" && ` +\n  `file ${workDir}/music.mp3 | grep -qv 'HTML' || (echo \"FAIL: music is HTML\" && exit 1)`\n);\n\nconst downloadCmd = downloads.join(' && ');\n\nreturn [{\n  json: {\n    downloadCmd,\n    workDir,\n    projectRecordId: data.projectRecordId,\n    reelRecordId: data.reelRecordId,\n    brandName: data.brandName,\n    clipCount: data.clipCount,\n    pipelineLog: data.pipelineLog,\n    industry: data.industry || '',\n    agentBranding: data.agentBranding || {}\n  }\n}];"
       },
       "id": "tht-reel-build-download",
       "name": "Code \u2014 Build Download Commands",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        1870,
-        530
-      ]
+      "position": [2860, 620]
     },
     {
       "parameters": {
@@ -247,23 +293,102 @@
       "name": "Execute Command \u2014 Download Assets",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        2090,
-        530
-      ]
+      "position": [3080, 620],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// V2: Normalize 4 clips to 1080x1920 30fps h264\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\nconst clipCount = $('Code \u2014 Build Download Commands').first().json.clipCount || 4;\n\nconst cmds = [];\nfor (let i = 1; i <= clipCount; i++) {\n  cmds.push(\n    `ffmpeg -y -i ${workDir}/clip_${i}.mp4 ` +\n    `-vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" ` +\n    `-r 30 -c:v libx264 -crf 18 -pix_fmt yuv420p -an ${workDir}/norm_${i}.mp4`\n  );\n}\nconst normalizeCmd = cmds.join(' && ');\n\nreturn [{\n  json: {\n    normalizeCmd,\n    workDir\n  }\n}];"
+        "jsCode": "// Check if download succeeded\nconst result = $input.first().json;\nconst exitCode = result.exitCode;\nconst stderr = result.stderr || '';\nconst stdout = result.stdout || '';\n\nif (exitCode !== 0) {\n  const failMatch = stdout.match(/FAIL: (.+)/) || stderr.match(/FAIL: (.+)/);\n  const detail = failMatch ? failMatch[1] : `exitCode=${exitCode}, stderr: ${stderr.slice(0, 200)}`;\n  return [{ json: { error: true, message: `Download failed: ${detail}` } }];\n}\n\nreturn [{ json: { error: false } }];"
+      },
+      "id": "tht-reel-check-download",
+      "name": "Code \u2014 Check Download",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3300, 620]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "download-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-download-ok",
+      "name": "IF \u2014 Download OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [3520, 620]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log for download failure\nconst checkResult = $('Code \\u2014 Check Download').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst dispatchLog = $('Code \\u2014 Build Dispatch Log').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = checkResult.message || 'Download failed';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\nconst existingLog = dispatchLog.fullLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  logEntry,\n  fullLog: newLog,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: project.projectRecordId,\n  workDir: $('Code \\u2014 Pre-flight Check').first().json.workDir\n} }];"
+      },
+      "id": "tht-reel-build-error-download",
+      "name": "Code \u2014 Build Error (Download)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [3740, 480]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.statusReset }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-error-download",
+      "name": "Airtable \u2014 Log Error (Download)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [3960, 480],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'rm -rf ' + $('Code \\u2014 Build Error (Download)').first().json.workDir }}"
+      },
+      "id": "tht-reel-cleanup-download-err",
+      "name": "Execute Command \u2014 Cleanup (Download Err)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [4180, 480]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response for download failure\nconst data = $('Code \\u2014 Build Error (Download)').first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage,\n  stage: 'download'\n} }];"
+      },
+      "id": "tht-reel-respond-error-download",
+      "name": "Code \u2014 Respond Error (Download)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [4400, 480]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V2: Normalize 4 clips to 1080x1920 30fps h264\nconst workDir = $('Code \\u2014 Build Download Commands').first().json.workDir;\nconst clipCount = $('Code \\u2014 Build Download Commands').first().json.clipCount || 4;\n\nconst cmds = [];\nfor (let i = 1; i <= clipCount; i++) {\n  cmds.push(\n    `ffmpeg -y -i ${workDir}/clip_${i}.mp4 ` +\n    `-vf \"scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2\" ` +\n    `-r 30 -c:v libx264 -crf 18 -pix_fmt yuv420p -an ${workDir}/norm_${i}.mp4`\n  );\n}\nconst normalizeCmd = cmds.join(' && ');\n\nreturn [{\n  json: {\n    normalizeCmd,\n    workDir\n  }\n}];"
       },
       "id": "tht-reel-build-normalize",
       "name": "Code \u2014 Build Normalize Commands",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        2310,
-        530
-      ]
+      "position": [3740, 720]
     },
     {
       "parameters": {
@@ -274,23 +399,102 @@
       "name": "Execute Command \u2014 Normalize Clips",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        2530,
-        530
-      ]
+      "position": [3960, 720],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// V2: FFMPEG stitch 4 clips with 3 crossfades + music\n// Veo 3.1 clips are ~8s each\n// Offsets: clip1_dur - fade = 7.5, then 7.5+8-0.5=15.0, then 15.0+8-0.5=22.5\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\n\nconst filterComplex = [\n  '[0:v][1:v]xfade=transition=fade:duration=0.5:offset=7.5[v01]',\n  '[v01][2:v]xfade=transition=fade:duration=0.5:offset=15.0[v012]',\n  '[v012][3:v]xfade=transition=fade:duration=0.5:offset=22.5[vfinal]',\n  '[4:a]volume=0.4,afade=t=in:st=0:d=1,afade=t=out:st=28:d=1.5[afinal]'\n].join(';');\n\nconst ffmpegCmd = `ffmpeg -y ` +\n  `-i ${workDir}/norm_1.mp4 ` +\n  `-i ${workDir}/norm_2.mp4 ` +\n  `-i ${workDir}/norm_3.mp4 ` +\n  `-i ${workDir}/norm_4.mp4 ` +\n  `-i ${workDir}/music.mp3 ` +\n  `-filter_complex \"${filterComplex}\" ` +\n  `-map \"[vfinal]\" -map \"[afinal]\" ` +\n  `-c:v libx264 -crf 18 -profile:v main -level 4.1 ` +\n  `-r 30 -pix_fmt yuv420p ` +\n  `-c:a aac -b:a 128k ` +\n  `-movflags +faststart ` +\n  `-shortest ` +\n  `${workDir}/reel_final.mp4`;\n\nreturn [{\n  json: {\n    ffmpegCmd,\n    workDir\n  }\n}];"
+        "jsCode": "// Check if normalize succeeded\nconst result = $input.first().json;\nconst exitCode = result.exitCode;\nconst stderr = result.stderr || '';\n\nif (exitCode !== 0) {\n  const detail = stderr.slice(-300);\n  return [{ json: { error: true, message: `Normalize failed (exitCode=${exitCode}): ${detail}` } }];\n}\n\nreturn [{ json: { error: false } }];"
+      },
+      "id": "tht-reel-check-normalize",
+      "name": "Code \u2014 Check Normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [4180, 720]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "normalize-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-normalize-ok",
+      "name": "IF \u2014 Normalize OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [4400, 720]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log for normalize failure\nconst checkResult = $('Code \\u2014 Check Normalize').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst dispatchLog = $('Code \\u2014 Build Dispatch Log').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = checkResult.message || 'Normalize failed';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\nconst existingLog = dispatchLog.fullLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  logEntry,\n  fullLog: newLog,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: project.projectRecordId,\n  workDir: $('Code \\u2014 Pre-flight Check').first().json.workDir\n} }];"
+      },
+      "id": "tht-reel-build-error-normalize",
+      "name": "Code \u2014 Build Error (Normalize)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [4620, 580]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.statusReset }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-error-normalize",
+      "name": "Airtable \u2014 Log Error (Normalize)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [4840, 580],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'rm -rf ' + $('Code \\u2014 Build Error (Normalize)').first().json.workDir }}"
+      },
+      "id": "tht-reel-cleanup-normalize-err",
+      "name": "Execute Command \u2014 Cleanup (Normalize Err)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [5060, 580]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response for normalize failure\nconst data = $('Code \\u2014 Build Error (Normalize)').first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage,\n  stage: 'normalize'\n} }];"
+      },
+      "id": "tht-reel-respond-error-normalize",
+      "name": "Code \u2014 Respond Error (Normalize)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [5280, 580]
+    },
+    {
+      "parameters": {
+        "jsCode": "// V3: Dynamic FFMPEG stitch \u2014 ffprobe each clip for real duration\n// T016: Added conditional RE branding overlay when industry === 'real-estate'\n// Veo 3.1 clips vary 5-10s, can't hardcode offsets\nconst workDir = $('Code \\u2014 Build Download Commands').first().json.workDir;\nconst fadeDur = 0.5;\nconst industry = ($('Code \\u2014 Build Download Commands').first().json.industry || '').toLowerCase().trim();\nconst agentBranding = $('Code \\u2014 Build Download Commands').first().json.agentBranding || {};\nconst isRealEstate = industry === 'real-estate';\n\n// If RE, download agent logo for overlay\nlet logoDownloadCmd = '';\nif (isRealEstate && agentBranding.logoUrl) {\n  logoDownloadCmd = `curl -L -o ${workDir}/agent_logo.png \"${agentBranding.logoUrl}\" 2>/dev/null || true\\n`;\n}\n\n// Build RE overlay filter components (applied after xfade, before output)\nlet reOverlayInputs = '';\nlet reOverlayFilter = '';\nif (isRealEstate) {\n  const brokerageName = (agentBranding.brokerageName || '').replace(/'/g, \"'\").replace(/\"/g, '\\\\\"');\n  const mlsNumber = (agentBranding.mlsNumber || '').replace(/'/g, \"'\").replace(/\"/g, '\\\\\"');\n  const hasLogo = !!agentBranding.logoUrl;\n\n  // Build overlay filter chain: vfinal -> RE overlays -> vbranded\n  let overlayChain = '';\n  let currentLabel = 'vfinal';\n\n  // Agent logo overlay (top-right corner, scaled to 120px wide)\n  if (hasLogo) {\n    reOverlayInputs = ' -i agent_logo.png';\n    overlayChain += `[5:v]scale=120:-1[logo]; [${currentLabel}][logo]overlay=W-w-40:40[vlogo]; `;\n    currentLabel = 'vlogo';\n  }\n\n  // Brokerage name text overlay (bottom-left)\n  if (brokerageName) {\n    overlayChain += `[${currentLabel}]drawtext=text='${brokerageName}':fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:fontsize=28:fontcolor=white:borderw=2:bordercolor=black:x=40:y=H-160[vbrok]; `;\n    currentLabel = 'vbrok';\n  }\n\n  // MLS number text overlay (bottom-left, below brokerage)\n  if (mlsNumber) {\n    overlayChain += `[${currentLabel}]drawtext=text='MLS\\\\# ${mlsNumber}':fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:fontsize=22:fontcolor=white:borderw=2:bordercolor=black:x=40:y=H-120[vmls]; `;\n    currentLabel = 'vmls';\n  }\n\n  // AI Generated Content disclosure (bottom-right, semi-transparent)\n  overlayChain += `[${currentLabel}]drawtext=text='AI Generated Content':fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf:fontsize=18:fontcolor=white@0.6:borderw=1:bordercolor=black@0.4:x=W-w-40:y=H-60[vbranded]; `;\n  currentLabel = 'vbranded';\n\n  reOverlayFilter = overlayChain;\n}\n\n// Build a shell script that:\n// 1. Probes each clip duration\n// 2. Computes crossfade offsets dynamically\n// 3. Builds and runs the ffmpeg command\n// 4. (RE only) Applies branding overlays\nconst finalVideoLabel = isRealEstate ? 'vbranded' : 'vfinal';\n\nconst script = `#!/bin/bash\nset -e\ncd ${workDir}\n${logoDownloadCmd}\n# Probe durations\nD1=$(ffprobe -v error -show_entries format=duration -of csv=p=0 norm_1.mp4)\nD2=$(ffprobe -v error -show_entries format=duration -of csv=p=0 norm_2.mp4)\nD3=$(ffprobe -v error -show_entries format=duration -of csv=p=0 norm_3.mp4)\nD4=$(ffprobe -v error -show_entries format=duration -of csv=p=0 norm_4.mp4)\n\n# Compute offsets: each offset = previous_offset + clip_duration - fade_duration\n# First crossfade at: D1 - fade\nOFF1=$(echo \"$D1 - ${fadeDur}\" | bc)\n# Second crossfade at: OFF1 + D2 - fade\nOFF2=$(echo \"$OFF1 + $D2 - ${fadeDur}\" | bc)\n# Third crossfade at: OFF2 + D3 - fade\nOFF3=$(echo \"$OFF2 + $D3 - ${fadeDur}\" | bc)\n# Total duration for audio fade-out\nTOTAL=$(echo \"$OFF3 + $D4 - ${fadeDur}\" | bc)\nFADEOUT=$(echo \"$TOTAL - 1.5\" | bc)\n\necho \"Durations: D1=$D1 D2=$D2 D3=$D3 D4=$D4\"\necho \"Offsets: OFF1=$OFF1 OFF2=$OFF2 OFF3=$OFF3 TOTAL=$TOTAL\"\n\nffmpeg -y \\\\\n  -i norm_1.mp4 -i norm_2.mp4 -i norm_3.mp4 -i norm_4.mp4 -i music.mp3${reOverlayInputs} \\\\\n  -filter_complex \\\\\n    \"[0:v][1:v]xfade=transition=fade:duration=${fadeDur}:offset=$OFF1[v01]; \\\\\n     [v01][2:v]xfade=transition=fade:duration=${fadeDur}:offset=$OFF2[v012]; \\\\\n     [v012][3:v]xfade=transition=fade:duration=${fadeDur}:offset=$OFF3[vfinal]; \\\\\n     ${reOverlayFilter}[4:a]volume=0.4,afade=t=in:st=0:d=1,afade=t=out:st=$FADEOUT:d=1.5[afinal]\" \\\\\n  -map \"[${finalVideoLabel}]\" -map \"[afinal]\" \\\\\n  -c:v libx264 -crf 18 -profile:v main -level 4.1 \\\\\n  -r 30 -pix_fmt yuv420p \\\\\n  -c:a aac -b:a 128k \\\\\n  -movflags +faststart \\\\\n  -shortest \\\\\n  reel_final.mp4\n`;\n\nreturn [{\n  json: {\n    ffmpegCmd: `bash -c '${script.replace(/'/g, \"'\\\\\\\"'\\\\\\\"'\")}'`,\n    workDir\n  }\n}];"
       },
       "id": "tht-reel-build-stitch",
       "name": "Code \u2014 Build Stitch Command",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        2750,
-        530
-      ]
+      "position": [4620, 820]
     },
     {
       "parameters": {
@@ -301,23 +505,102 @@
       "name": "Execute Command \u2014 Stitch Reel",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        2970,
-        530
-      ]
+      "position": [4840, 820],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// Validate output with ffprobe\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\nconst validateCmd = `ffprobe -v quiet -print_format json -show_format -show_streams ${workDir}/reel_final.mp4`;\n\nreturn [{\n  json: {\n    validateCmd,\n    workDir\n  }\n}];"
+        "jsCode": "// Check if stitch succeeded\nconst result = $input.first().json;\nconst exitCode = result.exitCode;\nconst stderr = result.stderr || '';\n\nif (exitCode !== 0) {\n  const detail = stderr.slice(-300);\n  return [{ json: { error: true, message: `Stitch failed (exitCode=${exitCode}): ${detail}` } }];\n}\n\nreturn [{ json: { error: false } }];"
+      },
+      "id": "tht-reel-check-stitch",
+      "name": "Code \u2014 Check Stitch",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [5060, 820]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "stitch-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-stitch-ok",
+      "name": "IF \u2014 Stitch OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [5280, 820]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log for stitch failure\nconst checkResult = $('Code \\u2014 Check Stitch').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst dispatchLog = $('Code \\u2014 Build Dispatch Log').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = checkResult.message || 'Stitch failed';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\nconst existingLog = dispatchLog.fullLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  logEntry,\n  fullLog: newLog,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: project.projectRecordId,\n  workDir: $('Code \\u2014 Pre-flight Check').first().json.workDir\n} }];"
+      },
+      "id": "tht-reel-build-error-stitch",
+      "name": "Code \u2014 Build Error (Stitch)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [5500, 680]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.statusReset }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-error-stitch",
+      "name": "Airtable \u2014 Log Error (Stitch)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [5720, 680],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'rm -rf ' + $('Code \\u2014 Build Error (Stitch)').first().json.workDir }}"
+      },
+      "id": "tht-reel-cleanup-stitch-err",
+      "name": "Execute Command \u2014 Cleanup (Stitch Err)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [5940, 680]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response for stitch failure\nconst data = $('Code \\u2014 Build Error (Stitch)').first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage,\n  stage: 'stitch'\n} }];"
+      },
+      "id": "tht-reel-respond-error-stitch",
+      "name": "Code \u2014 Respond Error (Stitch)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [6160, 680]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate output with ffprobe\nconst workDir = $('Code \\u2014 Build Download Commands').first().json.workDir;\nconst validateCmd = `ffprobe -v quiet -print_format json -show_format -show_streams ${workDir}/reel_final.mp4`;\n\nreturn [{\n  json: {\n    validateCmd,\n    workDir\n  }\n}];"
       },
       "id": "tht-reel-build-validate",
       "name": "Code \u2014 Build Validate Command",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        3190,
-        530
-      ]
+      "position": [5500, 920]
     },
     {
       "parameters": {
@@ -328,28 +611,107 @@
       "name": "Execute Command \u2014 Validate Output",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        3410,
-        530
-      ]
+      "position": [5720, 920],
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// Parse ffprobe output and validate specs\nconst output = $input.first().json.stdout;\nconst probe = JSON.parse(output);\nconst videoStream = probe.streams.find(s => s.codec_type === 'video');\nconst audioStream = probe.streams.find(s => s.codec_type === 'audio');\n\nconst errors = [];\n\nif (videoStream) {\n  if (videoStream.width !== 1080 || videoStream.height !== 1920) {\n    errors.push(`Resolution: ${videoStream.width}x${videoStream.height} (expected 1080x1920)`);\n  }\n  if (videoStream.codec_name !== 'h264') {\n    errors.push(`Video codec: ${videoStream.codec_name} (expected h264)`);\n  }\n} else {\n  errors.push('No video stream found');\n}\n\nif (!audioStream) {\n  errors.push('No audio stream found');\n}\n\n// Check file size\nconst fileSizeBytes = parseInt(probe.format.size || '0');\nconst fileSizeMB = fileSizeBytes / (1024 * 1024);\nif (fileSizeMB > 100) {\n  errors.push(`File size: ${fileSizeMB.toFixed(1)}MB (must be <100MB)`);\n}\n\nconst duration = parseFloat(probe.format.duration || '0');\n\nif (errors.length > 0) {\n  throw new Error(`Validation failed: ${errors.join('; ')}`);\n}\n\nconst workDir = $('Code \u2014 Build Download Commands').first().json.workDir;\n\nreturn [{\n  json: {\n    valid: true,\n    duration: Math.round(duration),\n    fileSizeMB: fileSizeMB.toFixed(1),\n    resolution: `${videoStream.width}x${videoStream.height}`,\n    codec: videoStream.codec_name,\n    reelPath: `${workDir}/reel_final.mp4`,\n    projectRecordId: $('Code \u2014 Build Download Commands').first().json.projectRecordId,\n    reelRecordId: $('Code \u2014 Build Download Commands').first().json.reelRecordId,\n    brandName: $('Code \u2014 Build Download Commands').first().json.brandName\n  }\n}];"
+        "jsCode": "// Parse ffprobe output and validate specs\n// Returns error object instead of throwing\nconst result = $input.first().json;\n\nif (result.exitCode !== 0) {\n  return [{ json: { error: true, message: `Validate command failed (exitCode=${result.exitCode}): ${(result.stderr || '').slice(-200)}` } }];\n}\n\nconst output = result.stdout;\nlet probe;\ntry {\n  probe = JSON.parse(output);\n} catch (e) {\n  return [{ json: { error: true, message: `ffprobe output not valid JSON: ${output.slice(0, 200)}` } }];\n}\n\nconst videoStream = probe.streams.find(s => s.codec_type === 'video');\nconst audioStream = probe.streams.find(s => s.codec_type === 'audio');\n\nconst errors = [];\n\nif (videoStream) {\n  if (videoStream.width !== 1080 || videoStream.height !== 1920) {\n    errors.push(`Resolution: ${videoStream.width}x${videoStream.height} (expected 1080x1920)`);\n  }\n  if (videoStream.codec_name !== 'h264') {\n    errors.push(`Video codec: ${videoStream.codec_name} (expected h264)`);\n  }\n} else {\n  errors.push('No video stream found');\n}\n\nif (!audioStream) {\n  errors.push('No audio stream found');\n}\n\n// Check file size\nconst fileSizeBytes = parseInt(probe.format.size || '0');\nconst fileSizeMB = fileSizeBytes / (1024 * 1024);\nif (fileSizeMB > 100) {\n  errors.push(`File size: ${fileSizeMB.toFixed(1)}MB (must be <100MB)`);\n}\n\nconst duration = parseFloat(probe.format.duration || '0');\n\nif (errors.length > 0) {\n  return [{ json: { error: true, message: `Validation failed: ${errors.join('; ')}` } }];\n}\n\nconst workDir = $('Code \\u2014 Build Download Commands').first().json.workDir;\n\nreturn [{\n  json: {\n    error: false,\n    valid: true,\n    duration: Math.round(duration),\n    fileSizeMB: fileSizeMB.toFixed(1),\n    resolution: `${videoStream.width}x${videoStream.height}`,\n    codec: videoStream.codec_name,\n    reelPath: `${workDir}/reel_final.mp4`,\n    projectRecordId: $('Code \\u2014 Build Download Commands').first().json.projectRecordId,\n    reelRecordId: $('Code \\u2014 Build Download Commands').first().json.reelRecordId,\n    brandName: $('Code \\u2014 Build Download Commands').first().json.brandName\n  }\n}];"
       },
       "id": "tht-reel-check-validate",
       "name": "Code \u2014 Check Validation",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [
-        3630,
-        530
-      ]
+      "position": [5940, 920]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "validate-ok",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals", "singleValue": false }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-reel-if-validate-ok",
+      "name": "IF \u2014 Validate OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [6160, 920]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log for validation failure\nconst checkResult = $('Code \\u2014 Check Validation').first().json;\nconst project = $('Code \\u2014 Validate Project').first().json;\nconst dispatchLog = $('Code \\u2014 Build Dispatch Log').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst message = checkResult.message || 'Validation failed';\nconst logEntry = `[${now}] \\u2717 REEL ERROR: ${message}`;\nconst existingLog = dispatchLog.fullLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  logEntry,\n  fullLog: newLog,\n  errorMessage: message,\n  statusReset: 'videos_generated',\n  projectRecordId: project.projectRecordId,\n  workDir: $('Code \\u2014 Pre-flight Check').first().json.workDir\n} }];"
+      },
+      "id": "tht-reel-build-error-validate",
+      "name": "Code \u2014 Build Error (Validate)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [6380, 780]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ $json.statusReset }}",
+            "Pipeline Log": "={{ $json.fullLog }}"
+          }
+        }
+      },
+      "id": "tht-reel-log-error-validate",
+      "name": "Airtable \u2014 Log Error (Validate)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [6600, 780],
+      "credentials": {
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
+      }
+    },
+    {
+      "parameters": {
+        "command": "={{ 'rm -rf ' + $('Code \\u2014 Build Error (Validate)').first().json.workDir }}"
+      },
+      "id": "tht-reel-cleanup-validate-err",
+      "name": "Execute Command \u2014 Cleanup (Validate Err)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [6820, 780]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response for validation failure\nconst data = $('Code \\u2014 Build Error (Validate)').first().json;\nreturn [{ json: {\n  success: false,\n  error: data.errorMessage,\n  stage: 'validate'\n} }];"
+      },
+      "id": "tht-reel-respond-error-validate",
+      "name": "Code \u2014 Respond Error (Validate)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [7040, 780]
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $('Code \\u2014 Check Validation').first().json.reelPath }}"
+      },
+      "id": "tht-reel-read-binary",
+      "name": "Read Binary File \u2014 Reel",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [6380, 1020]
     },
     {
       "parameters": {
         "operation": "upload",
-        "name": "=THT_Reel_{{ $('Code \u2014 Check Validation').first().json.brandName.replace(/[^a-zA-Z0-9]/g, '_') }}.mp4",
+        "name": "=THT_Reel_{{ $('Code \\u2014 Check Validation').first().json.brandName.replace(/[^a-zA-Z0-9]/g, '_') }}.mp4",
         "folderId": {
           "__rl": true,
           "value": "19xzIaZt5yIDMF7yBCF3Y2X6gKvokHiZB",
@@ -363,15 +725,9 @@
       "name": "Google Drive \u2014 Upload Reel",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
-      "position": [
-        4070,
-        530
-      ],
+      "position": [6600, 1020],
       "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "53ssDoT9mG1Dtejj",
-          "name": "newGoogleDriveAPI"
-        }
+        "googleDriveOAuth2Api": { "id": "53ssDoT9mG1Dtejj", "name": "newGoogleDriveAPI" }
       }
     },
     {
@@ -388,38 +744,24 @@
       "name": "HTTP Request \u2014 Share File",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [
-        4290,
-        530
-      ],
+      "position": [6820, 1020],
       "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "53ssDoT9mG1Dtejj",
-          "name": "newGoogleDriveAPI"
-        }
+        "googleDriveOAuth2Api": { "id": "53ssDoT9mG1Dtejj", "name": "newGoogleDriveAPI" }
       }
     },
     {
       "parameters": {
         "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tblcvKwDfxc46QW5Y",
-          "mode": "id"
-        },
-        "id": "={{ $('Code \u2014 Check Validation').first().json.reelRecordId }}",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tblcvKwDfxc46QW5Y", "mode": "id" },
+        "id": "={{ $('Code \\u2014 Check Validation').first().json.reelRecordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
             "Reel Status": "assembled",
-            "Reel Drive ID": "={{ $('Google Drive \u2014 Upload Reel').first().json.id }}",
-            "Reel URL": "=https://drive.google.com/file/d/{{ $('Google Drive \u2014 Upload Reel').first().json.id }}/view",
-            "Duration (s)": "={{ $('Code \u2014 Check Validation').first().json.duration }}"
+            "Reel Drive ID": "={{ $('Google Drive \\u2014 Upload Reel').first().json.id }}",
+            "Reel URL": "=https://drive.google.com/file/d/{{ $('Google Drive \\u2014 Upload Reel').first().json.id }}/view",
+            "Duration (s)": "={{ $('Code \\u2014 Check Validation').first().json.duration }}"
           }
         }
       },
@@ -427,35 +769,32 @@
       "name": "Airtable \u2014 Update Reel Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        4510,
-        530
-      ],
+      "position": [7040, 1020],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
       }
     },
     {
       "parameters": {
+        "jsCode": "// Build success Pipeline Log entry\nconst validation = $('Code \\u2014 Check Validation').first().json;\nconst driveId = $('Google Drive \\u2014 Upload Reel').first().json.id;\nconst dispatchLog = $('Code \\u2014 Build Dispatch Log').first().json;\nconst now = new Date().toISOString().replace('T', ' ').slice(0, 19);\nconst driveUrl = `https://drive.google.com/file/d/${driveId}/view`;\nconst logEntry = `[${now}] \\u2713 Reel assembled (${validation.duration}s, ${validation.fileSizeMB}MB) \\u2192 ${driveUrl}`;\nconst existingLog = dispatchLog.fullLog || '';\nconst newLog = existingLog ? existingLog + '\\n' + logEntry : logEntry;\n\nreturn [{ json: {\n  fullLog: newLog,\n  projectRecordId: validation.projectRecordId\n} }];"
+      },
+      "id": "tht-reel-build-success-log",
+      "name": "Code \u2014 Build Success Log",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [7260, 1020]
+    },
+    {
+      "parameters": {
         "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $('Code \u2014 Check Validation').first().json.projectRecordId }}",
+        "base": { "__rl": true, "value": "appCOlvJdsSeh0QPe", "mode": "id" },
+        "table": { "__rl": true, "value": "tbl4JgciFENe184jo", "mode": "id" },
+        "id": "={{ $json.projectRecordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Status": "reel_assembled"
+            "Status": "reel_assembled",
+            "Pipeline Log": "={{ $json.fullLog }}"
           }
         }
       },
@@ -463,321 +802,406 @@
       "name": "Airtable \u2014 Update Project Status",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
-      "position": [
-        4730,
-        530
-      ],
+      "position": [7480, 1020],
       "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
+        "airtableTokenApi": { "id": "YCWFwTIXwnTpVy2y", "name": "Airtable" }
       }
     },
     {
       "parameters": {
-        "command": "={{ 'rm -rf ' + $('Code \u2014 Build Download Commands').first().json.workDir }}"
+        "command": "={{ 'rm -rf ' + $('Code \\u2014 Build Download Commands').first().json.workDir }}"
       },
       "id": "tht-reel-cleanup",
       "name": "Execute Command \u2014 Cleanup",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
-      "position": [
-        4950,
-        530
-      ]
+      "position": [7700, 1020]
     },
     {
       "parameters": {
-        "mode": "append",
-        "options": {}
+        "jsCode": "// Final success response to webhook caller\nconst validation = $('Code \\u2014 Check Validation').first().json;\nconst driveId = $('Google Drive \\u2014 Upload Reel').first().json.id;\nreturn [{ json: {\n  success: true,\n  duration: validation.duration,\n  fileSizeMB: validation.fileSizeMB,\n  resolution: validation.resolution,\n  driveUrl: `https://drive.google.com/file/d/${driveId}/view`,\n  reelRecordId: validation.reelRecordId\n} }];"
       },
-      "id": "tht-reel-merge-data",
-      "name": "Merge \u2014 Wait For Both",
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3,
-      "position": [
-        1210,
-        530
-      ]
-    },
-    {
-      "parameters": {
-        "filePath": "={{ $('Code \u2014 Check Validation').first().json.reelPath }}"
-      },
-      "id": "tht-reel-read-binary",
-      "name": "Read Binary File \u2014 Reel",
-      "type": "n8n-nodes-base.readBinaryFile",
-      "typeVersion": 1,
-      "position": [
-        3850,
-        530
-      ]
+      "id": "tht-reel-respond-success",
+      "name": "Code \u2014 Respond Success",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [7920, 1020]
     }
   ],
   "connections": {
-    "Airtable \u2014 Fetch Project": {
+    "Webhook Trigger": {
       "main": [
         [
-          {
-            "node": "IF \u2014 No Project Found",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Airtable \u2014 Fetch Project", "type": "main", "index": 0 }
         ]
       ]
     },
-    "IF \u2014 No Project Found": {
+    "Airtable \u2014 Fetch Project": {
       "main": [
         [
-          {
-            "node": "NoOp \u2014 Exit",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Code \u2014 Validate Project", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Validate Project": {
+      "main": [
+        [
+          { "node": "IF \u2014 Project Found?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Project Found?": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Mark Assembling", "type": "main", "index": 0 }
         ],
         [
-          {
-            "node": "Airtable \u2014 Mark Assembling",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Code \u2014 Build Error (Project)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Project)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Project)", "type": "main", "index": 0 }
         ]
       ]
     },
     "Airtable \u2014 Mark Assembling": {
       "main": [
         [
-          {
-            "node": "Airtable \u2014 Fetch Video Records",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Airtable \u2014 Fetch Reel Record",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Airtable \u2014 Fetch Video Records", "type": "main", "index": 0 },
+          { "node": "Airtable \u2014 Fetch Reel Record", "type": "main", "index": 0 }
         ]
       ]
     },
     "Airtable \u2014 Fetch Video Records": {
       "main": [
         [
-          {
-            "node": "Merge \u2014 Wait For Both",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Merge \u2014 Wait For Both", "type": "main", "index": 0 }
         ]
       ]
     },
     "Airtable \u2014 Fetch Reel Record": {
       "main": [
         [
-          {
-            "node": "Merge \u2014 Wait For Both",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Pre-flight Check": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Create Work Dir",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Command \u2014 Create Work Dir": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Build Download Commands",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build Download Commands": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Download Assets",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Command \u2014 Download Assets": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Build Normalize Commands",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build Normalize Commands": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Normalize Clips",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Command \u2014 Normalize Clips": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Build Stitch Command",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build Stitch Command": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Stitch Reel",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Command \u2014 Stitch Reel": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Build Validate Command",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build Validate Command": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Validate Output",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Execute Command \u2014 Validate Output": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Check Validation",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Check Validation": {
-      "main": [
-        [
-          {
-            "node": "Read Binary File \u2014 Reel",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Drive \u2014 Upload Reel": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request \u2014 Share File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request \u2014 Share File": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Update Reel Record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Airtable \u2014 Update Reel Record": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Update Project Status",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Airtable \u2014 Update Project Status": {
-      "main": [
-        [
-          {
-            "node": "Execute Command \u2014 Cleanup",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Merge \u2014 Wait For Both", "type": "main", "index": 1 }
         ]
       ]
     },
     "Merge \u2014 Wait For Both": {
       "main": [
         [
-          {
-            "node": "Code \u2014 Pre-flight Check",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Code \u2014 Pre-flight Check", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Pre-flight Check": {
+      "main": [
+        [
+          { "node": "IF \u2014 Pre-flight OK?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Pre-flight OK?": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Dispatch Log", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Code \u2014 Build Error (Pre-flight)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Pre-flight)": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Error (Pre-flight)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error (Pre-flight)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Pre-flight)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Dispatch Log": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Dispatch", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Dispatch": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Create Work Dir", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Create Work Dir": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Download Commands", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Download Commands": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Download Assets", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Download Assets": {
+      "main": [
+        [
+          { "node": "Code \u2014 Check Download", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Check Download": {
+      "main": [
+        [
+          { "node": "IF \u2014 Download OK?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Download OK?": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Normalize Commands", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Code \u2014 Build Error (Download)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Download)": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Error (Download)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error (Download)": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Cleanup (Download Err)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Cleanup (Download Err)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Download)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Normalize Commands": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Normalize Clips", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Normalize Clips": {
+      "main": [
+        [
+          { "node": "Code \u2014 Check Normalize", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Check Normalize": {
+      "main": [
+        [
+          { "node": "IF \u2014 Normalize OK?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Normalize OK?": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Stitch Command", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Code \u2014 Build Error (Normalize)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Normalize)": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Error (Normalize)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error (Normalize)": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Cleanup (Normalize Err)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Cleanup (Normalize Err)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Normalize)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Stitch Command": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Stitch Reel", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Stitch Reel": {
+      "main": [
+        [
+          { "node": "Code \u2014 Check Stitch", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Check Stitch": {
+      "main": [
+        [
+          { "node": "IF \u2014 Stitch OK?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Stitch OK?": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Validate Command", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Code \u2014 Build Error (Stitch)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Stitch)": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Error (Stitch)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error (Stitch)": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Cleanup (Stitch Err)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Cleanup (Stitch Err)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Stitch)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Validate Command": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Validate Output", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Validate Output": {
+      "main": [
+        [
+          { "node": "Code \u2014 Check Validation", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Check Validation": {
+      "main": [
+        [
+          { "node": "IF \u2014 Validate OK?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "IF \u2014 Validate OK?": {
+      "main": [
+        [
+          { "node": "Read Binary File \u2014 Reel", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Code \u2014 Build Error (Validate)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Error (Validate)": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Log Error (Validate)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Log Error (Validate)": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Cleanup (Validate Err)", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Cleanup (Validate Err)": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Error (Validate)", "type": "main", "index": 0 }
         ]
       ]
     },
     "Read Binary File \u2014 Reel": {
       "main": [
         [
-          {
-            "node": "Google Drive \u2014 Upload Reel",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "Google Drive \u2014 Upload Reel", "type": "main", "index": 0 }
         ]
       ]
     },
-    "Webhook Trigger": {
+    "Google Drive \u2014 Upload Reel": {
       "main": [
         [
-          {
-            "node": "Airtable \u2014 Fetch Project",
-            "type": "main",
-            "index": 0
-          }
+          { "node": "HTTP Request \u2014 Share File", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "HTTP Request \u2014 Share File": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Update Reel Record", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Update Reel Record": {
+      "main": [
+        [
+          { "node": "Code \u2014 Build Success Log", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code \u2014 Build Success Log": {
+      "main": [
+        [
+          { "node": "Airtable \u2014 Update Project Status", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable \u2014 Update Project Status": {
+      "main": [
+        [
+          { "node": "Execute Command \u2014 Cleanup", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Execute Command \u2014 Cleanup": {
+      "main": [
+        [
+          { "node": "Code \u2014 Respond Success", "type": "main", "index": 0 }
         ]
       ]
     }

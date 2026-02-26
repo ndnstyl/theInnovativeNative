@@ -6,7 +6,7 @@ Creates a 12-node workflow that reviews ALL scene images together
 in a single Gemini Vision call, catching cross-scene quality issues
 before WF-006 FFMPEG assembly.
 
-Usage: python3 scripts/003-haven/deploy_wf005_batch_qa.py
+Usage: python3 scripts/003-haven-ugc-broll/deploy_wf005_batch_qa.py
 """
 import json
 import os

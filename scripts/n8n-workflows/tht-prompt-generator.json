@@ -1,5 +1,5 @@
 {
-  "name": "WF-THT-PROMPT \u2014 Prompt Generator",
+  "name": "WF-THT-PROMPT — Prompt Generator",
   "nodes": [
     {
       "parameters": {
@@ -14,7 +14,7 @@
       "typeVersion": 2,
       "position": [
         220,
-        300
+        400
       ],
       "webhookId": "tht-prompt"
     },
@@ -31,22 +31,36 @@
           "value": "tbl4JgciFENe184jo",
           "mode": "id"
         },
-        "id": "={{ $json.body ? $json.body.recordId : '' }}"
+        "id": "={{ $json.body ? $json.body.recordId : $json.recordId }}"
       },
       "id": "tht-prompt-fetch-project",
-      "name": "Airtable \u2014 Fetch Project",
+      "name": "Airtable — Fetch Project",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
         440,
-        300
+        400
       ],
       "credentials": {
         "airtableTokenApi": {
           "id": "YCWFwTIXwnTpVy2y",
           "name": "Airtable"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate the Fetch Project result\nconst items = $input.all();\nconst item = items[0]?.json || {};\n\n// Check for HTTP/Airtable error\nif (item.error || item.errorMessage || !item.id) {\n  const inputBody = $('Webhook Trigger').first().json;\n  const recordId = inputBody.body ? inputBody.body.recordId : inputBody.recordId;\n  return [{\n    json: {\n      projectFound: false,\n      errorMessage: item.error || item.errorMessage || `No project found for recordId: ${recordId || 'undefined'}`,\n      recordId: recordId || 'unknown'\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    projectFound: true,\n    ...item\n  }\n}];"
+      },
+      "id": "tht-prompt-validate-project",
+      "name": "Code — Validate Project",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        400
+      ]
     },
     {
       "parameters": {
@@ -58,12 +72,12 @@
           },
           "conditions": [
             {
-              "id": "check-empty",
-              "leftValue": "={{ $json.id }}",
-              "rightValue": "",
+              "id": "check-project-found",
+              "leftValue": "={{ $json.projectFound }}",
+              "rightValue": true,
               "operator": {
-                "type": "string",
-                "operation": "empty",
+                "type": "boolean",
+                "operation": "true",
                 "singleValue": true
               }
             }
@@ -71,24 +85,26 @@
           "combinator": "and"
         }
       },
-      "id": "tht-prompt-if-empty",
-      "name": "IF \u2014 No Project Found",
+      "id": "tht-prompt-if-project-found",
+      "name": "IF — Project Found?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        660,
-        300
+        880,
+        400
       ]
     },
     {
-      "parameters": {},
-      "id": "tht-prompt-noop-exit",
-      "name": "NoOp \u2014 Exit",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
+      "parameters": {
+        "jsCode": "// Build error log entry for project-not-found\nconst prev = $input.first().json;\nconst now = new Date().toISOString();\nconst message = prev.errorMessage || 'Project not found';\n\nreturn [{\n  json: {\n    recordId: prev.recordId || null,\n    pipelineLog: `[${now}] ✗ PROMPT ERROR: ${message}`,\n    errorMessage: message,\n    status: 'structure_selected'\n  }\n}];"
+      },
+      "id": "tht-prompt-build-error-log-project",
+      "name": "Code — Build Error Log (Project)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        880,
-        180
+        1100,
+        200
       ]
     },
     {
@@ -104,11 +120,101 @@
           "value": "tbl4JgciFENe184jo",
           "mode": "id"
         },
-        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "id": "={{ $json.recordId }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+            "id": "={{ $json.recordId }}",
+            "Status": "={{ $json.status }}",
+            "Pipeline Log": "={{ $json.pipelineLog }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Pipeline Log",
+              "displayName": "Pipeline Log",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-log-error-project",
+      "name": "Airtable — Log Error (Project)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1320,
+        200
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response to webhook caller\nconst prev = $input.first().json;\nreturn [{\n  json: {\n    success: false,\n    error: 'Project fetch failed',\n    message: prev.fields ? prev.fields['Pipeline Log'] : $('Code — Build Error Log (Project)').first().json.errorMessage\n  }\n}];"
+      },
+      "id": "tht-prompt-respond-error-project",
+      "name": "Code — Respond Error (Project)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $('Code — Validate Project').first().json.id }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Code — Validate Project').first().json.id }}",
             "Status": "prompts_generating"
           },
           "matchingColumns": [
@@ -142,12 +248,12 @@
         }
       },
       "id": "tht-prompt-mark-generating",
-      "name": "Airtable \u2014 Mark Generating",
+      "name": "Airtable — Mark Generating",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        880,
-        400
+        1100,
+        500
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -158,15 +264,15 @@
     },
     {
       "parameters": {
-        "jsCode": "// Build LLM prompt for brand timelapse \u2014 V2: 8 images, 4 videos\nconst project = $('Airtable \u2014 Fetch Project').first().json;\nconst brandName = project['Brand Name'];\nconst brandConcept = project['Brand Concept'];\n\nconst systemPrompt = `You are a hyper-realistic architectural construction timelapse prompt engineer.\n\nYou generate structured image and video prompts for AI image/video generation tools.\nAll prompts describe a SINGLE iconic brand building being constructed from raw land to full activation.\n\n## GLOBAL RULES \u2014 Apply to EVERY image prompt:\n- Fixed drone-level viewpoint: ~100 feet altitude, 30-40 degree downward angle, static camera\n- Same plot of land, same camera position, same lens across ALL 8 images (except Image 8 which is a push-in detail shot)\n- 9:16 vertical aspect ratio (portrait orientation)\n- HYPER-REALISTIC and PHOTOREALISTIC \u2014 NOT cartoonish, NOT cel-shaded, NOT stylized\n- Architecturally sound with real physics \u2014 structures must look constructionally plausible\n- Consistent dusk/blue-hour lighting across all images\n- The brand's recognizable visual elements (logo, colors, structural style) incorporated naturally\n\n## IMAGE PHASES (8 total \u2014 paired as start+end for 4 video stages):\n\n### Stage 1: Earth to Foundation\n1. **Excavated Lot** \u2014 Empty excavated dirt lot. Construction fencing around perimeter. Bulldozers, dump trucks, workers in hard hats. Raw exposed earth, no vegetation in center. Same surrounding trees/landscape that will appear in the final image.\n2. **Construction Starting** \u2014 Foundation concrete visible. Rebar grid and structural base emerging from ground. Crane base installed at center. Construction materials staged. First signs of the building footprint taking shape.\n\n### Stage 2: Building Rises\n3. **Mid Construction** \u2014 Steel/concrete framework rising to ~40-50% of final height. Scaffolding wrapping the structure. Glass/cladding panels beginning on lower floors. Multiple cranes active. The brand's architectural form becoming recognizable in the skeleton.\n4. **Structure Nearly Complete** \u2014 Building at ~85-90%. Most exterior cladding/glass installed. Brand's signature architectural features clearly visible. Scaffolding still on upper portions. Surrounding site work (driveways, walkways) being laid.\n\n### Stage 3: Polish and Finish\n5. **Detail & Finishing** \u2014 Scaffolding removed from most areas. Workers doing exterior finishing \u2014 cleaning glass, installing trim, mounting signage hardware. Some panels or details still incomplete. Close to done but not pristine. The building's form is complete.\n6. **Fully Polished** \u2014 Building 100% complete. Every surface clean and finished. Brand signage/logo elements mounted but NOT illuminated. No cars, no people, no interior lights. Empty surroundings. Pure architectural beauty in natural light.\n\n### Stage 4: Activation & Reveal\n7. **Coming to Life** \u2014 Same wide drone viewpoint. Building complete. Interior lights beginning to glow warm through windows. Dusk sky deepening. The first signs of activation \u2014 a few cars appearing, exterior lighting warming up. Setting the stage for the grand reveal.\n8. **Iconic Brand Reveal (PUSH-IN)** \u2014 CAMERA MOVES: slow push-in toward the building's most iconic brand element (the logo, the signature architectural feature). Full activation \u2014 all lights blazing, cars in lot, people at entrance, landscaping lush and mature. The brand symbol is the hero of the shot. This is the money shot.\n\n## VIDEO TRANSITION PROMPTS (4 total):\nEach video uses Veo 3.1 first+last frame interpolation. The model receives the start image and end image and generates smooth motion between them. The prompt describes WHAT HAPPENS during the transition.\n\n- Videos 1-3: Camera remains COMPLETELY STATIC (same drone position)\n- Video 4: Camera performs a slow, cinematic PUSH-IN toward the brand symbol\n- All motion must be gradual, physically realistic \u2014 construction workers moving, cranes operating, materials being placed\n- NO teleportation, NO snapping, NO time-lapse jitter\n\n## OUTPUT FORMAT:\nReturn a JSON object with this exact structure:\n{\n  \"images\": [\n    { \"phase\": 1, \"label\": \"Excavated Lot\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Construction Starting\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Mid Construction\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Structure Nearly Complete\", \"prompt\": \"...\" },\n    { \"phase\": 5, \"label\": \"Detail and Finishing\", \"prompt\": \"...\" },\n    { \"phase\": 6, \"label\": \"Fully Polished\", \"prompt\": \"...\" },\n    { \"phase\": 7, \"label\": \"Coming to Life\", \"prompt\": \"...\" },\n    { \"phase\": 8, \"label\": \"Iconic Brand Reveal\", \"prompt\": \"...\" }\n  ],\n  \"videos\": [\n    { \"phase\": 1, \"label\": \"Excavated Lot to Construction Starting\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Mid Construction to Structure Nearly Complete\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Detail and Finishing to Fully Polished\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Coming to Life to Iconic Brand Reveal\", \"prompt\": \"...\" }\n  ]\n}\n\nEach prompt should be 3-5 sentences of vivid, specific, cinematic description. Include the brand name and recognizable brand elements in every prompt. Image prompts should describe a STILL PHOTOGRAPH. Video prompts should describe MOTION and ACTIVITY.`;\n\nconst userPrompt = \"Generate construction timelapse prompts for: \" + brandName + \"\\n\\nArchitectural Concept: \" + brandConcept + \"\\n\\nGenerate all 8 image prompts and 4 video transition prompts following the rules above. Make the building unmistakably \" + brandName + \" \u2014 incorporate their logo, signature colors, and architectural style naturally into a hyper-realistic construction sequence.\";\n\nreturn [{\n  json: {\n    prompt: userPrompt,\n    systemPrompt: systemPrompt,\n    brandName: brandName,\n    brandConcept: brandConcept,\n    projectRecordId: $('Airtable \u2014 Fetch Project').first().json.id\n  }\n}];"
+        "jsCode": "// Build LLM prompt for brand timelapse — V4: preservation anchor + construction-focused edits\n// T015: Added RE prompt branching for industry === 'real-estate'\nconst project = $('Code — Validate Project').first().json;\nconst brandName = project['Brand Name'];\nconst brandConcept = project['Brand Concept'];\nconst industry = (project['Industry'] || '').toLowerCase().trim();\nconst canonDriveFileId = project['Canon Drive File ID'] || '';\nconst canonDriveUrl = project['Canon Drive URL'] || '';\n\nlet systemPrompt;\nlet userPrompt;\n\nif (industry === 'real-estate') {\n  // ── RE-SPECIFIC PROMPT TEMPLATES ──\n  const roomTypes = ['living room', 'kitchen', 'master bedroom', 'bathroom', 'dining room', 'home office', 'backyard/patio'];\n  const archStyles = ['modern', 'craftsman', 'mid-century', 'farmhouse', 'contemporary', 'colonial', 'Mediterranean'];\n\n  systemPrompt = `You are a photorealistic real estate property visualization prompt engineer.\n\nGiven a COMPLETED, FULLY-STAGED luxury property listing (the Hero Shot, Phase 8), you write REVERSE DECONSTRUCTION edit prompts that transform the property backward through 7 renovation/staging phases.\n\nEach prompt is an EDIT INSTRUCTION for an img2img AI model. The model receives the PREVIOUS phase's image + your edit prompt, and generates the next (earlier) phase.\n\n## CRITICAL RULES:\n- PRESERVATION ANCHOR (MANDATORY): Every edit prompt MUST begin with: \"Maintain the exact building shape, proportions, perspective, sky, and ALL architectural features identical to the reference image.\" Then describe ONLY the specific changes.\n- NEVER instruct modifications to the building's core shape, roofline, windows placement, or architectural proportions — these remain IDENTICAL until the structure is physically deconstructed (Phase 4 and below)\n- Prompts must describe WHAT TO CHANGE from the previous phase, not the full scene\n- Camera angle, lot, and surrounding neighborhood REMAIN FIXED — never mention changing these\n- Each step should change only 1-2 major visual elements\n- Use directive edit language: \"Remove...\", \"Strip away...\", \"Replace...with...\", \"Add...\"\n- The property's core footprint and structure must remain visible in ALL phases (even Phase 1 shows the empty lot)\n- 9:16 vertical portrait orientation\n- PHOTOREALISTIC, natural lighting, professional real estate photography style maintained throughout\n- Consistent golden-hour/dusk lighting for curb appeal\n- All interiors are VIRTUALLY STAGED — AI-enhanced interiors, never claim real furniture\n- Include COMPLIANCE DISCLOSURE: Every image prompt must end with \"[AI-Generated Virtual Staging]\"\n\n## ROOM TYPES TO REFERENCE (use where appropriate):\n${roomTypes.join(', ')}\n\n## ARCHITECTURAL STYLES (match to the property):\n${archStyles.join(', ')}\n\n## STAGING LANGUAGE (use these terms naturally):\n- \"virtually staged\", \"AI-enhanced interior\", \"property walkthrough\", \"listing showcase\"\n- \"professional real estate photography style\", \"photorealistic\", \"natural lighting\"\n\n## PHASES (generated in reverse order, each editing from the phase above):\n\nPhase 7 — Move-In Ready (edit from Phase 8):\nDirection: The MOST SUBTLE change. Remove ONLY staging furniture visible through windows and remove the for-sale signage. The building exterior, landscaping, driveway, and all architectural features remain COMPLETELY IDENTICAL. Interior goes dark/empty. Everything else stays exactly the same.\n\nPhase 6 — Exterior Complete (edit from Phase 7):\nDirection: Remove ALL landscaping — no grass, no bushes, no pathway lights. Raw graded soil around the property. Building exterior fully painted and finished but no curb appeal yet. Building shape and all architectural details remain identical.\n\nPhase 5 — Finishing Touches (edit from Phase 6):\nDirection: Add scaffolding to one side. Some exterior paint incomplete — patches of primer visible. Contractor van in driveway. Windows installed but some still have protective film. Unfinished trim work.\n\nPhase 4 — Exterior Framing (edit from Phase 5):\nDirection: Add heavy scaffolding covering the facade. Remove siding/cladding from upper level, showing Tyvek house wrap. Construction dumpster in driveway. Roof partially shingled with tar paper visible. Raw OSB panels exposed.\n\nPhase 3 — Framing Up (edit from Phase 4):\nDirection: Remove most exterior sheathing. Show raw wood framing at ~50% height. Stacked lumber and pallets of materials on site. The property's footprint recognizable but skeletal. Portable toilet and tool shed visible.\n\nPhase 2 — Foundation Poured (edit from Phase 3):\nDirection: Remove all framing. Show only concrete foundation slab with anchor bolts. Piles of lumber delivered but not assembled. Survey stakes with orange ribbon. Utility trenches visible.\n\nPhase 1 — Cleared Lot (edit from Phase 2):\nDirection: Remove all structures. Show cleared, graded dirt lot. Silt fence around perimeter. A single excavator parked. Raw exposed earth with tire tracks. The same surrounding neighborhood visible.\n\n## VIDEO TRANSITION PROMPTS (4 total):\nEach describes motion/activity between two adjacent phase images.\nVideos 1-3: STATIC camera, showing construction progress activity. Video 4: PUSH-IN toward the front door, listing showcase reveal.\n\n## OUTPUT FORMAT:\n{\n  \"edit_prompts\": [\n    { \"phase\": 7, \"label\": \"Move-In Ready\", \"from_phase\": 8, \"edit_prompt\": \"...\" },\n    { \"phase\": 6, \"label\": \"Exterior Complete\", \"from_phase\": 7, \"edit_prompt\": \"...\" },\n    { \"phase\": 5, \"label\": \"Finishing Touches\", \"from_phase\": 6, \"edit_prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Exterior Framing\", \"from_phase\": 5, \"edit_prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Framing Up\", \"from_phase\": 4, \"edit_prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Foundation Poured\", \"from_phase\": 3, \"edit_prompt\": \"...\" },\n    { \"phase\": 1, \"label\": \"Cleared Lot\", \"from_phase\": 2, \"edit_prompt\": \"...\" }\n  ],\n  \"videos\": [\n    { \"phase\": 1, \"label\": \"Cleared Lot to Foundation Poured\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Framing Up to Exterior Framing\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Finishing Touches to Exterior Complete\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Move-In Ready to Listing Showcase\", \"prompt\": \"...\" }\n  ]\n}\n\nEach edit prompt: 3-5 sentences. MUST start with the preservation anchor. Then describe SPECIFIC CHANGES only. End each with [AI-Generated Virtual Staging].\nEach video prompt: 3-5 sentences describing MOTION and ACTIVITY between frames.`;\n\n  userPrompt = \"Generate reverse deconstruction edit prompts for the Hero Shot of this property listing: \" + brandName + \"\\n\\nProperty Concept: \" + brandConcept + \"\\n\\nGenerate all 7 reverse edit prompts and 4 video transition prompts following the rules above. Style the property as a compelling listing showcase — photorealistic, natural lighting, professional real estate photography. All staged interiors must be clearly AI-generated virtual staging. Never claim real furniture or staging. Return your response as a single valid JSON object matching the OUTPUT FORMAT above.\";\n\n} else {\n  // ── DEFAULT BRAND TIMELAPSE PROMPTS (V4: preservation anchor) ──\n  systemPrompt = `You are a hyper-realistic architectural image editing prompt engineer.\n\nGiven a COMPLETED, FULLY-ACTIVATED iconic brand building (the Canon Image, Phase 8), you write REVERSE DECONSTRUCTION edit prompts that transform the building backward through 7 construction phases.\n\nEach prompt is an EDIT INSTRUCTION for an img2img AI model. The model receives the PREVIOUS phase's image + your edit prompt, and generates the next (earlier) phase.\n\n## CRITICAL RULES:\n- PRESERVATION ANCHOR (MANDATORY): Every edit prompt MUST begin with: \"Maintain the exact building shape, proportions, perspective, sky, and ALL brand elements (logos, signage, iconic architectural features) identical to the reference image.\" Then describe ONLY the specific changes.\n- NEVER instruct modifications to brand logos, brand signage, or iconic brand features — these remain IDENTICAL in ALL phases until the building structure itself is physically deconstructed (Phase 4 and below)\n- Focus edit instructions on CONSTRUCTION STATE changes (scaffolding, cladding, structural elements) — NOT lighting, atmosphere, or brand modifications\n- Prompts must describe WHAT TO CHANGE from the previous phase, not the full scene\n- Camera angle, site, and surrounding landscape REMAIN FIXED — never mention changing these\n- Each step should change only 1-2 major visual elements\n- Use directive edit language: \"Remove...\", \"Strip away...\", \"Replace...with...\", \"Add...\"\n- The building's core footprint and shape must remain visible in ALL phases (even Phase 1 shows the plot outline)\n- 9:16 vertical portrait orientation\n- HYPER-REALISTIC and PHOTOREALISTIC style maintained throughout\n- Consistent dusk/blue-hour lighting throughout ALL phases\n\n## PHASES (generated in reverse order, each editing from the phase above):\n\nPhase 7 — Coming to Life (edit from Phase 8):\nDirection: The MOST SUBTLE change in the entire sequence. Remove ONLY people and vehicles from the scene. The building itself — its shape, facade, all brand logos, signage, lighting, and every architectural detail — remains COMPLETELY IDENTICAL to the Canon Image. The only visible difference is an empty lot with no cars and no people at the entrance. Everything else stays exactly the same.\n\nPhase 6 — Fully Polished (edit from Phase 7):\nDirection: Turn off all artificial lighting — interior lights dark, exterior spotlights off. The building's shape, facade, and ALL brand elements (logos, signage) remain IDENTICAL but unlit. Remove finished landscaping and decorative sidewalks. Building stands complete but dormant in natural ambient dusk light only. No structural changes.\n\nPhase 5 — Detail & Finishing (edit from Phase 6):\nDirection: Add scaffolding to the upper third of the building. Some exterior panels appear incomplete with visible seams. A few workers visible on scaffolding doing finishing work. Brand signage still mounted but some letters may be missing or covered by scaffolding. Some areas still rough/unfinished.\n\nPhase 4 — Structure Nearly Complete (edit from Phase 5):\nDirection: Add heavy scaffolding covering 60-70% of the building. Remove glass/cladding from upper 2-3 floors, showing raw framework. Add a construction crane. More exposed steel/concrete visible. Site work incomplete. Brand signage removed — just bare mounting points visible.\n\nPhase 3 — Mid Construction (edit from Phase 4):\nDirection: Remove most exterior cladding. Show raw steel/concrete skeleton at ~40-50% height. Multiple cranes active. Heavy scaffolding everywhere. Construction materials scattered. The building's form barely recognizable in the skeleton.\n\nPhase 2 — Construction Starting (edit from Phase 3):\nDirection: Remove upper structure entirely. Show only foundation concrete with rebar grid. A single crane at ground level. Construction materials staged around the perimeter. First signs of building footprint.\n\nPhase 1 — Excavated Lot (edit from Phase 2):\nDirection: Remove all structures. Show empty excavated dirt lot. Construction fencing around perimeter. Bulldozers and dump trucks parked. Raw exposed earth. The same surrounding landscape visible.\n\n## VIDEO TRANSITION PROMPTS (4 total):\nSame as before — each describes motion between two adjacent phase images.\nVideos 1-3: STATIC camera. Video 4: PUSH-IN toward brand symbol.\n\n## OUTPUT FORMAT:\n{\n  \"edit_prompts\": [\n    { \"phase\": 7, \"label\": \"Coming to Life\", \"from_phase\": 8, \"edit_prompt\": \"...\" },\n    { \"phase\": 6, \"label\": \"Fully Polished\", \"from_phase\": 7, \"edit_prompt\": \"...\" },\n    { \"phase\": 5, \"label\": \"Detail and Finishing\", \"from_phase\": 6, \"edit_prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Structure Nearly Complete\", \"from_phase\": 5, \"edit_prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Mid Construction\", \"from_phase\": 4, \"edit_prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Construction Starting\", \"from_phase\": 3, \"edit_prompt\": \"...\" },\n    { \"phase\": 1, \"label\": \"Excavated Lot\", \"from_phase\": 2, \"edit_prompt\": \"...\" }\n  ],\n  \"videos\": [\n    { \"phase\": 1, \"label\": \"Excavated Lot to Construction Starting\", \"prompt\": \"...\" },\n    { \"phase\": 2, \"label\": \"Mid Construction to Structure Nearly Complete\", \"prompt\": \"...\" },\n    { \"phase\": 3, \"label\": \"Detail and Finishing to Fully Polished\", \"prompt\": \"...\" },\n    { \"phase\": 4, \"label\": \"Coming to Life to Iconic Brand Reveal\", \"prompt\": \"...\" }\n  ]\n}\n\nEach edit prompt: 3-5 sentences. MUST start with the preservation anchor. Then describe ONLY SPECIFIC CHANGES to make.\nEach video prompt: 3-5 sentences describing MOTION and ACTIVITY between frames.`;\n\n  userPrompt = \"Generate reverse deconstruction edit prompts for the Canon Image of: \" + brandName + \"\\n\\nConcept: \" + brandConcept + \"\\n\\nGenerate all 7 reverse edit prompts and 4 video transition prompts following the rules above. Make the building unmistakably \" + brandName + \" — incorporate their logo, signature colors, and architectural style naturally. Return your response as a single valid JSON object matching the OUTPUT FORMAT above.\";\n}\n\nreturn [{\n  json: {\n    prompt: userPrompt,\n    systemPrompt: systemPrompt,\n    brandName: brandName,\n    brandConcept: brandConcept,\n    industry: industry,\n    projectRecordId: $('Code — Validate Project').first().json.id,\n    canonDriveFileId: canonDriveFileId,\n    canonDriveUrl: canonDriveUrl\n  }\n}];"
       },
       "id": "tht-prompt-build-gemini",
-      "name": "Code \u2014 Build LLM Prompt",
+      "name": "Code — Build LLM Prompt",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1100,
-        400
+        1320,
+        500
       ]
     },
     {
@@ -177,37 +283,173 @@
         "nodeCredentialType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"llama-3.1-70b-versatile\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.prompt) }} }\n  ],\n  \"temperature\": 0.7,\n  \"response_format\": {\"type\": \"json_object\"}\n}",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": {{ JSON.stringify($json.systemPrompt) }} },\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.prompt) }} }\n  ],\n  \"temperature\": 0.7,\n  \"response_format\": {\"type\": \"json_object\"}\n}",
         "options": {
           "timeout": 120000
         }
       },
       "id": "tht-prompt-llm-call",
-      "name": "HTTP Request \u2014 Groq LLM",
+      "name": "HTTP Request — Groq LLM",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1320,
-        400
+        1540,
+        500
       ],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "GROQ_CREDENTIAL_ID",
+          "id": "nPvmd95ZhVZ3AVTd",
           "name": "Groq API"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
-        "jsCode": "// Parse LLM structured JSON response \u2014 V2: 8 images + 4 videos = 12 records\nconst llmResponse = $input.first().json;\nconst projectRecordId = $('Code \u2014 Build LLM Prompt').first().json.projectRecordId;\nconst brandName = $('Code \u2014 Build LLM Prompt').first().json.brandName;\n\ntry {\n  // Groq/OpenAI format: choices[0].message.content\n  const rawText = llmResponse.choices[0].message.content;\n  const data = typeof rawText === 'object' ? rawText : JSON.parse(rawText);\n\n  if (!data.images || data.images.length !== 8) {\n    throw new Error(`Expected 8 image prompts, got ${data.images ? data.images.length : 0}`);\n  }\n  if (!data.videos || data.videos.length !== 4) {\n    throw new Error(`Expected 4 video prompts, got ${data.videos ? data.videos.length : 0}`);\n  }\n\n  const records = [];\n\n  for (const img of data.images) {\n    records.push({\n      json: {\n        projectRecordId,\n        phaseNumber: img.phase,\n        assetType: 'image',\n        phaseLabel: img.label,\n        promptLabel: `${brandName} - Phase ${img.phase} (image)`,\n        promptText: img.prompt,\n        brandName\n      }\n    });\n  }\n\n  for (const vid of data.videos) {\n    records.push({\n      json: {\n        projectRecordId,\n        phaseNumber: vid.phase,\n        assetType: 'video',\n        phaseLabel: vid.label,\n        promptLabel: `${brandName} - Phase ${vid.phase} (video)`,\n        promptText: vid.prompt,\n        brandName\n      }\n    });\n  }\n\n  return records;\n} catch (error) {\n  return [{\n    json: {\n      projectRecordId,\n      parseError: true,\n      errorMessage: `Failed to parse LLM response: ${error.message}`\n    }\n  }];\n}"
+        "jsCode": "// Validate LLM response — V4: reverse deconstruction edit prompts + canon image data\nconst llmResponse = $input.first().json;\nconst projectRecordId = $('Code — Build LLM Prompt').first().json.projectRecordId;\nconst brandName = $('Code — Build LLM Prompt').first().json.brandName;\nconst canonDriveFileId = $('Code — Build LLM Prompt').first().json.canonDriveFileId || '';\nconst canonDriveUrl = $('Code — Build LLM Prompt').first().json.canonDriveUrl || '';\n\n// Check for HTTP-level error from Groq\nif (llmResponse.error || llmResponse.statusCode >= 400 || !llmResponse.choices) {\n  const httpError = llmResponse.error?.message || llmResponse.message || llmResponse.error || `HTTP ${llmResponse.statusCode || 'unknown'} from Groq`;\n  return [{\n    json: {\n      llmOk: false,\n      projectRecordId,\n      brandName,\n      errorMessage: `Groq LLM call failed: ${httpError}`\n    }\n  }];\n}\n\n// Parse the LLM response\ntry {\n  const rawText = llmResponse.choices[0].message.content;\n  const data = typeof rawText === 'object' ? rawText : JSON.parse(rawText);\n\n  if (!data.edit_prompts || data.edit_prompts.length !== 7) {\n    throw new Error(`Expected 7 edit prompts, got ${data.edit_prompts ? data.edit_prompts.length : 0}`);\n  }\n  if (!data.videos || data.videos.length !== 4) {\n    throw new Error(`Expected 4 video prompts, got ${data.videos ? data.videos.length : 0}`);\n  }\n\n  // Stage mapping for image phases\n  const imageStageMap = { 8: 1, 7: 1, 6: 2, 5: 2, 4: 3, 3: 3, 2: 4, 1: 4 };\n  const videoStageMap = { 1: 4, 2: 3, 3: 2, 4: 1 };\n\n  const records = [];\n\n  // Phase 8 canon image record — include canon image data so it shows in the table\n  records.push({\n    json: {\n      llmOk: true,\n      projectRecordId,\n      phaseNumber: 8,\n      assetType: 'image',\n      phaseLabel: 'Iconic Brand Reveal',\n      promptLabel: `${brandName} - Phase 8 (image)`,\n      promptText: 'Canon image — user-created hero image',\n      generationStatus: 'generated',\n      stage: 1,\n      brandName,\n      driveFileId: canonDriveFileId,\n      driveUrl: canonDriveFileId ? `https://drive.google.com/file/d/${canonDriveFileId}/view` : ''\n    }\n  });\n\n  // 7 edit prompt records\n  for (const ep of data.edit_prompts) {\n    records.push({\n      json: {\n        llmOk: true,\n        projectRecordId,\n        phaseNumber: ep.phase,\n        assetType: 'image',\n        phaseLabel: ep.label,\n        promptLabel: `${brandName} - Phase ${ep.phase} (image)`,\n        promptText: ep.edit_prompt,\n        generationStatus: 'pending',\n        stage: imageStageMap[ep.phase] || 1,\n        brandName,\n        driveFileId: '',\n        driveUrl: ''\n      }\n    });\n  }\n\n  // 4 video records\n  for (const vid of data.videos) {\n    records.push({\n      json: {\n        llmOk: true,\n        projectRecordId,\n        phaseNumber: vid.phase,\n        assetType: 'video',\n        phaseLabel: vid.label,\n        promptLabel: `${brandName} - Phase ${vid.phase} (video)`,\n        promptText: vid.prompt,\n        generationStatus: 'pending',\n        stage: videoStageMap[vid.phase] || 1,\n        brandName,\n        driveFileId: '',\n        driveUrl: ''\n      }\n    });\n  }\n\n  return records;\n} catch (error) {\n  return [{\n    json: {\n      llmOk: false,\n      projectRecordId,\n      brandName,\n      errorMessage: `Failed to parse LLM response: ${error.message}`\n    }\n  }];\n}"
       },
-      "id": "tht-prompt-parse-json",
-      "name": "Code \u2014 Parse Prompt JSON",
+      "id": "tht-prompt-validate-llm",
+      "name": "Code — Validate LLM Response",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1540,
-        400
+        1760,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-llm-ok",
+              "leftValue": "={{ $json.llmOk }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "tht-prompt-if-llm-ok",
+      "name": "IF — LLM OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build error log entry for LLM failure\nconst prev = $input.first().json;\nconst now = new Date().toISOString();\nconst message = prev.errorMessage || 'LLM response validation failed';\n\nreturn [{\n  json: {\n    recordId: prev.projectRecordId,\n    pipelineLog: `[${now}] ✗ PROMPT ERROR: ${message}`,\n    errorMessage: message,\n    status: 'structure_selected'\n  }\n}];"
+      },
+      "id": "tht-prompt-build-error-log-llm",
+      "name": "Code — Build Error Log (LLM)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appCOlvJdsSeh0QPe",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl4JgciFENe184jo",
+          "mode": "id"
+        },
+        "id": "={{ $json.recordId }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.recordId }}",
+            "Status": "={{ $json.status }}",
+            "Pipeline Log": "={{ $json.pipelineLog }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Pipeline Log",
+              "displayName": "Pipeline Log",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "tht-prompt-log-error-llm",
+      "name": "Airtable — Log Error (LLM)",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2420,
+        300
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Return error response to webhook caller\nconst errorLog = $('Code — Build Error Log (LLM)').first().json;\nreturn [{\n  json: {\n    success: false,\n    error: 'Prompt generation failed',\n    message: errorLog.errorMessage\n  }\n}];"
+      },
+      "id": "tht-prompt-respond-error-llm",
+      "name": "Code — Respond Error (LLM)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        300
       ]
     },
     {
@@ -216,12 +458,12 @@
         "options": {}
       },
       "id": "tht-prompt-split",
-      "name": "SplitInBatches \u2014 Create Prompts",
+      "name": "SplitInBatches — Create Prompts",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1870,
-        500
+        2200,
+        600
       ]
     },
     {
@@ -248,7 +490,10 @@
             "Phase Label": "={{ $json.phaseLabel }}",
             "Prompt Label": "={{ $json.promptLabel }}",
             "Prompt Text": "={{ $json.promptText }}",
-            "Generation Status": "pending"
+            "Generation Status": "={{ $json.generationStatus }}",
+            "Stage": "={{ $json.stage }}",
+            "Drive File ID": "={{ $json.driveFileId }}",
+            "Drive URL": "={{ $json.driveUrl }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -321,6 +566,36 @@
               "type": "string",
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Drive File ID",
+              "displayName": "Drive File ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Drive URL",
+              "displayName": "Drive URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -328,12 +603,12 @@
         }
       },
       "id": "tht-prompt-create-record",
-      "name": "Airtable \u2014 Create Prompt Record",
+      "name": "Airtable — Create Prompt Record",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        2090,
-        600
+        2420,
+        700
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -348,12 +623,12 @@
         "unit": "seconds"
       },
       "id": "tht-prompt-wait-rate",
-      "name": "Wait \u2014 Rate Limit",
+      "name": "Wait — Rate Limit",
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2310,
-        600
+        2640,
+        700
       ]
     },
     {
@@ -369,12 +644,13 @@
           "value": "tbl4JgciFENe184jo",
           "mode": "id"
         },
-        "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
+        "id": "={{ $('Code — Validate Project').first().json.id }}",
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "id": "={{ $('Airtable \u2014 Fetch Project').first().json.id }}",
-            "Status": "prompts_generated"
+            "id": "={{ $('Code — Validate Project').first().json.id }}",
+            "Status": "prompts_generated",
+            "Pipeline Log": "={{ $('Code — Build Success Log').first().json.pipelineLog }}"
           },
           "matchingColumns": [
             "id"
@@ -396,6 +672,16 @@
               "required": false,
               "defaultMatch": false,
               "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Pipeline Log",
+              "displayName": "Pipeline Log",
+              "required": false,
+              "defaultMatch": false,
               "display": true,
               "type": "string",
               "readOnly": false,
@@ -407,12 +693,12 @@
         }
       },
       "id": "tht-prompt-update-status",
-      "name": "Airtable \u2014 Update Project Status",
+      "name": "Airtable — Update Project Status",
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        2090,
-        360
+        2640,
+        460
       ],
       "credentials": {
         "airtableTokenApi": {
@@ -423,239 +709,245 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "check-parse-error",
-              "leftValue": "={{ $json.parseError }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        }
+        "jsCode": "// Build success log entry — V3: 7 edit + 4 video + 1 canon = 12 records\nconst projectRecordId = $('Code — Validate Project').first().json.id;\nconst brandName = $('Code — Build LLM Prompt').first().json.brandName;\nconst allItems = $('Code — Validate LLM Response').all();\nconst imageCount = allItems.filter(i => i.json.assetType === 'image').length;\nconst videoCount = allItems.filter(i => i.json.assetType === 'video').length;\nconst editCount = imageCount - 1; // subtract Phase 8 canon\nconst now = new Date().toISOString();\n\nreturn [{\n  json: {\n    projectRecordId,\n    brandName,\n    pipelineLog: `[${now}] ✓ Prompt Generation complete (${imageCount + videoCount}/${imageCount + videoCount} prompts created: ${editCount} edit + ${videoCount} video + Phase 8 canon)`\n  }\n}];"
       },
-      "id": "tht-prompt-if-parse-error",
-      "name": "IF \u2014 Parse Error",
-      "type": "n8n-nodes-base.if",
+      "id": "tht-prompt-build-success-log",
+      "name": "Code — Build Success Log",
+      "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1650,
-        400
+        2420,
+        460
       ]
     },
     {
       "parameters": {
-        "operation": "update",
-        "base": {
-          "__rl": true,
-          "value": "appCOlvJdsSeh0QPe",
-          "mode": "id"
-        },
-        "table": {
-          "__rl": true,
-          "value": "tbl4JgciFENe184jo",
-          "mode": "id"
-        },
-        "id": "={{ $json.projectRecordId }}",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "id": "={{ $json.projectRecordId }}",
-            "Status": "structure_selected"
-          },
-          "matchingColumns": [
-            "id"
-          ],
-          "schema": [
-            {
-              "id": "id",
-              "displayName": "id",
-              "required": false,
-              "defaultMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": true,
-              "removed": false
-            },
-            {
-              "id": "Status",
-              "displayName": "Status",
-              "required": false,
-              "defaultMatch": false,
-              "canBeUsedToMatch": true,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        }
+        "jsCode": "// Return success response to webhook caller\nconst successLog = $('Code — Build Success Log').first().json;\nreturn [{\n  json: {\n    success: true,\n    message: successLog.pipelineLog,\n    brandName: successLog.brandName\n  }\n}];"
       },
-      "id": "tht-prompt-revert-status",
-      "name": "Airtable \u2014 Revert Status",
-      "type": "n8n-nodes-base.airtable",
-      "typeVersion": 2.1,
+      "id": "tht-prompt-respond-success",
+      "name": "Code — Done Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        1870,
-        280
-      ],
-      "credentials": {
-        "airtableTokenApi": {
-          "id": "YCWFwTIXwnTpVy2y",
-          "name": "Airtable"
-        }
-      }
+        2860,
+        460
+      ]
     }
   ],
   "connections": {
-    "Airtable \u2014 Fetch Project": {
-      "main": [
-        [
-          {
-            "node": "IF \u2014 No Project Found",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF \u2014 No Project Found": {
-      "main": [
-        [
-          {
-            "node": "NoOp \u2014 Exit",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Airtable \u2014 Mark Generating",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Airtable \u2014 Mark Generating": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Build LLM Prompt",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Build LLM Prompt": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request \u2014 Groq LLM",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request \u2014 Groq LLM": {
-      "main": [
-        [
-          {
-            "node": "Code \u2014 Parse Prompt JSON",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code \u2014 Parse Prompt JSON": {
-      "main": [
-        [
-          {
-            "node": "IF \u2014 Parse Error",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "SplitInBatches \u2014 Create Prompts": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Update Project Status",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Airtable \u2014 Create Prompt Record",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Airtable \u2014 Create Prompt Record": {
-      "main": [
-        [
-          {
-            "node": "Wait \u2014 Rate Limit",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait \u2014 Rate Limit": {
-      "main": [
-        [
-          {
-            "node": "SplitInBatches \u2014 Create Prompts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF \u2014 Parse Error": {
-      "main": [
-        [
-          {
-            "node": "Airtable \u2014 Revert Status",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "SplitInBatches \u2014 Create Prompts",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook Trigger": {
       "main": [
         [
           {
-            "node": "Airtable \u2014 Fetch Project",
+            "node": "Airtable — Fetch Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Fetch Project": {
+      "main": [
+        [
+          {
+            "node": "Code — Validate Project",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Validate Project": {
+      "main": [
+        [
+          {
+            "node": "IF — Project Found?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Project Found?": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Mark Generating",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code — Build Error Log (Project)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Build Error Log (Project)": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Log Error (Project)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Log Error (Project)": {
+      "main": [
+        [
+          {
+            "node": "Code — Respond Error (Project)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Mark Generating": {
+      "main": [
+        [
+          {
+            "node": "Code — Build LLM Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Build LLM Prompt": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Groq LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Groq LLM": {
+      "main": [
+        [
+          {
+            "node": "Code — Validate LLM Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Validate LLM Response": {
+      "main": [
+        [
+          {
+            "node": "IF — LLM OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — LLM OK?": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Create Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code — Build Error Log (LLM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Build Error Log (LLM)": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Log Error (LLM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Log Error (LLM)": {
+      "main": [
+        [
+          {
+            "node": "Code — Respond Error (LLM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SplitInBatches — Create Prompts": {
+      "main": [
+        [
+          {
+            "node": "Code — Build Success Log",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Airtable — Create Prompt Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Build Success Log": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Update Project Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Update Project Status": {
+      "main": [
+        [
+          {
+            "node": "Code — Done Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Prompt Record": {
+      "main": [
+        [
+          {
+            "node": "Wait — Rate Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait — Rate Limit": {
+      "main": [
+        [
+          {
+            "node": "SplitInBatches — Create Prompts",
             "type": "main",
             "index": 0
           }

@@ -53,8 +53,8 @@
       "position": [880, 400],
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "",
-          "name": "Google Drive OAuth2"
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
         }
       }
     },
@@ -96,8 +96,8 @@
       "position": [1540, 400],
       "credentials": {
         "googlePalmApi": {
-          "id": "",
-          "name": "Google Gemini (PaLM) API"
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini(PaLM) Api Billing Connected"
         }
       }
     },
@@ -128,8 +128,8 @@
       "position": [1980, 400],
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "",
-          "name": "Google Drive OAuth2"
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "newGoogleDriveAPI"
         }
       }
     },
@@ -168,8 +168,8 @@
       "position": [2200, 400],
       "credentials": {
         "airtableTokenApi": {
-          "id": "",
-          "name": "Airtable Personal Access Token"
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
         }
       }
     },
