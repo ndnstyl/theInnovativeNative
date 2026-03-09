@@ -1376,6 +1376,63 @@ export interface Database {
         };
         Relationships: [];
       };
+      email_preferences: {
+        Row: {
+          user_id: string;
+          welcome_email: boolean;
+          enrollment_email: boolean;
+          payment_email: boolean;
+          event_reminder: boolean;
+          weekly_digest: boolean;
+          marketing: boolean;
+          unsubscribed_all: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          welcome_email?: boolean;
+          enrollment_email?: boolean;
+          payment_email?: boolean;
+          event_reminder?: boolean;
+          weekly_digest?: boolean;
+          marketing?: boolean;
+          unsubscribed_all?: boolean;
+        };
+        Update: {
+          welcome_email?: boolean;
+          enrollment_email?: boolean;
+          payment_email?: boolean;
+          event_reminder?: boolean;
+          weekly_digest?: boolean;
+          marketing?: boolean;
+          unsubscribed_all?: boolean;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      email_log: {
+        Row: {
+          id: string;
+          user_id: string;
+          email_type: string;
+          subject: string;
+          status: string;
+          metadata: any;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          email_type: string;
+          subject: string;
+          status?: string;
+          metadata?: any;
+        };
+        Update: {
+          status?: string;
+        };
+        Relationships: [];
+      };
       analytics_snapshots: {
         Row: {
           id: string;
