@@ -11,11 +11,11 @@ const AuthCallback = () => {
     const handleCallback = async () => {
       const supabase = createBrowserClient();
 
-      // Get the code and error from URL if present (for PKCE flow)
       const { searchParams } = new URL(window.location.href);
       const code = searchParams.get('code');
       const errorParam = searchParams.get('error');
       const errorDescription = searchParams.get('error_description');
+      const inviteToken = searchParams.get('invite_token');
 
       if (errorParam) {
         setError(errorDescription || errorParam);
@@ -24,7 +24,6 @@ const AuthCallback = () => {
 
       if (code) {
         try {
-          // Exchange the code for a session
           const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
           if (exchangeError) {
@@ -33,18 +32,58 @@ const AuthCallback = () => {
             return;
           }
 
-          // Successfully authenticated, redirect to dashboard
-          router.replace('/dashboard');
+          // Get the authenticated user
+          const { data: { user } } = await supabase.auth.getUser();
+          if (!user) {
+            setError('Authentication failed. Please try again.');
+            return;
+          }
+
+          // Handle invitation token — auto-approve membership
+          if (inviteToken) {
+            const { data: invitation } = await supabase
+              .from('invitations')
+              .select('id, status, expires_at')
+              .eq('token', inviteToken)
+              .eq('status', 'pending')
+              .single();
+
+            if (invitation && new Date(invitation.expires_at) > new Date()) {
+              await supabase
+                .from('invitations')
+                .update({ status: 'accepted' })
+                .eq('id', invitation.id);
+
+              await supabase
+                .from('profiles')
+                .update({ membership_status: 'approved' })
+                .eq('id', user.id);
+            }
+          }
+
+          // Fetch profile to determine redirect
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('onboarding_complete, membership_status')
+            .eq('id', user.id)
+            .single();
+
+          if (!profile || !profile.onboarding_complete) {
+            router.replace('/members/onboarding');
+          } else if (profile.membership_status === 'pending') {
+            router.replace('/members');
+          } else {
+            router.replace('/members');
+          }
         } catch (err) {
           console.error('Unexpected error during auth callback:', err);
           setError('An unexpected error occurred during authentication.');
         }
       } else {
-        // If no code, check if we already have a session
         const { data: { session } } = await supabase.auth.getSession();
 
         if (session) {
-          router.replace('/dashboard');
+          router.replace('/members');
         } else {
           setError('No authentication code found. Please try signing in again.');
         }
@@ -57,7 +96,7 @@ const AuthCallback = () => {
   return (
     <>
       <Head>
-        <title>Authenticating... | Law Firm RAG</title>
+        <title>Authenticating... | The Innovative Native</title>
         <meta name="robots" content="noindex" />
       </Head>
       <div className="auth-callback-page">
@@ -70,7 +109,7 @@ const AuthCallback = () => {
               <h2>Authentication Error</h2>
               <p>{error}</p>
               <button
-                onClick={() => router.push('/law-firm-rag')}
+                onClick={() => router.push('/')}
                 className="btn btn--primary"
               >
                 Return to Home

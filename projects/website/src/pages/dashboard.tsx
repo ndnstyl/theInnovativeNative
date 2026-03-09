@@ -58,7 +58,7 @@ const Dashboard = () => {
   }, [router]);
 
   const getPilotStatusBadge = () => {
-    const status = profile?.pilot_status || 'pending';
+    const status = (profile as any)?.pilot_status || 'pending';
     const statusConfig: Record<string, { label: string; color: string }> = {
       pending: { label: 'Pending Approval', color: '#ffa500' },
       active: { label: 'Active Pilot', color: '#00FFFF' },
@@ -160,16 +160,16 @@ const Dashboard = () => {
                     <span className="status-label">Current Status</span>
                     {getPilotStatusBadge()}
                   </div>
-                  {profile?.pilot_started_at && (
+                  {(profile as any)?.pilot_started_at && (
                     <div className="status-row">
                       <span className="status-label">Started</span>
                       <span className="status-value">
-                        {new Date(profile.pilot_started_at).toLocaleDateString()}
+                        {new Date((profile as any).pilot_started_at).toLocaleDateString()}
                       </span>
                     </div>
                   )}
                   <p className="card-description">
-                    {profile?.pilot_status === 'active'
+                    {(profile as any)?.pilot_status === 'active'
                       ? "You're currently participating in the pilot program. Access to all features is enabled."
                       : "Your pilot application is being reviewed. We'll notify you once approved."}
                   </p>

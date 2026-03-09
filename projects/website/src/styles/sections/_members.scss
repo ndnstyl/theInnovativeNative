@@ -1,0 +1,488 @@
+// ============================================
+// Member Directory & Profile Styles
+// 013-member-system
+// ============================================
+
+// --- Members Page ---
+.members-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 24px;
+
+    h1 {
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  &__count {
+    color: #757575;
+    font-size: 14px;
+  }
+
+  &__error {
+    padding: 12px 16px;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.2);
+    border-radius: 8px;
+    color: #ff4444;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 60px 0;
+    color: #757575;
+  }
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #1a1a1a;
+    border-top-color: #00FFFF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// --- Search Bar ---
+.member-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+
+  &__input-wrap {
+    flex: 1;
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4a4a4a;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  &__input {
+    width: 100%;
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 12px 14px 12px 40px;
+    color: #fff;
+    font-size: 14px;
+    transition: border-color 0.2s;
+
+    &::placeholder { color: #4a4a4a; }
+    &:focus {
+      outline: none;
+      border-color: #00FFFF;
+      box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
+    }
+  }
+
+  &__filter {
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 14px;
+    min-width: 140px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: #00FFFF;
+    }
+  }
+}
+
+// --- Member Grid ---
+.member-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 60px 0;
+    color: #757575;
+    font-size: 14px;
+  }
+
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+    padding: 16px 0;
+  }
+
+  &__page-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:hover:not(:disabled) { border-color: #00FFFF; color: #00FFFF; }
+    &:disabled { opacity: 0.3; cursor: not-allowed; }
+  }
+
+  &__page-info {
+    color: #757575;
+    font-size: 13px;
+  }
+}
+
+// --- Member Card ---
+.member-card {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: #00FFFF;
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__initials {
+    font-size: 18px;
+    font-weight: 700;
+    color: #757575;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__username {
+    display: block;
+    color: #757575;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  &__bio {
+    color: #999;
+    font-size: 13px;
+    margin: 6px 0 0;
+    line-height: 1.4;
+  }
+
+  &__meta {
+    color: #4a4a4a;
+    font-size: 11px;
+    margin-top: 6px;
+  }
+}
+
+// --- Profile Page ---
+.member-profile-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 24px;
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 60px 0;
+    color: #757575;
+  }
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #1a1a1a;
+    border-top-color: #00FFFF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// --- Profile Header ---
+.profile-header {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__initials {
+    font-size: 36px;
+    font-weight: 700;
+    color: #757575;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+
+    @media (max-width: 480px) {
+      justify-content: center;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+
+  &__username {
+    color: #757575;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__meta {
+    color: #4a4a4a;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  &__dot {
+    margin: 0 4px;
+  }
+
+  &__stats {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 12px;
+
+    strong { color: #fff; }
+  }
+
+  &__bio {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 12px 0;
+  }
+
+  &__social {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  &__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #00FFFF;
+    font-size: 13px;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  &__actions {
+    margin-top: 16px;
+
+    .btn--outline {
+      background: transparent;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 6px 16px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      &:hover { border-color: #00FFFF; color: #00FFFF; }
+    }
+  }
+}
+
+// --- Profile Activity ---
+.profile-activity {
+  margin-top: 32px;
+
+  &__title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px;
+  }
+
+  &__empty {
+    color: #4a4a4a;
+    font-size: 14px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00FFFF;
+    font-size: 14px;
+  }
+
+  &__content {
+    flex: 1;
+
+    p {
+      color: #ccc;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  &__time {
+    color: #4a4a4a;
+    font-size: 12px;
+  }
+
+  &__load-more {
+    margin-top: 12px;
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    color: #757575;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    align-self: center;
+
+    &:hover { border-color: #333; color: #fff; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

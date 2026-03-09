@@ -1,5 +1,6 @@
 // Supabase Database Types
-// These types represent the database schema for the Law Firm RAG application
+// These types represent the database schema
+// Updated for community platform (specs 010-029)
 
 export type Json =
   | string
@@ -15,27 +16,702 @@ export interface Database {
       profiles: {
         Row: {
           id: string;
-          email: string | null;
-          stripe_customer_id: string | null;
-          pilot_status: string | null;
-          pilot_started_at: string | null;
-          created_at: string | null;
+          display_name: string;
+          username: string | null;
+          avatar_url: string | null;
+          bio: string | null;
+          location: string | null;
+          website: string | null;
+          social_links: Json;
+          membership_status: string;
+          onboarding_complete: boolean;
+          last_active_at: string | null;
+          username_changed_at: string | null;
+          level: number;
+          xp_total: number;
+          search_vector: string | null;
+          created_at: string;
+          updated_at: string;
         };
         Insert: {
           id: string;
-          email?: string | null;
-          stripe_customer_id?: string | null;
-          pilot_status?: string | null;
-          pilot_started_at?: string | null;
-          created_at?: string | null;
+          display_name?: string;
+          username?: string | null;
+          avatar_url?: string | null;
+          bio?: string | null;
+          location?: string | null;
+          website?: string | null;
+          social_links?: Json;
+          membership_status?: string;
+          onboarding_complete?: boolean;
+          last_active_at?: string | null;
+          username_changed_at?: string | null;
+          level?: number;
+          xp_total?: number;
         };
         Update: {
+          display_name?: string;
+          username?: string | null;
+          avatar_url?: string | null;
+          bio?: string | null;
+          location?: string | null;
+          website?: string | null;
+          social_links?: Json;
+          membership_status?: string;
+          onboarding_complete?: boolean;
+          last_active_at?: string | null;
+          username_changed_at?: string | null;
+        };
+        Relationships: [];
+      };
+      communities: {
+        Row: {
+          id: string;
+          name: string;
+          slug: string;
+          description: string | null;
+          logo_url: string | null;
+          cover_image_url: string | null;
+          privacy: string;
+          pricing_model: string;
+          created_at: string;
+        };
+        Insert: {
           id?: string;
-          email?: string | null;
+          name: string;
+          slug: string;
+          description?: string | null;
+          logo_url?: string | null;
+          cover_image_url?: string | null;
+          privacy?: string;
+          pricing_model?: string;
+        };
+        Update: {
+          name?: string;
+          slug?: string;
+          description?: string | null;
+          logo_url?: string | null;
+          cover_image_url?: string | null;
+          privacy?: string;
+          pricing_model?: string;
+        };
+        Relationships: [];
+      };
+      community_members: {
+        Row: {
+          id: string;
+          community_id: string;
+          member_id: string;
+          role: string;
+          status: string;
+          deleted_at: string | null;
+          joined_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          member_id: string;
+          role?: string;
+          status?: string;
+        };
+        Update: {
+          role?: string;
+          status?: string;
+          deleted_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'community_members_community_id_fkey';
+            columns: ['community_id'];
+            referencedRelation: 'communities';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'community_members_member_id_fkey';
+            columns: ['member_id'];
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      categories: {
+        Row: {
+          id: string;
+          community_id: string;
+          name: string;
+          description: string | null;
+          slug: string;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          name: string;
+          description?: string | null;
+          slug: string;
+          sort_order?: number;
+        };
+        Update: {
+          name?: string;
+          description?: string | null;
+          slug?: string;
+          sort_order?: number;
+        };
+        Relationships: [];
+      };
+      posts: {
+        Row: {
+          id: string;
+          community_id: string;
+          category_id: string | null;
+          author_id: string;
+          title: string;
+          body: string | null;
+          is_pinned: boolean;
+          pin_order: number | null;
+          like_count: number;
+          comment_count: number;
+          deleted_at: string | null;
+          search_vector: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          category_id?: string | null;
+          author_id: string;
+          title: string;
+          body?: string | null;
+          is_pinned?: boolean;
+        };
+        Update: {
+          category_id?: string | null;
+          title?: string;
+          body?: string | null;
+          is_pinned?: boolean;
+          pin_order?: number | null;
+          deleted_at?: string | null;
+        };
+        Relationships: [];
+      };
+      comments: {
+        Row: {
+          id: string;
+          post_id: string;
+          author_id: string;
+          parent_id: string | null;
+          body: string;
+          like_count: number;
+          deleted_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          author_id: string;
+          parent_id?: string | null;
+          body: string;
+        };
+        Update: {
+          body?: string;
+          deleted_at?: string | null;
+        };
+        Relationships: [];
+      };
+      reactions: {
+        Row: {
+          id: string;
+          target_type: string;
+          target_id: string;
+          user_id: string;
+          emoji: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          target_type: string;
+          target_id: string;
+          user_id: string;
+          emoji?: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      courses: {
+        Row: {
+          id: string;
+          community_id: string;
+          slug: string;
+          title: string;
+          description: string | null;
+          thumbnail_url: string | null;
+          is_published: boolean;
+          is_free: boolean;
+          stripe_price_id: string | null;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          slug: string;
+          title: string;
+          description?: string | null;
+          thumbnail_url?: string | null;
+          is_published?: boolean;
+          is_free?: boolean;
+          stripe_price_id?: string | null;
+          sort_order?: number;
+        };
+        Update: {
+          slug?: string;
+          title?: string;
+          description?: string | null;
+          thumbnail_url?: string | null;
+          is_published?: boolean;
+          is_free?: boolean;
+          stripe_price_id?: string | null;
+          sort_order?: number;
+        };
+        Relationships: [];
+      };
+      modules: {
+        Row: {
+          id: string;
+          course_id: string;
+          title: string;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          course_id: string;
+          title: string;
+          sort_order?: number;
+        };
+        Update: {
+          title?: string;
+          sort_order?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'modules_course_id_fkey';
+            columns: ['course_id'];
+            referencedRelation: 'courses';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      lessons: {
+        Row: {
+          id: string;
+          module_id: string;
+          course_id: string;
+          slug: string;
+          title: string;
+          content_markdown: string | null;
+          video_url: string | null;
+          is_free_preview: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          module_id: string;
+          course_id: string;
+          slug: string;
+          title: string;
+          content_markdown?: string | null;
+          video_url?: string | null;
+          is_free_preview?: boolean;
+          sort_order?: number;
+        };
+        Update: {
+          slug?: string;
+          title?: string;
+          content_markdown?: string | null;
+          video_url?: string | null;
+          is_free_preview?: boolean;
+          sort_order?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'lessons_module_id_fkey';
+            columns: ['module_id'];
+            referencedRelation: 'modules';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'lessons_course_id_fkey';
+            columns: ['course_id'];
+            referencedRelation: 'courses';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      enrollments: {
+        Row: {
+          id: string;
+          user_id: string;
+          course_id: string;
+          stripe_session_id: string | null;
+          enrolled_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          course_id: string;
+          stripe_session_id?: string | null;
+        };
+        Update: {
+          stripe_session_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'enrollments_course_id_fkey';
+            columns: ['course_id'];
+            referencedRelation: 'courses';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      lesson_progress: {
+        Row: {
+          id: string;
+          user_id: string;
+          lesson_id: string;
+          course_id: string;
+          completed: boolean;
+          completed_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          lesson_id: string;
+          course_id: string;
+          completed?: boolean;
+          completed_at?: string | null;
+        };
+        Update: {
+          completed?: boolean;
+          completed_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'lesson_progress_lesson_id_fkey';
+            columns: ['lesson_id'];
+            referencedRelation: 'lessons';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'lesson_progress_course_id_fkey';
+            columns: ['course_id'];
+            referencedRelation: 'courses';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      membership_questions: {
+        Row: {
+          id: string;
+          community_id: string;
+          question_text: string;
+          is_required: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          question_text: string;
+          is_required?: boolean;
+          sort_order: number;
+        };
+        Update: {
+          question_text?: string;
+          is_required?: boolean;
+          sort_order?: number;
+        };
+        Relationships: [];
+      };
+      membership_requests: {
+        Row: {
+          id: string;
+          community_id: string;
+          user_id: string;
+          answers: Json;
+          status: string;
+          reviewed_by: string | null;
+          reviewed_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          user_id: string;
+          answers: Json;
+          status?: string;
+        };
+        Update: {
+          status?: string;
+          reviewed_by?: string | null;
+          reviewed_at?: string | null;
+        };
+        Relationships: [];
+      };
+      invitations: {
+        Row: {
+          id: string;
+          community_id: string;
+          email: string;
+          invited_by: string;
+          token: string;
+          personal_message: string | null;
+          status: string;
+          expires_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          email: string;
+          invited_by: string;
+          token?: string;
+          personal_message?: string | null;
+          status?: string;
+          expires_at: string;
+        };
+        Update: {
+          status?: string;
+        };
+        Relationships: [];
+      };
+      follows: {
+        Row: {
+          follower_id: string;
+          following_id: string;
+          created_at: string;
+        };
+        Insert: {
+          follower_id: string;
+          following_id: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      member_bans: {
+        Row: {
+          id: string;
+          community_id: string;
+          user_id: string;
+          banned_by: string;
+          reason: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          user_id: string;
+          banned_by: string;
+          reason?: string | null;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      notifications: {
+        Row: {
+          id: string;
+          community_id: string;
+          recipient_id: string;
+          actor_id: string | null;
+          type: string;
+          title: string;
+          body: string | null;
+          target_type: string | null;
+          target_id: string | null;
+          read_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          recipient_id: string;
+          actor_id?: string | null;
+          type: string;
+          title: string;
+          body?: string | null;
+          target_type?: string | null;
+          target_id?: string | null;
+        };
+        Update: {
+          read_at?: string | null;
+        };
+        Relationships: [];
+      };
+      subscriptions: {
+        Row: {
+          id: string;
+          community_id: string;
+          user_id: string;
+          stripe_customer_id: string | null;
+          stripe_subscription_id: string | null;
+          stripe_price_id: string | null;
+          plan: string;
+          status: string;
+          lifetime_access: boolean;
+          current_period_start: string | null;
+          current_period_end: string | null;
+          trial_start: string | null;
+          trial_end: string | null;
+          cancel_at_period_end: boolean;
+          grace_period_end: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          user_id: string;
           stripe_customer_id?: string | null;
-          pilot_status?: string | null;
-          pilot_started_at?: string | null;
-          created_at?: string | null;
+          stripe_subscription_id?: string | null;
+          stripe_price_id?: string | null;
+          plan?: string;
+          status?: string;
+          lifetime_access?: boolean;
+        };
+        Update: {
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          stripe_price_id?: string | null;
+          plan?: string;
+          status?: string;
+          lifetime_access?: boolean;
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          trial_start?: string | null;
+          trial_end?: string | null;
+          cancel_at_period_end?: boolean;
+          grace_period_end?: string | null;
+        };
+        Relationships: [];
+      };
+      events: {
+        Row: {
+          id: string;
+          community_id: string;
+          creator_id: string;
+          title: string;
+          description: string | null;
+          location_type: string;
+          location_details: string | null;
+          starts_at: string;
+          ends_at: string;
+          is_recurring: boolean;
+          recurrence_rule: string | null;
+          max_attendees: number | null;
+          rsvp_count: number;
+          deleted_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          creator_id: string;
+          title: string;
+          description?: string | null;
+          location_type?: string;
+          location_details?: string | null;
+          starts_at: string;
+          ends_at: string;
+          is_recurring?: boolean;
+          recurrence_rule?: string | null;
+          max_attendees?: number | null;
+        };
+        Update: {
+          title?: string;
+          description?: string | null;
+          location_type?: string;
+          location_details?: string | null;
+          starts_at?: string;
+          ends_at?: string;
+          max_attendees?: number | null;
+          deleted_at?: string | null;
+        };
+        Relationships: [];
+      };
+      event_rsvps: {
+        Row: {
+          id: string;
+          event_id: string;
+          user_id: string;
+          status: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_id: string;
+          user_id: string;
+          status?: string;
+        };
+        Update: {
+          status?: string;
+        };
+        Relationships: [];
+      };
+      levels: {
+        Row: {
+          id: string;
+          community_id: string;
+          level_number: number;
+          name: string;
+          min_points: number;
+          badge_url: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          level_number: number;
+          name: string;
+          min_points: number;
+          badge_url?: string | null;
+        };
+        Update: {
+          name?: string;
+          min_points?: number;
+          badge_url?: string | null;
+        };
+        Relationships: [];
+      };
+      point_config: {
+        Row: {
+          id: string;
+          community_id: string;
+          action: string;
+          points: number;
+          cooldown_minutes: number;
+          daily_cap: number | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          action: string;
+          points: number;
+          cooldown_minutes?: number;
+          daily_cap?: number | null;
+        };
+        Update: {
+          points?: number;
+          cooldown_minutes?: number;
+          daily_cap?: number | null;
         };
         Relationships: [];
       };
@@ -44,7 +720,38 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_course_progress: {
+        Args: {
+          p_user_id: string;
+          p_course_id: string;
+        };
+        Returns: number;
+      };
+      update_last_active: {
+        Args: {
+          p_user_id: string;
+        };
+        Returns: void;
+      };
+      generate_username_slug: {
+        Args: {
+          p_display_name: string;
+        };
+        Returns: string;
+      };
+      get_activity_heatmap: {
+        Args: {
+          p_user_id: string;
+        };
+        Returns: { activity_date: string; activity_count: number }[];
+      };
+      change_member_role: {
+        Args: {
+          p_target_member_id: string;
+          p_new_role: string;
+        };
+        Returns: Json;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -60,5 +767,64 @@ export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type ProfileInsert = Database['public']['Tables']['profiles']['Insert'];
 export type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
 
-// Pilot status enum for type safety
-export type PilotStatus = 'pending' | 'active' | 'completed' | 'cancelled';
+export type Community = Database['public']['Tables']['communities']['Row'];
+export type CommunityMember = Database['public']['Tables']['community_members']['Row'];
+export type CommunityMemberInsert = Database['public']['Tables']['community_members']['Insert'];
+
+export type Category = Database['public']['Tables']['categories']['Row'];
+
+export type Post = Database['public']['Tables']['posts']['Row'];
+export type PostInsert = Database['public']['Tables']['posts']['Insert'];
+export type PostUpdate = Database['public']['Tables']['posts']['Update'];
+
+export type Comment = Database['public']['Tables']['comments']['Row'];
+export type CommentInsert = Database['public']['Tables']['comments']['Insert'];
+
+export type Reaction = Database['public']['Tables']['reactions']['Row'];
+
+export type Course = Database['public']['Tables']['courses']['Row'];
+export type CourseInsert = Database['public']['Tables']['courses']['Insert'];
+export type CourseUpdate = Database['public']['Tables']['courses']['Update'];
+
+export type Module = Database['public']['Tables']['modules']['Row'];
+export type ModuleInsert = Database['public']['Tables']['modules']['Insert'];
+export type ModuleUpdate = Database['public']['Tables']['modules']['Update'];
+
+export type Lesson = Database['public']['Tables']['lessons']['Row'];
+export type LessonInsert = Database['public']['Tables']['lessons']['Insert'];
+export type LessonUpdate = Database['public']['Tables']['lessons']['Update'];
+
+export type Enrollment = Database['public']['Tables']['enrollments']['Row'];
+export type EnrollmentInsert = Database['public']['Tables']['enrollments']['Insert'];
+
+export type LessonProgress = Database['public']['Tables']['lesson_progress']['Row'];
+export type LessonProgressInsert = Database['public']['Tables']['lesson_progress']['Insert'];
+export type LessonProgressUpdate = Database['public']['Tables']['lesson_progress']['Update'];
+
+export type MembershipQuestion = Database['public']['Tables']['membership_questions']['Row'];
+export type MembershipRequest = Database['public']['Tables']['membership_requests']['Row'];
+export type Invitation = Database['public']['Tables']['invitations']['Row'];
+export type Follow = Database['public']['Tables']['follows']['Row'];
+export type MemberBan = Database['public']['Tables']['member_bans']['Row'];
+export type Notification = Database['public']['Tables']['notifications']['Row'];
+export type Subscription = Database['public']['Tables']['subscriptions']['Row'];
+export type Event = Database['public']['Tables']['events']['Row'];
+export type EventRsvp = Database['public']['Tables']['event_rsvps']['Row'];
+export type Level = Database['public']['Tables']['levels']['Row'];
+export type PointConfig = Database['public']['Tables']['point_config']['Row'];
+
+// Classroom composite types
+export interface ModuleWithLessons extends Module {
+  lessons: Lesson[];
+}
+
+export interface CourseWithModules extends Course {
+  modules: ModuleWithLessons[];
+}
+
+export interface CourseWithProgress extends Course {
+  progress: number;
+  is_enrolled: boolean;
+  total_lessons: number;
+  completed_lessons: number;
+}
