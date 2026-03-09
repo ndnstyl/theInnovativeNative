@@ -1,39 +1,14 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
 import HomeOneBanner from "@/components/layout/banner/HomeOneBanner";
-import Agency from "@/components/containers/home/Agency";
+import ChatGptGap from "@/components/containers/home/ChatGptGap";
+import ProofSystems from "@/components/containers/home/ProofSystems";
 import CaseStudies from "@/components/containers/home/CaseStudies";
-import HomeOffer from "@/components/containers/home/HomeOffer";
-import ServicesCarousel from "@/components/containers/home/ServicesCarousel";
-import WorkflowShowcase from "@/components/containers/home/WorkflowShowcase";
 import Testimonials from "@/components/containers/home/Testimonials";
+import HomeOffer from "@/components/containers/home/HomeOffer";
+import ValueLadder from "@/components/containers/home/ValueLadder";
 import Link from "next/link";
 import Head from "next/head";
-
-// Workflow demo videos - add your YouTube video IDs and thumbnails here
-// To get a YouTube thumbnail: https://img.youtube.com/vi/[VIDEO_ID]/maxresdefault.jpg
-interface WorkflowVideo {
-  id: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  videoId: string;
-  tags: string[];
-  duration?: string;
-}
-
-const workflowVideos: WorkflowVideo[] = [
-  // Example structure - uncomment and customize when ready:
-  // {
-  //   id: 1,
-  //   title: "Job Hunter Automation Walkthrough",
-  //   description: "End-to-end n8n workflow that discovers jobs, scores them, and generates personalized applications.",
-  //   thumbnail: "https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg",
-  //   videoId: "YOUR_VIDEO_ID",
-  //   tags: ["n8n", "Automation", "AI"],
-  //   duration: "12:34",
-  // },
-];
 
 const Home = () => {
   const openCalendly = () => {
@@ -47,22 +22,20 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>AI Automation Consultant | n8n Expert | Michael Soto</title>
+        <title>AI Systems for Business | The Innovative Native</title>
         <meta
           name="description"
-          content="Build AI-powered workflows that automate your business. Custom n8n development, growth systems diagnosis, and fractional CMO services."
+          content="We build AI infrastructure that replaces your fragmented SaaS stack. Automated workflows, integrated data pipelines, and AI agents for legal, creative, real estate, and small business operators."
         />
       </Head>
       <Layout header={1} footer={1} video={false}>
         <HomeOneBanner />
-        <Agency />
+        <ChatGptGap />
+        <ProofSystems />
         <CaseStudies />
         <Testimonials />
-        {workflowVideos.length > 0 && (
-          <WorkflowShowcase videos={workflowVideos} />
-        )}
         <HomeOffer />
-        <ServicesCarousel />
+        <ValueLadder />
 
         {/* About Section */}
         <section className="section">
@@ -70,37 +43,32 @@ const Home = () => {
             <div className="row justify-content-center">
               <div className="col-12 col-lg-8 text-center">
                 <span className="sub-title">
-                  ABOUT
+                  THE BUILDER
                   <i className="fa-solid fa-arrow-right"></i>
                 </span>
                 <h2 className="title title-anim mt-3">
-                  About Mike
+                  Who Builds This
                 </h2>
                 <div style={{ color: '#a0a0a0', textAlign: 'left', marginTop: '30px' }}>
                   <p>
-                    I&apos;ve spent nearly two decades inside growth systems that look functional
-                    on the surface and quietly fail underneath. My career has been defined by
-                    pattern recognition—I&apos;m usually brought in when leadership senses something
-                    is wrong but cannot articulate why.
+                    Nearly two decades of building systems that create leverage. I watched
+                    companies drown in disconnected software, manual workflows, and tools
+                    that promised efficiency but delivered complexity.
                   </p>
                   <p className="mt-3">
-                    I&apos;m not interested in cosmetic improvement. I&apos;m interested in whether
-                    a system can thrive at scale.
+                    When AI matured, I stopped adding tools to the stack and started
+                    replacing the stack. AI became the operational layer — automating
+                    repetitive work so operators focus on decisions that actually matter.
                   </p>
                   <p className="mt-3">
-                    I enter systems assuming three things:
-                  </p>
-                  <ul className="mt-2" style={{ paddingLeft: '1.5rem' }}>
-                    <li>Some parts are working for reasons no one fully understands</li>
-                    <li>Some parts are being protected because they feel validating, not because they perform</li>
-                    <li>Most reporting tells a comforting story instead of a true one</li>
-                  </ul>
-                  <p className="mt-3">
-                    My job is to identify which is which.
+                    That&apos;s what The Innovative Native builds. AI infrastructure that
+                    replaces fragmented SaaS stacks, automates high-value workflows,
+                    and gives you back 10-20 hours a week. Every system is documented,
+                    maintainable, and designed to run without me.
                   </p>
                 </div>
                 <Link href="/professionalExperience" className="btn btn--secondary mt-4">
-                  Learn More
+                  See the Full Background
                 </Link>
               </div>
             </div>
@@ -113,14 +81,15 @@ const Home = () => {
             <div className="row justify-content-center">
               <div className="col-12 col-lg-8 text-center">
                 <h2 className="title title-anim">
-                  Ready to Find Out What&apos;s Actually Driving Your Results?
+                  Let&apos;s Build Your AI System
                 </h2>
                 <p style={{ color: '#a0a0a0', marginTop: '20px' }}>
-                  Book a diagnostic call to discuss where your system might be lying
-                  and what structural corrections could help.
+                  Whether you need a self-deploy blueprint, a pilot program, or a full
+                  custom build — the first step is the same. Let&apos;s talk about what
+                  you&apos;re trying to automate.
                 </p>
                 <button onClick={openCalendly} className="btn btn--secondary mt-4">
-                  Book Discovery Call
+                  Book a Discovery Call
                 </button>
               </div>
             </div>

@@ -64,6 +64,52 @@
     border-radius: 50%;
   }
 
+  // Hero grid layout — text left, image right, fully in-flow
+  &--hero-grid {
+    .banner__hero-row {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      margin-top: 40px;
+    }
+
+    .banner__hero-text {
+      flex: 1;
+      max-width: 480px;
+
+      .cta {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        row-gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      h5 {
+        color: var(--primary-color);
+      }
+
+      .single p {
+        color: var(--secondary-color);
+        margin-top: 6px;
+        text-transform: capitalize;
+      }
+    }
+
+    .banner__hero-image {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .banner__hero-photo {
+      width: clamp(200px, 30vw, 420px);
+      height: auto;
+      border-radius: 50%;
+    }
+  }
+
   .star {
     position: absolute;
     top: 220px;

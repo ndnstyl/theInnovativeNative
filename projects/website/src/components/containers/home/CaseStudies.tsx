@@ -13,26 +13,26 @@ const caseStudies = [
   {
     id: 0,
     image: eleven,
-    title: "Paid Acquisition at Scale",
-    result: "25-30% cost improvement",
+    title: "Automated Acquisition Pipeline",
+    result: "25-30% cost reduction via AI-optimized spend",
   },
   {
     id: 1,
     image: twelve,
-    title: "System Noise vs Signal",
-    result: "60-65% KPI reduction, 18-22% efficiency gain",
+    title: "Signal Extraction System",
+    result: "65% fewer vanity KPIs, 22% operational efficiency gain",
   },
   {
     id: 2,
     image: fifteen,
-    title: "Finding Disguised Winners",
-    result: "30-35% incremental volume recovered",
+    title: "AI-Powered Revenue Recovery",
+    result: "35% incremental volume from automated detection",
   },
   {
     id: 3,
     image: sixteen,
-    title: "Organizational Fear",
-    result: "18-22% efficiency in 2 quarters",
+    title: "Workflow Automation Rollout",
+    result: "22% efficiency gain in 2 quarters",
   },
 ];
 
@@ -61,7 +61,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>
@@ -71,7 +71,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1 str">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>
@@ -81,7 +81,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>
@@ -91,7 +91,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1 str">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>
@@ -101,7 +101,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>
@@ -111,7 +111,7 @@ const CaseStudies = () => {
             <div className="portfolio__text-slider-single">
               <h2 className="h1 str">
                 <Link href="/portfolio">
-                  case studies
+                  systems deployed
                   <i className="fa-sharp fa-solid fa-arrow-down-right"></i>
                 </Link>
               </h2>

@@ -879,6 +879,29 @@
     }
   }
 
+  .banner--hero-grid {
+    padding: 200px 0px 80px;
+
+    .banner__hero-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .banner__hero-text {
+      max-width: 100%;
+
+      .cta {
+        justify-content: center;
+      }
+    }
+
+    .banner__hero-photo {
+      width: clamp(180px, 50vw, 300px);
+    }
+  }
+
   .banner-three {
     .banner-three__slider-single {
       padding: 180px 0px 660px;
@@ -1162,6 +1185,25 @@
     .star {
       left: 40px;
       top: 120px;
+    }
+  }
+
+  .banner--hero-grid {
+    padding: 140px 0px 60px;
+
+    .banner__hero-row {
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .banner__hero-text .cta {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
+
+    .banner__hero-photo {
+      width: clamp(160px, 60vw, 240px);
     }
   }
 

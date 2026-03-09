@@ -180,11 +180,11 @@ const Layout = ({
           href="/images/favicon.png"
           type="image/x-icon"
         />
-        <title>The Innovative Native | AI Systems & Growth Strategy</title>
-        <meta name="keywords" content="AI systems, growth strategy, automation, digital marketing, fractional CMO" />
+        <title>The Innovative Native | AI Systems That Run Your Business</title>
+        <meta name="keywords" content="AI systems, AI infrastructure, workflow automation, n8n, AI agents, business automation" />
         <meta
           name="description"
-          content="Building AI systems that thrive at scale. Growth diagnosis, automation orchestration, and strategic leadership."
+          content="We build AI infrastructure that replaces your fragmented SaaS stack. Automated workflows, AI agents, and integrated data pipelines for legal, creative, real estate, and small business operators."
         />
       </Head>
       <div className={combinedClassName}>
