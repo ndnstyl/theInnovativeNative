@@ -126,8 +126,8 @@ const FooterFive = () => {
               </div>
               <div className="paragraph">
                 <p>
-                  Building systems that thrive at scale.
-                  AI automation, growth diagnosis, and fractional CMO services.
+                  AI systems that replace fragmented SaaS stacks.
+                  System design, workflow automation, and AI training.
                 </p>
               </div>
               <div className="section__content-cta">
