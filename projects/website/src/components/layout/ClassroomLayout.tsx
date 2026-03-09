@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthModal from '@/components/auth/AuthModal';
 import UnreadBadge from '@/components/messaging/UnreadBadge';
+import NotificationBell from '@/components/notifications/NotificationBell';
 import { useUnreadCount } from '@/hooks/useUnreadCount';
 
 interface ClassroomLayoutProps {
@@ -105,6 +106,7 @@ const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) =>
             </Link>
           </nav>
           <div className="classroom-header__user">
+            <NotificationBell />
             {profile?.avatar_url ? (
               <img
                 src={profile.avatar_url}

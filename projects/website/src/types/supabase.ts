@@ -666,29 +666,67 @@ export interface Database {
         Row: {
           id: string;
           community_id: string;
-          recipient_id: string;
-          actor_id: string | null;
+          user_id: string;
+          source_user_id: string | null;
           type: string;
-          title: string;
-          body: string | null;
-          target_type: string | null;
-          target_id: string | null;
-          read_at: string | null;
+          content_type: string | null;
+          content_id: string | null;
+          description: string | null;
+          group_id: string | null;
+          group_count: number;
+          group_members: any;
+          is_read: boolean;
           created_at: string;
         };
         Insert: {
           id?: string;
           community_id: string;
-          recipient_id: string;
-          actor_id?: string | null;
+          user_id: string;
+          source_user_id?: string | null;
           type: string;
-          title: string;
-          body?: string | null;
-          target_type?: string | null;
-          target_id?: string | null;
+          content_type?: string | null;
+          content_id?: string | null;
+          description?: string | null;
         };
         Update: {
-          read_at?: string | null;
+          is_read?: boolean;
+        };
+        Relationships: [];
+      };
+      notification_preferences: {
+        Row: {
+          user_id: string;
+          notification_type: string;
+          channel: string;
+          enabled: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          notification_type: string;
+          channel: string;
+          enabled?: boolean;
+        };
+        Update: {
+          enabled?: boolean;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      thread_subscriptions: {
+        Row: {
+          user_id: string;
+          post_id: string;
+          subscribed: boolean;
+          created_at: string;
+        };
+        Insert: {
+          user_id: string;
+          post_id: string;
+          subscribed?: boolean;
+        };
+        Update: {
+          subscribed?: boolean;
         };
         Relationships: [];
       };
@@ -1319,6 +1357,14 @@ export interface Database {
           created_at: string;
           rank: number;
         }[];
+      };
+      get_unread_notification_count: {
+        Args: Record<string, never>;
+        Returns: number;
+      };
+      mark_all_notifications_read: {
+        Args: Record<string, never>;
+        Returns: void;
       };
     };
     Enums: {
