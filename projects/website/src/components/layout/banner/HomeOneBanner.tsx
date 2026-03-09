@@ -40,15 +40,15 @@ const HomeOneBanner = () => {
               <div className="cta section__content-cta">
                 <div className="single">
                   <h5 className="fw-7">20</h5>
-                  <p className="fw-5">Years in Growth</p>
+                  <p className="fw-5">Years Building Systems</p>
                 </div>
                 <div className="single">
-                  <h5 className="fw-7">$150M+</h5>
-                  <p className="fw-5">Campaigns Managed</p>
+                  <h5 className="fw-7">4</h5>
+                  <p className="fw-5">Verticals Served</p>
                 </div>
                 <div className="single">
-                  <h5 className="fw-7">110+</h5>
-                  <p className="fw-5">Clients Served</p>
+                  <h5 className="fw-7">10-20</h5>
+                  <p className="fw-5">Hours Returned Weekly</p>
                 </div>
               </div>
             </div>
