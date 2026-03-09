@@ -142,7 +142,7 @@ const CommentThread: React.FC<CommentThreadProps> = ({
           </div>
           <div
             className="classroom-comments__text"
-            dangerouslySetInnerHTML={{ __html: sanitizeHtml(comment.body_html) }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(comment.content) }}
           />
           <div className="classroom-comments__actions">
             {depth < 2 && (
@@ -150,7 +150,7 @@ const CommentThread: React.FC<CommentThreadProps> = ({
                 Reply
               </button>
             )}
-            {currentUserId === comment.author_id && (
+            {currentUserId === comment.user_id && (
               <button type="button" onClick={() => onDelete(comment.id)}>
                 Delete
               </button>

@@ -27,18 +27,18 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({
   const progressPct = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   // Find the first incomplete or first lesson to resume
-  let resumeSlug: string | null = null;
+  let resumeId: string | null = null;
   for (const mod of course.modules) {
     for (const lesson of mod.lessons) {
       if (!progress[lesson.id]) {
-        resumeSlug = lesson.slug;
+        resumeId = lesson.id;
         break;
       }
     }
-    if (resumeSlug) break;
+    if (resumeId) break;
   }
-  if (!resumeSlug && course.modules[0]?.lessons[0]) {
-    resumeSlug = course.modules[0].lessons[0].slug;
+  if (!resumeId && course.modules[0]?.lessons[0]) {
+    resumeId = course.modules[0].lessons[0].id;
   }
 
   return (
@@ -68,9 +68,9 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({
           {isEnrolled ? (
             <div className="classroom-overview__enrolled">
               <ProgressBar progress={progressPct} />
-              {resumeSlug && (
+              {resumeId && (
                 <Link
-                  href={`/classroom/${course.slug}/${resumeSlug}`}
+                  href={`/classroom/${course.id}/${resumeId}`}
                   className="classroom-overview__resume-btn"
                 >
                   {completedLessons > 0 ? 'Continue Learning' : 'Start Course'}
@@ -103,12 +103,11 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({
             <ul className="classroom-overview__lessons">
               {mod.lessons.map((lesson) => {
                 const isComplete = progress[lesson.id];
-                const canAccess = isEnrolled || lesson.is_free_preview;
 
                 return (
                   <li key={lesson.id} className="classroom-overview__lesson-item">
-                    {canAccess ? (
-                      <Link href={`/classroom/${course.slug}/${lesson.slug}`} className="classroom-overview__lesson">
+                    {isEnrolled ? (
+                      <Link href={`/classroom/${course.id}/${lesson.id}`} className="classroom-overview__lesson">
                         <span className="classroom-overview__lesson-icon">
                           {isComplete ? (
                             <i className="fa-solid fa-circle-check"></i>
@@ -117,9 +116,6 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({
                           )}
                         </span>
                         <span>{lesson.title}</span>
-                        {lesson.is_free_preview && !isEnrolled && (
-                          <span className="classroom-overview__preview-badge">Preview</span>
-                        )}
                       </Link>
                     ) : (
                       <span className="classroom-overview__lesson classroom-overview__lesson--locked">

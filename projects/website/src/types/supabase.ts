@@ -74,6 +74,9 @@ export interface Database {
           cover_image_url: string | null;
           privacy: string;
           pricing_model: string;
+          min_level_to_post: number | null;
+          min_level_to_chat: number | null;
+          exclude_admins_from_leaderboard: boolean;
           created_at: string;
         };
         Insert: {
@@ -85,6 +88,9 @@ export interface Database {
           cover_image_url?: string | null;
           privacy?: string;
           pricing_model?: string;
+          min_level_to_post?: number | null;
+          min_level_to_chat?: number | null;
+          exclude_admins_from_leaderboard?: boolean;
         };
         Update: {
           name?: string;
@@ -94,6 +100,9 @@ export interface Database {
           cover_image_url?: string | null;
           privacy?: string;
           pricing_model?: string;
+          min_level_to_post?: number | null;
+          min_level_to_chat?: number | null;
+          exclude_admins_from_leaderboard?: boolean;
         };
         Relationships: [];
       };
@@ -105,6 +114,7 @@ export interface Database {
           role: string;
           status: string;
           deleted_at: string | null;
+          event_reminders_enabled: boolean;
           joined_at: string;
         };
         Insert: {
@@ -113,11 +123,13 @@ export interface Database {
           member_id: string;
           role?: string;
           status?: string;
+          event_reminders_enabled?: boolean;
         };
         Update: {
           role?: string;
           status?: string;
           deleted_at?: string | null;
+          event_reminders_enabled?: boolean;
         };
         Relationships: [
           {
@@ -382,38 +394,39 @@ export interface Database {
         Row: {
           id: string;
           community_id: string;
-          slug: string;
           title: string;
           description: string | null;
           thumbnail_url: string | null;
-          is_published: boolean;
+          access_level: number;
           is_free: boolean;
           stripe_price_id: string | null;
-          sort_order: number;
+          published: boolean;
+          display_order: number;
+          search_vector: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
           community_id: string;
-          slug: string;
           title: string;
           description?: string | null;
           thumbnail_url?: string | null;
-          is_published?: boolean;
+          access_level?: number;
           is_free?: boolean;
           stripe_price_id?: string | null;
-          sort_order?: number;
+          published?: boolean;
+          display_order?: number;
         };
         Update: {
-          slug?: string;
           title?: string;
           description?: string | null;
           thumbnail_url?: string | null;
-          is_published?: boolean;
+          access_level?: number;
           is_free?: boolean;
           stripe_price_id?: string | null;
-          sort_order?: number;
+          published?: boolean;
+          display_order?: number;
         };
         Relationships: [];
       };
@@ -422,18 +435,18 @@ export interface Database {
           id: string;
           course_id: string;
           title: string;
-          sort_order: number;
+          display_order: number;
           created_at: string;
         };
         Insert: {
           id?: string;
           course_id: string;
           title: string;
-          sort_order?: number;
+          display_order?: number;
         };
         Update: {
           title?: string;
-          sort_order?: number;
+          display_order?: number;
         };
         Relationships: [
           {
@@ -449,12 +462,12 @@ export interface Database {
           id: string;
           module_id: string;
           course_id: string;
-          slug: string;
           title: string;
-          content_markdown: string | null;
+          content: string | null;
+          content_html: string | null;
           video_url: string | null;
-          is_free_preview: boolean;
-          sort_order: number;
+          display_order: number;
+          search_vector: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -462,20 +475,18 @@ export interface Database {
           id?: string;
           module_id: string;
           course_id: string;
-          slug: string;
           title: string;
-          content_markdown?: string | null;
+          content?: string | null;
+          content_html?: string | null;
           video_url?: string | null;
-          is_free_preview?: boolean;
-          sort_order?: number;
+          display_order?: number;
         };
         Update: {
-          slug?: string;
           title?: string;
-          content_markdown?: string | null;
+          content?: string | null;
+          content_html?: string | null;
           video_url?: string | null;
-          is_free_preview?: boolean;
-          sort_order?: number;
+          display_order?: number;
         };
         Relationships: [
           {
@@ -495,19 +506,18 @@ export interface Database {
       enrollments: {
         Row: {
           id: string;
-          user_id: string;
           course_id: string;
-          stripe_session_id: string | null;
+          user_id: string;
           enrolled_at: string;
+          completed_at: string | null;
         };
         Insert: {
           id?: string;
-          user_id: string;
           course_id: string;
-          stripe_session_id?: string | null;
+          user_id: string;
         };
         Update: {
-          stripe_session_id?: string | null;
+          completed_at?: string | null;
         };
         Relationships: [
           {
@@ -521,17 +531,16 @@ export interface Database {
       lesson_progress: {
         Row: {
           id: string;
-          user_id: string;
           lesson_id: string;
-          course_id: string;
+          user_id: string;
           completed: boolean;
           completed_at: string | null;
+          created_at: string;
         };
         Insert: {
           id?: string;
-          user_id: string;
           lesson_id: string;
-          course_id: string;
+          user_id: string;
           completed?: boolean;
           completed_at?: string | null;
         };
@@ -544,12 +553,6 @@ export interface Database {
             foreignKeyName: 'lesson_progress_lesson_id_fkey';
             columns: ['lesson_id'];
             referencedRelation: 'lessons';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'lesson_progress_course_id_fkey';
-            columns: ['course_id'];
-            referencedRelation: 'courses';
             referencedColumns: ['id'];
           }
         ];
@@ -667,14 +670,19 @@ export interface Database {
           id: string;
           community_id: string;
           user_id: string;
-          source_user_id: string | null;
           type: string;
+          title: string;
+          body: string | null;
+          action_url: string | null;
+          actor_id: string | null;
+          read: boolean;
+          source_user_id: string | null;
           content_type: string | null;
           content_id: string | null;
           description: string | null;
           group_id: string | null;
           group_count: number;
-          group_members: any;
+          group_members: Json;
           is_read: boolean;
           created_at: string;
         };
@@ -682,14 +690,21 @@ export interface Database {
           id?: string;
           community_id: string;
           user_id: string;
-          source_user_id?: string | null;
           type: string;
+          title: string;
+          body?: string | null;
+          action_url?: string | null;
+          actor_id?: string | null;
+          source_user_id?: string | null;
           content_type?: string | null;
           content_id?: string | null;
           description?: string | null;
         };
         Update: {
+          read?: boolean;
           is_read?: boolean;
+          group_count?: number;
+          group_members?: Json;
         };
         Relationships: [];
       };
@@ -737,16 +752,15 @@ export interface Database {
           user_id: string;
           stripe_customer_id: string | null;
           stripe_subscription_id: string | null;
-          stripe_price_id: string | null;
           plan: string;
           status: string;
-          lifetime_access: boolean;
           current_period_start: string | null;
           current_period_end: string | null;
           trial_start: string | null;
           trial_end: string | null;
           cancel_at_period_end: boolean;
           grace_period_end: string | null;
+          lifetime_access: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -756,7 +770,6 @@ export interface Database {
           user_id: string;
           stripe_customer_id?: string | null;
           stripe_subscription_id?: string | null;
-          stripe_price_id?: string | null;
           plan?: string;
           status?: string;
           lifetime_access?: boolean;
@@ -764,16 +777,15 @@ export interface Database {
         Update: {
           stripe_customer_id?: string | null;
           stripe_subscription_id?: string | null;
-          stripe_price_id?: string | null;
           plan?: string;
           status?: string;
-          lifetime_access?: boolean;
           current_period_start?: string | null;
           current_period_end?: string | null;
           trial_start?: string | null;
           trial_end?: string | null;
           cancel_at_period_end?: boolean;
           grace_period_end?: string | null;
+          lifetime_access?: boolean;
         };
         Relationships: [];
       };
@@ -781,60 +793,56 @@ export interface Database {
         Row: {
           id: string;
           community_id: string;
-          creator_id: string;
+          created_by: string;
           title: string;
           description: string | null;
+          start_time: string;
+          end_time: string;
           location_type: string;
-          location_details: string | null;
           location_url: string | null;
-          cover_image_url: string | null;
-          starts_at: string;
-          ends_at: string;
-          is_recurring: boolean;
-          recurrence_rule: string | null;
+          location_address: string | null;
           max_attendees: number | null;
-          capacity: number;
+          rsvp_count: number;
           category_id: string | null;
           timezone: string;
           status: string;
-          rsvp_count: number;
-          deleted_at: string | null;
+          capacity: number;
+          cover_image_url: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
           community_id: string;
-          creator_id: string;
+          created_by: string;
           title: string;
           description?: string | null;
+          start_time: string;
+          end_time: string;
           location_type?: string;
-          location_details?: string | null;
           location_url?: string | null;
-          cover_image_url?: string | null;
-          starts_at: string;
-          ends_at: string;
-          is_recurring?: boolean;
-          recurrence_rule?: string | null;
+          location_address?: string | null;
           max_attendees?: number | null;
-          capacity?: number;
           category_id?: string | null;
           timezone?: string;
+          status?: string;
+          capacity?: number;
+          cover_image_url?: string | null;
         };
         Update: {
           title?: string;
           description?: string | null;
+          start_time?: string;
+          end_time?: string;
           location_type?: string;
-          location_details?: string | null;
           location_url?: string | null;
-          cover_image_url?: string | null;
-          starts_at?: string;
-          ends_at?: string;
+          location_address?: string | null;
           max_attendees?: number | null;
-          capacity?: number;
           category_id?: string | null;
           timezone?: string;
-          deleted_at?: string | null;
+          status?: string;
+          capacity?: number;
+          cover_image_url?: string | null;
         };
         Relationships: [];
       };
@@ -842,22 +850,27 @@ export interface Database {
         Row: {
           id: string;
           event_id: string;
-          occurrence_id: string | null;
           user_id: string;
           status: string;
+          attended: boolean;
+          occurrence_id: string | null;
           reminder_sent: boolean;
           created_at: string;
+          updated_at: string;
         };
         Insert: {
           id?: string;
           event_id: string;
-          occurrence_id?: string | null;
           user_id: string;
           status?: string;
+          attended?: boolean;
+          occurrence_id?: string | null;
           reminder_sent?: boolean;
         };
         Update: {
           status?: string;
+          attended?: boolean;
+          occurrence_id?: string | null;
           reminder_sent?: boolean;
         };
         Relationships: [];
@@ -926,25 +939,22 @@ export interface Database {
       levels: {
         Row: {
           id: string;
-          community_id: string;
+          community_id: string | null;
           level_number: number;
           name: string;
           min_points: number;
-          badge_url: string | null;
           created_at: string;
         };
         Insert: {
           id?: string;
-          community_id: string;
+          community_id?: string | null;
           level_number: number;
           name: string;
-          min_points: number;
-          badge_url?: string | null;
+          min_points?: number;
         };
         Update: {
           name?: string;
           min_points?: number;
-          badge_url?: string | null;
         };
         Relationships: [];
       };
@@ -1020,8 +1030,6 @@ export interface Database {
           community_id: string;
           action: string;
           points: number;
-          cooldown_minutes: number;
-          daily_cap: number | null;
           created_at: string;
         };
         Insert: {
@@ -1029,13 +1037,9 @@ export interface Database {
           community_id: string;
           action: string;
           points: number;
-          cooldown_minutes?: number;
-          daily_cap?: number | null;
         };
         Update: {
           points?: number;
-          cooldown_minutes?: number;
-          daily_cap?: number | null;
         };
         Relationships: [];
       };
@@ -1043,21 +1047,19 @@ export interface Database {
         Row: {
           id: string;
           lesson_id: string;
-          file_name: string;
           file_path: string;
+          file_name: string;
           file_type: string;
           file_size: number;
-          uploaded_by: string;
           created_at: string;
         };
         Insert: {
           id?: string;
           lesson_id: string;
-          file_name: string;
           file_path: string;
+          file_name: string;
           file_type: string;
           file_size: number;
-          uploaded_by: string;
         };
         Update: {
           file_name?: string;
@@ -1075,25 +1077,22 @@ export interface Database {
         Row: {
           id: string;
           lesson_id: string;
-          author_id: string;
-          parent_comment_id: string | null;
-          body: string;
-          body_html: string;
-          deleted_at: string | null;
+          user_id: string;
+          content: string;
+          parent_id: string | null;
           created_at: string;
+          updated_at: string;
         };
         Insert: {
           id?: string;
           lesson_id: string;
-          author_id: string;
-          parent_comment_id?: string | null;
-          body: string;
-          body_html: string;
+          user_id: string;
+          content: string;
+          parent_id?: string | null;
         };
         Update: {
-          body?: string;
-          body_html?: string;
-          deleted_at?: string | null;
+          content?: string;
+          parent_id?: string | null;
         };
         Relationships: [
           {
@@ -1108,47 +1107,50 @@ export interface Database {
         Row: {
           id: string;
           user_id: string;
-          lesson_id: string;
           course_id: string;
+          lesson_id: string;
           event_type: string;
-          event_meta: Json;
+          metadata: Json;
           created_at: string;
         };
         Insert: {
           id?: string;
           user_id: string;
-          lesson_id: string;
           course_id: string;
+          lesson_id: string;
           event_type: string;
-          event_meta?: Json;
+          metadata?: Json;
         };
         Update: {};
         Relationships: [];
       };
       course_analytics_cache: {
         Row: {
-          id: string;
           course_id: string;
-          total_enrollments: number;
-          active_learners_7d: number;
-          avg_completion_pct: number;
-          top_drop_off_lesson_id: string | null;
-          computed_at: string;
+          total_enrolled: number;
+          active_7d: number;
+          completion_rate: number;
+          avg_time_seconds: number;
+          funnel_data: Json;
+          heatmap_data: Json;
+          updated_at: string;
         };
         Insert: {
-          id?: string;
           course_id: string;
-          total_enrollments?: number;
-          active_learners_7d?: number;
-          avg_completion_pct?: number;
-          top_drop_off_lesson_id?: string | null;
+          total_enrolled?: number;
+          active_7d?: number;
+          completion_rate?: number;
+          avg_time_seconds?: number;
+          funnel_data?: Json;
+          heatmap_data?: Json;
         };
         Update: {
-          total_enrollments?: number;
-          active_learners_7d?: number;
-          avg_completion_pct?: number;
-          top_drop_off_lesson_id?: string | null;
-          computed_at?: string;
+          total_enrolled?: number;
+          active_7d?: number;
+          completion_rate?: number;
+          avg_time_seconds?: number;
+          funnel_data?: Json;
+          heatmap_data?: Json;
         };
         Relationships: [];
       };
@@ -1196,6 +1198,7 @@ export interface Database {
           conversation_id: string;
           sender_id: string;
           body: string;
+          content_tsv: string | null;
           created_at: string;
         };
         Insert: {
@@ -1378,55 +1381,54 @@ export interface Database {
       };
       email_preferences: {
         Row: {
+          id: string;
           user_id: string;
-          welcome_email: boolean;
-          enrollment_email: boolean;
-          payment_email: boolean;
-          event_reminder: boolean;
-          weekly_digest: boolean;
-          marketing: boolean;
-          unsubscribed_all: boolean;
+          digest: boolean;
+          event_reminders: boolean;
+          dm_notifications: boolean;
+          community_highlights: boolean;
+          unsubscribe_token: string;
+          created_at: string;
           updated_at: string;
         };
         Insert: {
+          id?: string;
           user_id: string;
-          welcome_email?: boolean;
-          enrollment_email?: boolean;
-          payment_email?: boolean;
-          event_reminder?: boolean;
-          weekly_digest?: boolean;
-          marketing?: boolean;
-          unsubscribed_all?: boolean;
+          digest?: boolean;
+          event_reminders?: boolean;
+          dm_notifications?: boolean;
+          community_highlights?: boolean;
+          unsubscribe_token?: string;
         };
         Update: {
-          welcome_email?: boolean;
-          enrollment_email?: boolean;
-          payment_email?: boolean;
-          event_reminder?: boolean;
-          weekly_digest?: boolean;
-          marketing?: boolean;
-          unsubscribed_all?: boolean;
-          updated_at?: string;
+          digest?: boolean;
+          event_reminders?: boolean;
+          dm_notifications?: boolean;
+          community_highlights?: boolean;
         };
         Relationships: [];
       };
       email_log: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string | null;
           email_type: string;
           subject: string;
+          recipient_email: string;
           status: string;
-          metadata: any;
+          resend_message_id: string | null;
+          error_message: string | null;
           created_at: string;
         };
         Insert: {
           id?: string;
-          user_id: string;
+          user_id?: string | null;
           email_type: string;
           subject: string;
+          recipient_email: string;
           status?: string;
-          metadata?: any;
+          resend_message_id?: string | null;
+          error_message?: string | null;
         };
         Update: {
           status?: string;
@@ -1460,16 +1462,19 @@ export interface Database {
       rate_limits: {
         Row: {
           id: string;
-          user_id: string;
-          action: string;
+          user_id: string | null;
+          ip_address: string | null;
+          action_type: string;
           window_start: string;
           count: number;
+          created_at: string;
         };
         Insert: {
           id?: string;
-          user_id: string;
-          action: string;
-          window_start?: string;
+          user_id?: string | null;
+          ip_address?: string | null;
+          action_type: string;
+          window_start: string;
           count?: number;
         };
         Update: {
@@ -1503,18 +1508,20 @@ export interface Database {
       consent_records: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string | null;
+          session_id: string | null;
           consent_type: string;
           granted: boolean;
+          timestamp: string;
           ip_address: string | null;
           user_agent: string | null;
-          created_at: string;
         };
         Insert: {
           id?: string;
-          user_id: string;
+          user_id?: string | null;
+          session_id?: string | null;
           consent_type: string;
-          granted?: boolean;
+          granted: boolean;
           ip_address?: string | null;
           user_agent?: string | null;
         };
@@ -1528,22 +1535,213 @@ export interface Database {
           id: string;
           user_id: string;
           status: string;
-          reason: string | null;
           requested_at: string;
           completed_at: string | null;
-          processed_by: string | null;
+          error_message: string | null;
         };
         Insert: {
           id?: string;
           user_id: string;
           status?: string;
-          reason?: string | null;
         };
         Update: {
           status?: string;
           completed_at?: string | null;
-          processed_by?: string | null;
+          error_message?: string | null;
         };
+        Relationships: [];
+      };
+      payments: {
+        Row: {
+          id: string;
+          community_id: string;
+          user_id: string;
+          stripe_payment_intent_id: string | null;
+          stripe_invoice_id: string | null;
+          amount: number;
+          currency: string;
+          status: string;
+          refund_amount: number;
+          failure_reason: string | null;
+          description: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          user_id: string;
+          stripe_payment_intent_id?: string | null;
+          stripe_invoice_id?: string | null;
+          amount: number;
+          currency?: string;
+          status: string;
+          refund_amount?: number;
+          failure_reason?: string | null;
+          description?: string | null;
+        };
+        Update: {
+          status?: string;
+          refund_amount?: number;
+          failure_reason?: string | null;
+        };
+        Relationships: [];
+      };
+      webhook_events: {
+        Row: {
+          id: string;
+          stripe_event_id: string;
+          event_type: string;
+          processed_at: string;
+          payload: Json | null;
+        };
+        Insert: {
+          id?: string;
+          stripe_event_id: string;
+          event_type: string;
+          payload?: Json | null;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      member_storage: {
+        Row: {
+          id: string;
+          user_id: string;
+          total_bytes: number;
+          quota_bytes: number;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          total_bytes?: number;
+          quota_bytes?: number;
+        };
+        Update: {
+          total_bytes?: number;
+          quota_bytes?: number;
+        };
+        Relationships: [];
+      };
+      data_export_requests: {
+        Row: {
+          id: string;
+          user_id: string;
+          status: string;
+          requested_at: string;
+          completed_at: string | null;
+          download_url: string | null;
+          expires_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          status?: string;
+        };
+        Update: {
+          status?: string;
+          completed_at?: string | null;
+          download_url?: string | null;
+          expires_at?: string | null;
+        };
+        Relationships: [];
+      };
+      audit_log: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          action: string;
+          target_type: string | null;
+          target_id: string | null;
+          metadata: Json | null;
+          ip_address: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          action: string;
+          target_type?: string | null;
+          target_id?: string | null;
+          metadata?: Json | null;
+          ip_address?: string | null;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      tracking_events: {
+        Row: {
+          id: string;
+          event_id: string;
+          event_name: string;
+          platform: string;
+          source: string;
+          status: string;
+          response_code: number | null;
+          response_body: string | null;
+          payload: Json | null;
+          user_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_id: string;
+          event_name: string;
+          platform: string;
+          source: string;
+          status: string;
+          response_code?: number | null;
+          response_body?: string | null;
+          payload?: Json | null;
+          user_id?: string | null;
+        };
+        Update: {
+          status?: string;
+          response_code?: number | null;
+          response_body?: string | null;
+        };
+        Relationships: [];
+      };
+      tracking_retry_queue: {
+        Row: {
+          id: string;
+          tracking_event_id: string;
+          retry_count: number;
+          next_retry_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          tracking_event_id: string;
+          retry_count?: number;
+          next_retry_at: string;
+        };
+        Update: {
+          retry_count?: number;
+          next_retry_at?: string;
+        };
+        Relationships: [];
+      };
+      search_log: {
+        Row: {
+          id: string;
+          community_id: string;
+          user_id: string;
+          query: string;
+          result_count: number;
+          filters: Json | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          user_id: string;
+          query: string;
+          result_count: number;
+          filters?: Json | null;
+        };
+        Update: {};
         Relationships: [];
       };
     };
@@ -1863,7 +2061,6 @@ export type AutoDMConfig = Database['public']['Tables']['autodm_config']['Row'];
 export interface StudentProgressSummary {
   course_id: string;
   course_title: string;
-  course_slug: string;
   thumbnail_url: string | null;
   total_lessons: number;
   completed_lessons: number;

@@ -31,7 +31,7 @@ export function useAdminCourses() {
       const { data, error: fetchErr } = await supabaseClient
         .from('courses')
         .select('*')
-        .order('sort_order', { ascending: true });
+        .order('display_order', { ascending: true });
 
       if (fetchErr) throw fetchErr;
       setCourses(data ?? []);
@@ -125,13 +125,13 @@ export function useAdminCourses() {
           .from('modules')
           .select('*')
           .eq('course_id', courseId)
-          .order('sort_order', { ascending: true });
+          .order('display_order', { ascending: true });
 
         const { data: lessonsData } = await supabaseClient
           .from('lessons')
           .select('*')
           .eq('course_id', courseId)
-          .order('sort_order', { ascending: true });
+          .order('display_order', { ascending: true });
 
         const modules: ModuleWithLessons[] = (modulesData || []).map((mod) => ({
           ...mod,
@@ -170,7 +170,7 @@ export function useAdminCourses() {
   );
 
   const updateModule = useCallback(
-    async (id: string, updates: { title?: string; sort_order?: number }): Promise<boolean> => {
+    async (id: string, updates: { title?: string; display_order?: number }): Promise<boolean> => {
       try {
         const { error: updateErr } = await supabaseClient
           .from('modules')
@@ -271,7 +271,7 @@ export function useAdminCourses() {
     async (moduleIds: string[]): Promise<boolean> => {
       try {
         const updates = moduleIds.map((id, idx) =>
-          supabaseClient.from('modules').update({ sort_order: idx }).eq('id', id)
+          supabaseClient.from('modules').update({ display_order: idx }).eq('id', id)
         );
         const results = await Promise.all(updates);
         const failed = results.find((r) => r.error);
@@ -290,7 +290,7 @@ export function useAdminCourses() {
     async (lessonIds: string[]): Promise<boolean> => {
       try {
         const updates = lessonIds.map((id, idx) =>
-          supabaseClient.from('lessons').update({ sort_order: idx }).eq('id', id)
+          supabaseClient.from('lessons').update({ display_order: idx }).eq('id', id)
         );
         const results = await Promise.all(updates);
         const failed = results.find((r) => r.error);

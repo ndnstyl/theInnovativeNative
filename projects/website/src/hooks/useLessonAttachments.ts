@@ -57,7 +57,6 @@ export function useLessonAttachments(lessonId: string | undefined) {
             file_path: filePath,
             file_type: file.type || 'application/octet-stream',
             file_size: file.size,
-            uploaded_by: session.user.id,
           })
           .select()
           .single();

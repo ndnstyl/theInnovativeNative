@@ -17,13 +17,11 @@ interface LessonEditorProps {
  */
 const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
   const [title, setTitle] = useState(lesson.title);
-  const [slug, setSlug] = useState(lesson.slug);
   const [videoUrl, setVideoUrl] = useState(lesson.video_url ?? '');
-  const [isFreePreview, setIsFreePreview] = useState(lesson.is_free_preview);
   const [saving, setSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const autosaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const contentRef = useRef(lesson.content_markdown ?? '');
+  const contentRef = useRef(lesson.content ?? '');
 
   const editor = useEditor({
     extensions: [
@@ -37,7 +35,7 @@ const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
       TiptapImage,
       Placeholder.configure({ placeholder: 'Write your lesson content...' }),
     ],
-    content: lesson.content_markdown ?? '',
+    content: lesson.content ?? '',
     onUpdate: ({ editor: ed }) => {
       contentRef.current = ed.getHTML();
       scheduleAutosave();
@@ -48,16 +46,15 @@ const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
     setSaving(true);
     const success = await onSave(lesson.id, {
       title,
-      slug,
       video_url: videoUrl || null,
-      is_free_preview: isFreePreview,
-      content_markdown: contentRef.current || null,
+      content: contentRef.current || null,
+      content_html: contentRef.current || null,
     });
     if (success) {
       setLastSaved(new Date());
     }
     setSaving(false);
-  }, [onSave, lesson.id, title, slug, videoUrl, isFreePreview]);
+  }, [onSave, lesson.id, title, videoUrl]);
 
   const scheduleAutosave = useCallback(() => {
     if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
@@ -76,12 +73,10 @@ const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
   // Reset editor content when lesson changes
   useEffect(() => {
     setTitle(lesson.title);
-    setSlug(lesson.slug);
     setVideoUrl(lesson.video_url ?? '');
-    setIsFreePreview(lesson.is_free_preview);
-    contentRef.current = lesson.content_markdown ?? '';
+    contentRef.current = lesson.content ?? '';
     if (editor) {
-      editor.commands.setContent(lesson.content_markdown ?? '');
+      editor.commands.setContent(lesson.content ?? '');
     }
   }, [lesson.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -109,15 +104,6 @@ const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
             placeholder="Lesson title"
           />
         </div>
-        <div className="classroom-lesson-editor__field classroom-lesson-editor__field--sm">
-          <label>Slug</label>
-          <input
-            type="text"
-            value={slug}
-            onChange={(e) => { setSlug(e.target.value); scheduleAutosave(); }}
-            placeholder="lesson-slug"
-          />
-        </div>
         <div className="classroom-lesson-editor__field">
           <label>Video URL</label>
           <input
@@ -127,14 +113,6 @@ const LessonEditor: React.FC<LessonEditorProps> = ({ lesson, onSave }) => {
             placeholder="YouTube, Vimeo, or direct URL"
           />
         </div>
-        <label className="classroom-lesson-editor__toggle">
-          <input
-            type="checkbox"
-            checked={isFreePreview}
-            onChange={(e) => { setIsFreePreview(e.target.checked); scheduleAutosave(); }}
-          />
-          <span>Free Preview</span>
-        </label>
       </div>
 
       {editor && (

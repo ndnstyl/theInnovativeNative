@@ -16,13 +16,8 @@ const CourseRedirectPage: React.FC = () => {
     const firstLesson = firstModule?.lessons[0];
 
     if (firstLesson) {
-      // If enrolled or lesson is free preview, go to lesson
-      if (isEnrolled || firstLesson.is_free_preview) {
-        router.replace(`/classroom/${courseSlug}/${firstLesson.slug}`);
-      } else {
-        // Go to first lesson anyway — it will show enrollment gate
-        router.replace(`/classroom/${courseSlug}/${firstLesson.slug}`);
-      }
+      // Redirect to first lesson (by ID since slug column was removed)
+      router.replace(`/classroom/${courseSlug}/${firstLesson.id}`);
     }
   }, [course, isEnrolled, loading, courseSlug, router]);
 

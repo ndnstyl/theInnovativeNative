@@ -43,10 +43,10 @@ const LessonContent: React.FC<LessonContentProps> = ({ lesson }) => {
         </div>
       )}
 
-      {lesson.content_markdown && (
+      {lesson.content && (
         <div className="classroom-lesson__content">
           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-            {lesson.content_markdown}
+            {lesson.content}
           </ReactMarkdown>
         </div>
       )}

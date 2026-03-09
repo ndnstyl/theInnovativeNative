@@ -44,7 +44,7 @@ export function useEngagementTracker() {
           lesson_id: lessonId,
           course_id: courseId,
           event_type: eventType,
-          event_meta: (eventMeta ?? {}) as Json,
+          metadata: (eventMeta ?? {}) as Json,
         })
         .then(({ error }) => {
           if (error) console.warn('[engagement] tracking failed:', error.message);

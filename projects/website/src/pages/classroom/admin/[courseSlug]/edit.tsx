@@ -36,11 +36,11 @@ const CourseEditPage: React.FC = () => {
     if (!courseSlug) return;
     setLoading(true);
 
-    // Get course ID by slug
+    // Get course by ID (slug column was removed from schema)
     const { data: courseData } = await supabaseClient
       .from('courses')
       .select('id, community_id')
-      .eq('slug', courseSlug as string)
+      .eq('id', courseSlug as string)
       .single();
 
     if (!courseData) {
@@ -80,7 +80,7 @@ const CourseEditPage: React.FC = () => {
     await createModule({
       course_id: course.id,
       title: newModuleTitle.trim(),
-      sort_order: maxOrder,
+      display_order: maxOrder,
     });
     setNewModuleTitle('');
     await loadCourse();
@@ -96,13 +96,11 @@ const CourseEditPage: React.FC = () => {
     if (!course) return;
     const mod = course.modules.find((m) => m.id === moduleId);
     const lessonCount = mod?.lessons.length ?? 0;
-    const slug = `lesson-${Date.now()}`;
     await createLesson({
       module_id: moduleId,
       course_id: course.id,
-      slug,
       title: 'New Lesson',
-      sort_order: lessonCount,
+      display_order: lessonCount,
     });
     await loadCourse();
   };
@@ -149,8 +147,8 @@ const CourseEditPage: React.FC = () => {
               All Courses
             </Link>
             <h1>{course.title}</h1>
-            <span className={`classroom-admin-card__status ${course.is_published ? 'classroom-admin-card__status--published' : ''}`}>
-              {course.is_published ? 'Published' : 'Draft'}
+            <span className={`classroom-admin-card__status ${course.published ? 'classroom-admin-card__status--published' : ''}`}>
+              {course.published ? 'Published' : 'Draft'}
             </span>
           </div>
 
@@ -206,14 +204,11 @@ const CourseEditPage: React.FC = () => {
                       {mod.lessons.map((lesson) => (
                         <li key={lesson.id} className="classroom-admin-edit__lesson-row">
                           <Link
-                            href={`/classroom/admin/${courseSlug}/lessons/${lesson.slug}`}
+                            href={`/classroom/admin/${courseSlug}/lessons/${lesson.id}`}
                             className="classroom-admin-edit__lesson-link"
                           >
                             <i className="fa-solid fa-file-lines"></i>
                             <span>{lesson.title}</span>
-                            {lesson.is_free_preview && (
-                              <span className="classroom-sidebar__preview-badge">Preview</span>
-                            )}
                           </Link>
                           <button
                             type="button"

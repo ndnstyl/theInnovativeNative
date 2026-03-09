@@ -22,7 +22,7 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({ course, onCreateNew }
 
   return (
     <Link
-      href={`/classroom/admin/${course.slug}/edit`}
+      href={`/classroom/admin/${course.id}/edit`}
       className="classroom-admin-card"
     >
       <div className="classroom-admin-card__thumbnail">
@@ -37,8 +37,8 @@ const AdminCourseCard: React.FC<AdminCourseCardProps> = ({ course, onCreateNew }
       <div className="classroom-admin-card__body">
         <h3 className="classroom-admin-card__title">{course.title}</h3>
         <div className="classroom-admin-card__meta">
-          <span className={`classroom-admin-card__status ${course.is_published ? 'classroom-admin-card__status--published' : ''}`}>
-            {course.is_published ? 'Published' : 'Draft'}
+          <span className={`classroom-admin-card__status ${course.published ? 'classroom-admin-card__status--published' : ''}`}>
+            {course.published ? 'Published' : 'Draft'}
           </span>
           {course.is_free && <span className="classroom-admin-card__free">Free</span>}
         </div>

@@ -4,7 +4,7 @@ import type { CourseWithModules } from '@/types/supabase';
 
 interface CourseSidebarProps {
   course: CourseWithModules;
-  currentLessonSlug: string;
+  currentLessonSlug: string; // now actually lesson ID
   progress: Record<string, boolean>;
   isEnrolled: boolean;
   onClose?: () => void;
@@ -61,9 +61,9 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({
             <h4 className="classroom-sidebar__module-title">{module.title}</h4>
             <ul className="classroom-sidebar__lessons">
               {module.lessons.map((lesson) => {
-                const isActive = lesson.slug === currentLessonSlug;
+                const isActive = lesson.id === currentLessonSlug;
                 const isCompleted = progress[lesson.id] === true;
-                const isLocked = !isEnrolled && !lesson.is_free_preview;
+                const isLocked = !isEnrolled;
 
                 return (
                   <li key={lesson.id} className="classroom-sidebar__lesson-item">
@@ -76,7 +76,7 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({
                       </span>
                     ) : (
                       <Link
-                        href={`/classroom/${course.slug}/${lesson.slug}`}
+                        href={`/classroom/${course.id}/${lesson.id}`}
                         className={`classroom-sidebar__lesson ${isActive ? 'classroom-sidebar__lesson--active' : ''}`}
                         onClick={onClose}
                       >
@@ -90,9 +90,6 @@ const CourseSidebar: React.FC<CourseSidebarProps> = ({
                           )}
                         </span>
                         <span className="classroom-sidebar__lesson-title">{lesson.title}</span>
-                        {lesson.is_free_preview && !isEnrolled && (
-                          <span className="classroom-sidebar__preview-badge">Preview</span>
-                        )}
                       </Link>
                     )}
                   </li>

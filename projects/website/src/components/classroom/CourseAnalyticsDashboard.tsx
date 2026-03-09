@@ -27,13 +27,13 @@ const CourseAnalyticsDashboard: React.FC<CourseAnalyticsDashboardProps> = ({
     );
   }
 
-  const totalEnrollments = analytics?.total_enrollments ?? students.length;
-  const activeLearners = analytics?.active_learners_7d ?? students.filter((s) => {
+  const totalEnrollments = analytics?.total_enrolled ?? students.length;
+  const activeLearners = analytics?.active_7d ?? students.filter((s) => {
     if (!s.last_active) return false;
     const diff = Date.now() - new Date(s.last_active).getTime();
     return diff < 7 * 24 * 60 * 60 * 1000;
   }).length;
-  const avgCompletion = analytics?.avg_completion_pct ??
+  const avgCompletion = analytics?.completion_rate ??
     (students.length > 0
       ? Math.round(students.reduce((sum, s) => sum + s.progress_pct, 0) / students.length)
       : 0);
@@ -45,9 +45,9 @@ const CourseAnalyticsDashboard: React.FC<CourseAnalyticsDashboardProps> = ({
         Analytics: {courseTitle}
       </h2>
 
-      {analytics?.computed_at && (
+      {analytics?.updated_at && (
         <p className="classroom-analytics__updated">
-          Last computed: {new Date(analytics.computed_at).toLocaleString()}
+          Last computed: {new Date(analytics.updated_at).toLocaleString()}
         </p>
       )}
 

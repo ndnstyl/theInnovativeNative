@@ -36,5 +36,4 @@ export interface LevelConfig {
   level_number: number;
   min_points: number;
   name: string;
-  badge_url: string | null;
 }

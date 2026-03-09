@@ -52,7 +52,7 @@ export function useEvents(): UseEventsReturn {
             description,
             location_url,
             cover_image_url,
-            creator_id,
+            created_by,
             capacity,
             timezone,
             category_id,
@@ -61,7 +61,7 @@ export function useEvents(): UseEventsReturn {
               name,
               color
             ),
-            profiles!events_creator_id_fkey (
+            profiles!events_created_by_fkey (
               display_name,
               avatar_url
             )
@@ -96,7 +96,7 @@ export function useEvents(): UseEventsReturn {
           description: evt?.description,
           location_url: evt?.location_url,
           cover_image_url: evt?.cover_image_url,
-          host_id: evt?.creator_id,
+          host_id: evt?.created_by,
           host_name: host?.display_name || 'Unknown',
           host_avatar: host?.avatar_url,
           capacity: evt?.capacity || 0,

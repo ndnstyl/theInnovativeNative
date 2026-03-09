@@ -31,7 +31,7 @@ export function useCourseAnalytics(courseId: string | undefined) {
         .from('course_analytics_cache')
         .select('*')
         .eq('course_id', courseId)
-        .order('computed_at', { ascending: false })
+        .order('updated_at', { ascending: false })
         .limit(1)
         .single();
 
@@ -67,11 +67,12 @@ export function useCourseAnalytics(courseId: string | undefined) {
         (profiles ?? []).map((p) => [p.id, p])
       );
 
-      // Fetch progress per student
+      // Fetch progress per student (lesson_progress has no course_id; filter by lesson IDs)
+      const lessonIds = (lessons ?? []).map((l) => l.id);
       const { data: progressData } = await supabaseClient
         .from('lesson_progress')
         .select('user_id, lesson_id')
-        .eq('course_id', courseId)
+        .in('lesson_id', lessonIds)
         .eq('completed', true);
 
       const progressByUser = new Map<string, number>();

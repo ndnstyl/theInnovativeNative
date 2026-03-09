@@ -9,7 +9,7 @@ interface CourseCardProps {
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   return (
-    <Link href={`/classroom/${course.slug}`} className="classroom-card">
+    <Link href={`/classroom/${course.id}`} className="classroom-card">
       <div className="classroom-card__thumbnail">
         {course.thumbnail_url ? (
           <img src={course.thumbnail_url} alt={course.title} />

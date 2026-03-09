@@ -41,7 +41,7 @@ export function useEventDetail(occurrenceId: string | undefined): UseEventDetail
             events!inner (
               *,
               event_categories ( name, color ),
-              profiles!events_creator_id_fkey ( id, display_name, avatar_url )
+              profiles!events_created_by_fkey ( id, display_name, avatar_url )
             )
           ` as any)
           .eq('id', occurrenceId!)
@@ -62,7 +62,7 @@ export function useEventDetail(occurrenceId: string | undefined): UseEventDetail
           description: evt?.description,
           location_url: evt?.location_url,
           cover_image_url: evt?.cover_image_url,
-          host_id: evt?.creator_id,
+          host_id: evt?.created_by,
           host_name: host?.display_name || 'Unknown',
           host_avatar: host?.avatar_url,
           capacity: evt?.capacity || 0,

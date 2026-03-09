@@ -20,7 +20,6 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
   saving = false,
 }) => {
   const [title, setTitle] = useState('');
-  const [slug, setSlug] = useState('');
   const [description, setDescription] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [isPublished, setIsPublished] = useState(false);
@@ -31,27 +30,16 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
   useEffect(() => {
     if (course) {
       setTitle(course.title);
-      setSlug(course.slug);
       setDescription(course.description ?? '');
       setThumbnailUrl(course.thumbnail_url ?? '');
-      setIsPublished(course.is_published);
+      setIsPublished(course.published);
       setIsFree(course.is_free);
       setStripePriceId(course.stripe_price_id ?? '');
     }
   }, [course]);
 
-  const generateSlug = (text: string) => {
-    return text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '');
-  };
-
   const handleTitleChange = (val: string) => {
     setTitle(val);
-    if (!course) {
-      setSlug(generateSlug(val));
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -61,10 +49,9 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
       // Update
       const updates: CourseUpdate = {
         title,
-        slug,
         description: description || null,
         thumbnail_url: thumbnailUrl || null,
-        is_published: isPublished,
+        published: isPublished,
         is_free: isFree,
         stripe_price_id: stripePriceId || null,
       };
@@ -74,10 +61,9 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
       const insert: CourseInsert = {
         community_id: communityId,
         title,
-        slug,
         description: description || null,
         thumbnail_url: thumbnailUrl || null,
-        is_published: isPublished,
+        published: isPublished,
         is_free: isFree,
         stripe_price_id: stripePriceId || null,
       };
@@ -99,18 +85,6 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
           value={title}
           onChange={(e) => handleTitleChange(e.target.value)}
           placeholder="Course title"
-          required
-        />
-      </div>
-
-      <div className="classroom-settings-panel__field">
-        <label htmlFor="course-slug">Slug</label>
-        <input
-          id="course-slug"
-          type="text"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          placeholder="course-slug"
           required
         />
       </div>
@@ -174,7 +148,7 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
         <button
           type="submit"
           className="classroom-settings-panel__save"
-          disabled={saving || !title || !slug}
+          disabled={saving || !title}
         >
           {saving ? 'Saving...' : course ? 'Save Changes' : 'Create Course'}
         </button>

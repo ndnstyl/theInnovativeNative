@@ -35,7 +35,7 @@ const AdminCoursesPage: React.FC = () => {
     setSaving(false);
     if (course) {
       setShowCreate(false);
-      router.push(`/classroom/admin/${course.slug}/edit`);
+      router.push(`/classroom/admin/${course.id}/edit`);
       return true;
     }
     return false;

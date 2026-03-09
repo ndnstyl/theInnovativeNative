@@ -26,8 +26,8 @@ export function useCourses() {
         const { data: coursesData, error: coursesError } = await supabaseClient
           .from('courses')
           .select('*')
-          .eq('is_published', true)
-          .order('sort_order', { ascending: true });
+          .eq('published', true)
+          .order('display_order', { ascending: true });
 
         if (coursesError) throw coursesError;
         if (!coursesData) {
@@ -56,16 +56,21 @@ export function useCourses() {
               .select('id')
               .eq('course_id', courseId);
 
-            const { data: progress } = await supabaseClient
-              .from('lesson_progress')
-              .select('id')
-              .eq('course_id', courseId)
-              .eq('user_id', session.user.id)
-              .eq('completed', true);
+            const lessonIds = (lessons || []).map((l) => l.id);
+            let completedCount = 0;
+            if (lessonIds.length > 0) {
+              const { data: progress } = await supabaseClient
+                .from('lesson_progress')
+                .select('id')
+                .in('lesson_id', lessonIds)
+                .eq('user_id', session.user.id)
+                .eq('completed', true);
+              completedCount = progress?.length ?? 0;
+            }
 
             progressMap[courseId] = {
               total: lessons?.length ?? 0,
-              completed: progress?.length ?? 0,
+              completed: completedCount,
             };
           }
 
@@ -77,16 +82,21 @@ export function useCourses() {
                 .select('id')
                 .eq('course_id', course.id);
 
-              const { data: progress } = await supabaseClient
-                .from('lesson_progress')
-                .select('id')
-                .eq('course_id', course.id)
-                .eq('user_id', session.user.id)
-                .eq('completed', true);
+              const lessonIds = (lessons || []).map((l) => l.id);
+              let completedCount = 0;
+              if (lessonIds.length > 0) {
+                const { data: progress } = await supabaseClient
+                  .from('lesson_progress')
+                  .select('id')
+                  .in('lesson_id', lessonIds)
+                  .eq('user_id', session.user.id)
+                  .eq('completed', true);
+                completedCount = progress?.length ?? 0;
+              }
 
               progressMap[course.id] = {
                 total: lessons?.length ?? 0,
-                completed: progress?.length ?? 0,
+                completed: completedCount,
               };
             }
           }
@@ -138,12 +148,12 @@ export function useCourse(slug: string | undefined) {
     setError(null);
 
     try {
-      // Fetch course
+      // Fetch course by id (slug column removed from schema)
       const { data: courseData, error: courseError } = await supabaseClient
         .from('courses')
         .select('*')
-        .eq('slug', slug)
-        .eq('is_published', true)
+        .eq('id', slug)
+        .eq('published', true)
         .single();
 
       if (courseError) throw courseError;
@@ -157,14 +167,14 @@ export function useCourse(slug: string | undefined) {
         .from('modules')
         .select('*')
         .eq('course_id', courseData.id)
-        .order('sort_order', { ascending: true });
+        .order('display_order', { ascending: true });
 
       // Fetch lessons
       const { data: lessonsData } = await supabaseClient
         .from('lessons')
         .select('*')
         .eq('course_id', courseData.id)
-        .order('sort_order', { ascending: true });
+        .order('display_order', { ascending: true });
 
       // Build modules with lessons
       const modules: ModuleWithLessons[] = (modulesData || []).map((mod) => ({
@@ -189,12 +199,15 @@ export function useCourse(slug: string | undefined) {
           setIsEnrolled(!!enrollment);
         }
 
-        // Fetch progress
-        const { data: progressData } = await supabaseClient
-          .from('lesson_progress')
-          .select('lesson_id, completed')
-          .eq('user_id', session.user.id)
-          .eq('course_id', courseData.id);
+        // Fetch progress (lesson_progress has no course_id; query via lesson IDs)
+        const allLessonIds = (lessonsData || []).map((l) => l.id);
+        const { data: progressData } = allLessonIds.length > 0
+          ? await supabaseClient
+              .from('lesson_progress')
+              .select('lesson_id, completed')
+              .eq('user_id', session.user.id)
+              .in('lesson_id', allLessonIds)
+          : { data: [] as any[] };
 
         if (progressData) {
           const progressRecord: Record<string, boolean> = {};
@@ -247,11 +260,10 @@ export function useMarkComplete() {
             {
               user_id: session.user.id,
               lesson_id: lessonId,
-              course_id: courseId,
               completed: true,
               completed_at: new Date().toISOString(),
             },
-            { onConflict: 'user_id,lesson_id' }
+            { onConflict: 'lesson_id,user_id' }
           );
 
           if (error) throw error;
@@ -296,7 +308,6 @@ export function useEnroll() {
           body: {
             courseId: course.id,
             priceId: course.stripe_price_id,
-            courseSlug: course.slug,
           },
         });
 

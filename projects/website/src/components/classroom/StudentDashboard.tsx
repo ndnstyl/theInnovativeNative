@@ -34,49 +34,55 @@ const StudentDashboard: React.FC = () => {
         const courseIds = enrollments.map((e) => e.course_id);
         const enrollmentMap = new Map(enrollments.map((e) => [e.course_id, e.enrolled_at]));
 
-        // Fetch course data
+        // Fetch course data (no slug column)
         const { data: coursesData } = await supabaseClient
           .from('courses')
-          .select('id, title, slug, thumbnail_url')
+          .select('id, title, thumbnail_url')
           .in('id', courseIds);
 
-        // Fetch lesson counts
+        // Fetch lessons to build counts and lesson-to-course mapping
         const { data: lessons } = await supabaseClient
           .from('lessons')
           .select('id, course_id')
           .in('course_id', courseIds);
 
-        // Fetch progress
-        const { data: progressData } = await supabaseClient
-          .from('lesson_progress')
-          .select('lesson_id, course_id, completed, completed_at')
-          .eq('user_id', session.user.id)
-          .eq('completed', true)
-          .in('course_id', courseIds);
-
-        // Build summaries
-        const lessonsByConurse = new Map<string, number>();
+        const lessonToCourse = new Map<string, string>();
+        const lessonsByCourse = new Map<string, number>();
         (lessons ?? []).forEach((l) => {
-          lessonsByConurse.set(l.course_id, (lessonsByConurse.get(l.course_id) ?? 0) + 1);
+          lessonToCourse.set(l.id, l.course_id);
+          lessonsByCourse.set(l.course_id, (lessonsByCourse.get(l.course_id) ?? 0) + 1);
         });
 
+        // Fetch progress (lesson_progress has no course_id; query by lesson IDs)
+        const lessonIds = (lessons ?? []).map((l) => l.id);
+        const { data: progressData } = lessonIds.length > 0
+          ? await supabaseClient
+              .from('lesson_progress')
+              .select('lesson_id, completed, completed_at')
+              .eq('user_id', session.user.id)
+              .eq('completed', true)
+              .in('lesson_id', lessonIds)
+          : { data: [] };
+
+        // Map progress back to courses via lessonToCourse
         const completedByCourse = new Map<string, { count: number; lastAt: string | null }>();
         (progressData ?? []).forEach((p) => {
-          const cur = completedByCourse.get(p.course_id);
+          const cId = lessonToCourse.get(p.lesson_id);
+          if (!cId) return;
+          const cur = completedByCourse.get(cId);
           const newCount = (cur?.count ?? 0) + 1;
           const lastAt = !cur?.lastAt || (p.completed_at && p.completed_at > (cur.lastAt ?? ''))
             ? p.completed_at
             : cur?.lastAt ?? null;
-          completedByCourse.set(p.course_id, { count: newCount, lastAt });
+          completedByCourse.set(cId, { count: newCount, lastAt });
         });
 
         const summaries: StudentProgressSummary[] = (coursesData ?? []).map((c) => {
-          const total = lessonsByConurse.get(c.id) ?? 0;
+          const total = lessonsByCourse.get(c.id) ?? 0;
           const completed = completedByCourse.get(c.id)?.count ?? 0;
           return {
             course_id: c.id,
             course_title: c.title,
-            course_slug: c.slug,
             thumbnail_url: c.thumbnail_url,
             total_lessons: total,
             completed_lessons: completed,
@@ -154,7 +160,7 @@ const StudentDashboard: React.FC = () => {
           {courses.map((c) => (
             <Link
               key={c.course_id}
-              href={`/classroom/${c.course_slug}`}
+              href={`/classroom/${c.course_id}`}
               className="classroom-student-dash__course"
             >
               <div className="classroom-student-dash__course-thumb">

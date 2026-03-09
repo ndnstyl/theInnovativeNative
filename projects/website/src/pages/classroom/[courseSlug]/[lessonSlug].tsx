@@ -16,11 +16,11 @@ const LessonPage: React.FC = () => {
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Find current lesson
+  // Find current lesson (by ID since slug column was removed)
   const currentLesson: Lesson | undefined = useMemo(() => {
     if (!course) return undefined;
     for (const mod of course.modules) {
-      const found = mod.lessons.find((l) => l.slug === lessonSlug);
+      const found = mod.lessons.find((l) => l.id === lessonSlug);
       if (found) return found;
     }
     return undefined;
@@ -37,7 +37,7 @@ const LessonPage: React.FC = () => {
   }, [course, currentLesson]);
 
   // Check if content should be visible
-  const canView = isEnrolled || currentLesson?.is_free_preview;
+  const canView = isEnrolled;
 
   if (loading) {
     return (
@@ -112,10 +112,10 @@ const LessonPage: React.FC = () => {
                   onToggle={refetch}
                 />
 
-                {nextLesson && (isEnrolled || nextLesson.is_free_preview) && (
+                {nextLesson && isEnrolled && (
                   <button
                     className="classroom-next-btn"
-                    onClick={() => router.push(`/classroom/${courseSlug}/${nextLesson.slug}`)}
+                    onClick={() => router.push(`/classroom/${courseSlug}/${nextLesson.id}`)}
                   >
                     Next Lesson
                     <i className="fa-solid fa-arrow-right"></i>
