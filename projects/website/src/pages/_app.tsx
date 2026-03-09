@@ -5,6 +5,7 @@ import Script from "next/script";
 import { AuthProvider } from "@/contexts/AuthContext";
 import AnalyticsProvider from "@/components/common/AnalyticsProvider";
 import CookieConsent from "@/components/common/CookieConsent";
+import OrganizationSchema from "@/components/common/OrganizationSchema";
 
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
             src="https://assets.calendly.com/assets/external/widget.js"
             strategy="lazyOnload"
           />
+          <OrganizationSchema />
           <Component {...pageProps} />
           <CookieConsent />
         </Suspense>

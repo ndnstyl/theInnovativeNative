@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Block utility and gated routes
+Disallow: /dashboard
+Disallow: /classroom/
+Disallow: /auth/
+Disallow: /checkout/
+Disallow: /messages/
+Disallow: /settings/
+Disallow: /admin/
+Disallow: /members/onboarding
+Disallow: /members/requests
+Disallow: /members/settings
+
+# Block Next.js internals
+Disallow: /_next/data/
+
+Sitemap: https://theinnovativenative.com/sitemap.xml
