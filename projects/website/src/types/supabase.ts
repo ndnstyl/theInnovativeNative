@@ -748,11 +748,17 @@ export interface Database {
           description: string | null;
           location_type: string;
           location_details: string | null;
+          location_url: string | null;
+          cover_image_url: string | null;
           starts_at: string;
           ends_at: string;
           is_recurring: boolean;
           recurrence_rule: string | null;
           max_attendees: number | null;
+          capacity: number;
+          category_id: string | null;
+          timezone: string;
+          status: string;
           rsvp_count: number;
           deleted_at: string | null;
           created_at: string;
@@ -766,20 +772,30 @@ export interface Database {
           description?: string | null;
           location_type?: string;
           location_details?: string | null;
+          location_url?: string | null;
+          cover_image_url?: string | null;
           starts_at: string;
           ends_at: string;
           is_recurring?: boolean;
           recurrence_rule?: string | null;
           max_attendees?: number | null;
+          capacity?: number;
+          category_id?: string | null;
+          timezone?: string;
         };
         Update: {
           title?: string;
           description?: string | null;
           location_type?: string;
           location_details?: string | null;
+          location_url?: string | null;
+          cover_image_url?: string | null;
           starts_at?: string;
           ends_at?: string;
           max_attendees?: number | null;
+          capacity?: number;
+          category_id?: string | null;
+          timezone?: string;
           deleted_at?: string | null;
         };
         Relationships: [];
@@ -788,20 +804,86 @@ export interface Database {
         Row: {
           id: string;
           event_id: string;
+          occurrence_id: string | null;
           user_id: string;
           status: string;
+          reminder_sent: boolean;
           created_at: string;
         };
         Insert: {
           id?: string;
           event_id: string;
+          occurrence_id?: string | null;
           user_id: string;
           status?: string;
+          reminder_sent?: boolean;
         };
         Update: {
           status?: string;
+          reminder_sent?: boolean;
         };
         Relationships: [];
+      };
+      event_categories: {
+        Row: {
+          id: string;
+          community_id: string;
+          name: string;
+          color: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          name: string;
+          color?: string;
+        };
+        Update: {
+          name?: string;
+          color?: string;
+        };
+        Relationships: [];
+      };
+      event_occurrences: {
+        Row: {
+          id: string;
+          event_id: string;
+          community_id: string;
+          start_time: string;
+          end_time: string;
+          title_override: string | null;
+          description_override: string | null;
+          location_override: string | null;
+          status: string;
+          rsvp_count: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          event_id: string;
+          community_id: string;
+          start_time: string;
+          end_time: string;
+          title_override?: string | null;
+          description_override?: string | null;
+          location_override?: string | null;
+          status?: string;
+        };
+        Update: {
+          title_override?: string | null;
+          description_override?: string | null;
+          location_override?: string | null;
+          status?: string;
+          rsvp_count?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'event_occurrences_event_id_fkey';
+            columns: ['event_id'];
+            referencedRelation: 'events';
+            referencedColumns: ['id'];
+          }
+        ];
       };
       levels: {
         Row: {
@@ -1091,6 +1173,26 @@ export interface Database {
         };
         Returns: Json;
       };
+      rsvp_to_event: {
+        Args: {
+          p_occurrence_id: string;
+          p_user_id: string;
+        };
+        Returns: Json;
+      };
+      cancel_rsvp: {
+        Args: {
+          p_occurrence_id: string;
+          p_user_id: string;
+        };
+        Returns: Json;
+      };
+      generate_occurrences: {
+        Args: {
+          p_event_id: string;
+        };
+        Returns: void;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -1167,7 +1269,13 @@ export type MemberBan = Database['public']['Tables']['member_bans']['Row'];
 export type Notification = Database['public']['Tables']['notifications']['Row'];
 export type Subscription = Database['public']['Tables']['subscriptions']['Row'];
 export type Event = Database['public']['Tables']['events']['Row'];
+export type EventInsert = Database['public']['Tables']['events']['Insert'];
+export type EventUpdate = Database['public']['Tables']['events']['Update'];
 export type EventRsvp = Database['public']['Tables']['event_rsvps']['Row'];
+export type EventCategory = Database['public']['Tables']['event_categories']['Row'];
+export type EventCategoryInsert = Database['public']['Tables']['event_categories']['Insert'];
+export type EventOccurrence = Database['public']['Tables']['event_occurrences']['Row'];
+export type EventOccurrenceUpdate = Database['public']['Tables']['event_occurrences']['Update'];
 export type Level = Database['public']['Tables']['levels']['Row'];
 export type LevelUpdate = Database['public']['Tables']['levels']['Update'];
 export type MemberStats = Database['public']['Tables']['member_stats']['Row'];
