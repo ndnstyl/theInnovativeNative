@@ -96,34 +96,34 @@ const Agency = () => {
           <div className="col-12 col-lg-6">
             <div className="agency__content section__content">
               <span className="sub-title">
-                THE PROBLEM
+                THE REALITY
                 <i className="fa-solid fa-arrow-right"></i>
               </span>
               <h2 className="title title-anim">
-                Most Teams Don&apos;t Need More Effort. They Need Less Guessing.
+                Your Business Runs on 12 Tools That Don&apos;t Talk to Each Other
               </h2>
               <div className="paragraph">
                 <p>
-                  When leadership can&apos;t explain why results are changing, the system
-                  is no longer under control. Adding budget, tools, or people usually
-                  makes the failure more expensive.
+                  You&apos;ve got a CRM, a scheduler, an email tool, a project manager,
+                  a billing system, and a dozen browser tabs holding it all together.
+                  Every one of those tools creates data. None of them share it.
                 </p>
                 <p className="mt-3">
-                  <strong>I diagnose where systems are lying:</strong>
+                  <strong>Here&apos;s what that actually costs you:</strong>
                 </p>
                 <ul className="mt-2" style={{ listStyle: 'disc', paddingLeft: '1.5rem' }}>
-                  <li>Where reporting is comforting instead of true</li>
-                  <li>Where incentives create self-deception</li>
-                  <li>Where legacy wins became emotional anchors</li>
-                  <li>Where cosmetic optimization replaced structural correction</li>
+                  <li>Hours per week on manual data entry between systems</li>
+                  <li>Leads that fall through cracks between tools</li>
+                  <li>Decisions based on incomplete or stale information</li>
+                  <li>Growth that stalls because your systems can&apos;t keep up</li>
                 </ul>
               </div>
               <div className="skill-wrap">
                 <div className="skill-bar-single">
                   <div className="skill-bar-title">
-                    <p className="primary-text">Growth Diagnosis</p>
+                    <p className="primary-text">AI System Design</p>
                   </div>
-                  <div className="skill-bar-wrapper" data-percent="90%">
+                  <div className="skill-bar-wrapper" data-percent="95%">
                     <div className="skill-bar">
                       <div className="skill-bar-percent">
                         <span className="percent-value"></span>
@@ -133,9 +133,9 @@ const Agency = () => {
                 </div>
                 <div className="skill-bar-single">
                   <div className="skill-bar-title">
-                    <p className="primary-text">AI Orchestration</p>
+                    <p className="primary-text">Workflow Automation</p>
                   </div>
-                  <div className="skill-bar-wrapper" data-percent="85%">
+                  <div className="skill-bar-wrapper" data-percent="90%">
                     <div className="skill-bar">
                       <div className="skill-bar-percent">
                         <span className="percent-value"></span>
@@ -146,7 +146,7 @@ const Agency = () => {
               </div>
               <div className="section__content-cta">
                 <Link href="/portfolio" className="btn btn--primary">
-                  View Case Studies
+                  See Systems We&apos;ve Built
                 </Link>
               </div>
             </div>
