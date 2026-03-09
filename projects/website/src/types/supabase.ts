@@ -1457,6 +1457,95 @@ export interface Database {
         };
         Relationships: [];
       };
+      rate_limits: {
+        Row: {
+          id: string;
+          user_id: string;
+          action: string;
+          window_start: string;
+          count: number;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          action: string;
+          window_start?: string;
+          count?: number;
+        };
+        Update: {
+          count?: number;
+        };
+        Relationships: [];
+      };
+      rate_limit_config: {
+        Row: {
+          id: string;
+          action: string;
+          max_count: number;
+          window_minutes: number;
+          description: string | null;
+        };
+        Insert: {
+          id?: string;
+          action: string;
+          max_count: number;
+          window_minutes?: number;
+          description?: string | null;
+        };
+        Update: {
+          action?: string;
+          max_count?: number;
+          window_minutes?: number;
+          description?: string | null;
+        };
+        Relationships: [];
+      };
+      consent_records: {
+        Row: {
+          id: string;
+          user_id: string;
+          consent_type: string;
+          granted: boolean;
+          ip_address: string | null;
+          user_agent: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          consent_type: string;
+          granted?: boolean;
+          ip_address?: string | null;
+          user_agent?: string | null;
+        };
+        Update: {
+          granted?: boolean;
+        };
+        Relationships: [];
+      };
+      deletion_requests: {
+        Row: {
+          id: string;
+          user_id: string;
+          status: string;
+          reason: string | null;
+          requested_at: string;
+          completed_at: string | null;
+          processed_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          status?: string;
+          reason?: string | null;
+        };
+        Update: {
+          status?: string;
+          completed_at?: string | null;
+          processed_by?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -1596,6 +1685,36 @@ export interface Database {
           p_content_type: string;
           p_content_id: string;
           p_report_id?: string;
+        };
+        Returns: any;
+      };
+      check_rate_limit: {
+        Args: {
+          p_user_id: string;
+          p_action: string;
+          p_max_count: number;
+          p_window_minutes?: number;
+        };
+        Returns: boolean;
+      };
+      global_search: {
+        Args: {
+          p_query: string;
+          p_type?: string;
+          p_limit?: number;
+        };
+        Returns: {
+          result_type: string;
+          result_id: string;
+          title: string;
+          snippet: string;
+          url: string;
+          rank: number;
+        }[];
+      };
+      export_user_data: {
+        Args: {
+          p_user_id: string;
         };
         Returns: any;
       };
