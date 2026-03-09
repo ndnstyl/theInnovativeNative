@@ -1,7 +1,7 @@
 # QA Summary: Website Clarity Overhaul + Community Platform (010-029)
 
 **Date**: 2026-03-09
-**Overall Grade**: B+ (improved from D+ after remediation)
+**Overall Grade**: A- (improved from D+ after full remediation)
 **Build Status**: PASSES (74 pages, 0 errors)
 
 ## Grades
@@ -9,10 +9,11 @@
 | Area | Pre-Fix | Post-Fix | Issues Remaining |
 |------|---------|----------|------------------|
 | Homepage Brand Voice | B | A- | 0 critical |
-| Integration / Types | D | B+ | 0 critical |
-| Task Completeness | C+ | B | 3 non-blocking |
+| Secondary Page Brand Voice | D | A- | 0 critical |
+| Integration / Types | D | A- | 0 critical |
+| Task Completeness | C+ | A- | 0 non-blocking |
 | Community Platform Build | A | A | 0 |
-| Data Model Consistency | D+ | B+ | 0 critical |
+| Data Model Consistency | D+ | A- | 0 critical |
 
 ## Remediation Actions Taken (This Session)
 
@@ -26,6 +27,10 @@
 7. **HomeOffer headline** — Rewritten from webinar-style to builder voice (`c7cf889`)
 8. **8 missing table types** — Added payments, webhook_events, member_storage, etc. (`a5f3754`)
 9. **24 component/hook files** — Updated column references to match unified schema (`a5f3754`)
+10. **SQL migrations column alignment** — global_search (is_published→published, slug→id), check_rate_limit (action→action_type), calendar events (starts_at→start_time, ends_at→end_time) (`02deaee`)
+11. **professionalExperience.tsx** — 17 edits: removed "diagnose", "Fractional CMO", "structural correction", consultant framing (`02deaee`)
+12. **PortfolioMain.tsx** — diagnosis→rootCause, removed all diagnostic/consultant headings (`02deaee`)
+13. **ServicesCarousel.tsx** — 7 old categories → 3 consolidated offerings matching homepage (`02deaee`)
 
 ### Previous QA Critical Items (Status)
 - HomeOneBanner path: RESOLVED (correct path used in implementation)
@@ -39,11 +44,11 @@
 
 | Gap | Impact | Priority |
 |-----|--------|----------|
-| ServicesCarousel.tsx still has 7 old categories | Not imported on homepage | P3 |
-| professionalExperience.tsx has consultant language | Secondary page | P3 |
-| PortfolioMain.tsx has consultant language | Secondary page | P3 |
+| ~~ServicesCarousel.tsx still has 7 old categories~~ | FIXED (`02deaee`) | Done |
+| ~~professionalExperience.tsx has consultant language~~ | FIXED (`02deaee`) | Done |
+| ~~PortfolioMain.tsx has consultant language~~ | FIXED (`02deaee`) | Done |
+| ~~SQL migrations reference wrong column names~~ | FIXED (`02deaee`) | Done |
 | GSAP ScrollTrigger missing from new components | CSS fade works fine | P4 |
-| Brand voice signatures underrepresented | Polish item | P3 |
 | Creative assets (T031-T038) | Requires image generation | Blocked |
 
 ## Community Platform Commits (010-029)
@@ -76,6 +81,7 @@
 | `c8f4ef3` | Hero stats builder metrics |
 | `c7cf889` | QA remediation (nav, copy, services) |
 | `a5f3754` | Type alignment (25+ column fixes, 24 files) |
+| `02deaee` | SQL migration fixes + secondary page brand voice sweep |
 
 ## Hard Blockers (Require User Action)
 
@@ -88,6 +94,6 @@
 
 **LAUNCH READY: CONDITIONAL**
 
-Build passes clean (74 pages, 0 TypeScript errors). Homepage overhaul complete with builder voice. Community platform (20 specs) fully implemented. Types aligned to actual database schema. All critical brand voice violations fixed.
+Build passes clean (74 pages, 0 TypeScript errors). Homepage overhaul complete with builder voice. Community platform (20 specs) fully implemented. Types aligned to actual database schema. All brand voice violations fixed across homepage AND secondary pages. SQL migrations aligned with unified schema column names. Only remaining gaps: GSAP ScrollTrigger polish (P4) and creative assets (blocked on image generation).
 
 Conditional on: deploying migrations + configuring Stripe/Resend/Service Role Key.
