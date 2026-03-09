@@ -1,30 +1,22 @@
 import React from 'react';
+import { getBadgeComponent } from '@/components/gamification/badges';
 
 interface LevelBadgeProps {
   level: number;
   name?: string;
+  size?: number;
 }
 
-const LevelBadge: React.FC<LevelBadgeProps> = ({ level, name }) => {
+const LevelBadge: React.FC<LevelBadgeProps> = ({ level, name, size = 24 }) => {
+  const BadgeIcon = getBadgeComponent(level);
+
   return (
     <span
       className="level-badge"
+      title={`Level ${level}${name ? `: ${name}` : ''}`}
       aria-label={`Level ${level}${name ? `: ${name}` : ''}`}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 4,
-        padding: '2px 8px',
-        fontSize: 10,
-        fontWeight: 600,
-        borderRadius: 999,
-        backgroundColor: 'rgba(0, 255, 255, 0.15)',
-        color: '#00FFFF',
-        lineHeight: '16px',
-      }}
     >
-      <span>Lvl {level}</span>
-      {name && <span style={{ opacity: 0.7 }}>· {name}</span>}
+      <BadgeIcon size={size} />
     </span>
   );
 };

@@ -2,9 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import type { MemberProfileData, SocialLink } from '@/types/members';
 import { useAuth } from '@/contexts/AuthContext';
+import { useMemberStats } from '@/hooks/useMemberStats';
 import RoleBadge from './RoleBadge';
 import LevelBadge from './LevelBadge';
 import FollowButton from './FollowButton';
+import ProgressionDisplay from '@/components/gamification/ProgressionDisplay';
 
 interface ProfileHeaderProps {
   member: MemberProfileData;
@@ -43,6 +45,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ member }) => {
   const { session } = useAuth();
   const isOwnProfile = session?.user?.id === member.id;
   const socialLinks = (member.social_links || []) as SocialLink[];
+  const { stats, level, nextLevel } = useMemberStats(member.id);
 
   return (
     <div className="profile-header">
@@ -60,8 +63,14 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ member }) => {
         <div className="profile-header__name-row">
           <h1>{member.display_name}</h1>
           <RoleBadge role={member.role} />
-          <LevelBadge level={member.level} />
+          <LevelBadge level={member.level} size={32} />
         </div>
+
+        {stats && level && (
+          <div className="profile-header__points">
+            <span>{stats.total_points.toLocaleString()} points</span>
+          </div>
+        )}
 
         {member.username && (
           <span className="profile-header__username">@{member.username}</span>
@@ -78,6 +87,14 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ member }) => {
           <span className="profile-header__dot">·</span>
           <span><strong>{member.following_count}</strong> following</span>
         </div>
+
+        {stats && level && (
+          <ProgressionDisplay
+            currentPoints={stats.total_points}
+            currentLevel={level}
+            nextLevel={nextLevel}
+          />
+        )}
 
         {member.bio && <p className="profile-header__bio">{member.bio}</p>}
 

@@ -828,6 +828,72 @@ export interface Database {
         };
         Relationships: [];
       };
+      member_stats: {
+        Row: {
+          id: string;
+          community_member_id: string;
+          total_points: number;
+          current_level: number;
+          posts_count: number;
+          comments_count: number;
+          likes_received: number;
+          points_7d: number;
+          points_30d: number;
+          last_point_at: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_member_id: string;
+          total_points?: number;
+          current_level?: number;
+        };
+        Update: {
+          total_points?: number;
+          current_level?: number;
+          points_7d?: number;
+          points_30d?: number;
+          last_point_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'member_stats_community_member_id_fkey';
+            columns: ['community_member_id'];
+            referencedRelation: 'community_members';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      points_log: {
+        Row: {
+          id: string;
+          community_member_id: string;
+          action: string;
+          points: number;
+          source_type: string | null;
+          source_id: string | null;
+          reason: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_member_id: string;
+          action: string;
+          points: number;
+          source_type?: string | null;
+          source_id?: string | null;
+          reason?: string | null;
+        };
+        Update: {};
+        Relationships: [
+          {
+            foreignKeyName: 'points_log_community_member_id_fkey';
+            columns: ['community_member_id'];
+            referencedRelation: 'community_members';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       point_config: {
         Row: {
           id: string;
@@ -850,6 +916,119 @@ export interface Database {
           points?: number;
           cooldown_minutes?: number;
           daily_cap?: number | null;
+        };
+        Relationships: [];
+      };
+      lesson_attachments: {
+        Row: {
+          id: string;
+          lesson_id: string;
+          file_name: string;
+          file_path: string;
+          file_type: string;
+          file_size: number;
+          uploaded_by: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          lesson_id: string;
+          file_name: string;
+          file_path: string;
+          file_type: string;
+          file_size: number;
+          uploaded_by: string;
+        };
+        Update: {
+          file_name?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'lesson_attachments_lesson_id_fkey';
+            columns: ['lesson_id'];
+            referencedRelation: 'lessons';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      lesson_comments: {
+        Row: {
+          id: string;
+          lesson_id: string;
+          author_id: string;
+          parent_comment_id: string | null;
+          body: string;
+          body_html: string;
+          deleted_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          lesson_id: string;
+          author_id: string;
+          parent_comment_id?: string | null;
+          body: string;
+          body_html: string;
+        };
+        Update: {
+          body?: string;
+          body_html?: string;
+          deleted_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'lesson_comments_lesson_id_fkey';
+            columns: ['lesson_id'];
+            referencedRelation: 'lessons';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      content_engagement_log: {
+        Row: {
+          id: string;
+          user_id: string;
+          lesson_id: string;
+          course_id: string;
+          event_type: string;
+          event_meta: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          lesson_id: string;
+          course_id: string;
+          event_type: string;
+          event_meta?: Json;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      course_analytics_cache: {
+        Row: {
+          id: string;
+          course_id: string;
+          total_enrollments: number;
+          active_learners_7d: number;
+          avg_completion_pct: number;
+          top_drop_off_lesson_id: string | null;
+          computed_at: string;
+        };
+        Insert: {
+          id?: string;
+          course_id: string;
+          total_enrollments?: number;
+          active_learners_7d?: number;
+          avg_completion_pct?: number;
+          top_drop_off_lesson_id?: string | null;
+        };
+        Update: {
+          total_enrollments?: number;
+          active_learners_7d?: number;
+          avg_completion_pct?: number;
+          top_drop_off_lesson_id?: string | null;
+          computed_at?: string;
         };
         Relationships: [];
       };
@@ -876,6 +1055,28 @@ export interface Database {
           p_display_name: string;
         };
         Returns: string;
+      };
+      admin_award_points: {
+        Args: {
+          p_member_id: string;
+          p_points: number;
+          p_reason: string;
+        };
+        Returns: number;
+      };
+      get_points_history: {
+        Args: {
+          p_member_id: string;
+          p_limit?: number;
+          p_offset?: number;
+        };
+        Returns: {
+          id: string;
+          source_type: string;
+          source_description: string;
+          points: number;
+          created_at: string;
+        }[];
       };
       get_activity_heatmap: {
         Args: {
@@ -968,7 +1169,11 @@ export type Subscription = Database['public']['Tables']['subscriptions']['Row'];
 export type Event = Database['public']['Tables']['events']['Row'];
 export type EventRsvp = Database['public']['Tables']['event_rsvps']['Row'];
 export type Level = Database['public']['Tables']['levels']['Row'];
+export type LevelUpdate = Database['public']['Tables']['levels']['Update'];
+export type MemberStats = Database['public']['Tables']['member_stats']['Row'];
+export type PointsLogEntry = Database['public']['Tables']['points_log']['Row'];
 export type PointConfig = Database['public']['Tables']['point_config']['Row'];
+export type PointConfigUpdate = Database['public']['Tables']['point_config']['Update'];
 
 // Classroom composite types
 export interface ModuleWithLessons extends Module {
@@ -984,4 +1189,43 @@ export interface CourseWithProgress extends Course {
   is_enrolled: boolean;
   total_lessons: number;
   completed_lessons: number;
+}
+
+// Classroom V2 types
+export type LessonAttachment = Database['public']['Tables']['lesson_attachments']['Row'];
+export type LessonAttachmentInsert = Database['public']['Tables']['lesson_attachments']['Insert'];
+
+export type LessonComment = Database['public']['Tables']['lesson_comments']['Row'];
+export type LessonCommentInsert = Database['public']['Tables']['lesson_comments']['Insert'];
+
+export type ContentEngagementLog = Database['public']['Tables']['content_engagement_log']['Row'];
+export type ContentEngagementLogInsert = Database['public']['Tables']['content_engagement_log']['Insert'];
+
+export type CourseAnalyticsCache = Database['public']['Tables']['course_analytics_cache']['Row'];
+
+export interface LessonCommentWithAuthor extends LessonComment {
+  author: {
+    id: string;
+    display_name: string;
+    avatar_url: string | null;
+  };
+  replies?: LessonCommentWithAuthor[];
+}
+
+export interface ModuleWithDripStatus extends ModuleWithLessons {
+  is_locked: boolean;
+  unlocks_at: Date | null;
+  drip_days: number;
+}
+
+export interface StudentProgressSummary {
+  course_id: string;
+  course_title: string;
+  course_slug: string;
+  thumbnail_url: string | null;
+  total_lessons: number;
+  completed_lessons: number;
+  progress_pct: number;
+  last_accessed_at: string | null;
+  enrolled_at: string;
 }

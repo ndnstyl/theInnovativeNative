@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import type { MemberCardData } from '@/types/members';
 import RoleBadge from './RoleBadge';
+import LevelBadge from './LevelBadge';
 
 interface MemberCardProps {
   member: MemberCardData;
@@ -45,6 +46,11 @@ const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
         ) : (
           <span className="member-card__initials">
             {getInitials(member.display_name)}
+          </span>
+        )}
+        {member.level > 0 && (
+          <span className="member-card__level-overlay">
+            <LevelBadge level={member.level} size={16} />
           </span>
         )}
       </div>
