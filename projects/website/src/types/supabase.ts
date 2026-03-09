@@ -1255,6 +1255,151 @@ export interface Database {
         };
         Relationships: [];
       };
+      community_settings: {
+        Row: {
+          id: string;
+          community_id: string;
+          community_name: string;
+          description: string | null;
+          banner_url: string | null;
+          logo_url: string | null;
+          privacy_mode: string;
+          post_categories: any;
+          timezone: string;
+          updated_at: string;
+          updated_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          community_name?: string;
+          description?: string | null;
+          banner_url?: string | null;
+          logo_url?: string | null;
+          privacy_mode?: string;
+          post_categories?: any;
+          timezone?: string;
+          updated_by?: string | null;
+        };
+        Update: {
+          community_name?: string;
+          description?: string | null;
+          banner_url?: string | null;
+          logo_url?: string | null;
+          privacy_mode?: string;
+          post_categories?: any;
+          timezone?: string;
+          updated_by?: string | null;
+        };
+        Relationships: [];
+      };
+      content_reports: {
+        Row: {
+          id: string;
+          community_id: string;
+          reporter_id: string;
+          content_type: string;
+          content_id: string;
+          reason: string;
+          status: string;
+          admin_action: string | null;
+          actioned_by: string | null;
+          actioned_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          reporter_id: string;
+          content_type: string;
+          content_id: string;
+          reason: string;
+          status?: string;
+        };
+        Update: {
+          status?: string;
+          admin_action?: string | null;
+          actioned_by?: string | null;
+          actioned_at?: string | null;
+        };
+        Relationships: [];
+      };
+      admin_audit_log: {
+        Row: {
+          id: string;
+          admin_user_id: string;
+          action_type: string;
+          target_type: string | null;
+          target_id: string | null;
+          description: string | null;
+          metadata: any;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          admin_user_id: string;
+          action_type: string;
+          target_type?: string | null;
+          target_id?: string | null;
+          description?: string | null;
+          metadata?: any;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      dashboard_metrics: {
+        Row: {
+          id: string;
+          community_id: string;
+          metric_name: string;
+          current_value: number;
+          previous_value: number;
+          trend_percentage: number;
+          trend_direction: string;
+          computed_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          metric_name: string;
+          current_value?: number;
+          previous_value?: number;
+          trend_percentage?: number;
+          trend_direction?: string;
+        };
+        Update: {
+          current_value?: number;
+          previous_value?: number;
+          trend_percentage?: number;
+          trend_direction?: string;
+          computed_at?: string;
+        };
+        Relationships: [];
+      };
+      analytics_snapshots: {
+        Row: {
+          id: string;
+          community_id: string;
+          snapshot_date: string;
+          metric_name: string;
+          value: number;
+          metadata: any;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          snapshot_date: string;
+          metric_name: string;
+          value?: number;
+          metadata?: any;
+        };
+        Update: {
+          value?: number;
+          metadata?: any;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -1365,6 +1510,37 @@ export interface Database {
       mark_all_notifications_read: {
         Args: Record<string, never>;
         Returns: void;
+      };
+      log_admin_action: {
+        Args: {
+          p_action_type: string;
+          p_target_type: string;
+          p_target_id: string;
+          p_description: string;
+          p_metadata?: any;
+        };
+        Returns: void;
+      };
+      ban_member: {
+        Args: {
+          p_member_id: string;
+          p_reason?: string;
+        };
+        Returns: any;
+      };
+      unban_member: {
+        Args: {
+          p_member_id: string;
+        };
+        Returns: any;
+      };
+      remove_content: {
+        Args: {
+          p_content_type: string;
+          p_content_id: string;
+          p_report_id?: string;
+        };
+        Returns: any;
       };
     };
     Enums: {
@@ -1519,3 +1695,12 @@ export interface StudentProgressSummary {
   last_accessed_at: string | null;
   enrolled_at: string;
 }
+
+// Admin Dashboard types (018)
+export type CommunitySettingsRow = Database['public']['Tables']['community_settings']['Row'];
+export type CommunitySettingsUpdate = Database['public']['Tables']['community_settings']['Update'];
+export type ContentReport = Database['public']['Tables']['content_reports']['Row'];
+export type ContentReportUpdate = Database['public']['Tables']['content_reports']['Update'];
+export type AdminAuditLog = Database['public']['Tables']['admin_audit_log']['Row'];
+export type DashboardMetric = Database['public']['Tables']['dashboard_metrics']['Row'];
+export type AnalyticsSnapshot = Database['public']['Tables']['analytics_snapshots']['Row'];

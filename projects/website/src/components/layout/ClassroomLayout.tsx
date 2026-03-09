@@ -7,6 +7,7 @@ import AuthModal from '@/components/auth/AuthModal';
 import UnreadBadge from '@/components/messaging/UnreadBadge';
 import NotificationBell from '@/components/notifications/NotificationBell';
 import { useUnreadCount } from '@/hooks/useUnreadCount';
+import { useRole } from '@/hooks/useRole';
 
 interface ClassroomLayoutProps {
   title?: string;
@@ -16,6 +17,7 @@ interface ClassroomLayoutProps {
 const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) => {
   const { session, isLoading, profile } = useAuth();
   const unreadCount = useUnreadCount();
+  const { isAtLeast } = useRole();
   const router = useRouter();
   const [showAuth, setShowAuth] = useState(false);
 
@@ -104,6 +106,12 @@ const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) =>
               <i className="fa-solid fa-gauge"></i>
               Dashboard
             </Link>
+            {isAtLeast('admin') && (
+              <Link href="/admin" className={`classroom-header__link ${router.pathname.startsWith('/admin') ? 'active' : ''}`}>
+                <i className="fa-solid fa-shield-halved"></i>
+                Admin
+              </Link>
+            )}
           </nav>
           <div className="classroom-header__user">
             <NotificationBell />
