@@ -140,8 +140,8 @@ export interface Database {
           community_id: string;
           name: string;
           description: string | null;
-          slug: string;
-          sort_order: number;
+          display_order: number;
+          post_count: number;
           created_at: string;
         };
         Insert: {
@@ -149,14 +149,14 @@ export interface Database {
           community_id: string;
           name: string;
           description?: string | null;
-          slug: string;
-          sort_order?: number;
+          display_order?: number;
+          post_count?: number;
         };
         Update: {
           name?: string;
           description?: string | null;
-          slug?: string;
-          sort_order?: number;
+          display_order?: number;
+          post_count?: number;
         };
         Relationships: [];
       };
@@ -164,34 +164,37 @@ export interface Database {
         Row: {
           id: string;
           community_id: string;
-          category_id: string | null;
           author_id: string;
-          title: string;
-          body: string | null;
-          is_pinned: boolean;
-          pin_order: number | null;
+          category_id: string | null;
+          title: string | null;
+          body: string;
+          body_html: string;
+          pinned_position: number | null;
+          search_vector: string | null;
           like_count: number;
           comment_count: number;
+          edited_at: string | null;
           deleted_at: string | null;
-          search_vector: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
           community_id: string;
-          category_id?: string | null;
           author_id: string;
-          title: string;
-          body?: string | null;
-          is_pinned?: boolean;
+          category_id?: string | null;
+          title?: string | null;
+          body: string;
+          body_html: string;
+          pinned_position?: number | null;
         };
         Update: {
           category_id?: string | null;
-          title?: string;
-          body?: string | null;
-          is_pinned?: boolean;
-          pin_order?: number | null;
+          title?: string | null;
+          body?: string;
+          body_html?: string;
+          pinned_position?: number | null;
+          edited_at?: string | null;
           deleted_at?: string | null;
         };
         Relationships: [];
@@ -201,22 +204,24 @@ export interface Database {
           id: string;
           post_id: string;
           author_id: string;
-          parent_id: string | null;
+          parent_comment_id: string | null;
           body: string;
+          body_html: string;
           like_count: number;
           deleted_at: string | null;
           created_at: string;
-          updated_at: string;
         };
         Insert: {
           id?: string;
           post_id: string;
           author_id: string;
-          parent_id?: string | null;
+          parent_comment_id?: string | null;
           body: string;
+          body_html: string;
         };
         Update: {
           body?: string;
+          body_html?: string;
           deleted_at?: string | null;
         };
         Relationships: [];
@@ -224,18 +229,151 @@ export interface Database {
       reactions: {
         Row: {
           id: string;
+          community_id: string;
+          user_id: string;
           target_type: string;
           target_id: string;
-          user_id: string;
-          emoji: string;
+          reaction_type: string;
           created_at: string;
         };
         Insert: {
           id?: string;
+          community_id: string;
+          user_id: string;
           target_type: string;
           target_id: string;
+          reaction_type?: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      post_attachments: {
+        Row: {
+          id: string;
+          post_id: string;
+          file_path: string;
+          file_name: string;
+          file_type: string;
+          file_size: number;
+          display_mode: string;
+          optimized_path: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          file_path: string;
+          file_name: string;
+          file_type: string;
+          file_size: number;
+          display_mode?: string;
+          optimized_path?: string | null;
+        };
+        Update: {
+          display_mode?: string;
+          optimized_path?: string | null;
+        };
+        Relationships: [];
+      };
+      polls: {
+        Row: {
+          id: string;
+          post_id: string;
+          question: string;
+          total_votes: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          post_id: string;
+          question: string;
+          total_votes?: number;
+        };
+        Update: {
+          question?: string;
+          total_votes?: number;
+        };
+        Relationships: [];
+      };
+      poll_options: {
+        Row: {
+          id: string;
+          poll_id: string;
+          option_text: string;
+          vote_count: number;
+          display_order: number;
+        };
+        Insert: {
+          id?: string;
+          poll_id: string;
+          option_text: string;
+          vote_count?: number;
+          display_order?: number;
+        };
+        Update: {
+          option_text?: string;
+          vote_count?: number;
+          display_order?: number;
+        };
+        Relationships: [];
+      };
+      poll_votes: {
+        Row: {
+          id: string;
+          poll_id: string;
+          option_id: string;
           user_id: string;
-          emoji?: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          poll_id: string;
+          option_id: string;
+          user_id: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      reports: {
+        Row: {
+          id: string;
+          community_id: string;
+          reporter_id: string;
+          target_type: string;
+          target_id: string;
+          reason: string;
+          description: string | null;
+          status: string;
+          reviewed_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          reporter_id: string;
+          target_type: string;
+          target_id: string;
+          reason: string;
+          description?: string | null;
+          status?: string;
+        };
+        Update: {
+          status?: string;
+          reviewed_by?: string | null;
+        };
+        Relationships: [];
+      };
+      post_follows: {
+        Row: {
+          id: string;
+          user_id: string;
+          post_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          post_id: string;
         };
         Update: {};
         Relationships: [];
@@ -781,6 +919,25 @@ export type Comment = Database['public']['Tables']['comments']['Row'];
 export type CommentInsert = Database['public']['Tables']['comments']['Insert'];
 
 export type Reaction = Database['public']['Tables']['reactions']['Row'];
+export type ReactionInsert = Database['public']['Tables']['reactions']['Insert'];
+
+export type PostAttachment = Database['public']['Tables']['post_attachments']['Row'];
+export type PostAttachmentInsert = Database['public']['Tables']['post_attachments']['Insert'];
+
+export type Poll = Database['public']['Tables']['polls']['Row'];
+export type PollInsert = Database['public']['Tables']['polls']['Insert'];
+
+export type PollOption = Database['public']['Tables']['poll_options']['Row'];
+export type PollOptionInsert = Database['public']['Tables']['poll_options']['Insert'];
+
+export type PollVote = Database['public']['Tables']['poll_votes']['Row'];
+export type PollVoteInsert = Database['public']['Tables']['poll_votes']['Insert'];
+
+export type Report = Database['public']['Tables']['reports']['Row'];
+export type ReportInsert = Database['public']['Tables']['reports']['Insert'];
+
+export type PostFollow = Database['public']['Tables']['post_follows']['Row'];
+export type PostFollowInsert = Database['public']['Tables']['post_follows']['Insert'];
 
 export type Course = Database['public']['Tables']['courses']['Row'];
 export type CourseInsert = Database['public']['Tables']['courses']['Insert'];

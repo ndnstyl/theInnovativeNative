@@ -75,6 +75,10 @@ const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) =>
               <i className="fa-solid fa-graduation-cap"></i>
               Classroom
             </Link>
+            <Link href="/community" className={`classroom-header__link ${router.pathname.startsWith('/community') ? 'active' : ''}`}>
+              <i className="fa-regular fa-comments"></i>
+              Community
+            </Link>
             <Link href="/members" className={`classroom-header__link ${router.pathname.startsWith('/members') ? 'active' : ''}`}>
               <i className="fa-solid fa-users"></i>
               Members
