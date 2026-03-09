@@ -1,0 +1,961 @@
+// ============================================
+// Classroom Styles
+// Self-hosted course platform (Skool replacement)
+// ============================================
+
+// ---- Variables ----
+$classroom-bg: #000;
+$classroom-card-bg: #0a0a0a;
+$classroom-border: #1a1a1a;
+$classroom-accent: #00FFFF;
+$classroom-text: #fff;
+$classroom-text-muted: #757575;
+$classroom-text-dim: #4a4a4a;
+$classroom-sidebar-width: 300px;
+
+// ============================================
+// Loading & Auth States
+// ============================================
+.classroom-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: $classroom-bg;
+  color: $classroom-text-muted;
+  gap: 16px;
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid $classroom-border;
+    border-top-color: $classroom-accent;
+    border-radius: 50%;
+    animation: classroom-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes classroom-spin {
+  to { transform: rotate(360deg); }
+}
+
+.classroom-auth-required {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: $classroom-bg;
+  padding: 24px;
+
+  &__content {
+    text-align: center;
+    max-width: 400px;
+
+    i {
+      font-size: 48px;
+      color: $classroom-accent;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      color: $classroom-text;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: $classroom-text-muted;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// ============================================
+// Header
+// ============================================
+.classroom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid $classroom-border;
+  background: $classroom-bg;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__logo {
+    color: $classroom-text;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+
+    &:hover {
+      color: $classroom-accent;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  &__link {
+    color: $classroom-text-muted;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $classroom-text;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: $classroom-border;
+    color: $classroom-text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+// ============================================
+// Main Layout
+// ============================================
+.classroom {
+  min-height: 100vh;
+  background: $classroom-bg;
+  color: $classroom-text;
+}
+
+.classroom-main {
+  min-height: calc(100vh - 69px);
+}
+
+// ============================================
+// Dashboard (Course Grid Page)
+// ============================================
+.classroom-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px;
+
+  &__header {
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: $classroom-text;
+    }
+
+    p {
+      color: $classroom-text-muted;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  &__loading,
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    color: $classroom-text-muted;
+    gap: 16px;
+
+    i {
+      font-size: 32px;
+      color: $classroom-accent;
+    }
+  }
+}
+
+// ============================================
+// Course Grid
+// ============================================
+.classroom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.classroom-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+
+  i {
+    font-size: 48px;
+    color: $classroom-text-dim;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    color: $classroom-text;
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: $classroom-text-muted;
+    margin: 0;
+  }
+}
+
+// ============================================
+// Course Card
+// ============================================
+.classroom-card {
+  display: flex;
+  flex-direction: column;
+  background: $classroom-card-bg;
+  border: 1px solid $classroom-border;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+
+  &:hover {
+    border-color: #333;
+    transform: translateY(-2px);
+  }
+
+  &__thumbnail {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0e0e0e;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__thumbnail-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: $classroom-text-dim;
+
+    i {
+      font-size: 48px;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: $classroom-accent;
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  &__body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  &__description {
+    font-size: 14px;
+    color: $classroom-text-muted;
+    margin: 0 0 16px;
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $classroom-accent;
+    font-size: 14px;
+    font-weight: 600;
+
+    i {
+      transition: transform 0.2s;
+    }
+  }
+
+  &:hover &__cta i {
+    transform: translateX(4px);
+  }
+}
+
+// ============================================
+// Progress Bar
+// ============================================
+.classroom-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--sm {
+    .classroom-progress__track { height: 4px; }
+    .classroom-progress__label { font-size: 12px; }
+  }
+
+  &__track {
+    height: 6px;
+    background: $classroom-border;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    background: $classroom-accent;
+    border-radius: 8px;
+    transition: width 0.3s ease;
+    min-width: 0;
+  }
+
+  &__label {
+    font-size: 13px;
+    color: $classroom-text-muted;
+  }
+}
+
+// ============================================
+// Lesson View (Two-Panel Layout)
+// ============================================
+.classroom-lesson-view {
+  display: flex;
+  min-height: calc(100vh - 69px);
+}
+
+.classroom-sidebar-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 90;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: $classroom-card-bg;
+  border: 1px solid $classroom-border;
+  color: $classroom-text;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: $classroom-accent;
+  }
+}
+
+.classroom-sidebar-wrapper {
+  width: $classroom-sidebar-width;
+  flex-shrink: 0;
+  border-right: 1px solid $classroom-border;
+}
+
+.classroom-sidebar-backdrop {
+  display: none;
+}
+
+// ---- Sidebar ----
+.classroom-sidebar {
+  width: $classroom-sidebar-width;
+  height: calc(100vh - 69px);
+  overflow-y: auto;
+  position: sticky;
+  top: 69px;
+  background: $classroom-bg;
+  padding-bottom: 32px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0;
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $classroom-text-muted;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+
+    &:hover { color: $classroom-text; }
+  }
+
+  &__close {
+    display: none;
+    background: none;
+    border: none;
+    color: $classroom-text-muted;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover { color: $classroom-text; }
+  }
+
+  &__course-info {
+    padding: 16px 20px 0;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $classroom-text;
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  &__progress {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__progress-track {
+    height: 4px;
+    background: $classroom-border;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: $classroom-accent;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  &__progress-text {
+    font-size: 12px;
+    color: $classroom-text-muted;
+  }
+
+  &__nav {
+    margin-top: 24px;
+  }
+
+  &__module {
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+
+  &__module-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $classroom-text-muted;
+    padding: 12px 20px 8px;
+    margin: 0;
+  }
+
+  &__lessons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__lesson-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__lesson {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: $classroom-text-muted;
+    font-size: 14px;
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: $classroom-text;
+    }
+
+    &--active {
+      background: rgba(0, 255, 255, 0.05);
+      color: $classroom-text;
+      border-left: 2px solid $classroom-accent;
+    }
+
+    &--locked {
+      cursor: default;
+      opacity: 0.4;
+
+      &:hover {
+        background: transparent;
+        color: $classroom-text-muted;
+      }
+    }
+  }
+
+  &__lesson-icon {
+    width: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .fa-circle-check {
+      color: $classroom-accent;
+    }
+
+    .fa-circle-play {
+      color: $classroom-accent;
+    }
+  }
+
+  &__lesson-title {
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  &__preview-badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $classroom-accent;
+    background: rgba(0, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+}
+
+// ---- Lesson Content Area ----
+.classroom-lesson-content {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 48px;
+  max-width: 900px;
+}
+
+.classroom-lesson {
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $classroom-text;
+    margin: 0 0 32px;
+    line-height: 1.3;
+  }
+
+  &__video {
+    margin-bottom: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0e0e0e;
+    aspect-ratio: 16 / 9;
+
+    iframe,
+    video {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  }
+
+  // Markdown content styling
+  &__content {
+    color: #d4d4d4;
+    font-size: 16px;
+    line-height: 1.75;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $classroom-text;
+      margin: 32px 0 16px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 18px; }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    a {
+      color: $classroom-accent;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover { color: $classroom-text; }
+    }
+
+    ul, ol {
+      margin: 0 0 16px;
+      padding-left: 24px;
+
+      li {
+        margin-bottom: 8px;
+      }
+    }
+
+    code {
+      background: #1a1a1a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: $classroom-accent;
+    }
+
+    pre {
+      background: #0e0e0e;
+      border: 1px solid $classroom-border;
+      border-radius: 8px;
+      padding: 20px;
+      overflow-x: auto;
+      margin: 0 0 16px;
+
+      code {
+        background: none;
+        padding: 0;
+        font-size: 14px;
+        color: #d4d4d4;
+      }
+    }
+
+    blockquote {
+      border-left: 3px solid $classroom-accent;
+      padding: 12px 20px;
+      margin: 0 0 16px;
+      background: rgba(0, 255, 255, 0.03);
+      color: $classroom-text-muted;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 16px;
+
+      th, td {
+        border: 1px solid $classroom-border;
+        padding: 10px 14px;
+        text-align: left;
+      }
+
+      th {
+        background: #0e0e0e;
+        color: $classroom-text;
+        font-weight: 600;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid $classroom-border;
+      margin: 32px 0;
+    }
+  }
+}
+
+// ---- Lesson Actions (Complete + Next) ----
+.classroom-lesson-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid $classroom-border;
+}
+
+.classroom-complete-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid $classroom-border;
+  background: transparent;
+  color: $classroom-text-muted;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: $classroom-accent;
+    color: $classroom-accent;
+  }
+
+  &--completed {
+    border-color: $classroom-accent;
+    color: $classroom-accent;
+    background: rgba(0, 255, 255, 0.05);
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid $classroom-border;
+    border-top-color: $classroom-accent;
+    border-radius: 50%;
+    animation: classroom-spin 0.8s linear infinite;
+  }
+}
+
+.classroom-next-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: $classroom-accent;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  i {
+    transition: transform 0.2s;
+  }
+
+  &:hover i {
+    transform: translateX(3px);
+  }
+}
+
+// ============================================
+// Enroll Button / Overlay
+// ============================================
+.classroom-enroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+
+  &__overlay {
+    text-align: center;
+    padding: 48px;
+  }
+
+  &__content {
+    max-width: 400px;
+
+    i {
+      font-size: 48px;
+      color: $classroom-text-dim;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      color: $classroom-text;
+      font-size: 24px;
+      margin: 0 0 12px;
+    }
+
+    p {
+      color: $classroom-text-muted;
+      font-size: 14px;
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 8px;
+    background: $classroom-accent;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  &__spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: classroom-spin 0.8s linear infinite;
+    display: inline-block;
+  }
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: 1024px) {
+  .classroom-lesson-content {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .classroom-header {
+    padding: 12px 16px;
+
+    &__nav {
+      gap: 16px;
+    }
+
+    &__link span {
+      display: none;
+    }
+  }
+
+  .classroom-dashboard {
+    padding: 32px 16px;
+
+    &__header h1 {
+      font-size: 24px;
+    }
+  }
+
+  .classroom-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  // Mobile sidebar
+  .classroom-sidebar-toggle {
+    display: flex;
+  }
+
+  .classroom-sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: $classroom-sidebar-width;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: none;
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  .classroom-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+  }
+
+  .classroom-sidebar {
+    height: 100vh;
+    top: 0;
+    border-right: 1px solid $classroom-border;
+
+    &__close {
+      display: block;
+    }
+  }
+
+  .classroom-lesson-content {
+    padding: 24px 16px;
+  }
+
+  .classroom-lesson {
+    &__title {
+      font-size: 22px;
+    }
+
+    &__content {
+      font-size: 15px;
+    }
+  }
+
+  .classroom-lesson-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .classroom-complete-btn,
+  .classroom-next-btn {
+    justify-content: center;
+  }
+}

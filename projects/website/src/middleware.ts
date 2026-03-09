@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 import type { Database } from '@/types/supabase';
 
 // Routes that require authentication
-const protectedRoutes = ['/dashboard'];
+const protectedRoutes = ['/dashboard', '/classroom'];
 
 export async function middleware(req: NextRequest) {
   let res = NextResponse.next({
@@ -63,8 +63,8 @@ export async function middleware(req: NextRequest) {
 
   // If it's a protected route and no session, redirect to sign in
   if (isProtectedRoute && !session) {
-    const redirectUrl = new URL('/law-firm-rag', req.url);
-    // Add a query param to indicate the user needs to sign in
+    // Redirect to home page with auth requirement indicator
+    const redirectUrl = new URL('/', req.url);
     redirectUrl.searchParams.set('auth', 'required');
     redirectUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(redirectUrl);
