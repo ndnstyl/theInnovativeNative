@@ -6,6 +6,7 @@ import ProtectedRoute from '@/components/common/ProtectedRoute';
 import ProfileHeader from '@/components/members/ProfileHeader';
 import ProfileActivity from '@/components/members/ProfileActivity';
 import RoleManagement from '@/components/members/RoleManagement';
+import ActivityChart from '@/components/members/ActivityChart';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRole } from '@/hooks/useRole';
 import { useFollow } from '@/hooks/useFollow';
@@ -132,6 +133,7 @@ const MemberProfilePage = () => {
                 />
               )}
 
+              <ActivityChart userId={member.id} />
               <ProfileActivity userId={member.id} />
             </>
           ) : null}
