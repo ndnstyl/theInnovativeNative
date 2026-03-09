@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthContext';
 import AuthModal from '@/components/auth/AuthModal';
+import UnreadBadge from '@/components/messaging/UnreadBadge';
+import { useUnreadCount } from '@/hooks/useUnreadCount';
 
 interface ClassroomLayoutProps {
   title?: string;
@@ -12,6 +14,7 @@ interface ClassroomLayoutProps {
 
 const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) => {
   const { session, isLoading, profile } = useAuth();
+  const unreadCount = useUnreadCount();
   const router = useRouter();
   const [showAuth, setShowAuth] = useState(false);
 
@@ -82,6 +85,11 @@ const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) =>
             <Link href="/members" className={`classroom-header__link ${router.pathname.startsWith('/members') ? 'active' : ''}`}>
               <i className="fa-solid fa-users"></i>
               Members
+            </Link>
+            <Link href="/messages" className={`classroom-header__link ${router.pathname.startsWith('/messages') ? 'active' : ''}`}>
+              <i className="fa-regular fa-comment-dots"></i>
+              Messages
+              <UnreadBadge count={unreadCount} />
             </Link>
             <Link href="/community/calendar" className={`classroom-header__link ${router.pathname.startsWith('/community/calendar') ? 'active' : ''}`}>
               <i className="fa-regular fa-calendar"></i>

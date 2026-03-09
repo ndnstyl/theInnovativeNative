@@ -1114,6 +1114,109 @@ export interface Database {
         };
         Relationships: [];
       };
+      conversations: {
+        Row: {
+          id: string;
+          community_id: string;
+          last_message_at: string | null;
+          last_message_preview: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+        };
+        Update: {
+          last_message_at?: string | null;
+          last_message_preview?: string | null;
+        };
+        Relationships: [];
+      };
+      conversation_participants: {
+        Row: {
+          id: string;
+          conversation_id: string;
+          user_id: string;
+          last_read_at: string | null;
+          last_read_message_id: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          conversation_id: string;
+          user_id: string;
+        };
+        Update: {
+          last_read_at?: string | null;
+          last_read_message_id?: string | null;
+        };
+        Relationships: [];
+      };
+      messages: {
+        Row: {
+          id: string;
+          conversation_id: string;
+          sender_id: string;
+          body: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          conversation_id: string;
+          sender_id: string;
+          body: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      member_blocks: {
+        Row: {
+          blocker_id: string;
+          blocked_id: string;
+          created_at: string;
+        };
+        Insert: {
+          blocker_id: string;
+          blocked_id: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      conversation_mutes: {
+        Row: {
+          user_id: string;
+          conversation_id: string;
+          created_at: string;
+        };
+        Insert: {
+          user_id: string;
+          conversation_id: string;
+        };
+        Update: {};
+        Relationships: [];
+      };
+      autodm_config: {
+        Row: {
+          id: string;
+          community_id: string;
+          admin_user_id: string;
+          message_content: string;
+          is_enabled: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          community_id: string;
+          admin_user_id: string;
+          message_content: string;
+          is_enabled?: boolean;
+        };
+        Update: {
+          message_content?: string;
+          is_enabled?: boolean;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -1192,6 +1295,30 @@ export interface Database {
           p_event_id: string;
         };
         Returns: void;
+      };
+      get_or_create_conversation: {
+        Args: {
+          p_other_user_id: string;
+        };
+        Returns: string;
+      };
+      get_unread_conversation_count: {
+        Args: Record<string, never>;
+        Returns: number;
+      };
+      search_messages: {
+        Args: {
+          p_conversation_id: string;
+          p_query: string;
+          p_limit?: number;
+        };
+        Returns: {
+          id: string;
+          body: string;
+          sender_id: string;
+          created_at: string;
+          rank: number;
+        }[];
       };
     };
     Enums: {
@@ -1325,6 +1452,15 @@ export interface ModuleWithDripStatus extends ModuleWithLessons {
   unlocks_at: Date | null;
   drip_days: number;
 }
+
+// Messaging types
+export type Conversation = Database['public']['Tables']['conversations']['Row'];
+export type ConversationParticipant = Database['public']['Tables']['conversation_participants']['Row'];
+export type Message = Database['public']['Tables']['messages']['Row'];
+export type MessageInsert = Database['public']['Tables']['messages']['Insert'];
+export type MemberBlock = Database['public']['Tables']['member_blocks']['Row'];
+export type ConversationMute = Database['public']['Tables']['conversation_mutes']['Row'];
+export type AutoDMConfig = Database['public']['Tables']['autodm_config']['Row'];
 
 export interface StudentProgressSummary {
   course_id: string;
