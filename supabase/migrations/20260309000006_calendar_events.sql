@@ -186,14 +186,14 @@ BEGIN
   SELECT * INTO v_event FROM events WHERE id = p_event_id;
   IF v_event IS NULL THEN RETURN; END IF;
 
-  v_duration := v_event.ends_at - v_event.starts_at;
+  v_duration := v_event.end_time - v_event.start_time;
   v_count := COALESCE(v_event.max_attendees, 1); -- reuse for recurrence_count if needed
 
   -- For recurrence, use recurrence_rule
   IF v_event.recurrence_rule IS NULL OR v_event.recurrence_rule = '' THEN
     -- Single event: create one occurrence
     INSERT INTO event_occurrences (event_id, community_id, start_time, end_time)
-    VALUES (p_event_id, v_event.community_id, v_event.starts_at, v_event.ends_at)
+    VALUES (p_event_id, v_event.community_id, v_event.start_time, v_event.end_time)
     ON CONFLICT DO NOTHING;
     RETURN;
   END IF;
@@ -204,13 +204,13 @@ BEGIN
   FOR i IN 0..v_count-1 LOOP
     CASE v_event.recurrence_rule
       WHEN 'daily' THEN
-        v_start := v_event.starts_at + (i || ' days')::interval;
+        v_start := v_event.start_time + (i || ' days')::interval;
       WHEN 'weekly' THEN
-        v_start := v_event.starts_at + (i * 7 || ' days')::interval;
+        v_start := v_event.start_time + (i * 7 || ' days')::interval;
       WHEN 'monthly' THEN
-        v_start := v_event.starts_at + (i || ' months')::interval;
+        v_start := v_event.start_time + (i || ' months')::interval;
       ELSE
-        v_start := v_event.starts_at;
+        v_start := v_event.start_time;
     END CASE;
 
     v_end := v_start + v_duration;

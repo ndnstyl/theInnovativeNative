@@ -20,7 +20,7 @@ interface CaseStudy {
     context: string;
     observedSignals: string[];
     whatLeadershipBelieved: string;
-    diagnosis: string;
+    rootCause: string;
     intervention: string[];
     outcome: string[];
   };
@@ -32,7 +32,7 @@ const caseStudies: CaseStudy[] = [
     title: "Paid Acquisition at Scale",
     subtitle: "Personal Injury Law",
     category: "Case Study",
-    description: "$450-600k/mo spend showing 'stable' performance. Diagnosed structural saturation masked by platform optics.",
+    description: "$450-600k/mo spend showing 'stable' performance. Found structural saturation masked by platform optics.",
     result: "Cost per qualified case improved 25-30%",
     image: eleven,
     fullContent: {
@@ -44,7 +44,7 @@ const caseStudies: CaseStudy[] = [
         "Intake teams reported lower case quality despite higher lead counts"
       ],
       whatLeadershipBelieved: "Performance volatility was attributed to execution noise and competitive pressure. The assumed solution was tighter optimization and incremental budget increases to offset rising CPCs.",
-      diagnosis: "The system had reached structural saturation. Marginal CPA was increasing faster than volume gains, indicating diminishing returns. Branded and familiar segments were emotionally protected due to historical success, while higher-variance, long-term value segments were being cut during short reporting windows. Intake capacity and lead quality were not represented in primary decision metrics, creating false confidence.",
+      rootCause: "The system had hit structural saturation. Marginal CPA was climbing faster than volume gains — diminishing returns across the board. Branded and familiar segments were being protected out of comfort, not performance, while higher-variance segments with real long-term value kept getting cut. Intake capacity and lead quality weren't in the decision metrics, so the numbers told a comfortable lie.",
       intervention: [
         "Reframed success metrics around intake-qualified cases rather than raw lead volume",
         "Rebuilt search and LSA account structure to expose query-level marginal CPA behavior",
@@ -75,7 +75,7 @@ const caseStudies: CaseStudy[] = [
         "Optimization velocity increased while outcome predictability declined"
       ],
       whatLeadershipBelieved: "More dashboards, more data, and faster optimization cycles would eventually surface clarity and restore performance.",
-      diagnosis: "The system rewarded activity and narrative alignment, not causality. Reporting complexity masked true drivers of performance. Teams optimized to defend prior decisions rather than test economic reality, resulting in constant motion with diminishing returns.",
+      rootCause: "The system rewarded activity and narrative alignment, not causality. Reporting complexity masked true performance drivers. Teams were optimizing to defend past decisions instead of testing what actually moves revenue — constant motion, diminishing returns.",
       intervention: [
         "Removed non-causal metrics, reducing tracked KPIs by approximately 60–65%",
         "Introduced system-level thresholds tied to revenue, retention, and intake quality",
@@ -104,7 +104,7 @@ const caseStudies: CaseStudy[] = [
         "Budget reallocation decisions were made on 14–30 day performance windows"
       ],
       whatLeadershipBelieved: "High-variance segments were inherently risky and should be deprioritized in favor of stable performers.",
-      diagnosis: "Evaluation windows were misaligned with economic reality. High-variance segments were producing disproportionate long-term value but were repeatedly cut due to fear-based optimization and short-term reporting pressure.",
+      rootCause: "Evaluation windows were misaligned with economic reality. High-variance segments were producing outsized long-term value but kept getting cut because short reporting windows made them look unstable. Fear-based optimization was killing the best-performing segments.",
       intervention: [
         "Isolated high-variance segments from core optimization cycles",
         "Protected approximately 15–20% of total spend from short-term suppression",
@@ -122,7 +122,7 @@ const caseStudies: CaseStudy[] = [
     title: "Organizational Fear",
     subtitle: "System Constraint",
     category: "Case Study",
-    description: "Admitting the system was wrong felt riskier than stagnation. Cosmetic optimization replaced structural correction.",
+    description: "Admitting the system was wrong felt riskier than stagnation. Surface-level tweaks replaced the rebuild that was actually needed.",
     result: "Efficiency improved 18-22% in two quarters",
     image: sixteen,
     fullContent: {
@@ -133,7 +133,7 @@ const caseStudies: CaseStudy[] = [
         "Optimization activity increased while confidence in outcomes declined"
       ],
       whatLeadershipBelieved: "Admitting the system was wrong would undermine confidence and create organizational risk.",
-      diagnosis: "Fear of being wrong outweighed fear of stagnation. Cosmetic optimization replaced structural correction. The true constraint was organizational, not technical or tactical.",
+      rootCause: "Fear of being wrong outweighed fear of stagnation. Surface-level optimization replaced the rebuild that was actually needed. The true constraint was organizational, not technical or tactical.",
       intervention: [
         "Explicitly named organizational fear as a limiting variable in performance discussions",
         "Modeled the cost of inaction versus re-architecture over 6- and 12-month horizons",
@@ -381,10 +381,10 @@ const PortfolioMain = () => {
                 </p>
               </div>
 
-              {/* Observed Signals */}
+              {/* What The Data Showed */}
               <div style={{ marginBottom: '24px' }}>
                 <h4 style={{ color: '#00FFFF', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-                  Observed Signals
+                  What The Data Showed
                 </h4>
                 <ul style={{ color: '#d0d0d0', lineHeight: 1.7, paddingLeft: '20px' }}>
                   {selectedStudy.fullContent.observedSignals.map((signal, idx) => (
@@ -393,30 +393,30 @@ const PortfolioMain = () => {
                 </ul>
               </div>
 
-              {/* What Leadership Believed */}
+              {/* The Assumption */}
               <div style={{ marginBottom: '24px' }}>
                 <h4 style={{ color: '#00FFFF', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-                  What Leadership Believed
+                  The Assumption
                 </h4>
                 <p style={{ color: '#d0d0d0', lineHeight: 1.7, fontStyle: 'italic' }}>
                   {selectedStudy.fullContent.whatLeadershipBelieved}
                 </p>
               </div>
 
-              {/* Diagnosis */}
+              {/* Root Cause */}
               <div style={{ marginBottom: '24px' }}>
                 <h4 style={{ color: '#00FFFF', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-                  Diagnosis
+                  What Was Actually Broken
                 </h4>
                 <p style={{ color: '#d0d0d0', lineHeight: 1.7 }}>
-                  {selectedStudy.fullContent.diagnosis}
+                  {selectedStudy.fullContent.rootCause}
                 </p>
               </div>
 
-              {/* Intervention */}
+              {/* What We Built */}
               <div style={{ marginBottom: '24px' }}>
                 <h4 style={{ color: '#00FFFF', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-                  Intervention
+                  What We Built
                 </h4>
                 <ul style={{ color: '#d0d0d0', lineHeight: 1.7, paddingLeft: '20px' }}>
                   {selectedStudy.fullContent.intervention.map((item, idx) => (

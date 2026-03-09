@@ -47,7 +47,7 @@ const experienceRoles: ExperienceRole[] = [
     tech: ["n8n", "Supabase", "Airtable", "Gemini", "HubSpot", "Twilio"],
   },
   {
-    title: "Digital Media Consultant",
+    title: "Digital Media Director",
     company: "The Innovative Native",
     dates: "04/2015 - Present",
     bullets: [
@@ -146,9 +146,9 @@ const skillCategories: SkillCategory[] = [
 const timeCategories: TimeCategory[] = [
   {
     letter: "A",
-    name: "Systems Diagnosis",
+    name: "Systems Analysis",
     percentage: 25,
-    description: "Pattern recognition across growth systems. Identifying structural vs. tactical issues. Separating signal from noise in reporting. Finding what's actually driving results.",
+    description: "Reading growth systems to find what's actually working vs. what looks busy. Separating signal from noise. Identifying where the real leverage is hiding.",
   },
   {
     letter: "B",
@@ -164,15 +164,15 @@ const timeCategories: TimeCategory[] = [
   },
   {
     letter: "D",
-    name: "Decision Empowerment",
+    name: "Decision Infrastructure",
     percentage: 15,
-    description: "Enabling leadership to make confident calls. Translating data into actionable insights. Building dashboards that drive decisions, not just display data. Stakeholder alignment and communication.",
+    description: "Building the dashboards and reporting systems that make good decisions obvious. Data pipelines that drive action, not just display numbers. Clarity over complexity.",
   },
   {
     letter: "E",
-    name: "Executive Oversight",
+    name: "Team & Operations Leadership",
     percentage: 10,
-    description: "Strategic advisory and fractional CMO work. Board-level reporting and communication. Team leadership and capability building. P&L ownership and accountability.",
+    description: "Running the marketing function end-to-end. P&L ownership, board-level reporting, team building. Making sure the system runs without me in the room.",
   },
   {
     letter: "F",
@@ -184,11 +184,11 @@ const timeCategories: TimeCategory[] = [
 
 const roleMatches: RoleMatch[] = [
   {
-    title: "Fractional CMO",
-    tagline: "Strategic leadership for organizations needing structural correction, not incremental optimization.",
+    title: "Head of Growth / Marketing Lead",
+    tagline: "Hands-on leadership for teams that need their growth engine rebuilt, not tweaked.",
     keyResponsibilities: [
       "Lead marketing strategy and team direction at the executive level",
-      "Diagnose systemic issues in growth systems and implement corrective architecture",
+      "Identify what's broken in growth systems and rebuild the architecture",
       "Own P&L accountability and board-level reporting",
       "Build and mentor high-performing marketing teams",
       "Align marketing efforts with business objectives and revenue targets",
@@ -544,7 +544,7 @@ const ProfessionalExperience = () => {
   const renderSummaryModal = () => (
     <div>
       <p style={{ color: '#d0d0d0', lineHeight: 1.8, marginBottom: '24px', fontSize: '16px' }}>
-        Senior Growth Marketing leader with 19+ years of experience. I&apos;m typically brought in when leadership senses something is wrong but cannot articulate why.
+        Senior Growth Marketing leader with 19+ years building systems that actually work. I specialize in replacing fragmented tools and manual processes with AI infrastructure that runs without babysitting.
       </p>
 
       <h4 style={{ color: '#00FFFF', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
@@ -731,9 +731,9 @@ const ProfessionalExperience = () => {
         borderRadius: '12px',
         marginBottom: '28px',
       }}>
-        <h3 style={{ color: '#fff', fontSize: '20px', marginBottom: '8px' }}>Data-Driven Diagnosis</h3>
+        <h3 style={{ color: '#fff', fontSize: '20px', marginBottom: '8px' }}>Systems Pattern Recognition</h3>
         <p style={{ color: '#d0d0d0', lineHeight: 1.7 }}>
-          Identifying when performance signals are misleading. Separating what&apos;s actually causal from what merely appears productive. Finding where systems are lying, where reporting is comforting.
+          Reading growth systems to find what&apos;s actually driving results vs. what just looks busy. Separating real signal from comfortable reporting. Here&apos;s what actually works — and what&apos;s wasting your budget.
         </p>
       </div>
 
@@ -745,7 +745,7 @@ const ProfessionalExperience = () => {
         <h5 style={{ color: '#fff', fontSize: '15px', marginBottom: '8px' }}>Paid Acquisition Plateau ($450-600K/mo)</h5>
         <ul style={{ color: '#d0d0d0', lineHeight: 1.7, paddingLeft: '20px' }}>
           <li style={{ marginBottom: '4px' }}>Everyone said performance was &ldquo;stable&rdquo;</li>
-          <li style={{ marginBottom: '4px' }}>Diagnosed: Structural saturation masked by platform optics</li>
+          <li style={{ marginBottom: '4px' }}>Found: Structural saturation masked by platform optics</li>
           <li style={{ marginBottom: '4px' }}>Found: Emotionally protected segments consuming budget</li>
           <li>Result: 25-30% cost improvement after reframing metrics</li>
         </ul>
@@ -755,7 +755,7 @@ const ProfessionalExperience = () => {
         <h5 style={{ color: '#fff', fontSize: '15px', marginBottom: '8px' }}>System Noise vs Signal (120 KPIs)</h5>
         <ul style={{ color: '#d0d0d0', lineHeight: 1.7, paddingLeft: '20px' }}>
           <li style={{ marginBottom: '4px' }}>Teams spending 30-40% capacity on non-causal optimization</li>
-          <li style={{ marginBottom: '4px' }}>Diagnosis: Reporting complexity masking true drivers</li>
+          <li style={{ marginBottom: '4px' }}>Root cause: Reporting complexity masking true drivers</li>
           <li style={{ marginBottom: '4px' }}>Intervention: Cut KPIs by 60-65%</li>
           <li>Result: 18-22% efficiency improvement, system became explainable</li>
         </ul>
@@ -780,7 +780,7 @@ const ProfessionalExperience = () => {
   const renderMyTimeModal = () => (
     <div>
       <p style={{ color: '#d0d0d0', lineHeight: 1.7, marginBottom: '28px' }}>
-        How I allocate focus across engagements:
+        How I split my time across projects:
       </p>
 
       {timeCategories.map((cat, idx) => (
@@ -832,7 +832,7 @@ const ProfessionalExperience = () => {
         How Psychology Informs My Work
       </h4>
       <ul style={{ color: '#d0d0d0', lineHeight: 1.7, paddingLeft: '20px' }}>
-        <li style={{ marginBottom: '8px' }}>Understanding cognitive biases that affect decision-making (both in consumers and stakeholders)</li>
+        <li style={{ marginBottom: '8px' }}>Understanding cognitive biases that affect decision-making (both in users and teams)</li>
         <li style={{ marginBottom: '8px' }}>Behavioral science principles applied to conversion optimization</li>
         <li style={{ marginBottom: '8px' }}>Recognition of organizational dynamics and resistance to change</li>
         <li>User research methodology and qualitative analysis</li>
@@ -845,7 +845,7 @@ const ProfessionalExperience = () => {
       <style>{styles}</style>
       <CmnBanner
         title="Michael Soto"
-        navigation="Senior Marketer & AI Growth Strategist"
+        navigation="AI Systems Builder & Growth Engineer"
       />
 
       {/* Interactive Resume Section */}
@@ -871,7 +871,7 @@ const ProfessionalExperience = () => {
               <div style={{ marginBottom: '20px' }}>
                 <ResumeCard title="Summary" onClick={() => setActiveModal('summary')}>
                   <p style={{ color: '#d0d0d0', fontSize: '14px', lineHeight: 1.6 }}>
-                    Senior Growth Marketing leader with 19+ years of experience. Brought in when leadership senses something is wrong but cannot articulate why.
+                    19+ years building growth systems. I replace fragmented SaaS stacks and manual processes with AI infrastructure that runs itself.
                   </p>
                 </ResumeCard>
               </div>
@@ -900,7 +900,7 @@ const ProfessionalExperience = () => {
               <div style={{ marginBottom: '20px' }}>
                 <ResumeCard title="Strengths" onClick={() => setActiveModal('strengths')}>
                   <p style={{ color: '#fff', fontSize: '16px', fontWeight: 600, marginBottom: '4px' }}>Data-Driven</p>
-                  <p style={{ color: '#888', fontSize: '13px' }}>Diagnosing structural failure in growth systems</p>
+                  <p style={{ color: '#888', fontSize: '13px' }}>Finding and fixing what's actually broken in growth systems</p>
                 </ResumeCard>
               </div>
             </div>
@@ -1018,8 +1018,8 @@ const ProfessionalExperience = () => {
                 Roles Where I Deliver the Most Impact
               </h2>
               <p style={{ color: '#a0a0a0', maxWidth: '700px', margin: '0 auto' }}>
-                Based on 19+ years of pattern recognition across growth systems, these are the roles
-                where my experience creates the highest leverage.
+                19+ years of building growth systems. These are the roles
+                where I create the highest leverage.
               </p>
             </div>
           </div>
@@ -1065,11 +1065,11 @@ const ProfessionalExperience = () => {
                 Let&apos;s Talk
               </h2>
               <p style={{ color: '#a0a0a0', maxWidth: '500px', margin: '20px auto' }}>
-                Looking for a growth marketing leader or AI automation expert?
-                Schedule a conversation.
+                Need AI systems that replace your fragmented tool stack?
+                Let&apos;s talk about what you&apos;re building.
               </p>
               <button onClick={openCalendly} className="btn btn--secondary">
-                Book Discovery Call
+                Book a Call
               </button>
               <p style={{ color: '#a0a0a0', marginTop: '20px' }}>
                 Or email:{' '}

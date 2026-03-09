@@ -68,10 +68,10 @@ BEGIN
            c.id::text,
            c.title::text,
            COALESCE(c.description, '')::text,
-           ('/classroom/' || c.slug)::text,
+           ('/classroom/' || c.id)::text,
            1.0::real
     FROM courses c
-    WHERE c.is_published = true
+    WHERE c.published = true
       AND (c.title ILIKE '%' || p_query || '%' OR c.description ILIKE '%' || p_query || '%')
     LIMIT p_limit;
   END IF;

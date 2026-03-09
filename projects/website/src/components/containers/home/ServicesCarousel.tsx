@@ -7,79 +7,35 @@ import "swiper/swiper-bundle.css";
 const services = [
   {
     number: "01",
-    title: "Digital Marketing",
+    title: "AI System Design",
     items: [
-      "PPC strategy and execution across Google Ads and Meta",
-      "Local Services Ads optimization and dispute management",
-      "Funnel and landing page conversion optimization",
-      "Creative testing systems for paid media at scale",
-      "Attribution and performance analytics tied to revenue",
+      "Custom AI agents that handle real work, not demos",
+      "Lead intake, qualification, and routing that runs without you",
+      "Decision-support systems built around how your team actually operates",
+      "Human-in-the-loop controls so nothing goes rogue",
+      "Architecture that holds up when attention moves elsewhere",
     ],
   },
   {
     number: "02",
-    title: "AI Systems & Automation",
+    title: "Automation Infrastructure",
     items: [
-      "AI-powered intake, lead qualification, and routing",
-      "n8n-based workflow automation across marketing and ops",
-      "AI agents for research, content, and decision support",
-      "CRM automation with Airtable, Supabase, and custom logic",
-      "Human-in-the-loop systems for compliance and control",
+      "n8n workflow builds connecting your entire stack end to end",
+      "CRM and data pipeline automation across Airtable, Supabase, and APIs",
+      "Speed-to-lead systems that close the gap between inquiry and response",
+      "Content production pipelines from script to publish",
+      "Monitoring and fallback logic so things fail gracefully, not silently",
     ],
   },
   {
     number: "03",
-    title: "AI-First Growth Strategy",
+    title: "AI Training & Education",
     items: [
-      "AI readiness audits and system gap analysis",
-      "Growth stack design from traffic to revenue",
-      "KPI frameworks aligned to business outcomes",
-      "Experimentation systems for compounding gains",
-      "Strategic advisory for AI adoption without chaos",
-    ],
-  },
-  {
-    number: "04",
-    title: "Content & Distribution Systems",
-    items: [
-      "Short-form and long-form content engines",
-      "Viral research and trend intelligence pipelines",
-      "AI-assisted scripting and creative ideation",
-      "Cross-platform distribution workflows",
-      "Performance feedback loops tied to engagement and leads",
-    ],
-  },
-  {
-    number: "05",
-    title: "Sales & Revenue Operations",
-    items: [
-      "Lead-to-close workflow design",
-      "Speed-to-lead and response automation",
-      "Sales pipeline visibility and forecasting",
-      "Call tracking and qualification intelligence",
-      "Revenue attribution across channels",
-    ],
-  },
-  {
-    number: "06",
-    title: "Brand & Positioning Systems",
-    items: [
-      "Brand voice and messaging frameworks",
-      "Visual brand system extraction and consistency tools",
-      "Thought leadership positioning for founders",
-      "Offer architecture and narrative clarity",
-      "Trust-first authority building in regulated industries",
-    ],
-  },
-  {
-    number: "07",
-    title: "Compliance-Aware AI Implementations",
-    items: [
-      "HIPAA and ABA-adjacent workflow design",
-      "Data handling and access control strategies",
-      "AI usage guardrails for teams",
-      "Documentation-first system builds",
-      "Risk-aware automation planning",
+      "AI readiness audits that tell you where you actually stand",
+      "Hands-on workshops for teams adopting AI tools for the first time",
+      "Prompt engineering and workflow design training",
+      "Playbooks your team can run without calling you back",
+      "Ongoing advisory for teams scaling AI across departments",
     ],
   },
 ];
@@ -108,7 +64,7 @@ const ServicesCarousel = () => {
               SERVICES
               <i className="fa-solid fa-arrow-right"></i>
             </span>
-            <h2 className="title title-anim mt-3">What I Offer</h2>
+            <h2 className="title title-anim mt-3">What I Build</h2>
           </div>
         </div>
         <div className="row">
@@ -135,9 +91,6 @@ const ServicesCarousel = () => {
                 observeParents={true}
                 className="service-t__slider"
                 breakpoints={{
-                  1400: {
-                    slidesPerView: 4,
-                  },
                   1200: {
                     slidesPerView: 3,
                   },
