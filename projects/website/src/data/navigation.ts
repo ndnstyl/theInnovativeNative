@@ -11,38 +11,12 @@ export interface NavItem {
 }
 
 export const navItems: NavItem[] = [
-  // Original pages
   {
-    label: "Home",
-    href: "/",
+    label: "What We Build",
+    href: "/#chatgpt-gap",
     isCta: false,
     children: null,
   },
-  {
-    label: "Portfolio",
-    href: "/portfolio",
-    isCta: false,
-    children: null,
-  },
-  {
-    label: "Templates",
-    href: "/templates",
-    isCta: false,
-    children: null,
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    isCta: false,
-    children: null,
-  },
-  {
-    label: "Experience",
-    href: "/professionalExperience",
-    isCta: false,
-    children: null,
-  },
-  // New additions
   {
     label: "Proof Systems",
     href: "/#proof-systems",
@@ -50,8 +24,14 @@ export const navItems: NavItem[] = [
     children: null,
   },
   {
-    label: "Classroom",
+    label: "Learn",
     href: "/classroom",
+    isCta: false,
+    children: null,
+  },
+  {
+    label: "About",
+    href: "/professionalExperience",
     isCta: false,
     children: null,
   },

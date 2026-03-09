@@ -23,13 +23,12 @@ const HomeOffer = () => {
                 <i className="fa-solid fa-arrow-right"></i>
               </span>
               <h2 className="title title-anim">
-                Three Ways We Deploy AI Into Your Business
+                Here&apos;s How the Systems Get Built
               </h2>
               <div className="paragraph">
                 <p>
-                  Every business is different, but the pattern is the same —
-                  replace disconnected tools with integrated AI systems.
-                  Here&apos;s how we do it.
+                  The pattern is the same — replace disconnected tools with
+                  integrated AI systems. Here&apos;s what that looks like.
                 </p>
               </div>
               <div className="section__content-cta">
