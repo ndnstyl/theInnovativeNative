@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import star from "public/images/offer/star.png";
+import { serviceOfferings } from "@/data/homepage";
 
 const HomeOffer = () => {
   const openCalendly = () => {
@@ -18,18 +19,17 @@ const HomeOffer = () => {
           <div className="col-12 col-lg-5">
             <div className="offer__content section__content">
               <span className="sub-title">
-                HOW I HELP
+                WHAT WE BUILD
                 <i className="fa-solid fa-arrow-right"></i>
               </span>
               <h2 className="title title-anim">
-                Systems That Thrive At Scale
+                Three Ways We Deploy AI Into Your Business
               </h2>
               <div className="paragraph">
                 <p>
-                  I don&apos;t build automations. I build systems that thrive at scale—systems
-                  with clear documentation, predictable failure modes, and logic that any
-                  competent operator can maintain. No tribal knowledge required. No single
-                  point of failure when the original builder moves on.
+                  Every business is different, but the pattern is the same —
+                  replace disconnected tools with integrated AI systems.
+                  Here&apos;s how we do it.
                 </p>
               </div>
               <div className="section__content-cta">
@@ -41,70 +41,31 @@ const HomeOffer = () => {
           </div>
           <div className="col-12 col-lg-7 col-xl-6 offset-xl-1">
             <div className="offer__cta">
-              <div className="offer__cta-single fade-top">
-                <span className="sub-title">
-                  01
-                  <i className="fa-solid fa-arrow-right"></i>
-                </span>
-                <h2>
-                  <span>
-                    Growth System Diagnosis
-                    <i className="fa-sharp fa-solid fa-arrow-up-right"></i>
+              {serviceOfferings.map((offering, index) => (
+                <div key={offering.id} className="offer__cta-single fade-top">
+                  <span className="sub-title">
+                    {String(index + 1).padStart(2, '0')}
+                    <i className="fa-solid fa-arrow-right"></i>
                   </span>
-                </h2>
-                <p className="offer-description">
-                  Find where your system is lying, where reporting is comforting,
-                  and where assumptions no longer hold.
-                </p>
-              </div>
-              <div className="offer__cta-single fade-top">
-                <span className="sub-title">
-                  02
-                  <i className="fa-solid fa-arrow-right"></i>
-                </span>
-                <h2>
-                  <span>
-                    Automation Orchestration
-                    <i className="fa-sharp fa-solid fa-arrow-up-right"></i>
-                  </span>
-                </h2>
-                <p className="offer-description">
-                  I treat n8n as a control plane, not a task runner. Every workflow
-                  has explicit assumptions, clear contracts, and predictable failure behavior.
-                </p>
-              </div>
-              <div className="offer__cta-single fade-top">
-                <span className="sub-title">
-                  03
-                  <i className="fa-solid fa-arrow-right"></i>
-                </span>
-                <h2>
-                  <span>
-                    AI Implementation
-                    <i className="fa-sharp fa-solid fa-arrow-up-right"></i>
-                  </span>
-                </h2>
-                <p className="offer-description">
-                  AI components as probabilistic services with versioned prompts,
-                  validated outputs, and guardrails between AI behavior and business systems.
-                </p>
-              </div>
-              <div className="offer__cta-single fade-top">
-                <span className="sub-title">
-                  04
-                  <i className="fa-solid fa-arrow-right"></i>
-                </span>
-                <h2>
-                  <span>
-                    Fractional CMO
-                    <i className="fa-sharp fa-solid fa-arrow-up-right"></i>
-                  </span>
-                </h2>
-                <p className="offer-description">
-                  Strategic leadership for teams that need structural correction,
-                  not incremental optimization.
-                </p>
-              </div>
+                  <h2>
+                    <span>
+                      {offering.name}
+                      <i className="fa-sharp fa-solid fa-arrow-up-right"></i>
+                    </span>
+                  </h2>
+                  <p className="offer-description">
+                    {offering.description}
+                  </p>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '12px 0 0 0' }}>
+                    {offering.capabilities.map((cap, i) => (
+                      <li key={i} style={{ color: '#a0a0a0', fontSize: '14px', lineHeight: '1.8', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                        <i className="fa-solid fa-check" style={{ color: '#00FFFF', fontSize: '10px', marginTop: '6px', flexShrink: 0 }}></i>
+                        {cap}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
         </div>

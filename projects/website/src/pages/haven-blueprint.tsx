@@ -16,6 +16,7 @@ import Guarantee from "@/components/containers/haven-blueprint/Guarantee";
 import FaqSection from "@/components/containers/haven-blueprint/FaqSection";
 import FinalCta from "@/components/containers/haven-blueprint/FinalCta";
 import { HAVEN_BLUEPRINT } from "@/data/haven-blueprint";
+import BrandConnector from "@/components/common/BrandConnector";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -204,6 +205,7 @@ const HavenBlueprint = () => {
           <Guarantee />
           <FaqSection />
           <FinalCta scrollToCheckout={scrollToCheckout} />
+          <BrandConnector currentVertical="creative" />
         </main>
 
         {/* Minimal Footer */}

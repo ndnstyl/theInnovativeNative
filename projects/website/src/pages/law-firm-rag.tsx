@@ -14,6 +14,7 @@ import TrustIndicators from "@/components/containers/law-firm-rag/TrustIndicator
 import LegalFaq from "@/components/containers/law-firm-rag/LegalFaq";
 import FinalCta from "@/components/containers/law-firm-rag/FinalCta";
 import RoiCalculatorSection from "@/components/containers/law-firm-rag/RoiCalculatorSection";
+import BrandConnector from "@/components/common/BrandConnector";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,7 +99,7 @@ const LawFirmRag = () => {
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-        <title>Private Legal RAG | Your Firm's Second Brain</title>
+        <title>Private Legal RAG | Your Firm&apos;s Second Brain | The Innovative Native</title>
         <meta
           name="description"
           content="Enterprise AI trains on everyone's law. Your advantage is in your cases. Build a private legal RAG trained on your briefs, your outcomes, your institutional intelligence."
@@ -159,6 +160,7 @@ const LawFirmRag = () => {
           <TrustIndicators />
           <LegalFaq />
           <FinalCta openCalendly={openCalendly} />
+          <BrandConnector currentVertical="legal" />
         </main>
         <ScrollProgressBtn />
       </div>

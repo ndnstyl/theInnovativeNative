@@ -1,0 +1,317 @@
+/* ====
+ --------- Value Ladder / Engagement Tier Section Styles ---------
+ ==== */
+
+// Shared Variables for Value Ladder
+$vl-accent: var(--primary-color);
+$vl-magenta: #FF00FF;
+$vl-bg-dark: #0A0A14;
+$vl-bg-alt: #12121F;
+$vl-surface: #1A1A2E;
+$vl-text-primary: #F5F5F5;
+$vl-text-secondary: #B8B8C8;
+$vl-border: rgba(255, 255, 255, 0.1);
+$vl-border-muted: #3a3a4a;
+
+// ===================================
+// Value Ladder Section
+// ===================================
+.value-ladder {
+  position: relative;
+  z-index: 1;
+  padding: 96px 0;
+  background-color: $vl-bg-dark;
+  overflow: hidden;
+
+  // ---- Section Header ----
+  &__label {
+    color: $vl-accent;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  &__heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: $vl-text-primary;
+    margin-bottom: 16px;
+  }
+
+  &__subheading {
+    font-size: 1.125rem;
+    color: $vl-text-secondary;
+    max-width: 640px;
+    margin: 0 auto 56px;
+    line-height: 1.6;
+  }
+
+  // ---- Tier Track (horizontal at desktop) ----
+  &__track {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+
+    @media (min-width: 992px) {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+    }
+  }
+
+  // ---- Individual Tier ----
+  &__tier {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: $vl-surface;
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+    // Desktop: connecting line between tiers
+    @media (min-width: 992px) {
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: 12px 0 0 12px;
+      }
+
+      &:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+
+      // Connecting arrow pseudo-element between tiers
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(50%, -50%);
+        width: 0;
+        height: 0;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 12px solid rgba(0, 255, 255, 0.25);
+        z-index: 2;
+      }
+    }
+
+    // ---- Tier 1: Learn — Most subdued ----
+    &--1 {
+      border: 1px solid $vl-border-muted;
+
+      .value-ladder__tier-name {
+        color: $vl-text-secondary;
+      }
+
+      .value-ladder__tier-badge {
+        background: rgba(255, 255, 255, 0.05);
+        color: $vl-text-secondary;
+      }
+    }
+
+    // ---- Tier 2: Subtle cyan border ----
+    &--2 {
+      border: 1px solid rgba(0, 255, 255, 0.15);
+
+      .value-ladder__tier-badge {
+        background: rgba(0, 255, 255, 0.06);
+        color: rgba(0, 255, 255, 0.7);
+      }
+    }
+
+    // ---- Tier 3: Cyan border with light glow ----
+    &--3 {
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 16px rgba(0, 255, 255, 0.08);
+
+      .value-ladder__tier-badge {
+        background: rgba(0, 255, 255, 0.1);
+        color: $vl-accent;
+      }
+    }
+
+    // ---- Tier 4: Full neon glow + magenta accent ----
+    &--4 {
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 24px rgba(0, 255, 255, 0.2),
+                  0 0 48px rgba(0, 255, 255, 0.08);
+      background: linear-gradient(
+        180deg,
+        $vl-surface 0%,
+        rgba(0, 255, 255, 0.04) 100%
+      );
+
+      .value-ladder__tier-name {
+        background: linear-gradient(90deg, #00FFFF, $vl-magenta);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .value-ladder__tier-badge {
+        background: rgba(255, 0, 255, 0.1);
+        color: $vl-magenta;
+      }
+
+      &:hover {
+        box-shadow: 0 0 32px rgba(0, 255, 255, 0.3),
+                    0 0 64px rgba(255, 0, 255, 0.1);
+      }
+    }
+  }
+
+  // ---- Tier Name ----
+  &__tier-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $vl-text-primary;
+    margin-bottom: 12px;
+  }
+
+  // ---- Price Range Badge ----
+  &__tier-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  // ---- Tier Description ----
+  &__tier-desc {
+    font-size: 15px;
+    color: $vl-text-secondary;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  // ---- Tier Feature List ----
+  &__tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      color: $vl-text-secondary;
+      line-height: 1.5;
+
+      i {
+        flex-shrink: 0;
+        margin-top: 3px;
+        font-size: 12px;
+        color: $vl-accent;
+      }
+    }
+  }
+
+  // ---- CTA Buttons ----
+  &__tier-cta {
+    margin-top: auto;
+
+    .btn {
+      width: 100%;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-align: center;
+      transition: var(--transition);
+      display: inline-block;
+      text-decoration: none;
+
+      i {
+        margin-left: 8px;
+      }
+    }
+
+    // Ghost / outline button for lower tiers
+    .btn--ghost {
+      background: transparent;
+      color: $vl-text-primary;
+      border: 1px solid $vl-border-muted;
+
+      &:hover {
+        border-color: rgba(0, 255, 255, 0.4);
+        color: $vl-accent;
+      }
+    }
+
+    // Outline cyan for mid tiers
+    .btn--outline-cyan {
+      background: transparent;
+      color: $vl-accent;
+      border: 1px solid rgba(0, 255, 255, 0.4);
+
+      &:hover {
+        background: rgba(0, 255, 255, 0.08);
+        border-color: rgba(0, 255, 255, 0.6);
+        box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+      }
+    }
+
+    // Primary cyan for highest tiers
+    .btn--primary-cyan {
+      background: #00FFFF;
+      color: #0A0A14;
+      border: 1px solid #00FFFF;
+
+      &:hover {
+        background: #00D4D4;
+        border-color: #00D4D4;
+        box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+      }
+    }
+  }
+
+  // ---- Bottom Note ----
+  &__note {
+    margin-top: 48px;
+    text-align: center;
+
+    p {
+      color: $vl-text-secondary;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+
+      a {
+        color: $vl-accent;
+        text-decoration: none;
+        transition: var(--transition);
+
+        &:hover {
+          text-decoration: underline;
+          color: #00D4D4;
+        }
+      }
+    }
+  }
+
+  // ---- Responsive ----
+  @media (max-width: 991px) {
+    padding: 64px 0;
+
+    &__subheading {
+      margin-bottom: 40px;
+    }
+
+    &__tier {
+      padding: 24px;
+    }
+  }
+}
