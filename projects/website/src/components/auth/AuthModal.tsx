@@ -74,7 +74,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, redirectTo }) =>
       });
 
       if (error) {
-        console.error('Auth error:', error);
         setMessage({ type: 'error', text: error.message });
       } else {
         setMessage({
@@ -83,8 +82,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, redirectTo }) =>
         });
         setEmail('');
       }
-    } catch (err) {
-      console.error('Unexpected error:', err);
+    } catch {
       setMessage({ type: 'error', text: 'An unexpected error occurred. Please try again.' });
     } finally {
       setLoading(false);

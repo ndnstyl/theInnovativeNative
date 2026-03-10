@@ -3,7 +3,7 @@
 // Single source of truth for site-wide navigation.
 // =============================================================================
 
-export interface NavItem {
+interface NavItem {
   label: string;
   href: string;
   isCta: boolean;

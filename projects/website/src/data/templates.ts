@@ -151,11 +151,6 @@ export function getAllTemplateSlugs(): string[] {
   return templates.map((t) => t.slug);
 }
 
-export function getTemplatesByCategory(category: string): N8nTemplate[] {
-  if (category === 'all') return templates;
-  return templates.filter((t) => t.categories.includes(category));
-}
-
 export function getRelatedTemplates(currentSlug: string, limit: number = 3): N8nTemplate[] {
   const current = getTemplateBySlug(currentSlug);
   if (!current) return [];

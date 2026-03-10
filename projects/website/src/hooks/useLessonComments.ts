@@ -47,8 +47,8 @@ export function useLessonComments(lessonId: string | undefined) {
       }));
 
       setComments(buildThreads(flat));
-    } catch (err) {
-      console.error('Error fetching lesson comments:', err);
+    } catch {
+      // Fetch failed — empty comments list shown
     } finally {
       setLoading(false);
     }
@@ -72,8 +72,7 @@ export function useLessonComments(lessonId: string | undefined) {
         if (error) throw error;
         await fetchComments();
         return true;
-      } catch (err) {
-        console.error('Error adding comment:', err);
+      } catch {
         return false;
       }
     },
@@ -91,8 +90,7 @@ export function useLessonComments(lessonId: string | undefined) {
         if (error) throw error;
         await fetchComments();
         return true;
-      } catch (err) {
-        console.error('Error editing comment:', err);
+      } catch {
         return false;
       }
     },
@@ -110,8 +108,7 @@ export function useLessonComments(lessonId: string | undefined) {
         if (error) throw error;
         await fetchComments();
         return true;
-      } catch (err) {
-        console.error('Error deleting comment:', err);
+      } catch {
         return false;
       }
     },

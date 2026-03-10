@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { sanitizeHtml } from '@/lib/sanitize';
+import { timeAgo } from '@/lib/utils';
 import { usePost } from '@/hooks/usePost';
 import LikeButton from './LikeButton';
 import CommentThread from './CommentThread';
@@ -8,17 +9,6 @@ import CommentInput from './CommentInput';
 import AttachmentDisplay from './AttachmentDisplay';
 import PollDisplay from './PollDisplay';
 import type { FeedPost } from '@/types/feed';
-
-function timeAgo(dateStr: string): string {
-  const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
-  if (seconds < 60) return 'just now';
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  return `${days}d ago`;
-}
 
 interface PostDetailProps {
   postId: string;

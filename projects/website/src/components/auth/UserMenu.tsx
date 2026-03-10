@@ -44,8 +44,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
       const supabase = createBrowserClient();
       await supabase.auth.signOut();
       router.push('/law-firm-rag');
-    } catch (error) {
-      console.error('Error signing out:', error);
+    } catch {
+      // Sign-out failed — user can retry
     } finally {
       setIsLoading(false);
     }

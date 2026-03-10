@@ -23,8 +23,8 @@ export function useLessonAttachments(lessonId: string | undefined) {
 
       if (error) throw error;
       setAttachments(data ?? []);
-    } catch (err) {
-      console.error('Error fetching attachments:', err);
+    } catch {
+      // Fetch failed — empty attachment list shown
     } finally {
       setLoading(false);
     }
@@ -64,8 +64,7 @@ export function useLessonAttachments(lessonId: string | undefined) {
         if (insertErr) throw insertErr;
         await fetchAttachments();
         return data;
-      } catch (err) {
-        console.error('Error uploading attachment:', err);
+      } catch {
         return null;
       } finally {
         setUploading(false);
@@ -82,7 +81,7 @@ export function useLessonAttachments(lessonId: string | undefined) {
           .from('classroom')
           .remove([attachment.file_path]);
 
-        if (storageErr) console.warn('Storage delete failed:', storageErr);
+        // Storage delete failure is non-critical — DB record still removed
 
         // Delete from database
         const { error: dbErr } = await supabaseClient
@@ -93,8 +92,7 @@ export function useLessonAttachments(lessonId: string | undefined) {
         if (dbErr) throw dbErr;
         await fetchAttachments();
         return true;
-      } catch (err) {
-        console.error('Error deleting attachment:', err);
+      } catch {
         return false;
       }
     },

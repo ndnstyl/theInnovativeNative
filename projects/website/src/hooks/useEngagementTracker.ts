@@ -46,8 +46,8 @@ export function useEngagementTracker() {
           event_type: eventType,
           metadata: (eventMeta ?? {}) as Json,
         })
-        .then(({ error }) => {
-          if (error) console.warn('[engagement] tracking failed:', error.message);
+        .then(() => {
+          // Fire-and-forget — failures are non-critical
         });
     },
     [supabaseClient, session?.user?.id]

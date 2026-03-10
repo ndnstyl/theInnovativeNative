@@ -1,24 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { sanitizeHtml } from '@/lib/sanitize';
+import { timeAgo } from '@/lib/utils';
 import LikeButton from './LikeButton';
 import type { FeedPost } from '@/types/feed';
 
 interface PostCardProps {
   post: FeedPost;
   onPostDeleted?: () => void;
-}
-
-function timeAgo(dateStr: string): string {
-  const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
-  if (seconds < 60) return 'just now';
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}d ago`;
-  return new Date(dateStr).toLocaleDateString();
 }
 
 function truncateHtml(html: string, maxLen: number): { text: string; truncated: boolean } {

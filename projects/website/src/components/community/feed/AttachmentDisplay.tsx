@@ -1,14 +1,9 @@
 import React from 'react';
+import { formatFileSize } from '@/lib/utils';
 import type { FeedAttachment } from '@/types/feed';
 
 interface AttachmentDisplayProps {
   attachments: FeedAttachment[];
-}
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 function getFileIcon(type: string): string {

@@ -96,8 +96,8 @@ export function useCourseAnalytics(courseId: string | undefined) {
       });
 
       setStudents(studentList.sort((a, b) => b.progress_pct - a.progress_pct));
-    } catch (err) {
-      console.error('Error fetching course analytics:', err);
+    } catch {
+      // Analytics fetch failed — null/empty state shown
     } finally {
       setLoading(false);
     }

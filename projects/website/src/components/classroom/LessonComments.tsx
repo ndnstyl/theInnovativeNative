@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLessonComments } from '@/hooks/useLessonComments';
 import { sanitizeHtml } from '@/lib/sanitize';
+import { timeAgo } from '@/lib/utils';
 import type { LessonCommentWithAuthor } from '@/types/supabase';
 
 interface LessonCommentsProps {
@@ -113,17 +114,6 @@ const CommentThread: React.FC<CommentThreadProps> = ({
   depth = 0,
 }) => {
   const [showReply, setShowReply] = useState(false);
-
-  const timeAgo = (dateStr: string) => {
-    const diff = Date.now() - new Date(dateStr).getTime();
-    const mins = Math.floor(diff / 60000);
-    if (mins < 1) return 'just now';
-    if (mins < 60) return `${mins}m ago`;
-    const hours = Math.floor(mins / 60);
-    if (hours < 24) return `${hours}h ago`;
-    const days = Math.floor(hours / 24);
-    return `${days}d ago`;
-  };
 
   return (
     <div className={`classroom-comments__thread ${depth > 0 ? 'classroom-comments__thread--reply' : ''}`}>

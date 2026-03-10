@@ -1,18 +1,13 @@
 import React, { useRef } from 'react';
 import { useLessonAttachments } from '@/hooks/useLessonAttachments';
 import { useEngagementTracker } from '@/hooks/useEngagementTracker';
+import { formatFileSize } from '@/lib/utils';
 import type { LessonAttachment } from '@/types/supabase';
 
 interface AttachmentListProps {
   lessonId: string;
   courseId: string;
   isAdmin?: boolean;
-}
-
-function formatFileSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 function getFileIcon(fileType: string): string {

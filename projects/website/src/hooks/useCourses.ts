@@ -116,8 +116,7 @@ export function useCourses() {
         });
 
         setCourses(enrichedCourses);
-      } catch (err) {
-        console.error('Error fetching courses:', err);
+      } catch {
         setError('Failed to load courses');
       } finally {
         setLoading(false);
@@ -217,8 +216,7 @@ export function useCourse(slug: string | undefined) {
       } else {
         setIsEnrolled(courseData.is_free);
       }
-    } catch (err) {
-      console.error('Error fetching course:', err);
+    } catch {
       setError('Failed to load course');
     } finally {
       setLoading(false);
@@ -269,8 +267,7 @@ export function useMarkComplete() {
           if (error) throw error;
         }
         return true;
-      } catch (err) {
-        console.error('Error toggling completion:', err);
+      } catch {
         return false;
       } finally {
         setLoading(false);
@@ -297,7 +294,6 @@ export function useEnroll() {
       if (course.is_free) return;
 
       if (!course.stripe_price_id) {
-        console.error('Course has no stripe_price_id');
         return;
       }
 
@@ -315,8 +311,8 @@ export function useEnroll() {
         if (data?.url) {
           window.location.href = data.url;
         }
-      } catch (err) {
-        console.error('Checkout error:', err);
+      } catch {
+        // Checkout creation failed — user stays on current page
       } finally {
         setLoading(false);
       }

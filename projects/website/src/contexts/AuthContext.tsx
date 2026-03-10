@@ -35,7 +35,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .single();
 
       if (profileError || !profileData) {
-        console.error('Error fetching profile:', profileError);
         setProfile(null);
         setRole(null);
         setMembershipStatus(null);
@@ -81,8 +80,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
         }
       }
-    } catch (err) {
-      console.error('Error in fetchProfileAndRole:', err);
+    } catch {
+      // Profile/role fetch failed — user remains unauthenticated state
     }
   }, []);
 

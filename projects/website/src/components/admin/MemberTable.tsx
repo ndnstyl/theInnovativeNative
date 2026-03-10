@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ManagedMember } from '@/hooks/useMemberManagement';
+import { timeAgo } from '@/lib/utils';
 
 interface MemberTableProps {
   members: ManagedMember[];
@@ -11,18 +12,6 @@ interface MemberTableProps {
   onChangeRole: (memberId: string, newRole: string) => void;
   onBan: (memberId: string, reason?: string) => void;
   onUnban: (memberId: string) => void;
-}
-
-function timeAgo(date: string | null): string {
-  if (!date) return 'Never';
-  const diff = Date.now() - new Date(date).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return `${mins}m ago`;
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return `${hrs}h ago`;
-  const days = Math.floor(hrs / 24);
-  if (days < 30) return `${days}d ago`;
-  return new Date(date).toLocaleDateString();
 }
 
 const ROLES = ['member', 'moderator', 'admin', 'owner'];
@@ -102,7 +91,7 @@ const MemberTable: React.FC<MemberTableProps> = ({
                 </span>
               </div>
               <div className="member-table__last-active">
-                {timeAgo(member.last_active_at)}
+                {member.last_active_at ? timeAgo(member.last_active_at) : 'Never'}
               </div>
               <div className="member-table__actions">
                 {member.status === 'banned' ? (

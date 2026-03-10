@@ -27,7 +27,6 @@ const AuthCallback = () => {
           const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
           if (exchangeError) {
-            console.error('Error exchanging code for session:', exchangeError);
             setError(exchangeError.message);
             return;
           }
@@ -75,8 +74,7 @@ const AuthCallback = () => {
           } else {
             router.replace('/members');
           }
-        } catch (err) {
-          console.error('Unexpected error during auth callback:', err);
+        } catch {
           setError('An unexpected error occurred during authentication.');
         }
       } else {

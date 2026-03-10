@@ -15,7 +15,7 @@ export interface Vertical {
   icon: string;
 }
 
-export interface ProofSystem {
+interface ProofSystem {
   id: string;
   name: string;
   vertical: string;
@@ -26,7 +26,7 @@ export interface ProofSystem {
   status: "live" | "coming-soon" | "beta";
 }
 
-export interface ValueLadderTier {
+interface ValueLadderTier {
   id: string;
   name: string;
   priceRange: string;
@@ -36,7 +36,7 @@ export interface ValueLadderTier {
   order: number;
 }
 
-export interface ServiceOffering {
+interface ServiceOffering {
   id: string;
   name: string;
   description: string;

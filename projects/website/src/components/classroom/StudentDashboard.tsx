@@ -100,8 +100,8 @@ const StudentDashboard: React.FC = () => {
         });
 
         setCourses(summaries);
-      } catch (err) {
-        console.error('Error fetching student progress:', err);
+      } catch {
+        // Error handled silently — empty course list is shown
       } finally {
         setLoading(false);
       }

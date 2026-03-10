@@ -18,33 +18,35 @@ const LessonEditorPage: React.FC = () => {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [courseId, setCourseId] = useState('');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const loadLesson = useCallback(async () => {
     if (!courseSlug || !lessonSlug) return;
     setLoading(true);
+    setError(null);
 
     try {
-      // Get course by slug
+      // Get course by ID (slug column was removed from schema)
       const { data: courseData } = await supabaseClient
         .from('courses')
         .select('id')
-        .eq('slug', courseSlug as string)
+        .eq('id', courseSlug as string)
         .single();
 
       if (!courseData) return;
       setCourseId(courseData.id);
 
-      // Get lesson by slug + course
+      // Get lesson by ID (slug column was removed from schema)
       const { data: lessonData } = await supabaseClient
         .from('lessons')
         .select('*')
         .eq('course_id', courseData.id)
-        .eq('slug', lessonSlug as string)
+        .eq('id', lessonSlug as string)
         .single();
 
       setLesson(lessonData);
-    } catch (err) {
-      console.error('Error loading lesson:', err);
+    } catch {
+      setError('Failed to load lesson');
     } finally {
       setLoading(false);
     }
