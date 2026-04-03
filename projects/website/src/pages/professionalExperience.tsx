@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Layout from "@/components/layout/Layout";
 import CmnBanner from "@/components/layout/banner/CmnBanner";
+import { CALENDLY_URL } from "@/lib/constants";
 
 // Resume section types
 type SectionId = 'summary' | 'experience' | 'skills' | 'achievements' | 'strengths' | 'mytime' | 'education';
@@ -473,7 +474,7 @@ const ProfessionalExperience = () => {
   const openCalendly = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
+        url: CALENDLY_URL
       });
     }
   };

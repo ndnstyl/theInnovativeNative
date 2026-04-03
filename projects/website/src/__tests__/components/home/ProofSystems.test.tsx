@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import ProofSystems from "@/components/containers/home/ProofSystems";
 import { proofSystems } from "@/data/homepage";
+import { CALENDLY_URL } from "@/lib/constants";
 
 describe("ProofSystems", () => {
   beforeEach(() => {
@@ -67,7 +68,7 @@ describe("ProofSystems", () => {
     });
     fireEvent.click(ctaButton);
     expect((window as any).Calendly.initPopupWidget).toHaveBeenCalledWith({
-      url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+      url: CALENDLY_URL,
     });
   });
 

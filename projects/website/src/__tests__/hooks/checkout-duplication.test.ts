@@ -1,28 +1,17 @@
 /**
- * Checkout Duplication Test Suite
+ * Checkout Consolidation Test Suite
  *
- * This test documents that TWO separate checkout paths exist in the codebase:
+ * Verifies that the checkout path duplication has been resolved:
  *
- *   1. useCourseCheckout (src/hooks/useCourseCheckout.ts)
- *      - Manually builds a URL with query params to a Supabase Edge Function
- *      - Uses window.location.href redirect
- *      - Requires: courseId, courseName, stripePriceId, price
- *      - Calls trackBeginCheckout analytics
- *
- *   2. useEnroll from useCourses (src/hooks/useCourses.ts, line 288-328)
+ *   1. useCourseCheckout (src/hooks/useCourseCheckout.ts) — canonical checkout hook
  *      - Uses supabaseClient.functions.invoke('create-checkout')
- *      - Uses window.location.href redirect from response data.url
- *      - Requires: a Course object with stripe_price_id
- *      - Does NOT call analytics tracking
+ *      - Handles free course guard (is_free)
+ *      - Calls trackBeginCheckout analytics
+ *      - Has try/catch with error state
  *
- * Both paths target the same Supabase Edge Function ('create-checkout') but
- * with different invocation methods and parameter shapes.
- *
- * This duplication is a maintenance risk:
- * - Bug fixes to one path may not be applied to the other
- * - Analytics tracking is inconsistent (only useCourseCheckout tracks)
- * - Different error handling strategies
- * - The success/cancel redirect URLs may diverge
+ *   2. useEnroll from useCourses (src/hooks/useCourses.ts)
+ *      - Delegates to useCourseCheckout internally
+ *      - Maintains backwards-compatible API for EnrollButton
  */
 
 import * as fs from 'fs';
@@ -38,6 +27,7 @@ jest.mock('@/contexts/AuthContext', () => ({
   useAuth: () => ({
     supabaseClient: mockContainer.supabase,
     session: { user: { id: 'user-123', email: 'test@example.com' } },
+    role: 'member',
   }),
 }));
 
@@ -59,137 +49,83 @@ beforeEach(() => {
 });
 
 // ---------------------------------------------------------------------------
-// 1. Both hooks exist and export a checkout function
+// 1. Both hooks exist and export their checkout functions
 // ---------------------------------------------------------------------------
-describe('checkout path duplication', () => {
-  it('useCourseCheckout exports startCheckout', () => {
+describe('checkout consolidation', () => {
+  it('useCourseCheckout exports startCheckout, loading, and error', () => {
     const { result } = renderHook(() => useCourseCheckout());
     expect(typeof result.current.startCheckout).toBe('function');
     expect(typeof result.current.loading).toBe('boolean');
+    expect(result.current.error).toBeNull();
   });
 
-  it('useEnroll exports enroll', () => {
+  it('useEnroll exports enroll and loading (backwards-compatible API)', () => {
     const { result } = renderHook(() => useEnroll());
     expect(typeof result.current.enroll).toBe('function');
     expect(typeof result.current.loading).toBe('boolean');
   });
 
-  it('DUPLICATION: both source files reference "create-checkout" endpoint', () => {
+  it('RESOLVED: both paths now use the same checkout implementation', () => {
     /**
-     * This test proves both paths target the same backend endpoint
-     * by reading the source files directly.
-     *
-     * useCourseCheckout: Builds a URL string manually
-     *   `${SUPABASE_URL}/functions/v1/create-checkout?price_id=...&user_id=...`
-     *
-     * useEnroll: Uses the Supabase SDK
-     *   `supabaseClient.functions.invoke('create-checkout', { body: {...} })`
-     *
-     * This is a code smell -- there should be ONE checkout path.
+     * useEnroll now delegates to useCourseCheckout instead of having
+     * its own inline checkout logic. Verify by checking the source.
      */
     const hooksDir = path.resolve(__dirname, '../../hooks');
-
-    const checkoutSource = fs.readFileSync(
-      path.join(hooksDir, 'useCourseCheckout.ts'),
-      'utf-8'
-    );
     const coursesSource = fs.readFileSync(
       path.join(hooksDir, 'useCourses.ts'),
-      'utf-8'
+      'utf-8',
     );
 
-    // Both files reference 'create-checkout'
-    expect(checkoutSource).toContain('create-checkout');
-    expect(coursesSource).toContain('create-checkout');
-
-    // useCourseCheckout builds URL manually
-    expect(checkoutSource).toContain('functions/v1/create-checkout');
-
-    // useEnroll uses SDK invoke
-    expect(coursesSource).toContain("functions.invoke('create-checkout'");
+    // useEnroll should import and delegate to useCourseCheckout
+    expect(coursesSource).toContain('useCourseCheckout');
+    // useEnroll should NOT directly invoke the edge function anymore
+    expect(coursesSource).not.toContain("functions.invoke('create-checkout'");
   });
 });
 
 // ---------------------------------------------------------------------------
-// 2. Analytics tracking inconsistency
+// 2. Analytics tracking is now consistent
 // ---------------------------------------------------------------------------
-describe('analytics tracking inconsistency', () => {
-  it('useCourseCheckout calls trackBeginCheckout', () => {
-    /**
-     * We verify the import and call exist in the source, since actually
-     * calling startCheckout would trigger window.location.href navigation.
-     */
+describe('analytics tracking', () => {
+  it('useCourseCheckout source contains trackBeginCheckout', () => {
     const hooksDir = path.resolve(__dirname, '../../hooks');
     const source = fs.readFileSync(
       path.join(hooksDir, 'useCourseCheckout.ts'),
-      'utf-8'
+      'utf-8',
     );
 
     expect(source).toContain('trackBeginCheckout');
     expect(source).toContain("import { trackBeginCheckout }");
   });
 
-  it('useEnroll does NOT call trackBeginCheckout -- analytics gap', () => {
+  it('useEnroll inherits analytics tracking via delegation', () => {
     /**
-     * BUG DOCUMENTATION:
-     *
-     * useEnroll (useCourses.ts line 288-328) redirects users to Stripe
-     * checkout but does NOT fire any analytics event. This means:
-     * - Checkout funnels tracked via analytics will undercount conversions
-     * - Any component using useEnroll instead of useCourseCheckout
-     *   will have invisible checkout starts
-     *
-     * useCourseCheckout correctly calls `trackBeginCheckout(courseId, courseName, price)`.
+     * Since useEnroll delegates to useCourseCheckout, all analytics
+     * tracking is handled by the canonical hook. No separate tracking needed.
      */
     const hooksDir = path.resolve(__dirname, '../../hooks');
     const source = fs.readFileSync(
       path.join(hooksDir, 'useCourses.ts'),
-      'utf-8'
+      'utf-8',
     );
 
-    // useCourses does NOT import or call trackBeginCheckout
-    expect(source).not.toContain('trackBeginCheckout');
-  });
-
-  it('useEnroll via SDK invoke does not trigger analytics when called', async () => {
-    mockSupabase.functions.invoke.mockResolvedValue({
-      data: { url: 'https://checkout.stripe.com/session/def' },
-      error: null,
-    });
-
-    const { result } = renderHook(() => useEnroll());
-
-    await act(async () => {
-      await result.current.enroll({
-        id: 'course-2',
-        stripe_price_id: 'price_def',
-        is_free: false,
-      } as any);
-    });
-
-    // trackBeginCheckout was NOT called by useEnroll
-    expect(trackBeginCheckout).not.toHaveBeenCalled();
+    // useCourses should import useCourseCheckout (delegation)
+    expect(source).toContain('useCourseCheckout');
   });
 });
 
 // ---------------------------------------------------------------------------
-// 3. Free course handling differences
+// 3. Free course handling
 // ---------------------------------------------------------------------------
 describe('free course handling', () => {
-  it('useCourseCheckout source has no is_free guard', () => {
-    /**
-     * useCourseCheckout has no check for course.is_free.
-     * If called with a free course, it will still build a Stripe checkout URL
-     * and redirect the user, potentially causing confusion or errors.
-     */
+  it('useCourseCheckout now has is_free guard', () => {
     const hooksDir = path.resolve(__dirname, '../../hooks');
     const source = fs.readFileSync(
       path.join(hooksDir, 'useCourseCheckout.ts'),
-      'utf-8'
+      'utf-8',
     );
 
-    // No reference to is_free anywhere in the file
-    expect(source).not.toContain('is_free');
+    expect(source).toContain('is_free');
   });
 
   it('useEnroll correctly skips checkout for free courses', async () => {
@@ -209,28 +145,21 @@ describe('free course handling', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 4. Error handling differences
+// 4. Error handling
 // ---------------------------------------------------------------------------
-describe('error handling differences', () => {
-  it('useCourseCheckout has no try/catch or error state', () => {
-    /**
-     * useCourseCheckout builds a URL and sets window.location.href.
-     * If the Edge Function returns an error, the user sees a browser error page
-     * or a blank page -- there is no try/catch or error state.
-     */
+describe('error handling', () => {
+  it('useCourseCheckout has try/catch and error state', () => {
     const hooksDir = path.resolve(__dirname, '../../hooks');
     const source = fs.readFileSync(
       path.join(hooksDir, 'useCourseCheckout.ts'),
-      'utf-8'
+      'utf-8',
     );
 
-    // No try/catch block in the startCheckout function
-    expect(source).not.toContain('try {');
-    expect(source).not.toContain('catch');
+    expect(source).toContain('try {');
+    expect(source).toContain('catch');
 
-    // No error state
     const { result } = renderHook(() => useCourseCheckout());
-    expect(result.current).not.toHaveProperty('error');
+    expect(result.current).toHaveProperty('error');
   });
 
   it('useEnroll handles errors without crashing', async () => {

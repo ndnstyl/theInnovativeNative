@@ -42,7 +42,10 @@ export function usePost(postId: string) {
         author_display_name: (postData as any).profiles?.display_name || 'Unknown',
         author_avatar_url: (postData as any).profiles?.avatar_url || null,
         author_username: (postData as any).profiles?.username || null,
+        author_level: (postData as any).profiles?.level ?? 1,
         category_name: (postData as any).categories?.name || null,
+        recent_commenters: [],
+        last_comment_at: null,
       };
 
       // Check if liked

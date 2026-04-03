@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { logger } from '@/lib/logger';
+import { useCourseCheckout } from '@/hooks/useCourseCheckout';
 import type {
   Course,
   CourseWithModules,
@@ -17,12 +19,85 @@ export function useCourses() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    /** Fetch enrollments + lesson progress in batch (3 queries, no N+1) */
+    async function fetchUserProgress(
+      client: typeof supabaseClient,
+      userId: string,
+      courseIds: string[]
+    ): Promise<{
+      enrolledIds: string[];
+      progressMap: Record<string, { total: number; completed: number }>;
+    }> {
+      const enrolledIds: string[] = [];
+      const progressMap: Record<string, { total: number; completed: number }> = {};
+
+      const { data: enrollments } = await client
+        .from('enrollments')
+        .select('course_id')
+        .eq('user_id', userId)
+        .eq('status', 'active');
+
+      if (enrollments) {
+        enrolledIds.push(...enrollments.map((e) => e.course_id));
+      }
+
+      const { data: allLessons } = await client
+        .from('lessons')
+        .select('id, course_id')
+        .in('course_id', courseIds);
+
+      const allLessonIds = (allLessons || []).map((l) => l.id);
+      let completedLessonIds = new Set<string>();
+
+      if (allLessonIds.length > 0) {
+        const { data: allProgress } = await client
+          .from('lesson_progress')
+          .select('lesson_id')
+          .eq('user_id', userId)
+          .eq('completed', true)
+          .in('lesson_id', allLessonIds);
+
+        if (allProgress) {
+          completedLessonIds = new Set(allProgress.map((p) => p.lesson_id));
+        }
+      }
+
+      for (const courseId of courseIds) {
+        const courseLessons = (allLessons || []).filter((l) => l.course_id === courseId);
+        progressMap[courseId] = {
+          total: courseLessons.length,
+          completed: courseLessons.filter((l) => completedLessonIds.has(l.id)).length,
+        };
+      }
+
+      return { enrolledIds, progressMap };
+    }
+
+    /** Enrich course data with enrollment + progress info */
+    function enrichCourses(
+      coursesData: CourseWithProgress[],
+      enrolledIds: string[],
+      progressMap: Record<string, { total: number; completed: number }>
+    ): CourseWithProgress[] {
+      return coursesData.map((course) => {
+        const prog = progressMap[course.id];
+        const totalLessons = prog?.total ?? 0;
+        const completedLessons = prog?.completed ?? 0;
+        return {
+          ...course,
+          is_enrolled: enrolledIds.includes(course.id) || course.is_free,
+          progress: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
+          total_lessons: totalLessons,
+          completed_lessons: completedLessons,
+        };
+      });
+    }
+
     async function fetchCourses() {
       setLoading(true);
       setError(null);
 
       try {
-        // Fetch published courses
         const { data: coursesData, error: coursesError } = await supabaseClient
           .from('courses')
           .select('*')
@@ -30,93 +105,24 @@ export function useCourses() {
           .order('display_order', { ascending: true });
 
         if (coursesError) throw coursesError;
-        if (!coursesData) {
-          setCourses([]);
-          return;
-        }
+        if (!coursesData) { setCourses([]); return; }
 
-        // If user is logged in, fetch enrollments and progress
-        let enrolledCourseIds: string[] = [];
-        const progressMap: Record<string, { total: number; completed: number }> = {};
+        let enrolledIds: string[] = [];
+        let progressMap: Record<string, { total: number; completed: number }> = {};
 
         if (session?.user) {
-          const { data: enrollments } = await supabaseClient
-            .from('enrollments')
-            .select('course_id')
-            .eq('user_id', session.user.id);
-
-          if (enrollments) {
-            enrolledCourseIds = enrollments.map((e) => e.course_id);
-          }
-
-          // Fetch lesson counts and progress for enrolled courses
-          for (const courseId of enrolledCourseIds) {
-            const { data: lessons } = await supabaseClient
-              .from('lessons')
-              .select('id')
-              .eq('course_id', courseId);
-
-            const lessonIds = (lessons || []).map((l) => l.id);
-            let completedCount = 0;
-            if (lessonIds.length > 0) {
-              const { data: progress } = await supabaseClient
-                .from('lesson_progress')
-                .select('id')
-                .in('lesson_id', lessonIds)
-                .eq('user_id', session.user.id)
-                .eq('completed', true);
-              completedCount = progress?.length ?? 0;
-            }
-
-            progressMap[courseId] = {
-              total: lessons?.length ?? 0,
-              completed: completedCount,
-            };
-          }
-
-          // Also count lessons for free courses
-          for (const course of coursesData) {
-            if (course.is_free && !progressMap[course.id]) {
-              const { data: lessons } = await supabaseClient
-                .from('lessons')
-                .select('id')
-                .eq('course_id', course.id);
-
-              const lessonIds = (lessons || []).map((l) => l.id);
-              let completedCount = 0;
-              if (lessonIds.length > 0) {
-                const { data: progress } = await supabaseClient
-                  .from('lesson_progress')
-                  .select('id')
-                  .in('lesson_id', lessonIds)
-                  .eq('user_id', session.user.id)
-                  .eq('completed', true);
-                completedCount = progress?.length ?? 0;
-              }
-
-              progressMap[course.id] = {
-                total: lessons?.length ?? 0,
-                completed: completedCount,
-              };
-            }
-          }
+          const result = await fetchUserProgress(
+            supabaseClient,
+            session.user.id,
+            coursesData.map((c) => c.id)
+          );
+          enrolledIds = result.enrolledIds;
+          progressMap = result.progressMap;
         }
 
-        const enrichedCourses: CourseWithProgress[] = coursesData.map((course) => {
-          const prog = progressMap[course.id];
-          const totalLessons = prog?.total ?? 0;
-          const completedLessons = prog?.completed ?? 0;
-          return {
-            ...course,
-            is_enrolled: enrolledCourseIds.indexOf(course.id) >= 0 || course.is_free,
-            progress: totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0,
-            total_lessons: totalLessons,
-            completed_lessons: completedLessons,
-          };
-        });
-
-        setCourses(enrichedCourses);
-      } catch {
+        setCourses(enrichCourses(coursesData as CourseWithProgress[], enrolledIds, progressMap));
+      } catch (err) {
+        logger.error('useCourses', 'fetchCourses', err);
         setError('Failed to load courses');
       } finally {
         setLoading(false);
@@ -216,7 +222,8 @@ export function useCourse(slug: string | undefined) {
       } else {
         setIsEnrolled(courseData.is_free);
       }
-    } catch {
+    } catch (err) {
+      logger.error('useCourse', 'fetchCourse', err);
       setError('Failed to load course');
     } finally {
       setLoading(false);
@@ -267,7 +274,8 @@ export function useMarkComplete() {
           if (error) throw error;
         }
         return true;
-      } catch {
+      } catch (err) {
+        logger.error('useMarkComplete', 'toggleComplete', err);
         return false;
       } finally {
         setLoading(false);
@@ -280,45 +288,17 @@ export function useMarkComplete() {
 }
 
 // ============================================
-// useEnroll — initiate Stripe checkout for a course
+// useEnroll — delegates to useCourseCheckout (canonical checkout path)
 // ============================================
 export function useEnroll() {
-  const { supabaseClient, session } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { startCheckout, loading, error } = useCourseCheckout();
 
   const enroll = useCallback(
     async (course: Course) => {
-      if (!session?.user) return;
-
-      // Free courses bypass enrollment check entirely via is_free flag
-      if (course.is_free) return;
-
-      if (!course.stripe_price_id) {
-        return;
-      }
-
-      setLoading(true);
-      try {
-        // Call Supabase Edge Function to create checkout session
-        const { data, error } = await supabaseClient.functions.invoke('create-checkout', {
-          body: {
-            courseId: course.id,
-            priceId: course.stripe_price_id,
-          },
-        });
-
-        if (error) throw error;
-        if (data?.url) {
-          window.location.href = data.url;
-        }
-      } catch {
-        // Checkout creation failed — user stays on current page
-      } finally {
-        setLoading(false);
-      }
+      await startCheckout(course);
     },
-    [supabaseClient, session?.user]
+    [startCheckout]
   );
 
-  return { enroll, loading };
+  return { enroll, loading, error };
 }

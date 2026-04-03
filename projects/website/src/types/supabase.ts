@@ -29,7 +29,7 @@ export interface Database {
           username_changed_at: string | null;
           level: number;
           xp_total: number;
-          search_vector: string | null;
+          search_vector?: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -182,7 +182,7 @@ export interface Database {
           body: string;
           body_html: string;
           pinned_position: number | null;
-          search_vector: string | null;
+          search_vector?: string | null;
           like_count: number;
           comment_count: number;
           edited_at: string | null;
@@ -395,6 +395,7 @@ export interface Database {
           id: string;
           community_id: string;
           title: string;
+          slug: string;
           description: string | null;
           thumbnail_url: string | null;
           access_level: number;
@@ -403,7 +404,7 @@ export interface Database {
           stripe_price_id: string | null;
           published: boolean;
           display_order: number;
-          search_vector: string | null;
+          search_vector?: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -411,6 +412,7 @@ export interface Database {
           id?: string;
           community_id: string;
           title: string;
+          slug: string;
           description?: string | null;
           thumbnail_url?: string | null;
           access_level?: number;
@@ -422,6 +424,7 @@ export interface Database {
         };
         Update: {
           title?: string;
+          slug?: string;
           description?: string | null;
           thumbnail_url?: string | null;
           access_level?: number;
@@ -470,7 +473,7 @@ export interface Database {
           content_html: string | null;
           video_url: string | null;
           display_order: number;
-          search_vector: string | null;
+          search_vector?: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -1750,6 +1753,12 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
+      get_community_stats: {
+        Args: {
+          p_community_id?: string;
+        };
+        Returns: { member_count: number; admin_count: number }[];
+      };
       get_course_progress: {
         Args: {
           p_user_id: string;

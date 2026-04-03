@@ -9,6 +9,9 @@
  * State Management:
  * - Uses React state (can migrate to Zustand if needed)
  * - Session ID generated per app mount
+ *
+ * NOTE: All styling uses inline styles (no Tailwind).
+ * This project uses SCSS + Bootstrap, not Tailwind CSS.
  */
 
 import React, { useState, useCallback, useRef, useEffect } from 'react';
@@ -145,45 +148,70 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
 
   return (
     <div
-      className="flex flex-col h-screen"
       style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
         fontFamily: "'Inter', system-ui, sans-serif",
-        backgroundColor: '#f7fafc',
+        backgroundColor: '#0d1117',
       }}
     >
       {/* Header */}
       <header
-        className="flex items-center justify-between px-6 py-4"
         style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '16px 24px',
           backgroundColor: '#1a365d',
           color: '#ffffff',
         }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xl"
-            style={{ backgroundColor: '#d69e2e', color: '#1a365d' }}
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '20px',
+              backgroundColor: '#d69e2e',
+              color: '#1a365d',
+            }}
           >
             C
           </div>
           <div>
-            <h1 className="text-lg font-bold">Cerebro</h1>
-            <p className="text-xs opacity-70">Legal Research Assistant</p>
+            <h1 style={{ fontSize: '18px', fontWeight: 700, margin: 0 }}>Cerebro</h1>
+            <p style={{ fontSize: '12px', opacity: 0.7, margin: 0 }}>Legal Research Assistant</p>
           </div>
         </div>
 
         {/* Practice Area Selector */}
-        <div className="flex items-center gap-4">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <PracticeAreaSelector selected={practiceArea} onChange={setPracticeArea} />
 
           {/* User Menu (placeholder) */}
           <button
-            className="w-9 h-9 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'inherit',
+            }}
             aria-label="User menu"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style={{ width: '20px', height: '20px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -195,38 +223,58 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
         </div>
       </header>
 
-      {/* Main Content - Split Panels */}
-      <main className="flex-1 flex overflow-hidden">
-        {/* Search Results Panel (Left) */}
+      {/* Main Content - Split Panels (Chat LEFT, Results RIGHT) */}
+      <main style={{ flex: 1, display: 'flex', flexDirection: 'row-reverse', overflow: 'hidden' }}>
+        {/* Search Results Panel (now RIGHT via row-reverse) */}
         <section
           ref={resultsPanelRef}
-          className="w-1/2 flex flex-col border-r overflow-hidden"
-          style={{ borderColor: '#e2e8f0' }}
+          style={{
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            borderLeft: '1px solid #2a3a50',
+            overflow: 'hidden',
+          }}
           aria-label="Search Results"
         >
           {/* Results Header */}
           <div
-            className="px-4 py-3 flex items-center justify-between"
-            style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0' }}
+            style={{
+              padding: '12px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              backgroundColor: '#131b2e',
+              borderBottom: '1px solid #2a3a50',
+            }}
           >
-            <h2 className="text-sm font-semibold" style={{ color: '#1a202c' }}>
+            <h2 style={{ fontSize: '14px', fontWeight: 600, color: '#e8e8e8', margin: 0 }}>
               {searchResults.length > 0
                 ? `${searchResults.length} Results`
                 : 'Search Results'}
             </h2>
             {searchResults.length > 0 && (
-              <div className="text-xs" style={{ color: '#718096' }}>
+              <div style={{ fontSize: '12px', color: '#8899aa' }}>
                 Sorted by relevance
               </div>
             )}
           </div>
 
           {/* Results List */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div
+            style={{
+              flex: 1,
+              overflowY: 'auto',
+              padding: '16px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+            }}
+          >
             {searchResults.length === 0 ? (
-              <div className="text-center py-12" style={{ color: '#718096' }}>
+              <div style={{ textAlign: 'center', padding: '48px 0', color: '#8899aa' }}>
                 <svg
-                  className="w-16 h-16 mx-auto mb-4 opacity-50"
+                  style={{ width: '64px', height: '64px', margin: '0 auto 16px', opacity: 0.5, display: 'block' }}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -238,7 +286,7 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
-                <p className="text-sm">Enter a query to search legal documents</p>
+                <p style={{ fontSize: '14px', margin: 0 }}>Enter a query to search legal documents</p>
               </div>
             ) : (
               searchResults.map((result) => (
@@ -261,24 +309,51 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
           </div>
         </section>
 
-        {/* Chat Panel (Right) */}
+        {/* Chat Panel (now LEFT via row-reverse) */}
         <section
-          className="w-1/2 flex flex-col overflow-hidden"
-          style={{ backgroundColor: '#ffffff' }}
+          style={{
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            backgroundColor: '#0d1117',
+          }}
           aria-label="Chat Interface"
         >
           {/* Chat Messages */}
           <div
             ref={chatPanelRef}
-            className="flex-1 overflow-y-auto p-4"
+            style={{ flex: 1, overflowY: 'auto', padding: '16px' }}
           >
             {messages.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center" style={{ color: '#718096' }}>
+              <div
+                style={{
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#8899aa',
+                }}
+              >
                 <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mb-4"
-                  style={{ backgroundColor: 'rgba(43, 108, 176, 0.1)' }}
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '16px',
+                    backgroundColor: 'rgba(212, 168, 83, 0.1)',
+                  }}
                 >
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#2b6cb0' }}>
+                  <svg
+                    style={{ width: '40px', height: '40px', color: '#d4a853' }}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -287,10 +362,10 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium mb-2" style={{ color: '#1a202c' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: 500, marginBottom: '8px', color: '#e8e8e8' }}>
                   How can I help with your research?
                 </h3>
-                <p className="text-sm text-center max-w-md">
+                <p style={{ fontSize: '14px', textAlign: 'center', maxWidth: '28rem' }}>
                   Ask a legal question and I'll search our {practiceArea.replace('_', ' ')} case database
                   to provide relevant authorities with citations.
                 </p>
@@ -312,15 +387,46 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
 
             {/* Loading indicator */}
             {isLoading && (
-              <div className="flex justify-start mb-4">
+              <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}>
                 <div
-                  className="px-4 py-3 rounded-lg"
-                  style={{ backgroundColor: '#f7fafc', border: '1px solid #e2e8f0' }}
+                  style={{
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    backgroundColor: '#0d1117',
+                    border: '1px solid #2a3a50',
+                  }}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2b6cb0', animationDelay: '0ms' }} />
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2b6cb0', animationDelay: '150ms' }} />
-                    <div className="w-2 h-2 rounded-full animate-bounce" style={{ backgroundColor: '#2b6cb0', animationDelay: '300ms' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: '#2b6cb0',
+                        animation: 'bounce 1s infinite',
+                        animationDelay: '0ms',
+                      }}
+                    />
+                    <div
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: '#2b6cb0',
+                        animation: 'bounce 1s infinite',
+                        animationDelay: '150ms',
+                      }}
+                    />
+                    <div
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        backgroundColor: '#2b6cb0',
+                        animation: 'bounce 1s infinite',
+                        animationDelay: '300ms',
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -329,17 +435,22 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
             {/* Error display */}
             {error && (
               <div
-                className="mx-4 p-4 rounded-lg"
-                style={{ backgroundColor: 'rgba(220, 38, 38, 0.1)', border: '1px solid rgba(220, 38, 38, 0.3)' }}
+                style={{
+                  margin: '0 16px',
+                  padding: '16px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                  border: '1px solid rgba(220, 38, 38, 0.3)',
+                }}
                 role="alert"
               >
-                <div className="flex items-center gap-2 text-red-600">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#dc2626' }}>
+                  <svg style={{ width: '20px', height: '20px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span className="font-medium">Error</span>
+                  <span style={{ fontWeight: 500 }}>Error</span>
                 </div>
-                <p className="text-sm mt-1" style={{ color: '#dc2626' }}>{error}</p>
+                <p style={{ fontSize: '14px', marginTop: '4px', color: '#dc2626' }}>{error}</p>
               </div>
             )}
           </div>
@@ -354,6 +465,14 @@ export const CerebroApp: React.FC<CerebroAppProps> = ({
         isLoading={isLoading}
         placeholder={`Ask about ${practiceArea.replace('_', ' ')}...`}
       />
+
+      {/* Keyframe animation for loading dots (injected once) */}
+      <style>{`
+        @keyframes bounce {
+          0%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-6px); }
+        }
+      `}</style>
     </div>
   );
 };

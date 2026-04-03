@@ -91,7 +91,10 @@ export function useFeed(options: UseFeedOptions = {}) {
         author_display_name: row.profiles?.display_name || 'Unknown',
         author_avatar_url: row.profiles?.avatar_url || null,
         author_username: row.profiles?.username || null,
+        author_level: row.profiles?.level ?? 1,
         category_name: row.categories?.name || null,
+        recent_commenters: [],
+        last_comment_at: null,
       }));
 
       // Check if user has liked these posts

@@ -25,14 +25,30 @@ RewriteCond %{HTTP_HOST} ^www\.theinnovativenative\.com [NC]
 RewriteRule ^(.*)$ https://theinnovativenative.com/$1 [L,R=301]
 
 # =====================================================
+# EXTENSIONLESS URLs (Next.js static export)
+# =====================================================
+
+# Remove trailing slash (except root)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} \s(.+?)/+[?\s]
+RewriteRule ^(.+?)/$ /$1 [R=301,L]
+
+# Serve .html files without extension
+# If /path is requested and /path.html exists, serve it
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# =====================================================
 # SECURITY HEADERS
 # =====================================================
 
 # Prevent MIME type sniffing
 Header set X-Content-Type-Options "nosniff"
 
-# Clickjacking protection
-Header set X-Frame-Options "SAMEORIGIN"
+# Clickjacking protection (DENY = no framing allowed anywhere)
+Header set X-Frame-Options "DENY"
 
 # XSS Protection (legacy browsers)
 Header set X-XSS-Protection "1; mode=block"
@@ -43,18 +59,31 @@ Header set Referrer-Policy "strict-origin-when-cross-origin"
 # Permissions Policy (disable unused features)
 Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
 
-# Content Security Policy - Allow Stripe, Calendly, GTM, GA4, Meta Pixel
-Header set Content-Security-Policy "frame-src https://checkout.stripe.com https://js.stripe.com https://buy.stripe.com https://www.googletagmanager.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://calendly.com https://assets.calendly.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; frame-ancestors 'self'; img-src 'self' data: https: blob:;"
+# Content Security Policy - Full policy matching middleware.ts
+# Allows: Stripe, Calendly, Supabase, Google Fonts, GTM, GA4, Meta Pixel
+Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://calendly.com https://assets.calendly.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.supabase.co https://*.stripe.com https://www.google-analytics.com https://www.googletagmanager.com https://www.facebook.com https://px.ads.linkedin.com; frame-src https://calendly.com https://js.stripe.com https://buy.stripe.com https://checkout.stripe.com https://www.googletagmanager.com; frame-ancestors 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://calendly.com https://www.google-analytics.com https://*.google-analytics.com https://www.google.com https://www.googletagmanager.com https://analytics.google.com https://n8n.srv948776.hstgr.cloud https://cloudflareinsights.com;"
 
 # HSTS - force HTTPS for all future visits
 Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 
 # =====================================================
+# CVE-2025-29927 MITIGATION
+# =====================================================
+
+# Block x-middleware-subrequest header abuse (Next.js middleware bypass)
+RewriteCond %{HTTP:x-middleware-subrequest} !^$
+RewriteRule ^ - [F,L]
+
+# =====================================================
 # DIRECTORY PROTECTION
 # =====================================================
 
-# Prevent directory listing
+# Prevent directory listing but serve index.html for directories
 Options -Indexes
+DirectoryIndex index.html
+
+# Custom 404 page (branded, not blank)
+ErrorDocument 404 /404.html
 
 # Block access to hidden files (starting with .)
 <FilesMatch "^\.">

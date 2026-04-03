@@ -14,6 +14,7 @@ import {
   getAdjacentPosts,
 } from "@/lib/blog";
 import { BlogPost, BlogCategory, BlogTag } from "@/types/blog";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface BlogPostPageProps {
   post: BlogPost;
@@ -158,7 +159,7 @@ export default function BlogPostPage({
               <div className="col-12 col-lg-8">
                 <article
                   className="blog-article"
-                  dangerouslySetInnerHTML={{ __html: post.content || "" }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content || "") }}
                 />
 
                 {/* Tags */}
@@ -382,6 +383,8 @@ export default function BlogPostPage({
         </section>
 
         {/* Article Styles */}
+        {/* Global styles required for dangerouslySetInnerHTML blog content.
+            Scoped to .blog-article class — does not leak to other pages. */}
         <style jsx global>{`
           .blog-article {
             color: rgba(255, 255, 255, 0.85);

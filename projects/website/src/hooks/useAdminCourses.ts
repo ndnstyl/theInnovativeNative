@@ -18,13 +18,20 @@ import type {
  * All operations go through supabaseClient and require admin role.
  */
 export function useAdminCourses() {
-  const { supabaseClient, session } = useAuth();
+  const { supabaseClient, session, role } = useAuth();
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const isAdmin = role === 'admin' || role === 'moderator' || role === 'owner';
+
   // ---------- Fetch all courses (including unpublished) ----------
   const fetchCourses = useCallback(async () => {
+    if (!supabaseClient || !session || !isAdmin) {
+      setCourses([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -41,7 +48,7 @@ export function useAdminCourses() {
     } finally {
       setLoading(false);
     }
-  }, [supabaseClient]);
+  }, [supabaseClient, session, isAdmin]);
 
   useEffect(() => {
     fetchCourses();
@@ -50,6 +57,7 @@ export function useAdminCourses() {
   // ---------- Course CRUD ----------
   const createCourse = useCallback(
     async (input: CourseInsert): Promise<Course | null> => {
+      if (!isAdmin) { setError('Unauthorized'); return null; }
       try {
         const { data, error: insertErr } = await supabaseClient
           .from('courses')
@@ -66,11 +74,12 @@ export function useAdminCourses() {
         return null;
       }
     },
-    [supabaseClient, fetchCourses]
+    [supabaseClient, isAdmin, fetchCourses]
   );
 
   const updateCourse = useCallback(
     async (id: string, updates: CourseUpdate): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: updateErr } = await supabaseClient
           .from('courses')
@@ -86,11 +95,12 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient, fetchCourses]
+    [supabaseClient, isAdmin, fetchCourses]
   );
 
   const deleteCourse = useCallback(
     async (id: string): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: delErr } = await supabaseClient
           .from('courses')
@@ -106,12 +116,13 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient, fetchCourses]
+    [supabaseClient, isAdmin, fetchCourses]
   );
 
   // ---------- Fetch single course with modules + lessons ----------
   const fetchCourseDetail = useCallback(
     async (courseId: string): Promise<CourseWithModules | null> => {
+      if (!isAdmin) { setError('Unauthorized'); return null; }
       try {
         const { data: courseData, error: courseErr } = await supabaseClient
           .from('courses')
@@ -145,12 +156,13 @@ export function useAdminCourses() {
         return null;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   // ---------- Module CRUD ----------
   const createModule = useCallback(
     async (input: ModuleInsert): Promise<Module | null> => {
+      if (!isAdmin) { setError('Unauthorized'); return null; }
       try {
         const { data, error: insertErr } = await supabaseClient
           .from('modules')
@@ -166,11 +178,12 @@ export function useAdminCourses() {
         return null;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   const updateModule = useCallback(
     async (id: string, updates: { title?: string; display_order?: number }): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: updateErr } = await supabaseClient
           .from('modules')
@@ -185,11 +198,12 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   const deleteModule = useCallback(
     async (id: string): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: delErr } = await supabaseClient
           .from('modules')
@@ -204,12 +218,13 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   // ---------- Lesson CRUD ----------
   const createLesson = useCallback(
     async (input: LessonInsert): Promise<Lesson | null> => {
+      if (!isAdmin) { setError('Unauthorized'); return null; }
       try {
         const { data, error: insertErr } = await supabaseClient
           .from('lessons')
@@ -225,11 +240,12 @@ export function useAdminCourses() {
         return null;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   const updateLesson = useCallback(
     async (id: string, updates: LessonUpdate): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: updateErr } = await supabaseClient
           .from('lessons')
@@ -244,11 +260,12 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   const deleteLesson = useCallback(
     async (id: string): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const { error: delErr } = await supabaseClient
           .from('lessons')
@@ -263,12 +280,13 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   // ---------- Reorder helpers ----------
   const reorderModules = useCallback(
     async (moduleIds: string[]): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const updates = moduleIds.map((id, idx) =>
           supabaseClient.from('modules').update({ display_order: idx }).eq('id', id)
@@ -283,11 +301,12 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   const reorderLessons = useCallback(
     async (lessonIds: string[]): Promise<boolean> => {
+      if (!isAdmin) { setError('Unauthorized'); return false; }
       try {
         const updates = lessonIds.map((id, idx) =>
           supabaseClient.from('lessons').update({ display_order: idx }).eq('id', id)
@@ -302,7 +321,7 @@ export function useAdminCourses() {
         return false;
       }
     },
-    [supabaseClient]
+    [supabaseClient, isAdmin]
   );
 
   return {

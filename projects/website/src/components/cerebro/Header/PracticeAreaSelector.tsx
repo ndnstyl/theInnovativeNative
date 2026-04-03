@@ -12,7 +12,7 @@ import type { PracticeArea, PracticeAreaSelectorProps } from '../types/cerebro.t
 
 const PRACTICE_AREAS: { value: PracticeArea; label: string }[] = [
   { value: 'bankruptcy', label: 'Bankruptcy' },
-  { value: 'criminal_procedure', label: 'Criminal Procedure' },
+  { value: 'criminal_procedure', label: 'Criminal Defense' },
   { value: 'administrative', label: 'Administrative Law' },
 ];
 
@@ -25,30 +25,29 @@ export const PracticeAreaSelector: React.FC<PracticeAreaSelectorProps> = ({
   };
 
   return (
-    <div className="relative inline-block">
-      <label htmlFor="practice-area" className="sr-only">
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <label htmlFor="practice-area" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: 0 }}>
         Select Practice Area
       </label>
       <select
         id="practice-area"
         value={selected}
         onChange={handleChange}
-        className="
-          appearance-none
-          bg-cerebro-secondary/10
-          border border-cerebro-border
-          rounded-lg
-          px-4 py-2 pr-10
-          text-cerebro-text-primary
-          font-medium
-          cursor-pointer
-          hover:bg-cerebro-secondary/20
-          focus:outline-none
-          focus:ring-2
-          focus:ring-cerebro-secondary
-          focus:border-transparent
-          transition-colors
-        "
+        style={{
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          MozAppearance: 'none',
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '8px',
+          padding: '8px 40px 8px 16px',
+          color: '#ffffff',
+          fontWeight: 500,
+          cursor: 'pointer',
+          outline: 'none',
+          transition: 'background-color 0.2s',
+          fontSize: '14px',
+        }}
         aria-label="Select practice area for legal research"
       >
         {PRACTICE_AREAS.map((area) => (
@@ -58,9 +57,20 @@ export const PracticeAreaSelector: React.FC<PracticeAreaSelectorProps> = ({
         ))}
       </select>
       {/* Custom dropdown arrow */}
-      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          display: 'flex',
+          alignItems: 'center',
+          paddingRight: '12px',
+          pointerEvents: 'none',
+        }}
+      >
         <svg
-          className="w-4 h-4 text-cerebro-text-muted"
+          style={{ width: '16px', height: '16px', color: '#ffffff' }}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

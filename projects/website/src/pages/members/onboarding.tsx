@@ -1,8 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/contexts/AuthContext';
 import { useProfile } from '@/hooks/useProfile';
+import { useToast } from '@/components/common/ToastProvider';
+import { logger } from '@/lib/logger';
+import { getValidToken } from '@/lib/auth-token';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 import AvatarUpload from '@/components/members/AvatarUpload';
 
@@ -10,6 +13,8 @@ const OnboardingPage = () => {
   const router = useRouter();
   const { session, profile, isOnboarded, refreshProfile } = useAuth();
   const { updateProfile, generateUsername, isLoading, error } = useProfile();
+  const { showToast } = useToast();
+  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [displayName, setDisplayName] = useState('');
   const [username, setUsername] = useState('');
@@ -19,10 +24,34 @@ const OnboardingPage = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [step, setStep] = useState(1);
 
-  // If already onboarded, redirect
+  // DIRECT profile check — bypasses AuthContext entirely.
+  // If the user is already onboarded but AuthContext couldn't detect it
+  // (because fetchProfile failed), this catches it and redirects.
+  useEffect(() => {
+    if (!session?.user?.id) return;
+    const token = getValidToken();
+    if (!token) return;
+
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+    fetch(`${url}/rest/v1/profiles?id=eq.${session.user.id}&select=onboarding_complete`, {
+      headers: { 'apikey': anonKey, 'Authorization': `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0 && data[0].onboarding_complete) {
+          logger.info('Onboarding', 'directCheck', 'User already onboarded — redirecting');
+          router.replace('/classroom');
+        }
+      })
+      .catch(() => { /* non-critical */ });
+  }, [session, router]);
+
+  // If AuthContext knows we're onboarded, also redirect
   useEffect(() => {
     if (isOnboarded && profile?.onboarding_complete) {
-      router.replace('/members');
+      router.replace('/classroom');
     }
   }, [isOnboarded, profile, router]);
 
@@ -58,16 +87,36 @@ const OnboardingPage = () => {
     e.preventDefault();
     if (!displayName || !username) return;
 
-    await updateProfile({
-      display_name: displayName,
-      username,
-      bio: bio || null,
-      avatar_url: avatarUrl,
-      onboarding_complete: true,
-    });
+    if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+    submitTimeoutRef.current = setTimeout(() => {
+      showToast('This is taking longer than expected. Please try again.', 'warning');
+    }, 10000);
 
-    await refreshProfile();
-    router.replace('/members');
+    try {
+      // updateProfile now throws on failure — if this line completes, the save succeeded
+      await updateProfile({
+        display_name: displayName,
+        username,
+        bio: bio || null,
+        avatar_url: avatarUrl,
+        onboarding_complete: true,
+      });
+
+      // refreshProfile updates AuthContext state (isOnboarded, profile, etc.)
+      await refreshProfile();
+
+      showToast('Profile updated! Welcome to the community.', 'success');
+      router.replace('/classroom');
+    } catch (err) {
+      // updateProfile threw — save actually failed. Tell the user the truth.
+      logger.error('Onboarding', 'handleSubmit', err);
+      showToast(
+        err instanceof Error ? err.message : 'Failed to save profile. Please try again.',
+        'error'
+      );
+    } finally {
+      if (submitTimeoutRef.current) clearTimeout(submitTimeoutRef.current);
+    }
   };
 
   return (
@@ -192,6 +241,23 @@ const OnboardingPage = () => {
               </div>
             )}
           </form>
+
+          <div style={{ textAlign: 'center', marginTop: '24px' }}>
+            <button
+              type="button"
+              onClick={async () => {
+                const supabase = (await import('@/lib/supabase')).getSupabaseBrowserClient();
+                await supabase.auth.signOut();
+                window.location.href = '/classroom';
+              }}
+              style={{
+                background: 'none', border: 'none', color: '#757575',
+                fontSize: '13px', cursor: 'pointer', textDecoration: 'underline',
+              }}
+            >
+              Sign out and start over
+            </button>
+          </div>
         </div>
       </div>
     </ProtectedRoute>

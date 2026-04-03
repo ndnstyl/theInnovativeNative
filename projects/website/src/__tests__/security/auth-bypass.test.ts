@@ -41,7 +41,7 @@ function getAllPageFiles(dir: string): string[] {
 // ─── Constants from middleware.ts ───────────────────────────────────────────
 
 // These must match what's in src/middleware.ts
-const MIDDLEWARE_PROTECTED_ROUTES = ['/dashboard', '/classroom'];
+const MIDDLEWARE_PROTECTED_ROUTES = ['/dashboard', '/classroom', '/community'];
 
 // Routes that SHOULD be protected (either by middleware or ProtectedRoute component)
 const EXPECTED_PROTECTED_PATHS = [
@@ -78,24 +78,13 @@ describe('Authentication & Authorization Bypass Audit', () => {
       expect(middlewareContent).toContain("'/classroom'");
     });
 
-    it('should flag that /community is NOT in middleware protectedRoutes', () => {
-      // This is a known gap -- /community/* is NOT protected by middleware
-      // It relies entirely on ProtectedRoute component (client-side only)
+    it('should protect /community via middleware (regression guard)', () => {
+      // FIXED: /community is now in middleware protectedRoutes (defense-in-depth)
       const hasCommunityRoute =
         middlewareContent.includes("'/community'") ||
         middlewareContent.includes('"/community"');
 
-      console.warn(
-        '[AUTH GAP] /community is NOT in middleware protectedRoutes. ' +
-          'Protection relies entirely on the client-side ProtectedRoute component. ' +
-          'This means: (1) The initial HTML is served before auth check, ' +
-          '(2) API calls from community hooks may fire before redirect, ' +
-          '(3) Server-side rendering will include the page structure. ' +
-          'Recommendation: Add /community to middleware protectedRoutes for ' +
-          'defense-in-depth.'
-      );
-
-      expect(hasCommunityRoute).toBe(false);
+      expect(hasCommunityRoute).toBe(true);
     });
 
     it('should flag that /members is NOT in middleware protectedRoutes', () => {
@@ -112,21 +101,14 @@ describe('Authentication & Authorization Bypass Audit', () => {
       expect(hasMembersRoute).toBe(false);
     });
 
-    it('should flag missing env vars bypass vulnerability', () => {
-      // middleware.ts lines 19-22: if no env vars, return without auth check
-      const hasEnvBypass =
-        middlewareContent.includes('!supabaseUrl || !supabaseAnonKey') &&
-        middlewareContent.includes('return res');
+    it('should block protected routes when env vars are missing (regression guard)', () => {
+      // FIXED: Middleware now returns 503 for protected routes when env vars are missing
+      // instead of passing through without auth check
+      const checksEnvVars = middlewareContent.includes('!supabaseUrl || !supabaseAnonKey');
+      const returns503 = middlewareContent.includes('status: 503');
 
-      console.warn(
-        '[VULNERABILITY] Middleware passes through ALL requests when ' +
-          'NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY are missing. ' +
-          'This means: if env vars are accidentally unset (e.g., deployment misconfiguration), ' +
-          'ALL protected routes become publicly accessible. ' +
-          'Recommendation: Return 503 or redirect to an error page when auth cannot be verified.'
-      );
-
-      expect(hasEnvBypass).toBe(true);
+      expect(checksEnvVars).toBe(true);
+      expect(returns503).toBe(true);
     });
 
     it('should use startsWith for route matching (prefix-based)', () => {

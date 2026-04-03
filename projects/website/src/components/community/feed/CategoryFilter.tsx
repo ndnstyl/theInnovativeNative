@@ -1,33 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import type { FeedCategory } from '@/types/feed';
+import React from 'react';
 
 interface CategoryFilterProps {
+  categories: { id: string; name: string }[];
   activeId: string | undefined;
   onChange: (categoryId: string | undefined) => void;
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeId, onChange }) => {
-  const { supabaseClient } = useAuth();
-  const [categories, setCategories] = useState<FeedCategory[]>([]);
-
-  useEffect(() => {
-    if (!supabaseClient) return;
-
-    supabaseClient
-      .from('categories')
-      .select('*')
-      .order('display_order', { ascending: true })
-      .then(({ data }) => {
-        if (data) setCategories(data as FeedCategory[]);
-      });
-  }, [supabaseClient]);
-
+const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, activeId, onChange }) => {
   return (
-    <div className="category-filter">
+    <div className="category-filter" role="tablist" aria-label="Filter by category">
       <button
         className={`category-filter__chip ${!activeId ? 'category-filter__chip--active' : ''}`}
         onClick={() => onChange(undefined)}
+        role="tab"
+        aria-selected={!activeId}
       >
         All
       </button>
@@ -36,6 +22,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ activeId, onChange }) =
           key={cat.id}
           className={`category-filter__chip ${activeId === cat.id ? 'category-filter__chip--active' : ''}`}
           onClick={() => onChange(cat.id)}
+          role="tab"
+          aria-selected={activeId === cat.id}
         >
           {cat.name}
         </button>

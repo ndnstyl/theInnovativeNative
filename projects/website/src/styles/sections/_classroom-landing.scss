@@ -1,0 +1,547 @@
+// ============================================
+// Classroom Landing Page Styles
+// Public-facing course overview (Skool-style)
+// ============================================
+
+// ---- Variables ----
+$cl-accent: var(--primary-color);
+$cl-bg: var(--theme-bg);
+$cl-text: var(--white);
+$cl-text-muted: var(--secondary-color);
+$cl-border: rgba(255, 255, 255, 0.1);
+$cl-card-bg: rgba(255, 255, 255, 0.03);
+
+// ============================================
+// Main Wrapper
+// ============================================
+.classroom-landing {
+  padding: 180px 0 80px;
+  background: $cl-bg;
+  color: $cl-text;
+  min-height: 100vh;
+}
+
+// ============================================
+// Two-Column Grid
+// ============================================
+.classroom-landing__grid {
+  display: grid;
+  grid-template-columns: 1.86fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.classroom-landing__main {
+  min-width: 0;
+}
+
+.classroom-landing__sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+// ============================================
+// Hero Banner
+// ============================================
+.hero-banner {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: 400px;
+  margin-bottom: 24px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ============================================
+// Meta Bar
+// ============================================
+.meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid $cl-border;
+  margin-bottom: 32px;
+}
+
+.meta-bar__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid $cl-border;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: $cl-text;
+
+  i {
+    font-size: 12px;
+    color: $cl-accent;
+  }
+}
+
+.meta-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: $cl-text-muted;
+
+  i {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+}
+
+.meta-bar__avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// ============================================
+// About Section
+// ============================================
+.about-section {
+  margin-bottom: 40px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $cl-text;
+    margin: 0 0 16px;
+    line-height: 1.3;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 16px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+
+    li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      line-height: 1.7;
+
+      &::before {
+        content: "\2192";
+        position: absolute;
+        left: 0;
+        color: $cl-accent;
+      }
+    }
+  }
+}
+
+// ============================================
+// Course Gallery (Horizontal Scroll)
+// ============================================
+.course-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.course-gallery__card {
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.course-gallery__card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 10px 10px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+// ============================================
+// Sidebar Card
+// ============================================
+.sidebar-card {
+  background: $cl-card-bg;
+  border: 1px solid $cl-border;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.sidebar-card__header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sidebar-card__logo {
+  display: block;
+  max-width: 60px;
+  height: auto;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+}
+
+.sidebar-card__name {
+  text-align: center;
+  color: $cl-text;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.sidebar-card__subtitle {
+  text-align: center;
+  color: $cl-text-muted;
+  font-size: 12px;
+  margin: 0 0 4px;
+}
+
+.sidebar-card__tagline {
+  text-align: center;
+  color: $cl-text-muted;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.sidebar-card__stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-top: 1px solid $cl-border;
+  border-bottom: 1px solid $cl-border;
+}
+
+.sidebar-card__stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar-card__stats-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: $cl-text;
+
+  &--online {
+    color: #4ade80;
+  }
+}
+
+.sidebar-card__stats-label {
+  font-size: 12px;
+  color: $cl-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sidebar-card__cta {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: $cl-accent;
+  color: #000;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+}
+
+.sidebar-card__pricing {
+  text-align: center;
+  color: #ff4444 !important;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 8px 0 0;
+}
+
+.sidebar-card__login {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: $cl-text;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: border-color 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.sidebar-card__cta:focus-visible,
+.sidebar-card__login:focus-visible {
+  outline: 2px solid $cl-accent;
+  outline-offset: 2px;
+}
+
+.course-gallery__card:focus-visible {
+  outline: 2px solid $cl-accent;
+  outline-offset: 2px;
+}
+
+// ============================================
+// Loading State
+// ============================================
+.classroom-landing--loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.classroom-loading__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: classroom-spin 0.8s linear infinite;
+}
+
+// ============================================
+// Legal Footer
+// ============================================
+.classroom-landing__legal {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+  font-size: 13px;
+  color: $cl-text-muted;
+
+  a {
+    color: $cl-text-muted;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $cl-text;
+    }
+  }
+}
+
+// ============================================
+// Responsive — Tablet (max-width: 768px)
+// ============================================
+@media (max-width: 768px) {
+  .classroom-landing {
+    padding: 140px 0 60px;
+  }
+
+  .classroom-landing__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .classroom-landing__sidebar {
+    position: static;
+  }
+
+  .hero-banner {
+    max-height: 260px;
+  }
+
+  .course-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .sidebar-card__cta,
+  .sidebar-card__login {
+    width: 100%;
+  }
+}
+
+// ============================================
+// Responsive — Mobile (max-width: 480px)
+// ============================================
+@media (max-width: 480px) {
+  .classroom-landing {
+    padding: 120px 0 48px;
+  }
+
+  .classroom-landing__grid {
+    padding: 0 16px;
+  }
+
+  .hero-banner {
+    max-height: 200px;
+    border-radius: 8px;
+  }
+
+  .meta-bar {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .meta-bar__item {
+    font-size: 13px;
+  }
+
+  .about-section {
+    h2 {
+      font-size: 20px;
+    }
+
+    p,
+    ul li {
+      font-size: 15px;
+    }
+  }
+
+  .course-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sidebar-card {
+    padding: 20px;
+  }
+
+  .sidebar-card__stats-number {
+    font-size: 16px;
+  }
+}
+
+// ============================================
+// Responsive — Narrow (max-width: 320px)
+// No content overflow at smallest viewports
+// ============================================
+@media (max-width: 320px) {
+  .classroom-landing {
+    padding: 110px 0 40px;
+  }
+
+  .classroom-landing__grid {
+    padding: 0 12px;
+    gap: 16px;
+  }
+
+  .hero-banner {
+    max-height: 160px;
+  }
+
+  .course-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .course-gallery__card-title {
+    font-size: 12px;
+    // Truncate to 2 lines
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .sidebar-card {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .sidebar-card__cta,
+  .sidebar-card__login {
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .meta-bar__badge {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .about-section {
+    h2 { font-size: 18px; }
+    p, ul li { font-size: 14px; }
+  }
+
+  .classroom-landing__legal {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+}
+
+// ============================================
+// Touch Targets (44px minimum)
+// ============================================
+.sidebar-card__cta,
+.sidebar-card__login {
+  min-height: 44px;
+}
+
+.course-gallery__card {
+  min-height: 44px; // card itself is always taller, but enforce baseline
+}
+
+// ============================================
+// Reduced Motion
+// ============================================
+@media (prefers-reduced-motion: reduce) {
+  .course-gallery__card,
+  .sidebar-card__cta,
+  .sidebar-card__login,
+  .classroom-landing__legal a,
+  .course-gallery__card-title {
+    transition: none !important;
+  }
+
+  .classroom-loading__spinner {
+    animation: none !important;
+  }
+}

@@ -32,60 +32,61 @@ jest.mock('@supabase/auth-helpers-nextjs', () => ({
   createServerClient: (...args: any[]) => mockCreateServerClient(...args),
 }));
 
+// Mock NextResponse as a class with constructor (for `new NextResponse(null, { status: 403 })`)
+// and static methods (for NextResponse.next() and NextResponse.redirect())
+function createMockNextResponse() {
+  class MockNextResponse {
+    status: number;
+    cookies = { set: jest.fn() };
+    headers = new Map();
+    constructor(body: any, init?: any) {
+      this.status = init?.status ?? 200;
+    }
+    static next(opts?: any) {
+      _nextCalled = true;
+      const resp = new MockNextResponse(null);
+      return resp;
+    }
+    static redirect(url: any) {
+      _redirectCalled = true;
+      _redirectArg = url;
+      const resp = new MockNextResponse(null);
+      return resp;
+    }
+  }
+  return MockNextResponse;
+}
+
 // Mock the entire next/server import chain to avoid Edge Runtime API issues
 jest.mock('next/server', () => ({
   __esModule: true,
-  NextResponse: {
-    next: (opts?: any) => {
-      _nextCalled = true;
-      return {
-        cookies: { set: jest.fn() },
-        headers: new Map(),
-      };
-    },
-    redirect: (url: any) => {
-      _redirectCalled = true;
-      _redirectArg = url;
-      return {
-        cookies: { set: jest.fn() },
-        headers: new Map(),
-      };
-    },
-  },
+  NextResponse: createMockNextResponse(),
 }));
 
 // Also mock the internal next module that next/server re-exports from
 jest.mock('next/dist/server/web/exports/next-response', () => ({
   __esModule: true,
-  default: {
-    next: (opts?: any) => {
-      _nextCalled = true;
-      return {
-        cookies: { set: jest.fn() },
-        headers: new Map(),
-      };
-    },
-    redirect: (url: any) => {
-      _redirectCalled = true;
-      _redirectArg = url;
-      return {
-        cookies: { set: jest.fn() },
-        headers: new Map(),
-      };
-    },
-  },
+  default: createMockNextResponse(),
 }));
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 function createMockRequest(pathname: string, origin = 'https://example.com') {
   const url = new URL(pathname, origin);
+  const headersMap = new Map<string, string>();
   return {
     cookies: {
       getAll: jest.fn(() => []),
       set: jest.fn(),
     },
-    headers: new Map(),
+    headers: {
+      ...headersMap,
+      get: (key: string) => headersMap.get(key) ?? null,
+      set: (key: string, value: string) => headersMap.set(key, value),
+      has: (key: string) => headersMap.has(key),
+      forEach: (cb: Function) => headersMap.forEach((v, k) => cb(v, k)),
+      [Symbol.iterator]: () => headersMap[Symbol.iterator](),
+    },
     nextUrl: url,
     url: url.toString(),
   } as any;
@@ -261,9 +262,12 @@ describe('Middleware', () => {
     });
   });
 
-  // ── Missing env vars (VULNERABILITY) ──────────────────────────────────────
-  describe('Missing environment variables (VULNERABILITY)', () => {
-    it('should pass through protected routes when NEXT_PUBLIC_SUPABASE_URL is missing', async () => {
+  // ── Missing env vars (FIXED — returns 503) ─────────────────────────────────
+  describe('Missing environment variables (returns 503)', () => {
+    let _503Called = false;
+    let _503Status: number | null = null;
+
+    it('should return 503 for protected routes when NEXT_PUBLIC_SUPABASE_URL is missing', async () => {
       delete process.env.NEXT_PUBLIC_SUPABASE_URL;
 
       jest.resetModules();
@@ -272,37 +276,64 @@ describe('Middleware', () => {
       }));
       jest.doMock('next/server', () => ({
         __esModule: true,
-        NextResponse: {
-          next: () => { _nextCalled = true; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-          redirect: (url: any) => { _redirectCalled = true; _redirectArg = url; return { cookies: { set: jest.fn() }, headers: new Map() }; },
+        NextResponse: class {
+          status: number;
+          cookies = { set: jest.fn() };
+          headers = new Map();
+          constructor(body: any, init?: any) {
+            this.status = init?.status ?? 200;
+            _503Status = this.status;
+            if (this.status === 503) _503Called = true;
+          }
+          static next(opts?: any) {
+            _nextCalled = true;
+            return { cookies: { set: jest.fn() }, headers: new Map() };
+          }
+          static redirect(url: any) {
+            _redirectCalled = true;
+            _redirectArg = url;
+            return { cookies: { set: jest.fn() }, headers: new Map() };
+          }
         },
       }));
+      const MockNextResponse = class {
+        status: number;
+        cookies = { set: jest.fn() };
+        headers = new Map();
+        constructor(body: any, init?: any) {
+          this.status = init?.status ?? 200;
+          _503Status = this.status;
+          if (this.status === 503) _503Called = true;
+        }
+        static next(opts?: any) {
+          _nextCalled = true;
+          return { cookies: { set: jest.fn() }, headers: new Map() };
+        }
+        static redirect(url: any) {
+          _redirectCalled = true;
+          _redirectArg = url;
+          return { cookies: { set: jest.fn() }, headers: new Map() };
+        }
+      };
       jest.doMock('next/dist/server/web/exports/next-response', () => ({
         __esModule: true,
-        default: {
-          next: () => { _nextCalled = true; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-          redirect: (url: any) => { _redirectCalled = true; _redirectArg = url; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-        },
+        default: MockNextResponse,
       }));
 
       const { middleware: freshMiddleware } = await import('@/middleware');
       resetTrackers();
+      _503Called = false;
+      _503Status = null;
 
       const req = createMockRequest('/dashboard');
-      await freshMiddleware(req);
+      const result = await freshMiddleware(req);
 
-      // VULNERABILITY: passes through without auth check
-      expect(_redirectCalled).toBe(false);
+      // FIXED: protected routes get 503 when env vars are missing
+      expect(result?.status ?? _503Status).toBe(503);
       expect(mockCreateServerClient).not.toHaveBeenCalled();
-
-      console.warn(
-        '[VULNERABILITY CONFIRMED] Middleware passes through /dashboard ' +
-          'without any auth check when NEXT_PUBLIC_SUPABASE_URL is missing. ' +
-          'An attacker who can cause env var deletion gains access to all protected routes.'
-      );
     });
 
-    it('should pass through protected routes when NEXT_PUBLIC_SUPABASE_ANON_KEY is missing', async () => {
+    it('should return 503 for protected routes when NEXT_PUBLIC_SUPABASE_ANON_KEY is missing', async () => {
       process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://test.supabase.co';
       delete process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -312,32 +343,61 @@ describe('Middleware', () => {
       }));
       jest.doMock('next/server', () => ({
         __esModule: true,
-        NextResponse: {
-          next: () => { _nextCalled = true; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-          redirect: (url: any) => { _redirectCalled = true; _redirectArg = url; return { cookies: { set: jest.fn() }, headers: new Map() }; },
+        NextResponse: class {
+          status: number;
+          cookies = { set: jest.fn() };
+          headers = new Map();
+          constructor(body: any, init?: any) {
+            this.status = init?.status ?? 200;
+            _503Status = this.status;
+            if (this.status === 503) _503Called = true;
+          }
+          static next(opts?: any) {
+            _nextCalled = true;
+            return { cookies: { set: jest.fn() }, headers: new Map() };
+          }
+          static redirect(url: any) {
+            _redirectCalled = true;
+            _redirectArg = url;
+            return { cookies: { set: jest.fn() }, headers: new Map() };
+          }
         },
       }));
+      const MockNextResponse2 = class {
+        status: number;
+        cookies = { set: jest.fn() };
+        headers = new Map();
+        constructor(body: any, init?: any) {
+          this.status = init?.status ?? 200;
+          _503Status = this.status;
+          if (this.status === 503) _503Called = true;
+        }
+        static next(opts?: any) {
+          _nextCalled = true;
+          return { cookies: { set: jest.fn() }, headers: new Map() };
+        }
+        static redirect(url: any) {
+          _redirectCalled = true;
+          _redirectArg = url;
+          return { cookies: { set: jest.fn() }, headers: new Map() };
+        }
+      };
       jest.doMock('next/dist/server/web/exports/next-response', () => ({
         __esModule: true,
-        default: {
-          next: () => { _nextCalled = true; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-          redirect: (url: any) => { _redirectCalled = true; _redirectArg = url; return { cookies: { set: jest.fn() }, headers: new Map() }; },
-        },
+        default: MockNextResponse2,
       }));
 
       const { middleware: freshMiddleware } = await import('@/middleware');
       resetTrackers();
+      _503Called = false;
+      _503Status = null;
 
       const req = createMockRequest('/classroom/admin');
-      await freshMiddleware(req);
+      const result = await freshMiddleware(req);
 
-      expect(_redirectCalled).toBe(false);
+      // FIXED: protected routes get 503 when env vars are missing
+      expect(result?.status ?? _503Status).toBe(503);
       expect(mockCreateServerClient).not.toHaveBeenCalled();
-
-      console.warn(
-        '[VULNERABILITY CONFIRMED] Middleware passes through /classroom/admin ' +
-          'without auth check when NEXT_PUBLIC_SUPABASE_ANON_KEY is missing.'
-      );
     });
   });
 
@@ -383,7 +443,7 @@ describe('Middleware', () => {
 
   // ── Route protection completeness ─────────────────────────────────────────
   describe('Route protection completeness', () => {
-    it('should document that /community is NOT protected by middleware', async () => {
+    it('should redirect unauthenticated user from /community (regression guard)', async () => {
       mockGetSession.mockResolvedValueOnce({
         data: { session: null },
       });
@@ -391,12 +451,8 @@ describe('Middleware', () => {
       const req = createMockRequest('/community');
       await middleware(req);
 
-      expect(_redirectCalled).toBe(false);
-
-      console.warn(
-        '[AUTH GAP] /community passes through middleware without auth. ' +
-          'Only client-side ProtectedRoute prevents unauthorized access.'
-      );
+      // FIXED: /community is now in protectedRoutes
+      expect(_redirectCalled).toBe(true);
     });
 
     it('should document that /members is NOT protected by middleware', async () => {
@@ -413,6 +469,27 @@ describe('Middleware', () => {
         '[AUTH GAP] /members passes through middleware without auth. ' +
           'Member profile pages are only protected client-side.'
       );
+    });
+  });
+
+  // ── CVE-2025-29927 mitigation ──────────────────────────────────────────────
+  describe('CVE-2025-29927 mitigation', () => {
+    it('blocks requests with x-middleware-subrequest header (CVE-2025-29927)', async () => {
+      const req = createMockRequest('/dashboard');
+      // Inject the attack header
+      const origGet = req.headers.get;
+      req.headers.get = (key: string) => {
+        if (key === 'x-middleware-subrequest') return 'middleware:middleware';
+        return origGet(key);
+      };
+
+      const result = await middleware(req);
+
+      // Middleware should block this request with 403
+      expect(result).toBeDefined();
+      expect(result.status).toBe(403);
+      // Should NOT have proceeded to auth check
+      expect(mockCreateServerClient).not.toHaveBeenCalled();
     });
   });
 });

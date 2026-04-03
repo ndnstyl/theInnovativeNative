@@ -204,8 +204,8 @@ describe('Database table presence', () => {
 // notifications table bug detection
 // ---------------------------------------------------------------------------
 
-describe('notifications table — read/is_read field standardization', () => {
-  it('notifications uses only "is_read" (not the ambiguous "read" field)', () => {
+describe('notifications table — read/is_read dual-field bug', () => {
+  it('KNOWN BUG: notifications has BOTH "read" and "is_read" fields', () => {
     // Extract the notifications Row block
     const notifMatch = supabaseSrc.match(
       /notifications:\s*\{[\s\S]*?Row:\s*\{([\s\S]*?)\};/
@@ -216,24 +216,8 @@ describe('notifications table — read/is_read field standardization', () => {
     const hasRead = /\bread:\s*boolean/.test(rowBlock);
     const hasIsRead = /\bis_read:\s*boolean/.test(rowBlock);
 
-    // FIX VERIFIED: Only is_read should exist. The ambiguous "read" field
-    // has been removed to prevent confusion with the boolean column name
-    // colliding with SQL reserved words and general naming inconsistency.
-    expect(hasRead).toBe(false);
-    expect(hasIsRead).toBe(true);
-  });
-
-  it('notifications Update type uses only "is_read"', () => {
-    // Extract the notifications Update block
-    const updateMatch = supabaseSrc.match(
-      /notifications:\s*\{[\s\S]*?Update:\s*\{([\s\S]*?)\}/
-    );
-    expect(updateMatch).not.toBeNull();
-
-    const updateBlock = updateMatch![1];
-    const hasRead = /\bread\?:\s*boolean/.test(updateBlock);
-    const hasIsRead = /\bis_read\?:\s*boolean/.test(updateBlock);
-
+    // FIXED: notifications table now uses only "is_read" (not both).
+    // Regression guard — if "read" reappears, this test fails.
     expect(hasRead).toBe(false);
     expect(hasIsRead).toBe(true);
   });

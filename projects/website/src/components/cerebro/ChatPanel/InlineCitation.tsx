@@ -42,7 +42,7 @@ export const InlineCitation: React.FC<InlineCitationProps> = ({
   };
 
   return (
-    <span className="relative inline-block">
+    <span style={{ position: 'relative', display: 'inline-block' }}>
       <a
         href={`#result-${documentId}`}
         onClick={handleClick}
@@ -51,18 +51,14 @@ export const InlineCitation: React.FC<InlineCitationProps> = ({
         onMouseLeave={handleMouseLeave}
         onFocus={handleMouseEnter}
         onBlur={handleMouseLeave}
-        className="
-          font-mono text-sm
-          text-cerebro-secondary
-          underline decoration-dotted
-          hover:decoration-solid
-          cursor-pointer
-          transition-all
-        "
         style={{
           fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-          color: '#2b6cb0',
+          fontSize: '14px',
+          color: '#d4a853',
+          textDecoration: 'underline',
           textDecorationStyle: 'dotted',
+          cursor: 'pointer',
+          transition: 'all 0.2s',
         }}
         aria-describedby={`tooltip-${documentId}`}
       >
@@ -74,26 +70,32 @@ export const InlineCitation: React.FC<InlineCitationProps> = ({
         <div
           id={`tooltip-${documentId}`}
           role="tooltip"
-          className="
-            absolute bottom-full left-1/2 -translate-x-1/2 mb-2
-            px-3 py-2
-            bg-cerebro-primary text-white
-            text-xs rounded-lg shadow-lg
-            whitespace-nowrap
-            z-50
-          "
           style={{
-            backgroundColor: '#1a365d',
+            position: 'absolute',
+            bottom: '100%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            marginBottom: '8px',
+            padding: '8px 12px',
+            backgroundColor: '#1a2438',
+            color: '#e8e8e8',
+            fontSize: '12px',
+            borderRadius: '8px',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
             maxWidth: '300px',
             whiteSpace: 'normal',
+            zIndex: 50,
           }}
         >
-          <div className="font-semibold mb-1">Click to view source</div>
-          <div className="opacity-80">{citation}</div>
+          <div style={{ fontWeight: 600, marginBottom: '4px' }}>Click to view source</div>
+          <div style={{ opacity: 0.8 }}>{citation}</div>
           {/* Arrow */}
           <div
-            className="absolute left-1/2 -translate-x-1/2 top-full"
             style={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              top: '100%',
               width: 0,
               height: 0,
               borderLeft: '6px solid transparent',

@@ -53,8 +53,8 @@ export const templates: N8nTemplate[] = [
     images: [
       '/n8n-templates/screenshots/ultimate-social-scraper.png',
     ],
-    stripeBuyButtonId: 'buy_btn_1SywSKI4n1kMt7iRH4IIz3Eg',
-    stripePublishableKey: '***REDACTED***',
+    stripeBuyButtonId: process.env.NEXT_PUBLIC_STRIPE_BUY_BTN_SOCIAL_SCRAPER || '',
+    stripePublishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
     jsonFile: '/n8n-templates/json/a7f3x9k2-ultimate-social-scraper.json',
     walkthrough: {
       overview: 'The Ultimate Social Scraper is a production-ready n8n workflow designed to extract data from major social media platforms. It handles rate limiting, pagination, and data normalization automatically, so you can focus on analyzing the results rather than wrestling with APIs.',

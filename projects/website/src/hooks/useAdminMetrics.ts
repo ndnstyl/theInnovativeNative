@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-
-const COMMUNITY_ID = 'a0000000-0000-0000-0000-000000000001';
+import { COMMUNITY_ID } from '@/lib/constants';
 
 export interface AdminMetric {
   metric_name: string;
@@ -13,12 +12,18 @@ export interface AdminMetric {
 }
 
 export function useAdminMetrics() {
-  const { supabaseClient } = useAuth();
+  const { supabaseClient, session, role } = useAuth();
   const [metrics, setMetrics] = useState<AdminMetric[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const isAdmin = role === 'admin' || role === 'moderator' || role === 'owner';
+
   useEffect(() => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !session || !isAdmin) {
+      setMetrics([]);
+      setLoading(false);
+      return;
+    }
 
     async function fetch() {
       setLoading(true);
@@ -40,7 +45,7 @@ export function useAdminMetrics() {
     }
 
     fetch();
-  }, [supabaseClient]);
+  }, [supabaseClient, session, isAdmin]);
 
   return { metrics, loading };
 }

@@ -1,36 +1,52 @@
 import { useState, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { trackBeginCheckout } from '@/lib/analytics';
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+import type { Course } from '@/types/supabase';
 
 export function useCourseCheckout() {
-  const { session } = useAuth();
+  const { supabaseClient, session } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const startCheckout = useCallback(async (
-    courseId: string,
-    courseName: string,
-    stripePriceId: string,
-    price: number
+    course: Course
   ) => {
-    if (!session) return;
+    if (!session?.user) return;
+
+    // Free courses don't need checkout
+    if (course.is_free) return;
+
+    if (!course.stripe_price_id) {
+      setError('No price configured for this course');
+      return;
+    }
+
     setLoading(true);
+    setError(null);
 
-    trackBeginCheckout(courseId, courseName, price);
+    try {
+      trackBeginCheckout(course.id, course.title, 0);
 
-    // For static export, we use Stripe's client-side checkout via Payment Links
-    // or redirect to a Supabase Edge Function that creates a checkout session
-    const checkoutUrl = `${SUPABASE_URL}/functions/v1/create-checkout?` +
-      `price_id=${encodeURIComponent(stripePriceId)}` +
-      `&user_id=${encodeURIComponent(session.user.id)}` +
-      `&course_id=${encodeURIComponent(courseId)}` +
-      `&success_url=${encodeURIComponent(window.location.origin + '/checkout/success?session_id={CHECKOUT_SESSION_ID}')}` +
-      `&cancel_url=${encodeURIComponent(window.location.origin + '/checkout/cancel')}`;
+      const { data, error: invokeErr } = await supabaseClient.functions.invoke('create-checkout', {
+        body: {
+          courseId: course.id,
+          priceId: course.stripe_price_id,
+        },
+      });
 
-    window.location.href = checkoutUrl;
-    // setLoading(false) not needed since we're redirecting
-  }, [session]);
+      if (invokeErr) throw invokeErr;
 
-  return { startCheckout, loading };
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Checkout failed';
+      setError(message);
+      setLoading(false);
+    }
+  }, [supabaseClient, session]);
+
+  return { startCheckout, loading, error };
 }

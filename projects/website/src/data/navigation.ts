@@ -3,6 +3,8 @@
 // Single source of truth for site-wide navigation.
 // =============================================================================
 
+import { CALENDLY_URL } from '@/lib/constants';
+
 interface NavItem {
   label: string;
   href: string;
@@ -12,14 +14,14 @@ interface NavItem {
 
 export const navItems: NavItem[] = [
   {
-    label: "How It Works",
-    href: "/#chatgpt-gap",
+    label: "Portfolio",
+    href: "/portfolio",
     isCta: false,
     children: null,
   },
   {
-    label: "Our Work",
-    href: "/portfolio",
+    label: "Blog",
+    href: "/blog",
     isCta: false,
     children: null,
   },
@@ -30,15 +32,27 @@ export const navItems: NavItem[] = [
     children: null,
   },
   {
-    label: "Blog",
-    href: "/blog",
+    label: "Experience",
+    href: "/professionalExperience",
+    isCta: false,
+    children: null,
+  },
+  {
+    label: "Newsletter",
+    href: "/newsletter",
+    isCta: false,
+    children: null,
+  },
+  {
+    label: "Login",
+    href: "/classroom",
     isCta: false,
     children: null,
   },
   // CTA
   {
     label: "Book a Call",
-    href: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+    href: CALENDLY_URL,
     isCta: true,
     children: null,
   },

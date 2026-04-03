@@ -11,7 +11,8 @@ $classroom-accent: #00FFFF;
 $classroom-text: #fff;
 $classroom-text-muted: #757575;
 $classroom-text-dim: #4a4a4a;
-$classroom-sidebar-width: 300px;
+$classroom-sidebar-width: 273px;
+$classroom-progress-green: #22c55e;
 
 // ============================================
 // Loading & Auth States
@@ -192,10 +193,11 @@ $classroom-sidebar-width: 300px;
 
 // ============================================
 // Course Grid
+// Responsive columns: 3-col >1200px, 2-col 768-1200px, 1-col <768px
 // ============================================
 .classroom-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -233,7 +235,7 @@ $classroom-sidebar-width: 300px;
   flex-direction: column;
   background: $classroom-card-bg;
   border: 1px solid $classroom-border;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
   transition: border-color 0.2s, transform 0.2s;
@@ -281,6 +283,11 @@ $classroom-sidebar-width: 300px;
     letter-spacing: 0.05em;
     padding: 4px 10px;
     border-radius: 4px;
+
+    &--open {
+      background: $classroom-progress-green;
+      color: #fff;
+    }
   }
 
   &__body {
@@ -296,6 +303,10 @@ $classroom-sidebar-width: 300px;
     color: $classroom-text;
     margin: 0 0 8px;
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__description {
@@ -333,6 +344,51 @@ $classroom-sidebar-width: 300px;
 }
 
 // ============================================
+// Skeleton Loading Cards
+// ============================================
+.classroom-card--skeleton {
+  pointer-events: none;
+  cursor: default;
+}
+
+@keyframes classroom-skeleton-pulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.16; }
+}
+
+.classroom-skeleton-pulse {
+  animation: classroom-skeleton-pulse 1.4s ease-in-out infinite;
+  background: $classroom-text-muted;
+  border-radius: 4px;
+}
+
+.classroom-skeleton-line {
+  height: 14px;
+
+  &--title {
+    width: 75%;
+    height: 18px;
+    margin-bottom: 10px;
+  }
+
+  &--desc {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  &--short {
+    width: 60%;
+  }
+
+  &--bar {
+    width: 100%;
+    height: 4px;
+    margin-top: 12px;
+    border-radius: 8px;
+  }
+}
+
+// ============================================
 // Progress Bar
 // ============================================
 .classroom-progress {
@@ -354,7 +410,7 @@ $classroom-sidebar-width: 300px;
 
   &__fill {
     height: 100%;
-    background: $classroom-accent;
+    background: $classroom-progress-green;
     border-radius: 8px;
     transition: width 0.3s ease;
     min-width: 0;
@@ -362,7 +418,8 @@ $classroom-sidebar-width: 300px;
 
   &__label {
     font-size: 13px;
-    color: $classroom-text-muted;
+    font-weight: 600;
+    color: $classroom-progress-green;
   }
 }
 
@@ -474,7 +531,7 @@ $classroom-sidebar-width: 300px;
 
   &__progress-fill {
     height: 100%;
-    background: $classroom-accent;
+    background: $classroom-progress-green;
     border-radius: 4px;
     transition: width 0.3s ease;
   }
@@ -520,10 +577,15 @@ $classroom-sidebar-width: 300px;
     align-items: center;
     gap: 10px;
     padding: 10px 20px;
+    width: 100%;
     text-decoration: none;
+    text-align: left;
     color: $classroom-text-muted;
     font-size: 14px;
-    transition: background 0.15s, color 0.15s;
+    background: none;
+    border: none;
+    border-left: 2px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
     cursor: pointer;
 
     &:hover {
@@ -531,10 +593,15 @@ $classroom-sidebar-width: 300px;
       color: $classroom-text;
     }
 
+    &:focus-visible {
+      outline: 2px solid $classroom-accent;
+      outline-offset: -2px;
+    }
+
     &--active {
       background: rgba(0, 255, 255, 0.05);
       color: $classroom-text;
-      border-left: 2px solid $classroom-accent;
+      border-left-color: $classroom-accent;
     }
 
     &--locked {
@@ -546,6 +613,58 @@ $classroom-sidebar-width: 300px;
         color: $classroom-text-muted;
       }
     }
+  }
+
+  // Mobile accordion header (hidden on desktop)
+  &__mobile-header {
+    display: none;
+  }
+
+  &__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid $classroom-border;
+    color: $classroom-text;
+    cursor: pointer;
+    text-align: left;
+    gap: 12px;
+
+    i {
+      color: $classroom-text-muted;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+  }
+
+  &__mobile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__mobile-lesson-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $classroom-text;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__mobile-progress {
+    font-size: 12px;
+    color: $classroom-text-muted;
+  }
+
+  // Lessons panel (desktop: always visible; mobile: collapsible)
+  &__lessons-panel {
+    // Desktop: no special treatment needed
   }
 
   &__lesson-icon {
@@ -715,6 +834,44 @@ $classroom-sidebar-width: 300px;
       margin: 32px 0;
     }
   }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    color: $classroom-text-muted;
+    text-align: center;
+
+    i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: $classroom-text-dim;
+    }
+
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+
+// ---- Video Player ----
+.classroom-video-player {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0e0e0e;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+
+  iframe,
+  video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
 }
 
 // ---- Lesson Actions (Complete + Next) ----
@@ -864,12 +1021,21 @@ $classroom-sidebar-width: 300px;
 // ============================================
 // Responsive
 // ============================================
+
+// Tablet-large: 2-column grid
+@media (max-width: 1200px) {
+  .classroom-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
   .classroom-lesson-content {
     padding: 32px 24px;
   }
 }
 
+// Tablet: single-column grid + authenticated users get tab nav offset
 @media (max-width: 768px) {
   .classroom-header {
     padding: 12px 16px;
@@ -933,6 +1099,30 @@ $classroom-sidebar-width: 300px;
     &__close {
       display: block;
     }
+
+    // Mobile accordion: show header, collapse lessons panel
+    &__header--desktop {
+      display: none;
+    }
+
+    &__mobile-header {
+      display: block;
+    }
+
+    &__course-info {
+      display: none;
+    }
+
+    &__lessons-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+
+      &--open {
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+    }
   }
 
   .classroom-lesson-content {
@@ -957,5 +1147,135 @@ $classroom-sidebar-width: 300px;
   .classroom-complete-btn,
   .classroom-next-btn {
     justify-content: center;
+  }
+}
+
+// ============================================
+// Touch Target & Overflow Fixes (US4)
+// ============================================
+
+// Ensure minimum 44px touch targets on all interactive elements
+.classroom-sidebar__lesson {
+  min-height: 44px;
+}
+
+.classroom-complete-btn,
+.classroom-next-btn,
+.classroom-enroll__btn {
+  min-height: 44px;
+}
+
+.classroom-card__badge {
+  min-height: 28px; // badge doesn't need 44px (not a tap target)
+}
+
+// Course card titles: always truncated to 2 lines (reinforcement)
+.classroom-card__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 320px viewport: prevent overflow
+@media (max-width: 320px) {
+  .classroom-dashboard {
+    padding: 24px 12px;
+  }
+
+  .classroom-lesson-content {
+    padding: 20px 12px;
+  }
+
+  .classroom-card__body {
+    padding: 16px;
+  }
+
+  .classroom-card__title {
+    font-size: 16px;
+  }
+
+  .classroom-card__description {
+    font-size: 13px;
+  }
+
+  .classroom-header {
+    padding: 10px 12px;
+
+    &__logo {
+      font-size: 16px;
+    }
+  }
+
+  .classroom-sidebar {
+    width: 100vw;
+
+    &__lesson {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+
+    &__module-title {
+      padding: 12px 16px 8px;
+      font-size: 10px;
+    }
+  }
+
+  .classroom-sidebar-wrapper {
+    width: 100vw;
+  }
+
+  .classroom-lesson {
+    &__title {
+      font-size: 20px;
+    }
+  }
+
+  .classroom-lesson-actions {
+    gap: 12px;
+  }
+
+  .classroom-complete-btn,
+  .classroom-next-btn {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}
+
+// ============================================
+// Skip to Content
+// ============================================
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00FFFF;
+  color: #000;
+  padding: 8px 24px;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  font-size: 14px;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.2s;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// ============================================
+// Reduced Motion
+// ============================================
+@media (prefers-reduced-motion: reduce) {
+  .classroom-progress__fill,
+  .classroom-card,
+  .classroom-sidebar__lesson,
+  .classroom-sidebar,
+  .skip-to-content {
+    transition: none !important;
+    animation: none !important;
   }
 }

@@ -28,8 +28,7 @@
   }
 
   .navbar__item {
-    button,a
-    a {
+    button, a {
       padding: 41px 20px;
       text-transform: uppercase;
       font-weight: 500;
@@ -236,13 +235,11 @@
     position: fixed;
     inset: 0px;
     overflow: hidden;
-    transition: var(--transition);
+    transition: all 0.6s ease-in-out;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-100%);
-    transition: var(--transition);
     z-index: 9999;
-    transition: all 0.6s ease-in-out;
     background-color: #191919;
 
     &::before {
@@ -265,9 +262,22 @@
       display: flex;
       align-items: center;
       gap: 24px;
-      flex-wrap: wrap;
-      padding: 0px 20px 0px 20px;
+      flex-wrap: nowrap;
+      padding: 0px 20px;
       justify-content: space-between;
+      flex-shrink: 0;
+
+      .logo {
+        max-width: 50px;
+        flex-shrink: 0;
+
+        img {
+          // !important needed to override Next.js Image inline styles
+          width: 50px !important;
+          height: 50px !important;
+          object-fit: contain;
+        }
+      }
     }
 
     .close-offcanvas-menu {
@@ -279,7 +289,7 @@
       inset: 0px;
       background-color: transparent;
       z-index: 9999;
-      padding: 60px 100px 60px 60px;
+      padding: 30px 60px 30px 40px;
       height: 100vh;
       overflow-y: auto;
       overflow-x: clip;
@@ -311,10 +321,9 @@
         color: var(--white);
         padding: 20px 80px 20px 20px;
         line-height: 1;
-        font-size: 16px;
+        font-size: 24px;
         width: 100%;
         text-transform: uppercase;
-        font-size: 24px;
         &:hover {
           color: var(--primary-color);
         }
@@ -542,6 +551,87 @@
   }
 }
 
-/* ==== 
+// ============================================
+// Community Tab Navigation (Skool-style)
+// ============================================
+.community-tab-nav {
+  position: fixed;
+  top: 80px; // sits below the primary header
+  left: 0;
+  right: 0;
+  z-index: 998;
+  background-color: var(--black);
+  border-bottom: 1px solid #2a2a2a;
+
+  &__inner {
+    display: flex;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    // Hide scrollbar on desktop
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    min-height: 48px; // 44px+ touch target
+    font-size: 14px;
+    font-weight: 500;
+    color: #888;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    border-bottom: 2px solid transparent;
+    flex-shrink: 0;
+
+    &:hover {
+      color: var(--white);
+    }
+
+    &--active {
+      color: var(--white);
+      border-bottom-color: #00FFFF;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #00FFFF;
+      outline-offset: -2px;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Mobile: horizontal scroll with snap
+@media (max-width: 767px) {
+  .community-tab-nav {
+    top: 70px; // mobile header is smaller
+
+    &__inner {
+      padding: 0 16px;
+      scroll-snap-type: x mandatory;
+      gap: 0;
+    }
+
+    &__tab {
+      padding: 12px 16px;
+      font-size: 13px;
+      scroll-snap-align: start;
+    }
+  }
+}
+
+/* ====
  --------- (4.01) header styles end ---------
  ==== */

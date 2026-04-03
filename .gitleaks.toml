@@ -1,12 +1,116 @@
-# Gitleaks configuration
-# https://github.com/gitleaks/gitleaks
+# Gitleaks configuration for theinnovativenative
+# Run: gitleaks detect --config .gitleaks.toml
+# Pre-commit: gitleaks protect --config .gitleaks.toml --staged
 
-title = "theinnovativenative gitleaks config"
+title = "theinnovativenative secret detection"
 
-# Allow paths that are known to not contain real secrets
+[extend]
+# Use the default gitleaks rules as a base
+useDefault = true
+
+# Custom rules for services used in this project
+[[rules]]
+id = "stripe-secret-key"
+description = "Stripe Secret Key"
+regex = '''sk_live_[0-9a-zA-Z]{24,}'''
+tags = ["stripe", "secret"]
+
+[[rules]]
+id = "stripe-webhook-secret"
+description = "Stripe Webhook Signing Secret"
+regex = '''whsec_[0-9a-zA-Z]{24,}'''
+tags = ["stripe", "webhook"]
+
+[[rules]]
+id = "airtable-pat"
+description = "Airtable Personal Access Token"
+regex = '''pat[a-zA-Z0-9]{14}\.[0-9a-f]{64}'''
+tags = ["airtable", "token"]
+
+[[rules]]
+id = "supabase-access-token"
+description = "Supabase Management Access Token"
+regex = '''sbp_[0-9a-f]{40}'''
+tags = ["supabase", "token"]
+
+[[rules]]
+id = "supabase-service-role"
+description = "Supabase Service Role JWT"
+regex = '''eyJ[a-zA-Z0-9_-]+\.eyJ[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+'''
+tags = ["supabase", "jwt"]
+[rules.allowlist]
+paths = ['''\.example\.json$''', '''mcp-servers\.md$''']
+
+[[rules]]
+id = "slack-bot-token"
+description = "Slack Bot Token"
+regex = '''xoxb-[0-9]+-[0-9]+-[a-zA-Z0-9]+'''
+tags = ["slack", "token"]
+
+[[rules]]
+id = "notion-token"
+description = "Notion Integration Token"
+regex = '''ntn_[0-9a-zA-Z]{40,}'''
+tags = ["notion", "token"]
+
+[[rules]]
+id = "hostinger-api-token"
+description = "Hostinger API Token"
+regex = '''APITOKEN["'\s:=]+[0-9a-zA-Z]{40,50}'''
+tags = ["hostinger"]
+
+[[rules]]
+id = "n8n-jwt-api-key"
+description = "n8n API Key (JWT)"
+regex = '''eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+'''
+tags = ["n8n", "jwt"]
+[rules.allowlist]
+paths = ['''\.example\.json$''', '''mcp-servers\.md$''']
+
+[[rules]]
+id = "close-crm-api-key"
+description = "Close CRM API Key"
+regex = '''api_[0-9a-zA-Z]{20,}\.[0-9a-zA-Z]+'''
+tags = ["close-crm", "api-key"]
+
+[[rules]]
+id = "google-client-secret"
+description = "Google OAuth Client Secret"
+regex = '''GOCSPX-[a-zA-Z0-9_-]+'''
+tags = ["google", "oauth"]
+
+[[rules]]
+id = "apify-api-token"
+description = "Apify API Token"
+regex = '''apify_api_[a-zA-Z0-9]+'''
+tags = ["apify", "token"]
+
+[[rules]]
+id = "hyros-api-key"
+description = "Hyros API Key"
+regex = '''API_[0-9a-f]{64}'''
+tags = ["hyros", "api-key"]
+
+[[rules]]
+id = "relevance-ai-token"
+description = "Relevance AI Auth Token"
+regex = '''[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:sk-[a-zA-Z0-9]+'''
+tags = ["relevance-ai", "token"]
+
+[[rules]]
+id = "postgres-connection-string"
+description = "PostgreSQL Connection String with Password"
+regex = '''postgresql://[^:]+:[^@]+@[^/]+/[a-zA-Z0-9]+'''
+tags = ["database", "password"]
+
+# Allowlisted paths (files that legitimately discuss credential formats)
 [allowlist]
-  paths = [
-    '''\.env\.example$''',
-    '''\.env\.sample$''',
-    '''package-lock\.json$''',
-  ]
+paths = [
+  '''\.env\.example$''',
+  '''\.example\.json$''',
+  '''mcp-servers\.md$''',
+  '''SETUP-GUIDE\.md$''',
+  '''\.gitleaks\.toml$''',
+  '''security-hardening-sop\.md$''',
+  '''e2e/.*\.spec\.ts$'''
+]

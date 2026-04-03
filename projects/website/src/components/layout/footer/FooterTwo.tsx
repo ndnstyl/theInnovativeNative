@@ -177,13 +177,13 @@ const FooterTwo = () => {
                   <i className="fa-sharp fa-solid fa-location-dot"></i>
                   901 N Pitt Str., Suite 170 Alexandria, USA
                 </Link>
-                <Link href="tel:406-555-0120">
+                <Link href="tel:702-582-5335">
                   <i className="fa-sharp fa-solid fa-phone-volume"></i>
                   (406) 555-0120
                 </Link>
-                <Link href="mailto:info@xpovio.com">
+                <Link href="mailto:info@theinnovativenative.com">
                   <i className="fa-sharp fa-solid fa-envelope"></i>
-                  info@xpovio.com
+                  info@theinnovativenative.com
                 </Link>
               </div>
             </div>

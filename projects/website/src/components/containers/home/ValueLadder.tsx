@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { valueLadderTiers } from "@/data/homepage";
+import { CALENDLY_URL } from "@/lib/constants";
 
 const tierButtonClass: Record<string, string> = {
   learn: "btn btn--ghost",
@@ -15,7 +16,7 @@ const ValueLadder = () => {
   const openCalendly = () => {
     if (typeof window !== "undefined" && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+        url: CALENDLY_URL,
       });
     }
   };

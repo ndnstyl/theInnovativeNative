@@ -1,0 +1,465 @@
+// ── Isometric Workflow Diagram — 3D Glass Cubes + Neon Tubes ─────────────────
+
+// ── Variables ────────────────────────────────────────────────────────────────
+$cube-size: 80px;
+$cube-height: 40px;
+$grid-color: rgba(255, 255, 255, 0.04);
+$grid-color-strong: rgba(255, 255, 255, 0.07);
+
+// ── Main Container ──────────────────────────────────────────────────────────
+.iso-diagram {
+  padding: 60px 20px 80px;
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+
+  // ── Header ──────────────────────────────────────────────────────────────
+  &__header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.7;
+  }
+
+  // ── Scene (isometric viewport) ────────────────────────────────────────
+  &__scene {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 500px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      height: 400px;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+  }
+
+  // ── Isometric Grid Background ─────────────────────────────────────────
+  &__grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+
+    // Isometric grid using repeating lines
+    background-image:
+      // Diagonal lines going right
+      repeating-linear-gradient(
+        60deg,
+        $grid-color 0px,
+        $grid-color 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      // Diagonal lines going left
+      repeating-linear-gradient(
+        -60deg,
+        $grid-color 0px,
+        $grid-color 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      // Horizontal lines
+      repeating-linear-gradient(
+        0deg,
+        $grid-color-strong 0px,
+        $grid-color-strong 1px,
+        transparent 1px,
+        transparent 80px
+      );
+
+    // Fade edges
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 50%,
+      black 20%,
+      transparent 80%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 50%,
+      black 20%,
+      transparent 80%
+    );
+  }
+
+  // ── SVG connector layer ───────────────────────────────────────────────
+  &__svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  // ── Node container ────────────────────────────────────────────────────
+  &__nodes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    z-index: 2;
+  }
+
+  // ── Detail Panel ──────────────────────────────────────────────────────
+  &__detail {
+    max-width: 1000px;
+    margin: 40px auto 0;
+    padding: 32px;
+    background: rgba(14, 14, 14, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid;
+    border-radius: 16px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative;
+    z-index: 10;
+  }
+
+  &__detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__detail-id {
+    font-size: 12px;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--secondary-color);
+    opacity: 0.6;
+  }
+
+  &__detail-close {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--secondary-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--white);
+    }
+  }
+
+  &__detail-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--secondary-color);
+    margin-bottom: 28px;
+  }
+
+  &__detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  &__detail-col {
+    h4 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      font-size: 13px;
+      color: var(--secondary-color);
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+
+      i {
+        color: rgba(212, 149, 106, 0.5);
+        font-size: 11px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// ── Isometric Node ──────────────────────────────────────────────────────────
+
+.iso-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  transition: z-index 0s;
+
+  &:hover {
+    z-index: 10;
+
+    .iso-node__cube {
+      transform: translateY(-8px);
+    }
+
+    .iso-node__underglow {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    .iso-node__face--top {
+      box-shadow:
+        inset 0 0 30px var(--node-glow),
+        0 0 20px var(--node-glow);
+    }
+
+    .iso-node__icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 8px var(--node-color));
+    }
+
+    .iso-node__label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  &--active {
+    z-index: 10;
+
+    .iso-node__cube {
+      transform: translateY(-12px);
+    }
+
+    .iso-node__underglow {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+
+    .iso-node__face--top {
+      box-shadow:
+        inset 0 0 40px var(--node-glow-strong),
+        0 0 30px var(--node-glow);
+    }
+
+    .iso-node__label {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  // ── Underglow (colored light pool beneath cube) ─────────────────────
+  &__underglow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    width: 120px;
+    height: 40px;
+    background: radial-gradient(
+      ellipse,
+      var(--node-glow-strong) 0%,
+      var(--node-glow) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    filter: blur(8px);
+  }
+
+  // ── 3D Cube Assembly ──────────────────────────────────────────────────
+  &__cube {
+    width: $cube-size;
+    height: $cube-size;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // ── Cube Faces ────────────────────────────────────────────────────────
+  &__face {
+    position: absolute;
+    backface-visibility: hidden;
+
+    &--top {
+      width: $cube-size;
+      height: $cube-size;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.04) 50%,
+        rgba(255, 255, 255, 0.08) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      transition: box-shadow 0.4s ease;
+      box-shadow:
+        inset 0 0 20px var(--node-glow),
+        0 0 10px rgba(0, 0, 0, 0.2);
+
+      // Glass reflection streak
+      &::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        right: 40%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        border-radius: 1px;
+      }
+    }
+
+    &--front {
+      width: $cube-size;
+      height: $cube-height;
+      bottom: -$cube-height + 4px;
+      left: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      z-index: 2;
+
+      // Chrome edge highlight
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+      }
+    }
+
+    &--right {
+      // We skip the right face for simplicity — the front + top
+      // give enough depth impression in 2D isometric
+      display: none;
+    }
+  }
+
+  // ── Icon ──────────────────────────────────────────────────────────────
+  &__icon {
+    font-size: 26px;
+    color: var(--node-color);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 4px var(--node-glow));
+  }
+
+  // ── Floating Label (black pill) ───────────────────────────────────────
+  &__label {
+    position: absolute;
+    bottom: -$cube-height - 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    white-space: nowrap;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  &__label-text {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+}
+
+// ── Pulse animation for active nodes ────────────────────────────────────────
+@keyframes iso-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.iso-node--active .iso-node__underglow {
+  animation: iso-pulse 2s ease-in-out infinite;
+}

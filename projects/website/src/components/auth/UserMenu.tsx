@@ -43,7 +43,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     try {
       const supabase = createBrowserClient();
       await supabase.auth.signOut();
-      router.push('/law-firm-rag');
+      window.location.href = '/classroom';
     } catch {
       // Sign-out failed — user can retry
     } finally {
@@ -84,7 +84,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <span className="user-avatar user-avatar-lg">{getInitials()}</span>
             <div className="user-info">
               <span className="user-email">{displayEmail()}</span>
-              <span className="user-role">Pilot Member</span>
+              <span className="user-role">Member</span>
             </div>
           </div>
 

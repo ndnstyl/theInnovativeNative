@@ -75,30 +75,18 @@ describe('Environment Variable Security Audit', () => {
       }
     });
 
-    it('should flag hardcoded pk_live_ keys in templates.ts', () => {
+    it('should NOT contain hardcoded pk_live_ keys in templates.ts', () => {
       const templatesFindings = findings.filter((f) =>
         f.file.includes('templates.ts')
       );
-      // This IS a known issue -- templates.ts has a hardcoded pk_live_ key
-      expect(templatesFindings.length).toBeGreaterThan(0);
-      // Document the finding
-      for (const f of templatesFindings) {
-        console.warn(
-          `[SECURITY] ${f.file} contains hardcoded Stripe publishable key(s): ${f.matches.map((m) => m.slice(0, 20) + '...').join(', ')}`
-        );
-      }
+      expect(templatesFindings.length).toBe(0);
     });
 
-    it('should flag hardcoded pk_live_ keys in visionspark-re.ts', () => {
+    it('should NOT contain hardcoded pk_live_ keys in visionspark-re.ts', () => {
       const vsFindings = findings.filter((f) =>
         f.file.includes('visionspark-re.ts')
       );
-      expect(vsFindings.length).toBeGreaterThan(0);
-      for (const f of vsFindings) {
-        console.warn(
-          `[SECURITY] ${f.file} contains hardcoded Stripe publishable key(s): ${f.matches.map((m) => m.slice(0, 20) + '...').join(', ')}`
-        );
-      }
+      expect(vsFindings.length).toBe(0);
     });
 
     it('should confirm haven-blueprint.ts uses process.env for Stripe key', () => {
@@ -115,16 +103,13 @@ describe('Environment Variable Security Audit', () => {
       );
     });
 
-    it('should report total count of hardcoded pk_live_ keys in data/', () => {
+    it('should have zero hardcoded pk_live_ keys in data/', () => {
       const totalKeys = findings.reduce(
         (sum, f) => sum + f.matches.length,
         0
       );
-      console.warn(
-        `[SECURITY SUMMARY] Found ${totalKeys} hardcoded pk_live_ key(s) across ${findings.length} file(s) in src/data/`
-      );
-      // Asserting the vulnerability exists (test passes when the problem is found)
-      expect(totalKeys).toBeGreaterThanOrEqual(2);
+      // All Stripe keys should now use process.env
+      expect(totalKeys).toBe(0);
     });
   });
 

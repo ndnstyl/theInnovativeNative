@@ -1,46 +1,56 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useAuth } from "@/contexts/AuthContext";
 
+/** Skool-style community tab navigation data */
+const COMMUNITY_TABS = [
+  { label: "Community", href: "/community" },
+  { label: "Classroom", href: "/classroom" },
+  { label: "Calendar", href: "/community/calendar" },
+  { label: "Members", href: "/members" },
+  { label: "Leaderboards", href: "/community/leaderboard" },
+  { label: "About", href: "/community/about" },
+] as const;
+
+/**
+ * Secondary tab navigation bar (Skool-style).
+ * Renders below the primary header for authenticated users only.
+ * Active tab determined by current route pathname.
+ */
 const HeaderTwo = () => {
-  const openCalendly = () => {
-    if (typeof window !== 'undefined' && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
-      });
-    }
-  };
+  const { session } = useAuth();
+  const router = useRouter();
+
+  // Only render for authenticated users
+  if (!session) return null;
+
+  const currentPath = router.pathname;
 
   return (
-    <header className="header">
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          zIndex: 1000,
-          padding: '20px 30px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-end',
-          gap: '10px',
-        }}
-      >
-        <Link
-          href="/"
-          className="btn btn--secondary"
-          style={{ fontSize: '14px', padding: '10px 20px' }}
-        >
-          Home
-        </Link>
-        <button
-          onClick={openCalendly}
-          className="btn btn--secondary"
-          style={{ fontSize: '14px', padding: '10px 20px' }}
-        >
-          Book Discovery Call
-        </button>
+    <nav className="community-tab-nav" aria-label="Community navigation">
+      <div className="community-tab-nav__inner" role="tablist">
+        {COMMUNITY_TABS.map((tab) => {
+          // Determine active state: exact match or starts-with for nested routes
+          const isActive =
+            currentPath === tab.href ||
+            (tab.href !== "/community" && currentPath.startsWith(tab.href)) ||
+            (tab.href === "/community" && currentPath === "/community");
+
+          return (
+            <Link
+              key={tab.href}
+              href={tab.href}
+              role="tab"
+              aria-selected={isActive}
+              className={`community-tab-nav__tab${isActive ? " community-tab-nav__tab--active" : ""}`}
+            >
+              {tab.label}
+            </Link>
+          );
+        })}
       </div>
-    </header>
+    </nav>
   );
 };
 

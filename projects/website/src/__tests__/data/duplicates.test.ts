@@ -46,19 +46,25 @@ describe('Calendly URL centralization', () => {
     }
   });
 
-  it('navigation data references Calendly URL only in the CTA item', () => {
+  it('navigation data imports Calendly URL from constants (no hardcoded URL)', () => {
     const navSrc = readFileIfExists(path.join(DATA_DIR, 'navigation.ts'));
     expect(navSrc).not.toBeNull();
 
+    // FIXED: navigation.ts now imports CALENDLY_URL from @/lib/constants
+    // instead of hardcoding the URL inline
+    const importsFromConstants = navSrc!.includes('CALENDLY_URL') && navSrc!.includes('@/lib/constants');
+    expect(importsFromConstants).toBe(true);
+
+    // No hardcoded Calendly URL should remain in navigation.ts
     const matches = navSrc!.match(calendlyPattern) || [];
-    // Should appear exactly once (the CTA)
-    expect(matches.length).toBe(1);
+    expect(matches.length).toBe(0);
   });
 
   it('all Calendly URLs across data files are identical', () => {
+    // navigation.ts now imports from constants, so only homepage.ts has inline URLs
     const homepageSrc = readFileIfExists(path.join(DATA_DIR, 'homepage.ts')) || '';
-    const navSrc = readFileIfExists(path.join(DATA_DIR, 'navigation.ts')) || '';
-    const combined = homepageSrc + navSrc;
+    const constantsSrc = readFileIfExists(path.resolve(DATA_DIR, '../lib/constants.ts')) || '';
+    const combined = homepageSrc + constantsSrc;
 
     const matches = combined.match(calendlyPattern) || [];
     const uniqueUrls = new Set(matches);

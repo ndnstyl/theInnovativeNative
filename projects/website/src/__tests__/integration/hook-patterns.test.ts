@@ -99,12 +99,9 @@ describe('Hook anti-patterns', () => {
     });
   });
 
-  describe('Hardcoded COMMUNITY_ID', () => {
-    // Multiple hooks hardcode the same community ID instead of fetching
-    // it dynamically or accepting it as a parameter.
-    //
-    // FIX: Create a CommunityContext that fetches the community ID once
-    // and provides it to all hooks, or accept communityId as a hook param.
+  describe('Hardcoded COMMUNITY_ID (FIXED — consolidated to constants)', () => {
+    // FIXED: All hooks now import COMMUNITY_ID from @/lib/constants
+    // instead of hardcoding the UUID inline.
 
     const HARDCODED_ID = 'a0000000-0000-0000-0000-000000000001';
     const hooksWithHardcodedId = countFilesMatching(
@@ -112,30 +109,36 @@ describe('Hook anti-patterns', () => {
       new RegExp(HARDCODED_ID),
     );
 
-    it('should find hooks with hardcoded COMMUNITY_ID', () => {
-      expect(hooksWithHardcodedId.length).toBeGreaterThan(0);
+    it('should find ZERO hooks with hardcoded COMMUNITY_ID (regression guard)', () => {
+      // FIXED: Hooks now import from @/lib/constants instead of hardcoding
+      if (hooksWithHardcodedId.length > 0) {
+        const hookNames = hooksWithHardcodedId.map((f) =>
+          path.relative(SRC_DIR, f),
+        );
+        console.warn(
+          `Hooks still hardcoding COMMUNITY_ID:\n` +
+          hookNames.map((n) => `  - ${n}`).join('\n'),
+        );
+      }
+      expect(hooksWithHardcodedId.length).toBe(0);
     });
 
-    it('DUPLICATION: multiple hooks hardcode the same COMMUNITY_ID', () => {
-      const hookNames = hooksWithHardcodedId.map((f) =>
-        path.relative(SRC_DIR, f),
-      );
-
-      // Known offenders: useCommunitySettings, useMemberManagement,
-      // useSubscription, useAdminMetrics, useModeration
-      console.log(
-        `Hooks with hardcoded COMMUNITY_ID:\n` +
-        hookNames.map((n) => `  - ${n}`).join('\n'),
-      );
-
-      // More than 1 hook should not hardcode the same UUID
-      expect(hooksWithHardcodedId.length).toBeGreaterThan(1);
+    it('COMMUNITY_ID is consolidated in @/lib/constants', () => {
+      // Verify the constant exists in the constants file
+      const constantsPath = path.join(SRC_DIR, 'lib', 'constants.ts');
+      const content = fs.readFileSync(constantsPath, 'utf-8');
+      expect(content).toContain('COMMUNITY_ID');
+      expect(content).toContain(HARDCODED_ID);
     });
 
-    it('counts exactly how many hooks hardcode COMMUNITY_ID', () => {
-      // Expected: 5 hooks (useCommunitySettings, useMemberManagement,
-      // useSubscription, useAdminMetrics, useModeration)
-      expect(hooksWithHardcodedId.length).toBeGreaterThanOrEqual(5);
+    it('hooks import COMMUNITY_ID from constants (regression guard)', () => {
+      // Verify hooks use the import pattern instead of hardcoding
+      const hooksUsingImport = countFilesMatching(
+        HOOKS_DIR,
+        /import.*COMMUNITY_ID.*from.*constants/,
+      );
+      // At least the known 5 hooks should import from constants
+      expect(hooksUsingImport.length).toBeGreaterThanOrEqual(5);
     });
   });
 

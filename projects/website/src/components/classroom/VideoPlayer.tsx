@@ -13,19 +13,23 @@ function extractVimeoId(url: string): string | null {
 
 /**
  * Video player supporting YouTube, Vimeo, and native video URLs.
+ * Only renders when url is truthy. Responsive 16:9 aspect ratio.
  */
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title = 'Video' }) => {
+  if (!url) return null;
+
   const youtubeId = extractYouTubeId(url);
   const vimeoId = !youtubeId ? extractVimeoId(url) : null;
 
   return (
-    <div className="classroom-video-player">
+    <div className="classroom-video-player" style={{ aspectRatio: '16 / 9' }}>
       {youtubeId ? (
         <iframe
           src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          loading="lazy"
         />
       ) : vimeoId ? (
         <iframe
@@ -33,6 +37,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title = 'Video' }) => {
           title={title}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
+          loading="lazy"
         />
       ) : (
         <video controls src={url} title={title}>

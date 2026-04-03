@@ -1,8 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import RichTextEditor from '@/components/community/shared/RichTextEditor';
+import { getValidToken } from '@/lib/auth-token';
 import { sanitizeHtml } from '@/lib/sanitize';
+import RichTextEditor from '@/components/community/shared/RichTextEditor';
 import type { JSONContent } from '@tiptap/react';
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 interface PostComposerProps {
   communityId: string;
@@ -11,7 +15,7 @@ interface PostComposerProps {
 }
 
 const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, onPostCreated }) => {
-  const { supabaseClient, session } = useAuth();
+  const { session } = useAuth();
   const [expanded, setExpanded] = useState(false);
   const [body, setBody] = useState('');
   const [bodyHtml, setBodyHtml] = useState('');
@@ -26,7 +30,13 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabaseClient || !session?.user?.id) return;
+    if (!session?.user?.id) return;
+
+    const token = getValidToken();
+    if (!token) {
+      setError('Session expired. Please sign in again.');
+      return;
+    }
 
     const sanitized = sanitizeHtml(bodyHtml);
     if (!sanitized.replace(/<[^>]*>/g, '').trim()) {
@@ -42,17 +52,27 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
     setError(null);
 
     try {
-      const { error: insertError } = await supabaseClient
-        .from('posts')
-        .insert({
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/posts`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
           community_id: communityId,
           author_id: session.user.id,
           category_id: categoryId,
           body,
           body_html: sanitized,
-        });
+        }),
+      });
 
-      if (insertError) throw insertError;
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `HTTP ${res.status}`);
+      }
 
       setBody('');
       setBodyHtml('');
@@ -91,6 +111,7 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
           className="post-composer__category-select"
           aria-label="Post category"
           required
+          aria-label="Post category"
         >
           <option value="">Select category</option>
           {categories.map(cat => (

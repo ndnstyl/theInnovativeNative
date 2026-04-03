@@ -189,11 +189,14 @@ const Layout = ({
       </Head>
       <div className={combinedClassName}>
         {header === 1 && (
-          <Header
-            openNav={openNav}
-            handleNav={handleNav}
-            setOpenNav={setOpenNav}
-          />
+          <>
+            <Header
+              openNav={openNav}
+              handleNav={handleNav}
+              setOpenNav={setOpenNav}
+            />
+            <HeaderTwo />
+          </>
         )}
         {header === 2 && <HeaderTwo />}
         {header === 3 && (

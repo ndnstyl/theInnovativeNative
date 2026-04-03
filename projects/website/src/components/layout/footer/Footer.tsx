@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "public/images/logo.png";
-import NewsletterForm from "@/components/common/NewsletterForm";
+import { CALENDLY_URL } from "@/lib/constants";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +10,7 @@ const Footer = () => {
   const openCalendly = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
+        url: CALENDLY_URL
       });
     }
   };
@@ -88,8 +88,10 @@ const Footer = () => {
           </div>
           <div className="col-12 col-lg-3 col-xl-3">
             <div className="footer__single">
-              <NewsletterForm />
-              <div className="footer__single-content" style={{ marginTop: '24px' }}>
+              <div className="footer__single-intro">
+                <h5>Connect</h5>
+              </div>
+              <div className="footer__single-content">
                 <ul>
                   <li>
                     <a
@@ -113,6 +115,16 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+          <div className="col-12">
+            <div className="footer__legal" style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap' }}>
+              <Link href="/privacy-policy" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Privacy Policy</Link>
+              <Link href="/terms-and-conditions" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Terms &amp; Conditions</Link>
+              <Link href="/disclaimer" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Disclaimer</Link>
+              <Link href="/refund-policy" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Refund Policy</Link>
             </div>
           </div>
         </div>

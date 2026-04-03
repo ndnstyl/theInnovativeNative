@@ -121,6 +121,19 @@ Key Agent Record IDs (populate after creating agents):
 
 ---
 
+## Memory File Conventions (Obsidian-Compatible)
+
+All `.specify/memory/` markdown files use two conventions for cross-referencing:
+
+1. **YAML Frontmatter** — Every `.md` file starts with `---` block containing: `type`, `agent`, `project`, `created`, `updated`, `tags`, `status`
+2. **Wikilinks** — Use `[[filename]]` (no `.md` extension) to link between memory files. Only wikilink files within `.specify/memory/`. External paths (scripts, skills, features) stay as literal paths.
+
+Examples: `[[constitution]]`, `[[shared-learnings]]`, `[[builder-learnings]]`, `[[constitution#Airtable Schema Governance]]`
+
+New learnings files should follow `.specify/templates/learnings-template.md`.
+
+---
+
 ## Key Principles
 
 1. **Constitution First** - Load on every startup
@@ -136,11 +149,20 @@ Key Agent Record IDs (populate after creating agents):
 - Airtable (pipeline state) + Google Drive (media files) (003-haven-ugc-broll)
 - JavaScript (n8n Code nodes) + FFMPEG (CLI on n8n server) + n8n workflow engine, Kie.AI API (NBP + Veo 3.1), n8n Basic LLM Chain (Groq), Google Drive API, Airtable API (008-tiny-home-timelapse)
 - Airtable (state management), Google Drive (asset storage) (008-tiny-home-timelapse)
+- TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19, SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2 (008-website-clarity-overhaul)
+- N/A (no database changes) (008-website-clarity-overhaul)
+- TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router) + SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2, @supabase/auth-helpers-nextjs, @supabase/supabase-js (009-classroom-landing)
+- Supabase PostgreSQL (profiles, community_members, courses tables already exist) (009-classroom-landing)
+- TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router, static export) + @supabase/supabase-js, @supabase/auth-helpers-nextjs, Stripe.js, SCSS 1.66.1, Bootstrap 5.3.1, Tiptap (rich text editor, already installed) (010-classroom-lms)
+- Supabase PostgreSQL (project: etglkowtxfhrszxnkrcq, Pro plan) + Supabase Storage (certificates bucket) (010-classroom-lms)
+- TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router, static export) + SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2, @supabase/supabase-js ^2.95.0 (031-skool-ui-overhaul)
+- Supabase PostgreSQL (existing tables: courses, modules, lessons, lesson_progress, enrollments, posts, post_comments, post_likes, profiles, community_members) (031-skool-ui-overhaul)
 
 ## Knowledge Skills
 - **3d-web-experience**: Spline (variables, webhooks, real-time API, Spell AI, MCP server), Three.js, React Three Fiber, R3F+Spline hybrid, shaders, physics (Rapier), Remotion+Spline, multi-platform export (iOS/Android/Web/AR)
 - **frontend-design**: Anti-slop UI/UX rules, GSAP motion choreography, typography (anti-generic font pairing), color strategy, asymmetric layouts, background atmosphere, responsive patterns
 
 ## Recent Changes
-- Knowledge skills: Added 3d-web-experience (Spline + Three.js + R3F) and frontend-design (anti-slop UI/UX) knowledge skills
-- 002-stan-store-lawfirm-funnel: Added N/A (content products + no-code integrations) + Stan Store (storefront), PPTX Generator skill (PDF creation), n8n (webhook pipeline), Airtable (lead tracking)
+- 031-skool-ui-overhaul: Added TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router, static export) + SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2, @supabase/supabase-js ^2.95.0
+- 030-error-handling: Added TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router, static export)
+- 010-classroom-lms: Added TypeScript 5.2.2 / React 18.2.0 + Next.js 13.4.19 (Pages Router, static export) + @supabase/supabase-js, @supabase/auth-helpers-nextjs, Stripe.js, SCSS 1.66.1, Bootstrap 5.3.1, Tiptap (rich text editor, already installed)

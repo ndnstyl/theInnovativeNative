@@ -11,12 +11,12 @@ const LawFirmRagHero = ({ openCalendly }: LawFirmRagHeroProps) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
-  const videoId = "ZkLx4zC62Xk";
+  const videoId = "lSXvFUhECEI";
 
   return (
     <>
       <section className="section lfr-hero fade-wrapper">
-        {/* Background Image - hidden on mobile */}
+        {/* Background Image */}
         <div className="lfr-hero__bg-image">
           <Image
             src={heroImage}
@@ -28,7 +28,8 @@ const LawFirmRagHero = ({ openCalendly }: LawFirmRagHeroProps) => {
           />
           <div className="lfr-hero__bg-overlay"></div>
         </div>
-        <div className="container">
+
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="row justify-content-center">
             <div className="col-12 col-lg-10 text-center">
               <span className="sub-title fade-top">
@@ -58,7 +59,7 @@ const LawFirmRagHero = ({ openCalendly }: LawFirmRagHeroProps) => {
                 </button>
                 <button onClick={() => setShowVideoModal(true)} className="btn btn--secondary">
                   <i className="fa-solid fa-play" style={{ marginRight: '8px' }}></i>
-                  See It In Action
+                  What Is Cerebro?
                 </button>
               </div>
 
@@ -160,7 +161,7 @@ const LawFirmRagHero = ({ openCalendly }: LawFirmRagHeroProps) => {
                 height: '100%',
                 border: 'none',
                 borderRadius: '12px',
-                boxShadow: '0 0 60px rgba(0, 255, 255, 0.2)',
+                boxShadow: '0 0 60px rgba(212, 168, 83, 0.2)',
               }}
             />
           </div>

@@ -5,6 +5,7 @@ import logo from "public/images/logo.png";
 import gsap from "gsap";
 import chroma from "chroma-js";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { CALENDLY_URL } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 const FooterFive = () => {
@@ -16,7 +17,7 @@ const FooterFive = () => {
   const openCalendly = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
+        url: CALENDLY_URL
       });
     }
   };
@@ -187,6 +188,20 @@ const FooterFive = () => {
                   <i className="fa-sharp fa-solid fa-calendar"></i>
                   Book Discovery Call
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="footer__legal" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', padding: '16px 0' }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap' }}>
+                <Link href="/privacy-policy" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Privacy Policy</Link>
+                <Link href="/terms-and-conditions" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Terms &amp; Conditions</Link>
+                <Link href="/disclaimer" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Disclaimer</Link>
+                <Link href="/refund-policy" style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '14px', textDecoration: 'none', transition: 'color 0.2s' }}>Refund Policy</Link>
               </div>
             </div>
           </div>

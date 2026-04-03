@@ -3,7 +3,7 @@ import type { Profile, CommunityMember } from './supabase';
 // Role hierarchy: owner > admin > moderator > member
 export type Role = 'owner' | 'admin' | 'moderator' | 'member';
 
-export type MembershipStatus = 'pending' | 'approved' | 'declined' | 'removed' | 'banned';
+export type MembershipStatus = 'pending' | 'approved' | 'declined' | 'removed' | 'banned' | 'expired';
 
 export interface SocialLink {
   label: string;

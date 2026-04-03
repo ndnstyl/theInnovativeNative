@@ -20,7 +20,11 @@ export interface FeedPost {
   author_display_name: string;
   author_avatar_url: string | null;
   author_username: string | null;
+  author_level: number;
   category_name: string | null;
+  // Recent commenters for AvatarStack
+  recent_commenters: { url: string | null; name: string }[];
+  last_comment_at: string | null;
   // Client-side state
   is_liked?: boolean;
 }

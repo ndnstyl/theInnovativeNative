@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -15,16 +15,39 @@ import LegalFaq from "@/components/containers/law-firm-rag/LegalFaq";
 import FinalCta from "@/components/containers/law-firm-rag/FinalCta";
 import RoiCalculatorSection from "@/components/containers/law-firm-rag/RoiCalculatorSection";
 import BrandConnector from "@/components/common/BrandConnector";
+import DemoSection from "@/components/containers/law-firm-rag/DemoSection";
+import LeadCaptureModal from "@/components/containers/law-firm-rag/LeadCaptureModal";
+import { CALENDLY_URL } from "@/lib/constants";
+import { useTrackEvent } from "@/hooks/useTrackEvent";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LawFirmRag = () => {
-  const openCalendly = () => {
+  const [showLeadCapture, setShowLeadCapture] = useState(false);
+  const [leadCtaSource, setLeadCtaSource] = useState("unknown");
+  const { trackCalendlyClick, trackLeadCapture, trackDemoStart } = useTrackEvent();
+
+  const openCalendly = (email?: string) => {
+    trackCalendlyClick('law-firm-rag');
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
+        url: email ? `${CALENDLY_URL}?email=${encodeURIComponent(email)}` : CALENDLY_URL
       });
     }
+  };
+
+  // All conversion CTAs go through lead capture first
+  const openLeadCapture = (source: string = "unknown") => {
+    trackDemoStart(source);
+    setLeadCtaSource(source);
+    setShowLeadCapture(true);
+  };
+
+  // After lead is captured, open Calendly with pre-filled email
+  const handleLeadCaptured = (email: string) => {
+    trackLeadCapture('law-firm-rag-modal', 2500);
+    setShowLeadCapture(false);
+    openCalendly(email);
   };
 
   // Fade animation
@@ -216,19 +239,26 @@ const LawFirmRag = () => {
         />
       </Head>
       <div className="my-app landing-page">
-        <HeaderLanding openCalendly={openCalendly} />
+        <HeaderLanding openCalendly={() => openLeadCapture('header-nav')} />
         <main>
-          <LawFirmRagHero openCalendly={openCalendly} />
-          <ProblemAgitation openCalendly={openCalendly} />
+          <LawFirmRagHero openCalendly={() => openLeadCapture('hero-cta')} />
+          <DemoSection openCalendly={() => openLeadCapture('demo-section')} />
+          <ProblemAgitation openCalendly={() => openLeadCapture('problem-section')} />
           <SolutionOverview />
           <CaseStudyProof />
           <FeaturesBenefits />
-          <RoiCalculatorSection openCalendly={openCalendly} />
+          <RoiCalculatorSection openCalendly={() => openLeadCapture('roi-calculator')} />
           <TrustIndicators />
           <LegalFaq />
-          <FinalCta openCalendly={openCalendly} />
+          <FinalCta openCalendly={() => openLeadCapture('final-cta')} />
           <BrandConnector currentVertical="legal" />
         </main>
+        <LeadCaptureModal
+          isOpen={showLeadCapture}
+          onClose={() => setShowLeadCapture(false)}
+          onComplete={handleLeadCaptured}
+          ctaSource={leadCtaSource}
+        />
         <ScrollProgressBtn />
       </div>
     </>

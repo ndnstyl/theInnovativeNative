@@ -38,50 +38,12 @@ function createWrapper() {
 // 1. useAuth OUTSIDE AuthProvider
 // ---------------------------------------------------------------------------
 describe('useAuth() outside AuthProvider', () => {
-  it('returns safe defaults without throwing', () => {
-    const { result } = renderHook(() => useAuth());
-
-    expect(result.current.session).toBeNull();
-    expect(result.current.isLoading).toBe(true);
-    expect(result.current.profile).toBeNull();
-    expect(result.current.role).toBeNull();
-    expect(result.current.membershipStatus).toBeNull();
-    expect(result.current.isOnboarded).toBe(false);
-    expect(typeof result.current.refreshProfile).toBe('function');
-  });
-
-  it('BUG: supabaseClient is null cast as SupabaseClient — any .from() call will crash at runtime', () => {
-    /**
-     * BUG DOCUMENTATION:
-     *
-     * When useAuth() is called outside of AuthProvider, it returns:
-     *   supabaseClient: null as unknown as SupabaseClient<Database>
-     *
-     * This means TypeScript sees it as a valid SupabaseClient, so no compile
-     * errors occur. But at runtime, calling `supabaseClient.from('...')`
-     * will throw "Cannot read properties of null".
-     *
-     * Any hook that does `const { supabaseClient } = useAuth()` and then
-     * calls `supabaseClient.from(...)` without a null guard is vulnerable.
-     *
-     * Recommended fix: Either throw an error (like most context patterns),
-     * or explicitly type supabaseClient as `SupabaseClient | null`.
-     */
-    const { result } = renderHook(() => useAuth());
-
-    // Proves supabaseClient is null at runtime despite the TypeScript type
-    expect(result.current.supabaseClient).toBeNull();
-
-    // This would crash in a real component:
+  it('throws an error when called outside AuthProvider', () => {
+    // useAuth now correctly throws when used outside its provider,
+    // following the standard React context pattern.
     expect(() => {
-      (result.current.supabaseClient as any).from('profiles');
-    }).toThrow();
-  });
-
-  it('refreshProfile is a no-op function that resolves without error', async () => {
-    const { result } = renderHook(() => useAuth());
-
-    await expect(result.current.refreshProfile()).resolves.toBeUndefined();
+      renderHook(() => useAuth());
+    }).toThrow('useAuth must be used within an AuthProvider');
   });
 });
 

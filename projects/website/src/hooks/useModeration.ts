@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-
-const COMMUNITY_ID = 'a0000000-0000-0000-0000-000000000001';
+import { COMMUNITY_ID } from '@/lib/constants';
 
 export interface ReportWithReporter {
   id: string;
@@ -18,13 +17,19 @@ export interface ReportWithReporter {
 }
 
 export function useModeration() {
-  const { supabaseClient, session } = useAuth();
+  const { supabaseClient, session, role } = useAuth();
   const [reports, setReports] = useState<ReportWithReporter[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'pending' | 'all'>('pending');
 
+  const isAdmin = role === 'admin' || role === 'moderator' || role === 'owner';
+
   const fetchReports = useCallback(async () => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !session || !isAdmin) {
+      setReports([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
 
     let query = supabaseClient
@@ -44,12 +49,12 @@ export function useModeration() {
       reporter: r.reporter || undefined,
     })));
     setLoading(false);
-  }, [supabaseClient, filter]);
+  }, [supabaseClient, session, isAdmin, filter]);
 
   useEffect(() => { fetchReports(); }, [fetchReports]);
 
   const dismissReport = useCallback(async (reportId: string) => {
-    if (!supabaseClient || !session) return;
+    if (!supabaseClient || !session || !isAdmin) return;
     await supabaseClient
       .from('content_reports')
       .update({
@@ -68,17 +73,17 @@ export function useModeration() {
     });
 
     fetchReports();
-  }, [supabaseClient, session, fetchReports]);
+  }, [supabaseClient, session, isAdmin, fetchReports]);
 
   const removeContent = useCallback(async (reportId: string, contentType: string, contentId: string) => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !isAdmin) return;
     await supabaseClient.rpc('remove_content', {
       p_content_type: contentType,
       p_content_id: contentId,
       p_report_id: reportId,
     });
     fetchReports();
-  }, [supabaseClient, fetchReports]);
+  }, [supabaseClient, isAdmin, fetchReports]);
 
   return { reports, loading, filter, setFilter, dismissReport, removeContent, refetch: fetchReports };
 }

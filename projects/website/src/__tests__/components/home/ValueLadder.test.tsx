@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import ValueLadder from "@/components/containers/home/ValueLadder";
 import { valueLadderTiers } from "@/data/homepage";
+import { CALENDLY_URL } from "@/lib/constants";
 
 describe("ValueLadder", () => {
   beforeEach(() => {
@@ -64,7 +65,7 @@ describe("ValueLadder", () => {
     const pilotButton = screen.getByText("Book a Pilot Call");
     fireEvent.click(pilotButton);
     expect((window as any).Calendly.initPopupWidget).toHaveBeenCalledWith({
-      url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+      url: CALENDLY_URL,
     });
   });
 
@@ -73,7 +74,7 @@ describe("ValueLadder", () => {
     const buildButton = screen.getByText("Book a Discovery Call");
     fireEvent.click(buildButton);
     expect((window as any).Calendly.initPopupWidget).toHaveBeenCalledWith({
-      url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+      url: CALENDLY_URL,
     });
   });
 

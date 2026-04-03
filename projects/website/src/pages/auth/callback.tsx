@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { createBrowserClient } from '@/lib/supabase';
+import { getSupabaseBrowserClient } from '@/lib/supabase';
 
 const AuthCallback = () => {
   const router = useRouter();
@@ -9,37 +9,38 @@ const AuthCallback = () => {
 
   useEffect(() => {
     const handleCallback = async () => {
-      const supabase = createBrowserClient();
+      const supabase = getSupabaseBrowserClient();
+      const { searchParams, hash } = new URL(window.location.href);
 
-      const { searchParams } = new URL(window.location.href);
-      const code = searchParams.get('code');
       const errorParam = searchParams.get('error');
       const errorDescription = searchParams.get('error_description');
-      const inviteToken = searchParams.get('invite_token');
 
       if (errorParam) {
         setError(errorDescription || errorParam);
         return;
       }
 
+      const code = searchParams.get('code');
+
       if (code) {
-        try {
-          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+        // PKCE flow: exchange code for session
+        const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
-          if (exchangeError) {
-            setError(exchangeError.message);
-            return;
-          }
+        if (exchangeError) {
+          setError(exchangeError.message);
+          return;
+        }
 
-          // Get the authenticated user
-          const { data: { user } } = await supabase.auth.getUser();
-          if (!user) {
-            setError('Authentication failed. Please try again.');
-            return;
-          }
+        const session = data?.session;
+        if (!session?.user) {
+          setError('Authentication failed. Please try again.');
+          return;
+        }
 
-          // Handle invitation token — auto-approve membership
-          if (inviteToken) {
+        // Handle invitation token
+        const inviteToken = searchParams.get('invite_token');
+        if (inviteToken) {
+          try {
             const { data: invitation } = await supabase
               .from('invitations')
               .select('id, status, expires_at')
@@ -48,43 +49,60 @@ const AuthCallback = () => {
               .single();
 
             if (invitation && new Date(invitation.expires_at) > new Date()) {
-              await supabase
-                .from('invitations')
-                .update({ status: 'accepted' })
-                .eq('id', invitation.id);
-
-              await supabase
-                .from('profiles')
-                .update({ membership_status: 'approved' })
-                .eq('id', user.id);
+              await supabase.from('invitations').update({ status: 'accepted' }).eq('id', invitation.id);
+              await supabase.from('profiles').update({ membership_status: 'approved' }).eq('id', session.user.id);
             }
-          }
-
-          // Fetch profile to determine redirect
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('onboarding_complete, membership_status')
-            .eq('id', user.id)
-            .single();
-
-          if (!profile || !profile.onboarding_complete) {
-            router.replace('/members/onboarding');
-          } else if (profile.membership_status === 'pending') {
-            router.replace('/members');
-          } else {
-            router.replace('/members');
-          }
-        } catch {
-          setError('An unexpected error occurred during authentication.');
+          } catch { /* invitation handling non-critical */ }
         }
+
+        await redirectUser(supabase, session.user.id, searchParams);
+        return;
+      }
+
+      // No code — check for hash fragment (implicit flow fallback) or existing session
+      if (hash && (hash.includes('access_token') || hash.includes('type=recovery'))) {
+        // detectSessionInUrl: true will handle this automatically via onAuthStateChange
+        // Wait briefly for the client to process the hash
+        await new Promise(r => setTimeout(r, 1000));
+      }
+
+      // Check if we have a session now (either from hash processing or existing)
+      const { data: { session: existingSession } } = await supabase.auth.getSession();
+      if (existingSession?.user) {
+        await redirectUser(supabase, existingSession.user.id, searchParams);
       } else {
-        const { data: { session } } = await supabase.auth.getSession();
+        setError('No authentication code found. Please try signing in again.');
+      }
+    };
 
-        if (session) {
-          router.replace('/members');
-        } else {
-          setError('No authentication code found. Please try signing in again.');
-        }
+    const redirectUser = async (
+      supabase: ReturnType<typeof getSupabaseBrowserClient>,
+      userId: string,
+      searchParams: URLSearchParams
+    ) => {
+      // Check return_to
+      const rawReturnTo = searchParams.get('return_to') || sessionStorage.getItem('auth_return_to');
+      sessionStorage.removeItem('auth_return_to');
+      const returnTo = rawReturnTo && rawReturnTo.startsWith('/') && !rawReturnTo.startsWith('//') ? rawReturnTo : null;
+
+      if (returnTo) {
+        router.replace(returnTo);
+        return;
+      }
+
+      // Fetch profile to determine redirect
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('onboarding_complete, membership_status')
+        .eq('id', userId)
+        .single();
+
+      if (!profile || !profile.onboarding_complete) {
+        router.replace('/members/onboarding');
+      } else if (profile.membership_status === 'pending') {
+        router.replace('/members');
+      } else {
+        router.replace('/classroom');
       }
     };
 
@@ -106,10 +124,7 @@ const AuthCallback = () => {
               </div>
               <h2>Authentication Error</h2>
               <p>{error}</p>
-              <button
-                onClick={() => router.push('/')}
-                className="btn btn--primary"
-              >
+              <button onClick={() => router.push('/')} className="btn btn--primary">
                 Return to Home
               </button>
             </div>
@@ -131,45 +146,20 @@ const AuthCallback = () => {
           background-color: #000;
           padding: 20px;
         }
-
-        .auth-callback-container {
-          text-align: center;
-          max-width: 400px;
+        .auth-callback-container { text-align: center; max-width: 400px; }
+        .auth-callback-loading h2, .auth-callback-error h2 {
+          color: #fff; margin: 24px 0 12px; font-size: 24px;
         }
-
-        .auth-callback-loading h2,
-        .auth-callback-error h2 {
-          color: #fff;
-          margin: 24px 0 12px;
-          font-size: 24px;
+        .auth-callback-loading p, .auth-callback-error p {
+          color: #757575; margin-bottom: 24px;
         }
-
-        .auth-callback-loading p,
-        .auth-callback-error p {
-          color: #757575;
-          margin-bottom: 24px;
-        }
-
         .loading-spinner {
-          width: 48px;
-          height: 48px;
-          border: 3px solid #1a1a1a;
-          border-top-color: #00FFFF;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin: 0 auto;
+          width: 48px; height: 48px; border: 3px solid #1a1a1a;
+          border-top-color: #00FFFF; border-radius: 50%;
+          animation: spin 1s linear infinite; margin: 0 auto;
         }
-
-        .error-icon {
-          font-size: 48px;
-          color: #ff4444;
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
+        .error-icon { font-size: 48px; color: #ff4444; }
+        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
     </>
   );

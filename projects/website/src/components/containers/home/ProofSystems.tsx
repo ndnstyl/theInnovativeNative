@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import { proofSystems, verticals } from "@/data/homepage";
+import { CALENDLY_URL } from "@/lib/constants";
 
 const ProofSystems = () => {
   const openCalendly = () => {
     if (typeof window !== "undefined" && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+        url: CALENDLY_URL,
       });
     }
   };

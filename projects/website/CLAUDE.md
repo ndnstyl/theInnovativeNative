@@ -66,11 +66,33 @@ Content assets from the jobHunt project:
 
 ---
 
-## Development Workflow
+## Deployment (SSH — ALL AGENTS USE THIS)
+
+```bash
+# 1. Build
+cd /Users/makwa/theinnovativenative/projects/website && npm run build
+
+# 2. Deploy via rsync
+rsync -avz --delete \
+  -e "ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes" \
+  --exclude='theinnovativenative-site.zip' \
+  --exclude='resumes/' --exclude='videos/' --exclude='n8n-templates/' \
+  /Users/makwa/theinnovativenative/projects/website/out/ \
+  delikate@75.98.175.76:~/theinnovativenative.com/
+
+# 3. Fix directory index files (REQUIRED after every deploy)
+ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes delikate@75.98.175.76 \
+  "cd ~/theinnovativenative.com && for name in blog classroom community members messages templates admin checklist checkout auth; do [ -f \${name}.html ] && [ -d \${name} ] && cp \${name}.html \${name}/index.html 2>/dev/null; done"
+```
+
+**SSH Details**: Host `75.98.175.76` | Port `7822` | User `delikate` | Key `~/.ssh/a2hosting_tin` (no passphrase)
+**Document root**: `~/theinnovativenative.com/`
+
+## Development Workflow (Legacy — WordPress)
 
 1. **Local Development:** Use LocalWP at `theinnovativenative.local`
 2. **Version Control:** Track theme changes in `/wp-content/themes/`
-3. **Deployment:** SFTP or UpdraftPlus to production
+3. **Deployment:** See SSH deployment above (WordPress is deprecated)
 
 ---
 

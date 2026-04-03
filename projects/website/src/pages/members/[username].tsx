@@ -36,7 +36,7 @@ const MemberProfilePage = () => {
       // Fetch profile by username
       const { data: profile, error } = await supabaseClient
         .from('profiles')
-        .select('*')
+        .select('id, display_name, username, avatar_url, bio, location, website, social_links, level, xp_total, membership_status, onboarding_complete, last_active_at, username_changed_at, created_at')
         .eq('username', username)
         .single();
 

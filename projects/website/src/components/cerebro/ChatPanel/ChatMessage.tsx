@@ -35,7 +35,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   // Parse content to insert inline citations
   const renderContentWithCitations = (text: string, citationList: Citation[]) => {
     if (!citationList.length) {
-      return <p className="whitespace-pre-wrap">{text}</p>;
+      return <p style={{ whiteSpace: 'pre-wrap' }}>{text}</p>;
     }
 
     // Find citation patterns in text and replace with clickable components
@@ -76,25 +76,28 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
       );
     }
 
-    return <p className="whitespace-pre-wrap">{elements.length > 0 ? elements : text}</p>;
+    return <p style={{ whiteSpace: 'pre-wrap' }}>{elements.length > 0 ? elements : text}</p>;
   };
 
   if (type === 'user') {
     return (
       <div
-        className="flex justify-end mb-4"
+        style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}
         role="article"
         aria-label={`Your message at ${formatTime(timestamp)}`}
       >
         <div
-          className="max-w-[80%] p-4 rounded-lg rounded-br-none"
           style={{
+            maxWidth: '80%',
+            padding: '16px',
+            borderRadius: '8px',
+            borderBottomRightRadius: 0,
             backgroundColor: '#1a365d',
             color: '#ffffff',
           }}
         >
-          <p className="text-sm whitespace-pre-wrap">{content}</p>
-          <div className="text-xs opacity-60 mt-2 text-right">
+          <p style={{ fontSize: '14px', whiteSpace: 'pre-wrap' }}>{content}</p>
+          <div style={{ fontSize: '12px', opacity: 0.6, marginTop: '8px', textAlign: 'right' }}>
             {formatTime(timestamp)}
           </div>
         </div>
@@ -105,51 +108,84 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   // AI Message
   return (
     <div
-      className="flex justify-start mb-4"
+      style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '16px' }}
       role="article"
       aria-label={`AI response at ${formatTime(timestamp)}`}
     >
       <div
-        className="max-w-[85%] p-4 rounded-lg rounded-bl-none"
         style={{
-          backgroundColor: '#f7fafc',
-          color: '#1a202c',
-          border: '1px solid #e2e8f0',
+          maxWidth: '85%',
+          padding: '16px',
+          borderRadius: '8px',
+          borderBottomLeftRadius: 0,
+          backgroundColor: '#0d1117',
+          color: '#e8e8e8',
+          border: '1px solid #2a3a50',
         }}
       >
         {/* AI Label */}
-        <div className="flex items-center gap-2 mb-2">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
           <div
-            className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-            style={{ backgroundColor: '#2b6cb0', color: '#ffffff' }}
+            style={{
+              width: '24px',
+              height: '24px',
+              borderRadius: '9999px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+              fontWeight: 700,
+              backgroundColor: '#2b6cb0',
+              color: '#ffffff',
+            }}
             aria-hidden="true"
           >
             C
           </div>
-          <span className="text-xs font-medium" style={{ color: '#718096' }}>
+          <span style={{ fontSize: '12px', fontWeight: 500, color: '#8899aa' }}>
             Cerebro
           </span>
         </div>
 
         {/* Content with citations */}
         <div
-          className="text-sm leading-relaxed"
-          style={{ fontFamily: "'Source Serif Pro', Georgia, serif" }}
+          style={{
+            fontSize: '14px',
+            lineHeight: 1.625,
+            fontFamily: "'Source Serif Pro', Georgia, serif",
+          }}
         >
           {renderContentWithCitations(content, citations)}
         </div>
 
         {/* Sources Section (collapsible) */}
         {citations.length > 0 && (
-          <div className="mt-4 pt-3 border-t" style={{ borderColor: '#e2e8f0' }}>
+          <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid #2a3a50' }}>
             <button
               onClick={() => setSourcesExpanded(!sourcesExpanded)}
-              className="flex items-center gap-2 text-xs font-medium w-full text-left"
-              style={{ color: '#718096' }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '12px',
+                fontWeight: 500,
+                width: '100%',
+                textAlign: 'left',
+                color: '#8899aa',
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+              }}
               aria-expanded={sourcesExpanded}
             >
               <svg
-                className={`w-3 h-3 transition-transform ${sourcesExpanded ? 'rotate-90' : ''}`}
+                style={{
+                  width: '12px',
+                  height: '12px',
+                  transition: 'transform 0.2s',
+                  transform: sourcesExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -161,13 +197,20 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
             </button>
 
             {sourcesExpanded && (
-              <ul className="mt-2 space-y-1" role="list">
+              <ul style={{ marginTop: '8px', listStyle: 'none', padding: 0 }} role="list">
                 {citations.map((cite, index) => (
-                  <li key={index} className="text-xs" style={{ color: '#718096' }}>
+                  <li key={index} style={{ fontSize: '12px', color: '#8899aa', marginBottom: '4px' }}>
                     <button
                       onClick={() => onCitationClick?.(cite.documentId)}
-                      className="text-left hover:underline"
-                      style={{ color: '#2b6cb0' }}
+                      style={{
+                        textAlign: 'left',
+                        color: '#2b6cb0',
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'pointer',
+                        fontSize: '12px',
+                      }}
                     >
                       {cite.text} ({cite.court}, {cite.year})
                     </button>
@@ -181,12 +224,18 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {/* Verification Notice */}
         {verificationRequired && (
           <div
-            className="mt-3 pt-2 text-xs italic"
-            style={{ color: '#718096', borderTop: '1px dashed #e2e8f0' }}
+            style={{
+              marginTop: '12px',
+              paddingTop: '8px',
+              fontSize: '12px',
+              fontStyle: 'italic',
+              color: '#8899aa',
+              borderTop: '1px dashed #2a3a50',
+            }}
             role="alert"
           >
             <svg
-              className="w-3 h-3 inline mr-1"
+              style={{ width: '12px', height: '12px', display: 'inline', marginRight: '4px', verticalAlign: 'middle' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -204,7 +253,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         )}
 
         {/* Timestamp */}
-        <div className="text-xs mt-2" style={{ color: '#a0aec0' }}>
+        <div style={{ fontSize: '12px', marginTop: '8px', color: '#a0aec0' }}>
           {formatTime(timestamp)}
         </div>
       </div>

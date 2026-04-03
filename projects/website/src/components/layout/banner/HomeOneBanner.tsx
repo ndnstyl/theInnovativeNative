@@ -2,12 +2,13 @@ import React from "react";
 import Image from "next/image";
 import banneronethumb from "public/images/banner/banner-one-thumb.png";
 import star from "public/images/star.png";
+import { CALENDLY_URL } from "@/lib/constants";
 
 const HomeOneBanner = () => {
   const openCalendly = () => {
     if (typeof window !== 'undefined' && (window as any).Calendly) {
       (window as any).Calendly.initPopupWidget({
-        url: 'https://calendly.com/mike-buildmytribe/ai-discovery-call'
+        url: CALENDLY_URL
       });
     }
   };

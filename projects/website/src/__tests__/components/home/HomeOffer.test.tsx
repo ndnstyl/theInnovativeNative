@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import HomeOffer from "@/components/containers/home/HomeOffer";
 import { serviceOfferings } from "@/data/homepage";
+import { CALENDLY_URL } from "@/lib/constants";
 
 // Consultant language that should NOT appear
 const CONSULTANT_TERMS = [
@@ -74,7 +75,7 @@ describe("HomeOffer", () => {
     });
     fireEvent.click(ctaButton);
     expect((window as any).Calendly.initPopupWidget).toHaveBeenCalledWith({
-      url: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+      url: CALENDLY_URL,
     });
   });
 

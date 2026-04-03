@@ -58,9 +58,14 @@ const CourseSettingsPanel: React.FC<CourseSettingsPanelProps> = ({
       await onSave(updates);
     } else {
       // Create
+      const slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
       const insert: CourseInsert = {
         community_id: communityId,
         title,
+        slug,
         description: description || null,
         thumbnail_url: thumbnailUrl || null,
         published: isPublished,

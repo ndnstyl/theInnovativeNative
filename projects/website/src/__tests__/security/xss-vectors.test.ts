@@ -198,8 +198,8 @@ describe('XSS Vulnerability Surface Audit', () => {
   });
 
   // ── Blog content rendering ────────────────────────────────────────────────
-  describe('Blog [slug].tsx - unsanitized content', () => {
-    it('should flag blog post content rendering as unsanitized', () => {
+  describe('Blog [slug].tsx - sanitized content (regression guard)', () => {
+    it('should verify blog post content is sanitized via sanitizeHtml', () => {
       const blogPath = path.resolve(SRC_DIR, 'pages/blog/[slug].tsx');
       if (!fs.existsSync(blogPath)) {
         console.warn('[SKIP] blog/[slug].tsx not found');
@@ -207,27 +207,23 @@ describe('XSS Vulnerability Surface Audit', () => {
       }
 
       const content = readFile(blogPath);
-      const hasUnsanitizedRender = content.includes(
-        '__html: post.content || ""'
-      );
 
-      if (hasUnsanitizedRender) {
-        console.warn(
-          '[XSS WARNING] pages/blog/[slug].tsx renders post.content via ' +
-            'dangerouslySetInnerHTML without sanitization. If blog content comes ' +
-            'from a CMS or database, this is a stored XSS vector. Recommendation: ' +
-            'pipe through sanitizeHtml() before rendering.'
-        );
-      }
+      // FIXED: blog now imports and uses sanitizeHtml
+      const importsSanitize = content.includes("import") && content.includes("sanitizeHtml");
+      const usesSanitize = content.includes('sanitizeHtml(post.content');
 
-      // This is expected to be unsanitized based on our code review
-      expect(hasUnsanitizedRender).toBe(true);
+      expect(importsSanitize).toBe(true);
+      expect(usesSanitize).toBe(true);
+
+      // Verify the old unsanitized pattern is gone
+      const hasUnsanitizedRender = content.includes('__html: post.content || ""');
+      expect(hasUnsanitizedRender).toBe(false);
     });
   });
 
   // ── Search page snippet rendering ─────────────────────────────────────────
-  describe('search.tsx - unsanitized snippet rendering', () => {
-    it('should flag search result snippets as unsanitized', () => {
+  describe('search.tsx - sanitized snippet rendering (regression guard)', () => {
+    it('should verify search result snippets are sanitized via sanitizeHtml', () => {
       const searchPath = path.resolve(SRC_DIR, 'pages/search.tsx');
       if (!fs.existsSync(searchPath)) {
         console.warn('[SKIP] search.tsx not found');
@@ -235,28 +231,21 @@ describe('XSS Vulnerability Surface Audit', () => {
       }
 
       const content = readFile(searchPath);
-      const hasUnsanitizedSnippet =
+
+      // FIXED: search.tsx now imports and uses sanitizeHtml
+      const importsSanitize = content.includes("import") && content.includes("sanitizeHtml");
+      const usesSanitizeOnSnippet =
         content.includes('dangerouslySetInnerHTML') &&
-        content.includes('r.snippet') &&
-        !content.includes('sanitize');
+        content.includes('sanitizeHtml(r.snippet)');
 
-      if (hasUnsanitizedSnippet) {
-        console.warn(
-          '[XSS WARNING] pages/search.tsx renders search snippets via ' +
-            'dangerouslySetInnerHTML without sanitization. If snippets contain ' +
-            'user-generated content with <mark> tags from the search backend, ' +
-            'an attacker could inject HTML via crafted content. Recommendation: ' +
-            'use DOMPurify with ALLOWED_TAGS: ["mark"].'
-        );
-      }
-
-      expect(hasUnsanitizedSnippet).toBe(true);
+      expect(importsSanitize).toBe(true);
+      expect(usesSanitizeOnSnippet).toBe(true);
     });
   });
 
   // ── ResultCard (Cerebro) snippet rendering ────────────────────────────────
-  describe('ResultCard.tsx - snippet with regex replace', () => {
-    it('should flag ResultCard snippet rendering with inline style injection', () => {
+  describe('ResultCard.tsx - sanitized snippet (regression guard)', () => {
+    it('should verify ResultCard snippet is sanitized via sanitizeHtml', () => {
       const resultCardPath = path.resolve(
         SRC_DIR,
         'components/cerebro/SearchPanel/ResultCard.tsx'
@@ -268,29 +257,18 @@ describe('XSS Vulnerability Surface Audit', () => {
 
       const content = readFile(resultCardPath);
 
-      // This component does: snippet.replace(/<mark>/g, '<mark style="...">')
-      // and passes it to dangerouslySetInnerHTML without sanitization
-      const hasRegexReplace = content.includes("snippet.replace");
-      const hasNoSanitize = !content.includes('sanitize') && !content.includes('DOMPurify');
+      // FIXED: ResultCard now imports and uses sanitizeHtml around the snippet
+      const importsSanitize = content.includes("import") && content.includes("sanitizeHtml");
+      const usesSanitize = content.includes('sanitizeHtml(') && content.includes('snippet.replace');
 
-      if (hasRegexReplace && hasNoSanitize) {
-        console.warn(
-          '[XSS WARNING] ResultCard.tsx performs regex replacement on snippet ' +
-            'and passes result to dangerouslySetInnerHTML without sanitization. ' +
-            'If snippet source can contain attacker-controlled HTML, this is an ' +
-            'XSS vector. The regex only replaces <mark> tags but does not strip ' +
-            'other potentially malicious tags.'
-        );
-      }
-
-      expect(hasRegexReplace).toBe(true);
-      expect(hasNoSanitize).toBe(true);
+      expect(importsSanitize).toBe(true);
+      expect(usesSanitize).toBe(true);
     });
   });
 
   // ── StripeBuyButton.tsx ───────────────────────────────────────────────────
-  describe('StripeBuyButton.tsx - template literal injection', () => {
-    it('should flag StripeBuyButton innerHTML with interpolated props', () => {
+  describe('StripeBuyButton.tsx - escaped attribute injection (regression guard)', () => {
+    it('should verify StripeBuyButton uses escapeAttr for interpolated props', () => {
       const btnPath = path.resolve(
         SRC_DIR,
         'components/templates/StripeBuyButton.tsx'
@@ -302,23 +280,15 @@ describe('XSS Vulnerability Surface Audit', () => {
 
       const content = readFile(btnPath);
 
-      // Component interpolates buyButtonId and publishableKey into innerHTML
-      const interpolatesProps =
-        content.includes('${buyButtonId}') ||
-        content.includes('${publishableKey}');
-      const hasNoSanitize = !content.includes('sanitize');
+      // FIXED: StripeBuyButton now uses escapeAttr() to sanitize props
+      // before interpolating into innerHTML
+      const hasEscapeAttr = content.includes('escapeAttr');
+      const usesEscapedInterpolation =
+        content.includes('escapeAttr(buyButtonId)') ||
+        content.includes('escapeAttr(publishableKey)');
 
-      if (interpolatesProps && hasNoSanitize) {
-        console.warn(
-          '[XSS MEDIUM] StripeBuyButton.tsx interpolates component props ' +
-            'directly into an innerHTML string. If buyButtonId or publishableKey ' +
-            'ever contain user-controlled values (e.g., from a CMS or URL param), ' +
-            'this is an XSS vector. Current risk is medium because these values ' +
-            'come from static data files, but the pattern is unsafe.'
-        );
-      }
-
-      expect(interpolatesProps).toBe(true);
+      expect(hasEscapeAttr).toBe(true);
+      expect(usesEscapedInterpolation).toBe(true);
     });
   });
 

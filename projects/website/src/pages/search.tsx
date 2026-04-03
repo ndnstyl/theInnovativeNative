@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import ClassroomLayout from '@/components/layout/ClassroomLayout';
 import { useGlobalSearch } from '@/hooks/useGlobalSearch';
+import { sanitizeHtml } from '@/lib/sanitize';
 
 const TYPE_ICONS: Record<string, string> = {
   post: 'fa-solid fa-file-alt',
@@ -87,7 +88,7 @@ export default function SearchPage() {
                   <span className="global-search__result-type">{TYPE_LABELS[r.result_type]}</span>
                   <h4 className="global-search__result-title">{r.title}</h4>
                   {r.snippet && (
-                    <p className="global-search__result-snippet" dangerouslySetInnerHTML={{ __html: r.snippet }} />
+                    <p className="global-search__result-snippet" dangerouslySetInnerHTML={{ __html: sanitizeHtml(r.snippet) }} />
                   )}
                 </div>
               </Link>

@@ -3,6 +3,8 @@
 // Foundation data for all homepage components.
 // =============================================================================
 
+import { CALENDLY_URL } from '@/lib/constants';
+
 // ---------------------------------------------------------------------------
 // Interfaces
 // ---------------------------------------------------------------------------
@@ -156,7 +158,7 @@ export const valueLadderTiers: ValueLadderTier[] = [
     description:
       "Done-with-you AI system deployment. We build the infrastructure, integrate your data, and hand you a working system.",
     cta: "Book a Pilot Call",
-    href: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+    href: CALENDLY_URL,
     order: 3,
   },
   {
@@ -166,7 +168,7 @@ export const valueLadderTiers: ValueLadderTier[] = [
     description:
       "Full custom AI infrastructure for your business. We design, build, and deploy the system from scratch — then train your team to run it.",
     cta: "Book a Discovery Call",
-    href: "https://calendly.com/mike-buildmytribe/ai-discovery-call",
+    href: CALENDLY_URL,
     order: 4,
   },
 ];

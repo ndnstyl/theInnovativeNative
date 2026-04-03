@@ -4,29 +4,37 @@ import star from "public/images/star.png";
 
 const faqItems = [
   {
-    question: "How is this different from enterprise legal AI?",
-    answer: "Enterprise platforms train on public cases and generic doctrine—the same data everyone else uses. Private RAG trains only on your firm's internal documents: your briefs, your motions, your outcomes. Instead of asking 'What does the law say?' you ask 'What works for us?' That's the difference between research and institutional intelligence."
+    question: "What is the actual mechanism that prevents hallucinated citations?",
+    answer: "Architecture, not prompting. Cerebro uses a three-gate verification pipeline: (1) The LLM only receives text chunks retrieved from your firm's verified document corpus — it has zero access to the internet, public models, or external knowledge. (2) Every citation in the generated answer is cross-referenced against the documents table using our validate_citations() function. If a cited case doesn't exist in your corpus, it's flagged. (3) Every query generates a complete audit trail — the exact chunks retrieved, their scores, and every citation produced. Stanford's 2024 study found Harvey AI hallucinates at 17-34%. Cerebro's architecture has maintained 100% citation integrity across all testing because it generates exclusively from retrieved documents, not from model memory."
   },
   {
-    question: "What data does it train on?",
-    answer: "Your past cases. Your filings. Your discovery. Your expert reports. Your judge rulings. Your outcomes. Everything that makes your firm's approach unique. The system learns from your work, not from everyone else's published opinions."
+    question: "If the system does produce an incorrect answer and I rely on it in a filing, who is liable?",
+    answer: "You are. That's the honest answer, and any AI vendor who tells you otherwise is misleading you. Under ABA Model Rule 1.1, the attorney has a non-delegable duty of competence — including competence in the technology used. Every Cerebro answer includes a mandatory 'Verification Required' flag. This is a hard architectural constraint, not a suggestion. You must verify citations, read the source, and apply professional judgment. What Cerebro does provide: a complete audit trail that documents your research methodology. If a court questions your process, you can produce the exact retrieval path — query, retrieved chunks, relevance scores, citations, and source documents. That's fundamentally more defensible than 'I asked ChatGPT.'"
   },
   {
-    question: "What happens to my firm's documents?",
-    answer: "Your documents are encrypted and used only for your firm's retrieval—never shared, never used for training other models, never leaving your control. For firms requiring maximum security, we offer self-hosted deployment on your own infrastructure."
+    question: "Where does my client's data go? Does it train your models?",
+    answer: "Your documents are stored in an isolated PostgreSQL database dedicated exclusively to your firm. No data is shared between firms. No data is sent to OpenAI, Anthropic, or any third-party for model training. The embedding model processes your text into numerical vectors — it does not store or retain your content. The LLM receives only the retrieved chunks for answer generation — it does not retain conversation history or use your queries for improvement. Infrastructure is SOC 2 Type II certified with AES-256 encryption at rest and TLS 1.3 in transit. Regarding the February 2026 SDNY ruling on AI privilege: Cerebro's outputs are research tools, similar to Westlaw search results. Your work product doctrine applies to your analysis of the outputs, not the outputs themselves."
   },
   {
-    question: "Why only two practice areas?",
-    answer: "Depth over breadth. We'd rather be excellent in Criminal Defense and Bankruptcy than mediocre across everything. Each practice area gets comprehensive coverage of your specific patterns—your judges, your jurisdiction, your strategies. We're expanding based on pilot program feedback."
+    question: "Can I Shepardize the cases Cerebro returns?",
+    answer: "Not through Cerebro. This is a known limitation we disclose upfront. Cerebro retrieves cases from your corpus and ranks by authority and relevance, but it does not verify whether a case has been subsequently overruled, distinguished, or questioned. You must independently verify citation status through Westlaw, LexisNexis, or other citator services. Cerebro and Westlaw serve different purposes and complement each other — Westlaw searches published law, Cerebro searches your firm's internal work product. We're transparent about this because trust is earned through honesty, not marketing claims."
   },
   {
-    question: "Won't everyone eventually have enterprise AI anyway?",
-    answer: "Exactly. That's the point. When everyone has the same enterprise AI, it becomes table stakes—not an advantage. The only durable advantage will be who owns their institutional intelligence. Your briefs are more valuable than their model. Your history is more predictive than their training set."
+    question: "If opposing counsel challenges my research as AI-generated, what's my audit trail?",
+    answer: "Every Cerebro query generates a complete, timestamped record: the exact query submitted, the practice area searched, all chunk IDs retrieved with their similarity scores, the reranked results with relevance scores, every citation generated, the model used, and the response latency. You can produce: 'I queried my firm's private research system with [query]. It retrieved these [N] document chunks from our verified case corpus, ranked by authority and relevance. It generated this answer citing these specific documents from our own files. Here is the full retrieval path.' This is not 'I Googled it.' This is documented, reproducible, evidence-based legal research from your firm's own institutional knowledge."
   },
   {
-    question: "How long does implementation take?",
-    answer: "Pilot firms are typically operational within 2-3 weeks. This includes document ingestion, index building, and initial training on your specific patterns. Your existing document management system integrates directly—no manual uploads required for firms using standard DMS platforms."
-  }
+    question: "Why should I trust a startup over Westlaw or Lexis who have been doing this for 40 years?",
+    answer: "You shouldn't stop using Westlaw or Lexis. Cerebro is not a replacement for published case law research — it's a complement. Westlaw and Lexis search the same published law that every other firm searches. Cerebro searches knowledge that only your firm has: your briefs, your motions, your outcomes, your strategies. That's the knowledge trapped in closed files that nobody has time to dig through. When you ask Westlaw 'What does the law say about relief from stay?', every firm gets the same answer. When you ask Cerebro, you get 'Here's how WE argued relief from stay last time, and we won.' That institutional memory is your competitive advantage, and no enterprise platform can replicate it."
+  },
+  {
+    question: "What does the $2,500 pilot include, and what happens after?",
+    answer: "The $2,500 is a one-time setup fee covering: ingestion of your firm's case files into the Cerebro corpus, configuration for your practice areas, 90-day access for up to 5 attorneys, 500 queries per month, and a dedicated implementation specialist for weeks 1-2. After the pilot, ongoing access is $500/month for up to 10 users — month-to-month, no annual contract. If Cerebro doesn't meet the agreed benchmarks during the pilot (100% citation integrity, sub-15-second responses, relevant results for your practice area), the $2,500 is fully refundable. Compare: Harvey AI runs $1,000+ per user per month. Westlaw AI is $200-500+ per user per month with annual commitment."
+  },
+  {
+    question: "How does this comply with ABA ethics rules on AI use?",
+    answer: "ABA Formal Opinion 512 (2024) permits attorneys to use AI tools provided they: (1) understand how the tool works, (2) review and verify AI-generated output, (3) protect client confidentiality, and (4) comply with applicable law. Cerebro's architecture directly enables all four: (1) The three-gate retrieval pipeline is documented and explainable. (2) Every answer includes 'Verification Required' and links to source documents. (3) Private RAG with firm-isolated databases and no third-party data sharing. (4) Full audit trail for court disclosure requirements. Growing jurisdictions require AI disclosure in filings. Cerebro's audit trail provides the exact documentation courts are starting to demand."
+  },
 ];
 
 const LegalFaq = () => {

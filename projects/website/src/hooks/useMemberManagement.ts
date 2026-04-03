@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-
-const COMMUNITY_ID = 'a0000000-0000-0000-0000-000000000001';
+import { COMMUNITY_ID } from '@/lib/constants';
 
 export interface ManagedMember {
   user_id: string;
@@ -15,14 +14,20 @@ export interface ManagedMember {
 }
 
 export function useMemberManagement() {
-  const { supabaseClient } = useAuth();
+  const { supabaseClient, session, role } = useAuth();
   const [members, setMembers] = useState<ManagedMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('all');
 
+  const isAdmin = role === 'admin' || role === 'moderator' || role === 'owner';
+
   const fetchMembers = useCallback(async () => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !session || !isAdmin) {
+      setMembers([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
 
     const { data } = await supabaseClient
@@ -54,38 +59,38 @@ export function useMemberManagement() {
 
     setMembers(filtered);
     setLoading(false);
-  }, [supabaseClient, search, roleFilter]);
+  }, [supabaseClient, session, isAdmin, search, roleFilter]);
 
   useEffect(() => { fetchMembers(); }, [fetchMembers]);
 
   const changeRole = useCallback(async (memberId: string, newRole: string) => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !isAdmin) return;
     const { data } = await supabaseClient.rpc('change_member_role', {
       p_target_member_id: memberId,
       p_new_role: newRole,
     });
     if ((data as any)?.success) fetchMembers();
     return data;
-  }, [supabaseClient, fetchMembers]);
+  }, [supabaseClient, isAdmin, fetchMembers]);
 
   const banMember = useCallback(async (memberId: string, reason?: string) => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !isAdmin) return;
     const { data } = await supabaseClient.rpc('ban_member', {
       p_member_id: memberId,
       p_reason: reason || undefined,
     });
     if ((data as any)?.success) fetchMembers();
     return data;
-  }, [supabaseClient, fetchMembers]);
+  }, [supabaseClient, isAdmin, fetchMembers]);
 
   const unbanMember = useCallback(async (memberId: string) => {
-    if (!supabaseClient) return;
+    if (!supabaseClient || !isAdmin) return;
     const { data } = await supabaseClient.rpc('unban_member', {
       p_member_id: memberId,
     });
     if ((data as any)?.success) fetchMembers();
     return data;
-  }, [supabaseClient, fetchMembers]);
+  }, [supabaseClient, isAdmin, fetchMembers]);
 
   return {
     members, loading, search, setSearch, roleFilter, setRoleFilter,

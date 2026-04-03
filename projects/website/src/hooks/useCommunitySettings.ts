@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-
-const COMMUNITY_ID = 'a0000000-0000-0000-0000-000000000001';
+import { COMMUNITY_ID } from '@/lib/constants';
 
 export interface CommunitySettingsData {
   id: string;
