@@ -399,6 +399,7 @@ export interface Database {
           thumbnail_url: string | null;
           access_level: number;
           is_free: boolean;
+          is_premium: boolean;
           stripe_price_id: string | null;
           published: boolean;
           display_order: number;
@@ -414,6 +415,7 @@ export interface Database {
           thumbnail_url?: string | null;
           access_level?: number;
           is_free?: boolean;
+          is_premium?: boolean;
           stripe_price_id?: string | null;
           published?: boolean;
           display_order?: number;
@@ -424,6 +426,7 @@ export interface Database {
           thumbnail_url?: string | null;
           access_level?: number;
           is_free?: boolean;
+          is_premium?: boolean;
           stripe_price_id?: string | null;
           published?: boolean;
           display_order?: number;
@@ -675,7 +678,6 @@ export interface Database {
           body: string | null;
           action_url: string | null;
           actor_id: string | null;
-          read: boolean;
           source_user_id: string | null;
           content_type: string | null;
           content_id: string | null;
@@ -701,7 +703,6 @@ export interface Database {
           description?: string | null;
         };
         Update: {
-          read?: boolean;
           is_read?: boolean;
           group_count?: number;
           group_members?: Json;

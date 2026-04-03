@@ -1,0 +1,12 @@
+# Gitleaks configuration
+# https://github.com/gitleaks/gitleaks
+
+title = "theinnovativenative gitleaks config"
+
+# Allow paths that are known to not contain real secrets
+[allowlist]
+  paths = [
+    '''\.env\.example$''',
+    '''\.env\.sample$''',
+    '''package-lock\.json$''',
+  ]

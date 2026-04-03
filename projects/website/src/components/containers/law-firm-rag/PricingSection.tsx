@@ -92,7 +92,22 @@ const PricingSection = ({ openCalendly }: PricingSectionProps) => {
               </div>
 
               <div className="lfr-pricing__ctas">
-                <button className="btn btn--primary btn--large">
+                <button
+                  onClick={async () => {
+                    try {
+                      const res = await fetch('/api/stripe/create-checkout-session', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({}),
+                      });
+                      const data = await res.json();
+                      if (data.url) window.location.href = data.url;
+                    } catch (err) {
+                      console.error('Checkout error:', err);
+                    }
+                  }}
+                  className="btn btn--primary btn--large"
+                >
                   Start Your Pilot
                   <i className="fa-solid fa-arrow-right"></i>
                 </button>

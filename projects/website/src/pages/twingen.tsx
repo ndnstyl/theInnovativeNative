@@ -108,7 +108,7 @@ const HavenBlueprint = () => {
         <meta property="og:title" content={HAVEN_BLUEPRINT.seo.title} />
         <meta property="og:description" content={HAVEN_BLUEPRINT.seo.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://theinnovativenative.com/haven-blueprint" />
+        <meta property="og:url" content="https://theinnovativenative.com/twingen" />
         <meta property="og:image" content={HAVEN_BLUEPRINT.seo.ogImage} />
 
         {/* Twitter Card */}
@@ -136,7 +136,7 @@ const HavenBlueprint = () => {
                 "price": HAVEN_BLUEPRINT.price.earlyBird,
                 "priceCurrency": HAVEN_BLUEPRINT.price.currency,
                 "availability": "https://schema.org/InStock",
-                "url": "https://theinnovativenative.com/haven-blueprint"
+                "url": "https://theinnovativenative.com/twingen"
               }
             })
           }}

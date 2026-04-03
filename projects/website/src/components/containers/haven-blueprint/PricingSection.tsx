@@ -97,25 +97,6 @@ const PricingSection = () => {
               </div>
             </div>
 
-            {/* Inner Circle Add-On */}
-            <div className="hb-pricing__upsells fade-top">
-              <div className="hb-pricing__upsell-card">
-                <div className="hb-pricing__upsell-badge">MOST POPULAR ADD-ON</div>
-                <h4>{HAVEN_BLUEPRINT.upsells.innerCircle.name}</h4>
-                <p>{HAVEN_BLUEPRINT.upsells.innerCircle.description}</p>
-                <div className="hb-pricing__upsell-price">
-                  <strong>${HAVEN_BLUEPRINT.upsells.innerCircle.price}</strong>
-                  <span>/month</span>
-                </div>
-                <a
-                  href={HAVEN_BLUEPRINT.upsells.innerCircle.stripeLink}
-                  className="btn btn--tertiary"
-                >
-                  Join the Inner Circle
-                  <i className="fa-solid fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>

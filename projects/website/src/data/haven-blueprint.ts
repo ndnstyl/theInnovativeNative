@@ -1,8 +1,8 @@
 // Product configuration
-export const HAVEN_BLUEPRINT = {
-  name: "The AI Influencer Blueprint",
+export const TWINGEN = {
+  name: "TwinGen",
   tagline: "Build Your Own AI Influencer From Scratch",
-  description: "The exact system behind aSliceOfHaven — from AI image generation to automated video production. No coding. No guesswork.",
+  description: "The complete automation system for AI-generated content — from character creation to published videos. No coding. No guesswork.",
   price: {
     earlyBird: 57,
     full: 150,
@@ -10,36 +10,23 @@ export const HAVEN_BLUEPRINT = {
   },
   scarcity: {
     earlyBirdLimit: 100,
-    // TODO: Replace with actual count from Stripe or webhook-updated value
     earlyBirdSold: 0,
   },
-  // Stripe Buy Button config (placeholder IDs - user will fill in)
   stripe: {
-    buyButtonId: "STRIPE_BUY_BUTTON_ID", // TODO: Replace with actual Stripe Buy Button ID
-    publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "STRIPE_PUBLISHABLE_KEY",
-  },
-  upsells: {
-    innerCircle: {
-      name: "Haven Inner Circle",
-      price: 99,
-      interval: "month",
-      description: "Private community, monthly live workshops, direct Q&A, pipeline reviews, and first access to new workflows.",
-      stripeLink: "#STRIPE_INNER_CIRCLE_PAYMENT_LINK", // TODO: Replace with actual Stripe Payment Link
-    },
-    doneForYou: {
-      name: "Done-For-You Pipeline Setup",
-      price: 250,
-      description: "We set up your entire AI influencer pipeline — brand system, Airtable base, n8n workflows, and first content batch — so you can skip the build phase entirely.",
-      stripeLink: "#STRIPE_DONE_FOR_YOU_PAYMENT_LINK", // TODO: Replace with actual Stripe Payment Link
-    },
+    buyButtonId: "buy_btn_1T40tRI4n1kMt7iRy0rCS9gU",
+    publishableKey: "***REDACTED***",
+    priceId: "price_1T2ZsdI4n1kMt7iRG9urq2tr",
   },
   seo: {
-    title: "How to Create an AI Influencer — The Complete Blueprint | The Innovative Native",
-    description: "Build your own AI influencer from scratch. Get the exact system, workflows, prompts, and automation pipeline behind aSliceOfHaven. No coding required.",
-    keywords: ["how to create an AI influencer", "AI influencer", "AI UGC creator", "virtual influencer", "AI brand ambassador", "AI content creator"],
-    ogImage: "/images/haven-blueprint/og-image.jpg",
+    title: "TwinGen — Build Your Own AI Influencer | The Innovative Native",
+    description: "Build your own AI influencer from scratch. Get the complete automation system — workflows, prompts, and pipeline. No coding required.",
+    keywords: ["AI influencer", "TwinGen", "AI UGC creator", "virtual influencer", "AI brand ambassador", "AI content creator", "AI content automation"],
+    ogImage: "/images/twingen/og-image.jpg",
   },
 };
+
+// Backwards compat — components import this name
+export const HAVEN_BLUEPRINT = TWINGEN;
 
 // Pain points for problem agitation section
 export const painPoints = [
@@ -229,11 +216,11 @@ export const faqItems = [
   },
   {
     question: "Is this just for kitchen/lifestyle content?",
-    answer: "No. Haven is our case study, but the system is niche-agnostic. The brand foundation, automation engine, and content strategy modules work for any vertical — fashion, fitness, tech reviews, travel, food, or anything else. Module 6 includes a niche adaptation guide.",
+    answer: "No. aSliceOfHaven is our case study, but the TwinGen system is niche-agnostic. The brand foundation, automation engine, and content strategy modules work for any vertical — fashion, fitness, tech reviews, travel, food, or anything else. Module 6 includes a niche adaptation guide.",
   },
   {
     question: "What if I get stuck?",
-    answer: "Every module includes step-by-step video walkthroughs. The Notion workspace has troubleshooting sections for common issues. And if you want direct help, the Haven Inner Circle community (available as an optional add-on) gives you access to other builders and monthly live workshops.",
+    answer: "Every module includes step-by-step video walkthroughs. The Notion workspace has troubleshooting sections for common issues. You can also reach us at info@theinnovativenative.com for direct support.",
   },
   {
     question: "Can I really build an AI influencer for under $100?",

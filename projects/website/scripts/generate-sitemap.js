@@ -14,7 +14,7 @@ const TODAY = new Date().toISOString().split('T')[0];
 const pages = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
   { path: '/law-firm-rag', priority: '0.9', changefreq: 'monthly' },
-  { path: '/haven-blueprint', priority: '0.9', changefreq: 'monthly' },
+  { path: '/twingen', priority: '0.9', changefreq: 'monthly' },
   { path: '/visionspark-re', priority: '0.9', changefreq: 'monthly' },
   { path: '/portfolio', priority: '0.7', changefreq: 'monthly' },
   { path: '/professionalExperience', priority: '0.6', changefreq: 'monthly' },

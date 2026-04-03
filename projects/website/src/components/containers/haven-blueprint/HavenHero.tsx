@@ -14,7 +14,7 @@ const HavenHero = ({ scrollToCheckout }: HavenHeroProps) => {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10 text-center">
             <span className="sub-title fade-top">
-              THE AI INFLUENCER BLUEPRINT
+              TWINGEN
               <i className="fa-solid fa-arrow-right"></i>
             </span>
             <h1 className="title title-anim mt-4">
@@ -22,17 +22,23 @@ const HavenHero = ({ scrollToCheckout }: HavenHeroProps) => {
               From Scratch
             </h1>
             <p className="hb-hero__subtitle fade-top">
-              The exact system behind <strong>aSliceOfHaven</strong> — from AI image generation
-              to automated video production. No coding. No guesswork. Just the blueprint.
+              The complete automation system for AI-generated content — from character creation
+              to published videos. No coding. No guesswork. See how we built <strong>aSliceOfHaven</strong>.
             </p>
 
-            {/* Video Placeholder - will be replaced with Remotion VSL */}
+            {/* System Preview */}
             <div className="hb-hero__video fade-top">
-              <div className="hb-hero__video-placeholder">
-                <div className="hb-hero__video-icon">
-                  <i className="fa-solid fa-play"></i>
+              <div className="hb-hero__video-placeholder" style={{
+                background: 'linear-gradient(135deg, rgba(0,255,255,0.08) 0%, rgba(0,0,0,0.4) 100%)',
+                border: '1px solid rgba(0,255,255,0.2)',
+              }}>
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <i className="fa-solid fa-robot" style={{ fontSize: '48px', color: '#00FFFF', marginBottom: '16px', display: 'block' }}></i>
+                  <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>The TwinGen System</h3>
+                  <p style={{ color: '#a0a0a0', fontSize: '14px', maxWidth: '400px', margin: '0 auto' }}>
+                    Character creation &rarr; AI image &amp; video generation &rarr; automated assembly &rarr; multi-platform publishing. Built once, runs forever.
+                  </p>
                 </div>
-                <p>System Overview — Coming Soon</p>
               </div>
             </div>
 

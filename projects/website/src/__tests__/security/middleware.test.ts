@@ -238,12 +238,12 @@ describe('Middleware', () => {
       expect(_redirectCalled).toBe(false);
     });
 
-    it('should pass through on /haven-blueprint', async () => {
+    it('should pass through on /twingen', async () => {
       mockGetSession.mockResolvedValueOnce({
         data: { session: null },
       });
 
-      const req = createMockRequest('/haven-blueprint');
+      const req = createMockRequest('/twingen');
       await middleware(req);
 
       expect(_redirectCalled).toBe(false);

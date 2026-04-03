@@ -50,16 +50,40 @@ serve(async (req: Request) => {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
-        const userId = session.metadata?.user_id;
+        let userId = session.metadata?.user_id;
         const courseId = session.metadata?.course_id;
+        const customerEmail = session.customer_details?.email || session.customer_email;
 
-        // Course purchase → create enrollment
+        // Payment Links don't carry metadata — resolve user by email
+        if (!userId && customerEmail) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('email', customerEmail)
+            .maybeSingle();
+
+          if (!profile) {
+            // Try auth.users table via admin API
+            const { data: users } = await supabase.auth.admin.listUsers();
+            const match = users?.users?.find(u => u.email === customerEmail);
+            if (match) userId = match.id;
+          } else {
+            userId = profile.id;
+          }
+
+          if (!userId) {
+            console.error(`No user found for email: ${customerEmail}`);
+            break;
+          }
+          console.log(`Resolved user by email: ${customerEmail} → ${userId}`);
+        }
+
+        // Course purchase → create enrollment (CRIT-1 fix: removed stripe_session_id — column doesn't exist)
         if (userId && courseId) {
           const { error } = await supabase.from('enrollments').upsert(
             {
               user_id: userId,
               course_id: courseId,
-              stripe_session_id: session.id,
               enrolled_at: new Date().toISOString(),
             },
             { onConflict: 'user_id,course_id' }
@@ -71,19 +95,47 @@ serve(async (req: Request) => {
         // Subscription purchase → create/update subscription
         if (userId && session.mode === 'subscription') {
           const communityId = session.metadata?.community_id || 'a0000000-0000-0000-0000-000000000001';
+          const subId = session.subscription as string;
+
+          // Use stripe_subscription_id for upsert (has UNIQUE constraint in DB)
+          // CRIT-2 fix: upsert on stripe_subscription_id instead of community_id,user_id
+          // HIGH-1 fix: default plan 'monthly' instead of 'pro' (DB CHECK constraint)
           const { error } = await supabase.from('subscriptions').upsert(
             {
               community_id: communityId,
               user_id: userId,
               stripe_customer_id: session.customer as string,
-              stripe_subscription_id: session.subscription as string,
-              plan: session.metadata?.plan || 'pro',
+              stripe_subscription_id: subId,
+              plan: session.metadata?.plan || 'monthly',
               status: 'active',
             },
-            { onConflict: 'community_id,user_id' }
+            { onConflict: 'stripe_subscription_id' }
           );
           if (error) console.error('Failed to create subscription:', error);
-          else console.log(`Subscription created: user=${userId}`);
+          else console.log(`Subscription created: user=${userId}, sub=${subId}`);
+
+          // Auto-enroll in subscription-included courses only
+          // Premium courses (is_premium = true) require separate purchase
+          // e.g. Growth Marketing Masterclass ($499) and TwinGen are premium add-ons
+          const { data: includedCourses } = await supabase
+            .from('courses')
+            .select('id')
+            .eq('is_free', false)
+            .eq('published', true)
+            .eq('is_premium', false);
+
+          if (includedCourses && includedCourses.length > 0) {
+            const enrollments = includedCourses.map(c => ({
+              user_id: userId!,
+              course_id: c.id,
+              enrolled_at: new Date().toISOString(),
+            }));
+            const { error: enrollErr } = await supabase
+              .from('enrollments')
+              .upsert(enrollments, { onConflict: 'user_id,course_id' });
+            if (enrollErr) console.error('Failed to auto-enroll:', enrollErr);
+            else console.log(`Auto-enrolled in ${includedCourses.length} subscription courses`);
+          }
         }
         break;
       }

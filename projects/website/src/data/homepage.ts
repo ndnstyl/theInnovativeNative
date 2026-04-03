@@ -101,14 +101,14 @@ export const proofSystems: ProofSystem[] = [
     status: "live",
   },
   {
-    id: "haven-blueprint",
-    name: "The AI Influencer Blueprint",
+    id: "twingen",
+    name: "TwinGen",
     vertical: "creative",
     description:
-      "The complete system behind an AI influencer — from character design to automated video production. Image generation, quality scoring, and publish-ready assembly.",
+      "Build your own AI influencer from scratch — character creation, automated image/video generation, and publish-ready assembly. The complete content automation system.",
     outcome: "Full content pipeline — from idea to published video",
     price: "From $57",
-    href: "/haven-blueprint",
+    href: "/twingen",
     status: "live",
   },
   {
