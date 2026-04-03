@@ -111,7 +111,6 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
           className="post-composer__category-select"
           aria-label="Post category"
           required
-          aria-label="Post category"
         >
           <option value="">Select category</option>
           {categories.map(cat => (
