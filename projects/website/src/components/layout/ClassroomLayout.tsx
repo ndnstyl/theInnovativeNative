@@ -102,6 +102,10 @@ const ClassroomLayout: React.FC<ClassroomLayoutProps> = ({ title, children }) =>
               <i className="fa-solid fa-trophy"></i>
               Leaderboard
             </Link>
+            <Link href="/about" className={`classroom-header__link ${router.pathname === '/about' ? 'active' : ''}`}>
+              <i className="fa-solid fa-circle-info"></i>
+              About
+            </Link>
             <Link href="/dashboard" className={`classroom-header__link ${router.pathname === '/dashboard' ? 'active' : ''}`}>
               <i className="fa-solid fa-gauge"></i>
               Dashboard

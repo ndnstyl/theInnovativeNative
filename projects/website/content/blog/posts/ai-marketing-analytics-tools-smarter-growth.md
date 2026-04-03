@@ -4,7 +4,7 @@ slug: "ai-marketing-analytics-tools-smarter-growth"
 date: "2025-12-30T16:17:45.000Z"
 dateFormatted: "December 30, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6 {..."
+excerpt: "Your blueprint for using AI marketing analytics tools to drive smarter growth. Covers predictive analytics, ad optimization, multi-touch attribution, and real-time budget allocation."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["Artificial Intelligence","marketing analytics"]
 readingTime: 18

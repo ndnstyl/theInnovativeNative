@@ -23,6 +23,7 @@ const MemberProfilePage = () => {
   const [member, setMember] = useState<MemberProfileData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [isAgent, setIsAgent] = useState(false);
 
   const { followerCount, followingCount, isFollowing } = useFollow(member?.id || '');
 
@@ -76,6 +77,9 @@ const MemberProfilePage = () => {
         is_following: false,
       };
 
+      // Check if this is an AI agent profile
+      setIsAgent(!!(profile as any).is_agent);
+
       setMember(memberProfile);
       setIsLoading(false);
     };
@@ -123,9 +127,18 @@ const MemberProfilePage = () => {
             </div>
           ) : member ? (
             <>
+              {isAgent && (
+                <div className="agent-profile-banner" role="status" aria-label="AI Team Member profile">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 0a1 1 0 011 1v1.07A6.002 6.002 0 0113.93 7H15a1 1 0 110 2h-1.07A6.002 6.002 0 019 13.93V15a1 1 0 11-2 0v-1.07A6.002 6.002 0 012.07 9H1a1 1 0 010-2h1.07A6.002 6.002 0 017 2.07V1a1 1 0 011-1zm0 4a4 4 0 100 8 4 4 0 000-8zm0 2a2 2 0 110 4 2 2 0 010-4z"/>
+                  </svg>
+                  <span>This is an AI community team member at BuildMyTribe. {member.bio}</span>
+                </div>
+              )}
+
               <ProfileHeader member={member} />
 
-              {canManageRoles && session?.user?.id !== member.id && (
+              {!isAgent && canManageRoles && session?.user?.id !== member.id && (
                 <RoleManagement
                   targetMemberId={member.id}
                   currentRole={member.role}

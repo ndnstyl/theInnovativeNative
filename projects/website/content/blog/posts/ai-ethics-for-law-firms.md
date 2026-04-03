@@ -4,7 +4,7 @@ slug: "ai-ethics-for-law-firms"
 date: "2025-10-13T17:07:00.000Z"
 dateFormatted: "October 13, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6..."
+excerpt: "Why AI ethics is non-negotiable for law firms. Covers fairness, transparency, ABA compliance, GDPR requirements, malpractice risks, and building secure AI governance frameworks."
 categories: ["AI Automation","Law Firms"]
 tags: ["AI","Artificial Intelligence"]
 readingTime: 17

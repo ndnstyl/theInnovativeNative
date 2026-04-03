@@ -4,7 +4,7 @@ slug: "change-management-ai-law-firms"
 date: "2025-10-21T19:08:03.000Z"
 dateFormatted: "October 21, 2025"
 author: "Mike Soto"
-excerpt: "/* General text styling for non-heading elements */ p, .wp-block-paragraph, ul.wp-block-list li, ol.wp-block-list li { color: #ffffff !important; font-size:..."
+excerpt: "A strategic blueprint for managing AI adoption in law firms. Covers overcoming resistance, phased implementation, staff training programs, and building an AI-ready culture."
 categories: ["AI Automation","Law Firms"]
 tags: ["AI","Artificial Intelligence","LLMs"]
 readingTime: 18

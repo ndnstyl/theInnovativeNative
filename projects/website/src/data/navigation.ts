@@ -12,14 +12,14 @@ interface NavItem {
 
 export const navItems: NavItem[] = [
   {
-    label: "What We Build",
+    label: "How It Works",
     href: "/#chatgpt-gap",
     isCta: false,
     children: null,
   },
   {
-    label: "Proof Systems",
-    href: "/#proof-systems",
+    label: "Our Work",
+    href: "/portfolio",
     isCta: false,
     children: null,
   },
@@ -30,8 +30,8 @@ export const navItems: NavItem[] = [
     children: null,
   },
   {
-    label: "About",
-    href: "/professionalExperience",
+    label: "Blog",
+    href: "/blog",
     isCta: false,
     children: null,
   },

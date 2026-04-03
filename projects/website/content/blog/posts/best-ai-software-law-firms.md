@@ -4,7 +4,7 @@ slug: "best-ai-software-law-firms"
 date: "2025-11-11T13:44:27.000Z"
 dateFormatted: "November 11, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li, table { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4,..."
+excerpt: "A comprehensive guide to evaluating, integrating, and scaling AI software for law firms. Covers legal research, contract analysis, e-discovery, vendor selection, and infrastructure."
 categories: ["Artificial Intelligence","Law Firms"]
 tags: ["Artificial Intelligence"]
 readingTime: 20

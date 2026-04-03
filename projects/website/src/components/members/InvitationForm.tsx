@@ -120,7 +120,11 @@ const InvitationForm: React.FC = () => {
         </div>
 
         {feedback && (
-          <div className={`invitation-form__feedback invitation-form__feedback--${feedback.type}`}>
+          <div
+            className={`invitation-form__feedback invitation-form__feedback--${feedback.type}`}
+            role={feedback.type === 'error' ? 'alert' : 'status'}
+            aria-live="polite"
+          >
             {feedback.text}
           </div>
         )}

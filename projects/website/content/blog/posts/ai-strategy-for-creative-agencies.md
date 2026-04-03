@@ -4,7 +4,7 @@ slug: "ai-strategy-for-creative-agencies"
 date: "2025-12-17T05:13:26.000Z"
 dateFormatted: "December 16, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } The AI Imperative:..."
+excerpt: "Craft a winning AI strategy for your creative agency. A step-by-step roadmap covering tool selection, team training, ethical guidelines, scaling creative teams, and measuring ROI."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","Artificial Intelligence"]
 readingTime: 18

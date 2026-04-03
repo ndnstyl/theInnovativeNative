@@ -13,6 +13,20 @@ const OurPortfolio = () => {
           name="description"
           content="Case studies and examples of AI automation workflows, growth marketing systems, and technical implementations by Michael Soto."
         />
+        <link rel="canonical" href="https://theinnovativenative.com/portfolio" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Portfolio | AI Automation Projects" />
+        <meta property="og:description" content="Case studies of AI automation workflows, growth marketing systems, and technical implementations." />
+        <meta property="og:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+        <meta property="og:url" content="https://theinnovativenative.com/portfolio" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Portfolio | AI Automation Projects" />
+        <meta name="twitter:description" content="Case studies of AI automation workflows, growth marketing systems, and technical implementations." />
+        <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
       </Head>
       <Layout header={2} footer={5} video={0}>
         <CmnBanner

@@ -4,7 +4,7 @@ slug: "essential-ai-audit-law-firms"
 date: "2025-10-02T16:44:00.000Z"
 dateFormatted: "October 2, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li, .faq-answer { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2,..."
+excerpt: "Why every law firm needs an AI audit. Learn how to assess readiness, ensure compliance with regulations like GDPR and the EU AI Act, and build client trust through responsible AI use."
 categories: ["AI Automation","Law Firms"]
 tags: ["AI","Artificial Intelligence","LLMs"]
 readingTime: 23

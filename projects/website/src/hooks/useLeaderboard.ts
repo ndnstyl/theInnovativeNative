@@ -79,6 +79,8 @@ export function useLeaderboard(): UseLeaderboardReturn {
         .filter((row: any) => {
           const cm = row.community_members;
           const profile = cm?.profiles;
+          // Exclude AI agents from leaderboard
+          if (profile?.is_agent) return false;
           return cm?.status === 'active' && profile?.membership_status === 'approved';
         })
         .map((row: any, index: number) => {

@@ -4,7 +4,7 @@ slug: "proven-ai-law-firm-case-studies"
 date: "2026-02-01T17:11:40.000Z"
 dateFormatted: "February 1, 2026"
 author: "Mike Soto"
-excerpt: "/* General styling for non-heading text elements */ p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } /*..."
+excerpt: "Real case studies of AI delivering results in law firms. Covers contract review, legal research, e-discovery, predictive analytics, and how small firms scale with AI tools."
 categories: ["Artificial Intelligence","Law Firms"]
 tags: ["law firms","lawyers"]
 readingTime: 16

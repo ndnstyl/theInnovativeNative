@@ -64,6 +64,8 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
+    "knip": "^6.2.0",
+    "madge": "^8.0.0",
     "ts-jest": "^29.4.6"
   }
 }

@@ -89,6 +89,7 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
           className="post-composer__category-select"
+          aria-label="Post category"
           required
         >
           <option value="">Select category</option>
@@ -115,7 +116,7 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
         </div>
       </div>
 
-      {error && <div className="post-composer__error">{error}</div>}
+      {error && <div className="post-composer__error" role="alert" aria-live="polite">{error}</div>}
     </form>
   );
 };

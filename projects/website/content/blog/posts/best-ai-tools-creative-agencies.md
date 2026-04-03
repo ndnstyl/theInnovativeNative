@@ -4,7 +4,7 @@ slug: "best-ai-tools-creative-agencies"
 date: "2025-12-13T05:14:58.000Z"
 dateFormatted: "December 12, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li, table th, table td { color: #ffffff !important; font-size: 20px !important; } a { color:..."
+excerpt: "The top AI tools transforming creative agencies. Covers generative AI for content creation, Adobe integrations, marketing automation, asset management, and measuring ROI."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","design","marketing","tools"]
 readingTime: 24

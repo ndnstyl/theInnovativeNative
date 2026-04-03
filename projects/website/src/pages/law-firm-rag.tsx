@@ -120,6 +120,13 @@ const LawFirmRag = () => {
         <meta name="twitter:title" content="Private Legal RAG | Your Firm's Second Brain" />
         <meta name="twitter:description" content="Enterprise AI trains on everyone's law. Your advantage is in your cases. Build institutional intelligence from your own briefs and outcomes." />
 
+        {/* Canonical */}
+        <link rel="canonical" href="https://theinnovativenative.com/law-firm-rag" />
+
+        {/* OG Image */}
+        <meta property="og:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+        <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+
         {/* Schema.org SoftwareApplication */}
         <script
           type="application/ld+json"
@@ -143,6 +150,66 @@ const LawFirmRag = () => {
                 "Full Audit Trail",
                 "Criminal Defense Coverage",
                 "Bankruptcy Law Coverage"
+              ]
+            })
+          }}
+        />
+
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How is this different from enterprise legal AI?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Enterprise legal AI (Westlaw, LexisNexis) trains on public data. This is a private RAG trained exclusively on your firm's briefs, outcomes, and institutional intelligence — giving you an edge no competitor can replicate."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What data does it train on?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Past cases, filings, discovery documents, internal memos, and any legal documents your firm provides. No external data is mixed in. Your data stays yours."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What happens to my firm's documents?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "End-to-end encryption (AES-256), role-based access controls, complete audit logging, and self-hosted options available. No PII training. SOC2-ready architecture."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How long does implementation take?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "2-3 weeks for pilot firms. Includes document ingestion, embedding, testing, and training for your team."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://theinnovativenative.com/" },
+                { "@type": "ListItem", "position": 2, "name": "Law Firm RAG", "item": "https://theinnovativenative.com/law-firm-rag" }
               ]
             })
           }}

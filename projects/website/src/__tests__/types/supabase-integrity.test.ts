@@ -204,8 +204,8 @@ describe('Database table presence', () => {
 // notifications table bug detection
 // ---------------------------------------------------------------------------
 
-describe('notifications table — read/is_read dual-field bug', () => {
-  it('KNOWN BUG: notifications has BOTH "read" and "is_read" fields', () => {
+describe('notifications table — read/is_read field standardization', () => {
+  it('notifications uses only "is_read" (not the ambiguous "read" field)', () => {
     // Extract the notifications Row block
     const notifMatch = supabaseSrc.match(
       /notifications:\s*\{[\s\S]*?Row:\s*\{([\s\S]*?)\};/
@@ -216,16 +216,26 @@ describe('notifications table — read/is_read dual-field bug', () => {
     const hasRead = /\bread:\s*boolean/.test(rowBlock);
     const hasIsRead = /\bis_read:\s*boolean/.test(rowBlock);
 
-    // This test documents the bug. Both fields should not coexist.
-    // If this test starts failing, the bug has been fixed — update accordingly.
-    expect(hasRead).toBe(true);
+    // FIX VERIFIED: Only is_read should exist. The ambiguous "read" field
+    // has been removed to prevent confusion with the boolean column name
+    // colliding with SQL reserved words and general naming inconsistency.
+    expect(hasRead).toBe(false);
     expect(hasIsRead).toBe(true);
+  });
 
-    // Flag: this is a schema inconsistency that should be resolved
-    console.warn(
-      'BUG DETECTED: notifications table has both "read" and "is_read" boolean fields. ' +
-      'Pick one and remove the other to avoid confusion.'
+  it('notifications Update type uses only "is_read"', () => {
+    // Extract the notifications Update block
+    const updateMatch = supabaseSrc.match(
+      /notifications:\s*\{[\s\S]*?Update:\s*\{([\s\S]*?)\}/
     );
+    expect(updateMatch).not.toBeNull();
+
+    const updateBlock = updateMatch![1];
+    const hasRead = /\bread\?:\s*boolean/.test(updateBlock);
+    const hasIsRead = /\bis_read\?:\s*boolean/.test(updateBlock);
+
+    expect(hasRead).toBe(false);
+    expect(hasIsRead).toBe(true);
   });
 });
 

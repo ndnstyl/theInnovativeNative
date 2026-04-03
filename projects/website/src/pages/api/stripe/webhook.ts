@@ -1,3 +1,14 @@
+/**
+ * Stripe Webhook — Dev-Only Fallback
+ *
+ * IMPORTANT: The production webhook handler is the Supabase Edge Function at:
+ *   supabase/functions/stripe-webhook/index.ts
+ *
+ * This Next.js API route is retained as a local development fallback only.
+ * It does NOT write to the database — it only logs events for debugging.
+ * All production payment processing, enrollment grants, and receipt emails
+ * are handled by the Edge Function.
+ */
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { stripe } from '@/lib/stripe';
 import Stripe from 'stripe';
@@ -11,7 +22,7 @@ export const config = {
 
 // Helper to get raw body
 async function getRawBody(req: NextApiRequest): Promise<Buffer> {
-  const chunks: Buffer[] = [];
+  const chunks: Uint8Array[] = [];
   for await (const chunk of req) {
     chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
   }
@@ -63,8 +74,9 @@ export default async function handler(
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
 
-        // Log successful payment
-        console.log('Payment successful!', {
+        // Dev-only: log payment events for debugging.
+        // Production handling (DB writes, emails, onboarding) is in the Edge Function.
+        console.log('Payment successful (dev log only):', {
           sessionId: session.id,
           customerEmail: session.customer_email,
           amountTotal: session.amount_total,
@@ -73,21 +85,6 @@ export default async function handler(
           metadata: session.metadata,
           clientReferenceId: session.client_reference_id,
         });
-
-        // TODO: Connect to Supabase to store customer/payment data
-        // Example:
-        // await supabase.from('purchases').insert({
-        //   stripe_session_id: session.id,
-        //   customer_email: session.customer_email,
-        //   amount: session.amount_total,
-        //   currency: session.currency,
-        //   status: 'completed',
-        //   product: session.metadata?.product,
-        //   created_at: new Date().toISOString(),
-        // });
-
-        // TODO: Send confirmation email
-        // TODO: Trigger onboarding workflow
 
         break;
       }

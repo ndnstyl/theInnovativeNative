@@ -121,33 +121,18 @@ describe('debounce', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 2. BUG: Missing timer cleanup on unmount
+// 2. FIXED: Timer cleanup on unmount
 // ---------------------------------------------------------------------------
-describe('BUG: timer cleanup on unmount', () => {
-  it('documents that timerRef is NOT cleared on component unmount', () => {
+describe('FIXED: timer cleanup on unmount', () => {
+  it('timer is cleared on unmount — no stale supabase calls after unmount', () => {
     /**
-     * BUG DOCUMENTATION:
+     * FIX VERIFIED:
      *
-     * useMentions.ts stores a setTimeout ID in `timerRef` (line 7) but
-     * never clears it on unmount. There is no cleanup return in the hook.
+     * useMentions.ts now includes a cleanup useEffect that:
+     * 1. Clears the pending timeout via clearTimeout(timerRef.current)
+     * 2. Sets unmountedRef.current = true so the timer callback bails out
      *
-     * If the component unmounts while a debounced search is pending:
-     * 1. The timeout fires after 300ms
-     * 2. The async callback runs and calls supabase
-     * 3. It attempts to resolve the Promise, but since the component
-     *    is unmounted, React will warn about state updates on unmounted
-     *    components (or silently leak if resolve is just a Promise callback)
-     *
-     * The fix is simple — add a cleanup effect:
-     *
-     *   useEffect(() => {
-     *     return () => {
-     *       if (timerRef.current) clearTimeout(timerRef.current);
-     *     };
-     *   }, []);
-     *
-     * Impact: Memory leak potential + React warnings in dev mode.
-     * Severity: Low — the Promise just resolves to nowhere.
+     * After unmount, advancing timers should NOT trigger a supabase call.
      */
 
     const builder = setupProfilesBuilder([]);
@@ -161,15 +146,13 @@ describe('BUG: timer cleanup on unmount', () => {
     // Unmount before debounce completes
     unmount();
 
-    // The timer is still pending — advance to prove it fires
+    // The timer should have been cleared — advance to verify
     act(() => {
       jest.advanceTimersByTime(300);
     });
 
-    // The timer fired and called supabase even after unmount
-    // In a real app this would produce a React warning
-    // This test documents the leak — it should NOT call supabase after unmount
-    expect(builder.select).toHaveBeenCalled();
+    // After the fix, supabase should NOT have been called
+    expect(builder.select).not.toHaveBeenCalled();
   });
 });
 

@@ -4,7 +4,7 @@ slug: "ai-legal-marketing-analytics-for-growth"
 date: "2025-10-20T09:18:09.000Z"
 dateFormatted: "October 20, 2025"
 author: "Mike Soto"
-excerpt: "```html p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff..."
+excerpt: "A practical guide to AI legal marketing analytics for attorneys. Learn precision targeting, ad optimization, predictive analytics, and ROI tracking to grow your practice."
 categories: ["AI Automation","Artificial Intelligence","Law Firms"]
 tags: ["AI","Artificial Intelligence"]
 readingTime: 14

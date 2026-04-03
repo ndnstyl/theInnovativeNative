@@ -116,6 +116,7 @@ const MembershipQuestions: React.FC = () => {
                   onChange={(e) => setEditText(e.target.value.slice(0, 200))}
                   maxLength={200}
                   autoFocus
+                  aria-label="Edit question text"
                 />
                 <label className="membership-questions__toggle">
                   <input
@@ -175,6 +176,7 @@ const MembershipQuestions: React.FC = () => {
             onChange={(e) => setNewText(e.target.value.slice(0, 200))}
             placeholder="New question (max 200 chars)..."
             maxLength={200}
+            aria-label="New membership question"
           />
           <button
             className="btn btn--sm btn--primary"

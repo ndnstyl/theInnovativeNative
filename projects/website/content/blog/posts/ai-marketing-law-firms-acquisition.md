@@ -4,7 +4,7 @@ slug: "ai-marketing-law-firms-acquisition"
 date: "2025-10-13T17:09:23.000Z"
 dateFormatted: "October 13, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6..."
+excerpt: "How law firms can supercharge client acquisition with AI marketing. Covers content generation, SEO optimization, targeted advertising, and personalized client engagement strategies."
 categories: ["AI Automation","Law Firms"]
 tags: ["AI","Artificial Intelligence"]
 readingTime: 17

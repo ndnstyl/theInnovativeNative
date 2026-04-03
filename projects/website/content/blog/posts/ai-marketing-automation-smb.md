@@ -4,7 +4,7 @@ slug: "ai-marketing-automation-smb"
 date: "2025-12-21T05:13:37.000Z"
 dateFormatted: "December 20, 2025"
 author: "Mike Soto"
-excerpt: "```html p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff..."
+excerpt: "How AI marketing automation helps small businesses compete with bigger players. Covers email optimization, social media, predictive analytics, and choosing the right tools."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","Artificial Intelligence","marketing"]
 readingTime: 18

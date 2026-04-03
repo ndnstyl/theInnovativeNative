@@ -4,7 +4,7 @@ slug: "ai-lead-generation-for-lawyers"
 date: "2025-10-15T17:31:09.000Z"
 dateFormatted: "October 15, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2,..."
+excerpt: "How AI lead generation is revolutionizing client acquisition for lawyers. Covers conversational AI chatbots, automated intake, client qualification, and AI-powered CRM nurturing."
 categories: ["AI Automation","Law Firms"]
 tags: ["AI","Artificial Intelligence"]
 readingTime: 15

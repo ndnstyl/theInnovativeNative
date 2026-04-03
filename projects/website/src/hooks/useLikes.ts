@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface UseLikesOptions {
@@ -14,9 +14,24 @@ export function useLikes({ targetType, targetId, initialCount = 0, initialLiked 
   const [likeCount, setLikeCount] = useState(initialCount);
   const [loading, setLoading] = useState(false);
 
+  // Ref to track the latest isLiked value — prevents stale closure issues
+  // when toggleLike is called in rapid succession or before React re-renders
+  const isLikedRef = useRef(isLiked);
+  const loadingRef = useRef(loading);
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    isLikedRef.current = isLiked;
+  }, [isLiked]);
+
+  useEffect(() => {
+    loadingRef.current = loading;
+  }, [loading]);
+
   // Sync with initial values when they change
   useEffect(() => {
     setIsLiked(initialLiked);
+    isLikedRef.current = initialLiked;
     setLikeCount(initialCount);
   }, [initialLiked, initialCount]);
 
@@ -32,17 +47,22 @@ export function useLikes({ targetType, targetId, initialCount = 0, initialLiked 
       .eq('target_id', targetId)
       .limit(1)
       .then(({ data }) => {
-        setIsLiked(data !== null && data.length > 0);
+        const liked = data !== null && data.length > 0;
+        setIsLiked(liked);
+        isLikedRef.current = liked;
       });
   }, [supabaseClient, session, targetType, targetId]);
 
   const toggleLike = useCallback(async () => {
-    if (!supabaseClient || !session?.user?.id || loading) return;
+    if (!supabaseClient || !session?.user?.id || loadingRef.current) return;
     setLoading(true);
+    loadingRef.current = true;
 
-    // Optimistic update
-    const wasLiked = isLiked;
-    setIsLiked(!wasLiked);
+    // Read from ref to avoid stale closure — this is the key fix
+    const wasLiked = isLikedRef.current;
+    const newLiked = !wasLiked;
+    setIsLiked(newLiked);
+    isLikedRef.current = newLiked;
     setLikeCount(prev => wasLiked ? Math.max(prev - 1, 0) : prev + 1);
 
     try {
@@ -82,11 +102,13 @@ export function useLikes({ targetType, targetId, initialCount = 0, initialLiked 
     } catch {
       // Revert on error
       setIsLiked(wasLiked);
+      isLikedRef.current = wasLiked;
       setLikeCount(prev => wasLiked ? prev + 1 : Math.max(prev - 1, 0));
     } finally {
       setLoading(false);
+      loadingRef.current = false;
     }
-  }, [supabaseClient, session, targetType, targetId, isLiked, loading]);
+  }, [supabaseClient, session, targetType, targetId]);
 
   return { isLiked, likeCount, toggleLike, loading };
 }

@@ -4,7 +4,7 @@ slug: "ai-ethics-in-creative-business"
 date: "2026-01-15T14:12:54.000Z"
 dateFormatted: "January 15, 2026"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1.wp-block-heading,..."
+excerpt: "Navigate the ethical challenges of using AI in creative work. Covers copyright, deepfakes, bias in AI tools, content guardrails, and building governance for agencies."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","automation","creative"]
 readingTime: 17

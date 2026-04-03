@@ -4,7 +4,7 @@ slug: "ai-crm-marketing-integration"
 date: "2026-01-02T05:13:19.000Z"
 dateFormatted: "January 1, 2026"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6..."
+excerpt: "Learn how integrating AI with your CRM creates a smarter marketing stack. Boost lead scoring, personalization, and predictive analytics while keeping human oversight."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","Artificial Intelligence","marketing"]
 readingTime: 17

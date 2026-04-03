@@ -8,6 +8,14 @@
 
 RewriteEngine On
 
+# Extensionless URLs (serve .html files without extension)
+# Skip if the request matches an existing directory (Next.js static export
+# creates both classroom.html AND classroom/ for nested routes — directory wins)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
 # HTTPS enforcement
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

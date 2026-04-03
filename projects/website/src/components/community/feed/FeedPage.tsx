@@ -113,7 +113,7 @@ const FeedPage: React.FC = () => {
       {loading && posts.length === 0 ? (
         <FeedSkeleton />
       ) : error ? (
-        <div className="community-feed__error">
+        <div className="community-feed__error" role="alert" aria-live="polite">
           <p>Failed to load feed. <button onClick={refresh}>Retry</button></p>
         </div>
       ) : (

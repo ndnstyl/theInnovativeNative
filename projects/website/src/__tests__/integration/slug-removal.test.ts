@@ -79,14 +79,10 @@ describe('Slug column removal compliance', () => {
     }
 
     it('should have ZERO files with .eq("slug", ...) queries', () => {
-      // KNOWN BUG: this test intentionally fails to document the broken page.
-      //
-      // pages/classroom/admin/[courseSlug]/lessons/[lessonSlug].tsx
-      // queries courses.slug AND lessons.slug — both columns no longer exist.
-      //
-      // FIX: replace .eq('slug', courseSlug) with .eq('id', courseSlug)
-      //      replace .eq('slug', lessonSlug) with .eq('id', lessonSlug)
-      //      The parent edit page already links using lesson.id in the URL.
+      // FIXED: All classroom pages now query by ID, not slug.
+      // The lesson editor page at pages/classroom/admin/[courseSlug]/lessons/[lessonSlug].tsx
+      // was migrated from .eq('slug', ...) to .eq('id', ...) since the slug
+      // column was removed from the courses and lessons tables.
       if (fileHits.size > 0) {
         const summary = Array.from(fileHits.entries())
           .map(([file, hits]) => {
@@ -95,13 +91,12 @@ describe('Slug column removal compliance', () => {
           })
           .join('\n\n');
 
-        // We deliberately FAIL here so the bug is visible in test output.
-        expect(fileHits.size).toBe(0);
-        // If Jest stops at the first assertion, this message helps in the log:
         console.error(
           `SLUG BUG: ${fileHits.size} file(s) still query by slug:\n\n${summary}`,
         );
       }
+
+      expect(fileHits.size).toBe(0);
     });
   });
 

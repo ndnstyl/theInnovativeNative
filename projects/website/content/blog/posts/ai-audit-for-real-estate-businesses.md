@@ -4,7 +4,7 @@ slug: "ai-audit-for-real-estate-businesses"
 date: "2025-11-11T13:45:58.000Z"
 dateFormatted: "November 11, 2025"
 author: "Mike Soto"
-excerpt: "/* General text styling */ p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } /*..."
+excerpt: "A thorough guide to conducting an AI audit for real estate firms. Covers readiness assessment, regulatory compliance, governance frameworks, and risk mitigation strategies."
 categories: ["Artificial Intelligence","Real Estate"]
 tags: ["Artificial Intelligence"]
 readingTime: 16

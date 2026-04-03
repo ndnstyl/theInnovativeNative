@@ -74,7 +74,7 @@ const HomeOneBanner = () => {
           </a>
         </div>
         <div className="video-frame video-btn" onClick={openCalendly} style={{ cursor: 'pointer' }}>
-          <span className="btn btn--secondary">See What We Build</span>
+          <span className="btn btn--primary">Book a Discovery Call</span>
         </div>
         <div className="lines d-none d-lg-flex">
           <div className="line"></div>

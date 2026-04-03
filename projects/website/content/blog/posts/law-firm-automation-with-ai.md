@@ -4,7 +4,7 @@ slug: "law-firm-automation-with-ai"
 date: "2025-10-06T12:22:29.000Z"
 dateFormatted: "October 6, 2025"
 author: "Mike Soto"
-excerpt: "&nbsp; p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } Transforming..."
+excerpt: "How law firm automation with AI transforms legal practice. Covers document analysis, risk prediction, client onboarding, case management, and paralegal support for modern efficiency."
 categories: ["AI Automation","Artificial Intelligence","Law Firms"]
 tags: ["AI","Artificial Intelligence","LLMs"]
 readingTime: 16

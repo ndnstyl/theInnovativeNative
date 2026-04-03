@@ -4,7 +4,7 @@ slug: "ai-marketing-luxury-real-estate"
 date: "2025-11-15T17:32:39.000Z"
 dateFormatted: "November 15, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li, .estimated-reading-time { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important;..."
+excerpt: "Discover how AI marketing tools help luxury real estate agents attract high-net-worth buyers with hyper-personalized campaigns, optimized SEO, and targeted advertising."
 categories: ["Artificial Intelligence","Real Estate"]
 tags: ["Artificial Intelligence","real estate"]
 readingTime: 16

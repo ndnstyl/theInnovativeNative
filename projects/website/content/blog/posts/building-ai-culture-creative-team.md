@@ -4,7 +4,7 @@ slug: "building-ai-culture-creative-team"
 date: "2026-01-07T16:16:34.000Z"
 dateFormatted: "January 7, 2026"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6..."
+excerpt: "How to build an AI-powered culture in your creative team. Covers training strategies, workflow reorganization, change management, hiring for AI-creative hybrid roles, and team alignment."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["agency","creative","team"]
 readingTime: 20

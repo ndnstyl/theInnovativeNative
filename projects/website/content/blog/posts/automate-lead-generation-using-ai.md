@@ -4,7 +4,7 @@ slug: "automate-lead-generation-using-ai"
 date: "2025-12-25T05:13:29.000Z"
 dateFormatted: "December 24, 2025"
 author: "Mike Soto"
-excerpt: "p, .wp-block-paragraph, ul.wp-block-list li, ol.wp-block-list li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important;..."
+excerpt: "How to automate your entire lead generation funnel with AI. From chatbot capture and intelligent lead scoring to personalized drip campaigns and automated sales follow-ups."
 categories: ["AI Automation","Artificial Intelligence"]
 tags: ["AI","Artificial Intelligence","leadGen"]
 readingTime: 14

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import Layout from "@/components/layout/Layout";
 import CmnBanner from "@/components/layout/banner/CmnBanner";
 
@@ -841,6 +842,21 @@ const ProfessionalExperience = () => {
   );
 
   return (
+    <>
+    <Head>
+      <title>Michael Soto | AI Systems Builder & Growth Engineer</title>
+      <meta name="description" content="20 years building growth systems. AI infrastructure, n8n automation, and data pipelines for legal, creative, and real estate verticals." />
+      <link rel="canonical" href="https://theinnovativenative.com/professionalExperience" />
+      <meta property="og:title" content="Michael Soto | AI Systems Builder" />
+      <meta property="og:description" content="20 years building growth systems. AI infrastructure, automation, and data pipelines." />
+      <meta property="og:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+      <meta property="og:url" content="https://theinnovativenative.com/professionalExperience" />
+      <meta property="og:type" content="profile" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Michael Soto | AI Systems Builder" />
+      <meta name="twitter:description" content="20 years building growth systems. AI infrastructure, automation, and data pipelines." />
+      <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+    </Head>
     <Layout header={2} footer={5} video={0}>
       <style>{styles}</style>
       <CmnBanner
@@ -1139,6 +1155,7 @@ const ProfessionalExperience = () => {
         {renderEducationModal()}
       </ResumeModal>
     </Layout>
+    </>
   );
 };
 
