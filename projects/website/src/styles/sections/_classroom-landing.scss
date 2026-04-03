@@ -158,13 +158,28 @@ $cl-card-bg: rgba(255, 255, 255, 0.03);
 // Course Gallery (Horizontal Scroll)
 // ============================================
 .course-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.course-gallery__track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+
+  // Hide scrollbar but keep scroll functionality
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+  &::-webkit-scrollbar { height: 4px; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
 }
 
 .course-gallery__card {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -190,12 +205,24 @@ $cl-card-bg: rgba(255, 255, 255, 0.03);
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 32px 12px 12px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-  font-size: 14px;
+  padding: 28px 10px 10px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  font-size: 13px;
   font-weight: 600;
   color: #fff;
   line-height: 1.3;
+}
+
+.course-gallery__card-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,255,255,0.2);
+  color: #00ffff;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 // ============================================

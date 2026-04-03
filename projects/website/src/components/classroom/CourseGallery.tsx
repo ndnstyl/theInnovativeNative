@@ -107,97 +107,33 @@ const CourseGallery: React.FC<CourseGalleryProps> = ({
 
   return (
     <div className="course-gallery">
-      {courses.map((course) => {
-        const dbInfo = dbCourses[course.id];
-        const isEnrolled = enrolledCourseIds.has(course.id);
-        const isFree = dbInfo?.is_free;
-        const hasPrice = !!dbInfo?.stripe_price_id;
+      <div className="course-gallery__track">
+        {courses.map((course) => {
+          const isEnrolled = enrolledCourseIds.has(course.id);
 
-        const cardImage = (
-          <img
-            src={course.thumbnail}
-            alt={course.title}
-            width={300}
-            height={400}
-          />
-        );
-
-        // Enrolled — link directly to course
-        if (isAuthenticated && isEnrolled) {
           return (
-            <Link key={course.id} href={course.href} className="course-gallery__card course-gallery__card--enrolled">
-              {cardImage}
+            <Link
+              key={course.id}
+              href={course.href}
+              className={`course-gallery__card${isEnrolled ? ' course-gallery__card--enrolled' : ''}`}
+            >
+              <img
+                src={course.thumbnail}
+                alt={course.title}
+                width={300}
+                height={170}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
               <div className="course-gallery__card-title">{course.title}</div>
-              <div className="course-gallery__card-badge" style={{
-                background: 'rgba(0,255,255,0.15)', color: '#00ffff',
-                padding: '6px 14px', borderRadius: '4px', fontSize: '13px', fontWeight: 600,
-                marginTop: '8px', display: 'inline-block',
-              }}>Continue Learning</div>
+              {isEnrolled && (
+                <div className="course-gallery__card-badge">Continue</div>
+              )}
             </Link>
           );
-        }
-
-        // Show enroll/price button for anyone (authenticated or not) when course data loaded
-        if (dbInfo) {
-          return (
-            <div key={course.id} className="course-gallery__card">
-              {cardImage}
-              <div className="course-gallery__card-title">{course.title}</div>
-              {isFree ? (
-                <button
-                  onClick={() => handleFreeEnroll(course.id)}
-                  disabled={enrollingFreeId === course.id}
-                  style={{
-                    marginTop: '10px', padding: '10px 20px', background: '#00ffff', color: '#000',
-                    border: 'none', borderRadius: '6px', fontWeight: 700, fontSize: '14px',
-                    cursor: enrollingFreeId === course.id ? 'not-allowed' : 'pointer',
-                    opacity: enrollingFreeId === course.id ? 0.6 : 1,
-                  }}
-                >
-                  {enrollingFreeId === course.id ? 'Enrolling...' : 'Start Free Course'}
-                </button>
-              ) : hasPrice ? (
-                <button
-                  onClick={() => handlePaidEnroll(course.id)}
-                  disabled={checkoutLoading}
-                  style={{
-                    marginTop: '10px', padding: '10px 20px', background: '#00ffff', color: '#000',
-                    border: 'none', borderRadius: '6px', fontWeight: 700, fontSize: '14px',
-                    cursor: checkoutLoading ? 'not-allowed' : 'pointer',
-                    opacity: checkoutLoading ? 0.6 : 1,
-                  }}
-                >
-                  {checkoutLoading ? 'Loading...' : 'Enroll Now'}
-                </button>
-              ) : (
-                <div style={{ marginTop: '10px', color: 'rgba(255,255,255,0.4)', fontSize: '13px' }}>Coming Soon</div>
-              )}
-              {checkoutError && <div style={{ color: '#ff4444', fontSize: '12px', marginTop: '6px' }}>{checkoutError}</div>}
-            </div>
-          );
-        }
-
-        // Fallback: course data not yet loaded — show card with loading indicator
-        return (
-          <div
-            key={course.id}
-            className="course-gallery__card"
-            onClick={handleUnauthenticatedClick}
-            role="button"
-            tabIndex={0}
-            aria-label={`View ${course.title}`}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleUnauthenticatedClick();
-              }
-            }}
-          >
-            {cardImage}
-            <div className="course-gallery__card-title">{course.title}</div>
-          </div>
-        );
-      })}
+        })}
+      </div>
     </div>
   );
 };
