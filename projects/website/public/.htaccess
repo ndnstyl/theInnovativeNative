@@ -8,11 +8,40 @@
 
 RewriteEngine On
 
-# Extensionless URLs (serve .html files without extension)
-# Skip if the request matches an existing directory (Next.js static export
-# creates both classroom.html AND classroom/ for nested routes — directory wins)
+# Next.js dynamic routes — serve the [slug].html shell for client-side routing
+# Classroom course pages: /classroom/<uuid> → classroom/[courseSlug].html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^classroom/([^/]+)/?$ classroom/[courseSlug].html [L]
+
+# Classroom lesson pages: /classroom/<uuid>/<slug> → classroom/[courseSlug]/[lessonSlug].html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^classroom/([^/]+)/([^/]+)/?$ classroom/[courseSlug]/[lessonSlug].html [L]
+
+# Blog post pages: /blog/<slug> → already handled by static HTML files
+# Members profile pages: /members/<username>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^members/([^/]+)/?$ members/[username].html [L]
+
+# Templates: /templates/<slug>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^templates/([^/]+)/?$ templates/[slug].html [L]
+
+# Community calendar event: /community/calendar/<id>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^community/calendar/([^/]+)/?$ community/calendar/[id].html [L]
+
+# Messages conversation: /messages/<id>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^messages/([^/]+)/?$ messages/[conversationId].html [L]
+
+# Extensionless URLs (serve .html files without extension)
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+)$ $1.html [L]
 

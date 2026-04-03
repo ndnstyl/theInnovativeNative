@@ -159,7 +159,7 @@ $cl-card-bg: rgba(255, 255, 255, 0.03);
 // ============================================
 .course-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
   margin-bottom: 40px;
 }
@@ -179,7 +179,7 @@ $cl-card-bg: rgba(255, 255, 255, 0.03);
 
   img {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
   }
@@ -190,9 +190,9 @@ $cl-card-bg: rgba(255, 255, 255, 0.03);
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 32px 10px 10px;
+  padding: 32px 12px 12px;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
   line-height: 1.3;
