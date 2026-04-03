@@ -858,7 +858,7 @@ const ProfessionalExperience = () => {
       <meta name="twitter:description" content="20 years building growth systems. AI infrastructure, automation, and data pipelines." />
       <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
     </Head>
-    <Layout header={2} footer={5} video={0}>
+    <Layout header={1} footer={1} video={false}>
       <style>{styles}</style>
       <CmnBanner
         title="Michael Soto"

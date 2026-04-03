@@ -19,12 +19,20 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             src={course.thumbnail_url}
             alt={course.title}
             loading="lazy"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const placeholder = target.nextElementSibling as HTMLElement;
+              if (placeholder) placeholder.style.display = 'flex';
+            }}
           />
-        ) : (
-          <div className="classroom-card__thumbnail-placeholder">
-            <i className="fa-solid fa-graduation-cap" />
-          </div>
-        )}
+        ) : null}
+        <div
+          className="classroom-card__thumbnail-placeholder"
+          style={course.thumbnail_url ? { display: 'none' } : undefined}
+        >
+          <i className="fa-solid fa-graduation-cap" />
+        </div>
         {showOpenBadge && (
           <span className="classroom-card__badge classroom-card__badge--open">Open</span>
         )}

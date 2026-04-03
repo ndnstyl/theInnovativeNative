@@ -28,7 +28,7 @@ const OurPortfolio = () => {
         <meta name="twitter:description" content="Case studies of AI automation workflows, growth marketing systems, and technical implementations." />
         <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
       </Head>
-      <Layout header={2} footer={5} video={0}>
+      <Layout header={1} footer={1} video={false}>
         <CmnBanner
           title="Portfolio"
           navigation="Case Studies & Projects"
