@@ -45,11 +45,12 @@ const LessonPage: React.FC = () => {
     const userId = getStoredUserId();
 
     try {
-      // Fetch course
-      const courses = await supabaseGet<any[]>(
-        `courses?id=eq.${courseSlug}&published=eq.true&limit=1`,
-        token
-      );
+      // Fetch course — support both UUID and slug lookups
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(courseSlug as string);
+      const courseFilter = isUUID
+        ? `courses?id=eq.${courseSlug}&published=eq.true&limit=1`
+        : `courses?or=(id.eq.${courseSlug},slug.eq.${courseSlug})&published=eq.true&limit=1`;
+      const courses = await supabaseGet<any[]>(courseFilter, token);
       if (!courses || courses.length === 0) {
         setError('Course not found');
         setLoading(false);

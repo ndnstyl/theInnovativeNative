@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import ClassroomLayout from '@/components/layout/ClassroomLayout';
+import Layout from '@/components/layout/Layout';
 
 const pageTitle = 'About | BuildMyTribe.AI';
 const pageDescription =
@@ -9,7 +9,7 @@ const pageDescription =
 
 const AboutPage = () => {
   return (
-    <ClassroomLayout title="About">
+    <Layout header={1} footer={1} video={false}>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -131,7 +131,7 @@ const AboutPage = () => {
           </Link>
         </section>
       </div>
-    </ClassroomLayout>
+    </Layout>
   );
 };
 
