@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import { useAuth } from '@/contexts/AuthContext';
 import { getValidToken, getStoredUserId } from '@/lib/auth-token';
 import { COMMUNITY_ID } from '@/lib/constants';
@@ -8,6 +9,8 @@ import PostCard from './PostCard';
 import PostComposer from './PostComposer';
 import FeedSkeleton from './FeedSkeleton';
 import type { FeedPost, FeedSort } from '@/types/feed';
+
+const PostModal = dynamic(() => import('./PostModal'), { ssr: false });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -37,12 +40,42 @@ const FeedPage: React.FC = () => {
   const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [categoryId, setCategoryId] = useState<string | undefined>(undefined);
   const [sort, setSort] = useState<FeedSort>((router.query.sort as FeedSort) || 'recent');
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [routerReady, setRouterReady] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const offsetRef = useRef(0);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  // ---- Read ?post= param on mount (client-side only — static export) ----
+  useEffect(() => {
+    if (!router.isReady) return;
+    setRouterReady(true);
+    const postParam = router.query.post;
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (postParam && typeof postParam === 'string' && UUID_RE.test(postParam)) {
+      setSelectedPostId(postParam);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
+  // ---- Sync ?post= param when selectedPostId changes ----
+  useEffect(() => {
+    if (!routerReady) return;
+    if (selectedPostId) {
+      router.push(
+        { query: { ...router.query, post: selectedPostId } },
+        undefined,
+        { shallow: true },
+      );
+    } else {
+      const { post: _removed, ...rest } = router.query;
+      router.replace({ query: rest }, undefined, { shallow: true });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedPostId, routerReady]);
 
   // ---- Fetch categories on mount ----
   useEffect(() => {
@@ -74,7 +107,7 @@ const FeedPage: React.FC = () => {
       params.set('deleted_at', 'is.null');
       params.set('select', [
         '*',
-        'profiles!posts_author_id_fkey(display_name,avatar_url,username,level)',
+        'profiles!posts_author_id_fkey(display_name,avatar_url,username,level,is_agent)',
         'categories!posts_category_id_fkey(name)',
       ].join(','));
 
@@ -114,6 +147,7 @@ const FeedPage: React.FC = () => {
         author_avatar_url: row.profiles?.avatar_url || null,
         author_username: row.profiles?.username || null,
         author_level: row.profiles?.level ?? 1,
+        author_is_agent: row.profiles?.is_agent ?? false,
         category_name: row.categories?.name || null,
         recent_commenters: [],
         last_comment_at: null,
@@ -262,7 +296,13 @@ const FeedPage: React.FC = () => {
         <>
           <div className="community-feed__list">
             {posts.map(post => (
-              <PostCard key={post.id} post={post} />
+              <PostCard
+                key={post.id}
+                post={post}
+                onPostClick={setSelectedPostId}
+                onPostDeleted={handleRefresh}
+                onPinChanged={handleRefresh}
+              />
             ))}
           </div>
 
@@ -289,6 +329,15 @@ const FeedPage: React.FC = () => {
           )}
         </>
       )}
+      <PostModal
+        postId={selectedPostId}
+        onClose={() => setSelectedPostId(null)}
+        onCommentCountChange={(postId, newCount) => {
+          setPosts(prev => prev.map(p =>
+            p.id === postId ? { ...p, comment_count: newCount } : p
+          ));
+        }}
+      />
     </div>
   );
 };

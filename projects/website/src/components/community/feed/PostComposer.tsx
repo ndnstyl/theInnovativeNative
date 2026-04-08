@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { getValidToken } from '@/lib/auth-token';
 import { sanitizeHtml } from '@/lib/sanitize';
+
+const POST_COOLDOWN_MS = 10_000; // 10 seconds between posts
 import RichTextEditor from '@/components/community/shared/RichTextEditor';
 import type { JSONContent } from '@tiptap/react';
 
@@ -17,6 +19,7 @@ interface PostComposerProps {
 const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, onPostCreated }) => {
   const { session } = useAuth();
   const [expanded, setExpanded] = useState(false);
+  const lastPostTime = useRef<number>(0);
   const [body, setBody] = useState('');
   const [bodyHtml, setBodyHtml] = useState('');
   const [categoryId, setCategoryId] = useState('');
@@ -32,6 +35,14 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
     e.preventDefault();
     if (!session?.user?.id) return;
 
+    const now = Date.now();
+    const elapsed = now - lastPostTime.current;
+    if (elapsed < POST_COOLDOWN_MS) {
+      const remaining = Math.ceil((POST_COOLDOWN_MS - elapsed) / 1000);
+      setError(`Please wait ${remaining} seconds before posting again.`);
+      return;
+    }
+
     const token = getValidToken();
     if (!token) {
       setError('Session expired. Please sign in again.');
@@ -41,6 +52,10 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
     const sanitized = sanitizeHtml(bodyHtml);
     if (!sanitized.replace(/<[^>]*>/g, '').trim()) {
       setError('Post cannot be empty');
+      return;
+    }
+    if (sanitized.length > 50000) {
+      setError('Post is too long. Maximum 50,000 characters allowed.');
       return;
     }
     if (!categoryId) {
@@ -74,13 +89,19 @@ const PostComposer: React.FC<PostComposerProps> = ({ communityId, categories, on
         throw new Error(text || `HTTP ${res.status}`);
       }
 
+      lastPostTime.current = Date.now();
       setBody('');
       setBodyHtml('');
       setCategoryId('');
       setExpanded(false);
       onPostCreated();
     } catch (err: any) {
-      setError(err.message || 'Failed to create post');
+      const msg = err.message || '';
+      if (msg.includes('Rate limit exceeded') || msg.includes('54000')) {
+        setError('You\'re posting too quickly. Please wait a few minutes.');
+      } else {
+        setError(msg || 'Failed to create post');
+      }
     } finally {
       setSubmitting(false);
     }

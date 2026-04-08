@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
+import EmojiPickerButton from '@/components/community/feed/EmojiPickerButton';
 import type { JSONContent } from '@tiptap/react';
 
 interface RichTextEditorProps {
@@ -127,6 +128,8 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
           <button type="button" onClick={setLink} title="Link" className={editor.isActive('link') ? 'active' : ''}>
             <i className="fa-solid fa-link"></i>
           </button>
+          <span className="rich-text-editor__divider" />
+          <EmojiPickerButton editor={editor} />
         </div>
       )}
       <EditorContent editor={editor} className="rich-text-editor__content" />

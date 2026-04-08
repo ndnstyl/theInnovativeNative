@@ -1,131 +1,106 @@
 import { useState, useCallback } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { getValidToken } from '@/lib/auth-token';
 
-export function usePostActions(postId: string) {
-  const { supabaseClient, session } = useAuth();
-  const [isFollowing, setIsFollowing] = useState(false);
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+/** PATCH helper for post mutations — returns true on success, throws on failure */
+async function patchPost(postId: string, body: Record<string, unknown>, token: string): Promise<void> {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/posts?id=eq.${postId}`, {
+    method: 'PATCH',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal',
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+}
+
+interface UsePostActionsReturn {
+  pinPost: (postId: string) => Promise<boolean>;
+  unpinPost: (postId: string) => Promise<boolean>;
+  deletePost: (postId: string) => Promise<boolean>;
+  loading: boolean;
+  error: string | null;
+}
+
+/**
+ * Admin post actions hook.
+ * Uses direct REST PATCH — no Supabase JS client.
+ * Requires a valid auth token (admin/moderator role enforced by RLS).
+ */
+export function usePostActions(): UsePostActionsReturn {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const pinPost = useCallback(async (position: number): Promise<boolean> => {
-    if (!supabaseClient) return false;
-    setLoading(true);
-    try {
-      // Check count of pinned posts
-      const { count } = await supabaseClient
-        .from('posts')
-        .select('*', { count: 'exact', head: true })
-        .not('pinned_position', 'is', null);
-
-      if ((count || 0) >= 3) {
-        return false;
-      }
-
-      const { error } = await supabaseClient
-        .from('posts')
-        .update({ pinned_position: position })
-        .eq('id', postId);
-
-      return !error;
-    } finally {
-      setLoading(false);
-    }
-  }, [supabaseClient, postId]);
-
-  const unpinPost = useCallback(async (): Promise<boolean> => {
-    if (!supabaseClient) return false;
-    setLoading(true);
-    try {
-      const { error } = await supabaseClient
-        .from('posts')
-        .update({ pinned_position: null })
-        .eq('id', postId);
-      return !error;
-    } finally {
-      setLoading(false);
-    }
-  }, [supabaseClient, postId]);
-
-  const deletePost = useCallback(async (): Promise<boolean> => {
-    if (!supabaseClient) return false;
-    setLoading(true);
-    try {
-      const { error } = await supabaseClient
-        .from('posts')
-        .update({ deleted_at: new Date().toISOString() })
-        .eq('id', postId);
-      return !error;
-    } finally {
-      setLoading(false);
-    }
-  }, [supabaseClient, postId]);
-
-  const reportPost = useCallback(async (
-    reason: string,
-    description?: string
-  ): Promise<boolean> => {
-    if (!supabaseClient || !session?.user?.id) return false;
-    setLoading(true);
-    try {
-      const { data: community } = await supabaseClient
-        .from('communities')
-        .select('id')
-        .limit(1)
-        .single();
-
-      if (!community) return false;
-
-      const { error } = await supabaseClient
-        .from('reports')
-        .insert({
-          community_id: community.id,
-          reporter_id: session.user.id,
-          target_type: 'post',
-          target_id: postId,
-          reason,
-          description: description || null,
-        });
-
-      return !error;
-    } finally {
-      setLoading(false);
-    }
-  }, [supabaseClient, session, postId]);
-
-  const followPost = useCallback(async (): Promise<boolean> => {
-    if (!supabaseClient || !session?.user?.id) return false;
-    try {
-      const { error } = await supabaseClient
-        .from('post_follows')
-        .insert({ user_id: session.user.id, post_id: postId });
-      if (!error) setIsFollowing(true);
-      return !error;
-    } catch {
+  const pinPost = useCallback(async (postId: string): Promise<boolean> => {
+    const token = getValidToken();
+    if (!token) {
+      setError('Not authenticated');
       return false;
     }
-  }, [supabaseClient, session, postId]);
 
-  const unfollowPost = useCallback(async (): Promise<boolean> => {
-    if (!supabaseClient || !session?.user?.id) return false;
+    setLoading(true);
+    setError(null);
+
     try {
-      const { error } = await supabaseClient
-        .from('post_follows')
-        .delete()
-        .eq('user_id', session.user.id)
-        .eq('post_id', postId);
-      if (!error) setIsFollowing(false);
-      return !error;
-    } catch {
+      await patchPost(postId, { pinned_position: Date.now() }, token);
+      return true;
+    } catch (err: any) {
+      setError(err.message || 'Failed to pin post');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const unpinPost = useCallback(async (postId: string): Promise<boolean> => {
+    const token = getValidToken();
+    if (!token) {
+      setError('Not authenticated');
       return false;
     }
-  }, [supabaseClient, session, postId]);
 
-  const copyLink = useCallback(() => {
-    const url = `${window.location.origin}/community/posts/${postId}`;
-    navigator.clipboard.writeText(url);
-  }, [postId]);
+    setLoading(true);
+    setError(null);
 
-  return {
-    pinPost, unpinPost, deletePost, reportPost,
-    followPost, unfollowPost, isFollowing, copyLink, loading,
-  };
+    try {
+      await patchPost(postId, { pinned_position: null }, token);
+      return true;
+    } catch (err: any) {
+      setError(err.message || 'Failed to unpin post');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const deletePost = useCallback(async (postId: string): Promise<boolean> => {
+    const token = getValidToken();
+    if (!token) {
+      setError('Not authenticated');
+      return false;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await patchPost(postId, { deleted_at: new Date().toISOString() }, token);
+      return true;
+    } catch (err: any) {
+      setError(err.message || 'Failed to delete post');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { pinPost, unpinPost, deletePost, loading, error };
 }
