@@ -32,6 +32,18 @@ export const navItems: NavItem[] = [
     children: null,
   },
   {
+    label: "TrendPilot",
+    href: "/trendpilot",
+    isCta: false,
+    children: null,
+  },
+  {
+    label: "Resources",
+    href: "/resources",
+    isCta: false,
+    children: null,
+  },
+  {
     label: "Experience",
     href: "/professionalExperience",
     isCta: false,
