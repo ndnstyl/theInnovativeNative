@@ -181,5 +181,40 @@ Frontend change is built but **not yet deployed via rsync** — pending decision
 ## Status
 
 - **P0 form submission bug**: ✅ FIXED end-to-end (frontend payload + n8n v51 + Airtable accepting writes)
-- **Practice area dropdown**: ✅ FIXED in code, ⏳ pending redeploy
-- **Audience scope problem**: ⚠️ DECISION NEEDED (Path A/B/C)
+- **Practice area dropdown**: ✅ FIXED + redeployed + live
+- **Audience scope decision**: ✅ **PATH B APPROVED** by Mike 2026-04-09
+
+---
+
+## Mike's Decision: Path B (Two-Track System)
+
+**Decided 2026-04-09 by CEO directly**:
+
+1. **Keep PI content live and publish it as planned.** Days 15-28 ship on the original calendar. The content is high quality and PI is a valid secondary audience.
+2. **PI framing stays** — don't strip PI language from hub index, landing pages, or magnet copy. PI Firm Owners remain a valid sub-audience.
+3. **Spin up a new spec (037) for Criminal / Bankruptcy / Administrative Law** content as a parallel track with its own magnets, calendar, and publishing cadence.
+4. **Mix audiences as filler** when the primary Criminal/Bankruptcy/Admin track falls behind on content. PI posts can plug gaps rather than leaving a publish slot empty.
+5. **Hub index gets a light two-track framing** — acknowledges both audiences without deprioritizing either.
+
+This decision preserves ~50 hours of PI content work while unblocking the real primary audience. Nothing thrown away. No wasted effort.
+
+---
+
+## Path B Execution (in progress this session)
+
+| Action | Status |
+|--------|--------|
+| PI content stays live | ✅ Confirmed (no changes needed) |
+| Days 15-16 publishing unparked | ✅ Ready to hand-publish April 15-16 as planned |
+| Hub index light two-track framing | ⏳ In progress this session |
+| Spec 037 scaffold (Criminal/Bankruptcy/Admin) | ⏳ In progress this session |
+| Tier 2/3 PI content continues rolling | ✅ No change — Days 17-28 rewrites proceed as planned |
+| New 037 track can be built in parallel | ⏳ Will require separate Builder session(s) with fresh audience research |
+
+---
+
+## Process learning (for the self-check memory)
+
+I worked from the existing `002-stan-store-lawfirm-funnel` project files without asking "is the audience still PI?" That was a missed sanity check. Going forward, **every new spec should explicitly answer "who is the primary audience?" in the first paragraph of spec.md, even if the spec inherits from an older project directory.**
+
+This has been saved to memory as a new feedback entry so future sessions verify audience alignment before assuming.

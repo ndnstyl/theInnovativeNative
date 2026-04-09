@@ -80,15 +80,15 @@ const ResourcesHub = () => {
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
-        <title>Resources for PI Firm Owners | The Innovative Native</title>
+        <title>Resources for Law Firm Owners | The Innovative Native</title>
         <meta
           name="description"
-          content="Free deliverables for Personal Injury firm owners. Tool matrices, ROI calculators, governance templates, and self-audit frameworks. Built by an AI systems operator who works with law firms."
+          content="Free deliverables for Criminal Defense, Bankruptcy, Administrative Law, and Personal Injury firms. Tool matrices, ROI calculators, governance templates, and self-audit frameworks. Built by an AI systems operator who works with law firms."
         />
-        <meta property="og:title" content="Resources for PI Firm Owners" />
+        <meta property="og:title" content="Resources for Law Firm Owners" />
         <meta
           property="og:description"
-          content="Free tool matrices, ROI calculators, governance templates, and self-audit frameworks for PI firm owners."
+          content="Free tool matrices, ROI calculators, governance templates, and self-audit frameworks for Criminal Defense, Bankruptcy, Administrative Law, and PI firm owners."
         />
         <meta property="og:type" content="website" />
         <meta
@@ -122,20 +122,21 @@ const ResourcesHub = () => {
                         lineHeight: 1.15,
                       }}
                     >
-                      Resources for PI Firm Owners
+                      Resources for Law Firm Owners
                     </h1>
                     <p
                       style={{
                         fontSize: 'clamp(16px, 2vw, 18px)',
                         color: '#8899aa',
-                        maxWidth: '640px',
+                        maxWidth: '680px',
                         margin: '0 auto',
                         lineHeight: 1.6,
                       }}
                     >
-                      Free tool matrices, ROI calculators, governance templates, and
-                      self-audit frameworks. Built by an AI systems operator who
-                      works with Personal Injury law firms. No fluff. No upsell.
+                      Free tool matrices, ROI calculators, governance templates,
+                      and self-audit frameworks. Built by an AI systems operator
+                      who works with Criminal Defense, Bankruptcy, Administrative
+                      Law, and Personal Injury firms. No fluff. No upsell.
                     </p>
                   </div>
 
@@ -285,9 +286,10 @@ const ResourcesHub = () => {
                       lineHeight: 1.5,
                     }}
                   >
-                    More resources ship during Week 3 and Week 4 of the April 2026
-                    content schedule. Subscribe to the Legal AI Briefing to get
-                    notified when new deliverables go live.
+                    New resources ship weekly. Criminal Defense, Bankruptcy, and
+                    Administrative Law deliverables coming in May. Subscribe to
+                    the Legal AI Briefing to get notified when new tools and
+                    frameworks go live.
                   </p>
                 </div>
               </div>
