@@ -29,17 +29,20 @@
     "practice_area": {
       "type": ["string", "null"],
       "enum": [
+        "Criminal Defense",
+        "Bankruptcy",
+        "Administrative Law",
         "Personal Injury",
-        "Medical Malpractice",
-        "Auto Accident",
-        "Workers Compensation",
-        "Wrongful Death",
-        "Product Liability",
-        "Premises Liability",
+        "Family Law",
+        "Estate Planning",
+        "Business Law",
+        "Immigration",
+        "Real Estate",
+        "Tax Law",
         "Other",
         null
       ],
-      "description": "Practice area dropdown value (optional). Mapped from React state `practiceArea`."
+      "description": "Practice area dropdown value (optional). Mapped from React state `practiceArea`. Updated 2026-04-09 to broaden beyond PI focus per audience pivot — primary targets: Criminal Defense, Bankruptcy, Administrative Law."
     },
     "cta_source": {
       "type": "string",

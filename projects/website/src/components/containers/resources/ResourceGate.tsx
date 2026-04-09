@@ -7,13 +7,16 @@ const WEBHOOK_URL = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL || '';
 const MIN_FILL_TIME_MS = 2000;
 
 const PRACTICE_AREAS = [
+  'Criminal Defense',
+  'Bankruptcy',
+  'Administrative Law',
   'Personal Injury',
-  'Medical Malpractice',
-  'Auto Accident',
-  'Workers Compensation',
-  'Wrongful Death',
-  'Product Liability',
-  'Premises Liability',
+  'Family Law',
+  'Estate Planning',
+  'Business Law',
+  'Immigration',
+  'Real Estate',
+  'Tax Law',
   'Other',
 ];
 
