@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theinnovativenative.com/schemas/lead-form-submission.json",
+  "title": "Lead Form Submission",
+  "description": "JSON payload POSTed to the n8n cerebro-lead webhook (workflow 76ZmsMqUYMsr397j) by ResourceGate and NewsletterSignup components. Field names are snake_case to match the existing workflow's field mapping (see qa/n8n-cerebro-lead-behavior.md). The frontend may use camelCase in React state but MUST map to this wire format at POST time.",
+  "type": "object",
+  "required": ["name", "email", "cta_source"],
+  "additionalProperties": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Reader's first name (or full name if provided), trimmed. Mapped from React state `firstName`."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 5,
+      "maxLength": 254,
+      "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "description": "Valid email address."
+    },
+    "firm_name": {
+      "type": ["string", "null"],
+      "maxLength": 200,
+      "description": "Law firm name (optional). Mapped from React state `firmName`. Null or trimmed string."
+    },
+    "practice_area": {
+      "type": ["string", "null"],
+      "enum": [
+        "Personal Injury",
+        "Medical Malpractice",
+        "Auto Accident",
+        "Workers Compensation",
+        "Wrongful Death",
+        "Product Liability",
+        "Premises Liability",
+        "Other",
+        null
+      ],
+      "description": "Practice area dropdown value (optional). Mapped from React state `practiceArea`."
+    },
+    "cta_source": {
+      "type": "string",
+      "description": "Slug of the lead magnet being downloaded, or 'newsletter-signup' for standalone newsletter subscriptions, or 'resource-page-newsletter-optin' for newsletter opt-ins from a resource download success state. Mapped from React state `leadMagnetId`. The n8n workflow stores this in the Airtable Notes field as 'CTA: <value>'.",
+      "enum": [
+        "442-intake-math",
+        "5-ai-tools-pi",
+        "ai-governance-template-pi",
+        "heppner-one-pager",
+        "ai-tool-risk-chart",
+        "insurance-ai-colossus",
+        "demand-letter-matrix",
+        "rag-vs-wrapper-checklist",
+        "5-pi-automations-guide",
+        "cms-dashboard-guide",
+        "discovery-ai-overview",
+        "governance-audit-framework",
+        "5-pattern-audit-workbook",
+        "newsletter-signup",
+        "resource-page-newsletter-optin"
+      ]
+    },
+    "website": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "HONEYPOT field. Must be empty for legitimate submissions. The n8n Validate Request node silently drops submissions with a non-empty value. HTML form renders this as a hidden input that humans won't fill but bots typically will."
+    },
+    "phone": {
+      "type": ["string", "null"],
+      "description": "Optional. Not currently captured by ResourceGate but reserved for future expansion — the n8n workflow reads it if present."
+    },
+    "utm_source": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Forwarded UTM source parameter."
+    },
+    "utm_medium": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Forwarded UTM medium parameter."
+    },
+    "utm_campaign": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Forwarded UTM campaign parameter."
+    },
+    "utm_content": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Forwarded UTM content parameter."
+    },
+    "utm_term": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Forwarded UTM term parameter."
+    },
+    "fbclid": {
+      "type": "string",
+      "description": "Facebook click ID."
+    },
+    "gclid": {
+      "type": "string",
+      "description": "Google click ID."
+    },
+    "li_fat_id": {
+      "type": "string",
+      "description": "LinkedIn click ID."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the submission."
+    }
+  },
+  "examples": [
+    {
+      "name": "Jane",
+      "email": "jane@smithlaw.com",
+      "firm_name": "Smith & Associates",
+      "practice_area": "Personal Injury",
+      "cta_source": "demand-letter-matrix",
+      "website": "",
+      "utm_source": "linkedin",
+      "utm_medium": "organic",
+      "utm_campaign": "week3-day16",
+      "timestamp": "2026-04-16T14:32:18.421Z"
+    },
+    {
+      "name": "Jane",
+      "email": "jane@smithlaw.com",
+      "firm_name": null,
+      "practice_area": null,
+      "cta_source": "resource-page-newsletter-optin",
+      "website": "",
+      "utm_source": "linkedin",
+      "utm_campaign": "week3-day16",
+      "timestamp": "2026-04-16T14:32:24.118Z"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theinnovativenative.com/schemas/vanity-redirect-map.json",
+  "title": "Vanity Redirect Map",
+  "description": "Slug-to-destination mapping for the buildmytribe.ai branded short-URL Cloudflare Worker. This file is the single source of truth for all vanity URLs referenced in weeks 3 and 4 post content. SECURITY: Destinations are hardcoded. The Cloudflare Worker MUST NOT accept any user-supplied URL as a destination under any circumstances. Unknown slugs (not present in this file) MUST return HTTP 404 — no pass-through, no default destination, no fallback redirect. This prevents the open-redirect attack class.",
+  "type": "object",
+  "required": ["root", "redirects"],
+  "additionalProperties": false,
+  "properties": {
+    "root": {
+      "type": "object",
+      "description": "Redirect for the bare domain (buildmytribe.ai/).",
+      "required": ["destination", "status", "preserve_query"],
+      "additionalProperties": false,
+      "properties": {
+        "destination": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "Full HTTPS URL."
+        },
+        "status": {
+          "type": "integer",
+          "enum": [301, 302],
+          "default": 301
+        },
+        "preserve_query": {
+          "type": "boolean",
+          "default": true,
+          "description": "When true, append the incoming query string to the destination URL."
+        }
+      }
+    },
+    "redirects": {
+      "type": "array",
+      "description": "Array of slug-to-destination mappings. Each slug must be unique.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "required": ["slug", "destination", "status", "preserve_query"],
+        "additionalProperties": false,
+        "properties": {
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "minLength": 2,
+            "maxLength": 40,
+            "description": "Kebab-case short slug (no leading slash)."
+          },
+          "destination": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://theinnovativenative\\.com/",
+            "description": "Full HTTPS URL on theinnovativenative.com."
+          },
+          "status": {
+            "type": "integer",
+            "enum": [301, 302],
+            "default": 301,
+            "description": "HTTP redirect status. Use 301 for permanent, 302 for temporary."
+          },
+          "preserve_query": {
+            "type": "boolean",
+            "default": true,
+            "description": "When true, append the incoming query string to the destination URL."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional human-readable note about why this slug exists."
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "root": {
+        "destination": "https://theinnovativenative.com/resources",
+        "status": 301,
+        "preserve_query": true
+      },
+      "redirects": [
+        {
+          "slug": "math",
+          "destination": "https://theinnovativenative.com/resources/442-intake-math",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "The $442 Intake Math — Week 2 content, still in active rotation"
+        },
+        {
+          "slug": "tools",
+          "destination": "https://theinnovativenative.com/resources/5-ai-tools-pi",
+          "status": 301,
+          "preserve_query": true
+        },
+        {
+          "slug": "policy",
+          "destination": "https://theinnovativenative.com/resources/ai-governance-template-pi",
+          "status": 301,
+          "preserve_query": true
+        },
+        {
+          "slug": "heppner",
+          "destination": "https://theinnovativenative.com/resources/heppner-one-pager",
+          "status": 301,
+          "preserve_query": true
+        },
+        {
+          "slug": "risk",
+          "destination": "https://theinnovativenative.com/resources/ai-tool-risk-chart",
+          "status": 301,
+          "preserve_query": true
+        },
+        {
+          "slug": "colossus",
+          "destination": "https://theinnovativenative.com/resources/insurance-ai-colossus",
+          "status": 301,
+          "preserve_query": true
+        },
+        {
+          "slug": "demand",
+          "destination": "https://theinnovativenative.com/resources/demand-letter-matrix",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 3 Day 16 upgrade CTA"
+        },
+        {
+          "slug": "wrapper",
+          "destination": "https://theinnovativenative.com/resources/rag-vs-wrapper-checklist",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 3 Day 17 upgrade CTA"
+        },
+        {
+          "slug": "automate",
+          "destination": "https://theinnovativenative.com/resources/5-pi-automations-guide",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 3 Day 18 upgrade CTA"
+        },
+        {
+          "slug": "cms",
+          "destination": "https://theinnovativenative.com/resources/cms-dashboard-guide",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 3 Day 19 upgrade CTA"
+        },
+        {
+          "slug": "discovery",
+          "destination": "https://theinnovativenative.com/resources/discovery-ai-overview",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 3 Day 20 upgrade CTA"
+        },
+        {
+          "slug": "cost",
+          "destination": "https://theinnovativenative.com/resources/governance-audit-framework",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 4 Day 25 upgrade CTA"
+        },
+        {
+          "slug": "audit",
+          "destination": "https://theinnovativenative.com/resources/5-pattern-audit-workbook",
+          "status": 301,
+          "preserve_query": true,
+          "notes": "Week 4 Day 26 upgrade CTA"
+        }
+      ]
+    }
+  ]
+}

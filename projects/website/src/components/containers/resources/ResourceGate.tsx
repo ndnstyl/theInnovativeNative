@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const WEBHOOK_URL = 'https://n8n.srv948776.hstgr.cloud/webhook/cerebro-lead';
+const WEBHOOK_URL = process.env.NEXT_PUBLIC_LEAD_WEBHOOK_URL || '';
+
+// Minimum time a legit user spends filling the form (milliseconds).
+// Below this → silent drop (bot heuristic).
+const MIN_FILL_TIME_MS = 2000;
 
 const PRACTICE_AREAS = [
   'Personal Injury',
@@ -20,6 +24,16 @@ interface ResourceGateProps {
   leadMagnetId: string;
   downloadUrl: string;
   heroImage?: string;
+  /**
+   * When true, render the newsletter opt-in checkbox in the success state.
+   * Defaults to true. Set to false only if a specific page should suppress
+   * the offer (no current case — all pages enable it).
+   */
+  enableNewsletterOptIn?: boolean;
+  /**
+   * Optional override for the newsletter opt-in label.
+   */
+  newsletterOptInLabel?: string;
 }
 
 interface FormData {
@@ -27,6 +41,8 @@ interface FormData {
   email: string;
   firmName: string;
   practiceArea: string;
+  // honeypot — must stay empty; bots typically auto-fill
+  website: string;
 }
 
 interface FieldErrors {
@@ -52,6 +68,8 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
   bullets,
   leadMagnetId,
   downloadUrl,
+  enableNewsletterOptIn = true,
+  newsletterOptInLabel = 'Send me the weekly Legal AI Briefing. No spam, unsubscribe anytime.',
 }) => {
   const [unlocked, setUnlocked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -62,19 +80,48 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
     email: '',
     firmName: '',
     practiceArea: '',
+    website: '',
   });
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
+  const [newsletterStatus, setNewsletterStatus] = useState<
+    'idle' | 'submitted' | 'error'
+  >('idle');
+
+  // Download button ref for focus management after unlock
+  const downloadRef = useRef<HTMLAnchorElement>(null);
+
+  // Page load timestamp for bot heuristic
+  const pageLoadedAtRef = useRef<number>(
+    typeof window !== 'undefined' ? Date.now() : 0
+  );
 
   const storageKey = `tin_resource_downloaded_${leadMagnetId}`;
+  const newsletterKey = `tin_resource_newsletter_optin_${leadMagnetId}`;
 
-  // Check if already unlocked
+  // Check if already unlocked and if newsletter opt-in already recorded
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(storageKey);
       if (stored === 'true') {
         setUnlocked(true);
       }
+      const newsletterStored = localStorage.getItem(newsletterKey);
+      if (newsletterStored === 'true') {
+        setNewsletterStatus('submitted');
+      }
     }
-  }, [storageKey]);
+  }, [storageKey, newsletterKey]);
+
+  // Focus the download button when the success state appears (a11y: FR-051)
+  useEffect(() => {
+    if (unlocked && downloadRef.current) {
+      // Slight delay so the DOM is settled and the transition is visible
+      const t = window.setTimeout(() => {
+        downloadRef.current?.focus();
+      }, 100);
+      return () => window.clearTimeout(t);
+    }
+  }, [unlocked]);
 
   const validateEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -118,16 +165,36 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
 
     if (!validate()) return;
 
+    if (!WEBHOOK_URL) {
+      setError('Form submission is temporarily unavailable. Please try again later.');
+      return;
+    }
+
+    // Bot heuristic: form filled impossibly fast → silent drop.
+    // Mimic success so bots don't iterate, but do NOT POST.
+    const elapsed = Date.now() - pageLoadedAtRef.current;
+    if (elapsed < MIN_FILL_TIME_MS) {
+      // eslint-disable-next-line no-console
+      console.warn('[ResourceGate] form submitted too fast, silently dropped');
+      localStorage.setItem(storageKey, 'true');
+      setUnlocked(true);
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const payload = {
-        firstName: formData.firstName.trim(),
+      // Wire format is snake_case to match the n8n cerebro-lead workflow's
+      // field mapping (see specs/036-pi-content-value-system/qa/n8n-cerebro-lead-behavior.md).
+      // Prior to 036 this sent camelCase which the workflow dropped silently,
+      // producing empty Name/Company/Notes fields in Airtable.
+      const payload: Record<string, string | null> = {
+        name: formData.firstName.trim(),
         email: formData.email.trim(),
-        firmName: formData.firmName.trim() || null,
-        practiceArea: formData.practiceArea || null,
-        leadMagnet: leadMagnetId,
-        source: 'resource-page',
+        firm_name: formData.firmName.trim() || null,
+        practice_area: formData.practiceArea || null,
+        cta_source: leadMagnetId,
+        website: formData.website, // honeypot — server silent-drops if non-empty
         ...getUtmParams(),
         timestamp: new Date().toISOString(),
       };
@@ -148,6 +215,51 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
       setError('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Newsletter opt-in submission — fire-and-forget with keepalive so the POST
+  // survives page navigation. Silently handled; never blocks the download.
+  const handleNewsletterOptIn = async (email: string, firstName: string) => {
+    if (!WEBHOOK_URL) return;
+    if (newsletterStatus === 'submitted') return;
+
+    try {
+      const payload: Record<string, string | null> = {
+        name: firstName.trim(),
+        email: email.trim(),
+        firm_name: formData.firmName.trim() || null,
+        practice_area: formData.practiceArea || null,
+        cta_source: 'resource-page-newsletter-optin',
+        website: '',
+        ...getUtmParams(),
+        timestamp: new Date().toISOString(),
+      };
+
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+
+      if (res.ok) {
+        localStorage.setItem(newsletterKey, 'true');
+        setNewsletterStatus('submitted');
+      } else {
+        setNewsletterStatus('error');
+      }
+    } catch {
+      setNewsletterStatus('error');
+    }
+  };
+
+  const onNewsletterCheckboxChange = (checked: boolean) => {
+    setNewsletterOptIn(checked);
+    if (checked && formData.email && formData.firstName) {
+      // Fire the secondary POST immediately so if the user closes the tab
+      // right after clicking, the opt-in still persists.
+      handleNewsletterOptIn(formData.email, formData.firstName);
     }
   };
 
@@ -188,6 +300,7 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
 
   const goldBtnStyle: React.CSSProperties = {
     width: '100%',
+    minHeight: '48px', // a11y: WCAG 2.1 touch target (FR-044)
     padding: '14px 24px',
     backgroundColor: colors.accent,
     color: '#0a0f1a',
@@ -323,6 +436,7 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
                         Click below to download your copy.
                       </p>
                       <a
+                        ref={downloadRef}
                         href={downloadUrl}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -330,11 +444,96 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
                         style={{
                           ...goldBtnStyle,
                           textDecoration: 'none',
+                          minHeight: '44px', // a11y: WCAG touch target (FR-044)
                         }}
                       >
-                        <i className="fa-solid fa-download" />
+                        <i className="fa-solid fa-download" aria-hidden="true" />
                         Download Now
                       </a>
+
+                      {enableNewsletterOptIn && newsletterStatus !== 'submitted' && (
+                        <div
+                          style={{
+                            marginTop: '28px',
+                            paddingTop: '20px',
+                            borderTop: `1px solid ${colors.border}`,
+                          }}
+                        >
+                          <label
+                            htmlFor="rg-newsletter-optin"
+                            style={{
+                              display: 'flex',
+                              alignItems: 'flex-start',
+                              gap: '10px',
+                              cursor: 'pointer',
+                              color: colors.text,
+                              fontSize: '14px',
+                              lineHeight: 1.5,
+                              minHeight: '44px', // a11y touch target (FR-044)
+                            }}
+                          >
+                            <input
+                              id="rg-newsletter-optin"
+                              type="checkbox"
+                              checked={newsletterOptIn}
+                              onChange={(e) =>
+                                onNewsletterCheckboxChange(e.target.checked)
+                              }
+                              style={{
+                                marginTop: '3px',
+                                width: '18px',
+                                height: '18px',
+                                accentColor: colors.accent,
+                                cursor: 'pointer',
+                                flexShrink: 0,
+                              }}
+                            />
+                            <span>{newsletterOptInLabel}</span>
+                          </label>
+                          {newsletterStatus === 'error' && (
+                            <p
+                              role="alert"
+                              aria-live="polite"
+                              style={{
+                                color: colors.error,
+                                fontSize: '13px',
+                                marginTop: '6px',
+                                marginBottom: 0,
+                              }}
+                            >
+                              Couldn&apos;t save your preference. Try{' '}
+                              <a
+                                href="/newsletter"
+                                style={{ color: colors.accent }}
+                              >
+                                /newsletter
+                              </a>{' '}
+                              directly.
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {enableNewsletterOptIn && newsletterStatus === 'submitted' && (
+                        <p
+                          style={{
+                            marginTop: '20px',
+                            paddingTop: '16px',
+                            borderTop: `1px solid ${colors.border}`,
+                            color: colors.success,
+                            fontSize: '13px',
+                            textAlign: 'center',
+                            marginBottom: 0,
+                          }}
+                        >
+                          <i
+                            className="fa-solid fa-check"
+                            aria-hidden="true"
+                            style={{ marginRight: '6px' }}
+                          />
+                          You&apos;re on the Legal AI Briefing list. First issue arrives tomorrow morning.
+                        </p>
+                      )}
                     </div>
                   ) : (
                     <>
@@ -359,31 +558,60 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
                         Enter your details below.
                       </p>
 
-                      {error && (
-                        <div
-                          style={{
-                            backgroundColor: 'rgba(229, 83, 75, 0.12)',
-                            border: `1px solid ${colors.error}`,
-                            borderRadius: '8px',
-                            padding: '10px 14px',
-                            color: colors.error,
-                            fontSize: '14px',
-                            marginBottom: '18px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                          }}
-                        >
-                          <i className="fa-solid fa-exclamation-circle" />
-                          <span>{error}</span>
-                        </div>
-                      )}
+                      <div
+                        role="alert"
+                        aria-live="polite"
+                        aria-atomic="true"
+                      >
+                        {error && (
+                          <div
+                            style={{
+                              backgroundColor: 'rgba(229, 83, 75, 0.12)',
+                              border: `1px solid ${colors.error}`,
+                              borderRadius: '8px',
+                              padding: '10px 14px',
+                              color: colors.error,
+                              fontSize: '14px',
+                              marginBottom: '18px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                            }}
+                          >
+                            <i
+                              className="fa-solid fa-exclamation-circle"
+                              aria-hidden="true"
+                            />
+                            <span>{error}</span>
+                          </div>
+                        )}
+                      </div>
 
                       <form onSubmit={handleSubmit} noValidate>
+                        {/* Honeypot — hidden from users, bots autofill.
+                            Server-side check in n8n cerebro-lead workflow
+                            silently drops submissions with non-empty value. */}
+                        <input
+                          type="text"
+                          name="website"
+                          value={formData.website}
+                          onChange={(e) => updateField('website', e.target.value)}
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
+                          style={{
+                            position: 'absolute',
+                            left: '-9999px',
+                            width: '1px',
+                            height: '1px',
+                            opacity: 0,
+                            pointerEvents: 'none',
+                          }}
+                        />
                         {/* First Name */}
                         <div style={formGroupStyle}>
                           <label htmlFor="rg-firstName" style={labelStyle}>
-                            First Name <span style={{ color: colors.error }}>*</span>
+                            First Name <span style={{ color: colors.error }} aria-label="required">*</span>
                           </label>
                           <input
                             className="rg-input"
@@ -395,30 +623,57 @@ const ResourceGate: React.FC<ResourceGateProps> = ({
                             style={fieldErrors.firstName ? inputErrorStyle : inputStyle}
                             disabled={loading}
                             autoComplete="given-name"
+                            required
+                            aria-required="true"
+                            aria-invalid={fieldErrors.firstName ? 'true' : 'false'}
+                            aria-describedby={
+                              fieldErrors.firstName ? 'rg-firstName-error' : undefined
+                            }
                           />
                           {fieldErrors.firstName && (
-                            <div style={fieldErrorMsgStyle}>{fieldErrors.firstName}</div>
+                            <div
+                              id="rg-firstName-error"
+                              role="alert"
+                              aria-live="polite"
+                              style={fieldErrorMsgStyle}
+                            >
+                              {fieldErrors.firstName}
+                            </div>
                           )}
                         </div>
 
                         {/* Email */}
                         <div style={formGroupStyle}>
                           <label htmlFor="rg-email" style={labelStyle}>
-                            Email <span style={{ color: colors.error }}>*</span>
+                            Email <span style={{ color: colors.error }} aria-label="required">*</span>
                           </label>
                           <input
                             className="rg-input"
                             id="rg-email"
                             type="email"
+                            inputMode="email"
                             value={formData.email}
                             onChange={(e) => updateField('email', e.target.value)}
                             placeholder="jane@smithlaw.com"
                             style={fieldErrors.email ? inputErrorStyle : inputStyle}
                             disabled={loading}
                             autoComplete="email"
+                            required
+                            aria-required="true"
+                            aria-invalid={fieldErrors.email ? 'true' : 'false'}
+                            aria-describedby={
+                              fieldErrors.email ? 'rg-email-error' : undefined
+                            }
                           />
                           {fieldErrors.email && (
-                            <div style={fieldErrorMsgStyle}>{fieldErrors.email}</div>
+                            <div
+                              id="rg-email-error"
+                              role="alert"
+                              aria-live="polite"
+                              style={fieldErrorMsgStyle}
+                            >
+                              {fieldErrors.email}
+                            </div>
                           )}
                         </div>
 
