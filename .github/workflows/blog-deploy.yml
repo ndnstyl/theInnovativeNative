@@ -1,0 +1,83 @@
+name: Blog Auto-Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/website/content/blog/posts/**'
+      - 'projects/website/src/**'
+      - 'projects/website/package.json'
+      - '.github/workflows/blog-deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: blog-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: projects/website
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: projects/website/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Setup SSH
+        env:
+          A2_SSH_KEY: ${{ secrets.A2_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$A2_SSH_KEY" > ~/.ssh/a2hosting_tin
+          chmod 600 ~/.ssh/a2hosting_tin
+          ssh-keyscan -p 7822 -H 75.98.175.76 >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes" \
+            --exclude='theinnovativenative-site.zip' \
+            --exclude='resumes/' --exclude='videos/' --exclude='n8n-templates/' \
+            out/ \
+            delikate@75.98.175.76:~/theinnovativenative.com/
+
+      - name: Fix directory index files
+        run: |
+          ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes delikate@75.98.175.76 \
+            "cd ~/theinnovativenative.com && for name in blog classroom community members messages templates admin checklist checkout auth; do [ -f \${name}.html ] && [ -d \${name} ] && cp \${name}.html \${name}/index.html 2>/dev/null; done; true"
+
+      - name: Write heartbeat (success)
+        if: success()
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: |
+          curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
+            -H "Authorization: Bearer $AIRTABLE_PAT" \
+            -H "Content-Type: application/json" \
+            -d "{\"records\":[{\"fields\":{\"workflow_name\":\"github-actions.blog-deploy\",\"last_run_at\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\",\"status\":\"success\",\"notes\":\"Deployed commit $GITHUB_SHA\",\"run_id\":\"$GITHUB_RUN_ID\",\"expected_interval_minutes\":0,\"source\":\"github-actions\"}}]}"
+
+      - name: Write heartbeat (fail)
+        if: failure()
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: |
+          curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
+            -H "Authorization: Bearer $AIRTABLE_PAT" \
+            -H "Content-Type: application/json" \
+            -d "{\"records\":[{\"fields\":{\"workflow_name\":\"github-actions.blog-deploy\",\"last_run_at\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\",\"status\":\"fail\",\"notes\":\"Failed run $GITHUB_RUN_ID on commit $GITHUB_SHA\",\"run_id\":\"$GITHUB_RUN_ID\",\"expected_interval_minutes\":0,\"source\":\"github-actions\"}}]}"
