@@ -7,6 +7,7 @@ Quarters:
 - Q4 2025: Oct 1 - Dec 31, 2025 (mostly Achieved)
 - Q1 2026: Jan 1 - Mar 31, 2026 (in progress)
 """
+import os
 
 import requests
 import json
@@ -15,7 +16,7 @@ import time
 from datetime import datetime
 
 AIRTABLE_BASE_ID = "appTO7OCRB2XbAlak"
-AIRTABLE_API_KEY = "***REDACTED***"
+AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 OKRS_TABLE = "tblqVcKaHXd4w8Nzw"
 
 # Agent IDs for owners

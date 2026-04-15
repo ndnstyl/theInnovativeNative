@@ -2,13 +2,14 @@
 """
 Fix and create remaining Contacts for external client companies.
 """
+import os
 
 import requests
 import json
 import time
 
 AIRTABLE_BASE_ID = "appTO7OCRB2XbAlak"
-AIRTABLE_API_KEY = "***REDACTED***"
+AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 CONTACTS_TABLE = "tblg49y1OCUhyFmlH"
 
 # Valid industry options: Law Practice, Legal Services, LegalTech, Corporate Law, Other

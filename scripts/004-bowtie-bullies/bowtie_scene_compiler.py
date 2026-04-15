@@ -10,6 +10,7 @@ Usage:
     python bowtie_scene_compiler.py compile  <pipeline.json> [--dry-run] [--format 9:16]
     python bowtie_scene_compiler.py deploy   <pipeline.json> [--append] [--format 9:16]
 """
+import os
 
 import json
 import re
@@ -23,7 +24,7 @@ from pathlib import Path
 # ── Airtable Config (same base/table as bowtie_prompt_reviser.py) ──
 BASE_ID = "appTO7OCRB2XbAlak"
 TABLE_ID = "tblHsBzmt8Skvq2jX"
-API_TOKEN = "***REDACTED***"
+API_TOKEN = os.environ["AIRTABLE_API_KEY"]
 API_BASE = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_ID}"
 
 # ── Structured prompt slot constants (ported from n8n Code node JS) ──

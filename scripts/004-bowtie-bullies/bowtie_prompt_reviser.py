@@ -25,7 +25,7 @@ import urllib.error
 
 BASE_ID = "appTO7OCRB2XbAlak"
 TABLE_ID = "tblHsBzmt8Skvq2jX"
-API_TOKEN = "***REDACTED***"
+API_TOKEN = os.environ["AIRTABLE_API_KEY"]
 API_BASE = f"https://api.airtable.com/v0/{BASE_ID}/{TABLE_ID}"
 
 

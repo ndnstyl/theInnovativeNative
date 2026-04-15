@@ -2,6 +2,7 @@
 """
 Create realistic interactions for all contacts over 90 days.
 """
+import os
 
 import requests
 import json
@@ -10,7 +11,7 @@ import random
 from datetime import datetime, timedelta
 
 AIRTABLE_BASE_ID = "appTO7OCRB2XbAlak"
-AIRTABLE_API_KEY = "***REDACTED***"
+AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 INTERACTIONS_TABLE = "tblgHSyLh8oW0tNfj"
 
 # All contact IDs from the Contacts table

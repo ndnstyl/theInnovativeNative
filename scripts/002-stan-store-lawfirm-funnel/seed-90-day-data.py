@@ -13,6 +13,7 @@ Projects Weekly Hours (based on complexity):
 - Medium complexity: 6-8 hrs/week
 - Low complexity (internal): 4 hrs/week
 """
+import os
 
 import requests
 import json
@@ -26,7 +27,7 @@ import time
 # =============================================================================
 
 AIRTABLE_BASE_ID = "appTO7OCRB2XbAlak"
-AIRTABLE_API_KEY = "***REDACTED***"
+AIRTABLE_API_KEY = os.environ["AIRTABLE_API_KEY"]
 
 # Table IDs
 TABLES = {

@@ -131,7 +131,7 @@
             },
             {
               "name": "api_key",
-              "value": "5f5a7f2d6ed0e7cf427d31b3df0e26675584ead6fc44283a6d05960618051880"
+              "value": "__REDACTED_TOKEN__"
             }
           ]
         },
@@ -1164,7 +1164,7 @@
   "versionId": "efe844b4-37b2-4d8f-898e-a1860b826fad",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "878c8a268d3c6b42c507f9bb86e6dbbd67a834dfde27335ae67b0b9619e1c7bc"
+    "instanceId": "__REDACTED_TOKEN__"
   },
   "id": "brKB4Eu4nY1Fz4KT",
   "tags": [

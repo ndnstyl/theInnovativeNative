@@ -5,6 +5,7 @@ Seeds EP-001 Victory Lap record.
 
 Usage: python scripts/create_airtable_tables.py
 """
+import os
 
 import json
 import sys
@@ -13,7 +14,7 @@ import urllib.request
 import urllib.error
 
 BASE_ID = "appTO7OCRB2XbAlak"
-API_TOKEN = "***REDACTED***"
+API_TOKEN = os.environ["AIRTABLE_API_KEY"]
 API_URL = f"https://api.airtable.com/v0/meta/bases/{BASE_ID}/tables"
 
 

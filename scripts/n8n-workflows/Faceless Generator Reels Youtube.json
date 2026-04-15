@@ -243,7 +243,7 @@
           "parameters": [
             {
               "name": "xi-api-key",
-              "value": "***REDACTED***"
+              "value": "__REDACTED_TOKEN__"
             }
           ]
         },
@@ -1515,7 +1515,7 @@
           "parameters": [
             {
               "name": "xi-api-key",
-              "value": "***REDACTED***"
+              "value": "__REDACTED_TOKEN__"
             }
           ]
         },

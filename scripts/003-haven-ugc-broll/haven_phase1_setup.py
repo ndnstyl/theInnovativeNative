@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Haven UGC B-Roll Phase 1 Setup - Tasks T001, T002, T004, T005, T006"""
+import os
 
 import urllib.request
 import json
@@ -7,7 +8,7 @@ import ssl
 
 API_KEY = '***REDACTED***'
 N8N_BASE = 'https://n8n.srv948776.hstgr.cloud'
-AIRTABLE_TOKEN = '***REDACTED***'
+AIRTABLE_TOKEN = os.environ["AIRTABLE_API_KEY"]
 AIRTABLE_BASE = 'appTO7OCRB2XbAlak'
 TASKS_TABLE = 'tbliXF3imV0uFxJSB'
 TIME_TABLE = 'tbl4FrwRqV02j2TSK'
