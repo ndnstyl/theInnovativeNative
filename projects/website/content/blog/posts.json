@@ -1,31 +1,12 @@
 [
   {
-    "id": 10,
-    "title": "Proven AI Successes: 5+ Case Studies of AI in Law Firms",
-    "slug": "proven-ai-law-firm-case-studies",
-    "date": "2026-02-01T17:11:40.000Z",
-    "dateFormatted": "February 1, 2026",
-    "author": "Mike Soto",
-    "excerpt": "/* General styling for non-heading text elements */ p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } /*...",
-    "categories": [
-      "Artificial Intelligence",
-      "Law Firms"
-    ],
-    "tags": [
-      "law firms",
-      "lawyers"
-    ],
-    "readingTime": 16,
-    "originalUrl": "https://theinnovativenative.com/proven-ai-law-firm-case-studies/"
-  },
-  {
-    "id": 20,
+    "id": 1,
     "title": "Navigating the Ethical Frontier of AI in Creative Business",
     "slug": "ai-ethics-in-creative-business",
-    "date": "2026-01-15T14:12:54.000Z",
-    "dateFormatted": "January 15, 2026",
+    "date": "2026-04-01T10:00:00.000Z",
+    "dateFormatted": "April 1, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1.wp-block-heading,...",
+    "excerpt": "Navigate the ethical challenges of using AI in creative work. Covers copyright, deepfakes, bias in AI tools, content guardrails, and building governance for agencies.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -35,17 +16,16 @@
       "automation",
       "creative"
     ],
-    "readingTime": 17,
-    "originalUrl": "https://theinnovativenative.com/ai-ethics-in-creative-business/"
+    "readingTime": 16
   },
   {
-    "id": 19,
+    "id": 2,
     "title": "The Creative Catalyst: Building AI Culture in a Creative Team",
     "slug": "building-ai-culture-creative-team",
-    "date": "2026-01-07T16:16:34.000Z",
-    "dateFormatted": "January 7, 2026",
+    "date": "2026-03-29T10:00:00.000Z",
+    "dateFormatted": "March 29, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6...",
+    "excerpt": "How to build an AI-powered culture in your creative team. Covers training strategies, workflow reorganization, change management, hiring for AI-creative hybrid roles, and team alignment.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -55,17 +35,40 @@
       "creative",
       "team"
     ],
-    "readingTime": 20,
-    "originalUrl": "https://theinnovativenative.com/building-ai-culture-creative-team/"
+    "readingTime": 19
   },
   {
-    "id": 18,
+    "id": 3,
+    "title": "US v. Heppner: Why Using ChatGPT for Legal Research May Waive Attorney-Client Privilege",
+    "slug": "us-v-heppner-law-firm-ai-privilege",
+    "date": "2026-03-25T12:00:00.000Z",
+    "dateFormatted": "March 25, 2026",
+    "author": "Mike Soto",
+    "excerpt": "A federal judge just ruled that documents created through consumer AI tools are not protected by attorney-client privilege. Here's what every law firm needs to know — and what to do about it.",
+    "categories": [
+      "Law Firms",
+      "Artificial Intelligence"
+    ],
+    "tags": [
+      "AI",
+      "law firms",
+      "lawyers",
+      "privilege",
+      "Heppner",
+      "legal AI",
+      "privacy",
+      "compliance"
+    ],
+    "readingTime": 11
+  },
+  {
+    "id": 4,
     "title": "Integrating AI with CRM for Marketing: Your Guide to a Smarter Marketing Stack",
     "slug": "ai-crm-marketing-integration",
-    "date": "2026-01-02T05:13:19.000Z",
-    "dateFormatted": "January 1, 2026",
+    "date": "2026-03-22T10:00:00.000Z",
+    "dateFormatted": "March 22, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6...",
+    "excerpt": "Learn how integrating AI with your CRM creates a smarter marketing stack. Boost lead scoring, personalization, and predictive analytics while keeping human oversight.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -75,17 +78,16 @@
       "Artificial Intelligence",
       "marketing"
     ],
-    "readingTime": 17,
-    "originalUrl": "https://theinnovativenative.com/ai-crm-marketing-integration/"
+    "readingTime": 17
   },
   {
-    "id": 17,
+    "id": 5,
     "title": "Unleashing the Power of AI Marketing Analytics Tools: Your Blueprint for Smarter Growth",
     "slug": "ai-marketing-analytics-tools-smarter-growth",
-    "date": "2025-12-30T16:17:45.000Z",
-    "dateFormatted": "December 30, 2025",
+    "date": "2026-03-18T10:00:00.000Z",
+    "dateFormatted": "March 18, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6 {...",
+    "excerpt": "Your blueprint for using AI marketing analytics tools to drive smarter growth. Covers predictive analytics, ad optimization, multi-touch attribution, and real-time budget allocation.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -94,17 +96,16 @@
       "Artificial Intelligence",
       "marketing analytics"
     ],
-    "readingTime": 18,
-    "originalUrl": "https://theinnovativenative.com/ai-marketing-analytics-tools-smarter-growth/"
+    "readingTime": 18
   },
   {
-    "id": 16,
+    "id": 6,
     "title": "Unleashing Growth: How to Automate Lead Generation Using AI",
     "slug": "automate-lead-generation-using-ai",
-    "date": "2025-12-25T05:13:29.000Z",
-    "dateFormatted": "December 24, 2025",
+    "date": "2026-03-13T10:00:00.000Z",
+    "dateFormatted": "March 13, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list li, ol.wp-block-list li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important;...",
+    "excerpt": "How to automate your entire lead generation funnel with AI. From chatbot capture and intelligent lead scoring to personalized drip campaigns and automated sales follow-ups.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -114,17 +115,16 @@
       "Artificial Intelligence",
       "leadGen"
     ],
-    "readingTime": 14,
-    "originalUrl": "https://theinnovativenative.com/automate-lead-generation-using-ai/"
+    "readingTime": 14
   },
   {
-    "id": 15,
+    "id": 7,
     "title": "How AI Marketing Automation for Small Business Transforms Campaigns: Your Essential Guide",
     "slug": "ai-marketing-automation-smb",
-    "date": "2025-12-21T05:13:37.000Z",
-    "dateFormatted": "December 20, 2025",
+    "date": "2026-03-06T10:00:00.000Z",
+    "dateFormatted": "March 6, 2026",
     "author": "Mike Soto",
-    "excerpt": "```html p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff...",
+    "excerpt": "How AI marketing automation helps small businesses compete with bigger players. Covers email optimization, social media, predictive analytics, and choosing the right tools.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -134,17 +134,16 @@
       "Artificial Intelligence",
       "marketing"
     ],
-    "readingTime": 18,
-    "originalUrl": "https://theinnovativenative.com/ai-marketing-automation-smb/"
+    "readingTime": 17
   },
   {
-    "id": 14,
+    "id": 8,
     "title": "The AI Imperative: Crafting a Winning AI Strategy for Creative Agencies",
     "slug": "ai-strategy-for-creative-agencies",
-    "date": "2025-12-17T05:13:26.000Z",
-    "dateFormatted": "December 16, 2025",
+    "date": "2026-02-27T10:00:00.000Z",
+    "dateFormatted": "February 27, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } The AI Imperative:...",
+    "excerpt": "Craft a winning AI strategy for your creative agency. A step-by-step roadmap covering tool selection, team training, ethical guidelines, scaling creative teams, and measuring ROI.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -153,17 +152,16 @@
       "AI",
       "Artificial Intelligence"
     ],
-    "readingTime": 18,
-    "originalUrl": "https://theinnovativenative.com/ai-strategy-for-creative-agencies/"
+    "readingTime": 17
   },
   {
-    "id": 13,
-    "title": "The Best AI Tools for Creative Agencies: Revolutionizing Workflows for Designers & Marketers",
+    "id": 9,
+    "title": "The Best AI Tools for Creative Agencies: Improving Workflows for Designers & Marketers",
     "slug": "best-ai-tools-creative-agencies",
-    "date": "2025-12-13T05:14:58.000Z",
-    "dateFormatted": "December 12, 2025",
+    "date": "2026-02-20T10:00:00.000Z",
+    "dateFormatted": "February 20, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li, table th, table td { color: #ffffff !important; font-size: 20px !important; } a { color:...",
+    "excerpt": "The top AI tools transforming creative agencies. Covers generative AI for content creation, Adobe integrations, marketing automation, asset management, and measuring ROI.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence"
@@ -174,17 +172,16 @@
       "marketing",
       "tools"
     ],
-    "readingTime": 24,
-    "originalUrl": "https://theinnovativenative.com/best-ai-tools-creative-agencies/"
+    "readingTime": 22
   },
   {
-    "id": 12,
+    "id": 10,
     "title": "Elevating Your Game: AI Marketing for Luxury Real Estate – Tools & Tactics for High-End Sales",
     "slug": "ai-marketing-luxury-real-estate",
-    "date": "2025-11-15T17:32:39.000Z",
-    "dateFormatted": "November 15, 2025",
+    "date": "2026-02-13T10:00:00.000Z",
+    "dateFormatted": "February 13, 2026",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li, .estimated-reading-time { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important;...",
+    "excerpt": "Discover how AI marketing tools help luxury real estate agents attract high-net-worth buyers with hyper-personalized campaigns, optimized SEO, and targeted advertising.",
     "categories": [
       "Artificial Intelligence",
       "Real Estate"
@@ -193,17 +190,53 @@
       "Artificial Intelligence",
       "real estate"
     ],
-    "readingTime": 16,
-    "originalUrl": "https://theinnovativenative.com/ai-marketing-luxury-real-estate/"
+    "readingTime": 15
   },
   {
     "id": 11,
+    "title": "Mastering Change Management for AI in Law Firms: A Blueprint for Success",
+    "slug": "change-management-ai-law-firms",
+    "date": "2026-02-06T10:00:00.000Z",
+    "dateFormatted": "February 6, 2026",
+    "author": "Mike Soto",
+    "excerpt": "A strategic blueprint for managing AI adoption in law firms. Covers overcoming resistance, phased implementation, staff training programs, and building an AI-ready culture.",
+    "categories": [
+      "AI Automation",
+      "Law Firms"
+    ],
+    "tags": [
+      "AI",
+      "Artificial Intelligence",
+      "LLMs"
+    ],
+    "readingTime": 17
+  },
+  {
+    "id": 12,
+    "title": "Proven AI Successes: 5+ Case Studies of AI in Law Firms",
+    "slug": "proven-ai-law-firm-case-studies",
+    "date": "2026-02-01T17:11:40.000Z",
+    "dateFormatted": "February 1, 2026",
+    "author": "Mike Soto",
+    "excerpt": "Real case studies of AI delivering results in law firms. Covers contract review, legal research, e-discovery, predictive analytics, and how small firms scale with AI tools.",
+    "categories": [
+      "Artificial Intelligence",
+      "Law Firms"
+    ],
+    "tags": [
+      "law firms",
+      "lawyers"
+    ],
+    "readingTime": 16
+  },
+  {
+    "id": 13,
     "title": "The Essential Guide to an AI Audit for Real Estate Businesses: Readiness, Compliance, and Governance",
     "slug": "ai-audit-for-real-estate-businesses",
     "date": "2025-11-11T13:45:58.000Z",
     "dateFormatted": "November 11, 2025",
     "author": "Mike Soto",
-    "excerpt": "/* General text styling */ p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } /*...",
+    "excerpt": "A thorough guide to conducting an AI audit for real estate firms. Covers readiness assessment, regulatory compliance, governance frameworks, and risk mitigation strategies.",
     "categories": [
       "Artificial Intelligence",
       "Real Estate"
@@ -211,17 +244,16 @@
     "tags": [
       "Artificial Intelligence"
     ],
-    "readingTime": 16,
-    "originalUrl": "https://theinnovativenative.com/ai-audit-for-real-estate-businesses/"
+    "readingTime": 16
   },
   {
-    "id": 9,
+    "id": 14,
     "title": "The Definitive Guide to the Best AI Software for Law Firms: Evaluation, Integration, Infrastructure, and Scalability",
     "slug": "best-ai-software-law-firms",
     "date": "2025-11-11T13:44:27.000Z",
     "dateFormatted": "November 11, 2025",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li, table { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4,...",
+    "excerpt": "A comprehensive guide to evaluating, integrating, and scaling AI software for law firms. Covers legal research, contract analysis, e-discovery, vendor selection, and infrastructure.",
     "categories": [
       "Artificial Intelligence",
       "Law Firms"
@@ -229,37 +261,16 @@
     "tags": [
       "Artificial Intelligence"
     ],
-    "readingTime": 20,
-    "originalUrl": "https://theinnovativenative.com/best-ai-software-law-firms/"
+    "readingTime": 19
   },
   {
-    "id": 8,
-    "title": "Mastering Change Management for AI in Law Firms: A Blueprint for Success",
-    "slug": "change-management-ai-law-firms",
-    "date": "2025-10-21T19:08:03.000Z",
-    "dateFormatted": "October 21, 2025",
-    "author": "Mike Soto",
-    "excerpt": "/* General text styling for non-heading elements */ p, .wp-block-paragraph, ul.wp-block-list li, ol.wp-block-list li { color: #ffffff !important; font-size:...",
-    "categories": [
-      "AI Automation",
-      "Law Firms"
-    ],
-    "tags": [
-      "AI",
-      "Artificial Intelligence",
-      "LLMs"
-    ],
-    "readingTime": 18,
-    "originalUrl": "https://theinnovativenative.com/change-management-ai-law-firms/"
-  },
-  {
-    "id": 7,
+    "id": 15,
     "title": "Unlocking Unprecedented Growth: A Guide to AI Legal Marketing Analytics for Attorneys",
     "slug": "ai-legal-marketing-analytics-for-growth",
     "date": "2025-10-20T09:18:09.000Z",
     "dateFormatted": "October 20, 2025",
     "author": "Mike Soto",
-    "excerpt": "```html p, .wp-block-paragraph, ul.wp-block-list, ol.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff...",
+    "excerpt": "A practical guide to AI legal marketing analytics for attorneys. Learn precision targeting, ad optimization, predictive analytics, and ROI tracking to grow your practice.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence",
@@ -269,17 +280,16 @@
       "AI",
       "Artificial Intelligence"
     ],
-    "readingTime": 14,
-    "originalUrl": "https://theinnovativenative.com/ai-legal-marketing-analytics-for-growth/"
+    "readingTime": 14
   },
   {
-    "id": 6,
-    "title": "Unlock Growth: How AI Lead Generation for Lawyers is Revolutionizing Client Acquisition",
+    "id": 16,
+    "title": "Drive Growth: How AI Lead Generation for Lawyers is Improving Client Acquisition",
     "slug": "ai-lead-generation-for-lawyers",
     "date": "2025-10-15T17:31:09.000Z",
     "dateFormatted": "October 15, 2025",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2,...",
+    "excerpt": "How AI lead generation is improving client acquisition for lawyers. Covers conversational AI chatbots, automated intake, client qualification, and AI-powered CRM nurturing.",
     "categories": [
       "AI Automation",
       "Law Firms"
@@ -288,17 +298,16 @@
       "AI",
       "Artificial Intelligence"
     ],
-    "readingTime": 15,
-    "originalUrl": "https://theinnovativenative.com/ai-lead-generation-for-lawyers/"
+    "readingTime": 15
   },
   {
-    "id": 5,
-    "title": "AI Marketing for Law Firms: Supercharge Your Client Acquisition Strategies",
+    "id": 17,
+    "title": "AI Marketing for Law Firms: Strengthen Your Client Acquisition Strategies",
     "slug": "ai-marketing-law-firms-acquisition",
     "date": "2025-10-13T17:09:23.000Z",
     "dateFormatted": "October 13, 2025",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6...",
+    "excerpt": "How law firms can strengthen client acquisition with AI marketing. Covers content generation, SEO optimization, targeted advertising, and personalized client engagement strategies.",
     "categories": [
       "AI Automation",
       "Law Firms"
@@ -307,17 +316,16 @@
       "AI",
       "Artificial Intelligence"
     ],
-    "readingTime": 17,
-    "originalUrl": "https://theinnovativenative.com/ai-marketing-law-firms-acquisition/"
+    "readingTime": 17
   },
   {
-    "id": 4,
+    "id": 18,
     "title": "Navigating the AI Frontier: Why AI Ethics for Law Firms is Non-Negotiable",
     "slug": "ai-ethics-for-law-firms",
     "date": "2025-10-13T17:07:00.000Z",
     "dateFormatted": "October 13, 2025",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2, h3, h4, h5, h6...",
+    "excerpt": "Why AI ethics is non-negotiable for law firms. Covers fairness, transparency, ABA compliance, GDPR requirements, malpractice risks, and building secure AI governance frameworks.",
     "categories": [
       "AI Automation",
       "Law Firms"
@@ -326,17 +334,16 @@
       "AI",
       "Artificial Intelligence"
     ],
-    "readingTime": 17,
-    "originalUrl": "https://theinnovativenative.com/ai-ethics-for-law-firms/"
+    "readingTime": 17
   },
   {
-    "id": 3,
+    "id": 19,
     "title": "Transforming Legal Practice: The Power of Law Firm Automation with AI for Modern Efficiency",
     "slug": "law-firm-automation-with-ai",
     "date": "2025-10-06T12:22:29.000Z",
     "dateFormatted": "October 6, 2025",
     "author": "Mike Soto",
-    "excerpt": "&nbsp; p, .wp-block-paragraph, ul.wp-block-list, li { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } Transforming...",
+    "excerpt": "How law firm automation with AI transforms legal practice. Covers document analysis, risk prediction, client onboarding, case management, and paralegal support for modern efficiency.",
     "categories": [
       "AI Automation",
       "Artificial Intelligence",
@@ -347,17 +354,16 @@
       "Artificial Intelligence",
       "LLMs"
     ],
-    "readingTime": 16,
-    "originalUrl": "https://theinnovativenative.com/law-firm-automation-with-ai/"
+    "readingTime": 16
   },
   {
-    "id": 2,
+    "id": 20,
     "title": "The Essential AI Audit for Law Firms: Assessing Readiness and Ensuring Compliance",
     "slug": "essential-ai-audit-law-firms",
     "date": "2025-10-02T16:44:00.000Z",
     "dateFormatted": "October 2, 2025",
     "author": "Mike Soto",
-    "excerpt": "p, .wp-block-paragraph, ul.wp-block-list, li, .faq-answer { color: #ffffff !important; font-size: 20px !important; } a { color: #00c2ff !important; } h1, h2,...",
+    "excerpt": "Why every law firm needs an AI audit. Learn how to assess readiness, ensure compliance with regulations like GDPR and the EU AI Act, and build client trust through responsible AI use.",
     "categories": [
       "AI Automation",
       "Law Firms"
@@ -367,11 +373,10 @@
       "Artificial Intelligence",
       "LLMs"
     ],
-    "readingTime": 23,
-    "originalUrl": "https://theinnovativenative.com/essential-ai-audit-law-firms/"
+    "readingTime": 23
   },
   {
-    "id": 1,
+    "id": 21,
     "title": "Vague Prompts Break Everything",
     "slug": "vague-prompts-break-everything",
     "date": "2025-10-02T13:45:21.000Z",
@@ -388,7 +393,6 @@
       "LLMs",
       "Prompting"
     ],
-    "readingTime": 3,
-    "originalUrl": "https://theinnovativenative.com/vague-prompts-break-everything/"
+    "readingTime": 3
   }
 ]

@@ -2,7 +2,7 @@ name: Blog Auto-Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, 036-pi-content-value-system]
     paths:
       - 'projects/website/content/blog/posts/**'
       - 'projects/website/src/**'
