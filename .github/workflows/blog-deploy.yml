@@ -6,7 +6,11 @@ on:
     paths:
       - 'projects/website/content/blog/posts/**'
       - 'projects/website/src/**'
+      - 'projects/website/public/**'
       - 'projects/website/package.json'
+      - 'projects/website/package-lock.json'
+      - 'projects/website/scripts/**'
+      - 'projects/website/.npmrc'
       - '.github/workflows/blog-deploy.yml'
   workflow_dispatch:
 
