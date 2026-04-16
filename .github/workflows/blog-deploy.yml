@@ -98,7 +98,17 @@ jobs:
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
         run: |
-          curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
-            -H "Authorization: Bearer $AIRTABLE_PAT" \
-            -H "Content-Type: application/json" \
-            -d "{\"records\":[{\"fields\":{\"workflow_name\":\"github-actions.blog-deploy\",\"last_run_at\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\",\"status\":\"fail\",\"notes\":\"Failed run $GITHUB_RUN_ID on commit $GITHUB_SHA\",\"run_id\":\"$GITHUB_RUN_ID\",\"expected_interval_minutes\":0,\"source\":\"github-actions\"}}]}"
+          # Capture last 50 lines of build log into notes (escape for JSON via jq)
+          if [ -f /tmp/build.log ]; then
+            TAIL=$(tail -50 /tmp/build.log | jq -Rs .)
+          else
+            TAIL='"(no build.log)"'
+          fi
+          NOTES=$(jq -n --arg run "$GITHUB_RUN_ID" --arg sha "$GITHUB_SHA" --argjson tail "$TAIL" \
+            '"Failed run \($run) on commit \($sha)\n---LOG TAIL---\n" + $tail')
+          jq -n --arg ts "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --arg run "$GITHUB_RUN_ID" --argjson notes "$NOTES" \
+            '{records:[{fields:{workflow_name:"github-actions.blog-deploy",last_run_at:$ts,status:"fail",notes:$notes,run_id:$run,expected_interval_minutes:0,source:"github-actions"}}]}' \
+            | curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
+              -H "Authorization: Bearer $AIRTABLE_PAT" \
+              -H "Content-Type: application/json" \
+              -d @-
