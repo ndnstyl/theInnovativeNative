@@ -21,6 +21,7 @@ export interface FeedPost {
   author_avatar_url: string | null;
   author_username: string | null;
   author_level: number;
+  author_is_agent?: boolean;
   category_name: string | null;
   // Recent commenters for AvatarStack
   recent_commenters: { url: string | null; name: string }[];
