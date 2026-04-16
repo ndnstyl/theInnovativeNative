@@ -102,9 +102,13 @@ jobs:
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
         run: |
-          # Capture last 50 lines of build log into notes (escape for JSON via jq)
+          # Capture last 250 lines of build log into notes (escape for JSON via jq)
           if [ -f /tmp/build.log ]; then
-            TAIL=$(tail -50 /tmp/build.log | jq -Rs .)
+            # Grep for error context first, then tail
+            ERR=$(grep -E -B2 -A20 'Error|error|failed|Failed|TypeError|Cannot|cannot' /tmp/build.log | tail -150)
+            END=$(tail -100 /tmp/build.log)
+            COMBINED="===ERROR CONTEXT===\n$ERR\n===END OF LOG===\n$END"
+            TAIL=$(printf '%s' "$COMBINED" | jq -Rs .)
           else
             TAIL='"(no build.log)"'
           fi
