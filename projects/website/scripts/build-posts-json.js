@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { marked } = require('marked');
 
 const POSTS_DIR = path.join(__dirname, '..', 'content', 'blog', 'posts');
 const OUT_INDEX = path.join(__dirname, '..', 'content', 'blog', 'posts.json');
@@ -86,6 +87,7 @@ function main() {
     const slug = fm.slug || file.replace(/\.md$/, '');
     const readingTime = computeReadingTime(content);
     const date = fm.date || new Date().toISOString();
+    const htmlContent = marked.parse(content.trim(), { breaks: true, gfm: true });
     records.push({
       title: fm.title || slug,
       slug,
@@ -96,7 +98,7 @@ function main() {
       categories: Array.isArray(fm.categories) ? fm.categories : [],
       tags: Array.isArray(fm.tags) ? fm.tags : [],
       readingTime,
-      content: content.trim(),
+      content: htmlContent,
     });
   }
 

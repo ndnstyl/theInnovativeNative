@@ -1,8 +1,8 @@
 ---
 title: "Revolutionize Your Marketing: How AI Campaign Automation Tools Drive Unprecedented Results"
 slug: "revolutionize-your-marketing-how-ai-campaign-automation-tools-drive-unprecedented-results"
-date: "2026-04-17T07:58:55.654-05:00"
-dateFormatted: "April 17, 2026"
+date: "2026-04-03T09:00:00-05:00"
+dateFormatted: "April 3, 2026"
 author: "Mike Soto"
 excerpt: "Discover how AI campaign automation tools revolutionize marketing, boosting engagement, personalizing experiences, and driving unprecedented results."
 categories: ["Marketing", "Artificial Intelligence"]

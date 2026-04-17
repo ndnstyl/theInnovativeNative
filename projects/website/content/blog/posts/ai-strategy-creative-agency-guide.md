@@ -1,8 +1,8 @@
 ---
 title: "Revolutionize Your Agency: A Practical Guide to AI Strategy and ROI"
 slug: "ai-strategy-creative-agency-guide"
-date: "2026-04-17T06:07:00-05:00"
-dateFormatted: "April 17, 2026"
+date: "2026-04-07T09:00:00-05:00"
+dateFormatted: "April 7, 2026"
 author: "Mike Soto"
 excerpt: "A practical guide to AI strategy for creative agencies, implementing AI, understanding ROI, scaling with AI, and best practices."
 categories: ["Creative Agencies", "Artificial Intelligence"]

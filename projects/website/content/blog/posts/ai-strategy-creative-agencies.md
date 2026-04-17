@@ -1,8 +1,8 @@
 ---
 title: "AI Strategy for Creative Agencies: A Comprehensive Guide"
 slug: "ai-strategy-for-creative-agencies"
-date: "2026-04-17T06:07:00-05:00"
-dateFormatted: "April 17, 2026"
+date: "2026-03-31T09:00:00-05:00"
+dateFormatted: "March 31, 2026"
 author: "Mike Soto"
 excerpt: "Discover how AI can transform creative agencies, improve efficiency, and unlock new growth opportunities. Learn about implementation, ROI, and best practices."
 categories: ["Artificial Intelligence", "Marketing"]

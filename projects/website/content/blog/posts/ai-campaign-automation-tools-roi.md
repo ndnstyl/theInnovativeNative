@@ -1,8 +1,8 @@
 ---
 title: "Revolutionize Your Marketing: How AI Campaign Automation Tools Drive ROI"
 slug: "revolutionize-your-marketing-how-ai-campaign-automation-tools-drive-roi"
-date: "2026-04-17T07:59:00.137-05:00"
-dateFormatted: "April 17, 2026"
+date: "2026-04-11T09:00:00-05:00"
+dateFormatted: "April 11, 2026"
 author: "Mike Soto"
 excerpt: "AI campaign automation tools are essential for enhancing efficiency, personalizing experiences, and maximizing ROI in today's marketing landscape."
 categories: ["Marketing", "Artificial Intelligence"]
