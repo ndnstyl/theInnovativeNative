@@ -1,9 +1,8 @@
-```yaml
 ---
 title: "AI Strategy for Creative Agencies: A Comprehensive Guide"
-slug: "ai-strategy-for-creative-agencies-a-comprehensive-guide"
-date: "2024-01-29T14:35:00-05:00"
-dateFormatted: "January 29, 2024"
+slug: "ai-strategy-for-creative-agencies"
+date: "2026-04-17T06:07:00-05:00"
+dateFormatted: "April 17, 2026"
 author: "Mike Soto"
 excerpt: "Discover how AI can transform creative agencies, improve efficiency, and unlock new growth opportunities. Learn about implementation, ROI, and best practices."
 categories: ["Artificial Intelligence", "Marketing"]
@@ -248,4 +247,3 @@ Start planning your AI strategy today to transform your agency’s creative work
 *   [Source 5]: Message_a_model_in_Perplexity_response: KPIs for measuring ROI of AI adoption in creative workflows and how to calculate ROI of AI in creative agencies
 *   [Source 6]: Message_a_model_in_Perplexity_response: how AI enables creative agencies to scale and new service offerings for creative agencies with AI
 *   [Source 7]: Message_a_model_in_Perplexity_response: best practices for AI adoption in creative agencies, ethical considerations AI creative industry, and data privacy and security AI creative agencies
-```
