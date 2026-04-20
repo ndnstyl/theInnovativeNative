@@ -279,11 +279,19 @@ $quiz-border: rgba(255, 255, 255, 0.1);
   }
 
   &-privacy {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: $quiz-muted;
     text-align: center;
-    margin-top: 12px;
-    line-height: 1.4;
+    margin-top: 16px;
+    line-height: 1.5;
+
+    &-fine {
+      display: block;
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.25);
+      margin-top: 4px;
+      font-style: italic;
+    }
   }
 }
 

@@ -124,7 +124,11 @@ const QuizCapture = ({ headline, subtext, onSubmit }: QuizCaptureProps) => {
           </button>
         </form>
         <p className="quiz__capture-privacy">
-          No spam. Ever. We&rsquo;re too busy automating things.
+          We will not spam you. We will not sell your data. We will not show up at your
+          office with a whiteboard and a pitch deck.<br />
+          <span className="quiz__capture-privacy-fine">
+            (We already know where your office is. We just choose not to be weird about it.)
+          </span>
         </p>
       </div>
     </div>
