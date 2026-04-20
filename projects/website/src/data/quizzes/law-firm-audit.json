@@ -1,0 +1,154 @@
+{
+  "id": "law-firm-audit",
+  "title": "How Much Is Your Firm Losing to Manual Work?",
+  "subtitle": "7 questions. 2 minutes. A reality check that costs $0 but might save you $200K.",
+  "heroEmoji": "⚖️",
+  "captureHeadline": "Let's see how your firm stacks up.",
+  "captureSubtext": "We'll send your full audit results here. Attorney-client privilege doesn't apply, but we do promise not to spam you.",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "What kind of law does your firm practice?",
+      "subtext": "This helps us benchmark you against similar firms.",
+      "tooltip": "We work with criminal, bankruptcy, and administrative firms primarily. But honestly, every practice area has the same problem: too many hours spent on things that aren't practicing law.",
+      "type": "single",
+      "options": [
+        { "id": "q1-a", "label": "Criminal Defense", "subtitle": "Motions, discovery, repeat", "score": 2, "emoji": "🔒" },
+        { "id": "q1-b", "label": "Bankruptcy", "subtitle": "Means tests and matrix math", "score": 2, "emoji": "📉" },
+        { "id": "q1-c", "label": "Personal Injury", "subtitle": "Demand letters on demand", "score": 2, "emoji": "🏥" },
+        { "id": "q1-d", "label": "Family / Estate / Admin", "subtitle": "Templates for days", "score": 1, "emoji": "👨‍👩‍👧" },
+        { "id": "q1-e", "label": "Other", "subtitle": "Law is law", "score": 1, "emoji": "⚖️" }
+      ],
+      "scoreWeight": 0.5
+    },
+    {
+      "id": "q2",
+      "text": "How many attorneys are at your firm?",
+      "subtext": "Solo warriors to mid-size — this quiz works for all of you.",
+      "tooltip": "Fun fact: a solo attorney with good automation can out-produce a 5-person firm without it. We've seen it. The 5-person firm was not amused.",
+      "type": "single",
+      "options": [
+        { "id": "q2-a", "label": "Just me (solo)", "subtitle": "Chief Everything Officer", "score": 1, "emoji": "🦸" },
+        { "id": "q2-b", "label": "2–5 attorneys", "subtitle": "Small but mighty", "score": 2, "emoji": "👥" },
+        { "id": "q2-c", "label": "6–15 attorneys", "subtitle": "Real firm energy", "score": 3, "emoji": "🏢" },
+        { "id": "q2-d", "label": "16+", "subtitle": "There's a lot of manual work hiding in there", "score": 2, "emoji": "🏛️" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q3",
+      "text": "When you need to find how you handled a similar case before, what do you do?",
+      "subtext": "The question that keeps managing partners up at night.",
+      "tooltip": "Your firm's institutional knowledge is worth millions. It's trapped in emails, local drives, and the memory of that associate who left 6 months ago. Sleep well!",
+      "type": "single",
+      "options": [
+        { "id": "q3-a", "label": "Ask the attorney who handled it", "subtitle": "Hope they haven't left the firm yet", "score": 0, "emoji": "🙏" },
+        { "id": "q3-b", "label": "Search through email and file folders", "subtitle": "45 minutes later...", "score": 1, "emoji": "🔍" },
+        { "id": "q3-c", "label": "We have a document management system", "subtitle": "That nobody uses correctly", "score": 2, "emoji": "📁" },
+        { "id": "q3-d", "label": "We can search across all our work product instantly", "subtitle": "You're in the top 3% of firms", "score": 3, "emoji": "⚡" }
+      ],
+      "scoreWeight": 2
+    },
+    {
+      "id": "q4",
+      "text": "How many hours per week does your team spend drafting documents from scratch?",
+      "subtext": "Motions, briefs, demand letters, contracts — the stuff that follows patterns you already know.",
+      "tooltip": "A study found that 23% of a lawyer's day is spent on tasks that could be automated. At $350/hr, that's $290,500/yr per attorney in recoverable time. But sure, keep retyping that motion to dismiss.",
+      "type": "single",
+      "options": [
+        { "id": "q4-a", "label": "Under 5 hours", "subtitle": "Either efficient or not billing enough 😬", "score": 0, "emoji": "😬" },
+        { "id": "q4-b", "label": "5–15 hours", "subtitle": "Standard but painful", "score": 1, "emoji": "📝" },
+        { "id": "q4-c", "label": "15–30 hours", "subtitle": "That's almost a full associate", "score": 2, "emoji": "⏳" },
+        { "id": "q4-d", "label": "30+ hours", "subtitle": "You're not a law firm, you're a typing service", "score": 3, "emoji": "⌨️" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q5",
+      "text": "Does your firm use AI for anything right now?",
+      "subtext": "ChatGPT for 'research' doesn't count. (Okay, it kinda counts.)",
+      "tooltip": "72% of firms say they're 'exploring AI.' 4% have actually deployed anything. The other 68% are still in the 'we should look into that' phase from 2024.",
+      "type": "single",
+      "options": [
+        { "id": "q5-a", "label": "No — and I'm suspicious of it", "subtitle": "Healthy skepticism. We like it.", "score": 0, "emoji": "🤨" },
+        { "id": "q5-b", "label": "ChatGPT for quick questions", "subtitle": "Baby steps count", "score": 1, "emoji": "👶" },
+        { "id": "q5-c", "label": "We use AI-powered legal tools", "subtitle": "CoCounsel, Harvey, etc.", "score": 2, "emoji": "🤖" },
+        { "id": "q5-d", "label": "We have a custom AI system trained on our own work", "subtitle": "You're literally our ideal case study", "score": 3, "emoji": "🧠" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q6",
+      "text": "What's the one thing that eats your time and makes you want to scream?",
+      "subtext": "Pick the one that just made you sigh.",
+      "tooltip": "We asked 200 attorneys this question. The top answer was 'all of the above' followed by a long silence and a sip of bourbon.",
+      "type": "single",
+      "options": [
+        { "id": "q6-a", "label": "Client intake and follow-up", "subtitle": "The phone rings. Nobody answers. Client calls competitor.", "score": 2, "emoji": "📞" },
+        { "id": "q6-b", "label": "Document drafting and review", "subtitle": "Ctrl+F is not a legal strategy", "score": 2, "emoji": "📄" },
+        { "id": "q6-c", "label": "Case research and precedent hunting", "subtitle": "Westlaw bills hitting different", "score": 3, "emoji": "📚" },
+        { "id": "q6-d", "label": "Billing, admin, and compliance", "subtitle": "You didn't go to law school for this", "score": 1, "emoji": "🧾" },
+        { "id": "q6-e", "label": "Getting new clients in the door", "subtitle": "The marketing hamster wheel", "score": 2, "emoji": "🐹" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q7",
+      "text": "If a system could cut your research and drafting time by 60%, what would you do?",
+      "subtext": "This is the 'how serious are you' question. No wrong answers. Except the first one.",
+      "tooltip": "One of our clients went from 4 hours of research per motion to 45 minutes. They didn't fire anyone — they just took on 40% more cases with the same team. Revenue went up. Stress went down. Bourbon consumption remained constant.",
+      "type": "single",
+      "options": [
+        { "id": "q7-a", "label": "I'd be skeptical and wait for someone else to try it first", "subtitle": "Bold strategy, Cotton", "score": 0, "emoji": "🪑" },
+        { "id": "q7-b", "label": "I'd look into it if the price was right", "subtitle": "Reasonable human detected", "score": 1, "emoji": "🤔" },
+        { "id": "q7-c", "label": "I'd pilot it immediately on a small scale", "subtitle": "This is the way", "score": 2, "emoji": "🎯" },
+        { "id": "q7-d", "label": "I'd deploy it firm-wide yesterday", "subtitle": "Check your email — we're sending you something good", "score": 3, "emoji": "🚀" }
+      ],
+      "scoreWeight": 2
+    }
+  ],
+  "results": [
+    {
+      "id": "room-to-grow",
+      "minScore": 0,
+      "maxScore": 10,
+      "label": "Room to Grow",
+      "emoji": "🌱",
+      "headline": "Your firm is running on muscle memory. That works — until it doesn't.",
+      "summary": "Most of your processes are manual, your institutional knowledge lives in people's heads, and your team is spending billable hours on non-billable work. You're not alone — 96% of firms are in a similar spot. The ones that pull ahead are the ones that build systems now, before the workload forces the issue.",
+      "recommendation": "Start with a self-assessment. We built a free Automation Readiness Scorecard specifically for law firms — it identifies your 3 highest-impact automation opportunities in 10 minutes.",
+      "ctaLabel": "Download the Free Law Firm Scorecard",
+      "ctaType": "download",
+      "ctaUrl": "/resources",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "big-opportunity",
+      "minScore": 11,
+      "maxScore": 20,
+      "label": "Big Opportunity",
+      "emoji": "⚡",
+      "headline": "You know there's a better way. Now let us show you what it looks like.",
+      "summary": "You've got some systems in place, but they're disconnected. Your team wastes time on tasks that follow clear patterns — patterns that AI can learn from YOUR firm's own work product. The opportunity isn't replacing your attorneys. It's giving them superpowers.",
+      "recommendation": "Watch our 3-minute demo of Cerebro — a private AI system trained on your firm's own briefs, motions, and outcomes. Not generic AI. YOUR firm's intelligence, searchable and reusable.",
+      "ctaLabel": "Watch the Cerebro Demo",
+      "ctaType": "link",
+      "ctaUrl": "/law-firm-rag",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "ready-now",
+      "minScore": 21,
+      "maxScore": 35,
+      "label": "Ready Now",
+      "emoji": "🚀",
+      "headline": "You already get it. Let's stop talking about it and build it.",
+      "summary": "You're ahead of 95% of firms. You understand the problem, you see the ROI, and you're ready to act. What you need isn't another generic AI tool — it's a private system trained on YOUR firm's work product that gets smarter with every case. That's exactly what we build.",
+      "recommendation": "Let's talk about a Cerebro pilot. We deploy a private RAG system trained on your firm's documents in 2-3 weeks. You keep it forever. Your team uses it to research, draft, and find answers from your own institutional knowledge in seconds.",
+      "ctaLabel": "Book a Cerebro Pilot Call — $2,500",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "hot"
+    }
+  ]
+}

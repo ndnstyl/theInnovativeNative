@@ -1,0 +1,138 @@
+{
+  "id": "ai-readiness",
+  "title": "How AI-Ready Is Your Business?",
+  "subtitle": "6 questions. 2 minutes. A score that might hurt your feelings.",
+  "heroEmoji": "🤖",
+  "captureHeadline": "Before we roast your operations...",
+  "captureSubtext": "Tell us where to send your results. No spam — we're too busy automating things to write newsletters.",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "How many SaaS tools does your team log into every day?",
+      "subtext": "Be honest. We'll wait while you count the browser tabs.",
+      "tooltip": "The average small business uses 37 SaaS tools. No, that's not a typo. Yes, you're probably paying for 12 you forgot about.",
+      "type": "single",
+      "options": [
+        { "id": "q1-a", "label": "1–3 tools", "subtitle": "The minimalist", "score": 0, "emoji": "🧘" },
+        { "id": "q1-b", "label": "4–7 tools", "subtitle": "Normal human", "score": 1, "emoji": "👤" },
+        { "id": "q1-c", "label": "8–12 tools", "subtitle": "Tab hoarder", "score": 2, "emoji": "🗂️" },
+        { "id": "q1-d", "label": "13+ tools", "subtitle": "You need an intervention", "score": 3, "emoji": "🔥" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q2",
+      "text": "How much time per week does your team spend on tasks a robot should be doing?",
+      "subtext": "Copy-pasting between apps, manually updating spreadsheets, sending the same email 40 times...",
+      "tooltip": "If your answer is 'I don't know,' it's probably 10+ hours. The ones who don't know are always the worst offenders.",
+      "type": "single",
+      "options": [
+        { "id": "q2-a", "label": "Under 2 hours", "subtitle": "Sure it is 😉", "score": 0, "emoji": "😇" },
+        { "id": "q2-b", "label": "2–5 hours", "subtitle": "That's a whole afternoon", "score": 1, "emoji": "⏰" },
+        { "id": "q2-c", "label": "5–10 hours", "subtitle": "A full workday, gone", "score": 2, "emoji": "💸" },
+        { "id": "q2-d", "label": "10+ hours", "subtitle": "You're paying humans to be robots", "score": 3, "emoji": "🤖" }
+      ],
+      "scoreWeight": 2
+    },
+    {
+      "id": "q3",
+      "text": "What happens when a new lead comes in?",
+      "subtext": "Like, the actual first 60 seconds.",
+      "tooltip": "Studies show that responding within 5 minutes makes you 100x more likely to connect. Most businesses respond in... 47 hours. Forty. Seven. Hours.",
+      "type": "single",
+      "options": [
+        { "id": "q3-a", "label": "It sits in an inbox until someone remembers", "subtitle": "The classic", "score": 0, "emoji": "📨" },
+        { "id": "q3-b", "label": "Someone manually adds it to a spreadsheet", "subtitle": "Ah yes, the CRM of champions", "score": 1, "emoji": "📊" },
+        { "id": "q3-c", "label": "It goes into a CRM and someone follows up... eventually", "subtitle": "Progress!", "score": 2, "emoji": "📋" },
+        { "id": "q3-d", "label": "Auto-captured, auto-enriched, auto-sequenced", "subtitle": "You might not need us", "score": 3, "emoji": "⚡" }
+      ],
+      "scoreWeight": 2
+    },
+    {
+      "id": "q4",
+      "text": "Be honest: how's your data situation?",
+      "subtext": "Customer info, project records, that spreadsheet Karen made in 2019 that runs everything...",
+      "tooltip": "Every company has a 'Karen spreadsheet.' It's a Google Sheet that was supposed to be temporary in 2019 and now runs payroll, inventory, and Karen's birthday reminders. We don't judge. We automate.",
+      "type": "single",
+      "options": [
+        { "id": "q4-a", "label": "It's... everywhere", "subtitle": "Gmail, sticky notes, someone's brain", "score": 0, "emoji": "🤯" },
+        { "id": "q4-b", "label": "Mostly in spreadsheets", "subtitle": "Karen's spreadsheet lives on", "score": 1, "emoji": "📈" },
+        { "id": "q4-c", "label": "In a CRM/database, kinda organized", "subtitle": "You're trying, we see you", "score": 2, "emoji": "👀" },
+        { "id": "q4-d", "label": "Centralized, connected, and clean", "subtitle": "Who are you and what's your secret", "score": 3, "emoji": "✨" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q5",
+      "text": "Have you tried automating anything before?",
+      "subtext": "Zapier, Make, n8n, that YouTube tutorial you watched at 2 AM...",
+      "tooltip": "80% of Zapier accounts have exactly 1 active Zap. It connects Gmail to a Google Sheet. It was set up 2 years ago. No one knows what it does. No one will touch it. This is fine. 🔥",
+      "type": "single",
+      "options": [
+        { "id": "q5-a", "label": "What's automation?", "subtitle": "Welcome, friend. You're in the right place.", "score": 0, "emoji": "👋" },
+        { "id": "q5-b", "label": "I have a Zapier account I never use", "subtitle": "You and 12 million other people", "score": 1, "emoji": "🕸️" },
+        { "id": "q5-c", "label": "I've built some workflows that actually work", "subtitle": "Respect", "score": 2, "emoji": "🛠️" },
+        { "id": "q5-d", "label": "I have a full automation stack", "subtitle": "Are you sure you're not us?", "score": 3, "emoji": "🏗️" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q6",
+      "text": "Last one. What would you invest to get 10–20 hours per week back?",
+      "subtext": "That's the realistic range for a properly automated business.",
+      "tooltip": "If your hourly rate is $150 and you save 15 hours/week, that's $117,000/year in recovered capacity. But sure, keep copy-pasting.",
+      "type": "single",
+      "options": [
+        { "id": "q6-a", "label": "I'm not ready to invest yet", "subtitle": "No pressure — keep doing it manually", "score": 0, "emoji": "🤷" },
+        { "id": "q6-b", "label": "$100–$500/month", "subtitle": "Less than that software you forgot to cancel", "score": 1, "emoji": "💰" },
+        { "id": "q6-c", "label": "$500–$2,000/month", "subtitle": "Now we're talking", "score": 2, "emoji": "🚀" },
+        { "id": "q6-d", "label": "Whatever it takes — show me the ROI", "subtitle": "Music to our ears", "score": 3, "emoji": "🎯" }
+      ],
+      "scoreWeight": 1.5
+    }
+  ],
+  "results": [
+    {
+      "id": "early-stage",
+      "minScore": 0,
+      "maxScore": 8,
+      "label": "Early Stage",
+      "emoji": "🌱",
+      "headline": "You're doing everything by hand. That's... brave.",
+      "summary": "Look, there's no shame in it — every business starts here. But you're leaving serious time and money on the table. The good news? The gap between where you are and where you could be is actually the easiest to close. The first automations are always the highest-impact.",
+      "recommendation": "Start with the basics: automate your lead capture, connect your tools, and stop copy-pasting between apps. We wrote a guide for exactly this situation.",
+      "ctaLabel": "Get the Free Automation Starter Guide",
+      "ctaType": "download",
+      "ctaUrl": "/resources",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "getting-there",
+      "minScore": 9,
+      "maxScore": 15,
+      "label": "Getting There",
+      "emoji": "⚡",
+      "headline": "You've got the foundation — now it's time to build the machine.",
+      "summary": "You know automation exists. You've maybe built a few things. But your systems are still fragmented — data lives in 5 places, follow-up is manual, and your processes depend on specific people remembering specific things. One well-designed automation stack changes everything.",
+      "recommendation": "You're in the sweet spot for a 30-minute diagnostic call. We'll identify the 3 highest-impact automations for your specific situation — no pitch, just a roadmap.",
+      "ctaLabel": "Book a Free Diagnostic Call",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "ready-to-scale",
+      "minScore": 16,
+      "maxScore": 30,
+      "label": "Ready to Scale",
+      "emoji": "🚀",
+      "headline": "You already get it. Let's build the infrastructure.",
+      "summary": "You're not starting from zero — you have tools, some automation, and a clear sense of what's wasting your time. What you need isn't another tool. It's an architect who connects everything into one system that runs without you touching it. That's literally what we do.",
+      "recommendation": "Let's talk about a Pilot engagement. We build your custom automation infrastructure in 2–4 weeks, you keep it forever, and your team runs it without us.",
+      "ctaLabel": "Book a Pilot Call — $2,500",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "hot"
+    }
+  ]
+}
