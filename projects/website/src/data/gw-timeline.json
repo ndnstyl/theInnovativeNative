@@ -1,0 +1,210 @@
+{
+  "phases": [
+    {
+      "id": "y0q1",
+      "phase": "Year 0",
+      "quarter": "Q1",
+      "title": "Launch the Land Hunt",
+      "months": "Months 1-3",
+      "budget": 2500,
+      "cumulativeBudget": 2500,
+      "reservesRemaining": 272500,
+      "activities": [
+        "Set up saved searches on LandWatch, AcreValue, Land.com, Zillow",
+        "Lock in your shortlist of counties (eastern OK primary)",
+        "Make intro calls to 1 rural agent per target county",
+        "Run GIS deep-dive: pull 20-40 parcel candidates",
+        "Send direct-mail campaign round 1 (500 letters)"
+      ],
+      "deliverable": "5+ serious parcel candidates identified",
+      "gate": "If fewer than 5 candidates by end of Q1, expand to Texas Plan B"
+    },
+    {
+      "id": "y0q2",
+      "phase": "Year 0",
+      "quarter": "Q2",
+      "title": "Walk Properties and Make Offers",
+      "months": "Months 4-6",
+      "budget": 2500,
+      "cumulativeBudget": 5000,
+      "reservesRemaining": 270000,
+      "activities": [
+        "Visit 8-12 parcels in person (walk the land, not just drive by)",
+        "Score each parcel with the evaluation scorecard",
+        "Send direct-mail round 2",
+        "Make offers on 3-5 parcels (10-15% below asking)",
+        "Start due diligence on accepted offer"
+      ],
+      "deliverable": "One parcel under contract with due diligence started",
+      "gate": "If no accepted offer by end of Q2, revisit criteria or expand counties"
+    },
+    {
+      "id": "y0q3",
+      "phase": "Year 0",
+      "quarter": "Q3",
+      "title": "Close + Drill Well + Set Up Base",
+      "months": "Months 7-9",
+      "budget": 82000,
+      "cumulativeBudget": 87000,
+      "reservesRemaining": 188000,
+      "activities": [
+        "Close on the land — sign, record, take possession",
+        "Same-day: get farm number from FSA + file ag exemption",
+        "Same-day: visit NRCS office, introduce yourself, ask about EQIP",
+        "Week 1: hire consulting forester, schedule timber cruise",
+        "Schedule well drilling (60-90 day lead time)",
+        "Set up travel trailer on property — temporary base camp",
+        "Begin perimeter fence (learn on the job)",
+        "Submit EQIP application once management plan is ready"
+      ],
+      "deliverable": "Land owned, well scheduled, forester hired, EQIP submitted, living on site",
+      "gate": "Water yield confirmed? If well comes in under 3 GPM, activate backup cistern plan"
+    },
+    {
+      "id": "y0q4",
+      "phase": "Year 0",
+      "quarter": "Q4",
+      "title": "Water + Foundation + First Trees",
+      "months": "Months 10-12",
+      "budget": 42000,
+      "cumulativeBudget": 129000,
+      "reservesRemaining": 146000,
+      "activities": [
+        "Well drilling complete — test water quality",
+        "Install cistern + rainwater collection",
+        "Septic system installed (licensed contractor)",
+        "Site prep: driveway, building pad, drainage",
+        "Root cellar / storm shelter dug and poured",
+        "Foundation piers for house",
+        "Plant Year 1 trees (60 bare-root — pecan, walnut, persimmon, mulberry)",
+        "Finish perimeter fence"
+      ],
+      "deliverable": "Water flowing, septic done, foundation ready, trees in ground, fence complete",
+      "gate": "Budget check — if cumulative spend exceeds $130K, defer Y1 trees batch 2"
+    },
+    {
+      "id": "y1q1",
+      "phase": "Year 1",
+      "quarter": "Q1",
+      "title": "Shell Goes Up",
+      "months": "Months 13-15",
+      "budget": 62000,
+      "cumulativeBudget": 191000,
+      "reservesRemaining": 84000,
+      "activities": [
+        "Post-frame kit delivered",
+        "Crew erects columns + trusses (1-day safety hire)",
+        "Metal roof + sheathing installed",
+        "Windows and doors installed",
+        "Weather resistive barrier applied",
+        "Building is now 'dried in' — protected from rain"
+      ],
+      "deliverable": "Shell standing, dried in, ready for interior work",
+      "gate": "Shell on budget? Any structural surprises?"
+    },
+    {
+      "id": "y1q2",
+      "phase": "Year 1",
+      "quarter": "Q2",
+      "title": "Insulation + Rough Systems",
+      "months": "Months 16-18",
+      "budget": 22000,
+      "cumulativeBudget": 213000,
+      "reservesRemaining": 62000,
+      "activities": [
+        "Interior walls framed",
+        "Electrical rough-in (before insulation)",
+        "Plumbing rough-in (before insulation)",
+        "HVAC line sets run (before insulation)",
+        "Closed-cell spray foam applied (contracted)",
+        "Exterior rigid insulation added",
+        "First blower-door test"
+      ],
+      "deliverable": "Insulated envelope, all rough systems in place",
+      "gate": "If cumulative spend exceeds $215K, defer battery to Y2"
+    },
+    {
+      "id": "y1q3",
+      "phase": "Year 1",
+      "quarter": "Q3",
+      "title": "Solar + Interior Finish",
+      "months": "Months 19-21",
+      "budget": 26000,
+      "cumulativeBudget": 239000,
+      "reservesRemaining": 36000,
+      "activities": [
+        "Solar panels + battery installed (DIY + licensed tie-in)",
+        "Mini-split heat pump + ERV commissioned",
+        "Heat pump water heater installed",
+        "Electrical finish (outlets, switches, fixtures)",
+        "Plumbing finish (fixtures, dishwasher)",
+        "Drywall hung, mudded, painted",
+        "Flooring installed",
+        "Cabinets + countertops"
+      ],
+      "deliverable": "House is livable — power, water, climate control, finished interior",
+      "gate": "If cumulative spend exceeds $245K, defer aquaponics to Y3"
+    },
+    {
+      "id": "y1q4",
+      "phase": "Year 1",
+      "quarter": "Q4",
+      "title": "Move In",
+      "months": "Months 22-24",
+      "budget": 16500,
+      "cumulativeBudget": 255500,
+      "reservesRemaining": 19500,
+      "activities": [
+        "Final inspections",
+        "Certificate of occupancy (if required)",
+        "Move family from trailer into house",
+        "Retire the travel trailer",
+        "Aquaponics greenhouse structure started",
+        "Landscaping basics",
+        "Storm shelter stocked"
+      ],
+      "deliverable": "Family living in the house. Trailer retired. Homestead operational.",
+      "gate": "Year 1 review — budget, schedule, family sentiment all green?"
+    },
+    {
+      "id": "y2",
+      "phase": "Year 2",
+      "quarter": "Full Year",
+      "title": "Food Systems Come Online",
+      "months": "Months 25-36",
+      "budget": 16700,
+      "cumulativeBudget": 272200,
+      "reservesRemaining": 2800,
+      "activities": [
+        "Aquaponics system built, cycled, first fish stocked",
+        "Hair sheep flock (8-10 head) + livestock guardian dog",
+        "Chicken coop + 12 laying hens",
+        "Rotational grazing fence installed (EQIP may reimburse)",
+        "First harvests: fish, eggs, vegetables",
+        "Year 2 tree planting (replace mortality + expand)"
+      ],
+      "deliverable": "Food production active. 40%+ self-sufficiency target.",
+      "gate": "Ag exemption documented. Food self-sufficiency measured."
+    },
+    {
+      "id": "y3-5",
+      "phase": "Years 3-5",
+      "quarter": "Optimization",
+      "title": "Scale, Optimize, First Legacy Yields",
+      "months": "Months 37-60",
+      "budget": 0,
+      "cumulativeBudget": 272200,
+      "reservesRemaining": 2800,
+      "activities": [
+        "Aquaponics scaled to full production (~200 lbs fish/year)",
+        "Pond construction (EQIP cost-share — ~$650 out of pocket)",
+        "Attached workshop built",
+        "Pecan trees first meaningful crop (Year 5-7)",
+        "Livestock numbers stable, rotational grazing dialed in",
+        "Possible compound expansion if other families are ready"
+      ],
+      "deliverable": "Homestead is self-sustaining. Mike can leave for 2 weeks without crisis.",
+      "gate": "Daughters at decision points. Compound option evaluated."
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "contacts": [
+    {
+      "id": "ok-fsa",
+      "name": "Oklahoma FSA State Office",
+      "agency": "Farm Service Agency",
+      "category": "government",
+      "phone": "(405) 742-1000",
+      "address": "100 USDA Suite 102, Stillwater, OK 74074",
+      "website": "https://www.fsa.usda.gov/state-offices/oklahoma",
+      "description": "Your first stop — get your farm number here. They handle crop reporting and some loan programs too."
+    },
+    {
+      "id": "ok-nrcs",
+      "name": "Oklahoma NRCS State Office",
+      "agency": "Natural Resources Conservation Service",
+      "category": "government",
+      "phone": "(405) 742-1204",
+      "address": "100 USDA Suite 203, Stillwater, OK 74074",
+      "website": "https://www.nrcs.usda.gov/state-offices/oklahoma",
+      "description": "Runs the EQIP program. Your district conservationist works through this office."
+    },
+    {
+      "id": "ok-forestry",
+      "name": "Oklahoma Forestry Services",
+      "agency": "OK Dept of Agriculture",
+      "category": "government",
+      "phone": "405-521-3864",
+      "address": "2800 N. Lincoln Blvd, OKC, OK 73105",
+      "website": "https://ag.ok.gov/divisions/forestry-services/",
+      "description": "Free forester assistance, consulting forester referrals, seedling distribution."
+    },
+    {
+      "id": "ok-owrb",
+      "name": "Oklahoma Water Resources Board",
+      "agency": "OWRB",
+      "category": "government",
+      "phone": "(405) 530-8800",
+      "address": "3800 N. Classen Blvd, OKC, OK 73118",
+      "website": "https://www.owrb.ok.gov",
+      "description": "Well records, water rights, domestic exemption questions. Search their database for well logs near any property."
+    },
+    {
+      "id": "ok-occ",
+      "name": "Oklahoma Corporation Commission",
+      "agency": "OCC",
+      "category": "government",
+      "phone": "(405) 521-2211",
+      "address": "Jim Thorpe Building, OKC, OK",
+      "website": "https://oklahoma.gov/occ.html",
+      "description": "Oil and gas records. Search for active wells, leases, and drilling permits on or near any property."
+    },
+    {
+      "id": "tx-fsa",
+      "name": "Texas FSA State Office",
+      "agency": "Farm Service Agency",
+      "category": "government",
+      "phone": "(979) 680-5151",
+      "address": "2405 Texas Ave South, College Station, TX 77840",
+      "website": "https://www.fsa.usda.gov/state-offices/texas",
+      "description": "Texas equivalent of the OK FSA office. Farm numbers, crop reporting, loans."
+    },
+    {
+      "id": "tx-nrcs",
+      "name": "Texas NRCS State Office",
+      "agency": "Natural Resources Conservation Service",
+      "category": "government",
+      "phone": "(254) 742-9800",
+      "address": "101 S. Main St, Temple, TX 76501",
+      "website": "https://www.nrcs.usda.gov/state-offices/texas",
+      "description": "EQIP program administration for Texas."
+    },
+    {
+      "id": "tx-forest",
+      "name": "Texas A&M Forest Service",
+      "agency": "TX A&M",
+      "category": "government",
+      "phone": "(979) 458-6606",
+      "address": "200 Technology Way, Suite 1281, College Station, TX 77845",
+      "website": "https://tfsweb.tamu.edu",
+      "description": "Forester referrals, landowner assistance, forest management guidance for Texas."
+    },
+    {
+      "id": "usda-locator",
+      "name": "USDA Service Center Locator",
+      "agency": "USDA",
+      "category": "tools",
+      "website": "https://www.farmers.gov/working-with-us/service-center-locator",
+      "description": "Find your local FSA + NRCS office by county. They're usually in the same building."
+    },
+    {
+      "id": "eqip-apply",
+      "name": "EQIP How to Apply",
+      "agency": "NRCS",
+      "category": "tools",
+      "website": "https://www.nrcs.usda.gov/programs-initiatives/eqip-environmental-quality-incentives/apply-for-environmental-quality",
+      "description": "Official NRCS page with application steps, requirements, and links to forms."
+    },
+    {
+      "id": "eqip-advance",
+      "name": "EQIP Advance Payment Info",
+      "agency": "NRCS",
+      "category": "tools",
+      "website": "https://www.nrcs.usda.gov/resources/guides-and-instructions/eqip-advance-payment-option",
+      "description": "Details on the advance payment option — get 50% of your EQIP payment upfront."
+    },
+    {
+      "id": "rafi-guide",
+      "name": "NRCS 2026 Application Guide (RAFI)",
+      "agency": "Rural Advancement Foundation",
+      "category": "tools",
+      "website": "https://www.rafiusa.org/nrcs-2026-instructions-to-apply/",
+      "description": "Step-by-step guide for applying to NRCS programs in 2026. Written in plain language."
+    },
+    {
+      "id": "fema-maps",
+      "name": "FEMA Flood Map Service",
+      "agency": "FEMA",
+      "category": "tools",
+      "website": "https://msc.fema.gov",
+      "description": "Check if any property is in a flood zone. Search by address. Always do this before buying."
+    },
+    {
+      "id": "ok-forester-beauchamp",
+      "name": "US Forest & Wildlife Consulting",
+      "agency": "Brian Beauchamp",
+      "category": "foresters",
+      "website": "https://www.usfwc.com",
+      "description": "Oklahoma consulting forester — timber cruises, management plans, timber sales."
+    },
+    {
+      "id": "ok-forester-kingwood",
+      "name": "Kingwood Forestry",
+      "agency": "P. Prutzman",
+      "category": "foresters",
+      "website": "https://www.kingwoodforestry.com",
+      "description": "Oklahoma consulting forester — timber cruises, appraisals, management plans."
+    },
+    {
+      "id": "ok-forester-burns",
+      "name": "Burns Forestry",
+      "agency": "Burns Forestry",
+      "category": "foresters",
+      "website": "https://www.burnsforestry.com",
+      "description": "Oklahoma consulting forester."
+    },
+    {
+      "id": "ok-woodland",
+      "name": "Oklahoma Woodland Owners Association",
+      "agency": "OWOA",
+      "category": "foresters",
+      "phone": "(918) 569-4287",
+      "description": "Association of private woodland owners. Can refer consulting foresters in your area."
+    },
+    {
+      "id": "tx-forester-etfs",
+      "name": "East Texas Forestry Service",
+      "agency": "Steven Sutton",
+      "category": "foresters",
+      "phone": "(903) 755-2959",
+      "address": "1799 Big Oaks Rd, Avinger, TX 75630",
+      "description": "East Texas consulting forester — timber cruises, timber sales."
+    },
+    {
+      "id": "tx-forester-applequist",
+      "name": "Ed Applequist Consulting Forester",
+      "agency": "Ed Applequist",
+      "category": "foresters",
+      "phone": "(936) 598-7510",
+      "address": "3462 FM 699, Center, TX 75935",
+      "description": "East Texas consulting forester."
+    },
+    {
+      "id": "tx-forester-fw",
+      "name": "F&W Forestry Services",
+      "agency": "Kenneth Addy, CF, TFA",
+      "category": "foresters",
+      "phone": "(936) 435-9223",
+      "address": "1204 Sam Houston Ave, Suite 8, Huntsville, TX 77340",
+      "description": "East Texas consulting forester — certified forester."
+    },
+    {
+      "id": "tx-forester-farmers",
+      "name": "Farmers National Company",
+      "agency": "James Houser",
+      "category": "foresters",
+      "phone": "(903) 586-9375",
+      "address": "P.O. Box 623, Jacksonville, TX 75766",
+      "description": "East Texas consulting forester — farm and forest management."
+    },
+    {
+      "id": "lender-fsb",
+      "name": "The Federal Savings Bank / USDA Nationwide",
+      "agency": "Mortgage Lender",
+      "category": "lenders",
+      "phone": "(844) 999-0639",
+      "website": "https://www.usdanationwide.com/usda-construction-loans",
+      "description": "Largest remaining USDA single-close construction lender. Barndominium-friendly. All 50 states."
+    },
+    {
+      "id": "lender-district",
+      "name": "District Lending",
+      "agency": "Mortgage Lender",
+      "category": "lenders",
+      "phone": "(888) 210-3964",
+      "website": "https://districtlending.com/barndominium-financing/",
+      "description": "Barndominium specialists. USDA construction-to-perm loans. OK + TX confirmed."
+    },
+    {
+      "id": "lender-hurst",
+      "name": "Hurst Lending",
+      "agency": "Mortgage Lender",
+      "category": "lenders",
+      "phone": "(877) 292-7350",
+      "website": "https://hurstlending.com/financing-a-barndominium-construction-project/",
+      "description": "Dallas-based. Barndo construction program. Note: max 10 acres per loan."
+    },
+    {
+      "id": "ok-usda-rd",
+      "name": "Oklahoma USDA Rural Development",
+      "agency": "USDA Rural Development",
+      "category": "lenders",
+      "phone": "(800) 522-3819",
+      "address": "100 USDA Suite 108, Stillwater, OK 74074",
+      "website": "https://www.rd.usda.gov/ok/oklahoma-contacts",
+      "description": "Direct USDA home loans (Section 502). For lower-income borrowers — 0% down, rates as low as 1%."
+    },
+    {
+      "id": "ok-bar",
+      "name": "Oklahoma Bar Association — Lawyer Referral",
+      "agency": "Oklahoma Bar",
+      "category": "legal",
+      "website": "https://www.okbar.org/freelegal",
+      "description": "Find a real estate attorney in Oklahoma. Budget $400-$800 for contract review — worth every penny."
+    },
+    {
+      "id": "landwatch",
+      "name": "LandWatch",
+      "agency": "Land Search",
+      "category": "tools",
+      "website": "https://www.landwatch.com",
+      "description": "The biggest rural land search engine. Set up saved searches with county + acreage + price filters."
+    },
+    {
+      "id": "acrevalue",
+      "name": "AcreValue",
+      "agency": "Land Search",
+      "category": "tools",
+      "website": "https://www.acrevalue.com",
+      "description": "Land values, soil maps, ownership data. Great for researching parcels before you visit."
+    },
+    {
+      "id": "usda-eligibility",
+      "name": "USDA Property Eligibility Map",
+      "agency": "USDA",
+      "category": "tools",
+      "website": "https://eligibility.sc.egov.usda.gov/eligibility/welcomeAction.do?pageAction=sfp",
+      "description": "Check if a property is in a USDA-eligible rural area. Required for USDA home loans."
+    },
+    {
+      "id": "ok-forester-list",
+      "name": "OK Consulting Foresters List (PDF)",
+      "agency": "ODAFF",
+      "category": "foresters",
+      "website": "https://ag.ok.gov/wp-content/uploads/2022/05/Consulting-Foresters-January-20-2022-1.pdf",
+      "description": "Official Oklahoma list of registered consulting foresters. Download and call 2-3 for quotes."
+    }
+  ]
+}

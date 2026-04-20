@@ -1,0 +1,262 @@
+// ============================================================================
+// GENERATIONAL WEALTH — PRINT STYLES
+// ============================================================================
+
+@media print {
+  // Hide interactive / navigation elements
+  .gw-gate,
+  .gw-sidebar,
+  .gw-bottom-nav,
+  .gw-progress,
+  .gw-print-btn,
+  .gw-youtube,
+  .gw-checklist__checkbox,
+  .gw-expandable__chevron,
+  .gw-tooltip__popover,
+  header,
+  footer,
+  nav,
+  .scroll-progress-btn,
+  .custom-cursor {
+    display: none !important;
+  }
+
+  // Reset layout to single column
+  .gw-layout {
+    display: block;
+    background: #fff;
+    color: #000;
+  }
+
+  .gw-layout__sidebar {
+    display: none !important;
+  }
+
+  .gw-layout__main {
+    padding: 0;
+  }
+
+  .gw-layout__content-inner {
+    max-width: 100%;
+  }
+
+  // Content typography for print
+  .gw-content {
+    color: #111;
+    font-size: 11pt;
+    line-height: 1.6;
+
+    h1 {
+      font-size: 18pt;
+      color: #000;
+      border-bottom: 2px solid #000;
+      padding-bottom: 4pt;
+    }
+
+    h2 {
+      font-size: 14pt;
+      color: #000;
+      border-bottom: 1px solid #ccc;
+      margin-top: 18pt;
+      padding-bottom: 3pt;
+    }
+
+    h3 {
+      font-size: 12pt;
+      color: #000;
+      margin-top: 12pt;
+    }
+
+    a {
+      color: #000;
+      text-decoration: underline;
+    }
+
+    code {
+      background: #f4f4f4;
+      color: #000;
+      padding: 1px 4px;
+    }
+  }
+
+  // Callout boxes
+  .gw-callout {
+    border-left: 3px solid #000;
+    background: #f9f9f9 !important;
+    break-inside: avoid;
+
+    &__title {
+      color: #000 !important;
+    }
+
+    &__body {
+      color: #111;
+    }
+  }
+
+  // Checklist — show plain items
+  .gw-checklist {
+    &__item {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    &__label {
+      color: #111;
+    }
+
+    &__description {
+      color: #555;
+    }
+
+    &__progress {
+      color: #555;
+    }
+  }
+
+  // Step process
+  .gw-step-process {
+    &__number {
+      background: #fff;
+      border-color: #000;
+      color: #000;
+    }
+
+    &__connector {
+      background: #ccc;
+    }
+
+    &__description {
+      max-height: none !important;
+      opacity: 1 !important;
+    }
+
+    &__title {
+      color: #000;
+    }
+  }
+
+  // Expandable — show all content
+  .gw-expandable {
+    border-color: #ccc;
+    break-inside: avoid;
+
+    &__header {
+      background: #f4f4f4;
+    }
+
+    &__title {
+      color: #000;
+    }
+
+    &__body {
+      max-height: none !important;
+
+      &--open,
+      & {
+        max-height: none !important;
+      }
+    }
+
+    &__content {
+      color: #111;
+      border-top-color: #ccc;
+    }
+  }
+
+  // Stat cards
+  .gw-stat-card {
+    background: #f9f9f9;
+    border-color: #ccc;
+    break-inside: avoid;
+
+    &__value {
+      color: #000;
+    }
+
+    &__label {
+      color: #555;
+    }
+  }
+
+  // Comparison table
+  .gw-comparison-table {
+    &__wrapper {
+      overflow: visible;
+      border-color: #ccc;
+    }
+
+    th {
+      background: #333;
+      color: #fff;
+    }
+
+    td {
+      color: #111;
+    }
+
+    tr:nth-child(even) td {
+      background: #f4f4f4;
+    }
+
+    tr:nth-child(odd) td {
+      background: #fff;
+    }
+  }
+
+  // Contact cards
+  .gw-contact-card {
+    background: #f9f9f9;
+    border-color: #ccc;
+    break-inside: avoid;
+
+    &__name {
+      color: #000;
+    }
+
+    &__agency,
+    &__description,
+    &__detail {
+      color: #444;
+    }
+
+    &__phone-link,
+    &__website-link {
+      color: #000;
+    }
+
+    &__category {
+      background: #e0e0e0 !important;
+      color: #333 !important;
+    }
+
+    &__copy-btn {
+      display: none;
+    }
+  }
+
+  // Layout meta
+  .gw-layout__meta {
+    color: #555;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .gw-layout__disclaimer {
+    color: #888;
+    border-top-color: #ccc;
+  }
+
+  // Page breaks
+  h2 {
+    break-before: auto;
+    break-after: avoid;
+  }
+
+  .gw-callout,
+  .gw-stat-card,
+  .gw-contact-card,
+  .gw-expandable {
+    break-inside: avoid;
+  }
+}
