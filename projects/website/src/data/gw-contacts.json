@@ -234,6 +234,104 @@
       "description": "Find a real estate attorney in Oklahoma. Budget $400-$800 for contract review — worth every penny."
     },
     {
+      "id": "atty-barrett",
+      "name": "Barrett Legacy Estate Solutions",
+      "agency": "Estate Planning Attorney",
+      "category": "legal",
+      "website": "https://barrettestatesolutions.com/",
+      "description": "Norman, OK — farm/ranch estate planning. Founder lost family ag estate to litigation, built practice to prevent exactly that. Trust + LLC + generational transfer."
+    },
+    {
+      "id": "atty-avenue",
+      "name": "Avenue Legal Group",
+      "agency": "Estate Planning Attorney",
+      "category": "legal",
+      "website": "https://avenuelegalgroup.com/oklahoma-land-trusts-guide/",
+      "description": "Oklahoma land trusts, revocable trusts, real estate structuring."
+    },
+    {
+      "id": "atty-txaglaw",
+      "name": "TxAg Law (Marca Ewers)",
+      "agency": "Agricultural Attorney",
+      "category": "legal",
+      "website": "https://www.txaglaw.com/",
+      "description": "Texas — ag law, entity formation, estate planning, business succession for farms and ranches."
+    },
+    {
+      "id": "atty-langley",
+      "name": "Langley & Banack",
+      "agency": "Farm & Ranch Attorney",
+      "category": "legal",
+      "website": "https://www.langleybanack.com/practice-areas/real-estate/farm-and-ranch/",
+      "description": "San Antonio, TX — multi-generation ag family attorneys. Water rights, O&G, estate planning, eminent domain."
+    },
+    {
+      "id": "atty-skelton",
+      "name": "Skelton Slusher",
+      "agency": "Estate Planning Attorney",
+      "category": "legal",
+      "website": "https://www.skeltonslusher.com/estate-planning/",
+      "description": "Lufkin / Nacogdoches / Livingston, TX — estate planning, trust administration, asset transfer. East TX coverage."
+    },
+    {
+      "id": "atty-leibowitz",
+      "name": "Leibowitz Law (TX Ag Law)",
+      "agency": "Agricultural Attorney",
+      "category": "legal",
+      "website": "https://www.texasaglaw.com/about",
+      "description": "Texas ag law specialist — entity formation, estate planning, ag contracts."
+    },
+    {
+      "id": "atty-ross",
+      "name": "Ross & Shoalmire",
+      "agency": "Estate Planning Attorney",
+      "category": "legal",
+      "phone": "(903) 593-1500",
+      "address": "6633 Oak Hill Blvd, Suite 400, Tyler, TX",
+      "website": "https://www.rossandshoalmire.com/",
+      "description": "Tyler, TX — asset protection, Medicaid planning, trusts, probate. East Texas."
+    },
+    {
+      "id": "cpa-shores",
+      "name": "Greg Shores CPA",
+      "agency": "CPA — Farm/Ranch",
+      "category": "legal",
+      "website": "https://www.glshorescpa.com/",
+      "description": "McAlester, OK (Pittsburg County) — farm/ranch tax, individuals and businesses, 30+ years in east OK."
+    },
+    {
+      "id": "cpa-adamsbrown",
+      "name": "Adams Brown CPA",
+      "agency": "CPA — Farm/Ranch",
+      "category": "legal",
+      "website": "https://www.adamsbrowncpa.com/farm-accounting-texas/",
+      "description": "Texas statewide — farm management, tax compliance, financial planning for ag businesses."
+    },
+    {
+      "id": "cpa-farmag",
+      "name": "Farm & Ag CPA",
+      "agency": "CPA — Farm/Ranch",
+      "category": "legal",
+      "website": "https://www.farmandagcpa.com/accounting-tax-savings",
+      "description": "Texas — accounting + tax savings specifically for Texas farmers. Entity selection, depreciation, ag exemptions."
+    },
+    {
+      "id": "cpa-farming",
+      "name": "CPA Farming (National)",
+      "agency": "CPA — Ag Specialist",
+      "category": "legal",
+      "website": "https://www.cpafarming.com/",
+      "description": "Nationwide — specializes exclusively in farm/ranch/ag tax: row crops, livestock, timber. Serves OK + TX."
+    },
+    {
+      "id": "tx-tbls",
+      "name": "TX Board of Legal Specialization",
+      "agency": "Attorney Search",
+      "category": "legal",
+      "website": "https://www.tbls.org/specialtyarea/RF",
+      "description": "Search for board-certified farm/ranch real estate attorneys in Texas."
+    },
+    {
       "id": "landwatch",
       "name": "LandWatch",
       "agency": "Land Search",

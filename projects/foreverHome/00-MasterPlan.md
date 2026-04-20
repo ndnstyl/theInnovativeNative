@@ -320,6 +320,7 @@ PROCEED: East OK land hunt phase.
 | 12 | `12-VerificationReport.md` | Pass 5 ✅ (high-confidence facts + corrections from deep research) |
 | 13 | `13-LoanAcquisition-Playbook.md` | Pass 6 ✅ (USDA single-close + alternatives) |
 | 14 | `14-NRCS-CostShare-Playbook.md` | Pass 7 ✅ (EQIP brush mgmt, fencing, ponds — fact-checked for OK/TX) |
+| 15 | `15-Trust-LLC-Tax-Playbook.md` | Pass 8 ✅ (Buy personal → revocable trust → LLC operates, tax strategy, attorney/CPA directory) |
 | 97 | `97-HiddenCosts.md` | Pass 4 ✅ |
 | 98 | `98-RedTeam.md` | Pass 4 ✅ |
 | 99 | `99-Checklist.md` | Pass 4 ✅ |
