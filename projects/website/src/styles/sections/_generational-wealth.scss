@@ -119,6 +119,333 @@ $gw-sidebar-width: 240px;
 }
 
 // ============================================================================
+// PASSWORD GATE — LANDING PAGE (Rich Preview)
+// ============================================================================
+.gw-gate-landing {
+  background: $gw-black;
+  color: $gw-text;
+  min-height: 100vh;
+
+  &__hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 160px 24px 80px;
+    background: linear-gradient(160deg, rgba(0,40,40,0.8) 0%, $gw-black 60%);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+  }
+
+  &__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $gw-cyan;
+    margin-bottom: 1rem;
+  }
+
+  &__headline {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: $gw-text;
+    margin-bottom: 1.25rem;
+
+    @media (max-width: 767px) {
+      font-size: 2rem;
+    }
+  }
+
+  &__subheadline {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: $gw-text-muted;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    @media (max-width: 500px) {
+      gap: 1rem;
+    }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid $gw-border;
+    border-radius: 8px;
+    min-width: 100px;
+  }
+
+  &__stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $gw-cyan;
+  }
+
+  &__stat-label {
+    font-size: 0.75rem;
+    color: $gw-text-muted;
+    margin-top: 0.2rem;
+  }
+
+  // Body
+  &__body {
+    padding: 0 0 80px;
+  }
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // Access / Password Card
+  &__access {
+    padding: 3rem 0;
+
+    &--bottom {
+      padding-top: 2rem;
+    }
+  }
+
+  &__access-card {
+    background: $gw-bg-card;
+    border: 1px solid rgba(0,255,255,0.2);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  &__access-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $gw-text;
+    margin-bottom: 0.5rem;
+  }
+
+  &__access-sub {
+    font-size: 0.95rem;
+    color: $gw-text-muted;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  &__form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 400px;
+    margin: 0 auto;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid $gw-border;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    color: $gw-text;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $gw-cyan;
+    }
+
+    &--error {
+      border-color: $gw-magenta;
+      animation: gw-shake 0.5s ease;
+    }
+  }
+
+  &__btn {
+    padding: 0.75rem 1.5rem;
+    background: $gw-cyan;
+    color: $gw-black;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.9; }
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+  }
+
+  &__error {
+    color: $gw-magenta;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  // Section titles
+  &__section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $gw-text;
+    margin-bottom: 0.5rem;
+  }
+
+  &__section-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $gw-text-muted;
+    margin-bottom: 2rem;
+    max-width: 650px;
+  }
+
+  // Preview Section Grid
+  &__preview-section {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid $gw-border;
+  }
+
+  &__preview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__preview-card {
+    background: $gw-bg-card;
+    border: 1px solid $gw-border;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: rgba(0,255,255,0.3);
+    }
+  }
+
+  &__preview-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $gw-cyan;
+    margin-bottom: 0.35rem;
+  }
+
+  &__preview-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: $gw-text-muted;
+    margin: 0;
+  }
+
+  // Coming Soon tags
+  &__coming-section {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid $gw-border;
+  }
+
+  &__coming-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  &__coming-tag {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid $gw-border;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: $gw-text-muted;
+  }
+
+  // Mission / Quote
+  &__mission {
+    padding: 3rem 0;
+    border-top: 1px solid $gw-border;
+    text-align: center;
+  }
+
+  &__quote {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: $gw-text;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto 0.75rem;
+    border: none;
+    padding: 0;
+
+    @media (max-width: 767px) {
+      font-size: 1.05rem;
+    }
+  }
+
+  &__quote-attr {
+    font-size: 0.9rem;
+    color: $gw-cyan;
+    font-weight: 600;
+  }
+
+  // Legal
+  &__legal {
+    padding: 2rem 0 0;
+    border-top: 1px solid $gw-border;
+    text-align: center;
+
+    p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+}
+
+// ============================================================================
 // LAYOUT
 // ============================================================================
 .gw-layout {
