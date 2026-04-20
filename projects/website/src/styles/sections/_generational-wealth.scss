@@ -1906,3 +1906,494 @@ $gw-sidebar-width: 240px;
     }
   }
 }
+
+// ============================================================================
+// DASHBOARD PAGE (index.tsx) — gw-dashboard__*
+// ============================================================================
+.gw-dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 140px;
+
+  &__hero {
+    width: 100%;
+    background: linear-gradient(160deg, rgba(0, 40, 40, 0.9) 0%, $gw-black 70%);
+    padding: 80px 24px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  &__hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  &__headline {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $gw-text;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__subheadline {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  &__content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  &__section-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $gw-text;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__section-intro {
+    font-size: 0.95rem;
+    color: $gw-text-muted;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    background: $gw-bg-card;
+    border: 1px solid $gw-border;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: $gw-text;
+    transition: border-color 0.2s;
+
+    &--active {
+      &:hover {
+        border-color: rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+      }
+    }
+
+    &--dimmed {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+  }
+
+  &__card-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+
+    &--phase1 {
+      color: $gw-cyan;
+    }
+
+    &--phase2 {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &__card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $gw-text;
+    margin-bottom: 0.4rem;
+  }
+
+  &__card-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: auto;
+  }
+
+  &__card-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $gw-cyan;
+    margin-top: 1rem;
+
+    &--disabled {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &__legal {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid $gw-border;
+    text-align: center;
+    padding-bottom: 4rem;
+
+    p {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.35);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+  }
+}
+
+.gw-stat-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+
+  .gw-stat-card {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  @media (max-width: 480px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// ============================================================================
+// CONTACTS PAGE — gw-contacts__*
+// ============================================================================
+.gw-contacts {
+  &__search-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  &__search {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $gw-border;
+    border-radius: 6px;
+    color: $gw-text;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:focus {
+      border-color: $gw-cyan;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  &__tab {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $gw-border;
+    color: $gw-text-muted;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+    &--active {
+      background: rgba(0, 255, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.3);
+      color: $gw-cyan;
+    }
+
+    &:hover:not(.gw-contacts__tab--active) {
+      background: rgba(255, 255, 255, 0.08);
+      color: $gw-text;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 3rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// ============================================================================
+// GLOSSARY PAGE — gw-glossary__*
+// ============================================================================
+.gw-glossary {
+  &__search-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  &__search {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid $gw-border;
+    border-radius: 6px;
+    color: $gw-text;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:focus {
+      border-color: $gw-cyan;
+    }
+  }
+
+  &__alpha-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 2rem;
+  }
+
+  &__alpha-link {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: rgba(0, 255, 255, 0.1);
+      color: $gw-cyan;
+    }
+  }
+
+  &__group {
+    margin-bottom: 2rem;
+  }
+
+  &__letter {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $gw-cyan;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+  }
+
+  &__entry {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__term-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__term {
+    font-weight: 700;
+    color: $gw-text;
+    font-size: 1rem;
+  }
+
+  &__full {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &__definition {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.25rem;
+  }
+
+  &__links {
+    margin-top: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__links-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  &__page-link {
+    font-size: 0.75rem;
+    color: $gw-cyan;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: 3rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// ============================================================================
+// SHARED CONTENT CLASSES (used across multiple pages)
+// ============================================================================
+.gw-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.gw-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+
+  li {
+    padding: 0.4rem 0 0.4rem 1.5rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+
+    &::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: $gw-cyan;
+    }
+  }
+}
+
+.gw-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+
+  th {
+    background: rgba(0, 255, 255, 0.1);
+    color: $gw-cyan;
+    padding: 0.75rem;
+    text-align: left;
+    font-size: 0.85rem;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+  }
+
+  td {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.gw-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 2rem;
+
+  .gw-table {
+    margin-bottom: 0;
+    min-width: 420px;
+  }
+}
+
+.gw-timeline__budget-table {
+  @extend .gw-table;
+}
+
+// ============================================================================
+// GW CONTENT AREA ADJUSTMENTS
+// ============================================================================
+.gw-content {
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $gw-text;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: $gw-cyan;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: $gw-cyan;
+    text-decoration: underline;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  strong {
+    color: $gw-text;
+  }
+}
