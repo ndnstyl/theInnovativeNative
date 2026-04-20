@@ -1,5 +1,6 @@
 import React from "react";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import ExpandableSection from "@/components/generational-wealth/ExpandableSection";
 import InteractiveChecklist from "@/components/generational-wealth/InteractiveChecklist";
@@ -111,6 +112,7 @@ export default function DueDiligencePage() {
       readingTime="10 min"
       printable={true}
     >
+      <PageCover imageSrc="/images/generational-wealth/cover-due-diligence.jpg" imageAlt="Inspecting rural property" />
       <h1>Due Diligence — The Checklist Before You Buy Anything</h1>
 
       <p className="gw-lead">

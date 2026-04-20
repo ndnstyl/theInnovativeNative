@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import glossaryData from "@/data/gw-glossary.json";
 
 interface GlossaryTerm {
@@ -55,6 +56,7 @@ export default function GlossaryPage() {
 
   return (
     <GWLayout title="Glossary — Every Term in Plain English" lastVerified="April 2026">
+      <PageCover imageSrc="/images/generational-wealth/cover-glossary.jpg" imageAlt="Learning and reference materials" videoPlaceholder={false} />
       <h1>Glossary — Every Term in Plain English</h1>
       <p className="gw-lead">
         Every program, agency, and acronym on this site explained in plain English.

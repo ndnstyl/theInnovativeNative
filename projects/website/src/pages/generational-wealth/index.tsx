@@ -12,109 +12,137 @@ interface SectionCard {
   description: string;
   href: string;
   badge: string;
-  phase: 1 | 2;
+  group: "priority" | "knowledge" | "reference";
 }
 
 const SECTION_CARDS: SectionCard[] = [
   {
     title: "EQIP — Government Cost-Share",
-    description: "How the USDA pays 75–90% of your land improvement costs. The most important program you've never heard of.",
+    description: "How the USDA pays 75-90% of your land clearing, fencing, and pond costs. Start here.",
     href: "/generational-wealth/eqip",
-    badge: "Phase 1 — Must Read",
-    phase: 1,
+    badge: "Must Read",
+    group: "priority",
   },
   {
     title: "Money & Financing",
     description: "The $272K budget, three ways to pay for it, and why borrowing might be smarter than paying cash.",
     href: "/generational-wealth/financing",
-    badge: "Phase 1",
-    phase: 1,
+    badge: "Priority",
+    group: "priority",
   },
   {
     title: "Due Diligence",
     description: "The checklist that protects you from expensive surprises before you sign anything.",
     href: "/generational-wealth/due-diligence",
-    badge: "Phase 1 — Printable",
-    phase: 1,
+    badge: "Printable",
+    group: "priority",
   },
   {
-    title: "Contacts & Resources",
-    description: "Every agency, lender, forester, and tool you'll need. Phone numbers you can tap to call.",
-    href: "/generational-wealth/contacts",
-    badge: "Phase 1 — Printable",
-    phase: 1,
+    title: "Legal Structure — Trust, LLC & Tax",
+    description: "How to structure ownership so the land passes to the next generation tax-free and probate-free.",
+    href: "/generational-wealth/legal-structure",
+    badge: "Priority",
+    group: "priority",
   },
   {
-    title: "Timeline",
-    description: "The full plan quarter by quarter — from first land search through Year 5 food production.",
-    href: "/generational-wealth/timeline",
-    badge: "Phase 1",
-    phase: 1,
+    title: "The Vision",
+    description: "Why we're doing this, what it looks like when it's done, and the order everything has to happen.",
+    href: "/generational-wealth/vision",
+    badge: "Start Here",
+    group: "knowledge",
   },
   {
-    title: "Glossary",
-    description: "Every acronym explained in plain English. EQIP, FSA, NRCS, GPM — all of it.",
-    href: "/generational-wealth/glossary",
-    badge: "Phase 1 — Reference",
-    phase: 1,
+    title: "Finding Land",
+    description: "Where to look, how to evaluate a property, and how to negotiate.",
+    href: "/generational-wealth/find-land",
+    badge: "Guide",
+    group: "knowledge",
   },
   {
     title: "Building the Barndominium",
-    description: "Post-frame construction, closed-cell foam, mini-splits, and how to build tight on a budget.",
+    description: "Post-frame construction, spray foam insulation, and how to build tight on a budget.",
     href: "/generational-wealth/building",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    badge: "Guide",
+    group: "knowledge",
   },
   {
-    title: "Off-Grid Systems",
-    description: "Solar, battery, well water, rainwater, and septic — the systems that make the land livable.",
+    title: "Water, Power & Systems",
+    description: "Wells, solar panels, septic, rainwater — the infrastructure that makes the land livable.",
     href: "/generational-wealth/systems",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    badge: "Guide",
+    group: "knowledge",
   },
   {
-    title: "Food Production",
-    description: "Aquaponics, hair sheep, laying hens, fruit trees — the food systems that cut your grocery bill.",
+    title: "Food Systems",
+    description: "Aquaponics, fruit trees, sheep, chickens — growing what we eat.",
     href: "/generational-wealth/food",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    badge: "Guide",
+    group: "knowledge",
   },
   {
-    title: "Legal Structure",
-    description: "LLC vs. trust vs. nothing — how to hold the land so it passes to the next generation cleanly.",
-    href: "/generational-wealth/legal",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    title: "The Compound",
+    description: "When we're ready to bring more family in — carrying capacity, shared infrastructure, legal options.",
+    href: "/generational-wealth/compound",
+    badge: "Long-Term",
+    group: "knowledge",
   },
   {
-    title: "Tax Strategy",
-    description: "Ag exemptions, timber income treatment, depreciation, and how to keep more of what you earn.",
-    href: "/generational-wealth/tax",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    title: "Oklahoma vs Texas",
+    description: "Side-by-side comparison of land costs, water rights, taxes, and permits.",
+    href: "/generational-wealth/oklahoma-vs-texas",
+    badge: "Reference",
+    group: "reference",
   },
   {
-    title: "Estate Planning",
-    description: "How to make sure the land — and the vision — passes to your daughters without a courtroom fight.",
-    href: "/generational-wealth/estate",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    title: "Risks & Edge Cases",
+    description: "What can go wrong, walk-away triggers, hidden costs, and how we handle each one.",
+    href: "/generational-wealth/risks",
+    badge: "Reference",
+    group: "reference",
   },
   {
-    title: "Insurance",
-    description: "Farm and ranch insurance, builder's risk, homestead coverage — what you need and when.",
-    href: "/generational-wealth/insurance",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    title: "Contacts & Resources",
+    description: "Every phone number, website, and person you'll need. Tap to call.",
+    href: "/generational-wealth/contacts",
+    badge: "Printable",
+    group: "reference",
   },
   {
-    title: "Business Structures",
-    description: "Turning the homestead into a small agribusiness — market garden, timber, agritourism.",
-    href: "/generational-wealth/business",
-    badge: "Phase 2 — Coming Soon",
-    phase: 2,
+    title: "Timeline",
+    description: "The full plan quarter by quarter — Year 0 through Year 5.",
+    href: "/generational-wealth/timeline",
+    badge: "Reference",
+    group: "reference",
+  },
+  {
+    title: "Glossary",
+    description: "Every acronym and term explained in plain English.",
+    href: "/generational-wealth/glossary",
+    badge: "Reference",
+    group: "reference",
   },
 ];
+
+function CardGroup({ title, intro, cards }: { title: string; intro: string; cards: SectionCard[] }) {
+  return (
+    <>
+      <h2 className="gw-dashboard__section-heading">{title}</h2>
+      <p className="gw-dashboard__section-intro">{intro}</p>
+      <div className="gw-dashboard__cards">
+        {cards.map((card) => (
+          <Link key={card.href} href={card.href} className="gw-dashboard__card gw-dashboard__card--active">
+            <span className="gw-dashboard__card-badge gw-dashboard__card-badge--phase1">
+              {card.badge}
+            </span>
+            <h3 className="gw-dashboard__card-title">{card.title}</h3>
+            <p className="gw-dashboard__card-desc">{card.description}</p>
+            <span className="gw-dashboard__card-cta">Read this &rarr;</span>
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+}
 
 export default function GenerationalWealthIndex() {
   return (
@@ -146,49 +174,23 @@ export default function GenerationalWealthIndex() {
               <StatCard value="4 years" label="Full build-out timeline" />
             </div>
 
-            <h2 className="gw-dashboard__section-heading">Phase 1 — Buy the Land</h2>
-            <p className="gw-dashboard__section-intro">
-              These six guides cover everything from finding the property to
-              closing the deal. Start with EQIP — it changes how you look at
-              every parcel you consider.
-            </p>
+            <CardGroup
+              title="Start Here — The Critical Decisions"
+              intro="These four guides cover the money, the programs, the legal structure, and the due diligence. Read these before visiting any property."
+              cards={SECTION_CARDS.filter((c) => c.group === "priority")}
+            />
 
-            <div className="gw-dashboard__cards">
-              {SECTION_CARDS.filter((c) => c.phase === 1).map((card) => (
-                <Link key={card.href} href={card.href} className="gw-dashboard__card gw-dashboard__card--active">
-                  <span className="gw-dashboard__card-badge gw-dashboard__card-badge--phase1">
-                    {card.badge}
-                  </span>
-                  <h3 className="gw-dashboard__card-title">{card.title}</h3>
-                  <p className="gw-dashboard__card-desc">{card.description}</p>
-                  <span className="gw-dashboard__card-cta">
-                    Read this &rarr;
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <CardGroup
+              title="Deep Knowledge — The Build"
+              intro="Everything about finding land, building the house, setting up water and power, growing food, and eventually bringing more family onto the property."
+              cards={SECTION_CARDS.filter((c) => c.group === "knowledge")}
+            />
 
-            <h2 className="gw-dashboard__section-heading">Phase 2 — Build It</h2>
-            <p className="gw-dashboard__section-intro">
-              These guides come after the land is bought and the plan is locked.
-              We&rsquo;re writing them as we go — they&rsquo;ll be ready when you
-              need them.
-            </p>
-
-            <div className="gw-dashboard__cards">
-              {SECTION_CARDS.filter((c) => c.phase === 2).map((card) => (
-                <div key={card.href} className="gw-dashboard__card gw-dashboard__card--dimmed">
-                  <span className="gw-dashboard__card-badge gw-dashboard__card-badge--phase2">
-                    {card.badge}
-                  </span>
-                  <h3 className="gw-dashboard__card-title">{card.title}</h3>
-                  <p className="gw-dashboard__card-desc">{card.description}</p>
-                  <span className="gw-dashboard__card-cta gw-dashboard__card-cta--disabled">
-                    Coming Soon
-                  </span>
-                </div>
-              ))}
-            </div>
+            <CardGroup
+              title="Reference — Look These Up When You Need Them"
+              intro="State comparisons, risk analysis, contact directories, the full timeline, and a glossary of every term we use."
+              cards={SECTION_CARDS.filter((c) => c.group === "reference")}
+            />
 
             <div className="gw-dashboard__legal">
               <p>

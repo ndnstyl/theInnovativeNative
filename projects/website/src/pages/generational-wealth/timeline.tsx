@@ -1,5 +1,6 @@
 import React from "react";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import StatCard from "@/components/generational-wealth/StatCard";
 import StepProcess from "@/components/generational-wealth/StepProcess";
@@ -48,6 +49,7 @@ const timelineSteps = phases.map((phase, index) => ({
 export default function TimelinePage() {
   return (
     <GWLayout title="Timeline — The Full Plan, Quarter by Quarter" readingTime="8 min">
+      <PageCover imageSrc="/images/generational-wealth/cover-timeline.jpg" imageAlt="Building progress on homestead" />
       <h1>Timeline — The Full Plan, Quarter by Quarter</h1>
 
       <p className="gw-lead">

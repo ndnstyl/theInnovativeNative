@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import ContactCard from "@/components/generational-wealth/ContactCard";
 import contactsData from "@/data/gw-contacts.json";
 
@@ -48,6 +49,7 @@ export default function ContactsPage() {
 
   return (
     <GWLayout title="Contacts & Resources" lastVerified="April 2026" printable={true}>
+      <PageCover imageSrc="/images/generational-wealth/cover-contacts.jpg" imageAlt="USDA service center" />
       <h1>Contacts &amp; Resources</h1>
       <p className="gw-lead">
         Every phone number, website, and person you might need on this journey.

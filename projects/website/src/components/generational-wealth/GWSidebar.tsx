@@ -5,32 +5,28 @@ import { useRouter } from "next/router";
 interface NavPage {
   label: string;
   href: string;
-  phase2?: boolean;
 }
 
 const PAGES: NavPage[] = [
   { label: "Dashboard", href: "/generational-wealth" },
-  { label: "EQIP", href: "/generational-wealth/eqip" },
+  { label: "EQIP & Cost-Share", href: "/generational-wealth/eqip" },
   { label: "Financing", href: "/generational-wealth/financing" },
   { label: "Due Diligence", href: "/generational-wealth/due-diligence" },
+  { label: "Legal Structure", href: "/generational-wealth/legal-structure" },
+  { label: "Finding Land", href: "/generational-wealth/find-land" },
+  { label: "The Vision", href: "/generational-wealth/vision" },
+  { label: "Building", href: "/generational-wealth/building" },
+  { label: "Systems", href: "/generational-wealth/systems" },
+  { label: "Food Production", href: "/generational-wealth/food" },
+  { label: "The Compound", href: "/generational-wealth/compound" },
+  { label: "OK vs TX", href: "/generational-wealth/oklahoma-vs-texas" },
+  { label: "Risks", href: "/generational-wealth/risks" },
   { label: "Contacts", href: "/generational-wealth/contacts" },
   { label: "Timeline", href: "/generational-wealth/timeline" },
   { label: "Glossary", href: "/generational-wealth/glossary" },
-  { label: "Building", href: "/generational-wealth/building", phase2: true },
-  { label: "Systems", href: "/generational-wealth/systems", phase2: true },
-  { label: "Food Production", href: "/generational-wealth/food", phase2: true },
-  { label: "Legal", href: "/generational-wealth/legal", phase2: true },
-  { label: "Tax Strategy", href: "/generational-wealth/tax", phase2: true },
-  { label: "Estate Planning", href: "/generational-wealth/estate", phase2: true },
-  { label: "Insurance", href: "/generational-wealth/insurance", phase2: true },
-  { label: "Business Structures", href: "/generational-wealth/business", phase2: true },
 ];
 
-interface GWSidebarProps {
-  className?: string;
-}
-
-const GWSidebar = ({ className }: GWSidebarProps) => {
+const GWSidebar = ({ className }: { className?: string }) => {
   const router = useRouter();
 
   return (
@@ -44,16 +40,6 @@ const GWSidebar = ({ className }: GWSidebarProps) => {
       <ul className="gw-sidebar__list">
         {PAGES.map((page) => {
           const isActive = router.asPath === page.href;
-          if (page.phase2) {
-            return (
-              <li key={page.href} className="gw-sidebar__item">
-                <span className="gw-sidebar__link gw-sidebar__link--disabled">
-                  {page.label}
-                  <span className="gw-sidebar__coming-soon">(Coming Soon)</span>
-                </span>
-              </li>
-            );
-          }
           return (
             <li key={page.href} className="gw-sidebar__item">
               <Link

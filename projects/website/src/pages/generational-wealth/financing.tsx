@@ -1,5 +1,6 @@
 import React from "react";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import ComparisonTable from "@/components/generational-wealth/ComparisonTable";
 import ContactCard from "@/components/generational-wealth/ContactCard";
@@ -13,6 +14,7 @@ export default function FinancingPage() {
       title="Money & Financing — The Budget and How to Pay for It"
       readingTime="10 min"
     >
+      <PageCover imageSrc="/images/generational-wealth/cover-financing.jpg" imageAlt="Financial planning for homestead" />
       <h1>Money &amp; Financing — The Budget and How to Pay for It</h1>
 
       <CalloutBox type="the-law">

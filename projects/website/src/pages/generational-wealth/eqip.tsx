@@ -1,5 +1,6 @@
 import React from "react";
 import GWLayout from "@/components/generational-wealth/GWLayout";
+import PageCover from "@/components/generational-wealth/PageCover";
 import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import ComparisonTable from "@/components/generational-wealth/ComparisonTable";
 import CostCalculator from "@/components/generational-wealth/CostCalculator";
@@ -89,6 +90,7 @@ export default function EqipPage() {
       lastVerified="April 2026"
       readingTime="12 min"
     >
+      <PageCover imageSrc="/images/generational-wealth/cover-eqip.jpg" imageAlt="Tractor clearing brush on rural land" />
       <h1>NRCS &amp; EQIP — How the Government Helps Pay</h1>
 
       <CalloutBox type="the-law">
