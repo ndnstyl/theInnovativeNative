@@ -22,9 +22,10 @@ type QuizResultsProps = {
   score: number;
   maxScore: number;
   quizTitle: string;
+  showBooking?: boolean;
 };
 
-const QuizResults = ({ result, score, maxScore, quizTitle }: QuizResultsProps) => {
+const QuizResults = ({ result, score, maxScore, quizTitle, showBooking = false }: QuizResultsProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCTA = () => {
@@ -85,6 +86,15 @@ const QuizResults = ({ result, score, maxScore, quizTitle }: QuizResultsProps) =
         <p className="quiz__results-recommendation">{result.recommendation}</p>
 
         {renderCTA()}
+
+        {showBooking && (
+          <div className="quiz__booking">
+            <p className="quiz__booking-label">Or book a time right now:</p>
+            <button type="button" className="quiz__cta quiz__cta--booking" onClick={handleCTA}>
+              📅 Book a Free 15-Minute Call
+            </button>
+          </div>
+        )}
 
         <button
           type="button"
