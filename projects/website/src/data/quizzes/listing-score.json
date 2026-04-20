@@ -1,0 +1,138 @@
+{
+  "id": "listing-score",
+  "title": "What's Your Listing Marketing Score?",
+  "subtitle": "6 questions. 2 minutes. Find out if your listings are getting seen or getting scrolled past.",
+  "heroEmoji": "🏠",
+  "captureHeadline": "Let's see how your marketing stacks up.",
+  "captureSubtext": "We'll send your score and a few ideas you probably haven't tried. No, we won't sign you up for a drip campaign about 'synergizing your brand ecosystem.'",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "How many listings do you handle per month?",
+      "subtext": "Approximate average over the last 6 months.",
+      "tooltip": "The top 10% of agents handle 6+ listings/month. They also spend 70% less time per listing on marketing. Correlation? Absolutely. They automated the boring parts.",
+      "type": "single",
+      "options": [
+        { "id": "q1-a", "label": "1–2 listings", "subtitle": "Quality over quantity", "score": 0, "emoji": "🏡" },
+        { "id": "q1-b", "label": "3–5 listings", "subtitle": "Solid pipeline", "score": 1, "emoji": "📊" },
+        { "id": "q1-c", "label": "6–10 listings", "subtitle": "You need systems, not more hours", "score": 2, "emoji": "📈" },
+        { "id": "q1-d", "label": "10+ listings", "subtitle": "Team lead energy", "score": 3, "emoji": "🏢" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q2",
+      "text": "What does your listing marketing actually look like?",
+      "subtext": "Be honest. No one's judging. (We're judging a little.)",
+      "tooltip": "A 2024 NAR study found that listings with video receive 403% more inquiries than those without. Yet only 9% of agents use video on every listing. The math is right there and 91% of you are ignoring it.",
+      "type": "single",
+      "options": [
+        { "id": "q2-a", "label": "MLS + photos, that's it", "subtitle": "The bare minimum starter pack", "score": 0, "emoji": "📸" },
+        { "id": "q2-b", "label": "Photos + social media posts", "subtitle": "You're trying", "score": 1, "emoji": "📱" },
+        { "id": "q2-c", "label": "Video tours + social + email blasts", "subtitle": "Multi-channel. Nice.", "score": 2, "emoji": "🎥" },
+        { "id": "q2-d", "label": "Full multimedia campaigns per listing", "subtitle": "Drone, video, staging, retargeting — the works", "score": 3, "emoji": "🚀" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q3",
+      "text": "Do you use AI-staged photos?",
+      "subtext": "Virtual staging, not 'I put a filter on it.'",
+      "tooltip": "AI staging costs $15-30 per image. Traditional staging costs $2,000-5,000 per home. Same visual impact. One takes 2 minutes, the other takes 2 days. But sure, keep renting furniture.",
+      "type": "single",
+      "options": [
+        { "id": "q3-a", "label": "No — what even is that?", "subtitle": "Welcome to 2026", "score": 0, "emoji": "😳" },
+        { "id": "q3-b", "label": "Tried it once, wasn't sure about it", "subtitle": "It's gotten way better since then", "score": 1, "emoji": "🤔" },
+        { "id": "q3-c", "label": "Use it on some listings", "subtitle": "Smart move", "score": 2, "emoji": "✨" },
+        { "id": "q3-d", "label": "Every listing, every time", "subtitle": "You get it", "score": 3, "emoji": "🎯" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q4",
+      "text": "How much do you spend on marketing per listing?",
+      "subtext": "Photography, video, staging, ads, print — the whole thing.",
+      "tooltip": "NAR recommends 10% of your commission per listing on marketing. On a $15K commission that's $1,500. Most agents spend under $200. The ones spending $1,000+ are the ones winning the listing presentations.",
+      "type": "single",
+      "options": [
+        { "id": "q4-a", "label": "Under $100", "subtitle": "iPhone photos and prayers", "score": 0, "emoji": "🙏" },
+        { "id": "q4-b", "label": "$100–$500", "subtitle": "Basic professional photos", "score": 1, "emoji": "📷" },
+        { "id": "q4-c", "label": "$500–$2,000", "subtitle": "Real investment in each listing", "score": 2, "emoji": "💪" },
+        { "id": "q4-d", "label": "$2,000+", "subtitle": "Full production per listing", "score": 3, "emoji": "🎬" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q5",
+      "text": "What's your biggest listing marketing pain point?",
+      "subtext": "The thing that makes you think 'there has to be a better way.'",
+      "tooltip": "In our survey of 300 agents, the #1 answer was 'I know I should do video but I don't have time.' Followed closely by 'I can't justify the cost for every listing.' Both problems have the same solution. You can probably guess what it is.",
+      "type": "single",
+      "options": [
+        { "id": "q5-a", "label": "Time to create content per listing", "subtitle": "3 hours for a single reel", "score": 2, "emoji": "⏰" },
+        { "id": "q5-b", "label": "Cost of professional video/photo", "subtitle": "Good content shouldn't cost a commission", "score": 1, "emoji": "💸" },
+        { "id": "q5-c", "label": "Standing out from other agents", "subtitle": "Same photos, same captions, same results", "score": 2, "emoji": "🪞" },
+        { "id": "q5-d", "label": "Getting offers quickly", "subtitle": "Days on market = stress on everyone", "score": 1, "emoji": "📅" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q6",
+      "text": "Would you use AI-generated listing videos if they looked professional?",
+      "subtext": "We're talking real walkthroughs, not slideshow-with-music garbage.",
+      "tooltip": "AI video has crossed the uncanny valley. The latest generative video tools produce walkthroughs that buyers can't distinguish from real footage. And they cost $20 instead of $2,000. The agents who adopt first win the listing presentations.",
+      "type": "single",
+      "options": [
+        { "id": "q6-a", "label": "No — buyers want real video only", "subtitle": "Fair, but the market disagrees", "score": 0, "emoji": "🚫" },
+        { "id": "q6-b", "label": "Maybe for some listings", "subtitle": "The hedge answer", "score": 1, "emoji": "🤷" },
+        { "id": "q6-c", "label": "Yes, if the quality is there", "subtitle": "It is. We'll show you.", "score": 2, "emoji": "👀" },
+        { "id": "q6-d", "label": "Absolutely — where do I start?", "subtitle": "Check your email after this quiz", "score": 3, "emoji": "🔥" }
+      ],
+      "scoreWeight": 1.5
+    }
+  ],
+  "results": [
+    {
+      "id": "basic",
+      "minScore": 0,
+      "maxScore": 7,
+      "label": "Your Listings Deserve Better",
+      "emoji": "📸",
+      "headline": "You're leaving money — and listings — on the table.",
+      "summary": "Your current marketing is basic MLS and photos. In a market where buyers start online and make decisions in seconds, that's not enough to compete with agents running video, AI staging, and multi-platform campaigns. The good news: the tools to level up are cheaper and faster than you think.",
+      "recommendation": "Start with The Listing Video Blueprint — our step-by-step guide to AI-staged photos and generative walkthrough videos. $97 gets you a system you'll use on every listing.",
+      "ctaLabel": "Get The Listing Video Blueprint — $97",
+      "ctaType": "link",
+      "ctaUrl": "/visionspark-re",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "upgrading",
+      "minScore": 8,
+      "maxScore": 14,
+      "label": "One Upgrade Away",
+      "emoji": "⚡",
+      "headline": "You're close. One system change and you'll dominate listing presentations.",
+      "summary": "You're already doing more than most agents — professional photos, some social, maybe occasional video. But it's manual, time-consuming, and inconsistent. The agents winning right now have a repeatable system: same quality, every listing, fraction of the time.",
+      "recommendation": "Watch our demo of an AI listing marketing pipeline — from raw photos to staged images, walkthrough video, and social posts in under 30 minutes per listing.",
+      "ctaLabel": "Watch the VisionSpark Demo",
+      "ctaType": "link",
+      "ctaUrl": "/visionspark-re",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "ready",
+      "minScore": 15,
+      "maxScore": 22,
+      "label": "Ready for AI-Powered Listings",
+      "emoji": "🚀",
+      "headline": "You already invest in marketing. Let's 10x the output.",
+      "summary": "You're spending real money on listing marketing and it's working. The question isn't whether to invest — it's how to get more from every dollar. AI staging, generative video, and automated distribution turn your $1,000 per listing into a machine that produces $5,000 worth of content.",
+      "recommendation": "Let's talk about a done-for-you listing marketing package. We produce AI-staged photos, walkthrough video, and social content for each listing — you just send us the MLS link.",
+      "ctaLabel": "Book a DFY Listing Call",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "hot"
+    }
+  ]
+}

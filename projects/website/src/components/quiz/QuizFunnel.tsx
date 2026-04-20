@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import aiReadiness from "@/data/quizzes/ai-readiness.json";
 import lawFirmAudit from "@/data/quizzes/law-firm-audit.json";
+import contentScore from "@/data/quizzes/content-score.json";
+import listingScore from "@/data/quizzes/listing-score.json";
+import costCalculator from "@/data/quizzes/cost-calculator.json";
 import QuizWelcome from "./QuizWelcome";
 import QuizCapture from "./QuizCapture";
 import QuizQuestion from "./QuizQuestion";
@@ -9,6 +12,9 @@ import QuizResults from "./QuizResults";
 const QUIZ_MAP: Record<string, any> = {
   "ai-readiness": aiReadiness,
   "law-firm-audit": lawFirmAudit,
+  "content-score": contentScore,
+  "listing-score": listingScore,
+  "cost-calculator": costCalculator,
 };
 
 type AnswerRecord = {

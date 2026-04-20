@@ -1,0 +1,139 @@
+{
+  "id": "content-score",
+  "title": "What's Your Content Production Score?",
+  "subtitle": "6 questions. 2 minutes. Find out if you're a content machine or a content hostage.",
+  "heroEmoji": "🎬",
+  "captureHeadline": "Before we judge your content workflow...",
+  "captureSubtext": "Tell us where to send your score. We promise not to add you to a 47-email nurture sequence. (We automated that away years ago.)",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "How many pieces of content do you publish per week?",
+      "subtext": "Posts, reels, videos, blogs, newsletters — all of it.",
+      "tooltip": "The top 1% of creators publish 20+ pieces per week. Before you panic, most of them automated 80% of it. That's the secret no one talks about.",
+      "type": "single",
+      "options": [
+        { "id": "q1-a", "label": "0–1 pieces", "subtitle": "The ghost", "score": 0, "emoji": "👻" },
+        { "id": "q1-b", "label": "2–4 pieces", "subtitle": "Consistent-ish", "score": 1, "emoji": "📝" },
+        { "id": "q1-c", "label": "5–10 pieces", "subtitle": "Content warrior", "score": 2, "emoji": "⚔️" },
+        { "id": "q1-d", "label": "10+ pieces", "subtitle": "Either automated or exhausted", "score": 3, "emoji": "🤖" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q2",
+      "text": "How long does it take you to create ONE piece of content?",
+      "subtext": "From idea to published. Be honest — include the 45 minutes you spent picking a font.",
+      "tooltip": "The industry average is 3-4 hours per blog post and 2 hours per social video. AI-assisted creators do the same in 20-30 minutes. Same quality. Less existential dread.",
+      "type": "single",
+      "options": [
+        { "id": "q2-a", "label": "3+ hours", "subtitle": "You're crafting, not producing", "score": 0, "emoji": "🎨" },
+        { "id": "q2-b", "label": "1–3 hours", "subtitle": "Standard human speed", "score": 1, "emoji": "⏱️" },
+        { "id": "q2-c", "label": "30–60 minutes", "subtitle": "You've got systems", "score": 2, "emoji": "🏎️" },
+        { "id": "q2-d", "label": "Under 30 minutes", "subtitle": "Teach us your ways", "score": 3, "emoji": "⚡" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q3",
+      "text": "What eats most of your content time?",
+      "subtext": "Pick the one that just made you sigh.",
+      "tooltip": "83% of creators say editing is their biggest time sink. The irony: editing is the most automatable part of the entire pipeline. The robots are literally better at cutting silence and color grading than you are. Sorry.",
+      "type": "single",
+      "options": [
+        { "id": "q3-a", "label": "Coming up with ideas", "subtitle": "The blank page stare", "score": 1, "emoji": "😶" },
+        { "id": "q3-b", "label": "Filming or shooting", "subtitle": "Lighting. Always the lighting.", "score": 1, "emoji": "💡" },
+        { "id": "q3-c", "label": "Editing", "subtitle": "The 4-hour rabbit hole", "score": 2, "emoji": "✂️" },
+        { "id": "q3-d", "label": "Writing captions and copy", "subtitle": "The worst part and you know it", "score": 2, "emoji": "📱" },
+        { "id": "q3-e", "label": "Distribution across platforms", "subtitle": "Copy, paste, resize, reformat, cry", "score": 2, "emoji": "🔄" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q4",
+      "text": "Do you repurpose content across platforms?",
+      "subtext": "One video becomes a reel, a blog post, 3 tweets, and a LinkedIn carousel. Right? ...Right?",
+      "tooltip": "Gary Vee's team turns 1 keynote into 64 pieces of content. You don't need a team of 12 to do this. You need a pipeline. One workflow. Zero interns harmed.",
+      "type": "single",
+      "options": [
+        { "id": "q4-a", "label": "No — each platform gets original content", "subtitle": "You beautiful, exhausted human", "score": 0, "emoji": "😮‍💨" },
+        { "id": "q4-b", "label": "Sometimes, manually", "subtitle": "Ctrl+C, Ctrl+V, adjust, curse, repeat", "score": 1, "emoji": "📋" },
+        { "id": "q4-c", "label": "Yes, with some tools helping", "subtitle": "Getting there", "score": 2, "emoji": "🛠️" },
+        { "id": "q4-d", "label": "Fully automated repurposing pipeline", "subtitle": "You've ascended", "score": 3, "emoji": "🧘" }
+      ],
+      "scoreWeight": 1.5
+    },
+    {
+      "id": "q5",
+      "text": "Have you used AI for content creation?",
+      "subtext": "ChatGPT counts. Screaming at it also counts.",
+      "tooltip": "92% of creators have 'tried' AI. 8% have actually built it into their workflow. The 8% produce 5x more content in half the time. The 92% are still writing prompts that say 'act as a social media expert.'",
+      "type": "single",
+      "options": [
+        { "id": "q5-a", "label": "Never touched it", "subtitle": "You hand-write your captions in calligraphy, don't you", "score": 0, "emoji": "🖋️" },
+        { "id": "q5-b", "label": "ChatGPT for ideas and drafts", "subtitle": "Baby steps are still steps", "score": 1, "emoji": "👶" },
+        { "id": "q5-c", "label": "Multiple AI tools in my workflow", "subtitle": "Caption gen, image gen, scheduling", "score": 2, "emoji": "🔧" },
+        { "id": "q5-d", "label": "Built a full AI content pipeline", "subtitle": "Are you hiring?", "score": 3, "emoji": "🏭" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q6",
+      "text": "What would you invest to cut your content time in half?",
+      "subtext": "Same output, half the hours. What's that worth?",
+      "tooltip": "If you spend 20 hours/week on content and your time is worth $100/hr, that's $104,000/year on content production alone. Cutting that in half saves $52,000. Or, you know, you could just keep doing it manually. Your therapist needs the business.",
+      "type": "single",
+      "options": [
+        { "id": "q6-a", "label": "Nothing — I enjoy the process", "subtitle": "Valid. Unscalable, but valid.", "score": 0, "emoji": "🧘" },
+        { "id": "q6-b", "label": "$50–$100/month", "subtitle": "Less than your coffee budget", "score": 1, "emoji": "☕" },
+        { "id": "q6-c", "label": "$100–$500/month", "subtitle": "Smart investment territory", "score": 2, "emoji": "📈" },
+        { "id": "q6-d", "label": "Whatever gets me my time back", "subtitle": "Now we're talking", "score": 3, "emoji": "💰" }
+      ],
+      "scoreWeight": 1.5
+    }
+  ],
+  "results": [
+    {
+      "id": "manual-mode",
+      "minScore": 0,
+      "maxScore": 7,
+      "label": "Manual Mode",
+      "emoji": "🐌",
+      "headline": "You're creating content the hard way. Let's fix that.",
+      "summary": "Every piece of content is a one-off effort. No templates, no automation, no repurposing. You're spending hours on what should take minutes. The good news: you have the biggest upside potential of anyone taking this quiz.",
+      "recommendation": "Start with the fundamentals. TwinGen walks you through building an AI content pipeline from scratch — from idea generation to publish-ready content in minutes, not hours.",
+      "ctaLabel": "Check Out TwinGen — $57",
+      "ctaType": "link",
+      "ctaUrl": "/twingen",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "ready-to-automate",
+      "minScore": 8,
+      "maxScore": 14,
+      "label": "Ready to Automate",
+      "emoji": "⚡",
+      "headline": "You've got the skills. Now let's build the machine.",
+      "summary": "You're creating content consistently, maybe using a few tools. But you're still the bottleneck. Every piece still requires YOU to touch it multiple times. One well-designed pipeline changes everything — same quality, fraction of the time.",
+      "recommendation": "Join the classroom for deep-dive courses on AI content pipelines, automation workflows, and production systems that scale without hiring.",
+      "ctaLabel": "Join the Classroom — $99/mo",
+      "ctaType": "link",
+      "ctaUrl": "/classroom",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "pipeline-ready",
+      "minScore": 15,
+      "maxScore": 22,
+      "label": "Pipeline Ready",
+      "emoji": "🚀",
+      "headline": "You're already ahead. Let's make you untouchable.",
+      "summary": "You have tools, some automation, and a clear workflow. But there are gaps — manual steps that could be eliminated, repurposing that could be automated, distribution that could run itself. Let's close those gaps.",
+      "recommendation": "Let's talk about a custom content infrastructure build. We design the pipeline, connect your tools, and hand you a system that runs while you focus on what only you can do — being creative.",
+      "ctaLabel": "Book a Content Systems Call",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "hot"
+    }
+  ]
+}

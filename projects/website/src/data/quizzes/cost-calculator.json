@@ -1,0 +1,125 @@
+{
+  "id": "cost-calculator",
+  "title": "How Much Is Manual Work Costing You?",
+  "subtitle": "5 questions. 90 seconds. A dollar amount you can't unsee.",
+  "heroEmoji": "💸",
+  "captureHeadline": "Ready to see the damage?",
+  "captureSubtext": "We'll send you the full breakdown with 3 specific automations that would save you the most. We will not use this information to haunt you. (The number itself will do that.)",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "What's your hourly rate? (Or what you pay your team)",
+      "subtext": "Average across the people doing the repetitive work.",
+      "tooltip": "If you said 'I don't know,' congratulations — you're paying people an unknown amount to do things a robot could do for $0.003 per execution. That's fine. Everything is fine. 🔥",
+      "type": "single",
+      "options": [
+        { "id": "q1-a", "label": "$25–$50/hr", "subtitle": "Entry-level team", "score": 37, "emoji": "💵" },
+        { "id": "q1-b", "label": "$50–$100/hr", "subtitle": "Experienced staff", "score": 75, "emoji": "💰" },
+        { "id": "q1-c", "label": "$100–$200/hr", "subtitle": "Senior / specialist", "score": 150, "emoji": "💎" },
+        { "id": "q1-d", "label": "$200+/hr", "subtitle": "Your time is expensive and you're wasting it", "score": 250, "emoji": "👑" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q2",
+      "text": "How many hours per week does your team spend on repetitive tasks?",
+      "subtext": "Copy-paste, data entry, manual follow-up, reformatting, updating spreadsheets...",
+      "tooltip": "McKinsey found that 60% of occupations have at least 30% automatable tasks. That means almost a third of your team's week is doing robot work at human prices. Let that sink in while you pick your answer.",
+      "type": "single",
+      "options": [
+        { "id": "q2-a", "label": "2–5 hours/week", "subtitle": "That's already half a day", "score": 3, "emoji": "⏰" },
+        { "id": "q2-b", "label": "5–10 hours/week", "subtitle": "A full workday. Every. Week.", "score": 7, "emoji": "📅" },
+        { "id": "q2-c", "label": "10–20 hours/week", "subtitle": "You're paying for 2 days of robot work per week", "score": 15, "emoji": "🤖" },
+        { "id": "q2-d", "label": "20+ hours/week", "subtitle": "You don't have a team problem, you have a systems problem", "score": 25, "emoji": "🚨" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q3",
+      "text": "How many people on your team do this kind of repetitive work?",
+      "subtext": "Including yourself if you're doing it too. (You probably are.)",
+      "tooltip": "Solo operators lose 5-15 hours/week to tasks they could automate. A 5-person team? That's 25-75 hours/week of collective capacity being burned on copy-paste. Multiply by 52 weeks. Now multiply by the hourly rate you just told us. We'll wait.",
+      "type": "single",
+      "options": [
+        { "id": "q3-a", "label": "Just me", "subtitle": "Chief Manual Officer", "score": 1, "emoji": "🦸" },
+        { "id": "q3-b", "label": "2–3 people", "subtitle": "The repetition is spreading", "score": 2, "emoji": "👥" },
+        { "id": "q3-c", "label": "4–10 people", "subtitle": "Real team, real waste", "score": 7, "emoji": "🏢" },
+        { "id": "q3-d", "label": "10+ people", "subtitle": "You could fund an automation team with what you're losing", "score": 15, "emoji": "🏛️" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q4",
+      "text": "What industry are you in?",
+      "subtext": "This helps us give you relevant automation examples.",
+      "tooltip": "Every industry thinks they're 'different' and that automation won't work for them. Every industry is wrong. We've automated workflows for lawyers, real estate agents, e-commerce stores, creative agencies, and a guy who breeds tropical fish. Automation doesn't care about your industry.",
+      "type": "single",
+      "options": [
+        { "id": "q4-a", "label": "Legal / Professional Services", "subtitle": "Billable hours being burned on admin", "score": 0, "emoji": "⚖️" },
+        { "id": "q4-b", "label": "Real Estate", "subtitle": "Follow-up is everything, and you're dropping the ball", "score": 0, "emoji": "🏠" },
+        { "id": "q4-c", "label": "Creative / Content / Agency", "subtitle": "Too much time producing, not enough time creating", "score": 0, "emoji": "🎨" },
+        { "id": "q4-d", "label": "E-commerce / Retail", "subtitle": "Inventory, orders, customer service — all automatable", "score": 0, "emoji": "🛒" }
+      ],
+      "scoreWeight": 0
+    },
+    {
+      "id": "q5",
+      "text": "What's your single biggest time waste?",
+      "subtext": "If you could wave a wand and eliminate ONE task forever, which would it be?",
+      "tooltip": "The top 3 answers across all industries: 1) Email follow-up and lead chasing (34%), 2) Data entry and reporting (28%), 3) Content creation and formatting (22%). All three can be automated to near-zero with the right system. The wand exists. It's called n8n.",
+      "type": "single",
+      "options": [
+        { "id": "q5-a", "label": "Data entry and reporting", "subtitle": "Spreadsheets that update themselves? Yes.", "score": 0, "emoji": "📊" },
+        { "id": "q5-b", "label": "Email follow-up and lead chasing", "subtitle": "The ball you keep dropping", "score": 0, "emoji": "📧" },
+        { "id": "q5-c", "label": "Content creation and formatting", "subtitle": "Same template, different day", "score": 0, "emoji": "📝" },
+        { "id": "q5-d", "label": "Client intake and onboarding", "subtitle": "Forms, calls, setup — on repeat", "score": 0, "emoji": "📋" },
+        { "id": "q5-e", "label": "Invoicing, billing, admin", "subtitle": "You didn't start a business to do bookkeeping", "score": 0, "emoji": "🧾" }
+      ],
+      "scoreWeight": 0
+    }
+  ],
+  "results": [
+    {
+      "id": "low-cost",
+      "minScore": 0,
+      "maxScore": 300,
+      "label": "Moderate Waste",
+      "emoji": "💡",
+      "headline": "You're losing ${{WEEKLY}} per week to manual work.",
+      "summary": "That's ${{MONTHLY}} per month and ${{ANNUAL}} per year in labor spent on tasks that don't require human judgment. It's not catastrophic yet — but it adds up. And it's only going to grow as your business does. The best time to automate was last year. The second best time is now.",
+      "recommendation": "Start with the basics. We have a free guide that identifies the 5 highest-ROI automations for small businesses. Most can be set up in an afternoon.",
+      "ctaLabel": "Get the Free Automation Guide",
+      "ctaType": "link",
+      "ctaUrl": "/resources",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "mid-cost",
+      "minScore": 301,
+      "maxScore": 2000,
+      "label": "Serious Waste",
+      "emoji": "🔥",
+      "headline": "You're burning ${{WEEKLY}} per week on manual work.",
+      "summary": "That's ${{MONTHLY}} per month — ${{ANNUAL}} per year — in human labor doing things that software can do faster, cheaper, and without calling in sick. You could hire a full-time employee with what you're wasting. Or... you could automate it for a fraction of that cost.",
+      "recommendation": "You're in the sweet spot for a 30-minute diagnostic call. We'll identify your 3 highest-impact automations and give you a roadmap — no pitch, just a plan.",
+      "ctaLabel": "Book a Free Diagnostic Call",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "high-cost",
+      "minScore": 2001,
+      "maxScore": 999999,
+      "label": "Critical Waste",
+      "emoji": "🚨",
+      "headline": "You're hemorrhaging ${{WEEKLY}} per week.",
+      "summary": "That's ${{MONTHLY}} per month and ${{ANNUAL}} per year in labor spent on repetitive, automatable work. This isn't a nice-to-fix — it's a competitive disadvantage. Your competitors who automate this are reinvesting those hours into growth. You're reinvesting them into copy-paste.",
+      "recommendation": "Let's talk about a Pilot engagement. We build your custom automation infrastructure in 2-4 weeks. You keep it forever. Your team stops doing robot work and starts doing human work.",
+      "ctaLabel": "Book a Pilot Call — $2,500",
+      "ctaType": "calendly",
+      "ctaUrl": "",
+      "heatLevel": "hot"
+    }
+  ]
+}
