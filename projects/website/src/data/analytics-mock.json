@@ -1,0 +1,333 @@
+{
+  "lastUpdated": "2026-04-22T14:30:00Z",
+  "dateRange": { "start": "2026-03-23", "end": "2026-04-22" },
+  "ga4": {
+    "summary": {
+      "users": 1240,
+      "sessions": 2100,
+      "pageViews": 5800,
+      "bounceRate": 42.3,
+      "avgSessionDuration": 185,
+      "newUsers": 780,
+      "conversions": 34
+    },
+    "trend": [
+      { "date": "2026-03-23", "users": 34, "sessions": 58 },
+      { "date": "2026-03-24", "users": 41, "sessions": 67 },
+      { "date": "2026-03-25", "users": 38, "sessions": 61 },
+      { "date": "2026-03-26", "users": 52, "sessions": 84 },
+      { "date": "2026-03-27", "users": 61, "sessions": 98 },
+      { "date": "2026-03-28", "users": 55, "sessions": 89 },
+      { "date": "2026-03-29", "users": 43, "sessions": 71 },
+      { "date": "2026-03-30", "users": 30, "sessions": 52 },
+      { "date": "2026-03-31", "users": 36, "sessions": 59 },
+      { "date": "2026-04-01", "users": 47, "sessions": 76 },
+      { "date": "2026-04-02", "users": 58, "sessions": 93 },
+      { "date": "2026-04-03", "users": 65, "sessions": 104 },
+      { "date": "2026-04-04", "users": 72, "sessions": 115 },
+      { "date": "2026-04-05", "users": 49, "sessions": 79 },
+      { "date": "2026-04-06", "users": 33, "sessions": 55 },
+      { "date": "2026-04-07", "users": 37, "sessions": 61 },
+      { "date": "2026-04-08", "users": 54, "sessions": 87 },
+      { "date": "2026-04-09", "users": 68, "sessions": 109 },
+      { "date": "2026-04-10", "users": 75, "sessions": 120 },
+      { "date": "2026-04-11", "users": 71, "sessions": 114 },
+      { "date": "2026-04-12", "users": 62, "sessions": 99 },
+      { "date": "2026-04-13", "users": 44, "sessions": 72 },
+      { "date": "2026-04-14", "users": 39, "sessions": 64 },
+      { "date": "2026-04-15", "users": 56, "sessions": 90 },
+      { "date": "2026-04-16", "users": 64, "sessions": 103 },
+      { "date": "2026-04-17", "users": 79, "sessions": 118 },
+      { "date": "2026-04-18", "users": 67, "sessions": 107 },
+      { "date": "2026-04-19", "users": 53, "sessions": 86 },
+      { "date": "2026-04-20", "users": 48, "sessions": 78 },
+      { "date": "2026-04-21", "users": 42, "sessions": 69 }
+    ],
+    "topPages": [
+      { "path": "/", "views": 398, "uniqueUsers": 312, "avgTime": 142, "bounceRate": 38.2 },
+      { "path": "/blog/ai-lead-generation", "views": 287, "uniqueUsers": 241, "avgTime": 214, "bounceRate": 31.4 },
+      { "path": "/blog/ai-campaign-automation", "views": 243, "uniqueUsers": 198, "avgTime": 198, "bounceRate": 34.7 },
+      { "path": "/quiz", "views": 221, "uniqueUsers": 189, "avgTime": 267, "bounceRate": 22.1 },
+      { "path": "/about", "views": 174, "uniqueUsers": 152, "avgTime": 118, "bounceRate": 44.8 },
+      { "path": "/blog", "views": 168, "uniqueUsers": 145, "avgTime": 87, "bounceRate": 51.3 },
+      { "path": "/resources", "views": 134, "uniqueUsers": 117, "avgTime": 156, "bounceRate": 28.9 },
+      { "path": "/law-firm-rag", "views": 112, "uniqueUsers": 98, "avgTime": 189, "bounceRate": 26.4 },
+      { "path": "/blog/content-automation", "views": 98, "uniqueUsers": 84, "avgTime": 203, "bounceRate": 29.7 },
+      { "path": "/classroom", "views": 74, "uniqueUsers": 61, "avgTime": 312, "bounceRate": 18.3 }
+    ],
+    "sources": [
+      { "source": "google / organic", "sessions": 800 },
+      { "source": "direct / (none)", "sessions": 450 },
+      { "source": "facebook / referral", "sessions": 320 },
+      { "source": "linkedin / social", "sessions": 280 },
+      { "source": "email / outreach", "sessions": 150 },
+      { "source": "tinn.me / shortlink", "sessions": 100 }
+    ],
+    "devices": { "desktop": 55, "mobile": 42, "tablet": 3 },
+    "countries": [
+      { "country": "US", "users": 980 },
+      { "country": "UK", "users": 85 },
+      { "country": "CA", "users": 62 },
+      { "country": "AU", "users": 45 },
+      { "country": "IN", "users": 38 },
+      { "country": "Other", "users": 30 }
+    ],
+    "events": [
+      { "name": "page_view", "count": 5800 },
+      { "name": "quiz_complete", "count": 87 },
+      { "name": "calendly_click", "count": 23 },
+      { "name": "link_click", "count": 342 },
+      { "name": "scroll_depth_75", "count": 1200 },
+      { "name": "outbound_click", "count": 156 }
+    ],
+    "realtime": { "activeUsers": 3 }
+  },
+  "gsc": {
+    "summary": {
+      "clicks": 2400,
+      "impressions": 45000,
+      "ctr": 5.3,
+      "avgPosition": 14.2
+    },
+    "trend": [
+      { "date": "2026-03-23", "clicks": 62, "impressions": 1124 },
+      { "date": "2026-03-24", "clicks": 74, "impressions": 1287 },
+      { "date": "2026-03-25", "clicks": 58, "impressions": 1043 },
+      { "date": "2026-03-26", "clicks": 81, "impressions": 1456 },
+      { "date": "2026-03-27", "clicks": 96, "impressions": 1698 },
+      { "date": "2026-03-28", "clicks": 88, "impressions": 1574 },
+      { "date": "2026-03-29", "clicks": 71, "impressions": 1312 },
+      { "date": "2026-03-30", "clicks": 45, "impressions": 843 },
+      { "date": "2026-03-31", "clicks": 53, "impressions": 967 },
+      { "date": "2026-04-01", "clicks": 67, "impressions": 1198 },
+      { "date": "2026-04-02", "clicks": 79, "impressions": 1401 },
+      { "date": "2026-04-03", "clicks": 94, "impressions": 1654 },
+      { "date": "2026-04-04", "clicks": 108, "impressions": 1876 },
+      { "date": "2026-04-05", "clicks": 83, "impressions": 1487 },
+      { "date": "2026-04-06", "clicks": 49, "impressions": 901 },
+      { "date": "2026-04-07", "clicks": 55, "impressions": 1012 },
+      { "date": "2026-04-08", "clicks": 72, "impressions": 1289 },
+      { "date": "2026-04-09", "clicks": 91, "impressions": 1623 },
+      { "date": "2026-04-10", "clicks": 112, "impressions": 1943 },
+      { "date": "2026-04-11", "clicks": 103, "impressions": 1812 },
+      { "date": "2026-04-12", "clicks": 87, "impressions": 1556 },
+      { "date": "2026-04-13", "clicks": 63, "impressions": 1134 },
+      { "date": "2026-04-14", "clicks": 57, "impressions": 1021 },
+      { "date": "2026-04-15", "clicks": 76, "impressions": 1367 },
+      { "date": "2026-04-16", "clicks": 89, "impressions": 1589 },
+      { "date": "2026-04-17", "clicks": 118, "impressions": 2043 },
+      { "date": "2026-04-18", "clicks": 97, "impressions": 1723 },
+      { "date": "2026-04-19", "clicks": 81, "impressions": 1445 },
+      { "date": "2026-04-20", "clicks": 74, "impressions": 1312 },
+      { "date": "2026-04-21", "clicks": 66, "impressions": 1187 }
+    ],
+    "queries": [
+      { "query": "ai automation consultant", "clicks": 284, "impressions": 4120, "ctr": 6.9, "position": 8.4 },
+      { "query": "n8n workflow automation", "clicks": 231, "impressions": 3870, "ctr": 5.97, "position": 11.2 },
+      { "query": "ai for small business", "clicks": 198, "impressions": 5640, "ctr": 3.51, "position": 16.8 },
+      { "query": "law firm ai tools", "clicks": 176, "impressions": 2980, "ctr": 5.91, "position": 9.7 },
+      { "query": "ai lead generation system", "clicks": 154, "impressions": 4230, "ctr": 3.64, "position": 18.3 },
+      { "query": "content automation tools", "clicks": 143, "impressions": 3560, "ctr": 4.02, "position": 13.6 },
+      { "query": "chatgpt for law firms", "clicks": 128, "impressions": 2840, "ctr": 4.51, "position": 10.9 },
+      { "query": "ai campaign automation", "clicks": 112, "impressions": 3120, "ctr": 3.59, "position": 15.4 },
+      { "query": "n8n vs zapier", "clicks": 98, "impressions": 4780, "ctr": 2.05, "position": 22.7 },
+      { "query": "ai workflow builder", "clicks": 87, "impressions": 2650, "ctr": 3.28, "position": 17.1 },
+      { "query": "automated outreach system", "clicks": 76, "impressions": 1890, "ctr": 4.02, "position": 12.3 },
+      { "query": "michael soto ai consultant", "clicks": 68, "impressions": 420, "ctr": 16.19, "position": 3.2 },
+      { "query": "innovative native ai", "clicks": 61, "impressions": 387, "ctr": 15.76, "position": 2.8 },
+      { "query": "ai readiness quiz business", "clicks": 54, "impressions": 1230, "ctr": 4.39, "position": 14.8 },
+      { "query": "hire ai consultant small business", "clicks": 47, "impressions": 2140, "ctr": 2.2, "position": 21.4 }
+    ],
+    "pages": [
+      { "page": "/", "clicks": 542, "impressions": 8760, "ctr": 6.19, "position": 9.3 },
+      { "page": "/blog/ai-lead-generation", "clicks": 387, "impressions": 6230, "ctr": 6.21, "position": 7.8 },
+      { "page": "/quiz", "clicks": 312, "impressions": 4890, "ctr": 6.38, "position": 11.4 },
+      { "page": "/blog/ai-campaign-automation", "clicks": 287, "impressions": 5140, "ctr": 5.58, "position": 13.2 },
+      { "page": "/law-firm-rag", "clicks": 234, "impressions": 3780, "ctr": 6.19, "position": 8.9 },
+      { "page": "/about", "clicks": 198, "impressions": 2980, "ctr": 6.64, "position": 6.7 },
+      { "page": "/resources", "clicks": 167, "impressions": 3120, "ctr": 5.35, "position": 15.6 },
+      { "page": "/blog/content-automation", "clicks": 143, "impressions": 2870, "ctr": 4.98, "position": 14.3 },
+      { "page": "/classroom", "clicks": 98, "impressions": 1870, "ctr": 5.24, "position": 12.8 },
+      { "page": "/blog", "clicks": 74, "impressions": 2340, "ctr": 3.16, "position": 19.7 }
+    ]
+  },
+  "meta": {
+    "summary": {
+      "spend": 1250.0,
+      "impressions": 85000,
+      "clicks": 2100,
+      "ctr": 2.47,
+      "cpc": 0.6,
+      "cpm": 14.71,
+      "reach": 42000,
+      "frequency": 2.02,
+      "leads": 34,
+      "costPerLead": 36.76
+    },
+    "trend": [
+      { "date": "2026-03-23", "spend": 28.4, "clicks": 47, "leads": 1 },
+      { "date": "2026-03-24", "spend": 34.7, "clicks": 58, "leads": 2 },
+      { "date": "2026-03-25", "spend": 31.2, "clicks": 52, "leads": 1 },
+      { "date": "2026-03-26", "spend": 42.8, "clicks": 71, "leads": 2 },
+      { "date": "2026-03-27", "spend": 51.3, "clicks": 85, "leads": 3 },
+      { "date": "2026-03-28", "spend": 47.9, "clicks": 80, "leads": 2 },
+      { "date": "2026-03-29", "spend": 38.6, "clicks": 64, "leads": 1 },
+      { "date": "2026-03-30", "spend": 22.1, "clicks": 37, "leads": 0 },
+      { "date": "2026-03-31", "spend": 26.4, "clicks": 44, "leads": 1 },
+      { "date": "2026-04-01", "spend": 33.8, "clicks": 56, "leads": 1 },
+      { "date": "2026-04-02", "spend": 40.7, "clicks": 68, "leads": 2 },
+      { "date": "2026-04-03", "spend": 48.2, "clicks": 80, "leads": 2 },
+      { "date": "2026-04-04", "spend": 56.1, "clicks": 93, "leads": 3 },
+      { "date": "2026-04-05", "spend": 44.9, "clicks": 74, "leads": 1 },
+      { "date": "2026-04-06", "spend": 25.3, "clicks": 42, "leads": 0 },
+      { "date": "2026-04-07", "spend": 29.7, "clicks": 49, "leads": 1 },
+      { "date": "2026-04-08", "spend": 38.4, "clicks": 64, "leads": 2 },
+      { "date": "2026-04-09", "spend": 46.8, "clicks": 78, "leads": 2 },
+      { "date": "2026-04-10", "spend": 54.3, "clicks": 90, "leads": 3 },
+      { "date": "2026-04-11", "spend": 52.7, "clicks": 87, "leads": 2 },
+      { "date": "2026-04-12", "spend": 43.1, "clicks": 71, "leads": 1 },
+      { "date": "2026-04-13", "spend": 31.6, "clicks": 52, "leads": 1 },
+      { "date": "2026-04-14", "spend": 27.4, "clicks": 45, "leads": 0 },
+      { "date": "2026-04-15", "spend": 36.9, "clicks": 61, "leads": 1 },
+      { "date": "2026-04-16", "spend": 44.2, "clicks": 73, "leads": 2 },
+      { "date": "2026-04-17", "spend": 59.8, "clicks": 99, "leads": 3 },
+      { "date": "2026-04-18", "spend": 51.4, "clicks": 85, "leads": 2 },
+      { "date": "2026-04-19", "spend": 42.6, "clicks": 70, "leads": 1 },
+      { "date": "2026-04-20", "spend": 37.1, "clicks": 61, "leads": 1 },
+      { "date": "2026-04-21", "spend": 31.8, "clicks": 53, "leads": 0 }
+    ],
+    "campaigns": [
+      { "name": "AI Readiness Quiz — Lead Gen", "status": "active", "spend": 487.3, "impressions": 33200, "clicks": 820, "ctr": 2.47, "cpc": 0.59, "leads": 14, "costPerLead": 34.81 },
+      { "name": "Law Firm Audit — Retargeting", "status": "active", "spend": 312.8, "impressions": 21400, "clicks": 530, "ctr": 2.48, "cpc": 0.59, "leads": 10, "costPerLead": 31.28 },
+      { "name": "Content Score Quiz — Cold", "status": "active", "spend": 289.4, "impressions": 19800, "clicks": 490, "ctr": 2.47, "cpc": 0.59, "leads": 7, "costPerLead": 41.34 },
+      { "name": "Brand Awareness — IG Reel", "status": "paused", "spend": 160.5, "impressions": 10600, "clicks": 260, "ctr": 2.45, "cpc": 0.62, "leads": 3, "costPerLead": 53.5 }
+    ],
+    "demographics": {
+      "age": [
+        { "range": "25-34", "spend": 380, "clicks": 650 },
+        { "range": "35-44", "spend": 420, "clicks": 720 },
+        { "range": "45-54", "spend": 280, "clicks": 450 },
+        { "range": "55-64", "spend": 120, "clicks": 200 },
+        { "range": "18-24", "spend": 50, "clicks": 80 }
+      ],
+      "gender": [
+        { "gender": "Male", "spend": 720, "clicks": 1200 },
+        { "gender": "Female", "spend": 480, "clicks": 850 },
+        { "gender": "Unknown", "spend": 50, "clicks": 50 }
+      ],
+      "platform": [
+        { "platform": "Facebook", "spend": 650, "clicks": 1100 },
+        { "platform": "Instagram", "spend": 500, "clicks": 850 },
+        { "platform": "Audience Network", "spend": 100, "clicks": 150 }
+      ]
+    }
+  },
+  "sink": {
+    "summary": {
+      "totalLinks": 25,
+      "totalClicks": 1842,
+      "clicksToday": 47,
+      "avgClicksPerLink": 73.7
+    },
+    "topLinks": [
+      { "slug": "quiz", "destination": "theinnovativenative.com/quiz", "clicks": 487, "lastClick": "2026-04-21T18:34:00Z", "tags": ["quiz", "lead-gen"] },
+      { "slug": "book", "destination": "calendly.com/michaelsoto/30min", "clicks": 312, "lastClick": "2026-04-21T14:22:00Z", "tags": ["booking", "cta"] },
+      { "slug": "lfr", "destination": "theinnovativenative.com/law-firm-rag", "clicks": 234, "lastClick": "2026-04-21T11:07:00Z", "tags": ["lawfirm", "product"] },
+      { "slug": "ig", "destination": "instagram.com/theinnovativenative", "clicks": 198, "lastClick": "2026-04-21T09:45:00Z", "tags": ["social"] },
+      { "slug": "class", "destination": "theinnovativenative.com/classroom", "clicks": 167, "lastClick": "2026-04-20T22:18:00Z", "tags": ["community", "course"] },
+      { "slug": "guide", "destination": "theinnovativenative.com/resources", "clicks": 143, "lastClick": "2026-04-20T19:33:00Z", "tags": ["resource"] },
+      { "slug": "li", "destination": "linkedin.com/in/michaelsoto-ai", "clicks": 118, "lastClick": "2026-04-20T16:54:00Z", "tags": ["social"] },
+      { "slug": "audit", "destination": "theinnovativenative.com/quiz?type=audit", "clicks": 98, "lastClick": "2026-04-20T12:31:00Z", "tags": ["quiz", "lawfirm"] }
+    ],
+    "byReferrer": [
+      { "referrer": "linkedin.com", "clicks": 580 },
+      { "referrer": "direct", "clicks": 420 },
+      { "referrer": "facebook.com", "clicks": 310 },
+      { "referrer": "email", "clicks": 280 },
+      { "referrer": "twitter.com", "clicks": 120 },
+      { "referrer": "other", "clicks": 132 }
+    ],
+    "byDevice": { "mobile": 62, "desktop": 35, "tablet": 3 }
+  },
+  "pipeline": {
+    "summary": {
+      "totalLeads": 156,
+      "hotLeads": 12,
+      "meetingsBooked": 8,
+      "dealsWon": 2,
+      "conversionRate": 1.3
+    },
+    "byStage": [
+      { "stage": "Touch 1 - Icebreaker", "count": 45 },
+      { "stage": "Touch 2 - Value Content", "count": 32 },
+      { "stage": "Touch 3 - Free Resource", "count": 24 },
+      { "stage": "Touch 4 - Social Proof", "count": 18 },
+      { "stage": "Touch 5 - Conversation", "count": 15 },
+      { "stage": "Responded", "count": 10 },
+      { "stage": "Meeting Booked", "count": 8 },
+      { "stage": "Won", "count": 2 },
+      { "stage": "Lost", "count": 2 }
+    ],
+    "bySource": [
+      { "source": "Quiz Funnel", "count": 34 },
+      { "source": "Email Outreach", "count": 52 },
+      { "source": "LinkedIn", "count": 28 },
+      { "source": "Referral", "count": 18 },
+      { "source": "Organic", "count": 14 },
+      { "source": "Paid Social", "count": 10 }
+    ],
+    "recentLeads": [
+      { "name": "Sarah Chen", "company": "Chen & Associates", "source": "Quiz Funnel", "stage": "Meeting Booked", "heat": "hot", "date": "2026-04-21" },
+      { "name": "Marcus Rivera", "company": "Rivera Law Group", "source": "LinkedIn", "stage": "Touch 4 - Social Proof", "heat": "warm", "date": "2026-04-20" },
+      { "name": "Denise Okafor", "company": "Okafor Financial", "source": "Email Outreach", "stage": "Touch 2 - Value Content", "heat": "cold", "date": "2026-04-19" },
+      { "name": "Tom Whitfield", "company": "Whitfield Consulting", "source": "Referral", "stage": "Responded", "heat": "hot", "date": "2026-04-19" },
+      { "name": "Priya Mehta", "company": "Mehta Immigration Law", "source": "Paid Social", "stage": "Touch 3 - Free Resource", "heat": "warm", "date": "2026-04-18" }
+    ],
+    "byHeat": { "cold": 98, "warm": 46, "hot": 12 }
+  },
+  "abTests": {
+    "quizzes": [
+      {
+        "quizId": "ai-readiness",
+        "quizName": "AI Readiness Score",
+        "variantA": { "starts": 120, "completes": 95, "leads": 82, "completionRate": 79.2, "leadRate": 68.3 },
+        "variantB": { "starts": 110, "completes": 88, "leads": 85, "completionRate": 80.0, "leadRate": 77.3 },
+        "lift": 13.2,
+        "confidence": 87.4,
+        "status": "needs_more_data",
+        "daysRunning": 12
+      },
+      {
+        "quizId": "law-firm-audit",
+        "quizName": "Law Firm Audit",
+        "variantA": { "starts": 85, "completes": 72, "leads": 65, "completionRate": 84.7, "leadRate": 76.5 },
+        "variantB": { "starts": 78, "completes": 68, "leads": 64, "completionRate": 87.2, "leadRate": 82.1 },
+        "lift": 7.3,
+        "confidence": 72.1,
+        "status": "needs_more_data",
+        "daysRunning": 12
+      },
+      {
+        "quizId": "content-score",
+        "quizName": "Content Production Score",
+        "variantA": { "starts": 45, "completes": 32, "leads": 28, "completionRate": 71.1, "leadRate": 62.2 },
+        "variantB": { "starts": 42, "completes": 35, "leads": 33, "completionRate": 83.3, "leadRate": 78.6 },
+        "lift": 26.4,
+        "confidence": 91.2,
+        "status": "variant_b_winning",
+        "daysRunning": 8
+      }
+    ]
+  },
+  "funnel": {
+    "stages": [
+      { "name": "Site Visitors", "count": 1240, "rate": 100 },
+      { "name": "Link Clicks", "count": 342, "rate": 27.6 },
+      { "name": "Quiz Starts", "count": 245, "rate": 19.8 },
+      { "name": "Quiz Completes", "count": 195, "rate": 15.7 },
+      { "name": "Lead Captured", "count": 156, "rate": 12.6 },
+      { "name": "Meeting Booked", "count": 8, "rate": 0.6 },
+      { "name": "Deal Won", "count": 2, "rate": 0.2 }
+    ]
+  }
+}
