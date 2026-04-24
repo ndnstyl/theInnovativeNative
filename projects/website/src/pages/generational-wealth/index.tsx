@@ -6,6 +6,7 @@ import PasswordGate from "@/components/generational-wealth/PasswordGate";
 import JourneyProgress from "@/components/generational-wealth/JourneyProgress";
 import StatCard from "@/components/generational-wealth/StatCard";
 import GWBottomNav from "@/components/generational-wealth/GWBottomNav";
+import YouTubeEmbed from "@/components/generational-wealth/YouTubeEmbed";
 
 interface SectionCard {
   title: string;
@@ -69,6 +70,13 @@ const SECTION_CARDS: SectionCard[] = [
     title: "Water, Power & Systems",
     description: "Wells, solar panels, septic, rainwater — the infrastructure that makes the land livable.",
     href: "/generational-wealth/systems",
+    badge: "Guide",
+    group: "knowledge",
+  },
+  {
+    title: "Zero-Energy Cooling",
+    description: "Solar chimneys, earth tubes, and a tight envelope — keeping the house comfortable in hot-humid Oklahoma without a grid-hungry AC.",
+    href: "/generational-wealth/cooling",
     badge: "Guide",
     group: "knowledge",
   },
@@ -165,6 +173,8 @@ export default function GenerationalWealthIndex() {
           </div>
 
           <div className="gw-dashboard__content">
+            <YouTubeEmbed videoId="MEx1OJDpv1M" title="Welcome — Watch This First" />
+
             <JourneyProgress />
 
             <div className="gw-stat-cards">

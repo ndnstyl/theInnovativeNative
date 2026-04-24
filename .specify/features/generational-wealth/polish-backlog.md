@@ -25,6 +25,7 @@
 - [ ] **YouTube script #2**: "How the Government Pays You to Clear Your Land" (8-10 min) — Screen share + talking head. Links to /eqip.
 - [ ] **YouTube script #3**: "Everything I Wish I Knew Before Buying Rural Land" (10-12 min) — Due diligence content.
 - [ ] **YouTube script #4**: "Why a Barndominium (and What It Actually Costs)" (8-10 min) — Building education.
+- [x] **Per-page intro scripts (17 videos, 60-90s each)** — Conversational 10k-ft scripts for every GW page. Written 2026-04-24. See `video-scripts.md`. Next: record with Kal Jones, B-roll page scroll, embed at top of each page.
 
 ## Interactive Enhancements
 

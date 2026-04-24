@@ -4,6 +4,7 @@ import PageCover from "@/components/generational-wealth/PageCover";
 import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import StatCard from "@/components/generational-wealth/StatCard";
 import StepProcess from "@/components/generational-wealth/StepProcess";
+import YouTubeEmbed from "@/components/generational-wealth/YouTubeEmbed";
 
 const dependencySteps = [
   {
@@ -63,6 +64,8 @@ export default function VisionPage() {
         strategy has been researched to death. What you&rsquo;re reading is the
         actual plan we&rsquo;re executing.
       </p>
+
+      <YouTubeEmbed videoId="gUnk00ThoVQ" title="The Vision &mdash; Why We&rsquo;re Doing This" />
 
       <h2>Why This Matters</h2>
 

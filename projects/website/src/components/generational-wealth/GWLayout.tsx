@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import PasswordGate from "./PasswordGate";
 import GWSidebar from "./GWSidebar";
 import GWBottomNav from "./GWBottomNav";
+import GWSearchBar from "./GWSearchBar";
 import JourneyProgress from "./JourneyProgress";
 import PrintButton from "./PrintButton";
 
@@ -30,31 +31,37 @@ const GWLayout = ({
       </Head>
       <PasswordGate>
         <div className="gw-layout">
-          <div className="gw-layout__sidebar">
+          <div className="gw-layout__sidebar" data-pagefind-ignore>
             <GWSidebar />
           </div>
           <div className="gw-layout__main">
-            <div className="gw-layout__content-inner gw-content">
-              <JourneyProgress />
-              {(lastVerified || readingTime || printable) && (
-                <div className="gw-layout__meta">
-                  {lastVerified && (
-                    <span className="gw-layout__meta-item">
-                      <i className="fa-sharp fa-solid fa-rotate" />
-                      Verified {lastVerified}
-                    </span>
-                  )}
-                  {readingTime && (
-                    <span className="gw-layout__meta-item">
-                      <i className="fa-sharp fa-solid fa-clock" />
-                      {readingTime} read
-                    </span>
-                  )}
-                  {printable && <PrintButton />}
-                </div>
-              )}
+            <div
+              className="gw-layout__content-inner gw-content"
+              data-pagefind-body
+            >
+              <div data-pagefind-ignore>
+                <GWSearchBar />
+                <JourneyProgress />
+                {(lastVerified || readingTime || printable) && (
+                  <div className="gw-layout__meta">
+                    {lastVerified && (
+                      <span className="gw-layout__meta-item">
+                        <i className="fa-sharp fa-solid fa-rotate" />
+                        Verified {lastVerified}
+                      </span>
+                    )}
+                    {readingTime && (
+                      <span className="gw-layout__meta-item">
+                        <i className="fa-sharp fa-solid fa-clock" />
+                        {readingTime} read
+                      </span>
+                    )}
+                    {printable && <PrintButton />}
+                  </div>
+                )}
+              </div>
               {children}
-              <div className="gw-layout__disclaimer">
+              <div className="gw-layout__disclaimer" data-pagefind-ignore>
                 This guide is for informational purposes only. It is not legal,
                 financial, or tax advice. Program rules, payment rates, and
                 deadlines change — verify everything with the relevant agency or
@@ -63,7 +70,9 @@ const GWLayout = ({
             </div>
           </div>
         </div>
-        <GWBottomNav />
+        <div data-pagefind-ignore>
+          <GWBottomNav />
+        </div>
       </PasswordGate>
     </Layout>
   );

@@ -17,6 +17,7 @@ const PAGES: NavPage[] = [
   { label: "The Vision", href: "/generational-wealth/vision" },
   { label: "Building", href: "/generational-wealth/building" },
   { label: "Systems", href: "/generational-wealth/systems" },
+  { label: "Cooling", href: "/generational-wealth/cooling" },
   { label: "Food Production", href: "/generational-wealth/food" },
   { label: "The Compound", href: "/generational-wealth/compound" },
   { label: "OK vs TX", href: "/generational-wealth/oklahoma-vs-texas" },

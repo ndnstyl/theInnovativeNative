@@ -58,6 +58,77 @@ export default function FindLandPage() {
         in east Texas, we&rsquo;re not walking away from it.
       </p>
 
+      <h2>Regional Scoring: Why These Counties Won</h2>
+
+      <p>
+        Before we scored individual parcels, we scored whole regions. The plan
+        is an agroforestry plus aquaponics homestead that survives weather
+        disasters, produces food without trucked water, and stays off-grid
+        viable. Different regions of Texas and Oklahoma fail at those goals
+        in very different ways.
+      </p>
+
+      <p>
+        We weighted nine factors based on what actually kills homesteads. Water
+        shortage kills aquaponics. Hurricanes kill orchards. One flood wipes
+        five years of work. So water and disaster risk dominate the matrix.
+      </p>
+
+      <ComparisonTable
+        headers={["Factor", "Weight", "Why It Matters"]}
+        rows={[
+          ["Water (rainfall, aquifer, surface)", "22%", "Aquaponics and food forest are water-positive only when rain and aquifer cooperate"],
+          ["Disaster risk (inverse)", "18%", "Hurricane, flood, tornado, drought, wildfire. One bad year costs years of progress"],
+          ["Soil quality", "13%", "Swales, food forest, silvopasture all fail on shallow rock or caliche"],
+          ["Land cost ($/acre)", "10%", "Doubles or halves how fast we can scale the plan"],
+          ["Tree cover", "9%", "Mature canopy is a 20-year head start on agroforestry"],
+          ["Climate suitability", "9%", "Growing season, chill hours for fruit, heat stress"],
+          ["Regulatory friendliness", "8%", "Unrestricted land plus ag exemption ease"],
+          ["Energy potential", "6%", "Solar is good everywhere in the target region; wind varies"],
+          ["Proximity to Houston", "5%", "Homestead is not a commute, so low weight on purpose"],
+        ]}
+      />
+
+      <h3>Regional Rankings</h3>
+
+      <p>
+        We scored nine candidate regions on each factor (1 to 10), weighted
+        them, and summed out of 1000. The same biome shows up at the top from
+        both states: Piney Woods sandy loam with 50+ inches of rain, just on
+        different sides of the Red River.
+      </p>
+
+      <ComparisonTable
+        headers={["Rank", "Region", "Score", "Why It Ranked"]}
+        rows={[
+          ["1", "SE Oklahoma (McCurtain, Pushmataha, Le Flore, Choctaw)", "813", "Highest rainfall in OK, mature hardwood and pine, cheap, no zoning"],
+          ["2", "Deep East TX (Nacogdoches, San Augustine, Shelby, Cherokee)", "805", "Same rainfall and trees as SE OK, closer to Houston, no state income tax"],
+          ["3", "NE Oklahoma (Delaware, Adair, Cherokee-OK, Mayes)", "771", "Ozark springs enable gravity-fed aquaponics, real chill hours, very cheap"],
+          ["4", "North Houston Piney Woods (Montgomery, Walker, Grimes)", "730", "Closest to Houston, but more expensive and higher hurricane risk"],
+          ["5", "South Central OK (Bryan, Marshall, Johnston)", "725", "Lake Texoma water, cheaper land, but less rainfall than SE OK"],
+          ["6", "Brazos Valley (Burleson, Milam, Lee)", "694", "Excellent soil, but drier and more expensive"],
+          ["7", "Liberty and Chambers TX", "674", "Coastal plain. Direct hurricane and flood exposure sinks the score"],
+          ["8", "Colorado County and Eagle Lake", "649", "Prairie with minimal tree cover and a known flooding history"],
+          ["9", "Hill Country", "464", "28-32 inches rainfall plus shallow rock plus $25K/ac makes it the worst fit for this plan"],
+        ]}
+      />
+
+      <CalloutBox type="family-note" title="The big unlock">
+        SE Oklahoma and Deep East Texas score within 8 points of each other.
+        They&rsquo;re effectively the same biome. The choice between them comes
+        down to income tax (none in Texas) versus land cost (30 to 40 percent
+        cheaper in Oklahoma). Both win on everything else that matters for the
+        plan.
+      </CalloutBox>
+
+      <CalloutBox type="heads-up" title="Why the Hill Country is a trap for this plan">
+        Everyone romanticizes the Hill Country. For our plan it&rsquo;s the
+        worst region on the board: 28 to 32 inches of rainfall, shallow
+        caliche soil, flash flood risk in every canyon, wildfire exposure,
+        and $25K+ per acre. Beautiful to visit. Not where we build a
+        water-hungry food system.
+      </CalloutBox>
+
       <h2>How to Search</h2>
 
       <p>

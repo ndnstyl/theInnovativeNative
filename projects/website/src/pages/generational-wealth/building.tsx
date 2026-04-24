@@ -5,6 +5,7 @@ import CalloutBox from "@/components/generational-wealth/CalloutBox";
 import ComparisonTable from "@/components/generational-wealth/ComparisonTable";
 import ExpandableSection from "@/components/generational-wealth/ExpandableSection";
 import StepProcess from "@/components/generational-wealth/StepProcess";
+import YouTubeEmbed from "@/components/generational-wealth/YouTubeEmbed";
 
 const buildSteps = [
   {
@@ -121,6 +122,114 @@ export default function BuildingPage() {
         doesn&rsquo;t work. With it, you have a finished home and a $25,000
         contingency buffer.
       </CalloutBox>
+
+      <h2>The Floor Plan We&rsquo;re Building Around</h2>
+
+      <p>
+        The plan we&rsquo;ve fallen in love with is <strong>Plan 1121-01</strong>
+        {" "}from J&amp;E Renderings &mdash; a two-story barndominium with an
+        industrial-modern exterior and an open floor plan inside.
+      </p>
+
+      <figure className="gw-figure">
+        <img
+          src="/images/generational-wealth/floorplan-1121-01.png"
+          alt="First-floor layout of J&E Renderings Plan 1121-01 barndominium"
+          className="gw-figure__image"
+          loading="lazy"
+        />
+        <figcaption className="gw-figure__caption">
+          First-floor layout, Plan 1121-01. Image courtesy of{" "}
+          <a
+            href="https://janderenderings.com/plans/ols/products/1121-01"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            J&amp;E Renderings
+          </a>
+          {" "}&mdash; the source of the plan we&rsquo;re buying and adapting.
+        </figcaption>
+      </figure>
+
+      <p>
+        The 6-bedroom variant of this plan (1121-01-6B) runs <strong>4,928
+        square feet</strong>, 6 bed / 4.5 bath. The base 1121-01 is smaller
+        and what we&rsquo;re starting with. Open great room, large kitchen,
+        second-story loft/bedrooms, and clear-span living space that
+        post-frame construction handles beautifully.
+      </p>
+
+      <h3>Walkthrough Video</h3>
+
+      <p>
+        Here&rsquo;s the 3D walkthrough of the plan from J&amp;E Renderings so
+        the family can see how it flows before we commit.
+      </p>
+
+      <YouTubeEmbed videoId="tkyEIALqSRo" title="Plan 1121-01 walkthrough — J&E Renderings" />
+
+      <h2>Buying and Modifying the Plan</h2>
+
+      <p>
+        This is where we have to be careful and honest about what
+        we&rsquo;re buying.
+      </p>
+
+      <p>
+        J&amp;E Renderings is a <strong>rendering and design company, not a
+        licensed architect or engineer</strong> &mdash; they say so directly
+        on their site. That means when we purchase Plan 1121-01, what we
+        receive is a drawing set (PDFs, possibly CAD files). It is{" "}
+        <em>not</em> a permit-ready, stamped set of construction documents
+        for Oklahoma. That&rsquo;s normal for stock plans at this price point
+        &mdash; it&rsquo;s also the most important thing to know before
+        buying.
+      </p>
+
+      <CalloutBox type="heads-up" title="What we still need after purchase">
+        <ol className="gw-list">
+          <li><strong>A licensed Oklahoma structural engineer</strong> to stamp the post-frame structural details, the roof penetration for the solar chimney, and the foundation plan.</li>
+          <li><strong>A local designer or architect</strong> to modify the plan to incorporate our zero-energy cooling strategy (solar chimney location, earth-tube routing, ERV ducting). See the <a href="/generational-wealth/cooling">Cooling page</a> for the three paths and cost ranges.</li>
+          <li><strong>Written permission from J&amp;E Renderings to modify the plan.</strong> Their terms state: &ldquo;All designs are protected by copyright law and may not be reproduced in any way without prior written approval.&rdquo; We have to email or call Ansley before any third party touches the drawings.</li>
+        </ol>
+      </CalloutBox>
+
+      <h3>Questions to Ask J&amp;E Renderings Before Buying</h3>
+
+      <p>
+        Contact: <strong>Ansley</strong> at{" "}
+        <a href="mailto:ansley@janderenderings.com">ansley@janderenderings.com</a>{" "}
+        or <a href="tel:17705390938">770-539-0938</a>.
+      </p>
+
+      <ol className="gw-list">
+        <li>What is the price of Plan 1121-01 and what files come with it (PDF only, CAD, electrical / HVAC schematics, foundation plan)?</li>
+        <li>Is the license one-time use (one house built) or can we re-use it for a second family member&rsquo;s build on the compound later?</li>
+        <li>Will you grant written permission for a licensed Oklahoma architect or engineer to modify the plan for passive cooling features (solar chimney, earth tubes) and our specific site?</li>
+        <li>Do you provide engineer&rsquo;s stamps for Oklahoma permit submission, or is that our responsibility? (Expected answer: our responsibility.)</li>
+        <li>Can you refer a designer or engineer you&rsquo;ve worked with who&rsquo;s familiar with your plans and can do the modification?</li>
+      </ol>
+
+      <h3>Our Modification Plan</h3>
+
+      <p>
+        Assuming J&amp;E approves modification, here&rsquo;s the realistic
+        path we&rsquo;ll take:
+      </p>
+
+      <ul className="gw-list">
+        <li><strong>Step 1:</strong> Buy Plan 1121-01 from J&amp;E. Expected cost: $500&ndash;$2,500 based on typical stock-plan pricing for this tier.</li>
+        <li><strong>Step 2:</strong> Get written approval from J&amp;E to modify.</li>
+        <li><strong>Step 3:</strong> Hire a local Oklahoma designer (first call: <a href="https://alldraft.com/passive-solar-design-in-barndominiums-harnessing-the-sun-for-comfort-and-efficiency/" target="_blank" rel="noopener noreferrer">Alldraft</a>) to integrate the solar chimney and earth tube routing into the plan. Expected scope: $2,000&ndash;$5,000.</li>
+        <li><strong>Step 4:</strong> Hire a licensed Oklahoma PE to stamp the structural details, roof penetration, and foundation for Haskell County permit submission. Expected scope: $1,000&ndash;$3,500.</li>
+      </ul>
+
+      <p>
+        <strong>Total path cost:</strong> $3,500 &ndash; $11,000 for
+        permit-ready, zero-energy-cooling-integrated plans derived from
+        Plan 1121-01. That&rsquo;s still cheaper than a full custom design
+        ($5,000&ndash;$15,000) and gives us the layout we actually want.
+      </p>
 
       <h2>The Envelope</h2>
 

@@ -127,6 +127,20 @@ export default function SystemsPage() {
         operation.
       </p>
 
+      <h2>Cooling &mdash; Zero-Energy Design</h2>
+
+      <p>
+        Cooling in hot-humid Oklahoma is its own system and it&rsquo;s big
+        enough to have its own page. The short version: we&rsquo;re building
+        a <strong>solar chimney</strong> into the barndominium to pull hot
+        air out without electricity, paired with a tight envelope and a
+        small, efficient mini-split that runs off the solar array. The full
+        design &mdash; solar chimney, earth tubes, realistic performance
+        numbers, cost breakdown, and how to get the plans stamped &mdash;
+        lives on the{" "}
+        <a href="/generational-wealth/cooling">Cooling page</a>.
+      </p>
+
       <h2>The Dependency Chain</h2>
 
       <p>
