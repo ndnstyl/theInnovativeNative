@@ -74,18 +74,31 @@ export default function FindLandPage() {
         five years of work. So water and disaster risk dominate the matrix.
       </p>
 
+      <p>
+        Two valid lenses. The homestead-first weighting is the default, built
+        around what kills a homestead in the first ten years. The timber-first
+        weighting is the alternate, built around buying land cheap by valuing
+        the standing timber. We use both. Most parcels we look at run through
+        the homestead-first lens; mature wooded tracts run through the
+        timber-first lens. The full timber strategy lives on{" "}
+        <a href="/generational-wealth/timber">Timber as Asset</a>.
+      </p>
+
       <ComparisonTable
-        headers={["Factor", "Weight", "Why It Matters"]}
+        headers={["Factor", "Homestead-first", "Timber-first", "Why It Matters"]}
         rows={[
-          ["Water (rainfall, aquifer, surface)", "22%", "Aquaponics and food forest are water-positive only when rain and aquifer cooperate"],
-          ["Disaster risk (inverse)", "18%", "Hurricane, flood, tornado, drought, wildfire. One bad year costs years of progress"],
-          ["Soil quality", "13%", "Swales, food forest, silvopasture all fail on shallow rock or caliche"],
-          ["Land cost ($/acre)", "10%", "Doubles or halves how fast we can scale the plan"],
-          ["Tree cover", "9%", "Mature canopy is a 20-year head start on agroforestry"],
-          ["Climate suitability", "9%", "Growing season, chill hours for fruit, heat stress"],
-          ["Regulatory friendliness", "8%", "Unrestricted land plus ag exemption ease"],
-          ["Energy potential", "6%", "Solar is good everywhere in the target region; wind varies"],
-          ["Proximity to Houston", "5%", "Homestead is not a commute, so low weight on purpose"],
+          ["Water (rainfall, aquifer, surface)", "22%", "15%", "Aquaponics and food forest are water-positive only when rain and aquifer cooperate"],
+          ["Disaster risk (inverse)", "18%", "12%", "Hurricane, flood, tornado, drought, wildfire. One bad year costs years of progress"],
+          ["Soil quality", "13%", "6%", "Swales, food forest, silvopasture all fail on shallow rock or caliche"],
+          ["Land cost ($/acre)", "10%", "15%", "Doubles or halves how fast we scale. Higher weight in timber lens because it&rsquo;s half of the arbitrage"],
+          ["Standing timber $/acre (net of harvest)", "0%", "25%", "The whole point of the timber lens. Selectively harvested timber offsets purchase cost"],
+          ["Buildability premium (open vs. wooded site)", "0%", "8%", "Wooded sites cost 5 to 15% more to build on. New factor in the timber lens"],
+          ["Mineral plus timber rights convey clean", "(in regulatory)", "7%", "Surface, mineral, and timber rights all need to transfer at closing"],
+          ["Tree cover (canopy as agroforestry asset)", "9%", "0%", "Captured in homestead view. In the timber lens, replaced by the explicit timber value factor"],
+          ["Climate suitability", "9%", "5%", "Growing season, chill hours for fruit, heat stress"],
+          ["Regulatory friendliness", "8%", "4%", "Unrestricted land plus ag exemption ease"],
+          ["Energy potential", "6%", "2%", "Solar is good everywhere in the target region; wind varies"],
+          ["Proximity to Houston", "5%", "1%", "Homestead is not a commute, so low weight either way"],
         ]}
       />
 
