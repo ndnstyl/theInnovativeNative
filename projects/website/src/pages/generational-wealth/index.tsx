@@ -46,6 +46,13 @@ const SECTION_CARDS: SectionCard[] = [
     group: "priority",
   },
   {
+    title: "Timber as Asset — Buying Land at a Discount",
+    description: "How standing timber + EQIP cost-share can drive the net cost of a 25-acre tract to zero or below. Same region, smarter parcels.",
+    href: "/generational-wealth/timber",
+    badge: "Strategy",
+    group: "priority",
+  },
+  {
     title: "The Vision",
     description: "Why we're doing this, what it looks like when it's done, and the order everything has to happen.",
     href: "/generational-wealth/vision",

@@ -13,6 +13,7 @@ const PAGES: NavPage[] = [
   { label: "Financing", href: "/generational-wealth/financing" },
   { label: "Due Diligence", href: "/generational-wealth/due-diligence" },
   { label: "Legal Structure", href: "/generational-wealth/legal-structure" },
+  { label: "Timber as Asset", href: "/generational-wealth/timber" },
   { label: "Finding Land", href: "/generational-wealth/find-land" },
   { label: "The Vision", href: "/generational-wealth/vision" },
   { label: "Building", href: "/generational-wealth/building" },
