@@ -17,6 +17,14 @@ const PAGES = [
   { slug: "oklahoma-vs-texas", label: "OK vs TX" },
   { slug: "systems", label: "Systems" },
   { slug: "building", label: "Building" },
+  { slug: "foundation", label: "Foundation" },
+  { slug: "storm-shelter", label: "Storm Shelter" },
+  { slug: "insurance", label: "Insurance" },
+  { slug: "general-contracting", label: "Being Our Own GC" },
+  { slug: "permits", label: "Permits" },
+  { slug: "site-prep", label: "Site Prep" },
+  { slug: "finishes", label: "Finishes" },
+  { slug: "electrical", label: "Electrical" },
   { slug: "food", label: "Food" },
   { slug: "cooling", label: "Cooling" },
   { slug: "compound", label: "Compound" },
@@ -319,7 +327,7 @@ test.describe("Generational Wealth — live site QA", () => {
     await expect(page.getByText("60 days", { exact: false })).toBeVisible();
   });
 
-  test("Sidebar includes the 5 new subpage entries", async ({ page }) => {
+  test("Sidebar includes all 8 new subpage entries", async ({ page }) => {
     await page.goto("/generational-wealth/building", { waitUntil: "domcontentloaded" });
     const expected = [
       "Foundation",
@@ -327,10 +335,39 @@ test.describe("Generational Wealth — live site QA", () => {
       "Insurance",
       "Being Our Own GC",
       "Permits",
+      "Site Prep",
+      "Finishes",
+      "Electrical",
     ];
     for (const label of expected) {
       await expect(page.locator(".gw-sidebar__link", { hasText: label }).first()).toBeVisible();
     }
+  });
+
+  test("Site Prep subpage renders with DIY/hire split content", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/site-prep", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Site Prep/i })).toBeVisible();
+    await expect(page.getByText("EQIP brush mulching", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("skid steer", { exact: false }).first()).toBeVisible();
+  });
+
+  test("Finishes subpage renders with three finish levels and decision framework", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/finishes", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Finishes/i })).toBeVisible();
+    await expect(page.getByText("Bargain DIY").first()).toBeVisible();
+    await expect(page.getByText("Combination", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("Custom contractor").first()).toBeVisible();
+  });
+
+  test("Electrical subpage renders with NEC + service size + DIY split", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/electrical", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Electrical/i })).toBeVisible();
+    await expect(page.getByText("NEC", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("200 amp", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("rough-in", { exact: false }).first()).toBeVisible();
   });
 
   test("OK vs TX page has the new section video in the cover slot", async ({ page }) => {
