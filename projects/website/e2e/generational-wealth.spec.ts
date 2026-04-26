@@ -370,6 +370,21 @@ test.describe("Generational Wealth — live site QA", () => {
     await expect(page.getByText("rough-in", { exact: false }).first()).toBeVisible();
   });
 
+  test("Systems page has septic decision matrix + cistern trigger logic", async ({ page }) => {
+    await page.goto("/generational-wealth/systems", { waitUntil: "domcontentloaded" });
+    // Cistern trigger section
+    await expect(page.getByText("When We Need a Cistern", { exact: false })).toBeVisible();
+    // Septic comparison
+    await expect(page.getByText("Conventional vs Aerobic", { exact: false })).toBeVisible();
+    await expect(page.getByText("perk test", { exact: false }).first()).toBeVisible();
+  });
+
+  test("General Contracting page covers Truss Day with safety + COI", async ({ page }) => {
+    await page.goto("/generational-wealth/general-contracting", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("Truss Day", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("crew of four", { exact: false })).toBeVisible();
+  });
+
   test("OK vs TX page has the new section video in the cover slot", async ({ page }) => {
     await page.goto("/generational-wealth/oklahoma-vs-texas", { waitUntil: "domcontentloaded" });
     const liveSlot = page.locator(".gw-page-cover__video-holder--live").first();

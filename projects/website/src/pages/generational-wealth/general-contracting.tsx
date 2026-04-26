@@ -110,6 +110,56 @@ export default function GeneralContractingPage() {
         <li>Final inspection and Certificate of Occupancy</li>
       </ol>
 
+      <h2>Truss Day: The One Build Day We Don&rsquo;t Skimp On</h2>
+
+      <p>
+        Step 7 in the build order (column raising and truss setting) is
+        the one day that single-handedly justifies hiring a crew. Setting
+        roof trusses with two people is dangerous; setting them with four
+        is fast and safe. We do this exactly once per build, and we do it
+        right.
+      </p>
+
+      <ul className="gw-list">
+        <li>
+          <strong>Why a crew of four:</strong> trusses are 20 to 40 feet
+          long and weigh 40+ pounds each. One person guides from the
+          ground, two raise from the top plate, one stages the next
+          truss. Three is the safety floor. Two is reckless. Four is the
+          right number.
+        </li>
+        <li>
+          <strong>Cost:</strong> roughly $3,000 for a 4-person crew for
+          one day, plus crane truck rental if the trusses are too big to
+          hand-set ($500 to $1,200). Total: $3,000 to $4,500.
+        </li>
+        <li>
+          <strong>Insurance:</strong> the crew must carry general
+          liability and workers comp at the same minimums as any other
+          sub. Certificate of Insurance on file before they show up. See
+          the <a href="/generational-wealth/insurance">Insurance page</a>{" "}
+          for COI requirements.
+        </li>
+        <li>
+          <strong>Weather:</strong> wind over 15 mph means we postpone.
+          Wet pads or wet trusses mean we postpone. Crew shows up,
+          weather is wrong, we pay a half-day fee and reschedule. Rather
+          that than a falling truss.
+        </li>
+        <li>
+          <strong>Coordination:</strong> trusses arrive on the same day
+          or the day before. Pads and columns must be set and dry. Mike
+          is on site as the GC, not as a crew member (his job is
+          coordination and material handoff).
+        </li>
+      </ul>
+
+      <CalloutBox type="heads-up" title="Why we do not DIY truss day">
+        It&rsquo;s the only day where saving the labor cost has a
+        chance of getting someone killed. We hire it. We pay for the COI.
+        We do not negotiate the crew size down.
+      </CalloutBox>
+
       <h2>The Build Journal</h2>
 
       <p>
