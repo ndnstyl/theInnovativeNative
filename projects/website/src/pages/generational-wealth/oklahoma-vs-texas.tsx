@@ -13,7 +13,12 @@ export default function OklahomaVsTexasPage() {
       lastVerified="April 2026"
       readingTime="10 min"
     >
-      <PageCover imageSrc="/images/generational-wealth/cover-ok-vs-tx.jpg" imageAlt="Oklahoma and Texas rural landscapes" />
+      <PageCover
+        imageSrc="/images/generational-wealth/cover-ok-vs-tx.jpg"
+        imageAlt="Oklahoma and Texas rural landscapes"
+        videoId="g_Q7r7pw-lg"
+        videoTitle="Oklahoma vs Texas &mdash; Which State Fits Better"
+      />
       <h1>Oklahoma vs Texas — Which State Fits Better</h1>
 
       <p className="gw-lead">
