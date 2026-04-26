@@ -275,6 +275,36 @@ test.describe("Generational Wealth — live site QA", () => {
     await expect(page.getByText("hybrid", { exact: false }).first()).toBeVisible();
   });
 
+  test("Building page has Storm Shelter, Insurance, GC Duties, Permits sections", async ({ page }) => {
+    await page.goto("/generational-wealth/building", { waitUntil: "networkidle" });
+
+    // Storm Shelter section
+    await expect(
+      page.getByRole("heading", { name: /Storm Shelter.*Tornado Alley/i })
+    ).toBeVisible();
+    await expect(page.getByText("FEMA P-320", { exact: false })).toBeVisible();
+
+    // Insurance section
+    await expect(
+      page.getByRole("heading", { name: /Builder.s Risk and Contractor Insurance/i })
+    ).toBeVisible();
+    await expect(page.getByText("Certificate of Insurance", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("$1,000,000 per occurrence", { exact: false })).toBeVisible();
+
+    // GC Duties section
+    await expect(
+      page.getByRole("heading", { name: /Being Our Own General Contractor/i })
+    ).toBeVisible();
+    await expect(page.getByText("10 to 25 percent", { exact: false }).first()).toBeVisible();
+
+    // Permits section
+    await expect(
+      page.getByRole("heading", { name: /Permits and the Building Department/i })
+    ).toBeVisible();
+    await expect(page.getByText("Haskell County", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("AHJ", { exact: false }).first()).toBeVisible();
+  });
+
   test("OK vs TX page has the new section video in the cover slot", async ({ page }) => {
     await page.goto("/generational-wealth/oklahoma-vs-texas", { waitUntil: "networkidle" });
     const liveSlot = page.locator(".gw-page-cover__video-holder--live").first();

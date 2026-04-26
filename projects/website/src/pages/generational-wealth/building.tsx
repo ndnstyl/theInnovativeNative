@@ -425,6 +425,317 @@ export default function BuildingPage() {
         here. Save the regret later.
       </CalloutBox>
 
+      <h2>Storm Shelter: Mandatory in Tornado Alley</h2>
+
+      <p>
+        Eastern Oklahoma is in the heart of tornado alley. We don&rsquo;t
+        skip this. Some counties won&rsquo;t insure a residential build
+        without a documented shelter plan, and any insurance company that
+        does will charge a premium until one exists. More importantly,
+        a 1,200 sq ft post-frame house is the wrong place to be in a
+        tornado without a hardened space to retreat to.
+      </p>
+
+      <p>
+        Four shelter types, ranked by what fits a 90% DIY build:
+      </p>
+
+      <ComparisonTable
+        headers={["Type", "DIY-friendly?", "Materials cost", "Notes"]}
+        rows={[
+          ["Underground poured concrete", "Yes (with concrete delivery)", "$3,000 to $5,000", "Outside the home, accessed by stairs. Hardest to retrofit. Best to design in before site prep."],
+          ["Reinforced concrete safe room (interior)", "Partial (concrete contractor pours, Mike finishes)", "$5,000 to $10,000", "Built into the slab during pour. Steel door, ventilation. Doubles as pantry or closet."],
+          ["Above-ground prefab steel safe", "No (delivered + bolted in)", "$8,000 to $15,000 installed", "Bolted to a reinforced slab section. Fast install. Higher cost."],
+          ["Buried prefab fiberglass/steel", "No (excavated + dropped in)", "$10,000 to $18,000 installed", "Outdoor, hatch entry. Excavator-required."],
+        ]}
+      />
+
+      <h3>Our Pick</h3>
+
+      <p>
+        Reinforced concrete safe room, built into the slab during the
+        pour. About 8 feet by 8 feet, designed by the PE alongside the
+        foundation plan. Concrete contractor pours the walls and ceiling
+        as part of the slab pour day, which is one of the few days we
+        already hire help. Mike finishes the interior with a FEMA-rated
+        steel door, ventilation, and shelving. Doubles as a pantry the
+        rest of the year.
+      </p>
+
+      <p>
+        <strong>Estimated cost:</strong> $6,000 to $8,000, sized into the
+        budget under structure. We confirm FEMA P-320 specs with the PE
+        before pour day.
+      </p>
+
+      <CalloutBox type="heads-up" title="Cannot retrofit easily">
+        A safe room poured into the slab is straightforward. Adding one
+        after the slab is set means cutting concrete, retrofitting walls,
+        and probably code review for the modification. Plan it now or
+        plan to do an above-ground prefab later.
+      </CalloutBox>
+
+      <h2>Builder&rsquo;s Risk and Contractor Insurance</h2>
+
+      <p>
+        We&rsquo;re acting as our own general contractor. That makes us
+        the legally responsible party on the job site. If a hired
+        sub-contractor gets hurt and they aren&rsquo;t carrying their own
+        liability coverage, that liability lands on us personally. Two
+        policies cover this gap.
+      </p>
+
+      <h3>Policy 1: Builder&rsquo;s Risk</h3>
+
+      <p>
+        A temporary insurance policy that covers the structure and
+        materials during construction. Standard homeowner&rsquo;s
+        insurance does not cover an unfinished house. Builder&rsquo;s
+        risk fills that gap.
+      </p>
+
+      <ul className="gw-list">
+        <li>
+          <strong>What it covers:</strong> wind damage, hail, theft of
+          materials on site, fire, vandalism. Some policies also cover
+          worker injury on site if a sub is uninsured.
+        </li>
+        <li>
+          <strong>When it starts:</strong> the day construction begins or
+          the day materials are delivered to site, whichever comes first.
+        </li>
+        <li>
+          <strong>When it ends:</strong> when the certificate of
+          occupancy is issued and the homeowner&rsquo;s policy starts.
+        </li>
+        <li>
+          <strong>Cost:</strong> roughly 1 to 4 percent of the total
+          build value, prorated for the build duration. For a $272K
+          build over 18 months, expect $1,500 to $4,000 total.
+        </li>
+        <li>
+          <strong>Where to buy:</strong> regional carriers like
+          Farm Bureau (Oklahoma), Country Financial, Shelter, Allstate,
+          State Farm. Get three quotes. Confirm the policy covers
+          post-frame metal-clad construction specifically.
+        </li>
+      </ul>
+
+      <h3>Policy 2: Certificates of Insurance from every hired sub</h3>
+
+      <p>
+        Before any contractor steps on the property, we collect their
+        Certificate of Insurance (COI). This single page proves they
+        carry general liability and workers comp at adequate amounts.
+        If they get hurt or damage the property, their policy pays.
+        If they don&rsquo;t have a COI, our builder&rsquo;s risk and our
+        own pockets pay.
+      </p>
+
+      <p>
+        <strong>Required coverage minimums to confirm on the COI:</strong>
+      </p>
+
+      <ul className="gw-list">
+        <li>General liability: $1,000,000 per occurrence, $2,000,000 aggregate</li>
+        <li>Workers compensation: state statutory minimum (Oklahoma)</li>
+        <li>Auto liability if they drive heavy equipment to site</li>
+        <li>Policy active dates that cover the day they&rsquo;re on site</li>
+      </ul>
+
+      <h3>Subs we hire that need a COI on file before they arrive</h3>
+
+      <ComparisonTable
+        headers={["Hired sub", "Why we hire them", "COI required?"]}
+        rows={[
+          ["Truss-setting crew", "Safety on truss day", "Yes"],
+          ["Concrete contractor (slab + safe room pour)", "Volume, timing", "Yes"],
+          ["Septic installer (licensed)", "State requirement", "Yes"],
+          ["Electric service tie-in (licensed)", "Code, utility company requirement", "Yes"],
+          ["Solar grid-tie inspection (licensed)", "Utility company interconnect requirement", "Yes"],
+          ["Spray foam contractor (if not DIY)", "Equipment, training", "Yes"],
+          ["Site grading on the homesite pad", "Precision required", "Yes"],
+          ["EQIP brush mulching contractor", "Heavy equipment", "Yes"],
+        ]}
+      />
+
+      <CalloutBox type="heads-up" title="No COI, no work">
+        We do not let anyone start work until their certificate is in our
+        hands. Email is fine. We file them in a build folder. If a sub
+        balks at providing one, that sub is uninsured. Hire someone else.
+      </CalloutBox>
+
+      <h2>Being Our Own General Contractor</h2>
+
+      <p>
+        Hiring a general contractor on a $272K build typically costs 10 to
+        25 percent of the project value, or $27,000 to $68,000. That fee
+        is the entire reason a 90% DIY build pencils out under our budget.
+        We&rsquo;re saving the GC fee by doing the GC work ourselves. Worth
+        understanding what that means.
+      </p>
+
+      <h3>What the GC role actually involves</h3>
+
+      <ul className="gw-list">
+        <li>
+          <strong>Permitting:</strong> pulling the permits, posting them
+          on site, scheduling required inspections at the right milestones.
+        </li>
+        <li>
+          <strong>Sub-contractor coordination:</strong> calling subs,
+          collecting bids, scheduling them in the correct sequence,
+          rescheduling when one runs late and cascades into the next.
+        </li>
+        <li>
+          <strong>Material delivery:</strong> ordering, receiving,
+          checking against packing lists, staging on site, protecting
+          from weather and theft.
+        </li>
+        <li>
+          <strong>Safety:</strong> first aid kit, fire extinguisher,
+          posting site rules, confirming subs follow them.
+        </li>
+        <li>
+          <strong>Budget tracking:</strong> running ledger of paid vs
+          remaining, change order management, contingency monitoring.
+        </li>
+        <li>
+          <strong>Lender draws:</strong> if we&rsquo;re on a USDA
+          construction loan, we coordinate the inspection-and-draw cycle
+          (typically 3 to 5 draws over the build).
+        </li>
+        <li>
+          <strong>Inspector contact:</strong> requesting county inspections
+          when the build hits each milestone (foundation, framing,
+          rough electrical, rough plumbing, final).
+        </li>
+      </ul>
+
+      <h3>The time commitment</h3>
+
+      <p>
+        Realistic rule of thumb: 1 to 2 hours per day on phone calls,
+        scheduling, errands, and inspector coordination during active
+        construction. Plus the full days when subs are on site (we have to
+        be present). A 10-hour build day might be 7 hours of Mike doing
+        labor plus 3 hours of GC duties. We do not do both at full
+        capacity simultaneously.
+      </p>
+
+      <h3>The build order is not negotiable</h3>
+
+      <p>
+        Each step has prerequisites. Skipping or reordering means redoing
+        work or failing inspection.
+      </p>
+
+      <ol className="gw-list">
+        <li>Site prep and pad grading (homesite acre only, contractor)</li>
+        <li>Foundation pier drilling and concrete (DIY wet-set + Perma-Columns)</li>
+        <li>Foundation inspection</li>
+        <li>Slab pour with safe room walls (concrete contractor)</li>
+        <li>Underground rough plumbing and electrical conduit before slab cures</li>
+        <li>Kit delivery (post-frame columns, trusses, panels)</li>
+        <li>Column raising and truss setting (one-day crew)</li>
+        <li>Framing inspection</li>
+        <li>Roof and metal panel install (DIY)</li>
+        <li>Window and exterior door install (DIY)</li>
+        <li>Rough plumbing supply lines (DIY)</li>
+        <li>Rough electrical branch circuits (DIY) and main service tie-in (licensed contractor)</li>
+        <li>Rough mechanical (HVAC ducting, ERV)</li>
+        <li>Rough electrical and plumbing inspections</li>
+        <li>Insulation install (CCSF contractor + DIY rigid + DIY radiant barrier)</li>
+        <li>Insulation inspection</li>
+        <li>Drywall install (DIY)</li>
+        <li>Interior finishes: flooring, paint, trim, cabinets (DIY)</li>
+        <li>Plumbing fixtures and electrical trim (DIY)</li>
+        <li>Final inspection and Certificate of Occupancy</li>
+      </ol>
+
+      <CalloutBox type="pro-tip">
+        We keep a build journal. Date, what happened, who was on site,
+        what got inspected, what we paid. When the lender wants a draw
+        package or the insurer wants documentation, the journal is the
+        fastest way to assemble it. Photos every day, even if nothing
+        looks new.
+      </CalloutBox>
+
+      <h2>Permits and the Building Department</h2>
+
+      <p>
+        Haskell County building department is the authority that says
+        yes or no to our build. We talk to them BEFORE we hire the
+        designer or the engineer. The first conversation establishes
+        what they require, which determines what the designer and PE
+        have to deliver.
+      </p>
+
+      <h3>Questions to ask the AHJ on the first call</h3>
+
+      <ul className="gw-list">
+        <li>
+          Do you accept hand-drawn plans, CAD plans, or only stamped
+          engineered plans for residential post-frame construction?
+        </li>
+        <li>
+          For a 1,200 sq ft post-frame residential build, is a structural
+          PE stamp required, and on which sheets?
+        </li>
+        <li>
+          Do solar chimney roof penetrations and earth-tube wall
+          penetrations require separate engineer review?
+        </li>
+        <li>
+          What wind load zone applies? (Eastern Oklahoma is generally
+          110 mph, but local amendments vary.)
+        </li>
+        <li>
+          What is the minimum foundation depth required for residential
+          post-frame piers in this county?
+        </li>
+        <li>
+          What is your inspection schedule (foundation, framing, rough,
+          insulation, final), and how much advance notice do you need
+          for each?
+        </li>
+        <li>
+          How long does a complete permit application typically take to
+          approve? What rejects an application immediately?
+        </li>
+        <li>
+          What is the permit fee structure for our build value?
+        </li>
+        <li>
+          Is the permit issued in the name of the homeowner-as-GC or do
+          you require a licensed general contractor on the application?
+        </li>
+        <li>
+          How long is the permit valid once issued, and what triggers a
+          re-inspection or re-approval?
+        </li>
+      </ul>
+
+      <h3>Permit timeline</h3>
+
+      <p>
+        Once we submit a complete application with all required plans and
+        engineer stamps, expect 10 to 30 calendar days for approval.
+        Incomplete applications are rejected, not held. If a sheet is
+        missing or a stamp is wrong, the application starts over. We
+        budget two cycles in the schedule, which means we want plans
+        finalized 60 days before we want to break ground.
+      </p>
+
+      <CalloutBox type="family-note" title="Why we call before we design">
+        If the county requires a structural PE stamp, the designer needs
+        to know that before they draw anything (the PE has specific
+        format and detail requirements). If solar chimney penetrations
+        need engineer review, the engineer needs to be looped in early.
+        Calling the AHJ first costs us one phone call. Skipping that
+        call costs weeks of rework when the permit gets rejected.
+      </CalloutBox>
+
       <h2>The Envelope</h2>
 
       <p>
