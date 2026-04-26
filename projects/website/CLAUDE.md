@@ -73,7 +73,7 @@ Content assets from the jobHunt project:
 cd /Users/makwa/theinnovativenative/projects/website && npm run build
 
 # 2. Deploy via rsync — DEFAULT IS NO --delete to avoid wiping pages from other branches
-rsync -avz \
+rsync -avz --chmod=D755,F644 \
   -e "ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes" \
   --exclude='theinnovativenative-site.zip' \
   --exclude='resumes/' --exclude='videos/' --exclude='n8n-templates/' \
