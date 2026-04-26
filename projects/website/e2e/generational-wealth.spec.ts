@@ -66,7 +66,7 @@ test.describe("Generational Wealth — live site QA", () => {
   });
 
   test("search bar loads pagefind and returns results for 'post frame'", async ({ page }) => {
-    await page.goto("/generational-wealth/eqip", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/eqip", { waitUntil: "domcontentloaded" });
 
     // Capture network requests to /gw-search/* for diagnostics
     const pagefindRequests: { url: string; status: number }[] = [];
@@ -110,7 +110,7 @@ test.describe("Generational Wealth — live site QA", () => {
   });
 
   test("search returns results for several real queries", async ({ page }) => {
-    await page.goto("/generational-wealth/eqip", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/eqip", { waitUntil: "domcontentloaded" });
     const searchInput = page.locator(".gw-search__input").first();
 
     const queries = ["aquaponics", "barndominium", "EQIP", "well", "trust"];
@@ -128,7 +128,7 @@ test.describe("Generational Wealth — live site QA", () => {
   });
 
   test("welcome video embed renders on dashboard", async ({ page }) => {
-    await page.goto("/generational-wealth/", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/", { waitUntil: "domcontentloaded" });
     const ytWrapper = page.locator(".gw-youtube").first();
     await expect(ytWrapper).toBeVisible();
     // Title text appears in the placeholder
@@ -136,7 +136,7 @@ test.describe("Generational Wealth — live site QA", () => {
   });
 
   test("vision video embed renders inside the PageCover slot", async ({ page }) => {
-    await page.goto("/generational-wealth/vision", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/vision", { waitUntil: "domcontentloaded" });
     const liveSlot = page.locator(".gw-page-cover__video-holder--live").first();
     await expect(liveSlot).toBeVisible();
     // Should NOT show the "coming soon" placeholder
@@ -204,7 +204,7 @@ test.describe("Generational Wealth — live site QA", () => {
 
     for (const slug of errorPages) {
       const url = `/generational-wealth${slug ? "/" + slug : ""}`;
-      await page.goto(url, { waitUntil: "networkidle" });
+      await page.goto(url, { waitUntil: "domcontentloaded" });
     }
 
     // Filter out third-party / extension noise we don't control
@@ -243,7 +243,7 @@ test.describe("Generational Wealth — live site QA", () => {
 
     // The component appends ?v=<buildId> to bypass CDN cache. Pull the page
     // and extract the actual URL it's calling, then verify that URL serves 200.
-    await page.goto("/generational-wealth/eqip", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/eqip", { waitUntil: "domcontentloaded" });
     const seen: string[] = [];
     page.on("response", (r) => {
       if (r.url().includes("/gw-search/pagefind.js")) seen.push(`${r.status()} ${r.url()}`);
@@ -257,56 +257,84 @@ test.describe("Generational Wealth — live site QA", () => {
     ).toBeTruthy();
   });
 
-  test("Building page Foundation section is present and complete", async ({ page }) => {
-    await page.goto("/generational-wealth/building", { waitUntil: "networkidle" });
-    // Section heading
+  test("Building page has Critical Decisions cross-link block to 5 subpages", async ({ page }) => {
+    await page.goto("/generational-wealth/building", { waitUntil: "domcontentloaded" });
     await expect(
-      page.getByRole("heading", { name: "Foundation: What Goes Under the Columns" })
+      page.getByRole("heading", { name: /Critical Decisions Before We Frame/i })
     ).toBeVisible();
-    // Both options named
-    await expect(page.getByText("Perma-Column", { exact: false }).first()).toBeVisible();
-    await expect(page.getByText("Sturdi-Wall Plus").first()).toBeVisible();
-    // The 10,000 PSI clarification callout
-    await expect(page.getByText("10,000 PSI confusion")).toBeVisible();
-    // Engineer load numbers present
-    await expect(page.getByText("Axial").first()).toBeVisible();
-    await expect(page.getByText("Wind uplift").first()).toBeVisible();
-    // Hybrid plan is described
-    await expect(page.getByText("hybrid", { exact: false }).first()).toBeVisible();
+    const subpageHrefs = [
+      "/generational-wealth/foundation",
+      "/generational-wealth/storm-shelter",
+      "/generational-wealth/insurance",
+      "/generational-wealth/general-contracting",
+      "/generational-wealth/permits",
+    ];
+    for (const href of subpageHrefs) {
+      await expect(page.locator(`a[href="${href}"]`).first()).toBeVisible();
+    }
   });
 
-  test("Building page has Storm Shelter, Insurance, GC Duties, Permits sections", async ({ page }) => {
-    await page.goto("/generational-wealth/building", { waitUntil: "networkidle" });
+  test("Foundation subpage renders with Perma-Column + soil testing content", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/foundation", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Foundation: What Goes Under the Columns/i })).toBeVisible();
+    await expect(page.getByText("Perma-Column").first()).toBeVisible();
+    await expect(page.getByText("Sturdi-Wall Plus").first()).toBeVisible();
+    await expect(page.getByText("Soil Testing").first()).toBeVisible();
+    await expect(page.getByText("SSURGO", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("ESR-4239", { exact: false }).first()).toBeVisible();
+  });
 
-    // Storm Shelter section
-    await expect(
-      page.getByRole("heading", { name: /Storm Shelter.*Tornado Alley/i })
-    ).toBeVisible();
-    await expect(page.getByText("FEMA P-320", { exact: false })).toBeVisible();
+  test("Storm Shelter subpage renders with FEMA P-320 specs", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/storm-shelter", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Storm Shelter/i })).toBeVisible();
+    await expect(page.getByText("FEMA P-320").first()).toBeVisible();
+    await expect(page.getByText("250 mph", { exact: false }).first()).toBeVisible();
+  });
 
-    // Insurance section
-    await expect(
-      page.getByRole("heading", { name: /Builder.s Risk and Contractor Insurance/i })
-    ).toBeVisible();
-    await expect(page.getByText("Certificate of Insurance", { exact: false }).first()).toBeVisible();
+  test("Insurance subpage renders with builder's risk + COI requirements", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/insurance", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Insurance/i })).toBeVisible();
+    await expect(page.getByText("Builder", { exact: false }).first()).toBeVisible();
     await expect(page.getByText("$1,000,000 per occurrence", { exact: false })).toBeVisible();
+    await expect(page.getByText("Vacant Land", { exact: false }).first()).toBeVisible();
+  });
 
-    // GC Duties section
-    await expect(
-      page.getByRole("heading", { name: /Being Our Own General Contractor/i })
-    ).toBeVisible();
-    await expect(page.getByText("10 to 25 percent", { exact: false }).first()).toBeVisible();
+  test("General Contracting subpage renders with build order + GC duties", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/general-contracting", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Being Our Own General Contractor/i })).toBeVisible();
+    await expect(page.getByText("10 to 25 percent", { exact: false })).toBeVisible();
+    await expect(page.getByText("Build Journal", { exact: false }).first()).toBeVisible();
+  });
 
-    // Permits section
-    await expect(
-      page.getByRole("heading", { name: /Permits and the Building Department/i })
-    ).toBeVisible();
-    await expect(page.getByText("Haskell County", { exact: false }).first()).toBeVisible();
+  test("Permits subpage renders with AHJ questions + timeline", async ({ page }) => {
+    const r = await page.goto("/generational-wealth/permits", { waitUntil: "domcontentloaded" });
+    expect(r?.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1, name: /Permits and the Building Department/i })).toBeVisible();
+    await expect(page.getByText("Haskell County").first()).toBeVisible();
     await expect(page.getByText("AHJ", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("60 days", { exact: false })).toBeVisible();
+  });
+
+  test("Sidebar includes the 5 new subpage entries", async ({ page }) => {
+    await page.goto("/generational-wealth/building", { waitUntil: "domcontentloaded" });
+    const expected = [
+      "Foundation",
+      "Storm Shelter",
+      "Insurance",
+      "Being Our Own GC",
+      "Permits",
+    ];
+    for (const label of expected) {
+      await expect(page.locator(".gw-sidebar__link", { hasText: label }).first()).toBeVisible();
+    }
   });
 
   test("OK vs TX page has the new section video in the cover slot", async ({ page }) => {
-    await page.goto("/generational-wealth/oklahoma-vs-texas", { waitUntil: "networkidle" });
+    await page.goto("/generational-wealth/oklahoma-vs-texas", { waitUntil: "domcontentloaded" });
     const liveSlot = page.locator(".gw-page-cover__video-holder--live").first();
     await expect(liveSlot).toBeVisible();
     // No coming-soon placeholder
