@@ -257,6 +257,24 @@ test.describe("Generational Wealth — live site QA", () => {
     ).toBeTruthy();
   });
 
+  test("Building page Foundation section is present and complete", async ({ page }) => {
+    await page.goto("/generational-wealth/building", { waitUntil: "networkidle" });
+    // Section heading
+    await expect(
+      page.getByRole("heading", { name: "Foundation: What Goes Under the Columns" })
+    ).toBeVisible();
+    // Both options named
+    await expect(page.getByText("Perma-Column", { exact: false }).first()).toBeVisible();
+    await expect(page.getByText("Sturdi-Wall Plus").first()).toBeVisible();
+    // The 10,000 PSI clarification callout
+    await expect(page.getByText("10,000 PSI confusion")).toBeVisible();
+    // Engineer load numbers present
+    await expect(page.getByText("Axial").first()).toBeVisible();
+    await expect(page.getByText("Wind uplift").first()).toBeVisible();
+    // Hybrid plan is described
+    await expect(page.getByText("hybrid", { exact: false }).first()).toBeVisible();
+  });
+
   test("OK vs TX page has the new section video in the cover slot", async ({ page }) => {
     await page.goto("/generational-wealth/oklahoma-vs-texas", { waitUntil: "networkidle" });
     const liveSlot = page.locator(".gw-page-cover__video-holder--live").first();
