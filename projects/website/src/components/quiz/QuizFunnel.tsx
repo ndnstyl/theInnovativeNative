@@ -4,6 +4,7 @@ import lawFirmAudit from "@/data/quizzes/law-firm-audit.json";
 import contentScore from "@/data/quizzes/content-score.json";
 import listingScore from "@/data/quizzes/listing-score.json";
 import costCalculator from "@/data/quizzes/cost-calculator.json";
+import marketingDataAudit from "@/data/quizzes/marketing-data-audit.json";
 import QuizWelcome from "./QuizWelcome";
 import QuizCapture from "./QuizCapture";
 import QuizQuestion from "./QuizQuestion";
@@ -15,6 +16,7 @@ const QUIZ_MAP: Record<string, any> = {
   "content-score": contentScore,
   "listing-score": listingScore,
   "cost-calculator": costCalculator,
+  "marketing-data-audit": marketingDataAudit,
 };
 
 type AnswerRecord = {
@@ -39,9 +41,11 @@ type ResultBucket = {
   summary: string;
   recommendation: string;
   ctaLabel: string;
-  ctaType: "calendly" | "link" | "download";
+  ctaType: "calendly" | "link" | "download" | "check-inbox";
   ctaUrl: string;
   heatLevel: string;
+  nextStepHeadline?: string;
+  nextStepBody?: string;
 };
 
 type Screen =

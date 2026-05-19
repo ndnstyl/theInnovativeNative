@@ -79,18 +79,19 @@
 ============== */
 
 // abstract styles
-@import "./abstracts/mixins";
-@import "./abstracts/variables";
+// Brand SCSS — single source of truth in @tin/shared-ui
+@import "../../../../packages/shared-ui/src/styles/abstracts/mixins";
+@import "../../../../packages/shared-ui/src/styles/abstracts/variables";
 
 // base styles
-@import "./base/reset";
-@import "./base/typography";
-@import "./base/global";
+@import "../../../../packages/shared-ui/src/styles/base/reset";
+@import "../../../../packages/shared-ui/src/styles/base/typography";
+@import "../../../../packages/shared-ui/src/styles/base/global";
 
 // component styles
-@import "./components/buttons";
-@import "./components/forms";
-@import "./components/preloader";
+@import "../../../../packages/shared-ui/src/styles/components/buttons";
+@import "../../../../packages/shared-ui/src/styles/components/forms";
+@import "../../../../packages/shared-ui/src/styles/components/preloader";
 
 // layout styles
 @import "./layout/header";
@@ -103,7 +104,6 @@
 @import "./sections/law-firm-roi";
 @import "./sections/templates";
 @import "./sections/haven-blueprint";
-@import "./sections/blog-article";
 @import "./sections/visionspark-re";
 @import "./sections/spline-workflow";
 @import "./sections/workflow-diagram";

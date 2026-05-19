@@ -1,0 +1,295 @@
+{
+  "name": "Marketing Audit 2-Step Gate — Step 1 (Lead Intake + Confirmation Email)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cerebro-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "ma-node-01",
+      "name": "Webhook — cerebro-lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 400],
+      "webhookId": "cerebro-lead"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "route-marketing-audit",
+                    "leftValue": "={{ $json.body.quizId }}",
+                    "rightValue": "marketing-data-audit",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "marketing-data-audit"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "ma-node-02",
+      "name": "Route — Filter Marketing Audit",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [440, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"received\" }",
+        "options": {}
+      },
+      "id": "ma-node-03",
+      "name": "Respond — Other Quizzes Pass Through",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 580]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize incoming quiz lead payload and generate a unique confirmation token\nconsole.log('Step1: received webhook payload');\n\nconst body = $json.body || $json;\nconst now = new Date().toISOString();\n\nconst email = (body.email || '').toLowerCase().trim();\nconst name = (body.name || '').trim();\nconst company = (body.company || '').trim();\nconst phone = (body.phone || '').trim();\nconst quizId = body.quizId || 'marketing-data-audit';\nconst variant = body.variant || 'a';\nconst totalScore = body.totalScore ?? 0;\nconst maxScore = body.maxScore ?? 25;\nconst heatLevel = body.heatLevel || 'cold';\nconst resultBucket = body.resultBucket || 'flying-blind';\nconst source = body.source || 'direct';\nconst timestamp = body.timestamp || now;\n\nif (!email) {\n  throw new Error('Step1: Missing email in payload — cannot proceed');\n}\n\n// Generate short unique token for reply matching\n// Format: ma-<timestamp-hex>-<random-hex>\nconst tsMs = Date.now().toString(16);\nconst rand = Math.random().toString(16).slice(2, 10);\nconst confirmToken = `ma-${tsMs}-${rand}`;\n\nconsole.log(`Step1: token generated ${confirmToken} for ${email} score=${totalScore}/${maxScore} tier=${resultBucket}`);\n\nreturn [{\n  json: {\n    email,\n    name,\n    company,\n    phone,\n    quizId,\n    variant,\n    totalScore,\n    maxScore,\n    heatLevel,\n    resultBucket,\n    source,\n    timestamp,\n    confirmToken,\n    receivedAt: now,\n    status: 'awaiting_confirmation'\n  }\n}];"
+      },
+      "id": "ma-node-04",
+      "name": "Code — Normalize and Generate Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"queued\" }",
+        "options": {}
+      },
+      "id": "ma-node-05",
+      "name": "Respond — Acknowledge Marketing Audit",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [920, 400]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Marketing Audit Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.email }}",
+            "Name": "={{ $json.name }}",
+            "Company": "={{ $json.company }}",
+            "Phone": "={{ $json.phone }}",
+            "Quiz ID": "={{ $json.quizId }}",
+            "Score": "={{ $json.totalScore }}",
+            "Max Score": "={{ $json.maxScore }}",
+            "Heat Level": "={{ $json.heatLevel }}",
+            "Result Bucket": "={{ $json.resultBucket }}",
+            "Source": "={{ $json.source }}",
+            "Confirm Token": "={{ $json.confirmToken }}",
+            "Status": "awaiting_confirmation",
+            "Submitted At": "={{ $json.timestamp }}",
+            "Received At": "={{ $json.receivedAt }}"
+          }
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "id": "ma-node-06",
+      "name": "Airtable — Create Lead Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [1160, 400],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Code — Normalize and Generate Token').item.json.email }}",
+        "subject": "Your Marketing Un-Silo audit is ready. One reply needed.",
+        "emailType": "html",
+        "message": "=<html>\n<body style=\"font-family: Arial, sans-serif; background: #0d0d0d; color: #e0e0e0; padding: 32px; max-width: 600px; margin: 0 auto;\">\n\n<h2 style=\"color: #1971c2; margin-bottom: 8px;\">Your audit score is in.</h2>\n\n<p>Hi {{ $('Code — Normalize and Generate Token').item.json.name || 'there' }},</p>\n\n<p>You scored <strong>{{ $('Code — Normalize and Generate Token').item.json.totalScore }}/{{ $('Code — Normalize and Generate Token').item.json.maxScore }}</strong> on the Marketing Data Audit.</p>\n\n<p>The full Marketing Un-Silo Blueprint PDF is ready to send. One step stands between you and it.</p>\n\n<div style=\"background: #1a1a2e; border-left: 4px solid #1971c2; padding: 20px; margin: 24px 0; border-radius: 4px;\">\n  <p style=\"margin: 0 0 8px; font-size: 1.1em; color: #ffffff; font-weight: bold;\">Reply to this email with the single word:</p>\n  <p style=\"margin: 0; font-size: 2em; color: #1971c2; font-weight: bold; letter-spacing: 0.05em;\">Ok</p>\n</div>\n\n<p>That is it. No forms. No extra clicks. When we receive your reply, we send the PDF immediately.</p>\n\n<p style=\"color: #888; font-size: 0.85em;\">We do this to filter bots, confirm real intent, and make sure the PDF reaches a real inbox. Serious operators get through in under 60 seconds.</p>\n\n<p style=\"color: #555; font-size: 0.8em; margin-top: 32px;\">Confirmation token: {{ $('Code — Normalize and Generate Token').item.json.confirmToken }}</p>\n\n<p style=\"color: #555; font-size: 0.8em;\">The Innovative Native | <a href=\"https://theinnovativenative.com\" style=\"color: #1971c2;\">theinnovativenative.com</a></p>\n\n</body>\n</html>",
+        "options": {
+          "replyTo": "info@theInnovativeNative.com"
+        }
+      },
+      "id": "ma-node-07",
+      "name": "Brevo — Send Confirmation Email",
+      "type": "n8n-nodes-base.sendInBlue",
+      "typeVersion": 2,
+      "position": [1400, 400],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "sendInBlueApi": {
+          "id": "09qNZneFxFk356Vi",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://slack.com/api/chat.postMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$credentials.token}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "channel",
+              "value": "C07RQKL5A10"
+            },
+            {
+              "name": "text",
+              "value": "=:inbox_tray: *Marketing Audit Lead* — confirmation email sent\n*Email:* {{ $('Code — Normalize and Generate Token').item.json.email }}\n*Name:* {{ $('Code — Normalize and Generate Token').item.json.name }}\n*Score:* {{ $('Code — Normalize and Generate Token').item.json.totalScore }}/{{ $('Code — Normalize and Generate Token').item.json.maxScore }} ({{ $('Code — Normalize and Generate Token').item.json.heatLevel }})\n*Tier:* {{ $('Code — Normalize and Generate Token').item.json.resultBucket }}\n*Token:* {{ $('Code — Normalize and Generate Token').item.json.confirmToken }}\n_Waiting for Ok reply before PDF ships._"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ma-node-08",
+      "name": "Slack — Notify Lead Received",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1640, 400],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kEU2b4p4ognbXDRu",
+          "name": "Slack HTTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook — cerebro-lead": {
+      "main": [
+        [
+          {
+            "node": "Route — Filter Marketing Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route — Filter Marketing Audit": {
+      "main": [
+        [
+          {
+            "node": "Code — Normalize and Generate Token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond — Other Quizzes Pass Through",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Normalize and Generate Token": {
+      "main": [
+        [
+          {
+            "node": "Respond — Acknowledge Marketing Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond — Acknowledge Marketing Audit": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Create Lead Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable — Create Lead Record": {
+      "main": [
+        [
+          {
+            "node": "Brevo — Send Confirmation Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo — Send Confirmation Email": {
+      "main": [
+        [
+          {
+            "node": "Slack — Notify Lead Received",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "triggerCount": 1,
+  "updatedAt": "2026-05-17T00:00:00.000Z",
+  "versionId": "ma-step1-v1"
+}

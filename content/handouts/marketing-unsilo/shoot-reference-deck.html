@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marketing Un-Silo — Shoot Reference Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000;
+    --surface: #0a0a0a;
+    --line: #1f1f1f;
+    --text: #fff;
+    --muted: #b5b5b5;
+    --dim: #757575;
+    --cyan: #00FFFF;
+    --magenta: #ff00ff;
+  }
+  @page { size: Letter landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 11in;
+    height: 8.5in;
+    padding: 0.45in 0.55in;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .cover {
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .cover-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .cover-glow {
+    position: absolute; width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 60%);
+    top: -250px; right: -250px;
+  }
+  h1.display {
+    position: relative;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56pt;
+    line-height: 0.96;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  h1 .accent { color: var(--cyan); }
+  h1 .rare { color: var(--magenta); }
+  .brand {
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+    text-transform: uppercase;
+  }
+  .brand .dot { color: var(--magenta); }
+  .eyebrow {
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10pt;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .cover-sub {
+    position: relative;
+    font-size: 12pt;
+    color: var(--muted);
+    max-width: 7in;
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+  .cover-foot {
+    position: relative;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .cover-foot .v { color: var(--cyan); }
+
+  /* Scene layout */
+  .scene {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 0.4in;
+    height: 100%;
+  }
+  .scene-left {
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .scene-header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .scene-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: var(--cyan);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .scene-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .scene-meta {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    color: var(--muted);
+  }
+  .scene-meta .label {
+    color: var(--cyan);
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .scene-meta .v { color: var(--text); }
+
+  .scene-cue {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--cyan);
+    padding: 10px 12px;
+    border-radius: 2px;
+  }
+  .scene-cue h4 {
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .scene-cue p { font-size: 10pt; color: var(--text); line-height: 1.45; }
+  .scene-cue .draw-list {
+    margin-top: 6px; padding-left: 16px; font-size: 9pt; color: var(--muted);
+  }
+  .scene-cue .draw-list li { margin-bottom: 2px; }
+
+  .scene-right {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 8px;
+  }
+  .preview-main {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    padding: 8px;
+  }
+  .preview-main img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+  }
+  .preview-vertical {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+  .preview-vertical .vbox {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    height: 1.6in;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; padding: 6px;
+  }
+  .preview-vertical .vbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .preview-vertical .note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .preview-vertical .note .label {
+    color: var(--cyan);
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0.2in; left: 0.55in; right: 0.55in;
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--line);
+    padding-top: 6px;
+  }
+  .footer .accent { color: var(--cyan); }
+
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    border: 1px solid rgba(0,255,255,0.4);
+    background: rgba(0,255,255,0.08);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .tag.magenta {
+    color: var(--magenta);
+    border-color: rgba(255,0,255,0.4);
+    background: rgba(255,0,255,0.08);
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="page cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div style="position: relative; display: flex; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="logo-light.png" alt="" style="height: 36px;">
+      <div class="brand">The Innovative Native<span class="dot">.</span></div>
+    </div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: var(--dim); text-align: right; letter-spacing: 0.15em; text-transform: uppercase;">
+      Shoot Reference Deck<br>
+      Marketing Un-Silo Blueprint
+    </div>
+  </div>
+
+  <div>
+    <div class="eyebrow">— On-set reference</div>
+    <h1 class="display">
+      THE <span class="accent">UN-SILO</span><br>
+      SHOOT DECK<span class="rare">.</span>
+    </h1>
+    <p class="cover-sub">12 scenes. Each page is one scene. Left side: script cue + Excalidraw drawing order. Right side: Remotion preview (16:9 main + 9:16 short). Keep this open on monitor two during the shoot.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div>
+      <span class="v">12</span> scenes &nbsp;·&nbsp;
+      <span class="v">24</span> stills &nbsp;·&nbsp;
+      <span class="v">~30</span> min runtime &nbsp;·&nbsp;
+      <span class="v">12</span> shorts after the cut
+    </div>
+    <div>theinnovativenative.com</div>
+  </div>
+</section>
+
+<!-- SCENE 01 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 01 / 12</div>
+          <h2 class="scene-title">The 5 Questions</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">0:00 – 0:45</span></div>
+          <div><span class="label">Mode</span><span class="v">Cold open · Camera</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"I'm going to ask you five questions. If you can't answer any of them in under sixty seconds, keep watching."</p>
+          <p style="margin-top:6px;color:var(--muted)">Then list them rapid-fire. Hold a beat after Q5.</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera (Excalidraw)</h4>
+        <ul class="draw-list">
+          <li>Title appears first (cyan, Virgil)</li>
+          <li>Questions 1-5 as you SAY each</li>
+          <li>Magenta clock with "60 sec" label LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S01-five-questions.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s01-16x9.png" alt="Scene 1 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s01-9x16.png" alt="Scene 1 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Same scene, 9:16. Use this layout when cutting Clip 01 (The Hook).
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE 5 QUESTIONS</div><div class="accent">SCENE 01</div></div>
+</section>
+
+<!-- SCENE 02 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 02 / 12</div>
+          <h2 class="scene-title">The Stack Map</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">2:30 – 7:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"In the middle, one customer. One human. One purchase decision. Around them, the stack. Six functional zones, 24 silos. None talk to each other by default."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>Customer circle (cyan, dashed) FIRST</li>
+          <li>6 zone rectangles clockwise, as you call out each</li>
+          <li>Arrows from each zone to the customer</li>
+          <li>Magenta fence around all 6 LAST (punchline)</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S02-stack-map.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s02-16x9.png" alt="Scene 2 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s02-9x16.png" alt="Scene 2 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Not currently extracted as a standalone short (intro-only). Possible bonus clip.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE STACK MAP</div><div class="accent">SCENE 02</div></div>
+</section>
+
+<!-- SCENE 03 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 03 / 12</div>
+          <h2 class="scene-title">MER Formula Breakdown</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">7:00 – 8:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"The formula is dead simple. Total revenue divided by total marketing spend. But watch what happens to the inputs."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>Formula across center FIRST</li>
+          <li>Question marks under each input AS you call them out</li>
+          <li>"3 different MERs from same week" magenta callout LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S03-mer-breakdown.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s03-16x9.png" alt="Scene 3 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s03-9x16.png" alt="Scene 3 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Optional B-roll for Clip 02 (ROAS over-attribution).
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>MER BREAKDOWN</div><div class="accent">SCENE 03</div></div>
+</section>
+
+<!-- SCENE 04 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 04 / 12</div>
+          <h2 class="scene-title">ROAS Over-attribution</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">8:00 – 9:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Three platforms each claim the hundred bucks. Add up your channel ROAS, you'll see three hundred dollars. From a hundred dollars of real sale. 2 to 3x over-attribution is the NORMAL case."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>Bottom "ACTUAL SALE: $100" box FIRST</li>
+          <li>3 platform boxes (Meta, Google, YouTube) above</li>
+          <li>Arrows from each platform down to actual sale</li>
+          <li>"$300 reported" magenta callout LAST. This is the punch.</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag magenta">PUNCH MOMENT</span></p>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S04-roas-overattribution.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s04-16x9.png" alt="Scene 4 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s04-9x16.png" alt="Scene 4 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 02 ("Your ROAS adds up to more than your revenue"). Highest-stopping-power viz in the set.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>ROAS OVER-ATTRIBUTION</div><div class="accent">SCENE 04</div></div>
+</section>
+
+<!-- SCENE 05 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 05 / 12</div>
+          <h2 class="scene-title">The Knife Fight</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">12:00 – 13:30</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Same word. Marketing means one thing. RevOps means another. Both teams report up using that word. Leadership thinks they're hearing the same thing. They're not."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>Marketing / RevOps headers + table rows pre-loaded</li>
+          <li>You draw a big jagged line splitting the columns LIVE</li>
+          <li>Add "Same word. Different number." across the line in Virgil</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S05-knife-fight.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s05-16x9.png" alt="Scene 5 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s05-9x16.png" alt="Scene 5 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 03 ("MQL vs SQL: The Knife Fight").
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE KNIFE FIGHT</div><div class="accent">SCENE 05</div></div>
+</section>
+
+<!-- SCENE 06 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 06 / 12</div>
+          <h2 class="scene-title">The 64% Gap</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">13:30 – 15:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Two hundred sixteen vs seventy-eight. Same October. Same CRM. Sixty-four percent gap. Six figures of misallocated headcount and spend per quarter."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>Cyan bar "Marketing: 216 MQLs" FIRST</li>
+          <li>Magenta bar "RevOps: 78 SQLs" BELOW it</li>
+          <li>Hand-drawn bracket with "-64% gap" LAST</li>
+          <li>Cost line revealed at the very end</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S06-64-gap.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s06-16x9.png" alt="Scene 6 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s06-9x16.png" alt="Scene 6 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 04 ("The 64% Gap"). Specific numbers stop the scroll.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE 64% GAP</div><div class="accent">SCENE 06</div></div>
+</section>
+
+<!-- SCENE 07 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 07 / 12</div>
+          <h2 class="scene-title">The 4-Tab Audit</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">16:00 – 17:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"One spreadsheet. Four tabs. Tools. Flows. Identifiers. Definitions. If it's not on one of these tabs, it isn't real."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>4 tabs pre-loaded; TOOLS tab active (cyan fill)</li>
+          <li>Header row of the active tab pre-loaded</li>
+          <li>You add 2-3 example rows LIVE as you talk through the audit</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S07-four-tab-audit.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s07-16x9.png" alt="Scene 7 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s07-9x16.png" alt="Scene 7 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          B-roll option for any Phase 1 audit short.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE 4-TAB AUDIT</div><div class="accent">SCENE 07</div></div>
+</section>
+
+<!-- SCENE 08 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 08 / 12</div>
+          <h2 class="scene-title">The Identifier Graph</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">17:00 – 18:30</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Every system has a different way of identifying a person. If you can't translate one to another, you can't compute LTV by channel. This is the audit nobody runs."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>5 ID nodes pre-loaded (anonymous, email, CRM, Stripe, app user)</li>
+          <li>Draw the edges with join condition labels LIVE</li>
+          <li>Magenta dashed arrow on the weakest link ("drop-off here = no LTV") LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S08-identifier-graph.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s08-16x9.png" alt="Scene 8 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s08-9x16.png" alt="Scene 8 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 05 ("The identifier audit nobody runs").
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>IDENTIFIER GRAPH</div><div class="accent">SCENE 08</div></div>
+</section>
+
+<!-- SCENE 09 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 09 / 12</div>
+          <h2 class="scene-title">The 5-Layer Spine</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">19:00 – 22:30</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Capture, warehouse, ingest, model, activate. The warehouse is the one place everyone reads from. You don't need Snowflake. Postgres is fine."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>5 horizontal layers pre-loaded, bottom to top</li>
+          <li>Warehouse layer filled (the heart)</li>
+          <li>You draw upward arrows between layers as you discuss each</li>
+          <li>"The one place everyone reads from" magenta callout LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S09-five-layer-spine.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s09-16x9.png" alt="Scene 9 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s09-9x16.png" alt="Scene 9 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 06 ("You don't need Snowflake").
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>FIVE-LAYER SPINE</div><div class="accent">SCENE 09</div></div>
+</section>
+
+<!-- SCENE 10 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 10 / 12</div>
+          <h2 class="scene-title">Canonical Schema</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">22:30 – 23:00</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Five tables. dim_customer, fct_session, fct_order, fct_ad_spend, fct_touchpoint. Every metric you need can be computed from these five. Without them, you can't."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>5 table boxes pre-loaded with column lists</li>
+          <li>You can circle key joining columns (customer_id) live</li>
+          <li>"5 tables. Every metric you need." magenta close LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S10-canonical-schema.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s10-16x9.png" alt="Scene 10 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s10-9x16.png" alt="Scene 10 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Optional. Strong for a data-team-focused short if you want one outside the 12.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>CANONICAL SCHEMA</div><div class="accent">SCENE 10</div></div>
+</section>
+
+<!-- SCENE 11 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 11 / 12</div>
+          <h2 class="scene-title">The 8 KPIs</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">24:30 – 25:30</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Eight numbers. Same formula every Monday. Same dashboard for every team. That's the bar."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>4x2 grid of KPI cards pre-loaded</li>
+          <li>Add the magenta callout "Same number, every team, every Monday" LAST</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S11-eight-kpis.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s11-16x9.png" alt="Scene 11 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s11-9x16.png" alt="Scene 11 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Primary visual for Clip 08 ("The 8 numbers your CFO actually wants").
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>THE 8 KPIs</div><div class="accent">SCENE 11</div></div>
+</section>
+
+<!-- SCENE 12 -->
+<section class="page">
+  <div class="scene">
+    <div class="scene-left">
+      <div>
+        <div class="scene-header">
+          <div class="scene-num">SCENE 12 / 12</div>
+          <h2 class="scene-title">The CFO Monday View</h2>
+        </div>
+        <div class="scene-meta" style="margin-bottom: 12px;">
+          <div><span class="label">Script Cue</span><span class="v">26:30 – 27:30</span></div>
+          <div><span class="label">Mode</span><span class="v">Screen share · Excalidraw</span></div>
+        </div>
+        <div class="scene-cue">
+          <h4>What you say</h4>
+          <p>"Four questions. One dashboard. Four numbers that mean what everyone agrees they mean. In the CFO's inbox before Monday standup."</p>
+        </div>
+      </div>
+      <div class="scene-cue">
+        <h4>Draw on camera</h4>
+        <ul class="draw-list">
+          <li>4-row dashboard table pre-loaded</li>
+          <li>You add green/red health bar marks LIVE per row</li>
+          <li>Optional: circle the "&lt; 12 months" row in magenta as the punch metric</li>
+        </ul>
+        <p style="margin-top:8px"><span class="tag">FILE</span> <span style="color: var(--text); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt;">unsilo-S12-cfo-monday.excalidraw</span></p>
+      </div>
+    </div>
+    <div class="scene-right">
+      <div class="preview-main">
+        <img src="stills/s12-16x9.png" alt="Scene 12 16:9 preview">
+      </div>
+      <div class="preview-vertical">
+        <div class="vbox"><img src="stills/s12-9x16.png" alt="Scene 12 vertical"></div>
+        <div class="note">
+          <span class="label">For Shorts</span>
+          Strong CTA visual. Pair with Clip 12 ("How long would it take you?").
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div>UN-SILO SHOOT DECK</div><div>CFO MONDAY VIEW</div><div class="accent">SCENE 12</div></div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+{
+  "id": "marketing-data-audit",
+  "title": "Is Your Marketing Data Lying to You?",
+  "subtitle": "25 yes/no questions. 5 minutes. A score that tells you exactly where your marketing spine is broken. PDF delivery is a two-step opt-in.",
+  "heroEmoji": "📊",
+  "captureHeadline": "Your score is ready. Where should we send the full breakdown?",
+  "captureSubtext": "Submit your email. We send one confirmation email from info@theInnovativeNative.com. Reply with the single word Ok. We send the Marketing Un-Silo Blueprint PDF in our reply. No pitch decks. No sequences. One reply and it is yours.",
+  "questions": [
+    {
+      "id": "q-w1-1",
+      "text": "Every tool in your marketing stack has a named human owner.",
+      "subtext": "Not a team. A specific person whose job is on the line if the tool breaks.",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-1-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-1-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w1-2",
+      "text": "Every tool in your stack has a documented monthly cost.",
+      "subtext": "Including seats, overages, and the annual plan you forgot you renewed.",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-2-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-2-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w1-3",
+      "text": "Every tool's API status is captured (REST? Webhook? Export only?).",
+      "subtext": "If you don't know whether your tools have APIs, you can't build the spine.",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-3-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-3-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w1-4",
+      "text": "Every dashboard in active use is screenshot-archived with its query.",
+      "subtext": "If the tool shuts down tomorrow, you have the logic. If not, the number disappears with it.",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-4-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-4-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w1-5",
+      "text": "Your post-purchase survey is wired to billing.",
+      "subtext": "The \"How did you hear about us?\" question is often your most accurate channel signal. Is it connected to anything?",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-5-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-5-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w1-6",
+      "text": "Every UTM in active campaigns is documented in a single sheet.",
+      "subtext": "If four people are building UTMs independently, you have four attribution systems that don't agree.",
+      "type": "single",
+      "options": [
+        { "id": "q-w1-6-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w1-6-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-1",
+      "text": "Your email-to-CRM-ID match rate is measured and above 90%.",
+      "subtext": "If you can't answer this, the answer is no. Match rate below 90% means your LTV calculations are fiction.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-1-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-1-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-2",
+      "text": "Your CRM Contact record has a Stripe Customer ID on it.",
+      "subtext": "Without this join, revenue and marketing data live in separate universes.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-2-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-2-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-3",
+      "text": "Your web anonymous ID survives login (the identify call fires on auth).",
+      "subtext": "If the anonymous ID breaks on login, you lose the entire pre-conversion journey for every customer.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-3-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-3-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-4",
+      "text": "Server-side Conversions API fires for every ad platform you run.",
+      "subtext": "Meta CAPI, Google Enhanced Conversions, TikTok Events API. Without server-side, you're losing 20-40% of conversion signal to blockers.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-4-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-4-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-5",
+      "text": "First-touch channel is captured on the customer record at creation.",
+      "subtext": "If you can't answer which channel acquired each customer, you can't compute CAC or LTV by channel.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-5-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-5-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w2-6",
+      "text": "Email hashes (lowercase, trimmed) are computed consistently across your stack.",
+      "subtext": "If one tool hashes MIKE@COMPANY.COM and another hashes mike@company.com, they will never match.",
+      "type": "single",
+      "options": [
+        { "id": "q-w2-6-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w2-6-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-1",
+      "text": "Lead, MQL, SAL, SQL, Opportunity, and Customer each have exactly one signed definition.",
+      "subtext": "Signed means Marketing, RevOps, and Finance agreed in writing. Not agreed in the meeting. In writing.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-1-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-1-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-2",
+      "text": "Your marketing-attributed revenue formula is written and agreed across teams.",
+      "subtext": "If Marketing and RevOps compute \"marketing-driven revenue\" differently, every meeting is a fight.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-2-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-2-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-3",
+      "text": "\"Spend\" is explicitly defined to include or exclude tool subscriptions.",
+      "subtext": "There is no right answer. Just decide. A blended CAC computed differently every quarter is useless.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-3-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-3-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-4",
+      "text": "Refund and chargeback treatment in revenue reporting is explicitly defined.",
+      "subtext": "Gross revenue vs net revenue vs recognized revenue. Pick one. Document it. Every company has a different answer.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-4-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-4-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-5",
+      "text": "Your attribution model is named, written, and dated.",
+      "subtext": "Last-touch, position-based, time-decay, MMM. Whichever you use: it's in a document, with a date, and everyone knows where the document lives.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-5-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-5-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w3-6",
+      "text": "Attribution lookback windows are explicit across all channels.",
+      "subtext": "30-day click, 1-day view, 7-day click. If each platform uses its own default, your attribution math is a mess of apples and oranges.",
+      "type": "single",
+      "options": [
+        { "id": "q-w3-6-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w3-6-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-1",
+      "text": "A data warehouse exists and at least one team is writing to it weekly.",
+      "subtext": "BigQuery, Snowflake, Redshift, Supabase Postgres. Doesn't matter which. Matters that it's live and fed.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-1-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-1-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-2",
+      "text": "fct_ad_spend exists with daily rows per platform per campaign.",
+      "subtext": "Or the equivalent table. If your spend data lives only inside ad platforms, you cannot compute MER honestly.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-2-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-2-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-3",
+      "text": "fct_order exists with channel, first-touch, and customer_id columns.",
+      "subtext": "Without those three fields on every order, you cannot compute CAC payback or LTV by acquisition channel.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-3-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-3-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-4",
+      "text": "At least one dashboard reads from the warehouse, not from native tool data.",
+      "subtext": "If every dashboard is a native report from an ad platform or CRM, you have zero unified truth. Even one warehouse-sourced dashboard breaks the pattern.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-4-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-4-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-5",
+      "text": "Daily sync failures alert one named human.",
+      "subtext": "Not a team Slack channel that nobody watches. One specific person who will notice and fix it the same day.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-5-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-5-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-6",
+      "text": "Your 8 core KPIs are computed weekly and shared in one document.",
+      "subtext": "MER, blended CAC, CAC payback, 90d LTV, MQL-to-SQL, SQL-to-Won, pipeline per dollar spent, contribution margin per channel.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-6-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-6-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    },
+    {
+      "id": "q-w4-7",
+      "text": "A retired-tools list exists and at least one tool has been cancelled.",
+      "subtext": "Tool sprawl is a data quality problem. If you've never killed a tool, you've never audited your stack.",
+      "type": "single",
+      "options": [
+        { "id": "q-w4-7-yes", "label": "Yes", "score": 1, "emoji": "✓" },
+        { "id": "q-w4-7-no", "label": "No", "score": 0, "emoji": "✗" }
+      ],
+      "scoreWeight": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "flying-blind",
+      "minScore": 0,
+      "maxScore": 9,
+      "label": "Flying Blind",
+      "emoji": "🚨",
+      "headline": "You're flying blind.",
+      "summary": "Your marketing data is producing numbers, but those numbers are not talking to each other. You have no unified spine, no agreed definitions, and no way to compute the metrics your CFO actually needs. This is not a technology problem. It's a plumbing problem, and it's solvable.",
+      "recommendation": "Start with Phase 1 from the blueprint: tool inventory, data flow map, identifier audit, definition inventory. These four steps cost nothing but time and they expose exactly where the silos are. The full PDF is on its way to your inbox.",
+      "ctaLabel": "✉ Check your inbox",
+      "ctaType": "check-inbox",
+      "ctaUrl": "",
+      "nextStepHeadline": "Step 1 done. Step 2 is in your inbox.",
+      "nextStepBody": "We just sent an email from info@theInnovativeNative.com. Reply with the single word Ok and we will send the Marketing Un-Silo Blueprint PDF in our reply. Bots cannot do this. Serious operators can.",
+      "heatLevel": "cold"
+    },
+    {
+      "id": "inputs-not-insight",
+      "minScore": 10,
+      "maxScore": 17,
+      "label": "Inputs, Not Insight",
+      "emoji": "⚠️",
+      "headline": "You have inputs, not insight.",
+      "summary": "You've done real work here. Tools are owned. Some identifiers exist. But the spine is incomplete, definitions are soft, or the warehouse isn't feeding the dashboards yet. You can compute some of the 8 KPIs but not all of them, and not without arguments about whose number is right.",
+      "recommendation": "The highest-leverage next step is usually the definitions session (Phase 3 of the blueprint) combined with getting at least one warehouse-sourced dashboard live. The full blueprint with the canonical schema is on its way to your inbox.",
+      "ctaLabel": "✉ Check your inbox",
+      "ctaType": "check-inbox",
+      "ctaUrl": "",
+      "nextStepHeadline": "Step 1 done. Step 2 is in your inbox.",
+      "nextStepBody": "We just sent an email from info@theInnovativeNative.com. Reply with the single word Ok and we will send the Marketing Un-Silo Blueprint PDF in our reply. Bots cannot do this. Serious operators can.",
+      "heatLevel": "warm"
+    },
+    {
+      "id": "working-spine",
+      "minScore": 18,
+      "maxScore": 25,
+      "label": "Working Spine",
+      "emoji": "✅",
+      "headline": "Your marketing engine has a working spine.",
+      "summary": "You've built something real. Identifiers are joined, definitions are documented, the warehouse feeds the dashboards, and the 8 KPIs ship on a cadence. That puts you in the top tier of marketing orgs. The risk from here is decay: definitions drift, tool sprawl creeps back, and the weekly cadence gets skipped when things get busy.",
+      "recommendation": "The blueprint's Phase 4 section covers how to operate the spine once it is built: owner cadences, alerting thresholds, the quarterly definitions review, and the tool kill-switch protocol. The full document is on its way to your inbox.",
+      "ctaLabel": "✉ Check your inbox",
+      "ctaType": "check-inbox",
+      "ctaUrl": "",
+      "nextStepHeadline": "Step 1 done. Step 2 is in your inbox.",
+      "nextStepBody": "We just sent an email from info@theInnovativeNative.com. Reply with the single word Ok and we will send the Marketing Un-Silo Blueprint PDF in our reply. Bots cannot do this. Serious operators can.",
+      "heatLevel": "hot"
+    }
+  ]
+}

@@ -627,6 +627,49 @@ $quiz-border: rgba(255, 255, 255, 0.1);
   &:active {
     transform: translateY(0);
   }
+
+  &--inbox {
+    background-color: transparent;
+    color: $quiz-cyan;
+    border: 2px solid $quiz-cyan-border;
+    cursor: default;
+    pointer-events: none;
+    letter-spacing: 0.03em;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      color: $quiz-cyan;
+    }
+  }
+}
+
+.quiz__next-step {
+  background-color: rgba(255, 0, 255, 0.06);
+  border: 1px solid rgba(255, 0, 255, 0.35);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin: 20px 0 18px;
+  text-align: left;
+}
+
+.quiz__next-step-headline {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ff00ff;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+
+.quiz__next-step-body {
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.quiz__next-step-body strong {
+  color: #ffffff;
 }
 
 .quiz__share {

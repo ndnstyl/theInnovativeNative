@@ -12,9 +12,11 @@ type ResultBucket = {
   summary: string;
   recommendation: string;
   ctaLabel: string;
-  ctaType: "calendly" | "link" | "download";
+  ctaType: "calendly" | "link" | "download" | "check-inbox";
   ctaUrl: string;
   heatLevel: string;
+  nextStepHeadline?: string;
+  nextStepBody?: string;
 };
 
 type QuizResultsProps = {
@@ -61,7 +63,28 @@ const QuizResults = ({ result, score, maxScore, quizTitle, showBooking = false }
         </Link>
       );
     }
+    if (result.ctaType === "check-inbox") {
+      return (
+        <span className="quiz__cta quiz__cta--inbox">
+          {result.ctaLabel}
+        </span>
+      );
+    }
     return null;
+  };
+
+  const renderNextStep = () => {
+    if (!result.nextStepHeadline && !result.nextStepBody) return null;
+    return (
+      <div className="quiz__next-step">
+        {result.nextStepHeadline && (
+          <h3 className="quiz__next-step-headline">{result.nextStepHeadline}</h3>
+        )}
+        {result.nextStepBody && (
+          <p className="quiz__next-step-body">{result.nextStepBody}</p>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -86,6 +109,7 @@ const QuizResults = ({ result, score, maxScore, quizTitle, showBooking = false }
         <p className="quiz__results-recommendation">{result.recommendation}</p>
 
         {renderCTA()}
+        {renderNextStep()}
 
         {showBooking && (
           <div className="quiz__booking">

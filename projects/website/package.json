@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/build-posts-json.js && next build && node scripts/flatten-dynamic-routes.js && node scripts/add-heading-ids.js && npx pagefind --site out --glob \"generational-wealth/**/*.html\" --output-subdir gw-search",
-    "build:posts": "node scripts/build-posts-json.js",
+    "build": "next build && node scripts/flatten-dynamic-routes.js && node scripts/add-heading-ids.js && npx pagefind --site out --glob \"generational-wealth/**/*.html\" --output-subdir gw-search",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",

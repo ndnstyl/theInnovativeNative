@@ -1,0 +1,383 @@
+{
+  "name": "Marketing Audit 2-Step Gate — Step 2 (Reply Detection + PDF Delivery)",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
+            }
+          ]
+        },
+        "mailbox": "INBOX",
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "customEmailConfig": "[\"-UNSEEN\"]"
+        }
+      },
+      "id": "ma2-node-01",
+      "name": "IMAP — Poll info@theInnovativeNative.com",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [200, 400],
+      "credentials": {
+        "imap": {
+          "id": "Wytvr3BGdTiiYDz6",
+          "name": "IMAP Cerebro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pre-filter: reject auto-replies and empty bodies. Keep only candidate Ok replies.\nconsole.log(`Step2 pre-filter: received ${$input.all().length} email(s) from IMAP`);\n\nconst items = $input.all();\nconst candidates = [];\n\nfor (const item of items) {\n  const mail = item.json;\n\n  // --- Reject auto-reply headers ---\n  const headers = mail.headers || {};\n  const autoSubmitted = (headers['auto-submitted'] || '').toLowerCase();\n  const xAutoReply = (headers['x-auto-reply'] || headers['x-autoreply'] || '').toLowerCase();\n  const precedence = (headers['precedence'] || '').toLowerCase();\n  const returnPath = (headers['return-path'] || '').toLowerCase();\n\n  if (autoSubmitted && autoSubmitted !== 'no') {\n    console.log(`Skip: auto-submitted=${autoSubmitted}`);\n    continue;\n  }\n  if (xAutoReply) {\n    console.log(`Skip: x-auto-reply header present`);\n    continue;\n  }\n  if (precedence === 'bulk' || precedence === 'junk' || precedence === 'list') {\n    console.log(`Skip: precedence=${precedence}`);\n    continue;\n  }\n  if (returnPath === '<>' || returnPath.includes('mailer-daemon')) {\n    console.log(`Skip: return-path indicates bounce/daemon`);\n    continue;\n  }\n\n  // --- Require body content ---\n  const bodyText = (mail.text || '').toLowerCase().trim();\n  if (!bodyText) {\n    console.log('Skip: empty body');\n    continue;\n  }\n\n  // --- Check for Ok/okay/OK in first 500 chars ---\n  const bodyPreview = bodyText.slice(0, 500);\n  if (!/\\bok(ay)?\\b/i.test(bodyPreview)) {\n    console.log('Skip: no Ok signal in body preview');\n    continue;\n  }\n\n  // --- Extract token (ma-<hex>-<hex>) from subject or body ---\n  const tokenRx = /ma-[0-9a-f]+-[0-9a-f]+/i;\n  const subjectMatch = tokenRx.exec(mail.subject || '');\n  const bodyMatch = tokenRx.exec(bodyText);\n  const token = (subjectMatch || bodyMatch || [])[0] || '';\n\n  // --- Extract sender email ---\n  const fromRaw = mail.from || '';\n  const fromMatch = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/.exec(fromRaw);\n  const senderEmail = fromMatch ? fromMatch[0].toLowerCase() : '';\n\n  if (!senderEmail) {\n    console.log('Skip: could not parse sender email');\n    continue;\n  }\n\n  console.log(`Candidate reply: from=${senderEmail} token=${token || 'none'}`);\n  candidates.push({\n    json: {\n      senderEmail,\n      token,\n      subject: mail.subject || '',\n      bodyPreview,\n      receivedAt: new Date().toISOString()\n    }\n  });\n}\n\nconsole.log(`Step2 pre-filter result: ${candidates.length} candidate(s) from ${items.length} email(s)`);\n\nif (candidates.length === 0) {\n  return [{ json: { _empty: true } }];\n}\n\nreturn candidates;"
+      },
+      "id": "ma2-node-02",
+      "name": "Code — Pre-Filter Replies",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "skip-empty",
+              "leftValue": "={{ $json._empty }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ma2-node-03",
+      "name": "IF — Has Candidates",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Marketing Audit Leads",
+          "mode": "name"
+        },
+        "filterByFormula": "AND({Status}=\"awaiting_confirmation\", OR({Confirm Token}=\"{{ $json.token }}\", {Email}=\"{{ $json.senderEmail }}\"))",
+        "options": {
+          "sort": [
+            {
+              "field": "Received At",
+              "direction": "desc"
+            }
+          ]
+        }
+      },
+      "id": "ma2-node-04",
+      "name": "Airtable — Find Lead by Token or Email",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [920, 320],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-record-found",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "isNotEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ma2-node-05",
+      "name": "IF — Lead Record Found",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1160, 320]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.airtable.com/v0/appTO7OCRB2XbAlak/Marketing%20Audit%20Leads/{{ $json.id }}",
+        "method": "PATCH",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={{ JSON.stringify({ fields: { Status: 'confirmed', Confirmed_At: new Date().toISOString() } }) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ma2-node-06",
+      "name": "Airtable HTTP PATCH — Set Confirmed",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1400, 240],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Airtable — Find Lead by Token or Email').item.json.fields.Email }}",
+        "subject": "Here is your Marketing Un-Silo Blueprint PDF",
+        "emailType": "html",
+        "message": "=<html>\n<body style=\"font-family: Arial, sans-serif; background: #0d0d0d; color: #e0e0e0; padding: 32px; max-width: 600px; margin: 0 auto;\">\n\n<h2 style=\"color: #1971c2; margin-bottom: 8px;\">Here it is.</h2>\n\n<p>Hi {{ $('Airtable — Find Lead by Token or Email').item.json.fields.Name || 'there' }},</p>\n\n<p>You confirmed. The Marketing Un-Silo Blueprint PDF is attached to this email.</p>\n\n<p>Your audit score was <strong>{{ $('Airtable — Find Lead by Token or Email').item.json.fields.Score }}/{{ $('Airtable — Find Lead by Token or Email').item.json.fields['Max Score'] }}</strong> ({{ $('Airtable — Find Lead by Token or Email').item.json.fields['Heat Level'] }}).</p>\n\n<p>The PDF walks through all four phases: tool inventory, identifier mapping, definitions alignment, and warehouse operations. Start with whichever phase matches where you scored lowest.</p>\n\n<p>Full video walkthrough coming soon. Watch <a href=\"https://theinnovativenative.com\" style=\"color: #1971c2;\">theinnovativenative.com</a> for the announcement.</p>\n\n<p style=\"margin-top: 32px;\">If the PDF does not open, reply to this email and I will resend it directly.</p>\n\n<p>Thanks for confirming. Serious operators do.</p>\n\n<p>Mike<br>\n<a href=\"https://theinnovativenative.com\" style=\"color: #1971c2;\">theinnovativenative.com</a></p>\n\n</body>\n</html>",
+        "options": {
+          "attachments": "={{ [{\"name\": \"How-to-Unfck-Your-Marketing-Data.pdf\", \"url\": \"https://theinnovativenative.com/handouts/marketing-unsilo/How-to-Unfck-Your-Marketing-Data.pdf\"}] }}"
+        }
+      },
+      "id": "ma2-node-07",
+      "name": "Brevo — Send PDF Email",
+      "type": "n8n-nodes-base.sendInBlue",
+      "typeVersion": 2,
+      "position": [1640, 240],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "sendInBlueApi": {
+          "id": "09qNZneFxFk356Vi",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://slack.com/api/chat.postMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$credentials.token}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "channel",
+              "value": "C07RQKL5A10"
+            },
+            {
+              "name": "text",
+              "value": "=:white_check_mark: *PDF Delivered* via 2-step gate\n*Email:* {{ $('Airtable — Find Lead by Token or Email').item.json.fields.Email }}\n*Name:* {{ $('Airtable — Find Lead by Token or Email').item.json.fields.Name }}\n*Score:* {{ $('Airtable — Find Lead by Token or Email').item.json.fields.Score }}/{{ $('Airtable — Find Lead by Token or Email').item.json.fields['Max Score'] }} ({{ $('Airtable — Find Lead by Token or Email').item.json.fields['Heat Level'] }})\n*Tier:* {{ $('Airtable — Find Lead by Token or Email').item.json.fields['Result Bucket'] }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ma2-node-08",
+      "name": "Slack — Notify PDF Delivered",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1880, 240],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kEU2b4p4ognbXDRu",
+          "name": "Slack HTTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://slack.com/api/chat.postMessage",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{$credentials.token}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "channel",
+              "value": "C07RQKL5A10"
+            },
+            {
+              "name": "text",
+              "value": "=:warning: *Unmatched Ok Reply* — no lead record found\n*From:* {{ $('Code — Pre-Filter Replies').item.json.senderEmail }}\n*Token detected:* {{ $('Code — Pre-Filter Replies').item.json.token || 'none' }}\n*Subject:* {{ $('Code — Pre-Filter Replies').item.json.subject }}\n_Dismissed. No PDF sent._"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ma2-node-09",
+      "name": "Slack — Log Unmatched Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1400, 440],
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kEU2b4p4ognbXDRu",
+          "name": "Slack HTTP"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "IMAP — Poll info@theInnovativeNative.com": {
+      "main": [
+        [
+          {
+            "node": "Code — Pre-Filter Replies",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code — Pre-Filter Replies": {
+      "main": [
+        [
+          {
+            "node": "IF — Has Candidates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Has Candidates": {
+      "main": [
+        [
+          {
+            "node": "Airtable — Find Lead by Token or Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Airtable — Find Lead by Token or Email": {
+      "main": [
+        [
+          {
+            "node": "IF — Lead Record Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF — Lead Record Found": {
+      "main": [
+        [
+          {
+            "node": "Airtable HTTP PATCH — Set Confirmed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack — Log Unmatched Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable HTTP PATCH — Set Confirmed": {
+      "main": [
+        [
+          {
+            "node": "Brevo — Send PDF Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo — Send PDF Email": {
+      "main": [
+        [
+          {
+            "node": "Slack — Notify PDF Delivered",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "triggerCount": 1,
+  "updatedAt": "2026-05-17T00:00:00.000Z",
+  "versionId": "ma-step2-v1"
+}

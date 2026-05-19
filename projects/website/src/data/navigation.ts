@@ -21,7 +21,7 @@ export const navItems: NavItem[] = [
   },
   {
     label: "Blog",
-    href: "/blog",
+    href: "https://blog.theinnovativenative.com",
     isCta: false,
     children: null,
   },
@@ -34,6 +34,12 @@ export const navItems: NavItem[] = [
   {
     label: "Resources",
     href: "/resources",
+    isCta: false,
+    children: null,
+  },
+  {
+    label: "Growth Advisor",
+    href: "/growth-advisor",
     isCta: false,
     children: null,
   },

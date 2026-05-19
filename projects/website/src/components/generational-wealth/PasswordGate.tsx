@@ -4,7 +4,7 @@ interface PasswordGateProps {
   children: React.ReactNode;
 }
 
-const HASH = "2be49801dd95fc0a399be6d6a341d83868a177511b0155e543d0067d4b9ffd25";
+const HASH = "4384e878fb7e6bbac4bae94276690b5eb56bf5522cad43c5431f9ff90da26596";
 const SALT = "gw-tribe-2026";
 const LS_UNLOCKED = "gw_unlocked";
 const LS_UNLOCKED_AT = "gw_unlocked_at";

@@ -47,3 +47,31 @@ next-env.d.ts
 # WordPress uploads and cache
 /wp-content/uploads/
 /wp-content/cache/
+
+# Deployment safety additions (auto-added by recovery)
+**/node_modules/
+**/.next/
+**/out/
+**/test-results/
+**/__mocks__/coverage/
+*.prproj
+*.prin
+*.zip
+*.log
+venv/
+.vscode/
+Adobe Premiere Pro Audio Previews/
+Adobe Premiere Pro Auto-Save/
+Premiere Composer Files/
+
+# e2e debug scripts (one-offs)
+projects/website/e2e-*.mjs
+
+# Build artifacts
+projects/website/site-deploy*.zip
+projects/website/nextjs-site.zip
+
+# Local Adobe / video editor scratch
+output/
+outro.prin
+outro.prproj

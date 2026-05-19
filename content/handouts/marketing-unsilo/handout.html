@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>How to Unf*ck Your Marketing Data · The Innovative Native</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #0a0a0a;
+    --surface-2: #141414;
+    --line: #1f1f1f;
+    --text: #ffffff;
+    --muted: #b5b5b5;
+    --dim: #757575;
+    --cyan: #00FFFF;
+    --cyan-soft: rgba(0, 255, 255, 0.12);
+    --cyan-edge: rgba(0, 255, 255, 0.4);
+    --magenta: #ff00ff;
+    --magenta-soft: rgba(255, 0, 255, 0.10);
+    --danger: #ff4444;
+  }
+
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11pt;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    padding: 0.55in 0.65in 0.95in;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .page:last-child { page-break-after: auto; }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  h1.display {
+    font-size: 64pt;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    font-weight: 800;
+  }
+  h2.section {
+    font-size: 24pt;
+    line-height: 1.12;
+    margin-bottom: 18px;
+    padding-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  h2.section.tight { font-size: 22pt; }
+  h2.section .accent { color: var(--cyan); }
+  h2.section .rare { color: var(--magenta); }
+  h3 { font-size: 14pt; margin-bottom: 8px; }
+  h4 {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  p { margin-bottom: 8px; color: var(--muted); }
+  p strong, li strong { color: var(--text); font-weight: 600; }
+  ul, ol { padding-left: 18px; color: var(--muted); }
+  ul li, ol li { margin-bottom: 4px; }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    padding: 3px 9px;
+    border: 1px solid var(--cyan-edge);
+    border-radius: 2px;
+    background: var(--cyan-soft);
+  }
+  .tag.magenta {
+    color: var(--magenta);
+    border-color: rgba(255, 0, 255, 0.4);
+    background: var(--magenta-soft);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 14px 0;
+  }
+  .divider.cyan {
+    height: 2px;
+    background: var(--cyan);
+    margin: 12px 0 18px;
+    width: 60px;
+  }
+
+  /* Cover */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.6in;
+  }
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+  .cover-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,255,255,0.18) 0%, transparent 60%);
+    top: -200px; right: -200px;
+    pointer-events: none;
+  }
+  .cover-glow-2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,0,255,0.12) 0%, transparent 60%);
+    bottom: -100px; left: -100px;
+    pointer-events: none;
+  }
+  .cover-head {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+  }
+  .brand .dot { color: var(--magenta); }
+  .cover-meta {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8pt;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .cover-title-wrap { position: relative; padding-top: 0.3in; }
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .cover-title-line { color: var(--text); }
+  .cover-title-accent { color: var(--cyan); }
+  .cover-title-rare { color: var(--magenta); }
+  .cover-sub {
+    font-size: 13pt;
+    color: var(--muted);
+    max-width: 5in;
+    margin-top: 24px;
+    line-height: 1.45;
+  }
+  .cover-foot {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .cover-foot .stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+  .cover-foot .stat .v { color: var(--cyan); font-size: 22pt; display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+  .stat-group { display: flex; gap: 36px; }
+
+  /* Generic content page */
+  .ph {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .ph-tag { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.18em; }
+  .ph-num { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: var(--dim); }
+
+  .footer {
+    position: absolute;
+    bottom: 0.35in; left: 0.65in; right: 0.65in;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
+  .footer .accent { color: var(--cyan); }
+
+  /* Cards / blocks */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .card.cyan { border-color: var(--cyan-edge); background: linear-gradient(180deg, var(--cyan-soft), transparent 80%); }
+  .card.magenta { border-color: rgba(255,0,255,0.35); background: linear-gradient(180deg, var(--magenta-soft), transparent 80%); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+
+  .pull-quote {
+    border-left: 3px solid var(--cyan);
+    padding: 4px 0 4px 14px;
+    color: var(--text);
+    font-size: 12pt;
+    line-height: 1.4;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    margin: 12px 0;
+  }
+  .pull-quote.small { font-size: 11pt; }
+  .pull-quote.magenta { border-left-color: var(--magenta); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin-top: 6px;
+  }
+  th, td {
+    text-align: left;
+    padding: 6px 9px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    font-weight: 500;
+    border-bottom: 1px solid var(--cyan-edge);
+  }
+  td { color: var(--muted); }
+  td strong { color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+
+  /* Silo map */
+  .silo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .silo {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 12px 14px;
+    border-radius: 3px;
+    position: relative;
+  }
+  .silo::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--cyan);
+  }
+  .silo-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+  }
+  .silo-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2px 0 4px;
+  }
+  .silo-tools {
+    font-size: 8pt;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Icon */
+  .icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+  .icon-sm { width: 32px; height: 32px; }
+
+  /* Logo */
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark img {
+    height: 38px;
+    width: auto;
+  }
+  .logo-mark .wordmark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--cyan);
+  }
+  .logo-mark .wordmark .dot { color: var(--magenta); }
+  .logo-mark.sm img { height: 22px; }
+  .logo-mark.sm .wordmark { font-size: 7.5pt; }
+  .logo-large img { height: 140px; }
+
+  /* Contact block */
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    color: var(--text);
+  }
+  .contact-line .label {
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 7.5pt;
+    margin-right: 4px;
+  }
+  .contact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .contact-cell {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--cyan);
+    padding: 12px 14px;
+    border-radius: 2px;
+  }
+  .contact-cell .label {
+    display: block;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+  }
+  .contact-cell .value {
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    word-break: break-word;
+  }
+
+  /* Checklist */
+  .check {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 8px;
+    margin-bottom: 6px;
+    align-items: start;
+    font-size: 9.5pt;
+    color: var(--muted);
+  }
+  .check .box {
+    width: 12px; height: 12px;
+    border: 1.5px solid var(--cyan);
+    margin-top: 3px;
+    border-radius: 1px;
+  }
+
+  /* Phase pages */
+  .phase-hero {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .phase-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 78pt;
+    line-height: 0.85;
+    color: var(--cyan);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-align: left;
+  }
+
+  /* Glossary list */
+  .gloss { display: grid; grid-template-columns: 110px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 9pt; }
+  .gloss dt { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 8.5pt; }
+  .gloss dd { color: var(--muted); }
+  .gloss-list dt { font-weight: 500; }
+
+  /* Code/equation */
+  .eq {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10pt;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--cyan);
+    padding: 10px 12px;
+    border-radius: 2px;
+    color: var(--text);
+    margin: 6px 0 10px;
+    overflow-wrap: anywhere;
+  }
+  .eq .op { color: var(--cyan); }
+  .eq .var { color: var(--text); }
+  .eq .out { color: var(--magenta); }
+
+  /* Hazard block */
+  .hazard {
+    border: 1px solid rgba(255, 0, 255, 0.45);
+    background: linear-gradient(180deg, var(--magenta-soft), transparent 90%);
+    padding: 12px 14px;
+    border-radius: 3px;
+  }
+  .hazard h4 { color: var(--magenta); }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<section class="page cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-glow-2"></div>
+
+  <div class="cover-head">
+    <div class="logo-mark">
+      <img src="logo-light.png" alt="The Innovative Native">
+      <span class="wordmark">The Innovative Native<span class="dot">.</span></span>
+    </div>
+    <div class="cover-meta">
+      Marketing Operations<br>
+      Playbook 01 / Series
+    </div>
+  </div>
+
+  <div class="cover-title-wrap">
+    <div class="cover-eyebrow">Marketing Operations Playbook</div>
+    <h1 class="display">
+      <span class="cover-title-line">HOW TO</span><br>
+      <span class="cover-title-accent">UNF*CK</span><br>
+      <span class="cover-title-line">YOUR MARKETING</span><br>
+      <span class="cover-title-rare">DATA</span>
+    </h1>
+    <p class="cover-sub">Stop flying blind. Build the data spine your marketing org needs to compute MER, ROAS, and real unit economics, without arguing with Revenue Ops about whose number is right.</p>
+  </div>
+
+  <div class="cover-foot">
+    <div class="stat-group">
+      <div class="stat"><span class="v">24+</span>Marketing data silos<br>inventoried inside</div>
+      <div class="stat"><span class="v">9</span>Metrics you can't<br>trust without unification</div>
+      <div class="stat"><span class="v">4</span>Phase blueprint to<br>collapse them</div>
+    </div>
+    <div class="stat" style="text-align:right; line-height: 1.7;">
+      <span style="color:var(--cyan)">theinnovativenative.com</span><br>
+      info@theInnovativeNative.com<br>
+      (702) 582-5335<br>
+      <span style="color: var(--magenta);">@the.InnovativeNative</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 2: WHY THIS EXISTS ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Why This Exists</div>
+    <div class="ph-num">02 / 13</div>
+  </div>
+
+  <h2 class="section tight">If you can't <span class="accent">answer these</span><br>in 60 seconds, you're flying blind.</h2>
+  <div class="divider cyan"></div>
+
+  <ol style="font-size: 11pt; color: var(--text); line-height: 1.6; margin-left: 22px;">
+    <li>What was our <strong>blended MER</strong> last week, across every paid and organic channel?</li>
+    <li>What did <strong>one paying customer</strong> cost us, fully loaded, last quarter?</li>
+    <li>Which channel has the best <strong>contribution margin</strong>? Not the best ROAS. The best margin.</li>
+    <li>What's the <strong>CAC payback</strong> for cohort Q1, in months, by acquisition source?</li>
+    <li>Of the leads Marketing sent Sales last month, what percent <strong>closed</strong>, and what's the gap between Marketing's claim and Sales' record?</li>
+  </ol>
+
+  <div class="divider"></div>
+
+  <p>If you have to schedule a meeting to answer any of those, your marketing data lives in silos. You don't have a measurement problem. You have a <strong>plumbing</strong> problem. Most marketing teams build the stack the way most people build IKEA furniture: fast, reactive, screws left over. Then a year later they wonder why their CMO can't tell the CFO what one customer actually costs.</p>
+
+  <div class="pull-quote">
+    Your reports aren't lying. They're each telling the truth from inside a different room. The walls are the silos.
+  </div>
+
+  <div class="card cyan" style="margin-top: 14px;">
+    <h4>What this handout is</h4>
+    <p style="color: var(--text); margin-bottom: 6px;">A tactical, executable blueprint specifically for the <strong>marketing data layer</strong>: ad platforms, web analytics, CRM, email, social, attribution, billing, and the fight between Marketing and Revenue Ops over whose number wins. You can run it in-house. You don't need a 6-figure consulting engagement.</p>
+  </div>
+
+  <div class="hazard" style="margin-top: 12px;">
+    <h4>What this is not</h4>
+    <p style="color: var(--text);">A general "data strategy" deck. A vendor pitch. A list of dashboards. We will name the silos, name the metrics that break, name the conflict between teams, and show you the order to fix it in.</p>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>WHY THIS EXISTS</div>
+    <div class="accent">02</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 3: THE SILO MAP ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/The Silo Map</div>
+    <div class="ph-num">03 / 13</div>
+  </div>
+
+  <h2 class="section tight">The <span class="accent">marketing data silos</span>.<br>All of them.</h2>
+  <div class="divider cyan"></div>
+
+  <p>The average mid-market marketing org touches 25-40 tools. Each one is a silo unless something is actively un-siloing it. Here is the comprehensive map, organized by function. Tools listed are common examples, not endorsements.</p>
+
+  <div class="silo-grid">
+    <div class="silo">
+      <div class="silo-num">SILO 01</div>
+      <div class="silo-name">Paid Media Platforms</div>
+      <div class="silo-tools">Meta Ads, Google Ads, LinkedIn, TikTok, X, Pinterest, Reddit, DV360, The Trade Desk. Each one has its own conversion definitions, attribution windows, and audience IDs.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 02</div>
+      <div class="silo-name">Web Analytics</div>
+      <div class="silo-tools">GA4, Plausible, Adobe Analytics, Mixpanel, Amplitude, Heap, PostHog. Different event taxonomies, different sampling rules, different user IDs.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 03</div>
+      <div class="silo-name">Tag Management</div>
+      <div class="silo-tools">Google Tag Manager, Tealium, server-side tagging via Stape or Cloudflare Workers. Where ad-blocker losses become permanent.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 04</div>
+      <div class="silo-name">CRM &amp; Lead Database</div>
+      <div class="silo-tools">HubSpot, Salesforce, Pipedrive, ActiveCampaign, Close, Copper. Where MQL → SQL → Opportunity definitions silently disagree with marketing's funnel.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 05</div>
+      <div class="silo-name">Marketing Automation</div>
+      <div class="silo-tools">HubSpot, Marketo, Pardot, Customer.io, Iterable, Braze, ActiveCampaign. Workflow data, lead scoring, lifecycle stages.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 06</div>
+      <div class="silo-name">Email &amp; SMS Platforms</div>
+      <div class="silo-tools">Klaviyo, Mailchimp, ConvertKit, Beehiiv, SendGrid, Postmark, Attentive, Postscript. Open / click / unsubscribe / revenue-per-send.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 07</div>
+      <div class="silo-name">Social Native Analytics</div>
+      <div class="silo-tools">Meta Business Suite, LinkedIn Page Analytics, YouTube Studio, TikTok Analytics, X Analytics. Each measures reach and engagement differently.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 08</div>
+      <div class="silo-name">Social Management Tools</div>
+      <div class="silo-tools">Sprout, Hootsuite, Buffer, Later, Loomly, Metricool. Parallel post performance + click data that rarely matches native numbers.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 09</div>
+      <div class="silo-name">Influencer &amp; Affiliate</div>
+      <div class="silo-tools">Aspire, Grin, CreatorIQ, Impact, PartnerStack, Rewardful, Refersion, FirstPromoter. Promo-code attribution and creator UTMs.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 10</div>
+      <div class="silo-name">SEO &amp; Content Intelligence</div>
+      <div class="silo-tools">Ahrefs, Semrush, Moz, Sistrix, Surfer, Clearscope, Google Search Console, Bing Webmaster. Keyword universe, rank tracking, backlinks.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 11</div>
+      <div class="silo-name">Attribution Platforms</div>
+      <div class="silo-tools">Triple Whale, Northbeam, Rockerbox, Wicked Reports, Polar, Measured. Each model fights the native ad platforms by design.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 12</div>
+      <div class="silo-name">Call &amp; Form Tracking</div>
+      <div class="silo-tools">CallRail, Invoca, Typeform, Tally, Jotform, Calendly. Where phone-driven and form-driven leads vanish from digital attribution.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>THE SILO MAP / PART 1 OF 2</div>
+    <div class="accent">03</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4: SILO MAP (PART 2) ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/The Silo Map (cont.)</div>
+    <div class="ph-num">04 / 13</div>
+  </div>
+
+  <h2 class="section tight">The silos, <span class="accent">continued</span>.</h2>
+  <div class="divider cyan"></div>
+
+  <p>Silos thirteen through twenty-four. The deep cuts: post-purchase signals, the revenue truth layer, the sales-side stack, and the warehouse + BI tier that should be unifying all of it.</p>
+
+  <div class="silo-grid">
+    <div class="silo">
+      <div class="silo-num">SILO 13</div>
+      <div class="silo-name">Reviews &amp; Reputation</div>
+      <div class="silo-tools">Trustpilot, G2, Capterra, Yotpo, Stamped, Okendo, Google Business Profile. Conversion lift signals that never reach marketing.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 14</div>
+      <div class="silo-name">Session Recording &amp; CRO</div>
+      <div class="silo-tools">Hotjar, FullStory, LogRocket, Microsoft Clarity, VWO, Optimizely, Convert.com. Test data lives separately from the funnel.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 15</div>
+      <div class="silo-name">Post-Purchase Surveys</div>
+      <div class="silo-tools">Fairing, KnoCommerce, Enquire. "How did you hear about us?": often the truest channel signal, almost never wired into reporting.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 16</div>
+      <div class="silo-name">Billing &amp; Payments</div>
+      <div class="silo-tools">Stripe, Recurly, Chargebee, Maxio, Paddle, Shopify, WooCommerce. The actual revenue source of truth. Almost never joined to channel.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 17</div>
+      <div class="silo-name">Sales Engagement</div>
+      <div class="silo-tools">Outreach, Salesloft, Apollo, Lemlist, Smartlead. Sales touches that change conversion rates marketing claims credit for.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 18</div>
+      <div class="silo-name">Call Recording &amp; QA</div>
+      <div class="silo-tools">Gong, Chorus, Fathom. Sales conversation data that should feed back into ICP and creative. Never does.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 19</div>
+      <div class="silo-name">Customer Support</div>
+      <div class="silo-tools">Zendesk, Intercom, Front, Help Scout. Ticket volume by channel = early churn signal. Marketing rarely sees it.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 20</div>
+      <div class="silo-name">CDP / Reverse ETL</div>
+      <div class="silo-tools">Segment, Rudderstack, mParticle, Hightouch, Census. Supposed to unify, often becomes a 6th silo at half-completion.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 21</div>
+      <div class="silo-name">Data Warehouse</div>
+      <div class="silo-tools">BigQuery, Snowflake, Redshift, Databricks, Postgres. Where it should all land. The adoption gap is the entire problem.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 22</div>
+      <div class="silo-name">BI &amp; Dashboards</div>
+      <div class="silo-tools">Looker, Tableau, Power BI, Mode, Sigma, Metabase, Looker Studio. Where duplicate metric definitions multiply.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 23</div>
+      <div class="silo-name">Content &amp; DAM</div>
+      <div class="silo-tools">Asana, ClickUp, Notion, Airtable, Frame.io, Brandfolder, Bynder, Figma. Production data that never connects to performance.</div>
+    </div>
+    <div class="silo">
+      <div class="silo-num">SILO 24</div>
+      <div class="silo-name">Spreadsheets</div>
+      <div class="silo-tools">Google Sheets, Excel, Numbers. The dark matter of marketing reporting. Where every "real" number actually lives.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>THE SILO MAP / PART 2 OF 2</div>
+    <div class="accent">04</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4: METRICS YOU CAN'T TRUST ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Broken Metrics</div>
+    <div class="ph-num">05 / 13</div>
+  </div>
+
+  <h2 class="section tight">The <span class="accent">9 metrics</span> you<br>can't trust without unification.</h2>
+  <div class="divider cyan"></div>
+
+  <p>Every metric below is a calculation that crosses silos. If the inputs don't reconcile, the output is a story, not a number. This is the math the C-suite is trying to make decisions from.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 24%">Metric</th>
+        <th style="width: 30%">Formula</th>
+        <th style="width: 46%">Why it breaks under silos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>MER</strong><br><span class="mono" style="color:var(--dim)">Marketing Efficiency Ratio</span></td>
+        <td class="mono">Total Revenue ÷ Total Marketing Spend</td>
+        <td>Spend lives in 5+ ad platforms. Revenue lives in Stripe/Shopify. No one joins them on a common timestamp + customer ID. Result: directionally wrong.</td>
+      </tr>
+      <tr>
+        <td><strong>Channel ROAS</strong><br><span class="mono" style="color:var(--dim)">Return On Ad Spend</span></td>
+        <td class="mono">Channel Revenue ÷ Channel Spend</td>
+        <td>Every ad platform claims credit for the same conversion. Over-attribution of 2x-3x is normal. Native ROAS adds up to more revenue than the company actually made.</td>
+      </tr>
+      <tr>
+        <td><strong>Blended CAC</strong><br><span class="mono" style="color:var(--dim)">Customer Acquisition Cost</span></td>
+        <td class="mono">(Mktg + Sales Cost) ÷ New Customers</td>
+        <td>Organic content cost is invisible. Tool subscriptions aren't allocated. Sales comp lives in HR, not in the CAC formula. Number reported is always too low.</td>
+      </tr>
+      <tr>
+        <td><strong>LTV</strong><br><span class="mono" style="color:var(--dim)">Lifetime Value</span></td>
+        <td class="mono">ARPA × Gross Margin × Avg Lifetime</td>
+        <td>ARPA in billing, margin in finance, lifetime needs cohort retention from product. Marketing rarely sees any of them.</td>
+      </tr>
+      <tr>
+        <td><strong>CAC Payback</strong></td>
+        <td class="mono">CAC ÷ (ARPA × Gross Margin)</td>
+        <td>Three siloed inputs. If any one is wrong, the months-to-payback is wrong. This is the number that decides if you can scale paid spend.</td>
+      </tr>
+      <tr>
+        <td><strong>Contribution Margin / Channel</strong></td>
+        <td class="mono">Rev − COGS − Variable Mktg</td>
+        <td>Requires SKU-level revenue, channel-attributed orders, and COGS by SKU. Almost no marketing team can compute this honestly.</td>
+      </tr>
+      <tr>
+        <td><strong>Cohort Retention</strong></td>
+        <td class="mono">Active in Mo N ÷ Active in Mo 0</td>
+        <td>Lives in product or billing. Marketing usually only sees aggregate churn, not retention by acquisition channel.</td>
+      </tr>
+      <tr>
+        <td><strong>MQL → SQL → Won</strong></td>
+        <td class="mono">% conversion at each stage</td>
+        <td>MQL defined by marketing, SQL by sales, Won by RevOps. Definitions don't agree. Stage rates can't be trusted across teams.</td>
+      </tr>
+      <tr>
+        <td><strong>Pipeline Velocity</strong></td>
+        <td class="mono">(Opps × Win % × ACV) ÷ Cycle Length</td>
+        <td>Pulls from CRM stages, sales engagement, billing. If lifecycle stages drift, velocity drifts. Drives revenue forecasts that miss by 30%+.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote magenta" style="margin-top: 14px;">
+    A number you can't reconcile to a billing record is a number you can't bet money on.
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>BROKEN METRICS</div>
+    <div class="accent">05</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 5: REVOPS VS MARKETING ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/The Conflict</div>
+    <div class="ph-num">06 / 13</div>
+  </div>
+
+  <h2 class="section tight">Revenue Ops vs Marketing.<br><span class="accent">The knife fight</span> nobody admits to.</h2>
+  <div class="divider cyan"></div>
+
+  <p>Most data fights in growth-stage companies aren't about <em>tools</em>. They're about <strong>definitions</strong>. Marketing and Revenue Ops own different stores of truth and rarely agree on the words. Here's where the daggers come out.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 22%">The Word</th>
+        <th style="width: 39%">Marketing means</th>
+        <th style="width: 39%">RevOps means</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Lead</strong></td>
+        <td>Anyone who filled a form</td>
+        <td>Anyone with a known company that matches ICP</td>
+      </tr>
+      <tr>
+        <td><strong>MQL</strong></td>
+        <td>Score &gt; X in HubSpot / Marketo</td>
+        <td>Score + fit + recency, with manual SDR approval</td>
+      </tr>
+      <tr>
+        <td><strong>SQL</strong></td>
+        <td>Marketing passed it to sales</td>
+        <td>Sales accepted it and worked it</td>
+      </tr>
+      <tr>
+        <td><strong>Opportunity</strong></td>
+        <td>Any deal in the CRM</td>
+        <td>Stage 2+, with budget, authority, need, timeline confirmed</td>
+      </tr>
+      <tr>
+        <td><strong>Customer</strong></td>
+        <td>Anyone who paid us once</td>
+        <td>Anyone live on a subscription past trial / first invoice</td>
+      </tr>
+      <tr>
+        <td><strong>Attribution</strong></td>
+        <td>Last non-direct click, 30-day window</td>
+        <td>Closed-won source from CRM "Lead Source" field</td>
+      </tr>
+      <tr>
+        <td><strong>Channel Revenue</strong></td>
+        <td>Whatever the ad platform reports</td>
+        <td>Whatever closed-won deals carry that source</td>
+      </tr>
+      <tr>
+        <td><strong>Pipeline</strong></td>
+        <td>Total open opp value</td>
+        <td>Stage 3+ weighted by win probability</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card cyan" style="margin-top: 14px;">
+    <h4>The fix is a dictionary, not a tool</h4>
+    <p style="color: var(--text); margin: 4px 0;">Before you buy another platform, hold a <strong>90-minute definitions session</strong> with Marketing + RevOps + Finance in the room. Write one definition per term. Publish it. Make it the only definition referenced in dashboards. Disagreements end when the document does.</p>
+  </div>
+
+  <div class="hazard" style="margin-top: 12px;">
+    <h4>Real cost of unresolved definitions</h4>
+    <p style="color: var(--text); margin: 4px 0;">A marketing team reporting 1,200 MQLs/mo with an 18% MQL→SQL rate is reporting <strong>216 sales-ready leads</strong>. If RevOps measures the same month and counts 78 accepted SQLs, somebody is wrong by 64%. That gap is six figures of misallocated headcount and ad spend per quarter.</p>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>THE CONFLICT</div>
+    <div class="accent">06</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 6: PHASE 1 - AUDIT ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Phase 01</div>
+    <div class="ph-num">07 / 13</div>
+  </div>
+
+  <div class="phase-hero">
+    <div class="phase-num">01</div>
+    <div>
+      <h2 class="section" style="margin: 0;">Audit. <span class="accent">Map the silos.</span></h2>
+      <p style="margin-top: 6px;">Goal: every system that produces a marketing-relevant number is inventoried, owned, and tied to a downstream metric.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Step 1 / Tool Inventory</h4>
+      <p>For every platform across the 24 silos, capture:</p>
+      <ul style="font-size: 9.5pt;">
+        <li>Tool name + vendor</li>
+        <li>Owner (a real human, not a team)</li>
+        <li>Monthly cost (paid + seats)</li>
+        <li>Auth method (SSO? API key?)</li>
+        <li>Data residency / region</li>
+        <li>Has an API? Has a webhook?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Step 2 / Data Flow Map</h4>
+      <p>For each tool, document:</p>
+      <ul style="font-size: 9.5pt;">
+        <li>What it produces (events, records, files)</li>
+        <li>Where the data goes <em>today</em></li>
+        <li>What the downstream consumer thinks it's getting</li>
+        <li>Gap between #2 and #3</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Step 3 / Identifier Audit</h4>
+      <p>The single most important step. Catalog every <strong>person ID</strong> and <strong>account ID</strong> that exists in your stack:</p>
+      <ul style="font-size: 9.5pt;">
+        <li>Email (lowercase, trimmed)</li>
+        <li>Anonymous web visitor ID</li>
+        <li>CRM Contact ID, Account ID</li>
+        <li>Stripe Customer ID</li>
+        <li>App User ID</li>
+        <li>Ad platform user IDs (CAPI / Conversions API)</li>
+      </ul>
+      <p style="margin-top: 6px;">If you can't translate one to another, you can't compute LTV.</p>
+    </div>
+    <div class="card">
+      <h4>Step 4 / Definition Inventory</h4>
+      <p>Pull every dashboard, every saved report, every leadership slide from the last 90 days. List every <strong>defined metric</strong>. Note where the same word is calculated two different ways. This list becomes the input for Phase 3.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote small">
+    Most teams skip Step 3. They then spend six months on a CDP and still can't compute LTV by acquisition channel. The CDP can't fix what the identifier audit didn't surface.
+  </div>
+
+  <div class="card magenta" style="padding: 10px 14px; margin-bottom: 0;">
+    <h4>Output of Phase 1</h4>
+    <p style="color: var(--text); font-size: 10pt; line-height: 1.45;">One spreadsheet, four tabs: <strong>Tools</strong> · <strong>Flows</strong> · <strong>Identifiers</strong> · <strong>Definitions</strong>. If it's not on one of those tabs, it isn't real. Time-box to <strong>2 weeks</strong>. Done beats perfect.</p>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>PHASE 01 / AUDIT</div>
+    <div class="accent">07</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 7: PHASE 2 - THE SPINE ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Phase 02</div>
+    <div class="ph-num">08 / 13</div>
+  </div>
+
+  <div class="phase-hero">
+    <div class="phase-num">02</div>
+    <div>
+      <h2 class="section" style="margin: 0;">Build the <span class="accent">spine.</span></h2>
+      <p style="margin-top: 6px;">Goal: one queryable backend with every marketing event, every order, every cost, every customer, joined on identifiers you actually trust.</p>
+    </div>
+  </div>
+
+  <h4>The spine has 5 layers. Build them in order.</h4>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 4%">#</th>
+        <th style="width: 16%">Layer</th>
+        <th style="width: 30%">What it does</th>
+        <th style="width: 50%">Tooling that works (pick one)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Capture</strong></td>
+        <td>Server-side events, with first-party identifiers, sent to every destination</td>
+        <td>Segment, Rudderstack, server-side GTM (Stape), custom Cloudflare Worker</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Warehouse</strong></td>
+        <td>Single store every other system reads from. Schema is yours, not the vendor's.</td>
+        <td>BigQuery, Snowflake, Postgres (Supabase), Databricks</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Ingest</strong></td>
+        <td>Pull from every silo on a schedule. Land raw. Transform later.</td>
+        <td>Fivetran, Airbyte, n8n, Stitch, custom scripts. Cheap silos: just n8n.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Model</strong></td>
+        <td>Turn raw rows into modeled tables: <span class="mono">fct_orders</span>, <span class="mono">fct_sessions</span>, <span class="mono">dim_customers</span>, <span class="mono">fct_ad_spend</span></td>
+        <td>dbt, SQLMesh, or raw SQL views in Postgres</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Activate</strong></td>
+        <td>Push modeled segments back to ad platforms, CRM, email tool</td>
+        <td>Hightouch, Census, custom n8n flows</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card cyan" style="margin-top: 12px;">
+    <h4>Canonical Marketing Schema (minimum viable)</h4>
+    <div class="mono" style="color: var(--text); line-height: 1.45; font-size: 7.5pt;">
+      <strong>dim_customer</strong>(customer_id, email_hash, first_seen_at, first_touch_channel, first_touch_campaign, first_paid_at, lifetime_revenue, lifetime_orders, status)<br>
+      <strong>fct_session</strong>(session_id, anonymous_id, customer_id, started_at, channel, source, medium, campaign, landing_page, device)<br>
+      <strong>fct_order</strong>(order_id, customer_id, ordered_at, gross_revenue, discount, cogs, net_revenue, currency, channel, campaign)<br>
+      <strong>fct_ad_spend</strong>(date, platform, campaign_id, campaign_name, impressions, clicks, spend, native_conversions)<br>
+      <strong>fct_touchpoint</strong>(touchpoint_id, customer_id, occurred_at, channel, campaign, position_in_path)
+    </div>
+  </div>
+
+  <p style="margin-top: 8px; font-size: 10pt;">With those 5 tables, you can compute every metric on page 5. Without them, you can't.</p>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>PHASE 02 / SPINE</div>
+    <div class="accent">08</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 8: PHASE 3 - ALIGN DEFINITIONS ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Phase 03</div>
+    <div class="ph-num">09 / 13</div>
+  </div>
+
+  <div class="phase-hero">
+    <div class="phase-num">03</div>
+    <div>
+      <h2 class="section" style="margin: 0;">Align <span class="accent">definitions.</span></h2>
+      <p style="margin-top: 6px;">Goal: end the knife fight between Marketing and Revenue Ops. One dictionary, one set of dashboards, one number per question.</p>
+    </div>
+  </div>
+
+  <h4>The Definitions Session / agenda</h4>
+  <div class="card">
+    <ol style="font-size: 10pt; color: var(--text);">
+      <li><strong>0:00 – 0:10</strong> · Frame the cost of disagreement (use the 64% gap example from page 6).</li>
+      <li><strong>0:10 – 0:40</strong> · Lifecycle stages: Lead → MQL → SAL → SQL → Opportunity → Customer → Expansion. One sentence per stage, signed by all three teams.</li>
+      <li><strong>0:40 – 0:55</strong> · Attribution: agree on ONE primary model (last-touch, position-based, time-decay, MMM). Note exceptions, don't multiply them.</li>
+      <li><strong>0:55 – 1:10</strong> · Source of truth per metric: revenue = billing system, spend = ad platforms, leads = CRM. No exceptions.</li>
+      <li><strong>1:10 – 1:25</strong> · Cadence: weekly leadership view, monthly review, quarterly recalibration.</li>
+      <li><strong>1:25 – 1:30</strong> · Write the doc. Get sign-off in the room. No "let me send notes."</li>
+    </ol>
+  </div>
+
+  <h4 style="margin-top: 14px;">Shared KPI set / the minimum 8</h4>
+  <div class="grid-4" style="margin-top: 6px;">
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">Blended MER</h3><p class="mono" style="font-size: 8pt;">Rev ÷ Spend</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">Blended CAC</h3><p class="mono" style="font-size: 8pt;">Mktg+Sales ÷ New</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">CAC Payback</h3><p class="mono" style="font-size: 8pt;">Months to breakeven</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">90d LTV</h3><p class="mono" style="font-size: 8pt;">Cohort revenue 90d</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">MQL→SQL</h3><p class="mono" style="font-size: 8pt;">Stage conversion %</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">SQL→Won</h3><p class="mono" style="font-size: 8pt;">Stage conversion %</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">Pipeline / $ Spent</h3><p class="mono" style="font-size: 8pt;">Top-funnel efficiency</p></div>
+    <div class="card" style="margin-bottom: 0;"><h3 style="font-size: 11pt;">Contribution / Channel</h3><p class="mono" style="font-size: 8pt;">Rev − COGS − VarMkt</p></div>
+  </div>
+
+  <div class="pull-quote magenta" style="margin-top: 14px;">
+    Eight numbers, reported the same way every Monday, by every team. That's the bar. If you can't hit it, you don't have a marketing measurement problem. You have an executive alignment problem.
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>PHASE 03 / ALIGN</div>
+    <div class="accent">09</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 9: PHASE 4 - OPERATE ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Phase 04</div>
+    <div class="ph-num">10 / 13</div>
+  </div>
+
+  <div class="phase-hero">
+    <div class="phase-num">04</div>
+    <div>
+      <h2 class="section" style="margin: 0;">Operate. <span class="accent">Keep it clean.</span></h2>
+      <p style="margin-top: 6px;">Goal: the spine doesn't decay. Owners, cadence, alerting, and a kill-switch for tool sprawl.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Owners</h4>
+      <ul style="font-size: 9.5pt;">
+        <li><strong>Marketing Data Owner</strong>: one human, owns the spine end-to-end.</li>
+        <li><strong>Per-silo Stewards</strong>: one human per major tool; responsible for credentials, schema drift, vendor changes.</li>
+        <li><strong>Definition Council</strong>: Mktg + RevOps + Finance, meets quarterly, has authority to change any KPI definition.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Cadence</h4>
+      <ul style="font-size: 9.5pt;">
+        <li><strong>Weekly</strong>: the 8 KPIs reviewed, deltas explained.</li>
+        <li><strong>Monthly</strong>: cohort + channel deep dives.</li>
+        <li><strong>Quarterly</strong>: definitions review + tool audit.</li>
+        <li><strong>Always</strong>: alert when a tool's daily sync fails.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Tool Kill-Switch</h4>
+      <ul style="font-size: 9.5pt;">
+        <li>Quarterly: each tool re-justified by its steward.</li>
+        <li>If it doesn't write to the warehouse, it doesn't get renewed.</li>
+        <li>If it has under 3 active users in 90 days, cancel.</li>
+        <li>If two tools do the same job, kill the one with the worse API.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Alerting</h4>
+      <ul style="font-size: 9.5pt;">
+        <li>Daily sync failure → Slack to data owner</li>
+        <li>Identifier match rate drops &gt;5% → Slack</li>
+        <li>Spend &gt;3σ above 28-day baseline → Slack</li>
+        <li>Definition changed → email all three teams</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4 style="margin-top: 14px;">Unit Economics / what the CFO actually wants every Monday</h4>
+  <div class="card cyan">
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Number</th>
+          <th>Source</th>
+          <th>Health Bar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>What did one customer cost?</td><td>CAC</td><td>fct_ad_spend + fct_customer</td><td>&lt; LTV × 0.33</td></tr>
+        <tr><td>How long to make it back?</td><td>Payback</td><td>CAC ÷ gross profit/mo</td><td>&lt; 12 months</td></tr>
+        <tr><td>How much do we earn per $1 spent?</td><td>MER</td><td>Stripe ÷ all spend</td><td>&gt; 3.0 trailing 28d</td></tr>
+        <tr><td>Which channel actually pays?</td><td>Contribution / channel</td><td>fct_order × COGS by channel</td><td>positive at week 4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>PHASE 04 / OPERATE</div>
+    <div class="accent">10</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 10: 30-DAY AUDIT CHECKLIST ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Tactical</div>
+    <div class="ph-num">11 / 13</div>
+  </div>
+
+  <h2 class="section">The <span class="accent">30-day</span> audit checklist.</h2>
+  <div class="divider cyan"></div>
+  <p>Run this on your own stack this month. Each item is a yes/no with a measurable definition.</p>
+
+  <div class="grid-2" style="margin-top: 8px;">
+    <div>
+      <h4>Week 1 / Inventory</h4>
+      <div class="check"><div class="box"></div><div>Every tool in the 24 silos has a named owner.</div></div>
+      <div class="check"><div class="box"></div><div>Every tool has a documented monthly cost.</div></div>
+      <div class="check"><div class="box"></div><div>Every tool's API status is captured (REST? webhook? export only?).</div></div>
+      <div class="check"><div class="box"></div><div>Every dashboard in active use is screenshot-archived with its query.</div></div>
+      <div class="check"><div class="box"></div><div>The "How did you hear about us?" survey is wired to billing.</div></div>
+      <div class="check"><div class="box"></div><div>Every UTM in active campaigns is documented in a single sheet.</div></div>
+
+      <h4 style="margin-top: 12px;">Week 2 / Identifiers</h4>
+      <div class="check"><div class="box"></div><div>Email-to-CRM-ID match rate is measured and &gt;90%.</div></div>
+      <div class="check"><div class="box"></div><div>CRM Contact has Stripe Customer ID on it.</div></div>
+      <div class="check"><div class="box"></div><div>Web anonymous ID survives login (identify call fires).</div></div>
+      <div class="check"><div class="box"></div><div>Server-side conversions API fires for every ad platform.</div></div>
+      <div class="check"><div class="box"></div><div>First-touch channel is captured on customer creation.</div></div>
+      <div class="check"><div class="box"></div><div>Email hashes (lowercase + trim) are computed consistently.</div></div>
+    </div>
+
+    <div>
+      <h4>Week 3 / Definitions</h4>
+      <div class="check"><div class="box"></div><div>Lead / MQL / SAL / SQL / Opp / Customer each have one signed definition.</div></div>
+      <div class="check"><div class="box"></div><div>Marketing-attributed revenue formula is written and agreed.</div></div>
+      <div class="check"><div class="box"></div><div>"Spend" is defined to include or exclude tool subscriptions (your choice, just decide).</div></div>
+      <div class="check"><div class="box"></div><div>Refund + chargeback treatment in revenue is defined.</div></div>
+      <div class="check"><div class="box"></div><div>Attribution model is named, written, and dated.</div></div>
+      <div class="check"><div class="box"></div><div>Lookback windows are explicit (e.g., 30-day click, 1-day view).</div></div>
+
+      <h4 style="margin-top: 12px;">Week 4 / The Spine</h4>
+      <div class="check"><div class="box"></div><div>A warehouse exists and has at least one team writing to it weekly.</div></div>
+      <div class="check"><div class="box"></div><div><span class="mono">fct_ad_spend</span> exists with daily rows per platform per campaign.</div></div>
+      <div class="check"><div class="box"></div><div><span class="mono">fct_order</span> exists with channel + first-touch + customer_id.</div></div>
+      <div class="check"><div class="box"></div><div>One dashboard reads from the warehouse, not from native tools.</div></div>
+      <div class="check"><div class="box"></div><div>Daily sync failures alert one named human.</div></div>
+      <div class="check"><div class="box"></div><div>The 8 KPIs are computed weekly and shared in one document.</div></div>
+      <div class="check"><div class="box"></div><div>A retired-tools list exists. At least one tool has been cancelled.</div></div>
+    </div>
+  </div>
+
+  <div class="pull-quote" style="margin-top: 12px;">
+    Score yourself out of 25. Under 10 = you're flying blind. 10-17 = you have inputs, not insight. 18+ = your marketing engine has a working spine.
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>30-DAY CHECKLIST</div>
+    <div class="accent">11</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 11: GLOSSARY ============ -->
+<section class="page">
+  <div class="ph">
+    <div class="ph-tag">/Reference</div>
+    <div class="ph-num">12 / 13</div>
+  </div>
+
+  <h2 class="section">Glossary. <span class="accent">Use the same words.</span></h2>
+  <div class="divider cyan"></div>
+
+  <div class="grid-2">
+    <dl class="gloss-list">
+      <div class="gloss"><dt>MER</dt><dd>Marketing Efficiency Ratio. Total revenue ÷ total marketing spend, blended across all channels. A truth-telling number when native ROAS lies.</dd></div>
+      <div class="gloss"><dt>ROAS</dt><dd>Return On Ad Spend. Channel revenue ÷ channel spend. Native platforms over-report due to claim overlap.</dd></div>
+      <div class="gloss"><dt>CAC</dt><dd>Customer Acquisition Cost. Fully loaded (paid + organic salary + tools + sales comp) ÷ net new customers.</dd></div>
+      <div class="gloss"><dt>LTV</dt><dd>Lifetime Value. Average revenue per account × gross margin × expected lifetime (often capped at 24 or 36 months for sanity).</dd></div>
+      <div class="gloss"><dt>ARPA</dt><dd>Average Revenue Per Account. Usually monthly. Inputs LTV.</dd></div>
+      <div class="gloss"><dt>Payback</dt><dd>Months until cumulative gross profit from a customer equals their CAC. The number that decides whether you can scale paid spend.</dd></div>
+      <div class="gloss"><dt>Contribution Margin</dt><dd>Revenue minus COGS minus variable marketing. By channel, by cohort, by SKU. The realest profitability lens at the unit level.</dd></div>
+      <div class="gloss"><dt>MMM</dt><dd>Marketing Mix Modeling. Statistical attribution that doesn't rely on cookies. Slower, more directional, less debatable.</dd></div>
+    </dl>
+    <dl class="gloss-list">
+      <div class="gloss"><dt>MTA</dt><dd>Multi-Touch Attribution. Cookie-based; impaired by iOS / browser changes; still useful directionally for paid channels.</dd></div>
+      <div class="gloss"><dt>Incrementality</dt><dd>Lift caused by marketing vs the counterfactual no-marketing scenario. Geo holdouts and PSA tests are how you measure it honestly.</dd></div>
+      <div class="gloss"><dt>MQL / SQL</dt><dd>Marketing / Sales Qualified Lead. Definitions vary; the point of Phase 3 is making yours not vary internally.</dd></div>
+      <div class="gloss"><dt>SAL</dt><dd>Sales Accepted Lead. The under-used middle step. Catches handoff drop-off between MQL and SQL.</dd></div>
+      <div class="gloss"><dt>Pipeline Velocity</dt><dd>(Open Opps × Win Rate × ACV) ÷ Cycle Length. Drives revenue forecast accuracy.</dd></div>
+      <div class="gloss"><dt>CDP</dt><dd>Customer Data Platform. Unifies identity and events. Becomes a silo when half-deployed.</dd></div>
+      <div class="gloss"><dt>Reverse ETL</dt><dd>Push from warehouse back to operational tools. The "activate" step in Phase 2.</dd></div>
+      <div class="gloss"><dt>Identity Graph</dt><dd>The mapping between anonymous IDs, email hashes, CRM contact IDs, and customer IDs. Without it, no LTV by channel.</dd></div>
+    </dl>
+  </div>
+
+  <div class="card magenta" style="margin-top: 12px;">
+    <h4>The one habit that beats every tool</h4>
+    <p style="color: var(--text);">When someone says a metric, ask: "What's the formula and where does it pull from?" If you can't answer in one sentence, that metric is fiction. Make this question normal. Whole categories of silo damage disappear.</p>
+  </div>
+
+  <div class="footer">
+    <div>HOW TO UNF*CK YOUR MARKETING DATA</div>
+    <div>GLOSSARY</div>
+    <div class="accent">12</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 12: CTA ============ -->
+<section class="page">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+
+  <div class="ph">
+    <div class="ph-tag">/Next Step</div>
+    <div class="ph-num">13 / 13</div>
+  </div>
+
+  <h2 class="section" style="font-size: 30pt; line-height: 1.12;">Data that <span class="accent">flows</span><br>= growth that <span style="color: var(--magenta);">compounds</span>.</h2>
+  <div class="divider cyan"></div>
+
+  <p style="font-size: 12pt; color: var(--text);">Disconnected marketing systems don't just create friction. They quietly destroy the math. If your dashboards can't answer the 5 questions on page 2 in under a minute, you're not making decisions. You're guessing in expensive shoes.</p>
+
+  <p style="margin-top: 12px;">Use this blueprint to map your silos, build the spine, end the RevOps knife fight, and run the audit. Then your AI tools have something real to work on. Then your CAC payback is a number you can bet money on.</p>
+
+  <div class="card cyan" style="margin-top: 20px;">
+    <h4>Want me to run it with you</h4>
+    <p style="color: var(--text); font-size: 11pt;">I do this for operators running 7- and 8-figure businesses. We collapse the 24 silos into a single spine, write the definitions doc, build the dashboards, and hand you a marketing org that can compute its own unit economics every Monday before the standup.</p>
+    <p style="margin-top: 12px; font-size: 11pt;"><span class="tag">BOOK A DISCOVERY CALL</span></p>
+  </div>
+
+  <div class="contact-row">
+    <div class="contact-cell">
+      <span class="label">Email</span>
+      <span class="value">info@theInnovativeNative.com</span>
+    </div>
+    <div class="contact-cell">
+      <span class="label">Direct</span>
+      <span class="value">(702) 582-5335</span>
+    </div>
+    <div class="contact-cell">
+      <span class="label">Social</span>
+      <span class="value">@the.InnovativeNative</span>
+    </div>
+  </div>
+
+  <div class="pull-quote magenta" style="margin-top: 20px;">
+    Most teams don't need more effort. They need less guessing.
+  </div>
+
+  <div style="position: absolute; bottom: 0.55in; left: 0.65in; right: 0.65in;">
+    <div class="divider"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: var(--dim); text-transform: uppercase; letter-spacing: 0.18em;">
+      <div class="logo-mark sm">
+        <img src="logo-light.png" alt="The Innovative Native">
+        <span class="wordmark">The Innovative Native<span class="dot">.</span></span>
+      </div>
+      <div>theinnovativenative.com</div>
+      <div style="color: var(--cyan);">END</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
