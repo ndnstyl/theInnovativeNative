@@ -1,0 +1,124 @@
+name: Deploy Website (safe auto-deploy)
+
+# =============================================================================
+# SAFE AUTO-DEPLOY for theinnovativenative.com
+#
+# Replaces the manual-only rule from 2026-05-02 with a guarded auto-deploy:
+#
+#   push to blog-extraction → build → PREFLIGHT (manifest check) → deploy
+#
+# If preflight detects a page from the canonical manifest is missing, the
+# deploy is REFUSED. This makes the May 2 incident (rsync --delete wiping
+# generational-wealth + quiz) structurally impossible to repeat.
+#
+# Required secrets (set once in GitHub repo Settings → Secrets):
+#   A2_SSH_KEY               — private key contents of ~/.ssh/a2hosting_tin
+#   A2_HOST                  — 75.98.175.76
+#   A2_USER                  — delikate
+#   A2_PORT                  — 7822
+#   A2_DOC_ROOT              — ~/theinnovativenative.com/
+#   CF_ZONE_ID               — Cloudflare zone id (optional, for cache purge)
+#   CF_API_TOKEN             — Cloudflare API token with cache_purge perms
+# =============================================================================
+
+on:
+  push:
+    branches:
+      - blog-extraction
+      - main
+    paths:
+      - 'projects/website/**'
+      - 'packages/shared-ui/**'
+      - 'scripts/pages-manifest.json'
+      - 'scripts/deploy-preflight.sh'
+      - '.github/workflows/deploy-website.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-website
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      - name: Install deps
+        run: npm ci --legacy-peer-deps
+
+      - name: Build website
+        working-directory: projects/website
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_LEAD_WEBHOOK_URL: ${{ secrets.NEXT_PUBLIC_LEAD_WEBHOOK_URL }}
+          NEXT_PUBLIC_GA4_ID: ${{ secrets.NEXT_PUBLIC_GA4_ID }}
+        run: npm run build
+
+      - name: PREFLIGHT — manifest check (refuses deploy if pages missing)
+        run: |
+          chmod +x scripts/deploy-preflight.sh
+          ./scripts/deploy-preflight.sh
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.A2_SSH_KEY }}" > ~/.ssh/a2hosting_tin
+          chmod 600 ~/.ssh/a2hosting_tin
+          ssh-keyscan -p "${{ secrets.A2_PORT }}" -H "${{ secrets.A2_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync (additive, NO --delete by default)
+        run: |
+          rsync -avz --chmod=D755,F644 \
+            -e "ssh -i ~/.ssh/a2hosting_tin -p ${{ secrets.A2_PORT }} -o IdentitiesOnly=yes" \
+            --exclude='theinnovativenative-site.zip' \
+            --exclude='resumes/' --exclude='videos/' --exclude='n8n-templates/' \
+            projects/website/out/ \
+            "${{ secrets.A2_USER }}@${{ secrets.A2_HOST }}:${{ secrets.A2_DOC_ROOT }}"
+
+      - name: Fix directory index files
+        run: |
+          ssh -i ~/.ssh/a2hosting_tin -p ${{ secrets.A2_PORT }} -o IdentitiesOnly=yes \
+            "${{ secrets.A2_USER }}@${{ secrets.A2_HOST }}" \
+            "cd ${{ secrets.A2_DOC_ROOT }} && for name in blog classroom community members messages templates admin checklist checkout auth generational-wealth quiz resources settings; do [ -f \${name}.html ] && [ -d \${name} ] && cp \${name}.html \${name}/index.html 2>/dev/null; done; true"
+
+      - name: Purge Cloudflare cache
+        if: env.CF_ZONE_ID != ''
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}' \
+            | head -c 500
+          echo
+
+      - name: Save deploy receipt
+        if: always()
+        run: |
+          mkdir -p .deploy-history
+          STAMP=$(date -u +%Y%m%dT%H%M%SZ)
+          cat > ".deploy-history/${STAMP}-ci.json" <<EOF
+          {
+            "timestamp": "${STAMP}",
+            "sha": "${{ github.sha }}",
+            "branch": "${{ github.ref_name }}",
+            "actor": "${{ github.actor }}",
+            "status": "${{ job.status }}",
+            "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF

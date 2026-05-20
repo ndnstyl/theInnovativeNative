@@ -1,0 +1,160 @@
+name: URL + DNS Health Monitor
+
+# =============================================================================
+# Detects the "blog is silently dead" failure mode.
+#
+# Every hour:
+#   - DNS lookup on the apex + critical subdomains
+#   - HTTP fetch on critical pages
+#   - PDF + asset existence check
+#   - If ANYTHING fails, opens a GitHub issue (or appends to an existing one)
+#
+# This is the early-warning system you didn't have when the blog subdomain
+# went NXDOMAIN.
+# =============================================================================
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # every 2 hours
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout (for issue body templates)
+        uses: actions/checkout@v4
+
+      - name: Run health checks
+        id: checks
+        run: |
+          set +e
+          FAILURES=()
+
+          check_dns() {
+            local host="$1"
+            if host "$host" >/dev/null 2>&1; then
+              echo "  ✓ DNS $host"
+            else
+              echo "  ✗ DNS $host — NXDOMAIN or unreachable"
+              FAILURES+=("DNS:$host:NXDOMAIN")
+            fi
+          }
+
+          check_http() {
+            local url="$1"
+            local expected_status="${2:-200}"
+            local code=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 15 "$url")
+            if [[ "$code" == "$expected_status" ]]; then
+              echo "  ✓ $url ($code)"
+            else
+              echo "  ✗ $url → $code (expected $expected_status)"
+              FAILURES+=("HTTP:$url:$code")
+            fi
+          }
+
+          check_content() {
+            local url="$1"
+            local pattern="$2"
+            local body=$(curl -sL --max-time 15 "$url")
+            if echo "$body" | grep -q "$pattern"; then
+              echo "  ✓ $url contains '$pattern'"
+            else
+              echo "  ✗ $url MISSING '$pattern'"
+              FAILURES+=("CONTENT:$url:missing $pattern")
+            fi
+          }
+
+          echo "=== DNS ==="
+          check_dns "theinnovativenative.com"
+          check_dns "blog.theinnovativenative.com"
+          check_dns "www.theinnovativenative.com"
+
+          echo ""
+          echo "=== Critical pages (HTTP 200) ==="
+          check_http "https://theinnovativenative.com/" 200
+          check_http "https://theinnovativenative.com/professional-experience" 200
+          check_http "https://theinnovativenative.com/portfolio" 200
+          check_http "https://theinnovativenative.com/quiz/marketing-data-audit" 200
+          check_http "https://theinnovativenative.com/quiz/ai-readiness" 200
+          check_http "https://theinnovativenative.com/generational-wealth/" 200
+          check_http "https://theinnovativenative.com/resources" 200
+
+          echo ""
+          echo "=== Assets ==="
+          check_http "https://theinnovativenative.com/handouts/marketing-unsilo/How-to-Unfck-Your-Marketing-Data.pdf" 200
+
+          echo ""
+          echo "=== Blog (separate hosting) ==="
+          # Don't fail this check if known NXDOMAIN — record the state
+          if host blog.theinnovativenative.com >/dev/null 2>&1; then
+            check_http "https://blog.theinnovativenative.com/" 200
+          else
+            echo "  ! blog.theinnovativenative.com NXDOMAIN (known broken state — needs Cloudflare DNS fix)"
+            FAILURES+=("CRITICAL_KNOWN:blog.theinnovativenative.com:NXDOMAIN")
+          fi
+
+          echo ""
+          if [[ ${#FAILURES[@]} -eq 0 ]]; then
+            echo "All checks passed."
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "${#FAILURES[@]} check(s) failed."
+            {
+              echo "failed=true"
+              echo "failure_count=${#FAILURES[@]}"
+              echo "failures<<EOF"
+              for f in "${FAILURES[@]}"; do
+                echo "- $f"
+              done
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update GitHub issue on failure
+        if: steps.checks.outputs.failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const failures = `${{ steps.checks.outputs.failures }}`;
+            const count = `${{ steps.checks.outputs.failure_count }}`;
+            const title = `🚨 URL Health Failure (${count} check${count == 1 ? '' : 's'})`;
+            const body = [
+              `Detected ${count} failed health check(s) at ${new Date().toISOString()}.`,
+              ``,
+              `**Failures:**`,
+              failures,
+              ``,
+              `**Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              ``,
+              `This issue is auto-opened/updated by .github/workflows/url-health.yml. Close it once the underlying issue is resolved.`,
+            ].join('\n');
+
+            // Find existing open health issue
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'url-health',
+            });
+
+            if (issues.length > 0) {
+              const existing = issues[0];
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+              console.log(`Appended to existing issue #${existing.number}`);
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['url-health', 'auto-detected'],
+              });
+              console.log('Opened new issue');
+            }

@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# =============================================================================
+# post-checkout hook — warn about "trailing files surviving branch switches"
+#
+# Install with:
+#   cp scripts/git-hooks/post-checkout .git/hooks/
+#   chmod +x .git/hooks/post-checkout
+#
+# After switching branches, if there are critical untracked files that exist
+# on disk but NOT in the new branch's HEAD, alert the user. This prevents
+# the May 19 scenario where blog-extraction had ~5,000 untracked files from
+# previous branches that were silently invisible.
+# =============================================================================
+
+PREV_HEAD="$1"
+NEW_HEAD="$2"
+BRANCH_SWITCH="$3"
+
+# Only run on branch switches (BRANCH_SWITCH == 1), not file checkouts
+[[ "$BRANCH_SWITCH" != "1" ]] && exit 0
+
+# Watch these patterns — critical paths where "trailing files" cause the bug
+CRITICAL_PATTERNS=(
+  "projects/website/src/pages/"
+  "projects/website/src/components/"
+  "projects/website/src/data/"
+  "projects/blog/content/"
+  "content/handouts/"
+  "scripts/n8n-workflows/"
+  "remotion-videos/src/"
+)
+
+# Get untracked files matching critical patterns
+UNTRACKED=$(git ls-files --others --exclude-standard 2>/dev/null)
+CRITICAL_UNTRACKED=()
+
+while IFS= read -r f; do
+  [[ -z "$f" ]] && continue
+  for pattern in "${CRITICAL_PATTERNS[@]}"; do
+    if [[ "$f" == "$pattern"* ]]; then
+      CRITICAL_UNTRACKED+=("$f")
+      break
+    fi
+  done
+done <<< "$UNTRACKED"
+
+if [[ ${#CRITICAL_UNTRACKED[@]} -gt 0 ]]; then
+  echo ""
+  echo "╔══════════════════════════════════════════════════════════════════════╗"
+  echo "║  ⚠  TRAILING FILES DETECTED — POTENTIAL DATA LOSS RISK              ║"
+  echo "╚══════════════════════════════════════════════════════════════════════╝"
+  echo ""
+  echo "After switching branches, ${#CRITICAL_UNTRACKED[@]} untracked files in critical paths"
+  echo "exist on disk but are NOT tracked by the new branch."
+  echo ""
+  echo "First 10:"
+  printf '  %s\n' "${CRITICAL_UNTRACKED[@]:0:10}"
+  if [[ ${#CRITICAL_UNTRACKED[@]} -gt 10 ]]; then
+    echo "  ... and $((${#CRITICAL_UNTRACKED[@]} - 10)) more"
+  fi
+  echo ""
+  echo "What this means: these files survived from a previous branch. They are"
+  echo "INVISIBLE to git on this branch. If you deploy, they may or may not be"
+  echo "included depending on the build pipeline."
+  echo ""
+  echo "What to do:"
+  echo "  1. If these belong on THIS branch: stage and commit them"
+  echo "     git add <files> && git commit -m 'recover trailing files'"
+  echo "  2. If these belong on the PREVIOUS branch: switch back and commit there"
+  echo "     git checkout $PREV_HEAD"
+  echo "  3. If these are junk: clean them"
+  echo "     git clean -nd  # dry-run first"
+  echo ""
+fi
+
+exit 0
