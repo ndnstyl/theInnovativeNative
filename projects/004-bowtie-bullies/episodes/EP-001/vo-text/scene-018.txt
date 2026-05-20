@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+That stolen laptop became a library.<break time="200ms"/> A law school.<break time="200ms"/> A business plan.<break time="600ms"/> YGs think the goal is respect.<break time="200ms"/> Respect don't pay rent.<break time="200ms"/> What pay rent is knowin' how to make a dollar work while you sleep.<break time="600ms"/> I started learnin' that on a cracked screen in a parkin' lot.
+</prosody>
+</speak>

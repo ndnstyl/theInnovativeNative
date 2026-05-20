@@ -1,0 +1,238 @@
+{
+  "name": "LFR-Lead-Tracking",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lfr-lead-capture",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Lead Capture",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "lfr-lead-capture"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "email",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "name",
+              "name": "name",
+              "value": "={{ $json.body.name || 'Not Provided' }}",
+              "type": "string"
+            },
+            {
+              "id": "firm",
+              "name": "firm",
+              "value": "={{ $json.body.firm || 'Not Provided' }}",
+              "type": "string"
+            },
+            {
+              "id": "practice_area",
+              "name": "practice_area",
+              "value": "={{ $json.body.practice_area || 'Not Specified' }}",
+              "type": "string"
+            },
+            {
+              "id": "utm_source",
+              "name": "utm_source",
+              "value": "={{ $json.body.utm_source || 'direct' }}",
+              "type": "string"
+            },
+            {
+              "id": "utm_medium",
+              "name": "utm_medium",
+              "value": "={{ $json.body.utm_medium || 'landing' }}",
+              "type": "string"
+            },
+            {
+              "id": "utm_campaign",
+              "name": "utm_campaign",
+              "value": "={{ $json.body.utm_campaign || 'lfr-q1' }}",
+              "type": "string"
+            },
+            {
+              "id": "utm_content",
+              "name": "utm_content",
+              "value": "={{ $json.body.utm_content || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "timestamp",
+              "name": "timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "lead_status",
+              "name": "lead_status",
+              "value": "New",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-normalize",
+      "name": "Set - Normalize Lead Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "={{ $env.AIRTABLE_LFR_BASE_ID }}",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json.email }}",
+            "Name": "={{ $json.name }}",
+            "Firm": "={{ $json.firm }}",
+            "Practice Area": "={{ $json.practice_area }}",
+            "UTM Source": "={{ $json.utm_source }}",
+            "UTM Medium": "={{ $json.utm_medium }}",
+            "UTM Campaign": "={{ $json.utm_campaign }}",
+            "UTM Content": "={{ $json.utm_content }}",
+            "First Touch": "={{ $json.timestamp }}",
+            "Status": "={{ $json.lead_status }}"
+          },
+          "cachedResultType": "object"
+        },
+        "options": {}
+      },
+      "id": "airtable-create",
+      "name": "Airtable - Create Lead",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [690, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "CREDENTIAL_ID",
+          "name": "Airtable Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#lfr-leads",
+        "text": ":tada: *New Law Firm RAG Lead!*\n\n*Name:* {{ $json.name }}\n*Email:* {{ $json.email }}\n*Firm:* {{ $json.firm }}\n*Practice Area:* {{ $json.practice_area }}\n\n*Attribution:*\n- Source: {{ $json.utm_source }}\n- Medium: {{ $json.utm_medium }}\n- Campaign: {{ $json.utm_campaign }}\n- Content: {{ $json.utm_content }}\n\n_Captured: {{ $json.timestamp }}_",
+        "otherOptions": {}
+      },
+      "id": "slack-notify",
+      "name": "Slack - Notify Team",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [910, 200],
+      "credentials": {
+        "slackApi": {
+          "id": "CREDENTIAL_ID",
+          "name": "Slack"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Lead captured successfully', lead_id: $('Airtable - Create Lead').item.json.id }) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-success",
+      "name": "Respond - Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [910, 400]
+    }
+  ],
+  "connections": {
+    "Webhook - Lead Capture": {
+      "main": [
+        [
+          {
+            "node": "Set - Normalize Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set - Normalize Lead Data": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Create Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Create Lead": {
+      "main": [
+        [
+          {
+            "node": "Slack - Notify Team",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond - Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "law-firm-rag-campaign"
+  },
+  "pinData": {},
+  "versionId": "1.0.0",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "name": "Law Firm RAG",
+      "createdAt": "2026-02-04T00:00:00.000Z",
+      "updatedAt": "2026-02-04T00:00:00.000Z"
+    },
+    {
+      "name": "Lead Tracking",
+      "createdAt": "2026-02-04T00:00:00.000Z",
+      "updatedAt": "2026-02-04T00:00:00.000Z"
+    }
+  ]
+}

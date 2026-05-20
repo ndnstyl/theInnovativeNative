@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.40 | Similarity: 0.75 | Style: 0.45 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="x-soft">
+<emphasis level="strong">Each one teach one.</emphasis><break time="400ms"/> <emphasis level="strong">The marathon continues.</emphasis><break time="400ms"/> <emphasis level="strong">Pay attention.</emphasis>
+</prosody>
+</speak>

@@ -1,0 +1,29 @@
+{
+  "name": "The Innovative Native",
+  "description": "AI automation and community-building for entrepreneurs who want freedom without losing momentum.",
+
+  "colors": {
+    "background": "0a0a14",
+    "background_alt": "12121f",
+    "text": "f5f5f5",
+    "text_secondary": "b8b8c8",
+    "accent": "00ffff",
+    "accent_secondary": "ff00ff",
+    "accent_tertiary": "00d4d4",
+    "code_bg": "06060c",
+    "card_bg": "1a1a2e",
+    "card_bg_alt": "16213e"
+  },
+
+  "fonts": {
+    "heading": "Playfair Display",
+    "body": "Inter",
+    "code": "JetBrains Mono"
+  },
+
+  "assets": {
+    "logo": "assets/logo.png",
+    "logo_dark": null,
+    "icon": null
+  }
+}

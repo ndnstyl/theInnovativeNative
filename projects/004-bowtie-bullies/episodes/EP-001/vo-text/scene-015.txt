@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+Check-cashin' on Fridays.<break time="200ms"/> Rent-to-own for a TV I couldn't afford.<break time="200ms"/> No bank account 'cause nobody told me I needed one.<break time="200ms"/> Every dollar I earned went right back into somebody else's pocket.<break time="600ms"/> I was grindin' and leakin' at the same time.
+</prosody>
+<break time="600ms"/>
+<prosody rate="88%" volume="medium">
+That's what they don't show you<break time="200ms"/> you can work hard and still be broke if nobody taught you how money actually move.
+</prosody>
+</speak>

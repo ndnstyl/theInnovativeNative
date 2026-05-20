@@ -1,0 +1,217 @@
+/* ====
+ --------- ChatGPT Gap Comparison Section Styles ---------
+ ==== */
+
+// Shared Variables for ChatGPT Gap
+$cg-accent: var(--primary-color);
+$cg-bg-dark: #0A0A14;
+$cg-bg-alt: #12121F;
+$cg-surface: #1A1A2E;
+$cg-text-primary: #F5F5F5;
+$cg-text-secondary: #B8B8C8;
+$cg-border-muted: #3a3a4a;
+$cg-border: rgba(255, 255, 255, 0.1);
+
+// ===================================
+// ChatGPT Gap Section
+// ===================================
+.chatgpt-gap {
+  position: relative;
+  z-index: 1;
+  padding: 96px 0;
+  background-color: $cg-bg-dark;
+  overflow: hidden;
+
+  // ---- Section Header ----
+  &__label {
+    color: $cg-accent;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  &__heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: $cg-text-primary;
+    margin-bottom: 16px;
+  }
+
+  &__subheading {
+    font-size: 1.125rem;
+    color: $cg-text-secondary;
+    max-width: 640px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  // ---- Comparison Container ----
+  &__comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
+
+  // ---- Shared Column Styles ----
+  &__basic,
+  &__infrastructure {
+    flex: 1;
+    border-radius: 12px;
+    padding: 32px;
+    transition: var(--transition);
+  }
+
+  // ---- Basic (Left) Column — Muted ----
+  &__basic {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $cg-border-muted;
+
+    .chatgpt-gap__col-header {
+      color: $cg-text-secondary;
+      border-bottom-color: $cg-border-muted;
+    }
+
+    .chatgpt-gap__col-icon {
+      background: rgba(255, 255, 255, 0.05);
+
+      i {
+        color: $cg-text-secondary;
+      }
+    }
+
+    .chatgpt-gap__list-item {
+      color: $cg-text-secondary;
+
+      i {
+        color: #FF6B6B;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  // ---- Infrastructure (Right) Column — Neon ----
+  &__infrastructure {
+    background: rgba(0, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.12),
+                0 0 48px rgba(0, 255, 255, 0.06);
+
+    .chatgpt-gap__col-header {
+      color: $cg-text-primary;
+      border-bottom-color: rgba(0, 255, 255, 0.25);
+    }
+
+    .chatgpt-gap__col-icon {
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+
+      i {
+        color: $cg-accent;
+      }
+    }
+
+    .chatgpt-gap__list-item {
+      color: $cg-text-primary;
+
+      i {
+        color: $cg-accent;
+      }
+    }
+  }
+
+  // ---- Column Header ----
+  &__col-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $cg-border;
+  }
+
+  &__col-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+
+    i {
+      font-size: 20px;
+    }
+  }
+
+  // ---- List Items ----
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    i {
+      flex-shrink: 0;
+      margin-top: 4px;
+      font-size: 14px;
+    }
+  }
+
+  // ---- Bottom Note ----
+  &__note {
+    margin-top: 48px;
+    padding: 24px 32px;
+    background: rgba(0, 255, 255, 0.04);
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    border-radius: 8px;
+    text-align: center;
+
+    p {
+      color: $cg-text-secondary;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0;
+
+      strong {
+        color: $cg-text-primary;
+      }
+    }
+  }
+
+  // ---- Responsive ----
+  @media (max-width: 767px) {
+    padding: 64px 0;
+
+    &__basic,
+    &__infrastructure {
+      padding: 24px;
+    }
+
+    &__subheading {
+      margin-bottom: 32px;
+    }
+  }
+}

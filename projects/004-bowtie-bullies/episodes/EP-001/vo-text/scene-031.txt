@@ -1,0 +1,16 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.52 | Similarity: 0.75 | Style: 0.35 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="medium" pitch="-5%">
+There's a proverb.<break time="200ms"/> Goes back to when our people were property.<break time="200ms"/> When learnin' to read was a crime.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="medium" pitch="-5%">
+South Carolina, 1740<break time="200ms"/> made it illegal to teach a slave to write.<break time="200ms"/> Virginia.<break time="200ms"/> Alabama.<break time="200ms"/> Same laws.<break time="200ms"/> Same fear.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="medium" pitch="-5%">
+They knew if we could read, we could think.<break time="200ms"/> And if we could think, we'd never stay chained.
+</prosody>
+</speak>

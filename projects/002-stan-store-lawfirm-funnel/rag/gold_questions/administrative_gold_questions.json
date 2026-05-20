@@ -1,0 +1,776 @@
+{
+  "practice_area": "administrative",
+  "version": "1.0",
+  "created": "2026-02-06",
+  "questions": [
+    {
+      "id": "ad-001",
+      "category": "test_rule",
+      "query": "What is the Chevron deference standard?",
+      "must_cite": [
+        "Chevron U.S.A., Inc. v. Natural Resources Defense Council, Inc., 467 U.S. 837 (1984)"
+      ],
+      "must_include_elements": [
+        "step one: is statute ambiguous",
+        "step two: is agency interpretation reasonable",
+        "deference to agency expertise"
+      ],
+      "must_not_say": [],
+      "notes": "Two-step Chevron framework"
+    },
+    {
+      "id": "ad-002",
+      "category": "test_rule",
+      "query": "What is the arbitrary and capricious standard under the APA?",
+      "must_cite": [
+        "5 U.S.C. § 706(2)(A)",
+        "Motor Vehicle Manufacturers Association v. State Farm, 463 U.S. 29 (1983)"
+      ],
+      "must_include_elements": [
+        "reasoned decision-making",
+        "consideration of relevant factors",
+        "no clear error of judgment"
+      ],
+      "must_not_say": [],
+      "notes": "State Farm hard look review"
+    },
+    {
+      "id": "ad-003",
+      "category": "test_rule",
+      "query": "What is the substantial evidence standard?",
+      "must_cite": [
+        "5 U.S.C. § 706(2)(E)",
+        "Universal Camera Corp. v. NLRB, 340 U.S. 474 (1951)"
+      ],
+      "must_include_elements": [
+        "more than a scintilla",
+        "reasonable mind might accept",
+        "review whole record"
+      ],
+      "must_not_say": [],
+      "notes": "Applies to formal adjudications"
+    },
+    {
+      "id": "ad-004",
+      "category": "test_rule",
+      "query": "What is the standard for asylum eligibility?",
+      "must_cite": [
+        "8 U.S.C. § 1101(a)(42)",
+        "INS v. Cardoza-Fonseca, 480 U.S. 421 (1987)"
+      ],
+      "must_include_elements": [
+        "well-founded fear of persecution",
+        "on account of protected ground",
+        "unable or unwilling to return"
+      ],
+      "must_not_say": [],
+      "notes": "Well-founded fear = objective + subjective"
+    },
+    {
+      "id": "ad-005",
+      "category": "test_rule",
+      "query": "What is the Auer deference standard?",
+      "must_cite": [
+        "Auer v. Robbins, 519 U.S. 452 (1997)",
+        "Kisor v. Wilkie, 588 U.S. 558 (2019)"
+      ],
+      "must_include_elements": [
+        "deference to agency interpretation of own regulation",
+        "regulation must be genuinely ambiguous",
+        "interpretation within zone of ambiguity"
+      ],
+      "must_not_say": [],
+      "notes": "Kisor limited but preserved Auer"
+    },
+    {
+      "id": "ad-006",
+      "category": "test_rule",
+      "query": "What is the doctrine of exhaustion of administrative remedies?",
+      "must_cite": [
+        "McCarthy v. Madigan, 503 U.S. 140 (1992)"
+      ],
+      "must_include_elements": [
+        "complete agency process before judicial review",
+        "exceptions for futility",
+        "irreparable injury exception"
+      ],
+      "must_not_say": [],
+      "notes": "Prudential doctrine with exceptions"
+    },
+    {
+      "id": "ad-007",
+      "category": "test_rule",
+      "query": "What is the standard for cancellation of removal?",
+      "must_cite": [
+        "8 U.S.C. § 1229b(b)"
+      ],
+      "must_include_elements": [
+        "10 years continuous physical presence",
+        "good moral character",
+        "exceptional and extremely unusual hardship"
+      ],
+      "must_not_say": [],
+      "notes": "High hardship standard for non-LPRs"
+    },
+    {
+      "id": "ad-008",
+      "category": "test_rule",
+      "query": "What are the requirements for notice and comment rulemaking?",
+      "must_cite": [
+        "5 U.S.C. § 553"
+      ],
+      "must_include_elements": [
+        "notice in Federal Register",
+        "opportunity for public comment",
+        "concise general statement of basis and purpose"
+      ],
+      "must_not_say": [],
+      "notes": "Section 553 informal rulemaking"
+    },
+    {
+      "id": "ad-009",
+      "category": "test_rule",
+      "query": "What is the political question doctrine?",
+      "must_cite": [
+        "Baker v. Carr, 369 U.S. 186 (1962)"
+      ],
+      "must_include_elements": [
+        "textually demonstrable commitment to another branch",
+        "lack of judicially manageable standards",
+        "initial policy determination"
+      ],
+      "must_not_say": [],
+      "notes": "Baker v. Carr six-factor test"
+    },
+    {
+      "id": "ad-010",
+      "category": "test_rule",
+      "query": "What is the standing requirement for judicial review?",
+      "must_cite": [
+        "Lujan v. Defenders of Wildlife, 504 U.S. 555 (1992)"
+      ],
+      "must_include_elements": [
+        "injury in fact",
+        "causation",
+        "redressability"
+      ],
+      "must_not_say": [],
+      "notes": "Constitutional minimum for standing"
+    },
+    {
+      "id": "ad-011",
+      "category": "test_rule",
+      "query": "What is the finality requirement for judicial review under APA?",
+      "must_cite": [
+        "5 U.S.C. § 704",
+        "Bennett v. Spear, 520 U.S. 154 (1997)"
+      ],
+      "must_include_elements": [
+        "consummation of agency decisionmaking",
+        "legal consequences flow",
+        "rights and obligations determined"
+      ],
+      "must_not_say": [],
+      "notes": "Two-part Bennett finality test"
+    },
+    {
+      "id": "ad-012",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing agency findings of fact?",
+      "must_cite": [
+        "5 U.S.C. § 706(2)(E)",
+        "Allentown Mack Sales & Service v. NLRB, 522 U.S. 359 (1998)"
+      ],
+      "must_include_elements": [
+        "substantial evidence",
+        "whole record review",
+        "deferential but not rubber stamp"
+      ],
+      "must_not_say": [],
+      "notes": "Formal proceedings get substantial evidence review"
+    },
+    {
+      "id": "ad-013",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing BIA asylum determinations?",
+      "must_cite": [
+        "8 U.S.C. § 1252(b)(4)(B)"
+      ],
+      "must_include_elements": [
+        "substantial evidence",
+        "compelled by evidence to differ",
+        "deferential review"
+      ],
+      "must_not_say": [],
+      "notes": "Highly deferential standard for BIA"
+    },
+    {
+      "id": "ad-014",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing SSA disability determinations?",
+      "must_cite": [
+        "42 U.S.C. § 405(g)"
+      ],
+      "must_include_elements": [
+        "substantial evidence",
+        "supported by record as a whole",
+        "cannot reweigh evidence"
+      ],
+      "must_not_say": [],
+      "notes": "Federal courts defer to SSA findings"
+    },
+    {
+      "id": "ad-015",
+      "category": "edge_case",
+      "query": "When is an interpretive rule exempt from notice and comment?",
+      "must_cite": [
+        "5 U.S.C. § 553(b)(A)",
+        "Perez v. Mortgage Bankers Association, 575 U.S. 92 (2015)"
+      ],
+      "must_include_elements": [
+        "interprets existing law",
+        "does not create new law",
+        "no legal force without statute"
+      ],
+      "must_not_say": [],
+      "notes": "Interpretive vs legislative rule distinction"
+    },
+    {
+      "id": "ad-016",
+      "category": "edge_case",
+      "query": "What is the major questions doctrine?",
+      "must_cite": [
+        "West Virginia v. EPA, 597 U.S. 697 (2022)"
+      ],
+      "must_include_elements": [
+        "clear congressional authorization required",
+        "extraordinary cases of economic or political significance",
+        "skepticism of broad agency claims"
+      ],
+      "must_not_say": [],
+      "notes": "West Virginia formalized major questions doctrine"
+    },
+    {
+      "id": "ad-017",
+      "category": "test_rule",
+      "query": "What is the nondelegation doctrine?",
+      "must_cite": [
+        "Whitman v. American Trucking Associations, 531 U.S. 457 (2001)"
+      ],
+      "must_include_elements": [
+        "intelligible principle",
+        "Congress cannot delegate legislative power",
+        "broad delegations permitted"
+      ],
+      "must_not_say": [],
+      "notes": "Only two cases struck down delegations"
+    },
+    {
+      "id": "ad-018",
+      "category": "test_rule",
+      "query": "What are the elements of procedural due process?",
+      "must_cite": [
+        "Mathews v. Eldridge, 424 U.S. 319 (1976)"
+      ],
+      "must_include_elements": [
+        "private interest affected",
+        "risk of erroneous deprivation",
+        "government interest"
+      ],
+      "must_not_say": [],
+      "notes": "Mathews balancing test"
+    },
+    {
+      "id": "ad-019",
+      "category": "test_rule",
+      "query": "What triggers formal adjudication requirements?",
+      "must_cite": [
+        "5 U.S.C. § 554",
+        "5 U.S.C. § 556"
+      ],
+      "must_include_elements": [
+        "statute requires hearing on the record",
+        "APA hearing provisions apply",
+        "formal procedures required"
+      ],
+      "must_not_say": [],
+      "notes": "Magic words: on the record after hearing"
+    },
+    {
+      "id": "ad-020",
+      "category": "test_rule",
+      "query": "What is the good cause exception to notice and comment?",
+      "must_cite": [
+        "5 U.S.C. § 553(b)(B)"
+      ],
+      "must_include_elements": [
+        "impracticable",
+        "unnecessary",
+        "contrary to public interest"
+      ],
+      "must_not_say": [],
+      "notes": "Narrowly construed exception"
+    },
+    {
+      "id": "ad-021",
+      "category": "test_rule",
+      "query": "What is the test for particular social group in asylum?",
+      "must_cite": [
+        "Matter of Acosta, 19 I&N Dec. 211 (BIA 1985)"
+      ],
+      "must_include_elements": [
+        "immutable characteristic",
+        "social distinction",
+        "particularity"
+      ],
+      "must_not_say": [],
+      "notes": "Three-part test for PSG"
+    },
+    {
+      "id": "ad-022",
+      "category": "test_rule",
+      "query": "What is the Skidmore deference standard?",
+      "must_cite": [
+        "Skidmore v. Swift & Co., 323 U.S. 134 (1944)"
+      ],
+      "must_include_elements": [
+        "persuasive authority",
+        "thoroughness of consideration",
+        "validity of reasoning",
+        "consistency with earlier pronouncements"
+      ],
+      "must_not_say": [],
+      "notes": "Less deference than Chevron"
+    },
+    {
+      "id": "ad-023",
+      "category": "standard_review",
+      "query": "What is the scope of judicial review of agency legal interpretations?",
+      "must_cite": [
+        "5 U.S.C. § 706"
+      ],
+      "must_include_elements": [
+        "de novo for pure legal questions",
+        "Chevron for ambiguous statutes",
+        "agency interpretation considered"
+      ],
+      "must_not_say": [],
+      "notes": "Different standards for different issues"
+    },
+    {
+      "id": "ad-024",
+      "category": "standard_review",
+      "query": "What is the record rule for judicial review?",
+      "must_cite": [
+        "Citizens to Preserve Overton Park v. Volpe, 401 U.S. 402 (1971)"
+      ],
+      "must_include_elements": [
+        "review based on administrative record",
+        "no de novo fact-finding",
+        "limited exceptions"
+      ],
+      "must_not_say": [],
+      "notes": "Overton Park established record review"
+    },
+    {
+      "id": "ad-025",
+      "category": "edge_case",
+      "query": "When is agency action unreviewable?",
+      "must_cite": [
+        "5 U.S.C. § 701(a)(2)",
+        "Heckler v. Chaney, 470 U.S. 821 (1985)"
+      ],
+      "must_include_elements": [
+        "committed to agency discretion by law",
+        "no law to apply",
+        "enforcement discretion presumed unreviewable"
+      ],
+      "must_not_say": [],
+      "notes": "Chaney presumption for non-enforcement"
+    },
+    {
+      "id": "ad-026",
+      "category": "edge_case",
+      "query": "What is the zone of interests test?",
+      "must_cite": [
+        "Association of Data Processing Service Organizations v. Camp, 397 U.S. 150 (1970)",
+        "Match-E-Be-Nash-She-Wish Band of Pottawatomi Indians v. Patchak, 567 U.S. 209 (2012)"
+      ],
+      "must_include_elements": [
+        "interest arguably within zone",
+        "not marginally related",
+        "prudential standing"
+      ],
+      "must_not_say": [],
+      "notes": "Forgiving test for zone of interests"
+    },
+    {
+      "id": "ad-027",
+      "category": "test_rule",
+      "query": "What is the test for withholding of removal under CAT?",
+      "must_cite": [
+        "8 C.F.R. § 1208.16(c)"
+      ],
+      "must_include_elements": [
+        "more likely than not",
+        "torture by or with government acquiescence",
+        "specific intent to inflict severe pain"
+      ],
+      "must_not_say": [],
+      "notes": "Higher standard than asylum"
+    },
+    {
+      "id": "ad-028",
+      "category": "test_rule",
+      "query": "What is the categorical approach for immigration crimes?",
+      "must_cite": [
+        "Taylor v. United States, 495 U.S. 575 (1990)",
+        "Descamps v. United States, 570 U.S. 254 (2013)"
+      ],
+      "must_include_elements": [
+        "compare elements to federal generic offense",
+        "minimum conduct analysis",
+        "modified categorical approach for divisible statutes"
+      ],
+      "must_not_say": [],
+      "notes": "Taylor/Descamps categorical framework"
+    },
+    {
+      "id": "ad-029",
+      "category": "standard_review",
+      "query": "What is the deference to agency factual findings in informal proceedings?",
+      "must_cite": [
+        "5 U.S.C. § 706(2)(A)"
+      ],
+      "must_include_elements": [
+        "arbitrary and capricious standard",
+        "rational basis",
+        "court cannot substitute judgment"
+      ],
+      "must_not_say": [],
+      "notes": "A&C applies to informal factual findings"
+    },
+    {
+      "id": "ad-030",
+      "category": "edge_case",
+      "query": "What is the Chevron step zero inquiry?",
+      "must_cite": [
+        "United States v. Mead Corp., 533 U.S. 218 (2001)"
+      ],
+      "must_include_elements": [
+        "congressional delegation of authority",
+        "force of law",
+        "formal procedures indicative"
+      ],
+      "must_not_say": [],
+      "notes": "Mead limits Chevron applicability"
+    },
+    {
+      "id": "ad-031",
+      "category": "test_rule",
+      "query": "What is the five-step sequential evaluation for SSA disability?",
+      "must_cite": [
+        "20 C.F.R. § 404.1520"
+      ],
+      "must_include_elements": [
+        "substantial gainful activity",
+        "severe impairment",
+        "meets or equals listing",
+        "past relevant work",
+        "other work in national economy"
+      ],
+      "must_not_say": [],
+      "notes": "Sequential five-step process"
+    },
+    {
+      "id": "ad-032",
+      "category": "test_rule",
+      "query": "What is the test for aggravated felony drug trafficking?",
+      "must_cite": [
+        "8 U.S.C. § 1101(a)(43)(B)",
+        "Lopez v. Gonzales, 549 U.S. 47 (2006)"
+      ],
+      "must_include_elements": [
+        "illicit trafficking",
+        "felony under Controlled Substances Act",
+        "hypothetical federal felony"
+      ],
+      "must_not_say": [],
+      "notes": "Lopez: state felony must be federal felony"
+    },
+    {
+      "id": "ad-033",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing NLRB unfair labor practice findings?",
+      "must_cite": [
+        "29 U.S.C. § 160(e)",
+        "NLRB v. Hearst Publications, 322 U.S. 111 (1944)"
+      ],
+      "must_include_elements": [
+        "substantial evidence on the whole record",
+        "deference to Board expertise",
+        "policy judgments within Board discretion"
+      ],
+      "must_not_say": [],
+      "notes": "High deference to NLRB"
+    },
+    {
+      "id": "ad-034",
+      "category": "edge_case",
+      "query": "What is the presumption against retroactivity?",
+      "must_cite": [
+        "Bowen v. Georgetown University Hospital, 488 U.S. 204 (1988)"
+      ],
+      "must_include_elements": [
+        "agencies need express authorization",
+        "retroactive effect requires clear intent",
+        "prospective application presumed"
+      ],
+      "must_not_say": [],
+      "notes": "Georgetown: no inherent retroactive power"
+    },
+    {
+      "id": "ad-035",
+      "category": "test_rule",
+      "query": "What is the crime involving moral turpitude test?",
+      "must_cite": [
+        "Jordan v. De George, 341 U.S. 223 (1951)"
+      ],
+      "must_include_elements": [
+        "base, vile, or depraved conduct",
+        "contrary to accepted moral standards",
+        "categorical analysis applies"
+      ],
+      "must_not_say": [],
+      "notes": "CIMT is inherently vague concept"
+    },
+    {
+      "id": "ad-036",
+      "category": "standard_review",
+      "query": "What is the standard for reviewing EPA clean air regulations?",
+      "must_cite": [
+        "42 U.S.C. § 7607(d)(9)"
+      ],
+      "must_include_elements": [
+        "arbitrary and capricious",
+        "adequate explanation",
+        "reasonable basis in record"
+      ],
+      "must_not_say": [],
+      "notes": "CAA has specific review provision"
+    },
+    {
+      "id": "ad-037",
+      "category": "edge_case",
+      "query": "What is the rule against pre-enforcement judicial review?",
+      "must_cite": [
+        "Abbott Laboratories v. Gardner, 387 U.S. 136 (1967)"
+      ],
+      "must_include_elements": [
+        "ripeness doctrine",
+        "fitness for review",
+        "hardship from delayed review"
+      ],
+      "must_not_say": [],
+      "notes": "Abbott Labs two-part ripeness test"
+    },
+    {
+      "id": "ad-038",
+      "category": "test_rule",
+      "query": "What is the test for credible fear in expedited removal?",
+      "must_cite": [
+        "8 U.S.C. § 1225(b)(1)(B)(v)"
+      ],
+      "must_include_elements": [
+        "significant possibility of establishing eligibility",
+        "low threshold",
+        "screening mechanism"
+      ],
+      "must_not_say": [],
+      "notes": "Low bar for credible fear"
+    },
+    {
+      "id": "ad-039",
+      "category": "standard_review",
+      "query": "What is deference to agency fact findings in mixed questions?",
+      "must_cite": [
+        "NLRB v. Hearst Publications, 322 U.S. 111 (1944)",
+        "Bose Corp. v. Consumers Union, 466 U.S. 485 (1984)"
+      ],
+      "must_include_elements": [
+        "primarily factual: deferential",
+        "primarily legal: less deference",
+        "agency expertise considered"
+      ],
+      "must_not_say": [],
+      "notes": "Mixed questions get variable deference"
+    },
+    {
+      "id": "ad-040",
+      "category": "edge_case",
+      "query": "What is the logical outgrowth doctrine?",
+      "must_cite": [
+        "Long Island Care at Home, Ltd. v. Coke, 551 U.S. 158 (2007)"
+      ],
+      "must_include_elements": [
+        "final rule must be logical outgrowth of proposed rule",
+        "fair notice to commenters",
+        "not fundamentally different"
+      ],
+      "must_not_say": [],
+      "notes": "Procedural adequacy of notice"
+    },
+    {
+      "id": "ad-041",
+      "category": "test_rule",
+      "query": "What is the standard for voluntary departure?",
+      "must_cite": [
+        "8 U.S.C. § 1229c"
+      ],
+      "must_include_elements": [
+        "physical presence for one year",
+        "good moral character for five years",
+        "not aggravated felon"
+      ],
+      "must_not_say": [],
+      "notes": "Alternative to removal order"
+    },
+    {
+      "id": "ad-042",
+      "category": "standard_review",
+      "query": "What is the hard look doctrine?",
+      "must_cite": [
+        "Motor Vehicle Manufacturers Association v. State Farm, 463 U.S. 29 (1983)"
+      ],
+      "must_include_elements": [
+        "reasoned decision-making required",
+        "consideration of alternatives",
+        "response to significant comments"
+      ],
+      "must_not_say": [],
+      "notes": "State Farm is exemplar of hard look"
+    },
+    {
+      "id": "ad-043",
+      "category": "edge_case",
+      "query": "When does the APA apply to agency action?",
+      "must_cite": [
+        "5 U.S.C. § 551",
+        "5 U.S.C. § 553"
+      ],
+      "must_include_elements": [
+        "agency as defined",
+        "exceptions for military, foreign affairs",
+        "procedural requirements"
+      ],
+      "must_not_say": [],
+      "notes": "APA has broad but not universal application"
+    },
+    {
+      "id": "ad-044",
+      "category": "test_rule",
+      "query": "What is the test for successor bar in removal proceedings?",
+      "must_cite": [
+        "Matter of L-A-C-, 26 I&N Dec. 516 (BIA 2015)"
+      ],
+      "must_include_elements": [
+        "prior asylum denial",
+        "changed circumstances",
+        "material change in conditions"
+      ],
+      "must_not_say": [],
+      "notes": "Successor applications limited"
+    },
+    {
+      "id": "ad-045",
+      "category": "standard_review",
+      "query": "What is the exhaustion requirement for BIA appeals?",
+      "must_cite": [
+        "8 U.S.C. § 1252(d)(1)"
+      ],
+      "must_include_elements": [
+        "all administrative remedies available",
+        "preserved for judicial review",
+        "failure waives issues"
+      ],
+      "must_not_say": [],
+      "notes": "Jurisdictional exhaustion for immigration"
+    },
+    {
+      "id": "ad-046",
+      "category": "edge_case",
+      "query": "What is the doctrine of primary jurisdiction?",
+      "must_cite": [
+        "Far East Conference v. United States, 342 U.S. 570 (1952)"
+      ],
+      "must_include_elements": [
+        "court defers to agency expertise",
+        "uniformity in regulation",
+        "technical factual issues"
+      ],
+      "must_not_say": [],
+      "notes": "Allocation between courts and agencies"
+    },
+    {
+      "id": "ad-047",
+      "category": "test_rule",
+      "query": "What is the nexus requirement for asylum?",
+      "must_cite": [
+        "INS v. Elias-Zacarias, 502 U.S. 478 (1992)"
+      ],
+      "must_include_elements": [
+        "persecution on account of protected ground",
+        "causal connection",
+        "at least one central reason"
+      ],
+      "must_not_say": [],
+      "notes": "Nexus is critical element"
+    },
+    {
+      "id": "ad-048",
+      "category": "standard_review",
+      "query": "What deference applies to agency litigation positions?",
+      "must_cite": [
+        "Bowen v. Georgetown University Hospital, 488 U.S. 204 (1988)"
+      ],
+      "must_include_elements": [
+        "little or no deference",
+        "post hoc rationalization disfavored",
+        "not product of formal process"
+      ],
+      "must_not_say": [],
+      "notes": "Litigation positions get minimal deference"
+    },
+    {
+      "id": "ad-049",
+      "category": "edge_case",
+      "query": "What is the rule of lenity in immigration cases?",
+      "must_cite": [
+        "INS v. Cardoza-Fonseca, 480 U.S. 421 (1987)"
+      ],
+      "must_include_elements": [
+        "ambiguity resolved in favor of alien",
+        "deportation is harsh consequence",
+        "applies to deportation grounds"
+      ],
+      "must_not_say": [],
+      "notes": "Deportation treated like criminal penalty"
+    },
+    {
+      "id": "ad-050",
+      "category": "test_rule",
+      "query": "What is the vacatur remedy for APA violations?",
+      "must_cite": [
+        "5 U.S.C. § 706(2)",
+        "FCC v. Fox Television Stations, 556 U.S. 502 (2009)"
+      ],
+      "must_include_elements": [
+        "set aside agency action",
+        "remand to agency",
+        "courts may not rewrite rule"
+      ],
+      "must_not_say": [],
+      "notes": "Standard remedy is vacatur and remand"
+    }
+  ]
+}

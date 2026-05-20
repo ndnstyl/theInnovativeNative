@@ -1,0 +1,22 @@
+# HTTPS and www normalization handled by Cloudflare dashboard (not needed here)
+
+# Dynamic routes — Next.js static export uses bracket-named HTML files
+# Cloudflare Pages splat rules rewrite unknown paths to the catch-all HTML
+
+# /classroom/{courseSlug}/{lessonSlug} → catch-all lesson page
+/classroom/:courseSlug/:lessonSlug  /classroom/%5BcourseSlug%5D/%5BlessonSlug%5D.html  200
+
+# /classroom/{courseSlug} → catch-all course page
+/classroom/:courseSlug  /classroom/%5BcourseSlug%5D.html  200
+
+# /members/{username}/edit → catch-all edit page
+/members/:username/edit  /members/%5Busername%5D/edit.html  200
+
+# /members/{username} → catch-all profile page
+/members/:username  /members/%5Busername%5D.html  200
+
+# /blog/{slug} → catch-all blog page
+/blog/:slug  /blog/:slug.html  200
+
+# /community/posts/{id} → catch-all post detail page
+/community/posts/:id  /community/posts/%5Bid%5D.html  200

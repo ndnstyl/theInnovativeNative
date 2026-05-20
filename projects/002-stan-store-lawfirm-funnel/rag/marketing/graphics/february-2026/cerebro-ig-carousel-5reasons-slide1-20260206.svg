@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headline -->
+    <filter id="strongGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M 54 0 L 0 0 0 54" fill="none" stroke="rgba(0, 255, 255, 0.06)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0.8" />
+    </linearGradient>
+
+    <!-- Subtle vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.6" />
+    </radialGradient>
+
+    <!-- Number badge gradient -->
+    <linearGradient id="badgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:0.1" />
+    </linearGradient>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1080" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1080" height="1080" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1080" height="1080" fill="url(#gridFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1080" height="1080" fill="url(#vignette)"/>
+
+  <!-- Large "5" watermark -->
+  <text x="540" y="620" font-family="'Playfair Display', serif" font-size="600" font-weight="700" fill="#00FFFF" opacity="0.08" text-anchor="middle">
+    5
+  </text>
+
+  <!-- Decorative corner accents -->
+  <path d="M 60 0 L 0 0 L 0 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1020 0 L 1080 0 L 1080 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 1020 L 0 1080 L 60 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1080 1020 L 1080 1080 L 1020 1080" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Warning icon -->
+  <g transform="translate(490, 280)">
+    <polygon points="50,0 100,87 0,87" fill="none" stroke="#00FFFF" stroke-width="3" filter="url(#cyanGlow)"/>
+    <text x="50" y="65" font-family="'Inter', sans-serif" font-size="48" font-weight="700" fill="#00FFFF" text-anchor="middle">!</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="540" y="480" font-family="'Playfair Display', serif" font-size="72" font-weight="700" fill="#00FFFF" text-anchor="middle" filter="url(#strongGlow)">
+    5 Reasons
+  </text>
+
+  <text x="540" y="570" font-family="'Playfair Display', serif" font-size="56" font-weight="700" fill="#F5F5F5" text-anchor="middle">
+    Your AI Legal Research
+  </text>
+
+  <text x="540" y="650" font-family="'Playfair Display', serif" font-size="72" font-weight="700" fill="#FF00FF" text-anchor="middle" opacity="0.9">
+    Is Wrong
+  </text>
+
+  <!-- Subhead -->
+  <text x="540" y="750" font-family="'Inter', sans-serif" font-size="28" font-weight="400" fill="#B0B0B0" text-anchor="middle">
+    (And what to do about it)
+  </text>
+
+  <!-- Horizontal accent line -->
+  <line x1="340" y1="800" x2="740" y2="800" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+  <!-- Swipe indicator -->
+  <g transform="translate(470, 950)">
+    <text x="70" y="0" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#666666" text-anchor="middle">
+      Swipe for more
+    </text>
+    <path d="M 100 15 L 115 25 L 100 35" stroke="#666666" stroke-width="2" fill="none"/>
+    <path d="M 115 15 L 130 25 L 115 35" stroke="#666666" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- Cerebro branding -->
+  <text x="540" y="1040" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#00FFFF" text-anchor="middle" filter="url(#cyanGlow)">
+    CEREBRO
+  </text>
+
+</svg>

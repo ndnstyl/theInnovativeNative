@@ -1,0 +1,268 @@
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import SplitType from "split-type";
+import HeaderLanding from "@/components/layout/header/HeaderLanding";
+import ScrollProgressBtn from "@/components/layout/ScrollProgressBtn";
+import LawFirmRagHero from "@/components/containers/law-firm-rag/LawFirmRagHero";
+import ProblemAgitation from "@/components/containers/law-firm-rag/ProblemAgitation";
+import SolutionOverview from "@/components/containers/law-firm-rag/SolutionOverview";
+import CaseStudyProof from "@/components/containers/law-firm-rag/CaseStudyProof";
+import FeaturesBenefits from "@/components/containers/law-firm-rag/FeaturesBenefits";
+import TrustIndicators from "@/components/containers/law-firm-rag/TrustIndicators";
+import LegalFaq from "@/components/containers/law-firm-rag/LegalFaq";
+import FinalCta from "@/components/containers/law-firm-rag/FinalCta";
+import RoiCalculatorSection from "@/components/containers/law-firm-rag/RoiCalculatorSection";
+import BrandConnector from "@/components/common/BrandConnector";
+import DemoSection from "@/components/containers/law-firm-rag/DemoSection";
+import LeadCaptureModal from "@/components/containers/law-firm-rag/LeadCaptureModal";
+import { CALENDLY_URL } from "@/lib/constants";
+import { useTrackEvent } from "@/hooks/useTrackEvent";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const LawFirmRag = () => {
+  const [showLeadCapture, setShowLeadCapture] = useState(false);
+  const [leadCtaSource, setLeadCtaSource] = useState("unknown");
+  const { trackCalendlyClick, trackLeadCapture, trackDemoStart } = useTrackEvent();
+
+  const openCalendly = (email?: string) => {
+    trackCalendlyClick('law-firm-rag');
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
+        url: email ? `${CALENDLY_URL}?email=${encodeURIComponent(email)}` : CALENDLY_URL
+      });
+    }
+  };
+
+  // All conversion CTAs go through lead capture first
+  const openLeadCapture = (source: string = "unknown") => {
+    trackDemoStart(source);
+    setLeadCtaSource(source);
+    setShowLeadCapture(true);
+  };
+
+  // After lead is captured, open Calendly with pre-filled email
+  const handleLeadCaptured = (email: string) => {
+    trackLeadCapture('law-firm-rag-modal', 2500);
+    setShowLeadCapture(false);
+    openCalendly(email);
+  };
+
+  // Fade animation
+  useEffect(() => {
+    const fadeWrapperRefs = document.querySelectorAll(".fade-wrapper");
+
+    fadeWrapperRefs.forEach((fadeWrapperRef) => {
+      const fadeItems = fadeWrapperRef.querySelectorAll(".fade-top");
+
+      fadeItems.forEach((element, index) => {
+        const delay = index * 0.15;
+
+        gsap.set(element, {
+          opacity: 0,
+          y: 100,
+        });
+
+        ScrollTrigger.create({
+          trigger: element,
+          start: "top 100%",
+          end: "bottom 20%",
+          scrub: 0.5,
+          onEnter: () => {
+            gsap.to(element, {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              delay: delay,
+            });
+          },
+          once: true,
+        });
+      });
+    });
+  }, []);
+
+  // Split text animation
+  useEffect(() => {
+    const myText = new SplitType(".title-anim");
+    const titleAnims = document.querySelectorAll(".title-anim");
+
+    titleAnims.forEach((titleAnim) => {
+      const charElements = titleAnim.querySelectorAll(".char");
+
+      charElements.forEach((char, index) => {
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: char,
+            start: "top 90%",
+            end: "bottom 60%",
+            scrub: false,
+            markers: false,
+            toggleActions: "play none none none",
+          },
+        });
+
+        const charDelay = index * 0.03;
+
+        tl2.from(char, {
+          duration: 0.8,
+          x: 70,
+          delay: charDelay,
+          autoAlpha: 0,
+        });
+      });
+    });
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+        <title>Private Legal RAG | Your Firm&apos;s Second Brain | The Innovative Native</title>
+        <meta
+          name="description"
+          content="Enterprise AI trains on everyone's law. Your advantage is in your cases. Build a private legal RAG trained on your briefs, your outcomes, your institutional intelligence."
+        />
+        <meta
+          name="keywords"
+          content="legal research AI, law firm AI assistant, legal document retrieval, Westlaw alternative, legal knowledge management, bankruptcy legal research, RAG legal, AI legal research"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Private Legal RAG | Your Firm's Second Brain" />
+        <meta property="og:description" content="Enterprise AI trains on everyone's law. Your advantage is in your cases. Build institutional intelligence from your own briefs and outcomes." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://theinnovativenative.com/law-firm-rag" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Private Legal RAG | Your Firm's Second Brain" />
+        <meta name="twitter:description" content="Enterprise AI trains on everyone's law. Your advantage is in your cases. Build institutional intelligence from your own briefs and outcomes." />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://theinnovativenative.com/law-firm-rag" />
+
+        {/* OG Image */}
+        <meta property="og:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+        <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
+
+        {/* Schema.org SoftwareApplication */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Law Firm RAG",
+              "applicationCategory": "LegalSoftware",
+              "operatingSystem": "Cloud-based",
+              "description": "AI-powered legal research engine with authority-aware retrieval from firm documents",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD",
+                "description": "Pilot program available"
+              },
+              "featureList": [
+                "100% Citation Integrity",
+                "Authority-Aware Ranking",
+                "Full Audit Trail",
+                "Criminal Defense Coverage",
+                "Bankruptcy Law Coverage"
+              ]
+            })
+          }}
+        />
+
+        {/* FAQPage Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How is this different from enterprise legal AI?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Enterprise legal AI (Westlaw, LexisNexis) trains on public data. This is a private RAG trained exclusively on your firm's briefs, outcomes, and institutional intelligence — giving you an edge no competitor can replicate."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What data does it train on?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Past cases, filings, discovery documents, internal memos, and any legal documents your firm provides. No external data is mixed in. Your data stays yours."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What happens to my firm's documents?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "End-to-end encryption (AES-256), role-based access controls, complete audit logging, and self-hosted options available. No PII training. SOC2-ready architecture."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How long does implementation take?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "2-3 weeks for pilot firms. Includes document ingestion, embedding, testing, and training for your team."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* BreadcrumbList Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://theinnovativenative.com/" },
+                { "@type": "ListItem", "position": 2, "name": "Law Firm RAG", "item": "https://theinnovativenative.com/law-firm-rag" }
+              ]
+            })
+          }}
+        />
+      </Head>
+      <div className="my-app landing-page">
+        <HeaderLanding openCalendly={() => openLeadCapture('header-nav')} />
+        <main>
+          <LawFirmRagHero openCalendly={() => openLeadCapture('hero-cta')} />
+          <DemoSection openCalendly={() => openLeadCapture('demo-section')} />
+          <ProblemAgitation openCalendly={() => openLeadCapture('problem-section')} />
+          <SolutionOverview />
+          <CaseStudyProof />
+          <FeaturesBenefits />
+          <RoiCalculatorSection openCalendly={() => openLeadCapture('roi-calculator')} />
+          <TrustIndicators />
+          <LegalFaq />
+          <FinalCta openCalendly={() => openLeadCapture('final-cta')} />
+          <BrandConnector currentVertical="legal" />
+        </main>
+        <LeadCaptureModal
+          isOpen={showLeadCapture}
+          onClose={() => setShowLeadCapture(false)}
+          onComplete={handleLeadCaptured}
+          ctaSource={leadCtaSource}
+        />
+        <ScrollProgressBtn />
+      </div>
+    </>
+  );
+};
+
+export default LawFirmRag;

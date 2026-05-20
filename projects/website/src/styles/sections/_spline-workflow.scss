@@ -1,0 +1,294 @@
+// ── Spline Workflow Interactive Diagram ──────────────────────────────────────
+
+.spline-workflow {
+  padding: 80px 0;
+  position: relative;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 0 20px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 12px;
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // ── Layout: Scene + Legend side by side ──────────────────────────────────
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ── 3D Scene Container ──────────────────────────────────────────────────
+  &__scene {
+    width: 100%;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(14, 14, 14, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    @media (max-width: 768px) {
+      height: 350px;
+    }
+  }
+
+  // ── Loader ──────────────────────────────────────────────────────────────
+  &__loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    gap: 16px;
+
+    p {
+      color: var(--secondary-color);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      height: 350px;
+    }
+  }
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(212, 149, 106, 0.2);
+    border-top-color: #d4956a;
+    border-radius: 50%;
+    animation: spline-spin 1s linear infinite;
+  }
+
+  @keyframes spline-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  // ── Node Legend ─────────────────────────────────────────────────────────
+  &__legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @media (max-width: 991px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(14, 14, 14, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+
+    &:hover,
+    &--hovered {
+      background: rgba(14, 14, 14, 0.9);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateX(4px);
+
+      @media (max-width: 991px) {
+        transform: translateY(-2px);
+      }
+    }
+
+    &--active {
+      background: rgba(14, 14, 14, 0.95);
+      border-color: rgba(212, 149, 106, 0.5);
+      box-shadow: 0 0 20px rgba(212, 149, 106, 0.1);
+    }
+
+    @media (max-width: 991px) {
+      width: auto;
+      padding: 10px 14px;
+    }
+  }
+
+  &__legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__legend-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    flex: 1;
+  }
+
+  &__legend-tech {
+    font-size: 11px;
+    color: var(--secondary-color);
+    opacity: 0.7;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  // ── Detail Panel ────────────────────────────────────────────────────────
+  &__detail {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding: 32px;
+    background: rgba(14, 14, 14, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    animation: spline-detail-in 0.3s ease;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    @media (min-width: 1240px) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @keyframes spline-detail-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+  }
+
+  &__detail-id {
+    font-size: 12px;
+    font-family: "JetBrains Mono", monospace;
+    color: var(--secondary-color);
+    opacity: 0.7;
+  }
+
+  &__detail-close {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--secondary-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--white);
+    }
+  }
+
+  &__detail-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--secondary-color);
+    margin-bottom: 24px;
+  }
+
+  &__detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+
+  &__detail-col {
+    h4 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      font-size: 13px;
+      color: var(--secondary-color);
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+
+      i {
+        color: rgba(212, 149, 106, 0.6);
+        font-size: 11px;
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+// ============================================
+// Level Badge Styles
+// 014-gamification
+// ============================================
+
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  cursor: default;
+
+  svg {
+    display: block;
+  }
+}
+
+// Glow effect for Level 9
+.level-badge--glow,
+svg.level-badge--glow {
+  filter: drop-shadow(0 0 4px rgba(0, 255, 255, 0.4));
+}

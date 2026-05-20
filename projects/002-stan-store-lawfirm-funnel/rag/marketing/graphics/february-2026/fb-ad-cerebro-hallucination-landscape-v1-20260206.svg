@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" width="1200" height="628">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headlines -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Red Warning Glow -->
+    <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0.9" />
+    </linearGradient>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.5" />
+    </radialGradient>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="628" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1200" height="628" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1200" height="628" fill="url(#gridFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1200" height="628" fill="url(#vignette)"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M 1140 0 L 1200 0 L 1200 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 568 L 0 628 L 60 628" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Left side: Warning visual -->
+  <g transform="translate(180, 314)">
+    <!-- Warning X icon -->
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#FF6B6B" stroke-width="3" filter="url(#redGlow)"/>
+    <line x1="-30" y1="-30" x2="30" y2="30" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+    <line x1="30" y1="-30" x2="-30" y2="30" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main content area -->
+  <g transform="translate(350, 0)">
+    <!-- Big statistic -->
+    <text x="250" y="140" font-family="'Playfair Display', serif" font-size="72" font-weight="700" fill="#FF6B6B" filter="url(#redGlow)" text-anchor="middle">
+      87%
+    </text>
+    <text x="250" y="195" font-family="'Inter', sans-serif" font-size="24" font-weight="400" fill="#F5F5F5" text-anchor="middle">
+      of AI legal citations are wrong
+    </text>
+
+    <!-- Divider -->
+    <line x1="100" y1="230" x2="400" y2="230" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+    <!-- Value prop -->
+    <text x="250" y="280" font-family="'Playfair Display', serif" font-size="32" font-weight="700" fill="#00FFFF" filter="url(#cyanGlow)" text-anchor="middle">
+      Cerebro verifies every citation.
+    </text>
+
+    <!-- Features -->
+    <g transform="translate(100, 320)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="18" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="10">Your documents first</tspan>
+      </text>
+      <text x="200" y="0" font-family="'Inter', sans-serif" font-size="18" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="10">Authority-aware ranking</tspan>
+      </text>
+    </g>
+    <g transform="translate(100, 355)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="18" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="10">Full audit trail</tspan>
+      </text>
+      <text x="200" y="0" font-family="'Inter', sans-serif" font-size="18" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="10">Zero hallucinations</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- CTA Button -->
+  <g transform="translate(900, 460)">
+    <rect x="0" y="0" width="240" height="60" rx="6" fill="#00FFFF" filter="url(#cyanGlow)"/>
+    <text x="120" y="38" font-family="'Inter', sans-serif" font-size="18" font-weight="700" fill="#0A0A14" text-anchor="middle">
+      10 Pilot Slots - Feb
+    </text>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="595" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#666666" text-anchor="middle">
+    theinnovativenative.com/law-firm-rag
+  </text>
+
+  <!-- Cerebro branding -->
+  <text x="60" y="595" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#00FFFF" filter="url(#cyanGlow)">
+    CEREBRO
+  </text>
+
+</svg>

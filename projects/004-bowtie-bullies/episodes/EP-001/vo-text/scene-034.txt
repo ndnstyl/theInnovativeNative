@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.40 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+That's what this channel is.<break time="200ms"/> A barbershop workshop that never closes.<break time="200ms"/> Each one teach one<break time="200ms"/> but louder.<break time="200ms"/> Not a course.<break time="200ms"/> Not a brand deal.<break time="200ms"/> Not a rented Lamborghini in the thumbnail sellin' you a dream I ain't even livin'.
+</prosody>
+<break time="600ms"/>
+<prosody rate="90%" volume="medium">
+This is <emphasis level="strong">witness testimony</emphasis>.<break time="200ms"/> From somebody who slept in a Cutlass Supreme and read tax codes by flashlight.<break time="200ms"/> And decided the people who look like him deserve to know what he learned.
+</prosody>
+</speak>

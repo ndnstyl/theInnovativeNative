@@ -1,0 +1,220 @@
+{
+  "name": "WF-OOTD-PINTEREST — Pinterest Board Scraper",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "ootd-pin-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [220, 400]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/alexey~pinterest-crawler/run-sync-get-dataset-items?token=***REDACTED***",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"startUrls\": [{\"url\": \"https://www.pinterest.com/ms_belle1/outfit-of-the-day/\"}],\n  \"maxPinsCnt\": 100,\n  \"proxyConfig\": {\"useApifyProxy\": true}\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "ootd-pin-scrape",
+      "name": "Scrape Pinterest Board",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter valid pins and extract clean image URLs\n// Apify alexey~pinterest-crawler returns varied structures\nconst items = $input.all();\nconst validPins = [];\nconst seen = new Set();\n\nfunction extractUrl(val) {\n  if (typeof val === 'string') return val;\n  if (val && typeof val === 'object') {\n    // Could be {url: '...'} or {orig: {url: '...'}} etc.\n    if (val.url) return String(val.url);\n    if (val.orig?.url) return String(val.orig.url);\n    if (val.orig) return String(val.orig);\n    // Try highest-res keys\n    for (const k of ['originals', 'orig', '1200x', '736x', '474x', '236x']) {\n      if (val[k]?.url) return String(val[k].url);\n      if (typeof val[k] === 'string') return val[k];\n    }\n  }\n  return null;\n}\n\nfor (const item of items) {\n  const pin = item.json;\n  \n  // Try every known field the crawler might use\n  const imageUrl = extractUrl(pin.imageUrl) || extractUrl(pin.image) || extractUrl(pin.images) || extractUrl(pin.thumbnailUrl) || extractUrl(pin.media?.images) || null;\n  if (!imageUrl || !imageUrl.startsWith('http')) continue;\n  \n  // Get pin ID for dedup\n  const pinId = String(pin.id || pin.pinId || pin.url || imageUrl);\n  if (seen.has(pinId)) continue;\n  seen.add(pinId);\n  \n  // Get pin URL\n  const pinUrl = String(pin.url || pin.link || (pin.id ? `https://www.pinterest.com/pin/${pin.id}/` : ''));\n  \n  validPins.push({\n    json: {\n      pin_id: pinId,\n      image_url: imageUrl,\n      title: String(pin.title || pin.name || ''),\n      description: String(pin.description || ''),\n      pin_url: pinUrl\n    }\n  });\n}\n\nif (validPins.length === 0) {\n  // Debug: return first item's keys so we can see the schema\n  const sample = items[0]?.json || {};\n  return [{ json: { error: 'No valid pins found', count: 0, sampleKeys: Object.keys(sample), sample: JSON.stringify(sample).substring(0, 500) } }];\n}\n\nreturn validPins;"
+      },
+      "id": "ootd-pin-filter",
+      "name": "Filter Valid Pins",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "batchSize": 3,
+        "options": {}
+      },
+      "id": "ootd-pin-split",
+      "name": "SplitInBatches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [940, 400]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.image_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 30000
+        }
+      },
+      "id": "ootd-pin-download",
+      "name": "Download Pin Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1180, 500]
+    },
+    {
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"inlineData\": {\n            \"mimeType\": \"{{ $binary.data.mimeType || 'image/jpeg' }}\",\n            \"data\": \"{{ $binary.data.data }}\"\n          }\n        },\n        {\n          \"text\": \"You are a fashion stylist analyzing outfit photos for an Instagram fashion account.\\n\\nDescribe this outfit in detail for an AI image generation prompt. Include:\\n1. All clothing items (top, bottom, shoes, accessories)\\n2. Colors and patterns\\n3. Fabric textures (silk, denim, knit, etc.)\\n4. Overall style vibe (casual chic, streetwear, elegant, bohemian, etc.)\\n5. Any notable styling details (tucked shirt, rolled sleeves, layering)\\n\\nFormat as a single flowing description paragraph, NOT a bulleted list.\\nStart with the overall vibe, then describe from top to bottom.\\nKeep it under 200 words. Do not mention the model/person, only the clothes.\\n\\nExample: Effortless casual chic. A cream oversized linen blazer over a fitted white crop top, paired with high-waisted straight-leg light wash jeans. Brown leather belt with gold buckle. White leather sneakers. Gold hoop earrings and a delicate layered necklace. Hair pulled back loosely.\"\n        }\n      ]\n    }\n  ]\n}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ootd-pin-gemini",
+      "name": "Gemini — Analyze Outfit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1420, 500],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini(PaLM) Api Billing Connected"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const geminiResponse = $input.first().json;\nconst pinData = $('SplitInBatches').first().json;\n\nlet outfitPrompt = '';\ntry {\n  outfitPrompt = geminiResponse.candidates[0].content.parts[0].text;\n} catch (e) {\n  outfitPrompt = `[Gemini analysis failed: ${e.message}] Pin: ${pinData.pin_url}`;\n}\n\n// Build look name from pin title or auto-generate\nlet lookName = pinData.title?.trim();\nif (!lookName || lookName.length < 3) {\n  lookName = `Pinterest Import — ${pinData.pin_id?.toString().slice(-6) || Date.now()}`;\n}\n// Truncate if too long for Airtable\nif (lookName.length > 100) {\n  lookName = lookName.substring(0, 97) + '...';\n}\n\nreturn [{\n  json: {\n    look_name: lookName,\n    outfit_prompt: outfitPrompt.trim(),\n    status: 'Pending',\n    pinterest_url: pinData.pin_url || '',\n    categories_done: 0\n  }\n}];"
+      },
+      "id": "ootd-pin-build-record",
+      "name": "Build OOTD Record",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1660, 500]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appWVJhdylvNm07nv",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUT12noiUZuMBfL",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Look Name": "={{ $json.look_name }}",
+            "Outfit Prompt": "={{ $json.outfit_prompt }}",
+            "Status": "={{ $json.status }}",
+            "Pinterest URL": "={{ $json.pinterest_url }}",
+            "Categories Done": "={{ $json.categories_done }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "ootd-pin-airtable-create",
+      "name": "Airtable — Create OOTD Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1900, 500],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "ootd-pin-loop-back",
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2140, 500]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          { "node": "Scrape Pinterest Board", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Scrape Pinterest Board": {
+      "main": [
+        [
+          { "node": "Filter Valid Pins", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Filter Valid Pins": {
+      "main": [
+        [
+          { "node": "SplitInBatches", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "SplitInBatches": {
+      "main": [
+        [],
+        [
+          { "node": "Download Pin Image", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Download Pin Image": {
+      "main": [
+        [
+          { "node": "Gemini — Analyze Outfit", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Gemini — Analyze Outfit": {
+      "main": [
+        [
+          { "node": "Build OOTD Record", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Build OOTD Record": {
+      "main": [
+        [
+          { "node": "Airtable — Create OOTD Record", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Airtable — Create OOTD Record": {
+      "main": [
+        [
+          { "node": "Loop Back", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          { "node": "SplitInBatches", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  }
+}

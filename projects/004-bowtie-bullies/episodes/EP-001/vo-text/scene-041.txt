@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.36 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+Number four.<break time="200ms"/> A rental arrangement.<break time="200ms"/> I ain't talkin' about buyin' a buildin'<break time="200ms"/> that come later.<break time="200ms"/> I'm talkin' about rentin' somethin' you control.<break time="200ms"/> A room.<break time="200ms"/> A parkin' spot.<break time="200ms"/> A storage unit you lease to somebody else.
+</prosody>
+<break time="600ms"/>
+<prosody rate="92%" volume="medium">
+You don't need a mortgage.<break time="200ms"/> <emphasis level="strong">You need leverage.</emphasis>
+</prosody>
+</speak>

@@ -1,0 +1,16 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.55 | Similarity: 0.75 | Style: 0.38 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="soft">
+So they passed knowledge in secret.<break time="200ms"/> Whispered lessons in the fields.<break time="200ms"/> Scratched letters in the dirt.<break time="200ms"/> Each person who learned turned around and taught another.<break time="200ms"/> One by one.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="x-soft">
+In the dark.<break time="200ms"/> At risk of death.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="medium">
+<emphasis level="strong">Each one teach one.</emphasis><break time="200ms"/> That's how knowledge survived when the system tried to kill it.
+</prosody>
+</speak>

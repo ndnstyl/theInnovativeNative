@@ -1,0 +1,122 @@
+// Email Preferences styles
+.email-prefs {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.email-prefs__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.email-prefs__subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.email-prefs__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.email-prefs__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  gap: 1rem;
+
+  & + & {
+    border-top: 1px solid rgba(26, 26, 26, 0.5);
+  }
+
+  &--danger {
+    margin-top: 1.5rem;
+    background: #0e0e0e;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+}
+
+.email-prefs__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.email-prefs__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.email-prefs__desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.email-prefs__toggle {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+}
+
+.email-prefs__toggle-track {
+  display: block;
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: background 0.2s;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  input:checked + & {
+    background: #00FFFF;
+
+    &::after {
+      transform: translateX(20px);
+    }
+  }
+
+  input:disabled + & {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &--danger {
+    input:checked + & {
+      background: #ef4444;
+    }
+  }
+}
+
+.email-prefs__unsubscribe {
+  margin-top: 1.5rem;
+}

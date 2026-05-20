@@ -1,0 +1,138 @@
+# 03_folder_structure_corpus.md
+
+## Goal
+A deterministic, auditable corpus layout that supports:
+- strict topic isolation (bankruptcy vs criminal vs admin)
+- reproducible builds
+- deterministic re-indexing
+- clear provenance (source + court + date)
+
+---
+
+## Repository Layout
+
+/corpus
+  /sources
+    /federal
+      /scotus
+      /circuits
+        /ca1
+        /ca2
+        /ca3
+        /ca4
+        /ca5
+        /ca6
+        /ca7
+        /ca8
+        /ca9
+        /ca10
+        /ca11
+        /cadc
+        /cafc
+      /districts
+        /alnd
+        /almd
+        ...
+      /bankruptcy
+        /alnb
+        /almb
+        ...
+      /agencies
+        /bia
+        /ssa
+        /nlrb
+        /va
+        /epa
+
+  /normalized
+    /bankruptcy
+      /opinions
+      /statutes
+      /rules
+    /criminal_procedure
+      /opinions
+      /statutes
+      /rules
+    /administrative
+      /opinions
+      /statutes
+      /rules
+
+  /chunks
+    /bankruptcy
+      /v1
+    /criminal_procedure
+      /v1
+    /administrative
+      /v1
+
+  /embeddings
+    /bankruptcy
+      /v1
+    /criminal_procedure
+      /v1
+    /administrative
+      /v1
+
+  /indexes
+    /bankruptcy
+      /v1
+    /criminal_procedure
+      /v1
+    /administrative
+      /v1
+
+  /eval
+    /gold
+      /bankruptcy
+      /criminal_procedure
+      /administrative
+    /runs
+      /YYYY-MM-DD
+    /reports
+      /YYYY-MM-DD
+
+---
+
+## File Naming Conventions (Normalized)
+
+### Opinions
+{court_code}__{year}-{month}-{day}__{docket_or_cite_hash}__{slug}.json
+
+Examples:
+scotus__2020-06-18__20-0012__bostock.json
+ca5__2023-11-07__22-30521__in_re_westwood.json
+txsb__2024-03-02__23-31118__in_re_smith.json
+bia__2018-05-14__a123456789__matter_of_x.json
+
+Each JSON includes:
+- document_id (UUID)
+- source_url (if available)
+- sha256 of raw source
+- court, date, docket/cite
+- practice_area
+- precedential_weight
+- text_body
+
+### Statutes / Rules
+usc_title_11__2026-02-03.json
+frbp__2026-02-03.json
+fed_rcp__2026-02-03.json
+fed_rcmp__2026-02-03.json
+fed_re__2026-02-03.json
+apa__2026-02-03.json
+
+---
+
+## Versioning
+- `chunks/v1` means the first deterministic chunking spec.
+- `embeddings/v1` binds to:
+  - embedding model name + version
+  - dimensionality
+  - normalization settings
+- `indexes/v1` binds to:
+  - vector index type (pgvector/qdrant/lancedb)
+  - distance metric
+  - filter schema version
+
+No in-place mutation. New build → new version folder.

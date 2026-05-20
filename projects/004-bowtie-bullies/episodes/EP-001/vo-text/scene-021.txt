@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.48 | Similarity: 0.75 | Style: 0.40 | Speaker Boost: ON
+
+<speak>
+<prosody rate="88%" volume="medium">
+Everybody left at some point.<break time="200ms"/> The homies.<break time="200ms"/> The family.<break time="200ms"/> The women.<break time="200ms"/> Everybody got a reason.
+</prosody>
+<break time="600ms"/>
+<prosody rate="88%" volume="soft">
+But the dog never did.<break time="200ms"/> It's about who stayed when you had nothin'.<break time="200ms"/> That's loyalty you can't buy.<break time="200ms"/> Can't fake.<break time="200ms"/> Can't replace.
+</prosody>
+</speak>

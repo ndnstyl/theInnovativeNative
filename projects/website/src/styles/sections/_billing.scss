@@ -1,0 +1,130 @@
+// Billing & Subscription styles
+.billing {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.billing__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.billing__loading {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.billing__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 255, 255, 0.15);
+  border-top-color: #00FFFF;
+  border-radius: 50%;
+  animation: billing-spin 0.8s linear infinite;
+}
+
+@keyframes billing-spin {
+  to { transform: rotate(360deg); }
+}
+
+.billing__no-sub {
+  text-align: center;
+  padding: 3rem;
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+
+  i {
+    font-size: 2.5rem;
+    color: #00FFFF;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+  }
+}
+
+.billing__card {
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.billing__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #1a1a1a;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.billing__status {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 600;
+
+  &--active { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+  &--trial { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+  &--past-due { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+  &--canceled { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+  &--incomplete { background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.5); }
+}
+
+.billing__card-body {
+  padding: 1.25rem;
+}
+
+.billing__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+
+  & + & {
+    border-top: 1px solid rgba(26, 26, 26, 0.5);
+  }
+}
+
+.billing__label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.billing__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.billing__cancel-notice {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem;
+  background: rgba(234, 179, 8, 0.08);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #eab308;
+}
+
+.billing__card-actions {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #1a1a1a;
+}

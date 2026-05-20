@@ -1,0 +1,1714 @@
+// ============================================
+// Classroom Admin Styles
+// Course management, lesson editor, analytics
+// ============================================
+
+// Re-use classroom variables
+$classroom-bg: #000;
+$classroom-card-bg: #0a0a0a;
+$classroom-border: #1a1a1a;
+$classroom-accent: #00FFFF;
+$classroom-text: #fff;
+$classroom-text-muted: #757575;
+$classroom-text-dim: #4a4a4a;
+
+// ============================================
+// Admin Page Layout
+// ============================================
+.classroom-admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px;
+
+  &__header {
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: $classroom-text;
+    }
+
+    p {
+      color: $classroom-text-muted;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ff4444;
+    padding: 16px;
+    background: rgba(255, 68, 68, 0.05);
+    border: 1px solid rgba(255, 68, 68, 0.2);
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+
+  &__create {
+    max-width: 600px;
+  }
+
+  &__cancel-btn {
+    margin-top: 12px;
+    padding: 8px 20px;
+    background: none;
+    border: 1px solid $classroom-border;
+    color: $classroom-text-muted;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      border-color: $classroom-text-muted;
+      color: $classroom-text;
+    }
+  }
+}
+
+// ============================================
+// Admin Course Grid
+// ============================================
+.classroom-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+// ============================================
+// Admin Course Card
+// ============================================
+.classroom-admin-card {
+  display: flex;
+  flex-direction: column;
+  background: $classroom-card-bg;
+  border: 1px solid $classroom-border;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #333;
+    transform: translateY(-2px);
+  }
+
+  &--new {
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    gap: 12px;
+    border-style: dashed;
+    color: $classroom-text-muted;
+    font-size: 16px;
+    font-weight: 500;
+    background: transparent;
+
+    i {
+      font-size: 32px;
+      color: $classroom-accent;
+    }
+
+    &:hover {
+      border-color: $classroom-accent;
+      color: $classroom-text;
+    }
+  }
+
+  &__thumbnail {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0e0e0e;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__thumbnail-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: $classroom-text-dim;
+
+    i { font-size: 36px; }
+  }
+
+  &__body {
+    padding: 16px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 8px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__status {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    color: $classroom-text-muted;
+
+    &--published {
+      background: rgba(0, 255, 255, 0.1);
+      color: $classroom-accent;
+    }
+  }
+
+  &__free {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0, 255, 255, 0.1);
+    color: $classroom-accent;
+  }
+}
+
+// ============================================
+// Course Settings Panel (Create/Edit Form)
+// ============================================
+.classroom-settings-panel {
+  background: $classroom-card-bg;
+  border: 1px solid $classroom-border;
+  border-radius: 12px;
+  padding: 32px;
+
+  &__heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: $classroom-text;
+    margin: 0 0 24px;
+  }
+
+  &__field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: $classroom-text-muted;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: $classroom-bg;
+      border: 1px solid $classroom-border;
+      border-radius: 8px;
+      color: $classroom-text;
+      font-size: 14px;
+      font-family: inherit;
+
+      &::placeholder { color: $classroom-text-dim; }
+      &:focus {
+        outline: none;
+        border-color: $classroom-accent;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  }
+
+  &__row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: $classroom-text-muted;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: $classroom-accent;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid $classroom-border;
+  }
+
+  &__save {
+    padding: 10px 24px;
+    background: $classroom-accent;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.9; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  &__delete {
+    padding: 10px 20px;
+    background: none;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 68, 68, 0.05);
+      border-color: #ff4444;
+    }
+  }
+
+  &__delete-confirm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: $classroom-text-muted;
+  }
+
+  &__delete-yes {
+    padding: 6px 16px;
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  &__delete-no {
+    padding: 6px 16px;
+    background: none;
+    border: 1px solid $classroom-border;
+    color: $classroom-text-muted;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+}
+
+// ============================================
+// Course Edit Page
+// ============================================
+.classroom-admin-edit {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: $classroom-text;
+      margin: 0;
+    }
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $classroom-text-muted;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+
+    &:hover { color: $classroom-text; }
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid $classroom-border;
+    padding-bottom: 0;
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: $classroom-text-muted;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover { color: $classroom-text; }
+
+    &.active {
+      color: $classroom-accent;
+      border-bottom-color: $classroom-accent;
+    }
+  }
+
+  // ---- Content Tab: Modules & Lessons ----
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__module {
+    background: $classroom-card-bg;
+    border: 1px solid $classroom-border;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  &__module-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid $classroom-border;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $classroom-text;
+      margin: 0;
+    }
+  }
+
+  &__module-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__btn-sm {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid $classroom-border;
+    color: $classroom-text-muted;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: $classroom-accent;
+      color: $classroom-accent;
+    }
+
+    &--danger {
+      &:hover {
+        border-color: #ff4444;
+        color: #ff4444;
+      }
+    }
+  }
+
+  &__lessons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__lesson-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+
+    &:last-child { border-bottom: none; }
+  }
+
+  &__lesson-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $classroom-text-muted;
+    text-decoration: none;
+    font-size: 14px;
+    flex: 1;
+    transition: color 0.2s;
+
+    &:hover { color: $classroom-accent; }
+  }
+
+  &__empty-mod {
+    padding: 20px;
+    text-align: center;
+    color: $classroom-text-dim;
+    font-size: 14px;
+  }
+
+  &__add-module {
+    display: flex;
+    gap: 12px;
+
+    input {
+      flex: 1;
+      padding: 10px 14px;
+      background: $classroom-card-bg;
+      border: 1px solid $classroom-border;
+      border-radius: 8px;
+      color: $classroom-text;
+      font-size: 14px;
+
+      &::placeholder { color: $classroom-text-dim; }
+      &:focus { outline: none; border-color: $classroom-accent; }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: $classroom-accent;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+
+      &:hover { opacity: 0.9; }
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+  }
+}
+
+// ============================================
+// Lesson Editor Page
+// ============================================
+.classroom-admin-lesson {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__attachments {
+    margin-top: 32px;
+  }
+}
+
+// ============================================
+// Lesson Editor Component
+// ============================================
+.classroom-lesson-editor {
+  background: $classroom-card-bg;
+  border: 1px solid $classroom-border;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &__header {
+    padding: 24px;
+    border-bottom: 1px solid $classroom-border;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__field {
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: $classroom-text-muted;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      background: $classroom-bg;
+      border: 1px solid $classroom-border;
+      border-radius: 6px;
+      color: $classroom-text;
+      font-size: 14px;
+      font-family: inherit;
+
+      &::placeholder { color: $classroom-text-dim; }
+      &:focus { outline: none; border-color: $classroom-accent; }
+    }
+
+    &--sm {
+      max-width: 300px;
+    }
+  }
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: $classroom-text-muted;
+    font-size: 14px;
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: $classroom-accent;
+    }
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    border-bottom: 1px solid $classroom-border;
+    background: rgba(255, 255, 255, 0.02);
+    flex-wrap: wrap;
+
+    button {
+      padding: 6px 10px;
+      background: none;
+      border: none;
+      color: $classroom-text-muted;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: $classroom-text;
+      }
+
+      &.active {
+        background: rgba(0, 255, 255, 0.1);
+        color: $classroom-accent;
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 20px;
+    background: $classroom-border;
+    margin: 0 4px;
+  }
+
+  &__content {
+    min-height: 300px;
+    padding: 24px;
+
+    .tiptap,
+    .ProseMirror {
+      min-height: 250px;
+      color: #d4d4d4;
+      font-size: 16px;
+      line-height: 1.75;
+      outline: none;
+
+      h1, h2, h3 {
+        color: $classroom-text;
+        margin: 24px 0 12px;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      a { color: $classroom-accent; }
+
+      ul, ol {
+        padding-left: 24px;
+        margin: 0 0 12px;
+      }
+
+      blockquote {
+        border-left: 3px solid $classroom-accent;
+        padding: 8px 16px;
+        margin: 0 0 12px;
+        color: $classroom-text-muted;
+      }
+
+      code {
+        background: $classroom-border;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: $classroom-text-dim;
+        pointer-events: none;
+        height: 0;
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    border-top: 1px solid $classroom-border;
+  }
+
+  &__save-btn {
+    padding: 8px 20px;
+    background: $classroom-accent;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.9; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  &__saved-at {
+    font-size: 12px;
+    color: $classroom-text-dim;
+  }
+}
+
+// ============================================
+// Drag Handle
+// ============================================
+.classroom-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: $classroom-text-dim;
+  cursor: grab;
+  font-size: 14px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+
+  &:hover {
+    color: $classroom-text-muted;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// ============================================
+// Level Gate Badge
+// ============================================
+.classroom-level-gate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 165, 0, 0.1);
+  color: #ffa500;
+
+  i { font-size: 10px; }
+}
+
+// ============================================
+// Drip Indicator
+// ============================================
+.classroom-drip-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(0, 255, 255, 0.06);
+  color: $classroom-accent;
+
+  i { font-size: 10px; }
+}
+
+// ============================================
+// Video Player
+// ============================================
+.classroom-video-player {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0e0e0e;
+  aspect-ratio: 16 / 9;
+
+  iframe,
+  video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+}
+
+// ============================================
+// Attachments
+// ============================================
+.classroom-attachments {
+  margin-top: 32px;
+  border-top: 1px solid $classroom-border;
+  padding-top: 24px;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 16px;
+
+    i { color: $classroom-text-muted; }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__download {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid $classroom-border;
+    border-radius: 8px;
+    color: $classroom-text-muted;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: $classroom-accent;
+      color: $classroom-text;
+    }
+  }
+
+  &__name {
+    flex: 1;
+    color: $classroom-text;
+  }
+
+  &__size {
+    font-size: 12px;
+    color: $classroom-text-dim;
+  }
+
+  &__remove {
+    padding: 8px;
+    background: none;
+    border: none;
+    color: $classroom-text-dim;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 0.2s;
+
+    &:hover { color: #ff4444; }
+  }
+
+  &__upload {
+    margin-top: 12px;
+  }
+
+  &__upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: none;
+    border: 1px dashed $classroom-border;
+    color: $classroom-text-muted;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: $classroom-accent;
+      color: $classroom-accent;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// ============================================
+// Lesson Comments
+// ============================================
+.classroom-comments {
+  margin-top: 40px;
+  border-top: 1px solid $classroom-border;
+  padding-top: 24px;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 20px;
+
+    i { color: $classroom-text-muted; }
+  }
+
+  &__loading,
+  &__empty {
+    color: $classroom-text-muted;
+    font-size: 14px;
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: $classroom-card-bg;
+      border: 1px solid $classroom-border;
+      border-radius: 8px;
+      color: $classroom-text;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+
+      &::placeholder { color: $classroom-text-dim; }
+      &:focus { outline: none; border-color: $classroom-accent; }
+    }
+
+    button {
+      align-self: flex-end;
+      padding: 8px 20px;
+      background: $classroom-accent;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover { opacity: 0.9; }
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__thread {
+    &--reply {
+      margin-left: 40px;
+      border-left: 2px solid $classroom-border;
+      padding-left: 16px;
+    }
+  }
+
+  &__comment {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  }
+
+  &__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: $classroom-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    span {
+      font-size: 13px;
+      font-weight: 600;
+      color: $classroom-text;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+
+    strong {
+      font-size: 14px;
+      color: $classroom-text;
+    }
+
+    span {
+      font-size: 12px;
+      color: $classroom-text-dim;
+    }
+  }
+
+  &__text {
+    font-size: 14px;
+    color: #d4d4d4;
+    line-height: 1.6;
+
+    p { margin: 0; }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+
+    button {
+      background: none;
+      border: none;
+      color: $classroom-text-dim;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s;
+
+      &:hover { color: $classroom-accent; }
+    }
+  }
+}
+
+// ============================================
+// Transcript Panel
+// ============================================
+.classroom-transcript {
+  margin-top: 16px;
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid $classroom-border;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: $classroom-text-muted;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: #333;
+      color: $classroom-text;
+    }
+  }
+
+  &__content {
+    padding: 16px;
+    margin-top: 8px;
+    background: $classroom-card-bg;
+    border: 1px solid $classroom-border;
+    border-radius: 8px;
+    color: #d4d4d4;
+    font-size: 14px;
+    line-height: 1.7;
+    max-height: 400px;
+    overflow-y: auto;
+
+    p { margin: 0; }
+  }
+}
+
+// ============================================
+// Student Dashboard
+// ============================================
+.classroom-student-dash {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px;
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    color: $classroom-text-muted;
+    gap: 16px;
+  }
+
+  &__greeting {
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: $classroom-text;
+      margin: 0 0 4px;
+    }
+
+    p {
+      color: $classroom-text-muted;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  &__stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  &__stat {
+    background: $classroom-card-bg;
+    border: 1px solid $classroom-border;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+
+  &__stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: $classroom-accent;
+  }
+
+  &__stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $classroom-text-muted;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    color: $classroom-text-muted;
+
+    i {
+      font-size: 48px;
+      color: $classroom-text-dim;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 20px;
+      color: $classroom-text;
+      margin: 0 0 8px;
+    }
+
+    p { margin: 0 0 24px; }
+  }
+
+  &__browse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: $classroom-accent;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.9; }
+  }
+
+  &__courses {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__course {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background: $classroom-card-bg;
+    border: 1px solid $classroom-border;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+
+    &:hover { border-color: #333; }
+  }
+
+  &__course-thumb {
+    width: 120px;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0e0e0e;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__thumb-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: $classroom-text-dim;
+
+    i { font-size: 24px; }
+  }
+
+  &__course-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $classroom-text;
+      margin: 0;
+    }
+  }
+
+  &__course-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: $classroom-text-muted;
+  }
+
+  &__complete-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: $classroom-accent;
+    font-weight: 600;
+  }
+}
+
+// ============================================
+// Course Overview
+// ============================================
+.classroom-overview {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 32px;
+
+  &__hero {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  &__thumbnail {
+    width: 360px;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $classroom-text;
+    margin: 0 0 12px;
+    line-height: 1.3;
+  }
+
+  &__description {
+    color: $classroom-text-muted;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: $classroom-text-muted;
+    }
+  }
+
+  &__enrolled {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__resume-btn,
+  &__enroll-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: $classroom-accent;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+
+    &:hover { opacity: 0.9; }
+  }
+
+  &__curriculum {
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: $classroom-text;
+      margin: 0 0 24px;
+    }
+  }
+
+  &__module {
+    margin-bottom: 24px;
+  }
+
+  &__module-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 12px;
+  }
+
+  &__module-count {
+    font-size: 12px;
+    font-weight: 400;
+    color: $classroom-text-muted;
+  }
+
+  &__lessons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__lesson-item {
+    margin: 0;
+  }
+
+  &__lesson {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: $classroom-text-muted;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: $classroom-text;
+    }
+
+    &--locked {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  &__lesson-icon {
+    width: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .fa-circle-check { color: $classroom-accent; }
+    .fa-circle-play { color: $classroom-text-muted; }
+  }
+
+  &__preview-badge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $classroom-accent;
+    background: rgba(0, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+}
+
+// ============================================
+// Analytics Dashboard
+// ============================================
+.classroom-analytics {
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 24px;
+    color: $classroom-text-muted;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $classroom-text;
+    margin: 0 0 8px;
+  }
+
+  &__updated {
+    color: $classroom-text-dim;
+    font-size: 12px;
+    margin: 0 0 24px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  &__card {
+    background: $classroom-card-bg;
+    border: 1px solid $classroom-border;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  &__card-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: $classroom-accent;
+    margin-bottom: 4px;
+  }
+
+  &__card-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $classroom-text-muted;
+  }
+
+  // ---- Completion Distribution ----
+  &__distribution {
+    margin-bottom: 40px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: $classroom-text;
+      margin: 0 0 16px;
+    }
+  }
+
+  &__bars {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    height: 140px;
+    padding: 0 12px;
+  }
+
+  &__bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+  }
+
+  &__bar-track {
+    flex: 1;
+    width: 100%;
+    max-width: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__bar-fill {
+    width: 100%;
+    background: $classroom-accent;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s ease;
+    min-height: 4px;
+  }
+
+  &__bar-label {
+    font-size: 11px;
+    color: $classroom-text-muted;
+  }
+
+  &__bar-count {
+    font-size: 13px;
+    font-weight: 600;
+    color: $classroom-text;
+  }
+}
+
+// ============================================
+// Admin Consumption Report
+// ============================================
+.classroom-admin-report {
+  &__heading {
+    font-size: 18px;
+    font-weight: 600;
+    color: $classroom-text;
+    margin: 0 0 16px;
+  }
+
+  &__empty {
+    color: $classroom-text-muted;
+    font-size: 14px;
+    text-align: center;
+    padding: 32px 0;
+  }
+
+  &__table-wrapper {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid $classroom-border;
+      font-size: 14px;
+    }
+
+    th {
+      color: $classroom-text-muted;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td { color: #d4d4d4; }
+  }
+
+  &__student {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__avatar-placeholder {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $classroom-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: $classroom-text;
+  }
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span { font-size: 13px; color: $classroom-text-muted; }
+  }
+
+  &__progress-track {
+    width: 80px;
+    height: 4px;
+    background: $classroom-border;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: $classroom-accent;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: 768px) {
+  .classroom-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .classroom-admin-edit {
+    padding: 24px 16px;
+
+    &__header { flex-direction: column; align-items: flex-start; }
+  }
+
+  .classroom-analytics__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .classroom-student-dash {
+    padding: 32px 16px;
+
+    &__stats { flex-direction: column; }
+    &__course { flex-direction: column; }
+    &__course-thumb { width: 100%; }
+  }
+
+  .classroom-overview {
+    padding: 32px 16px;
+
+    &__hero { flex-direction: column; }
+    &__thumbnail { width: 100%; }
+  }
+
+  .classroom-settings-panel {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,187 @@
+// Blog Article Content Typography
+// Styles the HTML rendered via dangerouslySetInnerHTML in blog/[slug].tsx
+
+.blog-article {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  max-width: 720px;
+
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+    font-weight: 700;
+    margin-top: 2.5em;
+    margin-bottom: 0.75em;
+    line-height: 1.3;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.625rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4em; }
+  h3 { font-size: 1.325rem; }
+  h4 { font-size: 1.125rem; }
+
+  // First heading after start shouldn't have huge top margin
+  > h2:first-child,
+  > h3:first-child {
+    margin-top: 0;
+  }
+
+  // Paragraphs
+  p {
+    margin-bottom: 1.5em;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  // Lead paragraph (first p)
+  > p:first-of-type {
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  // Strong / Bold
+  strong, b {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  // Emphasis
+  em, i {
+    font-style: italic;
+  }
+
+  // Links
+  a {
+    color: var(--primary-color, #00FFFF);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  // Lists
+  ul, ol {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.7;
+
+    strong {
+      color: #fff;
+    }
+  }
+
+  // Nested lists
+  ul ul, ol ol, ul ol, ol ul {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  // Blockquotes
+  blockquote {
+    border-left: 3px solid var(--primary-color, #00FFFF);
+    margin: 2em 0;
+    padding: 1em 1.5em;
+    background: rgba(0, 255, 255, 0.04);
+    border-radius: 0 8px 8px 0;
+
+    p {
+      margin-bottom: 0.75em;
+      color: rgba(255, 255, 255, 0.9);
+      font-style: italic;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Code
+  code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--primary-color, #00FFFF);
+  }
+
+  pre {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.25em;
+    overflow-x: auto;
+    margin: 2em 0;
+
+    code {
+      background: none;
+      padding: 0;
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  // Tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    font-size: 0.95em;
+  }
+
+  th, td {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+  }
+
+  th {
+    background: rgba(255, 255, 255, 0.06);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  td {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  // Horizontal rule
+  hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2.5em 0;
+  }
+
+  // Images
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5em 0;
+  }
+}
+
+// Blog post header section
+.blog-post-header {
+  padding-bottom: 0 !important;
+}
+
+.blog-post-content {
+  padding-top: 30px !important;
+}

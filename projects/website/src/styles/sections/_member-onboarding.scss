@@ -1,0 +1,184 @@
+// ============================================
+// Onboarding Page Styles
+// 013-member-system
+// ============================================
+
+.onboarding-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  padding: 40px 20px;
+}
+
+.onboarding-container {
+  width: 100%;
+  max-width: 520px;
+}
+
+.onboarding-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  h1 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: #757575;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.onboarding-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.onboarding-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  transition: background 0.3s;
+
+  &.active {
+    background: #00FFFF;
+  }
+}
+
+.onboarding-form {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 16px;
+  padding: 32px;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    label {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input,
+    textarea {
+      background: #0e0e0e;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 15px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &::placeholder { color: #4a4a4a; }
+
+      &:focus {
+        outline: none;
+        border-color: #00FFFF;
+        box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.1);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+  }
+
+  .field-status {
+    font-size: 12px;
+    margin-left: 8px;
+
+    &.checking { color: #757575; }
+    &.available { color: #00FF88; }
+    &.taken { color: #ff4444; }
+  }
+
+  .char-count {
+    font-size: 12px;
+    color: #4a4a4a;
+    text-align: right;
+  }
+}
+
+.onboarding-step {
+  animation: fadeIn 0.3s ease;
+}
+
+.onboarding-next-btn,
+.onboarding-submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.onboarding-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.onboarding-back-btn {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px;
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  color: #757575;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: #333;
+    color: #fff;
+  }
+}
+
+.onboarding-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  border-radius: 8px;
+  color: #ff4444;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .onboarding-form {
+    padding: 24px 20px;
+  }
+
+  .onboarding-header h1 {
+    font-size: 24px;
+  }
+}

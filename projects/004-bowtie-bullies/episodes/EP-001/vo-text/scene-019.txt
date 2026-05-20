@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.40 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+Got to a point where it wasn't about me no more.<break time="200ms"/> Family eatin' next month.<break time="200ms"/> Kids not repeatin' the same mistakes.<break time="600ms"/> Breakin' the cycle ain't a motivational poster<break time="200ms"/> it's a Tuesday.<break time="200ms"/> It's choosin' the library over the corner every single day.
+</prosody>
+</speak>

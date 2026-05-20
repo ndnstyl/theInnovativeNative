@@ -1,0 +1,65 @@
+{
+  "name": "BowTie Bullies — The Aftermath",
+  "description": "Faceless AI YouTube channel narrated by Tyrone, witnessed by Red Nose. Raw, earned, restrained content about AI impact through the lens of African American urban survival wisdom.",
+
+  "colors": {
+    "background": "1E1E20",
+    "background_alt": "2C2C30",
+    "text": "E7E7E1",
+    "text_secondary": "4A4A4A",
+    "accent": "9A4C22",
+    "accent_secondary": "7E6551",
+    "accent_tertiary": "C4713B",
+    "code_bg": "2C2C30",
+    "card_bg": "1E1E20",
+    "card_bg_alt": "2C2C30"
+  },
+
+  "fonts": {
+    "heading": "Anton",
+    "body": "Space Mono",
+    "code": "JetBrains Mono"
+  },
+
+  "video_overlay": {
+    "hook_font": "Anton",
+    "hook_weight": "700",
+    "hook_color": "E7E7E1",
+    "hook_shadow": "000000",
+    "caption_font": "Space Mono",
+    "caption_weight": "400",
+    "caption_bg": "1E1E20",
+    "caption_text": "E7E7E1",
+    "accent_word_color": "9A4C22",
+    "cta_bg": "9A4C22",
+    "cta_text": "E7E7E1"
+  },
+
+  "assets": {
+    "logo": null,
+    "logo_dark": null,
+    "icon": null,
+    "mascot_reference": "cinema_knowledge/bowtie-bullies/",
+    "mascot_name": "Red Nose",
+    "mascot_type": "American Red Nose Pitbull"
+  },
+
+  "extended_palette": {
+    "burnt_umber": "3A1A0A",
+    "copper": "C4713B",
+    "gunmetal": "2C2C30",
+    "deep_red": "8B1A1A",
+    "bowtie_crimson": "8B0000",
+    "moss": "5A7A5A"
+  },
+
+  "bowtie_mark": {
+    "description": "Chevrolet bowtie silhouette — the brand's signature mark. NOT a literal fabric bowtie.",
+    "shape": "Chevrolet bowtie silhouette (horizontal diamond-cross)",
+    "fill": "1E1E20",
+    "trim": "8B0000",
+    "trim_thickness_pct": "3-5% relative to bowtie height",
+    "max_frame_coverage": "5%",
+    "placements": ["vehicle_grille", "environmental_easter_egg", "channel_watermark", "merch_branding"]
+  }
+}

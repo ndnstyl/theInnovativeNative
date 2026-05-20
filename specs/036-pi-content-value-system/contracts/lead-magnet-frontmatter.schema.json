@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theinnovativenative.com/schemas/lead-magnet-frontmatter.json",
+  "title": "Lead Magnet Markdown Frontmatter",
+  "description": "YAML frontmatter schema for every lead magnet markdown source file in projects/002-stan-store-lawfirm-funnel/content/lead-magnets/. Drives PPTX generation, landing page props, and the vanity redirect map.",
+  "type": "object",
+  "required": [
+    "slug",
+    "title",
+    "subtitle",
+    "bullets",
+    "vanity_slug",
+    "pptx_filename",
+    "voice_calibration",
+    "page_count",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "minLength": 3,
+      "maxLength": 60,
+      "description": "Kebab-case identifier. Matches the markdown filename and the resource landing page filename."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 120,
+      "description": "Human-readable title displayed on the landing page hero and in SEO meta."
+    },
+    "subtitle": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 280,
+      "description": "1-2 sentence description displayed under the title and in meta description."
+    },
+    "bullets": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 6,
+      "items": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 150
+      },
+      "description": "Value bullets shown on the landing page. Each is a single-line description of what the reader gets."
+    },
+    "vanity_slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "minLength": 2,
+      "maxLength": 40,
+      "description": "Short slug used on buildmytribe.ai. Must match an entry in the vanity-redirect-map.json."
+    },
+    "pptx_filename": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*\\.pptx$",
+      "description": "PPTX filename (with .pptx extension) deployed to projects/website/public/assets/lead-magnets/."
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional: research source or attribution line displayed in the PPTX."
+    },
+    "voice_calibration": {
+      "type": "string",
+      "enum": [
+        "442-intake-math-pi",
+        "5-ai-tools-pi-firms",
+        "ai-governance-template-pi",
+        "heppner-executive-one-pager",
+        "heppner-tool-comparison-chart",
+        "insurance-ai-colossus-breakdown"
+      ],
+      "description": "Reference to an existing magnet whose voice was used as the style target. Toughlove uses this to verify voice consistency."
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12,
+      "description": "Target slide count for the PPTX. Most magnets: 4-8. One-pagers: 1-2."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "published"],
+      "default": "draft"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "intake",
+        "ai-tools",
+        "governance",
+        "discovery",
+        "operations",
+        "diagnostics"
+      ],
+      "description": "High-level category for the /resources hub index grouping."
+    },
+    "created": {
+      "type": "string",
+      "format": "date",
+      "description": "YYYY-MM-DD date the magnet was authored."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "YYYY-MM-DD date of last edit."
+    }
+  },
+  "examples": [
+    {
+      "slug": "demand-letter-matrix",
+      "title": "AI Demand Letter Tool Comparison Matrix + ROI Calculator",
+      "subtitle": "Side-by-side comparison of 4 AI demand letter tools, with a plug-in ROI calculator for your firm's case volume.",
+      "bullets": [
+        "4-tool matrix: EvenUp, Tavrn, Filevine DemandsAI, Supio — scored on cost, speed, integrations",
+        "Editable ROI calculator: enter your case volume, see first-year savings",
+        "Red flags to watch for in every demand-letter AI demo",
+        "Decision tree: which tool fits your firm size and case mix"
+      ],
+      "vanity_slug": "demand",
+      "pptx_filename": "demand-letter-matrix.pptx",
+      "source": "EvenUp Series E (Fortune 2026), Harvard Law AI Productivity Study 2025, Tavrn and Filevine product specs",
+      "voice_calibration": "442-intake-math-pi",
+      "page_count": 6,
+      "status": "draft",
+      "category": "operations",
+      "created": "2026-04-09"
+    }
+  ]
+}

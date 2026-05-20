@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.40 | Similarity: 0.75 | Style: 0.45 | Speaker Boost: ON
+
+<speak>
+<prosody rate="85%" volume="medium">
+The hood already taught me what survival look like.<break time="200ms"/> What it feel like to stretch ten dollars into a week.<break time="200ms"/> What it mean to watch doors close and figure out which window to climb through.
+</prosody>
+<break time="600ms"/>
+<prosody rate="85%" volume="medium">
+AI just made it urgent for everybody else.
+</prosody>
+</speak>

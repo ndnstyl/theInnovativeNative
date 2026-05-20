@@ -1,0 +1,357 @@
+{
+  "name": "BowTie B-Roll Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-broll-generate",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 460],
+      "webhookId": "bowtie-broll-generate"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-aspect-ratio",
+              "leftValue": "={{ $json.body?.aspect_ratio ?? $json.aspect_ratio }}",
+              "rightValue": "16:9",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
+      "name": "IF Aspect Ratio",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [480, 460]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={{$credentials.googleGeminiApi.apiKey}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"text\": \"Generate a photorealistic image in 16:9 widescreen landscape format (1920x1080). {{ $json.body?.prompt_text ?? $json.prompt_text }}\\n\\nDo NOT include: {{ $json.body?.negative_prompt ?? $json.negative_prompt }}\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseModalities\": [\"IMAGE\"],\n    \"imageConfig\": {\n      \"aspectRatio\": \"16:9\",\n      \"imageSize\": \"2K\"\n    }\n  }\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
+      "name": "Gemini Generate Landscape",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [740, 340],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key={{$credentials.googleGeminiApi.apiKey}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"text\": \"Generate a photorealistic image in 9:16 portrait format (1080x1920). {{ $json.body?.prompt_text ?? $json.prompt_text }}\\n\\nDo NOT include: {{ $json.body?.negative_prompt ?? $json.negative_prompt }}\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseModalities\": [\"IMAGE\"],\n    \"imageConfig\": {\n      \"aspectRatio\": \"9:16\",\n      \"imageSize\": \"2K\"\n    }\n  }\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
+      "name": "Gemini Generate Portrait",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [740, 580],
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "append",
+        "options": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
+      "name": "Merge Paths",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [1000, 460]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract base64 image data from Gemini response and convert to binary\nconst geminiResponse = $input.first().json;\nconst webhookData = $('Webhook Trigger').first().json.body;\n\n// Extract the base64 image from Gemini response\nlet base64Data;\ntry {\n  base64Data = geminiResponse.candidates[0].content.parts[0].inlineData.data;\n} catch (e) {\n  throw new Error(`Failed to extract image from Gemini response: ${e.message}. Response: ${JSON.stringify(geminiResponse).substring(0, 500)}`);\n}\n\nconst mimeType = geminiResponse.candidates[0].content.parts[0].inlineData.mimeType || 'image/png';\n\n// Build filename: bowtie-broll-{prompt_id}-{aspect_ratio}-{timestamp}.png\nconst aspectClean = webhookData.aspect_ratio.replace(':', 'x');\nconst timestamp = Date.now();\nconst filename = `bowtie-broll-${webhookData.prompt_id}-${aspectClean}-${timestamp}.png`;\n\n// Convert base64 to binary\nconst binaryData = Buffer.from(base64Data, 'base64');\n\nreturn {\n  json: {\n    prompt_id: webhookData.prompt_id,\n    prompt_text: webhookData.prompt_text,\n    negative_prompt: webhookData.negative_prompt,\n    aspect_ratio: webhookData.aspect_ratio,\n    category: webhookData.category,\n    episode_tags: webhookData.episode_tags,\n    mood: webhookData.mood,\n    filename: filename,\n    generated_date: new Date().toISOString(),\n    mime_type: mimeType\n  },\n  binary: {\n    data: await this.helpers.prepareBinaryData(\n      binaryData,\n      filename,\n      mimeType\n    )\n  }\n};"
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1240, 460]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "name": "={{ $json.filename }}",
+        "folderId": "={{ $env.BOWTIE_GDRIVE_BROLL_FOLDER_ID }}",
+        "options": {
+          "simplifyOutput": true
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
+      "name": "Google Drive Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1480, 460],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "GDRIVE_CREDENTIAL_ID",
+          "name": "Google Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZFXmecddrm4YGD",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Prompt ID": "={{ $('Convert to File').item.json.prompt_id }}",
+            "Category": "={{ $('Convert to File').item.json.category }}",
+            "Episode Tags": "={{ $('Convert to File').item.json.episode_tags }}",
+            "Mood": "={{ $('Convert to File').item.json.mood }}",
+            "Aspect Ratio": "={{ $('Convert to File').item.json.aspect_ratio }}",
+            "Drive URL": "=https://drive.google.com/file/d/{{ $json.id }}/view",
+            "Drive File ID": "={{ $json.id }}",
+            "Generated Date": "={{ $('Convert to File').item.json.generated_date }}",
+            "Status": "Generated",
+            "Image Preview": "=[{\"url\": \"https://drive.google.com/uc?export=download&id={{ $json.id }}\"}]"
+          }
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
+      "name": "Airtable Create Record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1720, 460],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#project-updates",
+          "mode": "name"
+        },
+        "text": "=:art: *BowTie B-Roll Generated*\n\n*Prompt ID:* {{ $('Convert to File').item.json.prompt_id }}\n*Category:* {{ $('Convert to File').item.json.category }}\n*Mood:* {{ $('Convert to File').item.json.mood }}\n*Aspect Ratio:* {{ $('Convert to File').item.json.aspect_ratio }}\n*Drive Link:* https://drive.google.com/file/d/{{ $('Google Drive Upload').item.json.id }}/view\n*Generated:* {{ $('Convert to File').item.json.generated_date }}",
+        "otherOptions": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567809",
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [1960, 460],
+      "credentials": {
+        "slackApi": {
+          "id": "SLACK_CREDENTIAL_ID",
+          "name": "Slack"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [240, 740]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#cerebro-alerts",
+          "mode": "name"
+        },
+        "text": "=:rotating_light: *BowTie B-Roll Generator FAILED*\n\n*Workflow:* {{ $json.workflow.name }}\n*Node:* {{ $json.execution.error.node || 'Unknown' }}\n*Error:* {{ $json.execution.error.message }}\n*Execution ID:* {{ $json.execution.id }}\n*Timestamp:* {{ new Date().toISOString() }}\n\nCheck n8n for full error details.",
+        "otherOptions": {}
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567811",
+      "name": "Slack Error Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [480, 740],
+      "credentials": {
+        "slackApi": {
+          "id": "SLACK_CREDENTIAL_ID",
+          "name": "Slack"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "IF Aspect Ratio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Aspect Ratio": {
+      "main": [
+        [
+          {
+            "node": "Gemini Generate Landscape",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gemini Generate Portrait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Generate Landscape": {
+      "main": [
+        [
+          {
+            "node": "Merge Paths",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Generate Portrait": {
+      "main": [
+        [
+          {
+            "node": "Merge Paths",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Paths": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Upload": {
+      "main": [
+        [
+          {
+            "node": "Airtable Create Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Create Record": {
+      "main": [
+        [
+          {
+            "node": "Slack Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Slack Error Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "current"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "bowtie-broll-generator"
+  },
+  "tags": [
+    "bowtie-bullies",
+    "image-generation",
+    "b-roll",
+    "005-bowtie-video-pipeline"
+  ],
+  "triggerCount": 1
+}

@@ -1,0 +1,86 @@
+{
+  "output": {
+    "directory": "output/bowtie-bullies",
+    "naming": "{name}-{date}",
+    "keep_parts": false
+  },
+  "generation": {
+    "slides_per_batch": 5,
+    "auto_combine": true,
+    "open_after_generate": false
+  },
+  "defaults": {
+    "slide_width_inches": 13.333,
+    "slide_height_inches": 7.5
+  },
+  "video": {
+    "resolution": "1920x1080",
+    "aspect_ratio": "16:9",
+    "codec": "libx264",
+    "audio_codec": "aac",
+    "fps": 24,
+    "crf": 18,
+    "pixel_format": "yuv420p",
+    "max_file_size_mb": 256
+  },
+  "shorts": {
+    "resolution": "1080x1920",
+    "aspect_ratio": "9:16",
+    "fps": 30,
+    "max_duration_seconds": 60,
+    "target_duration_seconds": 55
+  },
+  "platforms": {
+    "youtube_long": {
+      "resolution": "1920x1080",
+      "max_duration": 1200,
+      "fps": 24
+    },
+    "youtube_shorts": {
+      "resolution": "1080x1920",
+      "max_duration": 60,
+      "fps": 30
+    },
+    "instagram_reels": {
+      "resolution": "1080x1920",
+      "max_duration": 90,
+      "max_size_mb": 100
+    },
+    "tiktok": {
+      "resolution": "1080x1920",
+      "max_duration": 180,
+      "max_size_mb": 287
+    }
+  },
+  "elevenlabs": {
+    "voice_id": "__PENDING__",
+    "model": "eleven_multilingual_v2",
+    "stability": 0.62,
+    "similarity_boost": 0.78,
+    "style": 0.15,
+    "speaker_boost": true
+  },
+  "gemini": {
+    "image_model": "gemini-2.0-flash-exp",
+    "vision_model": "gemini-2.0-flash-exp",
+    "consistency_threshold": 7,
+    "max_regen_attempts": 3
+  },
+  "ffmpeg": {
+    "color_grade": "eq=contrast=1.15:brightness=-0.03:saturation=0.75,unsharp=5:5:0.5,noise=alls=20:allf=t+u,vignette=PI/4:1.2",
+    "ken_burns_zoom_range": [1.0, 1.08],
+    "ken_burns_duration_seconds": 6,
+    "crossfade_duration": 0.8,
+    "text_font": "Anton",
+    "caption_font": "Space Mono",
+    "data_font": "JetBrains Mono",
+    "text_size": 72,
+    "caption_size": 48,
+    "music_volume": 0.06,
+    "voice_volume": 1.0,
+    "fade_duration": 1.0,
+    "film_grain": 20,
+    "vignette_angle": "PI/4",
+    "vignette_strength": 1.2
+  }
+}

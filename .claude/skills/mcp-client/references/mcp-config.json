@@ -1,0 +1,95 @@
+{
+  "mcpServers": {
+    "archon": {
+      "transport": "http",
+      "url": "http://localhost:8051/mcp"
+    },
+    "n8n": {
+      "command": "npx",
+      "args": ["n8n-mcp"],
+      "env": {
+        "N8N_API_URL": "https://n8n.srv948776.hstgr.cloud/",
+        "N8N_API_KEY": "***REDACTED***"
+      }
+    },
+    "playwright-mcp": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {
+        "MCP_MODE": "stdio"
+      }
+    },
+    "airtable-mcp": {
+      "command": "npx",
+      "args": ["-y", "airtable-mcp-server"],
+      "env": {
+        "AIRTABLE_API_KEY": "***REDACTED***"
+      }
+    },
+    "notion-mcp": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_TOKEN": "***REDACTED***"
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=bjxbeycuypvxvpzjyaco"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "sbp_e6b8246c09662d4e3fdf62692c0d4ac10c352969"
+      }
+    },
+    "relevanceai-mcp-server": {
+      "command": "npx",
+      "args": [
+        "@relevanceai/relevanceai-mcp-server@latest",
+        "--region",
+        "bcbe5a",
+        "--tools",
+        "b7160b48-397c-4fb3-bde2-a02f36774133,290081d7-1a8b-4632-8060-0db97962162b,cb1d4ff8-2195-4e13-8e5d-0efcfc67268b,131ec53a-d733-4407-922b-a1eadac30729,3f49ac9b-e469-4218-9349-cf7b8d20072d,310c42be-5112-4658-8914-904fee641cc0,80ac9dfb-ae58-46f1-929f-6e705064ae8e,fdd76a5f-6fe9-431e-b918-39d5948de159,e36e89e5-4789-422a-a2b4-b15fb4f57f8e"
+      ],
+      "env": {
+        "RELEVANCE_AUTH_TOKEN": "33222298b45c-4bd4-ad36-dc39186252a1:***REDACTED***"
+      }
+    },
+    "serena": {
+      "command": "/Users/makwa/.local/bin/uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server"
+      ]
+    },
+    "hostinger-api": {
+      "command": "npx",
+      "args": ["-y", "hostinger-api-mcp"],
+      "env": {
+        "DEBUG": "false",
+        "APITOKEN": "3grIb9jy6g9lkkuCGFBaihTMaQ1f20pvyEplhUPp38a8f8fa"
+      }
+    },
+    "slack-mcp": {
+      "command": "npx",
+      "args": ["-y", "@kazuph/mcp-slack"],
+      "env": {
+        "SLACK_MCP_XOXB_TOKEN": "***REDACTED***",
+        "SLACK_TEAM_ID": "T08TE7CD3DL"
+      }
+    },
+    "google-drive-mcp": {
+      "command": "npx",
+      "args": ["-y", "mcp-google-drive"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "***REDACTED***",
+        "GOOGLE_CLIENT_SECRET": "***REDACTED***",
+        "GOOGLE_REFRESH_TOKEN": "***REDACTED***"
+      }
+    }
+  }
+}

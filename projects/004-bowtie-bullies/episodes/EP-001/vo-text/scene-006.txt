@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.45 | Similarity: 0.75 | Style: 0.35 | Speaker Boost: ON
+
+<speak>
+<prosody rate="86%" volume="medium">
+Same way some folk hear music<break time="200ms"/> I started hearin' systems.
+</prosody>
+</speak>

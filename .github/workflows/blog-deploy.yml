@@ -1,0 +1,142 @@
+name: Blog Auto-Deploy
+
+on:
+  push:
+    branches: [main, 036-pi-content-value-system]
+    paths:
+      - 'projects/website/content/blog/posts/**'
+      - 'projects/website/src/**'
+      - 'projects/website/public/**'
+      - 'projects/website/package.json'
+      - 'projects/website/package-lock.json'
+      - 'projects/website/scripts/**'
+      - 'projects/website/.npmrc'
+      - '.github/workflows/blog-deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: blog-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: projects/website
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: projects/website/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build static site
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/build.log
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_LFR_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_LFR_SUPABASE_URL }}
+          NEXT_PUBLIC_LFR_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_LFR_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_STRIPE_CLASSROOM_LINK: ${{ secrets.NEXT_PUBLIC_STRIPE_CLASSROOM_LINK }}
+          NEXT_PUBLIC_STRIPE_BUY_BTN_SOCIAL_SCRAPER: ${{ secrets.NEXT_PUBLIC_STRIPE_BUY_BTN_SOCIAL_SCRAPER }}
+          NEXT_PUBLIC_STRIPE_BUY_BTN_TWINGEN: ${{ secrets.NEXT_PUBLIC_STRIPE_BUY_BTN_TWINGEN }}
+          NEXT_PUBLIC_STRIPE_BUY_BTN_VISIONSPARK: ${{ secrets.NEXT_PUBLIC_STRIPE_BUY_BTN_VISIONSPARK }}
+          NEXT_PUBLIC_STRIPE_BUY_BTN_TRENDPILOT: ${{ secrets.NEXT_PUBLIC_STRIPE_BUY_BTN_TRENDPILOT }}
+          NEXT_PUBLIC_STRIPE_PRODUCT_VISIONSPARK: ${{ secrets.NEXT_PUBLIC_STRIPE_PRODUCT_VISIONSPARK }}
+          NEXT_PUBLIC_STRIPE_VISIONSPARK_LINK: ${{ secrets.NEXT_PUBLIC_STRIPE_VISIONSPARK_LINK }}
+          NEXT_PUBLIC_STRIPE_PRICE_TWINGEN: ${{ secrets.NEXT_PUBLIC_STRIPE_PRICE_TWINGEN }}
+          NEXT_PUBLIC_STRIPE_PRICE_TRENDPILOT: ${{ secrets.NEXT_PUBLIC_STRIPE_PRICE_TRENDPILOT }}
+          NEXT_PUBLIC_STRIPE_TRENDPILOT_LINK: ${{ secrets.NEXT_PUBLIC_STRIPE_TRENDPILOT_LINK }}
+          NEXT_PUBLIC_LEAD_WEBHOOK_URL: ${{ secrets.NEXT_PUBLIC_LEAD_WEBHOOK_URL }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_CEREBRO_WEBHOOK_URL: ${{ secrets.NEXT_PUBLIC_CEREBRO_WEBHOOK_URL }}
+          NEXT_PUBLIC_GTM_ID: ${{ secrets.NEXT_PUBLIC_GTM_ID }}
+          NEXT_PUBLIC_FB_PIXEL_ID: ${{ secrets.NEXT_PUBLIC_FB_PIXEL_ID }}
+
+      - name: Dump build log to step summary on failure
+        if: failure()
+        run: |
+          echo "## Build log (last 200 lines)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          tail -200 /tmp/build.log >> $GITHUB_STEP_SUMMARY 2>&1 || echo "(no build.log)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload build log artifact on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: /tmp/build.log
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Setup SSH
+        env:
+          A2_SSH_KEY: ${{ secrets.A2_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$A2_SSH_KEY" > ~/.ssh/a2hosting_tin
+          chmod 600 ~/.ssh/a2hosting_tin
+          ssh-keyscan -p 7822 -H 75.98.175.76 >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes" \
+            --exclude='theinnovativenative-site.zip' \
+            --exclude='resumes/' --exclude='videos/' --exclude='n8n-templates/' \
+            out/ \
+            delikate@75.98.175.76:~/theinnovativenative.com/
+
+      - name: Fix directory index files
+        run: |
+          ssh -i ~/.ssh/a2hosting_tin -p 7822 -o IdentitiesOnly=yes delikate@75.98.175.76 \
+            "cd ~/theinnovativenative.com && for name in blog classroom community members messages templates admin checklist checkout auth; do [ -f \${name}.html ] && [ -d \${name} ] && cp \${name}.html \${name}/index.html 2>/dev/null; done; true"
+
+      - name: Write heartbeat (success)
+        if: success()
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: |
+          curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
+            -H "Authorization: Bearer $AIRTABLE_PAT" \
+            -H "Content-Type: application/json" \
+            -d "{\"records\":[{\"fields\":{\"workflow_name\":\"github-actions.blog-deploy\",\"last_run_at\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\",\"status\":\"success\",\"notes\":\"Deployed commit $GITHUB_SHA\",\"run_id\":\"$GITHUB_RUN_ID\",\"expected_interval_minutes\":0,\"source\":\"github-actions\"}}]}"
+
+      - name: Write heartbeat (fail)
+        if: failure()
+        env:
+          AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
+        run: |
+          # Capture last 250 lines of build log into notes (escape for JSON via jq)
+          if [ -f /tmp/build.log ]; then
+            # Grep for error context first, then tail
+            ERR=$(grep -E -B2 -A20 'Error|error|failed|Failed|TypeError|Cannot|cannot' /tmp/build.log | tail -150)
+            END=$(tail -100 /tmp/build.log)
+            COMBINED="===ERROR CONTEXT===\n$ERR\n===END OF LOG===\n$END"
+            TAIL=$(printf '%s' "$COMBINED" | jq -Rs .)
+          else
+            TAIL='"(no build.log)"'
+          fi
+          NOTES=$(jq -n --arg run "$GITHUB_RUN_ID" --arg sha "$GITHUB_SHA" --argjson tail "$TAIL" \
+            '"Failed run \($run) on commit \($sha)\n---LOG TAIL---\n" + $tail')
+          jq -n --arg ts "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" --arg run "$GITHUB_RUN_ID" --argjson notes "$NOTES" \
+            '{records:[{fields:{workflow_name:"github-actions.blog-deploy",last_run_at:$ts,status:"fail",notes:$notes,run_id:$run,expected_interval_minutes:0,source:"github-actions"}}]}' \
+            | curl -sS -X POST "https://api.airtable.com/v0/appTO7OCRB2XbAlak/tbl2yOITasZ1XBCzD" \
+              -H "Authorization: Bearer $AIRTABLE_PAT" \
+              -H "Content-Type: application/json" \
+              -d @-

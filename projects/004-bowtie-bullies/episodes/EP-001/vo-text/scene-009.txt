@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.45 | Similarity: 0.75 | Style: 0.30 | Speaker Boost: ON
+
+<speak>
+<prosody rate="86%" volume="medium">
+Ain't get a record deal.<break time="200ms"/> Ain't get a scholarship.<break time="200ms"/> Ain't get saved by nobody.
+</prosody>
+</speak>

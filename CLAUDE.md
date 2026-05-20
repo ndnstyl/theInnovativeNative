@@ -1,159 +1,46 @@
-# The Innovative Native - AI Assistant Context
+# The Innovative Native — Claude Code Instructions
 
-> This file provides context for AI assistants working on this project.
+## Principles
+1. **Hooks > Instructions** — Anything that MUST happen is in hooks, not here
+2. **Fork > Inline** — Complex work runs in isolated subagent context
+3. **Scalar Metrics > Subjective Judgment** — Agents need numbers, not vibes
+4. **Constitution First** — Load `.specify/memory/constitution.md` on startup
+5. **No Spec Kit = No Work** — Document before executing
+6. **If it's not in Airtable, it didn't happen** — Visibility is accountability
 
-## Project Overview
+## Rules (auto-loaded by file path)
+@.claude/rules/hard-rules.md
+@.claude/rules/agent-protocol.md
+@.claude/rules/security.md
+@.claude/rules/n8n-rules.md
+@.claude/rules/tech-stack.md
+@.claude/rules/airtable-schema.md
+@.claude/rules/supabase-rules.md
+@.claude/rules/prompt-engineering.md
 
-A dual-purpose consultant portfolio website for Michael Soto:
-1. **Home Page** - Attracts consulting clients (AI automation, n8n, growth)
-2. **Careers Page** - Engages recruiters with downloadable resumes
-3. **Portfolio Page** - Filterable grid showcasing work
-
-**Domain:** theinnovativenative.com
-**Framework:** WordPress + Pro Theme (Cornerstone builder)
-**Hosting:** hosting.com (cPanel access)
-**Repo:** https://github.com/ndnstyl/theInnovativeNative.git
-
----
-
-## Site Architecture
-
+## Project Structure
 ```
-theinnovativenative.com
-├── / (Home - Consulting Focus)
-├── /careers (Recruiter Focus)
-└── /portfolio (Filterable Grid)
+.specify/features/     — Feature spec kits (spec.md, plan.md, tasks.md)
+.specify/memory/       — Constitution, learnings, agent roster
+.claude/agents/        — Subagent definitions (researcher, implementer, reviewer, deployer, logger)
+.claude/rules/         — Modular rules (loaded by file path match)
+.claude/skills/        — User-invocable skills (speckit, toughlove, remotion, pptx, etc.)
+scripts/hooks/         — Deterministic lifecycle hooks
+scripts/autoresearch/  — Autonomous iteration loop (Karpathy pattern)
 ```
 
----
+## Memory Conventions
+- `.specify/memory/` files use YAML frontmatter + `[[wikilinks]]`
+- New learnings follow `.specify/templates/learnings-template.md`
 
-## Key Files
+## Quick Reference
+- **Airtable Base**: appTO7OCRB2XbAlak (see `.claude/rules/airtable-schema.md` for tables)
+- **Supabase Community**: etglkowtxfhrszxnkrcq (us-east-1)
+- **Website**: Next.js 13.4.19, static export, SCSS + Bootstrap + GSAP
 
-| File | Purpose |
-|------|---------|
-| `/docs/SETUP.md` | LocalWP installation and backup import |
-| `/docs/DEPLOYMENT.md` | How to deploy to production |
-| `/docs/CONTENT.md` | Portfolio content inventory |
-| `/docs/PAGES.md` | Page content specifications |
-| `/content/myBackground.md` | Professional narrative (20 years pattern recognition) |
-| `/content/Case Studies.md` | 4 anonymized case studies with metrics |
-| `/content/Systems Architecture*.md` | n8n orchestration philosophy |
-| `/wp-content/themes/` | Theme customizations (track in git) |
-| `/assets/` | Screenshots, thumbnails, videos |
-| `/backups/` | UpdraftPlus backup (2026-01-29) - ready to import |
+## Active Technologies
+- TypeScript 5.2.2, React 18.2.0, Node 18+ (build tooling only) + Next.js 13.4.19 (Pages Router, `output: 'export'`), SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2. NO new runtime dependencies introduced. (036-pi-content-value-system)
+- Static HTML output → A2 Hosting (LiteSpeed). Lead capture persists to Airtable base `appTO7OCRB2XbAlak` via n8n webhook (`NEXT_PUBLIC_LEAD_WEBHOOK_URL`). Unlock state persists in browser localStorage. No new databases, no schema changes. (036-pi-content-value-system)
 
----
-
-## Content Assets (In This Repo)
-
-| Asset Type | Location |
-|------------|----------|
-| Professional Background | `/content/myBackground.md` |
-| Case Studies (4) | `/content/Case Studies.md` |
-| Systems Architecture | `/content/Systems Architecture*.md` |
-| WordPress Backup | `/backups/` (db, themes, plugins, uploads) |
-
-## Related Project Assets
-
-Content assets from the jobHunt project:
-
-| Asset Type | Location |
-|------------|----------|
-| n8n Workflows | `/Users/makwa/jobHunt/n8nWorkflow/` |
-| Resumes | `/Users/makwa/jobHunt/Resume/personas/docx/` |
-| Brand Voice | `/Users/makwa/jobHunt/brandVoice.md` |
-| Recommendations | `/Users/makwa/jobHunt/LOR/` |
-
----
-
-## Development Workflow
-
-1. **Local Development:** Use LocalWP at `theinnovativenative.local`
-2. **Version Control:** Track theme changes in `/wp-content/themes/`
-3. **Deployment:** SFTP or UpdraftPlus to production
-
----
-
-## Current Status
-
-### Phase 1: Setup ✅
-- [x] Git repository initialized
-- [x] Project documentation created
-- [x] Content inventory completed
-- [x] WordPress backup downloaded (in `/backups/`)
-- [x] Professional content added (background, case studies, systems architecture)
-
-### Phase 2: Local Environment (Manual Steps)
-- [ ] Install LocalWP (https://localwp.com/)
-- [x] ~~Create backup from live site~~ (backup files in `/backups/`)
-- [ ] Import backup to LocalWP
-- [ ] Copy theme files to this repo
-
-### Phase 3: Portfolio Page (Build First)
-- [ ] Create portfolio page in Cornerstone
-- [ ] Set up filter categories
-- [ ] Add portfolio items
-- [ ] Create screenshots/thumbnails
-
-### Phase 4: Home Page
-- [ ] Update hero section
-- [ ] Add services section
-- [ ] Add featured work section
-- [ ] Keep Calendly integration
-
-### Phase 5: Careers Page
-- [ ] Create new page
-- [ ] Add resume download section
-- [ ] Add career highlights
-- [ ] Link to portfolio
-
----
-
-## Brand Voice
-
-From `/content/myBackground.md` and `/Users/makwa/jobHunt/brandVoice.md`:
-
-| Attribute | Guideline |
-|-----------|-----------|
-| Tone | Direct, practical, no-fluff |
-| Attitude | Confident without arrogance, comfortable saying no |
-| Style | Plain language, short sentences, economically justified |
-| Energy | Grounded operator with pattern recognition expertise |
-
-**Core Messaging:**
-- "I build systems that survive contact with reality"
-- "Most teams don't need more effort. They need less guessing."
-- "I diagnose where systems are lying"
-- "If a system requires constant narrative defense, it is already broken"
-
-**What Mike Optimizes For:**
-- Economic durability
-- Decision clarity under uncertainty
-- Systems that don't collapse when attention moves elsewhere
-
----
-
-## Technical Notes
-
-### WordPress/Cornerstone
-- Pro Theme uses Cornerstone page builder
-- Edit pages via WP Admin → Pages → Edit with Cornerstone
-- Theme files in `wp-content/themes/pro-child/` (or similar)
-
-### Portfolio Implementation Options
-1. Cornerstone native grid elements
-2. Essential Grid plugin
-3. Custom post type with taxonomy filters
-
-### SEO Targets
-- Home: "AI automation consultant", "n8n developer"
-- Portfolio: Project-specific keywords
-- Careers: Consider `noindex` for privacy
-
----
-
-## Contact & Hosting
-
-- **Hosting Provider:** hosting.com
-- **cPanel Access:** Via hosting.com login
-- **Domain Registrar:** (check hosting.com or separate)
+## Recent Changes
+- 036-pi-content-value-system: Added TypeScript 5.2.2, React 18.2.0, Node 18+ (build tooling only) + Next.js 13.4.19 (Pages Router, `output: 'export'`), SCSS 1.66.1, Bootstrap 5.3.1, GSAP 3.12.2. NO new runtime dependencies introduced.

@@ -1,0 +1,256 @@
+{
+  "name": "BowTie Bullies - Thumbnail Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bowtie-thumbnail",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "bowtie-thumbnail-generator"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json;\nconst input = raw.body || raw;\n\nconst episodeId = input.episode_id;\nconst episodeTitle = input.episode_title;\nconst thumbnailType = input.thumbnail_type;\nconst customScene = input.custom_scene_description || '';\nconst pose = input.pose;\n\n// Character consistency markers (MUST be in every prompt)\nconst consistencyMarkers = `American Red Nose Pitbull, adult male, strong muscular realistic build, rich reddish-brown copper coat, distinctive red/liver nose, amber/honey eyes, natural uncropped rose ears, small healed scar across left brow, wearing sleeveless black coveralls slightly unzipped over bare muscular chest, black military tactical boots. Controlled intelligence, gentleman strategist expression. NOT aggressive. NOT playful. Watchful. Calm. 2D cel-shaded style.`;\n\n// Negative prompt (ALWAYS include)\nconst negativePrompt = `\\n\\nNegative prompt: Blue nose, black nose, gray coat, brindle, white coat, cropped ears, aggressive snarling, teeth showing, cute puppy, playful, tongue out, bright colors, butterfly bowtie, fabric bowtie, silk bowtie, bowtie at collar, exaggerated bodybuilder, beast mode, suburban setting, grass yard, dog park, stock photo, cheerful, multiple dogs, human face, neon, photorealistic, 3D render, watermark, text, logo`;\n\n// Pose prompt mappings\nconst posePrompts = {\n  P1: `Sitting upright in 3/4 angle, looking off-frame to the right. Composed, dignified, alert posture. Dark Steel (#1E1E20) background. Single Rust Orange (#9A4C22) sodium vapor light casting warm directional light from upper left. Roger Deakins-style single-source lighting. Heavy vignette with 30-50% edge darkening. Film grain at 20%. Urban industrial environment hints in deep shadow.`,\n  P2: `Standing facing camera, shot from slightly below eye level. Powerful upright posture, arms relaxed at sides. Harsh overhead light creating dramatic shadows under brow and jaw. Dark Steel (#1E1E20) background with subtle concrete texture. Roger Deakins-style top lighting. Heavy vignette. Film grain at 20%. Authority and controlled strength.`,\n  P3: `Lying beside contextual objects (worn leather journal, vintage radio, tactical gear), head resting up on one paw. Relaxed but watchful expression, eyes tracking something off-frame. Warm Earth Clay (#7E6551) toned ambient light. Dark Steel (#1E1E20) floor surface. Roger Deakins-style practical lighting from nearby lamp. Film grain at 20%. Subtle vignette.`,\n  P4: `Sitting at the edge of an urban rooftop, back partially to camera, looking out over city lights far below. Night scene. Atmospheric fog and haze. Silhouette with Rust Orange (#9A4C22) rim light from city glow. Dark Steel (#1E1E20) sky. Roger Deakins-style backlight silhouette. Heavy vignette. Film grain at 20%. Philosophical, contemplative mood.`,\n  P5: `Extreme close-up of face, one amber/honey eye fully visible as the focal anchor. Shallow depth of field f/1.4. Healed scar across left brow clearly visible. Dark Steel (#1E1E20) background thrown completely out of focus. Roger Deakins-style close portrait lighting, single soft source from camera left. Film grain at 20%. Subtle vignette. Intensity without aggression.`,\n  P6: `Walking through an empty urban street mid-stride, moving toward camera at slight angle. Wet asphalt reflecting sparse streetlights. Fog rolling through the scene. Roger Deakins-style atmospheric depth with layered light sources receding into distance. Dark Steel (#1E1E20) dominant palette. Rust Orange (#9A4C22) from sodium vapor streetlights. Heavy vignette. Film grain at 20%. Solitary, purposeful, aftermath energy.`\n};\n\n// Thumbnail type to pose mapping\nconst typeToPose = {\n  hook: 'P5',\n  authority: 'P2',\n  product: 'P3',\n  philosophical: 'P4',\n  dramatic: 'P1',\n  aftermath: 'P6'\n};\n\n// Use provided pose or fall back to type mapping\nconst selectedPose = pose || typeToPose[thumbnailType];\nconst posePrompt = posePrompts[selectedPose] || posePrompts[typeToPose[thumbnailType]];\n\n// Build the full prompt\nlet fullPrompt = `${consistencyMarkers}\\n\\n${posePrompt}`;\n\n// Add episode context\nfullPrompt += `\\n\\nEpisode context: \"${episodeTitle}\" (Episode ${episodeId}).`;\n\n// Add custom scene description if provided\nif (customScene) {\n  fullPrompt += `\\n\\nAdditional scene direction: ${customScene}`;\n}\n\n// Add thumbnail composition directive\nfullPrompt += `\\n\\nYouTube thumbnail composition, bold dramatic, 1280x720, high impact. Colors: Dark Steel (#1E1E20), Rust Orange (#9A4C22), Earth Clay (#7E6551), Bone White (#E7E7E1). Typography style: Anton condensed uppercase headlines. Film grain 20%, heavy vignette, Roger Deakins cinematic lighting.`;\n\n// Append negative prompt\nfullPrompt += negativePrompt;\n\nconst timestamp = Date.now();\nconst filename = `bowtie-thumb-${episodeId}-${thumbnailType}-${timestamp}.png`;\n\nreturn {\n  episodeId,\n  episodeTitle,\n  thumbnailType,\n  pose: selectedPose,\n  prompt: fullPrompt,\n  filename,\n  timestamp\n};"
+      },
+      "id": "build-prompt",
+      "name": "Build Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "generate",
+        "modelId": {
+          "__rl": true,
+          "value": "gemini-2.0-flash-exp",
+          "mode": "list",
+          "cachedResultName": "gemini-2.0-flash-exp"
+        },
+        "prompt": "={{ $json.prompt }}",
+        "options": {
+          "numberOfImages": 1,
+          "aspectRatio": "16:9"
+        }
+      },
+      "id": "gemini-generate",
+      "name": "Google Gemini - Generate Thumbnail",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [720, 300],
+      "credentials": {
+        "googleGeminiApi": {
+          "id": "JbBNLCe83ER3tCwD",
+          "name": "Google Gemini API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data",
+        "options": {
+          "fileName": "={{ $('Build Prompt').item.json.filename }}",
+          "mimeType": "image/png"
+        }
+      },
+      "id": "convert-to-file",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $env.BOWTIE_GDRIVE_THUMBNAILS_FOLDER_ID }}",
+          "mode": "id"
+        },
+        "name": "={{ $('Build Prompt').item.json.filename }}",
+        "options": {}
+      },
+      "id": "gdrive-upload",
+      "name": "Google Drive Upload",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [1200, 300],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "53ssDoT9mG1Dtejj",
+          "name": "Google Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appTO7OCRB2XbAlak",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl578fcxEG7aOuyJ",
+          "mode": "id"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Episode ID": "={{ $('Build Prompt').item.json.episodeId }}",
+            "Episode Title": "={{ $('Build Prompt').item.json.episodeTitle }}",
+            "Thumbnail Type": "={{ $('Build Prompt').item.json.thumbnailType }}",
+            "Pose": "={{ $('Build Prompt').item.json.pose }}",
+            "Drive URL": "={{ $('Google Drive Upload').item.json.webViewLink }}",
+            "Drive File ID": "={{ $('Google Drive Upload').item.json.id }}",
+            "Status": "Generated",
+            "Generated Date": "={{ $now.toISO() }}",
+            "Image Preview": "=[{\"url\": \"https://drive.google.com/uc?export=download&id={{ $('Google Drive Upload').item.json.id }}\"}]"
+          }
+        },
+        "options": {}
+      },
+      "id": "airtable-log",
+      "name": "Airtable - Log Thumbnail",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [1440, 300],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YCWFwTIXwnTpVy2y",
+          "name": "Airtable"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $env.BOWTIE_SLACK_CHANNEL_ID }}",
+          "mode": "id"
+        },
+        "text": "={{ ':white_check_mark: *Thumbnail Generated*\\n\\n*Episode:* ' + $('Build Prompt').item.json.episodeId + ' — ' + $('Build Prompt').item.json.episodeTitle + '\\n*Type:* ' + $('Build Prompt').item.json.thumbnailType + '\\n*Pose:* ' + $('Build Prompt').item.json.pose + '\\n*File:* ' + $('Build Prompt').item.json.filename + '\\n*Preview:* ' + $('Google Drive Upload').item.json.webViewLink }}",
+        "otherOptions": {}
+      },
+      "id": "slack-notify",
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [1680, 300],
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack OAuth2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Build Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Prompt": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini - Generate Thumbnail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini - Generate Thumbnail": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Upload": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Log Thumbnail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Log Thumbnail": {
+      "main": [
+        [
+          {
+            "node": "Slack Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "bowtie-bullies",
+      "createdAt": "2026-02-12T00:00:00.000Z",
+      "updatedAt": "2026-02-12T00:00:00.000Z"
+    },
+    {
+      "name": "thumbnails",
+      "createdAt": "2026-02-12T00:00:00.000Z",
+      "updatedAt": "2026-02-12T00:00:00.000Z"
+    },
+    {
+      "name": "video-pipeline",
+      "createdAt": "2026-02-12T00:00:00.000Z",
+      "updatedAt": "2026-02-12T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "bowtie-thumbnail-generator"
+  }
+}

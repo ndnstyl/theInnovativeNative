@@ -1,0 +1,8 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.40 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+We playin' the long game.<break time="200ms"/> Not the quick flip.<break time="200ms"/> Not the overnight success story.<break time="200ms"/> The kind where you build so solid, what you made outlives you.<break time="600ms"/> <emphasis level="strong">Generational.</emphasis><break time="600ms"/> The kind of wealth they can't foreclose on, can't repo, can't delete with an algorithm.
+</prosody>
+</speak>

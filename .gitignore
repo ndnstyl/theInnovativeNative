@@ -1,55 +1,270 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ===========================================
+# Second Brain Skills Template - .gitignore
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# ------------------------------------------
+# PROPRIETARY/PERSONAL CONTENT (EXCLUDE)
 
-# testing
-/coverage
+# Your personal projects and business data
+law_firm_RAG/
+websiteStuff/
+specs/
+rizeToAirtable.md
 
-# next.js
-/.next/
-/out/
+# Personal/proprietary feature specs (ALL personal data)
+# The folder structure is preserved via templates
+.specify/features/
 
-# production
-/build
+# Agent performance tracking (personal data)
+.specify/memory/agents/performance.json
 
-# misc
-.DS_Store
+# Session logs and reports (contain personal data)
+.specify/memory/reports/
+.specify/memory/projects/time-log.json
+.specify/features/**/session-log.md
+
+# SECRETS & CREDENTIALS (NEVER COMMIT)
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# API keys, tokens, credentials
 *.pem
+*.key
+secrets/
+credentials/
 
-# debug
+# DEPENDENCIES
+
+# Node modules (reinstall via npm/yarn)
+node_modules/
+**/node_modules/
+
+# Package lock files (optional - some prefer to include)
+# package-lock.json
+# yarn.lock
+
+# BUILD OUTPUTS & CACHES
+
+# Build directories
+dist/
+build/
+.next/
+out/
+.output/
+
+# Cache directories
+.cache/
+*.cache
+.turbo/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# EDITOR & IDE
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains (IntelliJ, WebStorm, etc.)
+.idea/
+
+# Vim
+*.swp
+*.swo
+*~
+
+# OS GENERATED
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+
+# LOGS & DEBUG
+
+# Log files
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Debug
+.debug/
 
-# vercel
-.vercel
+# REMOTION SPECIFIC
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Remotion video content
+remotion-videos/
+projects/006-ai-editing/remotion/
 
-# backups (large binary files)
-/backups/*.gz
-/backups/*.zip
+# MEDIA FILES — GLOBAL (NEVER commit binary media)
+
+# Video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.wmv
+*.flv
+*.m4v
+
+# Audio files
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.m4a
+*.flac
+*.wma
+
+# Image files (raster)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.tiff
+*.tif
+*.ico
+*.psd
+*.ai
+
+# EXCEPTIONS: Keep SVGs (vector, text-based, small)
+!*.svg
+
+# EXCEPTIONS: Keep specific small brand assets needed by skills
+!.claude/skills/pptx-generator/brands/*/assets/*.png
+!.claude/skills/pptx-generator/brands/*/assets/*.jpg
+!.claude/skills/pptx-generator/brands/*/*.png
+
+# EXCEPTIONS: Keep website public/ assets (imported at build time by Next.js)
+!projects/website/public/**/*.png
+!projects/website/public/**/*.jpg
+!projects/website/public/**/*.jpeg
+!projects/website/public/**/*.gif
+!projects/website/public/**/*.webp
+!projects/website/public/**/*.ico
+
+# LARGE BINARY / MEDIA DIRECTORIES
+
+# ComfyUI models and outputs
+comfyUI/
+output/
+
+# _comfyUI local installation (43GB — ENTIRE directory excluded)
+_comfyUI/
+
+# Qwen3 voice-over models (1.8GB)
+qwen3_VO/
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Video editing project auto-saves and previews
+projects/006-ai-editing/premiere/Adobe Premiere Pro Auto-Save/
+projects/006-ai-editing/premiere/Adobe Premiere Pro Audio Previews/
+
+# BowTie Bullies media assets (large binaries, stored on GDrive)
+projects/004-bowtie-bullies/media/
+projects/004-bowtie-bullies/assets/
+projects/004-bowtie-bullies/brand/assets/
+
+# Haven UGC B-roll assets (binary, stored on GDrive)
+projects/003-haven-ugc-broll/assets/
+
+# 006-ai-editing reference images
+projects/006-ai-editing/references/
+
+# Entire old deliverables/ directory (all tracked files moved to projects/)
+deliverables/
+
+# Pipeline output (generated bins, copied media, XML)
+premiere-prep/
+
+# Premiere Pro project files and renders (large binaries, not in git)
+projects/006-ai-editing/premiere/
+
+# Haven cache files
+scripts/003-haven-ugc-broll/ootd_cache.json
+
+# BACKUPS
+
+# Backup files
+*.bak
+*.backup
+backups/
+
+# TEMPORARY FILES
+
+# Temp directories
+tmp/
+temp/
+.tmp/
+
+# SENSITIVE AIRTABLE DATA
+
+# Airtable exports (may contain sensitive data)
+*.airtable.json
+
+# WHAT TO INCLUDE (Override ignores)
+
+# Keep template files even if parent is ignored
+!.specify/templates/
+!.specify/templates/**
+
+# Keep a README in features to explain structure
+!.specify/features/README.md
+
+# Keep the skill structure
+!.claude/skills/
+!.claude/skills/**
+
+# BUT exclude MCP config references that contain real credentials
+.claude/skills/mcp-client/references/mcp-config.json
+.claude/skills/mcp-client/scripts/__pycache__/
+
+# Keep constitution and shared learnings (they're the template)
+!.specify/memory/constitution.md
+!.specify/memory/learnings/shared-learnings.md
+
+# Keep agent learnings structure (template value)
+!.specify/memory/learnings/*-learnings.md
+
+# Keep escalation matrix template
+!.specify/memory/escalation-matrix.json
+
+# Keep agent roster structure
+!.specify/memory/agents/roster.json
+
 
 # WordPress uploads and cache
 /wp-content/uploads/
 /wp-content/cache/
 
 # Deployment safety additions (auto-added by recovery)
-**/node_modules/
 **/.next/
 **/out/
 **/test-results/
@@ -57,9 +272,6 @@ next-env.d.ts
 *.prproj
 *.prin
 *.zip
-*.log
-venv/
-.vscode/
 Adobe Premiere Pro Audio Previews/
 Adobe Premiere Pro Auto-Save/
 Premiere Composer Files/
@@ -72,6 +284,81 @@ projects/website/site-deploy*.zip
 projects/website/nextjs-site.zip
 
 # Local Adobe / video editor scratch
-output/
 outro.prin
 outro.prproj
+||||||| base
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<<<<<<< ours
+
+
+
+
+=======
+# Project registry and logs contain personal data - exclude
+.specify/memory/projects/
+# n8n workflow backups contain raw credentials — never commit
+scripts/n8n-workflows/_backups/

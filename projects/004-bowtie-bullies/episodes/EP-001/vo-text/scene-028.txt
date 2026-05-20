@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.42 | Speaker Boost: ON
+
+<speak>
+<prosody rate="90%" volume="medium">
+The highest thing you can do is inspire.<break time="200ms"/> Not motivate<break time="200ms"/> that wear off.<break time="400ms"/> <emphasis level="strong">Inspire.</emphasis><break time="200ms"/> Light somethin' inside somebody that don't go out when you leave the room.
+</prosody>
+<break time="600ms"/>
+<prosody rate="90%" volume="medium">
+That's the currency that matters.<break time="200ms"/> That's the investment that compounds forever.<break time="600ms"/> Luck is just bein' prepared when the door opens.<break time="200ms"/> Stay ready.<break time="200ms"/> The door always comes.
+</prosody>
+</speak>

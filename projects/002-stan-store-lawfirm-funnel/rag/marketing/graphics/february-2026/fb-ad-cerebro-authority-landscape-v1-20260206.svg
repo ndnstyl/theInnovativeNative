@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" width="1200" height="628">
+  <defs>
+    <!-- Cyan Glow Filter -->
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Strong Glow for Headlines -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Gradient for grid fade -->
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#0A0A14;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0A0A14;stop-opacity:0.9" />
+    </linearGradient>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0A0A14;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.5" />
+    </radialGradient>
+
+    <!-- Hierarchy gradient -->
+    <linearGradient id="hierarchyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00FFFF;stop-opacity:0.2" />
+    </linearGradient>
+
+    <!-- Google Fonts -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="628" fill="#0A0A14"/>
+
+  <!-- Grid Pattern Layer -->
+  <rect width="1200" height="628" fill="url(#gridPattern)" opacity="0.6"/>
+
+  <!-- Grid fade overlay -->
+  <rect width="1200" height="628" fill="url(#gridFade)"/>
+
+  <!-- Vignette -->
+  <rect width="1200" height="628" fill="url(#vignette)"/>
+
+  <!-- Decorative corner accents -->
+  <path d="M 1140 0 L 1200 0 L 1200 60" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 0 568 L 0 628 L 60 628" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4"/>
+
+  <!-- Left side: Authority Pyramid -->
+  <g transform="translate(200, 280)">
+    <!-- Level 1: SCOTUS (top) -->
+    <g transform="translate(0, -120)">
+      <polygon points="0,-50 70,20 -70,20" fill="#1A1A2E" stroke="#00FFFF" stroke-width="2" filter="url(#cyanGlow)"/>
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="14" font-weight="700" fill="#00FFFF" text-anchor="middle">
+        SCOTUS
+      </text>
+    </g>
+
+    <!-- Level 2: Circuit -->
+    <g transform="translate(0, -30)">
+      <polygon points="-85,-35 85,-35 115,30 -115,30" fill="#1A1A2E" stroke="#00FFFF" stroke-width="2" opacity="0.7"/>
+      <text x="0" y="8" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#B0B0B0" text-anchor="middle">
+        Circuit Courts
+      </text>
+    </g>
+
+    <!-- Level 3: District -->
+    <g transform="translate(0, 70)">
+      <polygon points="-130,-35 130,-35 160,30 -160,30" fill="#1A1A2E" stroke="#00FFFF" stroke-width="2" opacity="0.5"/>
+      <text x="0" y="8" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#808080" text-anchor="middle">
+        District Courts
+      </text>
+    </g>
+
+    <!-- Rank labels -->
+    <text x="-180" y="-100" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#00FFFF">1st</text>
+    <text x="-180" y="-10" font-family="'Inter', sans-serif" font-size="12" font-weight="500" fill="#B0B0B0">2nd</text>
+    <text x="-180" y="80" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#666666">3rd</text>
+  </g>
+
+  <!-- Right side: Content -->
+  <g transform="translate(480, 0)">
+    <!-- Headline -->
+    <text x="0" y="100" font-family="'Playfair Display', serif" font-size="48" font-weight="700" fill="#00FFFF" filter="url(#strongGlow)">
+      SCOTUS &gt; Circuit &gt; District
+    </text>
+
+    <text x="0" y="160" font-family="'Playfair Display', serif" font-size="28" font-weight="400" fill="#F5F5F5">
+      Authority-aware ranking. Built in.
+    </text>
+
+    <!-- Divider -->
+    <line x1="0" y1="190" x2="500" y2="190" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+
+    <!-- Quote -->
+    <g transform="translate(0, 230)">
+      <rect x="-2" y="0" width="4" height="60" fill="#FF00FF" opacity="0.6"/>
+      <text x="20" y="20" font-family="'Inter', sans-serif" font-size="16" font-style="italic" fill="#B0B0B0">
+        "I don't need more cases.
+      </text>
+      <text x="20" y="45" font-family="'Inter', sans-serif" font-size="16" font-style="italic" fill="#B0B0B0">
+        I need the right cases, in the right order."
+      </text>
+    </g>
+
+    <!-- Features row -->
+    <g transform="translate(0, 330)">
+      <text x="0" y="0" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="8">Precedent hierarchy</tspan>
+      </text>
+      <text x="180" y="0" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="8">Jurisdiction aware</tspan>
+      </text>
+      <text x="350" y="0" font-family="'Inter', sans-serif" font-size="16" font-weight="400" fill="#B0B0B0">
+        <tspan fill="#00FFFF">&#x2713;</tspan>
+        <tspan dx="8">Auto-sorted</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- CTA Button -->
+  <g transform="translate(900, 460)">
+    <rect x="0" y="0" width="240" height="60" rx="6" fill="#00FFFF" filter="url(#cyanGlow)"/>
+    <text x="120" y="38" font-family="'Inter', sans-serif" font-size="18" font-weight="700" fill="#0A0A14" text-anchor="middle">
+      Try Free - 10 Spots
+    </text>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="595" font-family="'Inter', sans-serif" font-size="12" font-weight="400" fill="#666666" text-anchor="middle">
+    theinnovativenative.com/law-firm-rag
+  </text>
+
+  <!-- Cerebro branding -->
+  <text x="60" y="595" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#00FFFF" filter="url(#cyanGlow)">
+    CEREBRO
+  </text>
+
+</svg>

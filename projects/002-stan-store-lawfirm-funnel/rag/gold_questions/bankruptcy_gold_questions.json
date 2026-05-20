@@ -1,0 +1,807 @@
+{
+  "practice_area": "bankruptcy",
+  "version": "1.0",
+  "created": "2026-02-06",
+  "questions": [
+    {
+      "id": "bk-001",
+      "category": "test_rule",
+      "query": "What is the test for dischargeability under 11 USC 523(a)(2)(A)?",
+      "must_cite": [
+        "Field v. Mans, 516 U.S. 59 (1995)",
+        "11 U.S.C. § 523(a)(2)(A)"
+      ],
+      "must_include_elements": [
+        "false representation",
+        "debtor's knowledge of falsity",
+        "intent to deceive",
+        "justifiable reliance",
+        "resulting damage"
+      ],
+      "must_not_say": [
+        "reasonable reliance",
+        "detrimental reliance"
+      ],
+      "notes": "Field v. Mans established justifiable (not reasonable) reliance standard"
+    },
+    {
+      "id": "bk-002",
+      "category": "test_rule",
+      "query": "What are the elements of an avoidable preference under 11 USC 547(b)?",
+      "must_cite": [
+        "11 U.S.C. § 547(b)",
+        "Union Bank v. Wolas, 502 U.S. 151 (1991)"
+      ],
+      "must_include_elements": [
+        "transfer to or for benefit of creditor",
+        "antecedent debt",
+        "while debtor was insolvent",
+        "within 90 days (or 1 year for insiders)",
+        "creditor received more than in Chapter 7"
+      ],
+      "must_not_say": [],
+      "notes": "All five elements must be proven by trustee"
+    },
+    {
+      "id": "bk-003",
+      "category": "test_rule",
+      "query": "When does the automatic stay take effect in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 362(a)",
+        "Midlantic Nat'l Bank v. New Jersey Dept. of Environmental Protection, 474 U.S. 494 (1986)"
+      ],
+      "must_include_elements": [
+        "immediately upon filing",
+        "petition date",
+        "applies to all creditors",
+        "no action required"
+      ],
+      "must_not_say": [],
+      "notes": "Stay is automatic and self-executing"
+    },
+    {
+      "id": "bk-004",
+      "category": "test_rule",
+      "query": "What is the test for good faith under Chapter 11?",
+      "must_cite": [
+        "11 U.S.C. § 1129(a)(3)"
+      ],
+      "must_include_elements": [
+        "proposed in good faith",
+        "not by any means forbidden by law",
+        "totality of circumstances"
+      ],
+      "must_not_say": [],
+      "notes": "Good faith is fact-specific, totality analysis"
+    },
+    {
+      "id": "bk-005",
+      "category": "test_rule",
+      "query": "What is required for a claim to be nondischargeable as a domestic support obligation?",
+      "must_cite": [
+        "11 U.S.C. § 523(a)(5)",
+        "11 U.S.C. § 101(14A)"
+      ],
+      "must_include_elements": [
+        "owed to spouse, former spouse, or child",
+        "in the nature of alimony, maintenance, or support",
+        "established by separation agreement, divorce decree, or court order"
+      ],
+      "must_not_say": [],
+      "notes": "DSOs have priority and are nondischargeable"
+    },
+    {
+      "id": "bk-006",
+      "category": "standard_review",
+      "query": "What is the standard of review for a bankruptcy court's factual findings?",
+      "must_cite": [
+        "Fed. R. Bankr. P. 8013",
+        "Anderson v. City of Bessemer City, 470 U.S. 564 (1985)"
+      ],
+      "must_include_elements": [
+        "clearly erroneous",
+        "deferential review",
+        "definite and firm conviction"
+      ],
+      "must_not_say": [
+        "de novo"
+      ],
+      "notes": "Factual findings reviewed for clear error"
+    },
+    {
+      "id": "bk-007",
+      "category": "standard_review",
+      "query": "What is the standard for relief from the automatic stay under 362(d)(1)?",
+      "must_cite": [
+        "11 U.S.C. § 362(d)(1)"
+      ],
+      "must_include_elements": [
+        "cause",
+        "including lack of adequate protection",
+        "burden on movant"
+      ],
+      "must_not_say": [],
+      "notes": "Cause is broadly interpreted"
+    },
+    {
+      "id": "bk-008",
+      "category": "standard_review",
+      "query": "How are discharge exceptions construed?",
+      "must_cite": [
+        "Kawaauhau v. Geiger, 523 U.S. 57 (1998)"
+      ],
+      "must_include_elements": [
+        "narrowly construed",
+        "in favor of debtor",
+        "fresh start policy"
+      ],
+      "must_not_say": [],
+      "notes": "SCOTUS emphasized narrow construction"
+    },
+    {
+      "id": "bk-009",
+      "category": "edge_case",
+      "query": "Can a Chapter 7 debtor retain property subject to a lien without reaffirming?",
+      "must_cite": [
+        "11 U.S.C. § 521(a)(2)",
+        "11 U.S.C. § 521(a)(6)"
+      ],
+      "must_include_elements": [
+        "ride-through eliminated by BAPCPA",
+        "must surrender, redeem, or reaffirm"
+      ],
+      "must_not_say": [
+        "ride-through permitted"
+      ],
+      "notes": "BAPCPA changed prior ride-through doctrine"
+    },
+    {
+      "id": "bk-010",
+      "category": "edge_case",
+      "query": "What happens if a debtor fails to complete credit counseling before filing?",
+      "must_cite": [
+        "11 U.S.C. § 109(h)",
+        "11 U.S.C. § 521(b)"
+      ],
+      "must_include_elements": [
+        "not eligible for relief",
+        "case may be dismissed"
+      ],
+      "must_not_say": [],
+      "notes": "Credit counseling is a prerequisite to filing"
+    },
+    {
+      "id": "bk-011",
+      "category": "test_rule",
+      "query": "What is the test for determining whether a debt is for willful and malicious injury under 523(a)(6)?",
+      "must_cite": [
+        "Kawaauhau v. Geiger, 523 U.S. 57 (1998)"
+      ],
+      "must_include_elements": [
+        "deliberate or intentional injury",
+        "not merely reckless or negligent",
+        "subjective intent to injure"
+      ],
+      "must_not_say": [
+        "reckless disregard sufficient"
+      ],
+      "notes": "Geiger requires actual intent, not just recklessness"
+    },
+    {
+      "id": "bk-012",
+      "category": "test_rule",
+      "query": "What constitutes an executory contract in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 365",
+        "NLRB v. Bildisco & Bildisco, 465 U.S. 513 (1984)"
+      ],
+      "must_include_elements": [
+        "material obligations remaining on both sides",
+        "Countryman definition",
+        "breach by either party excuses other"
+      ],
+      "must_not_say": [],
+      "notes": "Countryman test widely adopted"
+    },
+    {
+      "id": "bk-013",
+      "category": "test_rule",
+      "query": "What is the absolute priority rule in Chapter 11?",
+      "must_cite": [
+        "11 U.S.C. § 1129(b)(2)",
+        "Bank of America NT & SA v. 203 North LaSalle Street Partnership, 526 U.S. 434 (1999)"
+      ],
+      "must_include_elements": [
+        "senior classes paid in full",
+        "before junior classes receive anything",
+        "cramdown context"
+      ],
+      "must_not_say": [],
+      "notes": "LaSalle addressed new value exception"
+    },
+    {
+      "id": "bk-014",
+      "category": "test_rule",
+      "query": "What are the requirements for a valid security interest in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 544",
+        "UCC Article 9"
+      ],
+      "must_include_elements": [
+        "attachment",
+        "perfection",
+        "strong-arm powers"
+      ],
+      "must_not_say": [],
+      "notes": "Trustee can avoid unperfected liens"
+    },
+    {
+      "id": "bk-015",
+      "category": "test_rule",
+      "query": "What is the contemporaneous exchange defense to preference?",
+      "must_cite": [
+        "11 U.S.C. § 547(c)(1)"
+      ],
+      "must_include_elements": [
+        "intended as contemporaneous exchange",
+        "in fact substantially contemporaneous",
+        "new value given"
+      ],
+      "must_not_say": [],
+      "notes": "Both intent and fact requirements"
+    },
+    {
+      "id": "bk-016",
+      "category": "standard_review",
+      "query": "What showing is required for a creditor to lift the automatic stay for cause?",
+      "must_cite": [
+        "11 U.S.C. § 362(d)(1)",
+        "11 U.S.C. § 362(g)"
+      ],
+      "must_include_elements": [
+        "creditor has initial burden",
+        "debtor must show equity or necessity",
+        "burden shifting"
+      ],
+      "must_not_say": [],
+      "notes": "Burden allocation in 362(g)"
+    },
+    {
+      "id": "bk-017",
+      "category": "standard_review",
+      "query": "What is the standard for approving a settlement in bankruptcy?",
+      "must_cite": [
+        "TMT Trailer Ferry, Inc., 390 U.S. 414 (1968)"
+      ],
+      "must_include_elements": [
+        "fair and equitable",
+        "in best interest of estate",
+        "probability of success in litigation"
+      ],
+      "must_not_say": [],
+      "notes": "TMT Trailer Ferry factors"
+    },
+    {
+      "id": "bk-018",
+      "category": "edge_case",
+      "query": "Can student loans be discharged in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 523(a)(8)",
+        "Brunner v. New York State Higher Education Services Corp., 831 F.2d 395 (2d Cir. 1987)"
+      ],
+      "must_include_elements": [
+        "undue hardship required",
+        "Brunner test",
+        "good faith effort to repay"
+      ],
+      "must_not_say": [
+        "automatically dischargeable"
+      ],
+      "notes": "Undue hardship is high standard"
+    },
+    {
+      "id": "bk-019",
+      "category": "edge_case",
+      "query": "What happens to a debtor's tax refund in Chapter 7?",
+      "must_cite": [
+        "11 U.S.C. § 541(a)"
+      ],
+      "must_include_elements": [
+        "property of the estate",
+        "pro-rated based on petition date",
+        "trustee may claim"
+      ],
+      "must_not_say": [],
+      "notes": "Refund apportioned to pre-petition period"
+    },
+    {
+      "id": "bk-020",
+      "category": "edge_case",
+      "query": "Can a bankruptcy court deny discharge for substantial abuse?",
+      "must_cite": [
+        "11 U.S.C. § 707(b)",
+        "11 U.S.C. § 707(b)(2)"
+      ],
+      "must_include_elements": [
+        "means test",
+        "totality of circumstances",
+        "presumption of abuse"
+      ],
+      "must_not_say": [],
+      "notes": "BAPCPA added means test"
+    },
+    {
+      "id": "bk-021",
+      "category": "test_rule",
+      "query": "What is the ordinary course of business defense to preference?",
+      "must_cite": [
+        "11 U.S.C. § 547(c)(2)",
+        "Union Bank v. Wolas, 502 U.S. 151 (1991)"
+      ],
+      "must_include_elements": [
+        "incurred in ordinary course",
+        "made in ordinary course OR according to ordinary business terms"
+      ],
+      "must_not_say": [
+        "both subjective and objective required"
+      ],
+      "notes": "BAPCPA made subjective OR objective (disjunctive)"
+    },
+    {
+      "id": "bk-022",
+      "category": "test_rule",
+      "query": "What is the test for substantive consolidation of debtor estates?",
+      "must_cite": [
+        "In re Owens Corning, 419 F.3d 195 (3d Cir. 2005)"
+      ],
+      "must_include_elements": [
+        "alter ego",
+        "substantial identity",
+        "prejudice to creditors"
+      ],
+      "must_not_say": [],
+      "notes": "Owens Corning narrowed substantive consolidation"
+    },
+    {
+      "id": "bk-023",
+      "category": "test_rule",
+      "query": "What is the test for equitable subordination under 510(c)?",
+      "must_cite": [
+        "11 U.S.C. § 510(c)",
+        "Benjamin v. Diamond (In re Mobile Steel Co.), 563 F.2d 692 (5th Cir. 1977)"
+      ],
+      "must_include_elements": [
+        "inequitable conduct",
+        "injury to creditors or unfair advantage",
+        "subordination consistent with bankruptcy law"
+      ],
+      "must_not_say": [],
+      "notes": "Mobile Steel three-part test"
+    },
+    {
+      "id": "bk-024",
+      "category": "standard_review",
+      "query": "What is the standard for approving attorney fees in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 330(a)"
+      ],
+      "must_include_elements": [
+        "reasonable compensation",
+        "actual and necessary services",
+        "benefit to estate"
+      ],
+      "must_not_say": [],
+      "notes": "Court must review fee applications"
+    },
+    {
+      "id": "bk-025",
+      "category": "standard_review",
+      "query": "When can a bankruptcy court reopen a closed case?",
+      "must_cite": [
+        "11 U.S.C. § 350(b)"
+      ],
+      "must_include_elements": [
+        "cause shown",
+        "administer assets",
+        "accord relief",
+        "discretionary"
+      ],
+      "must_not_say": [],
+      "notes": "Reopening is discretionary"
+    },
+    {
+      "id": "bk-026",
+      "category": "edge_case",
+      "query": "Can a debtor amend schedules after confirmation?",
+      "must_cite": [
+        "Fed. R. Bankr. P. 1009"
+      ],
+      "must_include_elements": [
+        "matter of course before closing",
+        "leave of court after closing",
+        "good faith"
+      ],
+      "must_not_say": [],
+      "notes": "Rule 1009 governs amendments"
+    },
+    {
+      "id": "bk-027",
+      "category": "test_rule",
+      "query": "What is the test for determining if a transfer was made with actual intent to defraud under 548(a)(1)(A)?",
+      "must_cite": [
+        "11 U.S.C. § 548(a)(1)(A)"
+      ],
+      "must_include_elements": [
+        "badges of fraud",
+        "totality of circumstances",
+        "actual intent"
+      ],
+      "must_not_say": [],
+      "notes": "Badges of fraud are circumstantial evidence"
+    },
+    {
+      "id": "bk-028",
+      "category": "test_rule",
+      "query": "What constitutes reasonably equivalent value for fraudulent transfer purposes?",
+      "must_cite": [
+        "11 U.S.C. § 548(a)(1)(B)",
+        "BFP v. Resolution Trust Corp., 511 U.S. 531 (1994)"
+      ],
+      "must_include_elements": [
+        "value received in exchange",
+        "fair market value consideration",
+        "foreclosure sale presumption"
+      ],
+      "must_not_say": [],
+      "notes": "BFP established foreclosure sale presumption"
+    },
+    {
+      "id": "bk-029",
+      "category": "standard_review",
+      "query": "What is the burden of proof for objecting to a claim?",
+      "must_cite": [
+        "11 U.S.C. § 502(a)",
+        "Fed. R. Bankr. P. 3001"
+      ],
+      "must_include_elements": [
+        "prima facie validity",
+        "objector must rebut",
+        "burden shifts"
+      ],
+      "must_not_say": [],
+      "notes": "Properly filed proof of claim is prima facie valid"
+    },
+    {
+      "id": "bk-030",
+      "category": "edge_case",
+      "query": "What are the limits on a debtor's exemptions in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 522",
+        "11 U.S.C. § 522(b)(3)"
+      ],
+      "must_include_elements": [
+        "federal vs state exemptions",
+        "domicile requirements",
+        "opt-out states"
+      ],
+      "must_not_say": [],
+      "notes": "States may opt out of federal exemptions"
+    },
+    {
+      "id": "bk-031",
+      "category": "test_rule",
+      "query": "What is the cram down interest rate for secured claims?",
+      "must_cite": [
+        "11 U.S.C. § 1129(b)(2)(A)",
+        "Till v. SCS Credit Corp., 541 U.S. 465 (2004)"
+      ],
+      "must_include_elements": [
+        "prime plus adjustment",
+        "risk factors",
+        "present value"
+      ],
+      "must_not_say": [],
+      "notes": "Till formula: prime + risk adjustment"
+    },
+    {
+      "id": "bk-032",
+      "category": "test_rule",
+      "query": "What is required to convert a Chapter 11 case to Chapter 7?",
+      "must_cite": [
+        "11 U.S.C. § 1112(b)"
+      ],
+      "must_include_elements": [
+        "cause",
+        "best interests of creditors",
+        "in the alternative, dismissal"
+      ],
+      "must_not_say": [],
+      "notes": "Court balances dismissal vs conversion"
+    },
+    {
+      "id": "bk-033",
+      "category": "standard_review",
+      "query": "What is the standard for extending time to assume or reject a lease?",
+      "must_cite": [
+        "11 U.S.C. § 365(d)(4)"
+      ],
+      "must_include_elements": [
+        "120 days initial period",
+        "90 day extension for cause",
+        "prior court approval"
+      ],
+      "must_not_say": [],
+      "notes": "BAPCPA tightened deadlines"
+    },
+    {
+      "id": "bk-034",
+      "category": "edge_case",
+      "query": "Can a debtor file bankruptcy to stop a pending foreclosure?",
+      "must_cite": [
+        "11 U.S.C. § 362(a)",
+        "11 U.S.C. § 362(c)(3)"
+      ],
+      "must_include_elements": [
+        "automatic stay applies",
+        "prior filing limitations",
+        "30-day limit for repeat filers"
+      ],
+      "must_not_say": [],
+      "notes": "BAPCPA added repeat filer limitations"
+    },
+    {
+      "id": "bk-035",
+      "category": "edge_case",
+      "query": "What is the effect of BAPCPA's safe harbor for financial contracts?",
+      "must_cite": [
+        "11 U.S.C. § 555",
+        "11 U.S.C. § 556",
+        "11 U.S.C. § 560"
+      ],
+      "must_include_elements": [
+        "exemption from automatic stay",
+        "right to liquidate",
+        "financial contracts protected"
+      ],
+      "must_not_say": [],
+      "notes": "Safe harbors protect financial markets"
+    },
+    {
+      "id": "bk-036",
+      "category": "test_rule",
+      "query": "What is the test for determining insider status under 11 USC 101(31)?",
+      "must_cite": [
+        "11 U.S.C. § 101(31)"
+      ],
+      "must_include_elements": [
+        "statutory categories",
+        "close relationship",
+        "control or influence"
+      ],
+      "must_not_say": [],
+      "notes": "Insider extends preference period to 1 year"
+    },
+    {
+      "id": "bk-037",
+      "category": "test_rule",
+      "query": "What constitutes a claim in bankruptcy?",
+      "must_cite": [
+        "11 U.S.C. § 101(5)",
+        "Johnson v. Home State Bank, 501 U.S. 78 (1991)"
+      ],
+      "must_include_elements": [
+        "right to payment",
+        "contingent",
+        "unliquidated",
+        "equitable remedies"
+      ],
+      "must_not_say": [],
+      "notes": "Claim broadly defined"
+    },
+    {
+      "id": "bk-038",
+      "category": "standard_review",
+      "query": "What is required to avoid a judicial lien under 522(f)?",
+      "must_cite": [
+        "11 U.S.C. § 522(f)"
+      ],
+      "must_include_elements": [
+        "impairs exemption",
+        "formula for impairment",
+        "judicial lien definition"
+      ],
+      "must_not_say": [],
+      "notes": "Formula in 522(f)(2)(A)"
+    },
+    {
+      "id": "bk-039",
+      "category": "edge_case",
+      "query": "What is the effect of a discharge injunction violation?",
+      "must_cite": [
+        "11 U.S.C. § 524(a)",
+        "Taggart v. Lorenzen, 139 S. Ct. 1795 (2019)"
+      ],
+      "must_include_elements": [
+        "contempt remedy",
+        "no fair ground of doubt",
+        "objective standard"
+      ],
+      "must_not_say": [],
+      "notes": "Taggart set objective standard for contempt"
+    },
+    {
+      "id": "bk-040",
+      "category": "test_rule",
+      "query": "What is the test for assuming an executory contract under 365?",
+      "must_cite": [
+        "11 U.S.C. § 365(b)(1)"
+      ],
+      "must_include_elements": [
+        "cure defaults",
+        "compensate for pecuniary loss",
+        "adequate assurance of future performance"
+      ],
+      "must_not_say": [],
+      "notes": "Three requirements for assumption"
+    },
+    {
+      "id": "bk-041",
+      "category": "test_rule",
+      "query": "What is the new value defense to preference?",
+      "must_cite": [
+        "11 U.S.C. § 547(c)(4)"
+      ],
+      "must_include_elements": [
+        "new value given after transfer",
+        "not secured by unavoidable security interest",
+        "unpaid"
+      ],
+      "must_not_say": [],
+      "notes": "Must be subsequent new value"
+    },
+    {
+      "id": "bk-042",
+      "category": "standard_review",
+      "query": "When can a court approve a sale free and clear of liens?",
+      "must_cite": [
+        "11 U.S.C. § 363(f)"
+      ],
+      "must_include_elements": [
+        "one of five conditions",
+        "consent",
+        "price exceeds liens",
+        "disputed lien",
+        "money satisfaction"
+      ],
+      "must_not_say": [],
+      "notes": "Disjunctive conditions in 363(f)"
+    },
+    {
+      "id": "bk-043",
+      "category": "edge_case",
+      "query": "What is the treatment of environmental claims in bankruptcy?",
+      "must_cite": [
+        "Midlantic Nat'l Bank v. New Jersey Dept. of Environmental Protection, 474 U.S. 494 (1986)",
+        "11 U.S.C. § 362(b)(4)"
+      ],
+      "must_include_elements": [
+        "police power exception",
+        "abandonment limitations",
+        "government unit exception"
+      ],
+      "must_not_say": [],
+      "notes": "Midlantic limited abandonment of hazardous property"
+    },
+    {
+      "id": "bk-044",
+      "category": "test_rule",
+      "query": "What is the best interests test in Chapter 11?",
+      "must_cite": [
+        "11 U.S.C. § 1129(a)(7)"
+      ],
+      "must_include_elements": [
+        "creditors receive not less than Chapter 7",
+        "liquidation analysis",
+        "each impaired creditor"
+      ],
+      "must_not_say": [],
+      "notes": "Comparison to Chapter 7 distribution"
+    },
+    {
+      "id": "bk-045",
+      "category": "test_rule",
+      "query": "What is the test for dismissal for bad faith filing?",
+      "must_cite": [
+        "11 U.S.C. § 1112(b)",
+        "11 U.S.C. § 707(a)"
+      ],
+      "must_include_elements": [
+        "cause",
+        "totality of circumstances",
+        "improper purpose"
+      ],
+      "must_not_say": [],
+      "notes": "Bad faith is basis for dismissal"
+    },
+    {
+      "id": "bk-046",
+      "category": "standard_review",
+      "query": "What is the standard for approving DIP financing?",
+      "must_cite": [
+        "11 U.S.C. § 364"
+      ],
+      "must_include_elements": [
+        "unable to obtain credit otherwise",
+        "business judgment",
+        "priming liens"
+      ],
+      "must_not_say": [],
+      "notes": "364 has escalating inducements"
+    },
+    {
+      "id": "bk-047",
+      "category": "edge_case",
+      "query": "What is the treatment of PACA claims in bankruptcy?",
+      "must_cite": [
+        "7 U.S.C. § 499e",
+        "11 U.S.C. § 541"
+      ],
+      "must_include_elements": [
+        "statutory trust",
+        "not property of estate",
+        "produce seller priority"
+      ],
+      "must_not_say": [],
+      "notes": "PACA trust survives bankruptcy"
+    },
+    {
+      "id": "bk-048",
+      "category": "test_rule",
+      "query": "What is the test for nondischargeability for fraud as fiduciary?",
+      "must_cite": [
+        "11 U.S.C. § 523(a)(4)"
+      ],
+      "must_include_elements": [
+        "express or technical trust",
+        "fiduciary relationship",
+        "defalcation, embezzlement, or larceny"
+      ],
+      "must_not_say": [
+        "constructive trust"
+      ],
+      "notes": "Requires express trust, not implied"
+    },
+    {
+      "id": "bk-049",
+      "category": "standard_review",
+      "query": "When is a debtor required to turn over property to the trustee?",
+      "must_cite": [
+        "11 U.S.C. § 521(a)(4)",
+        "11 U.S.C. § 542"
+      ],
+      "must_include_elements": [
+        "property of estate",
+        "delivery to trustee",
+        "turnover"
+      ],
+      "must_not_say": [],
+      "notes": "Trustee can compel turnover"
+    },
+    {
+      "id": "bk-050",
+      "category": "edge_case",
+      "query": "What is the effect of a preferential transfer to a guarantor?",
+      "must_cite": [
+        "11 U.S.C. § 547(b)",
+        "11 U.S.C. § 550"
+      ],
+      "must_include_elements": [
+        "transfer for benefit of creditor",
+        "guarantor benefited",
+        "recovery from transferee"
+      ],
+      "must_not_say": [],
+      "notes": "Guarantor can be beneficiary under 547"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+SLIDER SETTINGS (set before generating):
+  Stability: 0.50 | Similarity: 0.75 | Style: 0.40 | Speaker Boost: ON
+
+<speak>
+<prosody rate="92%" volume="medium">
+I started understandin' somethin'.<break time="400ms"/> <emphasis level="strong">Ownership is everything.</emphasis><break time="200ms"/> Own your mind, mind your own.<break time="200ms"/> Don't wait for somebody to hand you a lane<break time="200ms"/> lay your own brick.<break time="200ms"/> Every day.<break time="200ms"/> One at a time.
+</prosody>
+<break time="600ms"/>
+<prosody rate="94%" volume="medium">
+Eventually you look up and you got a wall.<break time="200ms"/> You got a foundation.<break time="200ms"/> You got somethin' they can't take.
+</prosody>
+</speak>
