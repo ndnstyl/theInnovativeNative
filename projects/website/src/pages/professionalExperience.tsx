@@ -220,20 +220,20 @@ const roleMatches: RoleMatch[] = [
     ],
   },
   {
-    title: "AI Automation Engineer",
-    tagline: "Production-grade workflow development integrating LLMs into real business operations.",
+    title: "Director of Marketing",
+    tagline: "Marketing operator who ships AI-powered growth systems. 20 years performance marketing plus production-grade AI infrastructure that replaces fragmented SaaS stacks.",
     keyResponsibilities: [
-      "Architect and deploy AI-powered automation systems using n8n, Make, or similar",
-      "Integrate LLMs (GPT-4, Claude, Gemini) into business workflows",
-      "Build data pipelines connecting CRMs, databases, and external APIs",
-      "Design error handling, retry logic, and human-in-the-loop checkpoints",
-      "Create RAG systems and multi-agent orchestration patterns",
+      "Own the full-funnel growth stack from awareness through retention",
+      "Architect attribution pipelines that map spend to revenue outcomes",
+      "Build experimentation frameworks running 25+ tests monthly",
+      "Deploy AI-powered automation (n8n, RAG agents, LLM orchestration) replacing fragmented SaaS",
+      "Lead cross-functional teams across product, sales, content, and engineering",
     ],
     experienceMatch: [
-      "Architected lead nurturing systems generating $1.2M+ incremental revenue",
-      "Built end-to-end attribution pipeline reducing reporting time 80%",
-      "Improved lead-to-close rate 4X through automated qualification workflows",
-      "Automated 90% of lead-to-delivery pipelines with production-grade reliability",
+      "$50M+ in lifetime managed media spend across Google, Meta, LinkedIn, YouTube",
+      "Scaled agency portfolio 5.3x ($225K to $1.2M/month) via measurement and automation",
+      "10%+ MoM growth for 12 consecutive months while cutting CPA 52% on B2B SaaS marketplace",
+      "Tier-1 PR placements (CNN, Forbes, WSJ, Fortune, BBC) at 18% reply rate, 4-5x benchmark",
     ],
   },
 ];
@@ -546,7 +546,7 @@ const ProfessionalExperience = () => {
   const renderSummaryModal = () => (
     <div>
       <p style={{ color: '#d0d0d0', lineHeight: 1.8, marginBottom: '24px', fontSize: '16px' }}>
-        Senior Growth Marketing leader with 19+ years building systems that actually work. I specialize in replacing fragmented tools and manual processes with AI infrastructure that runs without babysitting.
+        Senior Growth Marketing leader with 20 years building systems that actually work. I specialize in replacing fragmented tools and manual processes with AI infrastructure that runs without babysitting.
       </p>
 
       <h4 style={{ color: '#00FFFF', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
@@ -845,24 +845,24 @@ const ProfessionalExperience = () => {
   return (
     <>
     <Head>
-      <title>Michael Soto | AI Systems Builder & Growth Engineer</title>
-      <meta name="description" content="20 years building growth systems. AI infrastructure, n8n automation, and data pipelines for legal, creative, and real estate verticals." />
+      <title>Michael Soto | Director of Marketing | Growth Systems + AI</title>
+      <meta name="description" content="20 years scaling marketing machines. $50M+ in managed media spend. Performance marketing leader who ships AI-powered growth systems." />
       <link rel="canonical" href="https://theinnovativenative.com/professionalExperience" />
-      <meta property="og:title" content="Michael Soto | AI Systems Builder" />
-      <meta property="og:description" content="20 years building growth systems. AI infrastructure, automation, and data pipelines." />
+      <meta property="og:title" content="Michael Soto | Director of Marketing" />
+      <meta property="og:description" content="20 years scaling marketing machines. $50M+ in managed media spend. AI-native growth operator." />
       <meta property="og:image" content="https://theinnovativenative.com/images/og-default.jpg" />
       <meta property="og:url" content="https://theinnovativenative.com/professionalExperience" />
       <meta property="og:type" content="profile" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Michael Soto | AI Systems Builder" />
-      <meta name="twitter:description" content="20 years building growth systems. AI infrastructure, automation, and data pipelines." />
+      <meta name="twitter:title" content="Michael Soto | Director of Marketing" />
+      <meta name="twitter:description" content="20 years scaling marketing machines. $50M+ in managed media spend. AI-native growth operator." />
       <meta name="twitter:image" content="https://theinnovativenative.com/images/og-default.jpg" />
     </Head>
     <Layout header={1} footer={1} video={false}>
       <style>{styles}</style>
       <CmnBanner
         title="Michael Soto"
-        navigation="AI Systems Builder & Growth Engineer"
+        navigation="Director of Marketing | Growth Systems + AI"
       />
 
       {/* Interactive Resume Section */}
@@ -888,7 +888,7 @@ const ProfessionalExperience = () => {
               <div style={{ marginBottom: '20px' }}>
                 <ResumeCard title="Summary" onClick={() => setActiveModal('summary')}>
                   <p style={{ color: '#d0d0d0', fontSize: '14px', lineHeight: 1.6 }}>
-                    19+ years building growth systems. I replace fragmented SaaS stacks and manual processes with AI infrastructure that runs itself.
+                    20 years building growth systems. I replace fragmented SaaS stacks and manual processes with AI infrastructure that runs itself.
                   </p>
                 </ResumeCard>
               </div>
@@ -1035,7 +1035,7 @@ const ProfessionalExperience = () => {
                 Roles Where I Deliver the Most Impact
               </h2>
               <p style={{ color: '#a0a0a0', maxWidth: '700px', margin: '0 auto' }}>
-                19+ years of building growth systems. These are the roles
+                20 years of building growth systems. These are the roles
                 where I create the highest leverage.
               </p>
             </div>

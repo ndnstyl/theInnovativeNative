@@ -41,8 +41,8 @@ const HomeOneBanner = () => {
                   <p className="fw-5">Years in Growth Marketing</p>
                 </div>
                 <div className="single">
-                  <h5 className="fw-7">$50M+</h5>
-                  <p className="fw-5">Marketing Budgets Managed Yearly</p>
+                  <h5 className="fw-7">$50M+ /year</h5>
+                  <p className="fw-5">Marketing Budgets Managed</p>
                 </div>
                 <div className="single">
                   <h5 className="fw-7">5.3x</h5>
