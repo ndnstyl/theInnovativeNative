@@ -21,6 +21,7 @@ import {
   calculateQuoteDuration,
 } from './BowTie/styles/bowtie-theme';
 import { ReelsRoot } from './Reels/ReelsRoot';
+import { VisionSparkHero } from './Ads/VisionSparkHero/VisionSparkHero';
 import { TrendPilotReel } from './Ads/TrendPilot/TrendPilotReel';
 import { TrendPilotCarousel } from './Ads/TrendPilot/TrendPilotCarousel';
 import { TREND_PILOT_VARIANTS, sizes, reelDurations, timing as adTiming } from './Ads';
@@ -45,6 +46,19 @@ import {
   S11EightKpis,
   S12CfoMondayView,
 } from './Unsilo';
+import { NumberFlash } from './InnovativeNative/patterns/NumberFlash';
+import { IconFlash } from './InnovativeNative/patterns/IconFlash';
+import { QuoteBurst } from './InnovativeNative/patterns/QuoteBurst';
+import { WordFlash } from './InnovativeNative/patterns/WordFlash';
+import { BracketHighlight } from './InnovativeNative/patterns/BracketHighlight';
+import { BumperFlash } from './InnovativeNative/patterns/BumperFlash';
+import { TitleCard, StatCard, CalloutCard, BulletReveal, WorkflowMap, ComparisonSplit } from './InnovativeNative';
+import { LowerThird } from './InnovativeNative/LowerThird';
+import { EndCard } from './InnovativeNative/EndCard';
+import { BarChart } from './InnovativeNative/BarChart';
+import { Timeline } from './InnovativeNative/Timeline';
+import { ProcessDiagram } from './InnovativeNative/ProcessDiagram';
+import { IconGrid } from './InnovativeNative/IconGrid';
 
 /**
  * Calculate total duration accounting for transition overlaps
@@ -877,6 +891,138 @@ export const RemotionRoot: React.FC = () => {
         <Composition id="Unsilo-S11-9x16" component={S11EightKpis} durationInFrames={180} fps={30} width={1080} height={1920} />
         <Composition id="Unsilo-S12-16x9" component={S12CfoMondayView} durationInFrames={180} fps={30} width={1920} height={1080} />
         <Composition id="Unsilo-S12-9x16" component={S12CfoMondayView} durationInFrames={180} fps={30} width={1080} height={1920} />
+      </Folder>
+
+      {/* ─── Innovative Native Pattern Interrupts (16:9 only, 30fps) ─── */}
+      <Folder name="InnovativeNative-Patterns">
+        <Composition
+          id="Pattern-NumberFlash-16x9"
+          component={NumberFlash}
+          durationInFrames={45}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ value: '300%', label: 'reported ROAS' }}
+        />
+        <Composition
+          id="Pattern-IconFlash-16x9"
+          component={IconFlash}
+          durationInFrames={45}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ icon: 'icons/techsy/stripe.png', label: 'Stripe' }}
+        />
+        <Composition
+          id="Pattern-QuoteBurst-16x9"
+          component={QuoteBurst}
+          durationInFrames={75}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ text: 'Clarity compounds.', emphasis: 'compounds' }}
+        />
+        <Composition
+          id="Pattern-WordFlash-16x9"
+          component={WordFlash}
+          durationInFrames={30}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ word: 'SCALE', position: 'center' }}
+        />
+        <Composition
+          id="Pattern-BracketHighlight-16x9"
+          component={BracketHighlight}
+          durationInFrames={60}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ x: 760, y: 390, width: 400, height: 300, color: 'cyan' }}
+        />
+        <Composition
+          id="Pattern-BumperFlash-16x9"
+          component={BumperFlash}
+          durationInFrames={30}
+          fps={30}
+          width={1920}
+          height={1080}
+          defaultProps={{ direction: 'left' }}
+        />
+      </Folder>
+
+      {/* ─── InnovativeNative Explainer Templates ─── */}
+      <Folder name="InnovativeNative">
+        <Composition id="TIN-TitleCard-16x9" component={TitleCard} durationInFrames={180} fps={30} width={1920} height={1080}
+          defaultProps={{ title: 'The Gap Nobody Talks About', subtitle: 'Why your marketing numbers never match', eyebrow: 'Chapter 1' }} />
+        <Composition id="TIN-TitleCard-9x16" component={TitleCard} durationInFrames={180} fps={30} width={1080} height={1920}
+          defaultProps={{ title: 'The Gap Nobody Talks About', subtitle: 'Why your marketing numbers never match', eyebrow: 'Chapter 1' }} />
+
+        <Composition id="TIN-StatCard-16x9" component={StatCard} durationInFrames={180} fps={30} width={1920} height={1080}
+          defaultProps={{ value: '64%', label: 'gap between marketing and revops counts', footnote: 'vs reported numbers' }} />
+        <Composition id="TIN-StatCard-9x16" component={StatCard} durationInFrames={180} fps={30} width={1080} height={1920}
+          defaultProps={{ value: '64%', label: 'gap between marketing and revops counts', footnote: 'vs reported numbers' }} />
+
+        <Composition id="TIN-CalloutCard-16x9" component={CalloutCard} durationInFrames={180} fps={30} width={1920} height={1080}
+          defaultProps={{ text: 'Clarity compounds. Confusion is expensive.', attribution: '— The Innovative Native' }} />
+        <Composition id="TIN-CalloutCard-9x16" component={CalloutCard} durationInFrames={180} fps={30} width={1080} height={1920}
+          defaultProps={{ text: 'Clarity compounds. Confusion is expensive.', attribution: '— The Innovative Native' }} />
+
+        <Composition id="TIN-BulletReveal-16x9" component={BulletReveal} durationInFrames={240} fps={30} width={1920} height={1080}
+          defaultProps={{ title: 'Why the data is broken', items: ['Marketing and revops use different attribution windows', 'Ad platforms count clicks, not customers', 'No canonical identifier links the stacks', 'Reports are built on estimates'] }} />
+        <Composition id="TIN-BulletReveal-9x16" component={BulletReveal} durationInFrames={240} fps={30} width={1080} height={1920}
+          defaultProps={{ title: 'Why the data is broken', items: ['Marketing and revops use different attribution windows', 'Ad platforms count clicks, not customers', 'No canonical identifier links the stacks', 'Reports are built on estimates'] }} />
+
+        <Composition id="TIN-WorkflowMap-16x9" component={WorkflowMap} durationInFrames={240} fps={30} width={1920} height={1080}
+          defaultProps={{ steps: [{ n: 1, label: 'Audit your stack' }, { n: 2, label: 'Define canonical IDs' }, { n: 3, label: 'Unify attribution windows' }, { n: 4, label: 'Ship the MER dashboard' }] }} />
+        <Composition id="TIN-WorkflowMap-9x16" component={WorkflowMap} durationInFrames={240} fps={30} width={1080} height={1920}
+          defaultProps={{ steps: [{ n: 1, label: 'Audit your stack' }, { n: 2, label: 'Define canonical IDs' }, { n: 3, label: 'Unify attribution windows' }, { n: 4, label: 'Ship the MER dashboard' }] }} />
+
+        <Composition id="TIN-ComparisonSplit-16x9" component={ComparisonSplit} durationInFrames={210} fps={30} width={1920} height={1080}
+          defaultProps={{ left: { label: 'Marketing claims', value: '$4.2 ROAS' }, right: { label: 'Finance sees', value: '1.8 MER' }, vs: 'VS' }} />
+        <Composition id="TIN-ComparisonSplit-9x16" component={ComparisonSplit} durationInFrames={210} fps={30} width={1080} height={1920}
+          defaultProps={{ left: { label: 'Marketing claims', value: '$4.2 ROAS' }, right: { label: 'Finance sees', value: '1.8 MER' }, vs: 'VS' }} />
+
+        <Composition id="TIN-LowerThird-16x9" component={LowerThird} durationInFrames={150} fps={30} width={1920} height={1080}
+          defaultProps={{ name: 'Mike Larabie', title: 'Founder, The Innovative Native' }} />
+        <Composition id="TIN-LowerThird-9x16" component={LowerThird} durationInFrames={150} fps={30} width={1080} height={1920}
+          defaultProps={{ name: 'Mike Larabie', title: 'Founder, The Innovative Native' }} />
+
+        <Composition id="TIN-EndCard-16x9" component={EndCard} durationInFrames={240} fps={30} width={1920} height={1080}
+          defaultProps={{ showSubscribe: true }} />
+        <Composition id="TIN-EndCard-9x16" component={EndCard} durationInFrames={240} fps={30} width={1080} height={1920}
+          defaultProps={{ showSubscribe: true }} />
+
+        <Composition id="TIN-BarChart-16x9" component={BarChart} durationInFrames={240} fps={30} width={1920} height={1080}
+          defaultProps={{ title: 'Revenue by Channel', bars: [{ label: 'Organic', v: 42 }, { label: 'Paid', v: 78 }, { label: 'Email', v: 31 }, { label: 'Referral', v: 55 }], unit: 'K' }} />
+        <Composition id="TIN-BarChart-9x16" component={BarChart} durationInFrames={240} fps={30} width={1080} height={1920}
+          defaultProps={{ title: 'Revenue by Channel', bars: [{ label: 'Organic', v: 42 }, { label: 'Paid', v: 78 }, { label: 'Email', v: 31 }, { label: 'Referral', v: 55 }], unit: 'K' }} />
+
+        <Composition id="TIN-Timeline-16x9" component={Timeline} durationInFrames={240} fps={30} width={1920} height={1080}
+          defaultProps={{ events: [{ date: 'Q1 2024', label: 'Audit' }, { date: 'Q2 2024', label: 'Systems' }, { date: 'Q3 2024', label: 'Launch' }, { date: 'Q4 2024', label: 'Scale' }] }} />
+        <Composition id="TIN-Timeline-9x16" component={Timeline} durationInFrames={240} fps={30} width={1080} height={1920}
+          defaultProps={{ events: [{ date: 'Q1 2024', label: 'Audit' }, { date: 'Q2 2024', label: 'Systems' }, { date: 'Q3 2024', label: 'Launch' }, { date: 'Q4 2024', label: 'Scale' }] }} />
+
+        <Composition id="TIN-ProcessDiagram-16x9" component={ProcessDiagram} durationInFrames={210} fps={30} width={1920} height={1080}
+          defaultProps={{ input: 'Raw Data', transform: 'AI Automation', output: 'Clear Insight', inputLabel: 'Input', transformLabel: 'Process', outputLabel: 'Output' }} />
+        <Composition id="TIN-ProcessDiagram-9x16" component={ProcessDiagram} durationInFrames={210} fps={30} width={1080} height={1920}
+          defaultProps={{ input: 'Raw Data', transform: 'AI Automation', output: 'Clear Insight', inputLabel: 'Input', transformLabel: 'Process', outputLabel: 'Output' }} />
+
+        <Composition id="TIN-IconGrid-16x9" component={IconGrid} durationInFrames={210} fps={30} width={1920} height={1080}
+          defaultProps={{ title: 'The Stack', items: [{ icon: 'assets/icon-placeholder.png', label: 'Airtable' }, { icon: 'assets/icon-placeholder.png', label: 'n8n' }, { icon: 'assets/icon-placeholder.png', label: 'Supabase' }, { icon: 'assets/icon-placeholder.png', label: 'Remotion' }, { icon: 'assets/icon-placeholder.png', label: 'Brevo' }, { icon: 'assets/icon-placeholder.png', label: 'Stripe' }] }} />
+        <Composition id="TIN-IconGrid-9x16" component={IconGrid} durationInFrames={210} fps={30} width={1080} height={1920}
+          defaultProps={{ title: 'The Stack', items: [{ icon: 'assets/icon-placeholder.png', label: 'Airtable' }, { icon: 'assets/icon-placeholder.png', label: 'n8n' }, { icon: 'assets/icon-placeholder.png', label: 'Supabase' }, { icon: 'assets/icon-placeholder.png', label: 'Remotion' }, { icon: 'assets/icon-placeholder.png', label: 'Brevo' }, { icon: 'assets/icon-placeholder.png', label: 'Stripe' }] }} />
+      </Folder>
+
+      <Folder name="VisionSpark">
+        <Composition
+          id="VisionSparkHero"
+          component={VisionSparkHero}
+          durationInFrames={1500}
+          fps={30}
+          width={1920}
+          height={1080}
+        />
       </Folder>
     </>
   );
