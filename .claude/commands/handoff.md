@@ -204,9 +204,9 @@ To execute Neo's tasks:
 @neo Execute task T006 from feature 001-neo-workflow-management
 
 Context:
-- Spec: .specify/features/001-neo-workflow-management/spec.md
-- Plan: .specify/features/001-neo-workflow-management/plan.md
-- Tasks: .specify/features/001-neo-workflow-management/tasks.md
+- Spec: specs/001-neo-workflow-management/spec.md
+- Plan: specs/001-neo-workflow-management/plan.md
+- Tasks: specs/001-neo-workflow-management/tasks.md
 
 Note: T007 is blocked by T006 - will be available after T006 completes.
 ```
@@ -216,9 +216,9 @@ To execute Tab's tasks:
 @tab Execute task T008 from feature 001-neo-workflow-management
 
 Context:
-- Spec: .specify/features/001-neo-workflow-management/spec.md
-- Plan: .specify/features/001-neo-workflow-management/plan.md
-- Tasks: .specify/features/001-neo-workflow-management/tasks.md
+- Spec: specs/001-neo-workflow-management/spec.md
+- Plan: specs/001-neo-workflow-management/plan.md
+- Tasks: specs/001-neo-workflow-management/tasks.md
 ```
 
 ### Blocked Tasks (Will Auto-Unblock)

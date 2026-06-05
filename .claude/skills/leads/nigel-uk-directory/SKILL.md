@@ -25,7 +25,7 @@ UK market lead generation and data enrichment. Focus areas:
 - WordPress management
 
 ## Key Resources
-- Spec Path: `.specify/features/uk-directory/`
+- Spec Path: `specs/uk-directory/`
 - Learnings: `.specify/memory/learnings/nigel-learnings.md`
 
 ## Delegation (via Drew)

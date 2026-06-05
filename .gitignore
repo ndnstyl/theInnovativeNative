@@ -286,79 +286,23 @@ projects/website/nextjs-site.zip
 # Local Adobe / video editor scratch
 outro.prin
 outro.prproj
-||||||| base
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< ours
-
-
-
-
-=======
 # Project registry and logs contain personal data - exclude
 .specify/memory/projects/
 # n8n workflow backups contain raw credentials — never commit
 scripts/n8n-workflows/_backups/
+
+# === Repo hygiene additions (2026-06-05) ===
+# Python virtualenvs (dot-prefixed; venv/ above misses these)
+.venv/
+**/.venv/
+# Playwright MCP session logs (regenerable)
+.playwright-mcp/
+# Deploy safety-system logs (operational scratch)
+.deploy-history/
+# Root-level Airtable data dumps
+/at-*.json
+# Auto-generated session daily logs (kept in OB1/memory, not git)
+.specify/memory/ob1-hygiene-*.md
+.specify/memory/prompt-mutation-*.md
+.specify/memory/rework-scan-*.md

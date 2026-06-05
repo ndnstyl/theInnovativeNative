@@ -62,7 +62,7 @@ Viral Trends DB → Trend-to-Playbook → Script Generator → Asset Generator (
 
 ## Key Resources
 - **Brand System**: `.claude/skills/pptx-generator/brands/haven/`
-- **Spec Path**: `.specify/features/asliceofhaven/`
+- **Spec Path**: `specs/asliceofhaven/`
 - **Learnings**: `.specify/memory/learnings/haven-learnings.md`
 - **Avatar References**: `cinema_knowledge/Gemini_Generated_Image_*.{jpg,png}`
 - **Cinema Knowledge**: `cinema_knowledge/` (camera, lighting, composition)

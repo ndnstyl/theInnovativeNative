@@ -226,7 +226,7 @@ Health = (Success_Rate * 0.6) + (Recency * 0.2) + (Error_Severity * 0.2)
 
 ## References
 
-- Neo SKILL: `.claude/skills/workers/neo-n8n/SKILL.md`
+- Builder SKILL: `.claude/skills/workers/builder/SKILL.md`
 - Neo Learnings: `.specify/memory/learnings/neo-learnings.md`
 - Pattern Library: `.specify/patterns/`
 - n8n API Docs: https://docs.n8n.io/api/

@@ -25,7 +25,7 @@ Instagram automation SaaS platform. Focus areas:
 - Feature development
 
 ## Key Resources
-- Spec Path: `.specify/features/buildmytribe-ai/`
+- Spec Path: `specs/buildmytribe-ai/`
 - Learnings: `.specify/memory/learnings/trinity-learnings.md`
 
 ## Delegation (via Drew)

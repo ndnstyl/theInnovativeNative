@@ -280,7 +280,7 @@ All task requests flow through Drew except:
    ```
 
 2. **Before an agent modifies a file**, check if another ACTIVE spec kit owns it:
-   - Search all `spec.md` files in `.specify/features/` for `owned_paths`
+   - Search all `spec.md` files in `specs/` for `owned_paths`
    - If the file is claimed by another active spec → **STOP. Escalate to Drew.**
    - If unclaimed → proceed
 
@@ -307,7 +307,7 @@ On 2026-04-03, specs 031-skool-ui-overhaul and 032-skool-migration-mvp both modi
 
 2. **One owner per spec kit.** The designated project lead has final authority over all changes to that feature's files.
 
-3. **No orphan specs.** Every spec kit in `.specify/features/` MUST have:
+3. **No orphan specs.** Every spec kit in `specs/` MUST have:
    - An `owner` field in the spec.md frontmatter (agent ID from roster)
    - A `project_lead` who is accountable for the unified deliverable
    - A link to the parent project in Airtable

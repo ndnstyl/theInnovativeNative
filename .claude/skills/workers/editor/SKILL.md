@@ -27,14 +27,14 @@ Cinematic editor that takes a script + generated assets and creates the Timeline
 
 ## Required Context (Load on Startup)
 
-1. `.specify/features/bowtie-video-pipeline/spec.md` — Pipeline spec (Timeline EDL format, audio mix hierarchy, SFX rules)
+1. `specs/bowtie-video-pipeline/spec.md` — Pipeline spec (Timeline EDL format, audio mix hierarchy, SFX rules)
 2. `projects/004-bowtie-bullies/brand/visual-style-guide.md` — Color palette, typography, color grade filter
 3. `projects/004-bowtie-bullies/brand/tyrone-voice-guide.md` — Pacing philosophy, silence rules, AAVE voice system
 4. `projects/004-bowtie-bullies/brand/intro-outro-spec.md` — Intro/outro timing and audio
 5. `.claude/skills/pptx-generator/brands/bowtie-bullies/brand-system.md` — Brand system
-6. `.specify/features/bowtie-video-pipeline/timeline-edl-schema.json` — Formal EDL output schema
-7. `.specify/features/bowtie-video-pipeline/sfx-mixing-spec.md` — Ducking rules, dB-to-linear tables, FFMPEG filter patterns
-8. `.specify/features/bowtie-video-pipeline/episode-script-template.json` — Input format (scene JSON)
+6. `specs/bowtie-video-pipeline/timeline-edl-schema.json` — Formal EDL output schema
+7. `specs/bowtie-video-pipeline/sfx-mixing-spec.md` — Ducking rules, dB-to-linear tables, FFMPEG filter patterns
+8. `specs/bowtie-video-pipeline/episode-script-template.json` — Input format (scene JSON)
 9. `scripts/timeline_to_ffmpeg.py` — FFMPEG compiler that consumes Editor output
 
 ---

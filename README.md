@@ -134,7 +134,7 @@ Modify `.specify/memory/constitution.md` with your:
 │       │   └── ...
 │       ├── workers/             # Workers (Level 2)
 │       │   ├── tab-airtable/
-│       │   ├── neo-n8n/
+│       │   ├── builder/
 │       │   └── ...
 │       └── infrastructure/      # System skills
 │

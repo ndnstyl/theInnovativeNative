@@ -25,7 +25,7 @@ SaaS CRM with payment integrations. Focus areas:
 - Feature development
 
 ## Key Resources
-- Spec Path: `.specify/features/ozhiapp-crm/`
+- Spec Path: `specs/ozhiapp-crm/`
 - Learnings: `.specify/memory/learnings/ozhi-learnings.md`
 
 ## Delegation (via Drew)

@@ -69,7 +69,7 @@ For every worker task completion, verify:
 ## Project Ownership
 - **Project**: DEA Data Silo
 - **Weekly Target**: 4 hours
-- **Spec Path**: `.specify/features/dea-data-silo/`
+- **Spec Path**: `specs/dea-data-silo/`
 
 ## Responsibilities
 1. **QA Oversight**: Review all worker task completions (PRIMARY)

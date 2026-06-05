@@ -126,7 +126,7 @@ When a handoff is executed, this manifest is generated:
     "id": "HO-2026-02-05-001",
     "timestamp": "2026-02-05T10:30:00Z",
     "feature": "001-neo-workflow-management",
-    "featurePath": ".specify/features/001-neo-workflow-management/",
+    "featurePath": "specs/001-neo-workflow-management/",
     "initiatedBy": "base-claude"
   },
   "assignments": [
@@ -136,7 +136,7 @@ When a handoff is executed, this manifest is generated:
       "agent": {
         "id": "neo",
         "name": "Neo",
-        "skillPath": ".claude/skills/workers/neo-n8n/SKILL.md",
+        "skillPath": ".claude/skills/workers/builder/SKILL.md",
         "airtableRecordId": "recXXXXXXXX"
       },
       "airtableTaskId": "recYYYYYYYY",

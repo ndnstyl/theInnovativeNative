@@ -102,5 +102,5 @@ Create these views manually in the Workflows table (tblYm6SNOu8lcyNTV):
 - Feature Spec: `specs/001-neo-workflow-management/spec.md`
 - Implementation Plan: `specs/001-neo-workflow-management/plan.md`
 - Tasks: `specs/001-neo-workflow-management/tasks.md`
-- Neo Skill: `.claude/skills/workers/neo-n8n/SKILL.md`
+- Builder Skill: `.claude/skills/workers/builder/SKILL.md`
 - Pattern Library: `.specify/patterns/README.md`

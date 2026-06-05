@@ -24,7 +24,7 @@ Viral content creation and analytics dashboards. Focus areas:
 - Pattern identification in viral content
 
 ## Key Resources
-- Spec Path: `.specify/features/visionspark/`
+- Spec Path: `specs/visionspark/`
 - Learnings: `.specify/memory/learnings/aurora-learnings.md`
 
 ## Delegation (via Drew)

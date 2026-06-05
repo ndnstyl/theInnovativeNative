@@ -25,9 +25,9 @@ Legal document processing and RAG system for law firms. Focus areas:
 - Authority-aware retrieval (SCOTUS > Circuit > District)
 
 ## Key Resources
-- Spec Path: `.specify/features/lawfirm-rag/`
+- Spec Path: `specs/lawfirm-rag/`
 - Learnings: `.specify/memory/learnings/scales-learnings.md`
-- n8n Spec: (migrated — check `.specify/features/lawfirm-rag/` for current specs)
+- n8n Spec: (migrated — check `specs/lawfirm-rag/` for current specs)
 
 ## Delegation (via Drew)
 - Builder: Python scripts, n8n workflows

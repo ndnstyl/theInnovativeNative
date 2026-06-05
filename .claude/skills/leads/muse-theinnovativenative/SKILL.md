@@ -25,7 +25,7 @@ CEO's personal brand portfolio and content. Focus areas:
 - Brand consistency
 
 ## Key Resources
-- Spec Path: `.specify/features/theinnovativenative/`
+- Spec Path: `specs/theinnovativenative/`
 - Learnings: `.specify/memory/learnings/muse-learnings.md`
 - Brand System: `.claude/skills/pptx-generator/brands/innovative-native/`
 
