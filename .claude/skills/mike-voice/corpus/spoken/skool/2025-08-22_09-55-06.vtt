@@ -1,0 +1,521 @@
+WEBVTT
+
+00:00.000 --> 00:29.300
+Okay, now if you guys are visual workers like I am, you kind of need to see some things.
+
+00:30.000 --> 00:47.060
+I am going to give you kind of the overall snapshot. I told you we're going to jump into Merrill here. This is a board that I've used to basically create and ideate workflows for beginning to end. You can even see some of these here that I have handwritten on a whiteboard previously.
+
+00:47.060 --> 00:54.200
+But overall, the first thing that we're going to do is take this essentially as much as we can step by step.
+
+00:54.200 --> 01:24.200
+
+
+01:24.200 --> 01:37.420
+People think they know about the automation that they want to do. They get into it. They start mapping it all out. And then once they create it, they realize that it solves nothing. Don't do that. I've done it before. It's just a complete waste of time.
+
+01:37.420 --> 02:07.420
+
+
+02:07.420 --> 02:37.420
+
+
+02:37.420 --> 02:45.160
+You want to keep the subject matter expert out of it, the business owner out of it. You want to keep the person that knows the most in the loop for the longest time possible so you get the best results.
+
+02:45.160 --> 02:58.060
+Now, that being said, this is also where you're going to just jot down all of the tools that you use. These are most of the tools that I use. Get everything out as much as you can.
+
+02:58.060 --> 03:06.960
+I would like to actually reduce this. The more that you do reduce this, you reduce your overhead, your subscriptions. You also reduce information islands and data silos.
+
+03:07.420 --> 03:14.840
+We'll talk about that. And if we haven't gone over that yet or you haven't seen any of my other videos, I do have one that's specifically about data silos.
+
+03:15.380 --> 03:24.360
+Because the other thing that you have to think about, the more you have, the more tools you have, the more information islands or data silos you're inevitably going to have.
+
+03:24.360 --> 03:33.800
+So each and every department, whether it's marketing, admin, sales, rev ops, sec ops, whatever it is, everybody uses their own set of tools.
+
+03:33.980 --> 03:41.780
+So that creates all of these data silos. So the more that you have and the larger of a business that you have, the more tools you're going to have, the more data silos you're going to have.
+
+03:42.020 --> 03:42.900
+But that's a whole different topic.
+
+03:45.220 --> 03:52.160
+Now, one of the reasons why you want to get this out of your brain is because essentially, like I brought up earlier, you might automate the wrong thing.
+
+03:52.160 --> 03:55.260
+Like this happens quite often.
+
+03:56.040 --> 04:03.320
+Maybe you have a meeting with your team and you guys are going over the concept of it or somebody missed that day or whatever it is.
+
+04:04.040 --> 04:12.320
+Having it out on a whiteboard or in notes keeps everybody on the same page of what you need to automate and why.
+
+04:13.080 --> 04:21.220
+There are many businesses that jump into automation and they're trying to reduce bottlenecks and be the most impactful that they can.
+
+04:21.220 --> 04:26.140
+But they somehow missed one of the steps or are completely automating the wrong thing.
+
+04:27.540 --> 04:30.580
+And mapping forces you to see where value leaks are.
+
+04:30.800 --> 04:34.500
+So you don't waste time building automations that save minutes instead of hours.
+
+04:35.160 --> 04:42.160
+Sometimes just a slight pivot in an automation, instead of only saving five minutes, it saves two hours.
+
+04:42.160 --> 04:48.540
+So once you actually put it all on paper, get it on a whiteboard, it'll give you a lot more clarity.
+
+04:49.320 --> 04:52.600
+Which moves on to step two, hidden dependencies.
+
+04:54.540 --> 04:56.820
+A workflow isn't just a set of tasks.
+
+04:57.080 --> 05:05.920
+There are things sometimes that have dependencies before it or that need to be worked out in order for the workflow to happen.
+
+05:05.920 --> 05:08.180
+Maybe it's a meeting.
+
+05:08.360 --> 05:12.780
+Maybe it is a tool that you have yet to use or pay for the subscription for.
+
+05:12.940 --> 05:20.660
+Or in some cases, like we talked about earlier, you want to integrate it into a piece of software that doesn't have API integration.
+
+05:21.100 --> 05:22.240
+So you have to rethink that.
+
+05:22.360 --> 05:25.180
+There are hidden dependencies that are out there all the time.
+
+05:25.180 --> 05:32.800
+And then without mapping, you don't see step two secretly depends on step zero or step one.
+
+05:33.180 --> 05:38.720
+Like uploading the right file format or client signing a document or anything along those lines.
+
+05:38.720 --> 05:46.440
+Or you're trying to automate something that requires credentials and prior verification like OAuth or passwords.
+
+05:46.440 --> 05:58.420
+Or you are trying to automate your Stripe invoices and you don't realize you have to convert from one file format to another before you can actually upload.
+
+05:58.900 --> 06:01.960
+So you have to think of these dependencies.
+
+06:02.800 --> 06:06.980
+They're not always going to be just bam, smack you in the face.
+
+06:07.140 --> 06:10.120
+It's just better to try to get it out on the front end.
+
+06:12.820 --> 06:14.440
+Next is garbage in, garbage out.
+
+06:14.440 --> 06:18.320
+But AI plus automation only amplifies what's already there.
+
+06:19.040 --> 06:22.200
+For a really simple example, ChatGPT.
+
+06:22.580 --> 06:29.620
+If you say, hey, ChatGPT, create a personalized email that I want to send to this new prospect.
+
+06:29.760 --> 06:30.500
+It's the first time.
+
+06:31.840 --> 06:32.740
+Give me that draft.
+
+06:33.380 --> 06:38.780
+That's completely different than saying, hey, this is the customer profile that I'm going after.
+
+06:38.880 --> 06:42.380
+It's the first time we have had zero in action.
+
+06:42.520 --> 06:43.240
+This is their company.
+
+06:43.240 --> 06:46.700
+This is a value proposition.
+
+06:46.920 --> 06:54.120
+And you actually build that prompt out instead of saying just send out a personalized email to Chris Hawkins.
+
+06:54.300 --> 06:55.360
+You can actually have a company.
+
+06:55.600 --> 06:56.600
+You can have enriched data.
+
+06:56.800 --> 06:58.180
+And you can give it over to ChatGPT.
+
+06:58.800 --> 07:00.960
+So better in is better out.
+
+07:01.220 --> 07:03.840
+In other words, garbage in, garbage out.
+
+07:03.840 --> 07:08.120
+The worse you either explain or you leave out details.
+
+07:08.520 --> 07:13.480
+ChatGPT, as well as AI and AI agents, they don't know anything that you don't tell them.
+
+07:14.100 --> 07:15.940
+So garbage in is always going to be garbage out.
+
+07:16.880 --> 07:21.320
+Mapping exposes where your data is created, validated, and passed along.
+
+07:21.320 --> 07:24.620
+So again, garbage in, garbage out.
+
+07:24.940 --> 07:26.920
+So education, a lot of people don't think about.
+
+07:27.340 --> 07:32.100
+What I just kind of mentioned before, humans intuitively, they handle exceptions here.
+
+07:32.100 --> 07:43.940
+Meaning, like, say we are, I don't know, sending an invoice to somebody that actually hasn't paid yet.
+
+07:43.940 --> 07:50.920
+And we know, oh, okay, looking at our calendar, I'm working with Jim Roof and Company.
+
+07:51.260 --> 07:53.200
+And they're actually on a project.
+
+07:53.660 --> 07:55.620
+And I know the hours that they work.
+
+07:56.220 --> 07:58.240
+And now they're on vacation.
+
+07:58.380 --> 08:00.040
+I see, oh, we talked.
+
+08:00.200 --> 08:00.760
+We had a meeting.
+
+08:00.920 --> 08:01.780
+We're going to reconvene.
+
+08:01.900 --> 08:03.420
+We've got another project that's coming up.
+
+08:03.620 --> 08:05.100
+They haven't paid their invoice yet.
+
+08:05.780 --> 08:06.800
+Humans can do that.
+
+08:07.860 --> 08:08.660
+Machines don't.
+
+08:08.660 --> 08:14.960
+They're not going to know Jim is on vacation or they're out of town or what it is.
+
+08:15.680 --> 08:18.700
+They're not going to intuit anything that isn't there.
+
+08:19.060 --> 08:21.880
+Only what is available to them will they be able to process.
+
+08:23.060 --> 08:28.280
+Mapping lets you identify the edge cases up front and decide whether you automate, delegate, or eliminate.
+
+08:30.040 --> 08:33.800
+And the next one, clarity for compliance and trust.
+
+08:34.140 --> 08:36.140
+This works in a multitude of ways.
+
+08:36.220 --> 08:37.040
+We talked about HIPAA.
+
+08:37.040 --> 08:39.440
+We talked about very risk-averse lawyers.
+
+08:39.980 --> 08:48.880
+Or maybe there's PCI compliance, payment card information, payment card industry, things that you have to actually be aware of.
+
+08:49.720 --> 08:59.760
+Mapping it out provides clarity and compliance and trust, especially in the regulated spaces, like I just said, and PCI compliance and HIPAA and all those things.
+
+09:00.180 --> 09:03.340
+And then six, it forces the process of discipline.
+
+09:03.340 --> 09:06.740
+Most businesses run on tribal knowledge.
+
+09:07.280 --> 09:09.460
+Like, oh, Jenna knows how to do that.
+
+09:09.540 --> 09:10.700
+We're just going to go give it to Jenna.
+
+09:11.020 --> 09:15.060
+And nobody really knows what Jenna does because she hasn't mapped it all out.
+
+09:15.160 --> 09:16.640
+There's no standard operating procedure.
+
+09:16.800 --> 09:18.180
+So that is a bottleneck.
+
+09:18.480 --> 09:19.600
+Oh, I don't know how to do it.
+
+09:19.780 --> 09:20.200
+Jenna does.
+
+09:20.380 --> 09:21.740
+I'm just going to pass it over to her.
+
+09:21.740 --> 09:32.240
+So it forces discipline to where you have to get this out of your brain or out of Jenna's brain and put it onto a particular document that you can create SOPs around.
+
+09:32.240 --> 09:41.400
+You start to discover opportunities and things to eliminate before or even after automation.
+
+09:42.040 --> 09:44.160
+Not every step deserves automation.
+
+09:44.420 --> 09:51.940
+Some things that you do still want to do manually because they're very high value situations.
+
+09:52.220 --> 09:56.280
+Sometimes I've had situations where people are selling very, very high ticket offers.
+
+09:56.280 --> 10:02.760
+You don't want to automate a lot of those cold outreaches or those sales calls.
+
+10:02.980 --> 10:04.500
+Like, you do have retail AI.
+
+10:04.720 --> 10:06.040
+Voice agents are getting great.
+
+10:06.140 --> 10:07.300
+They sound just like humans.
+
+10:07.440 --> 10:11.360
+Their knowledge base is deep because everything that you can train on is awesome.
+
+10:11.700 --> 10:16.860
+But you don't want an AI cold calling a potential $50,000 contract.
+
+10:17.380 --> 10:19.100
+Like, that's just not something you do.
+
+10:19.220 --> 10:21.260
+So not everything needs to be automated.
+
+10:21.260 --> 10:26.560
+You can automate everything all the way up into that call, but you don't want to automate that.
+
+10:26.680 --> 10:27.400
+And some people are.
+
+10:27.500 --> 10:27.980
+I can tell you.
+
+10:28.060 --> 10:36.140
+There are people out there that are using retail AI and a couple of other things, Vappy or whatever, and they're trying to do high ticket closes.
+
+10:36.260 --> 10:37.100
+Some of them are successful.
+
+10:37.500 --> 10:38.420
+I wouldn't trust it.
+
+10:38.680 --> 10:43.740
+But this is where you start to discover those opportunities or eliminate what you need to be automated.
+
+10:43.740 --> 10:55.820
+And then mapping often shows, like, redundant tools or overlap or whatever, like Notion plus Google Docs or, you know, using multiple Excel sheets or whatever it is.
+
+10:56.360 --> 11:01.780
+The bottom line, automation without mapping is like paving a cow path.
+
+11:01.780 --> 11:14.200
+If you just automation without mapping is just something that you don't want to do.
+
+11:14.300 --> 11:15.300
+Mapping gives you the clarity.
+
+11:16.260 --> 11:18.380
+It surfaces all of the edge cases.
+
+11:18.680 --> 11:23.740
+It allows you to look at all of the dependencies and just creates an overall cleaner flow.
+
+11:25.560 --> 11:28.960
+Now, that being said, that's kind of like the structure of how you want to do it.
+
+11:28.960 --> 11:37.700
+We'll go over quickly just a few things just so that you have some kind of material examples of getting your beak wet into N8N.
+
+11:37.820 --> 11:42.740
+These are little screen grabs of little nodes that are from N8N.
+
+11:43.440 --> 11:47.080
+So you have entry points, you have functions, and you have exit points.
+
+11:47.820 --> 11:49.280
+Entry points are things like triggers.
+
+11:49.540 --> 11:55.920
+Maybe it is a weekly trigger or a daily trigger or you just got an email and that starts the workflow.
+
+11:55.920 --> 12:00.880
+A trigger is something that actually starts the first part of the automation.
+
+12:01.140 --> 12:02.800
+So that is the input.
+
+12:03.600 --> 12:05.360
+And then there are all of the functions.
+
+12:05.580 --> 12:09.620
+Code nodes, custom nodes, edit fields, splitting out fields, filters.
+
+12:10.740 --> 12:13.460
+You have AI agents.
+
+12:13.600 --> 12:18.940
+Maybe those AI agents have access to your calendar or other tools like Perplexity or Google.
+
+12:18.940 --> 12:21.720
+Google, your Gmail and different things like that.
+
+12:21.840 --> 12:22.860
+Those are your functions.
+
+12:23.080 --> 12:25.660
+So there's the input.
+
+12:26.100 --> 12:30.680
+There are all of the functions, the meat and potatoes, the executions of what's happening with your AI.
+
+12:31.040 --> 12:33.520
+And then there is the exit, the out points.
+
+12:34.360 --> 12:43.240
+Those are things like updating spreadsheets or putting files into your Dropbox or to Airtable or to ClickUp or to your HubSpot or different things like that.
+
+12:43.240 --> 12:49.780
+So that's a very rudimentary way to kind of go over input, function, output.
+
+12:50.240 --> 12:57.680
+And these are some of the nodes that you're going to start to see and maybe you've worked with and it in already and you're kind of familiar with a few of these things.
+
+12:57.680 --> 13:05.020
+But overall, this is what something as a workflow starts to look like.
+
+13:05.240 --> 13:07.320
+You are listening for and collecting data.
+
+13:07.500 --> 13:10.320
+So like an RSS feed to an Airtable.
+
+13:10.700 --> 13:18.680
+There is an RSS feed that you're either listening to, it filters out and executes a sub-workflow and then it inputs it over into Airtable.
+
+13:20.380 --> 13:23.600
+For Zoom meetings, this is what I used to use for Zapier.
+
+13:23.720 --> 13:24.580
+I use a little bit different.
+
+13:24.580 --> 13:33.160
+This is a very old board, but in Zapier, you would have something like ReadAI, format it with date and time and then other formats.
+
+13:33.260 --> 13:37.640
+And then you inject it into Airtable or HubSpot or Salesforce or whatever it is.
+
+13:39.740 --> 13:42.780
+Another one, something like this, like LinkedIn content analytics.
+
+13:43.160 --> 13:53.340
+You have a schedule, you create a task in ClickUp, you send a message in Slack to whoever it is, maybe a channel or a specific team member or an overall team.
+
+13:53.340 --> 13:54.700
+You wait.
+
+13:55.700 --> 13:56.420
+Human in a loop.
+
+13:56.880 --> 14:00.920
+So the response from whoever it is, maybe it's like the sales director.
+
+14:01.080 --> 14:03.940
+You're saying, hey, we've got this task.
+
+14:04.580 --> 14:06.140
+This person needs to be onboarded.
+
+14:06.540 --> 14:07.940
+Have they already been onboarded?
+
+14:08.000 --> 14:08.480
+Yes or no?
+
+14:08.800 --> 14:11.600
+This little wait allows them to give a response.
+
+14:11.700 --> 14:16.440
+If no, then it'll get tasked and then it'll split it out for whatever operations that need to happen.
+
+14:16.440 --> 14:20.360
+Put it in an Airtable and send message and contact fields.
+
+14:20.420 --> 14:24.100
+And this is where you start to see a little bit of how things can work for you.
+
+14:24.400 --> 14:27.100
+Say you have like 15 of these that have stacked up.
+
+14:27.260 --> 14:30.340
+This little part right here, when you see this, it'll go through the loop.
+
+14:30.340 --> 14:32.960
+So it'll send it in one by one.
+
+14:33.080 --> 14:33.500
+It'll wait.
+
+14:33.740 --> 14:39.720
+And then this, again, like maybe the sales director or sales manager has it and they've got to work through all 15.
+
+14:40.040 --> 14:43.660
+Every time they either approve it, yes or no, it'll go through this filtration system.
+
+14:44.120 --> 14:46.820
+If there's no operation, you know, they'll just do whatever there is.
+
+14:47.200 --> 14:52.340
+If there is, then it'll execute whatever it is based on the if command that's right here in this.
+
+14:52.340 --> 14:56.880
+And then send a message through to Slack.
+
+14:57.600 --> 15:00.220
+And then it'll go again for another answer, human in the loop.
+
+15:00.340 --> 15:06.000
+And then the cycle either continues with more questions or it will go and execute whatever it is.
+

@@ -1,0 +1,99 @@
+{
+  "_doc": "Anti-patterns the humanize pass must strip. Em dashes are ZERO TOLERANCE per Mike's standing rule. LLM tells are common ChatGPT/Claude phrases that immediately give the AI away.",
+  "_enforcement": {
+    "zero_tolerance_remove": ["em_dashes", "moreover", "delve", "in_today_fast_paced_world", "navigate_the_landscape", "unleash_potential", "harness_the_power", "in_conclusion", "in_summary", "as_an_ai", "as_a_language_model"],
+    "flag_for_rewrite": ["its_not_x_its_y", "decorative_triplets", "rhetorical_question_close", "numbered_lists_in_narrative"],
+    "soft_replace": ["leverage_as_verb", "utilize", "robust", "seamlessly", "synergy"]
+  },
+  "patterns": {
+    "em_dashes": {
+      "regex": "[—–]|&mdash;|&ndash;| -- ",
+      "replacement_rule": "Replace with period if at clause boundary; comma if mid-clause; colon if introducing a list. Choose by reading the sentence.",
+      "severity": "ZERO_TOLERANCE",
+      "memory_ref": "feedback_no_em_dashes"
+    },
+    "its_not_x_its_y": {
+      "regex": "(?i)\\bit'?s not (just )?(a|an|the)?\\s?\\w+,?\\s?it'?s (a|an|the)?\\s?\\w+",
+      "replacement_rule": "Mike doesn't write this. Rewrite as a single declarative statement instead.",
+      "severity": "FLAG",
+      "example_bad": "It's not a tool, it's a system.",
+      "example_good": "It's a system. Tool framing misses what it actually does."
+    },
+    "delve": {
+      "regex": "(?i)\\bdelve\\b|\\bdelving\\b",
+      "replacement_rule": "Replace with 'dig into', 'look at', 'unpack', or just cut.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "moreover": {
+      "regex": "(?i)\\bmoreover\\b",
+      "replacement_rule": "Cut. Start a new paragraph or use 'And' or 'Also'.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "in_today_fast_paced_world": {
+      "regex": "(?i)in (today'?s|this) (fast.?paced|modern|digital|rapidly evolving) (world|landscape|era|environment)",
+      "replacement_rule": "Cut entirely. This phrase is a tell.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "navigate_the_landscape": {
+      "regex": "(?i)navigate (the|this|today'?s) (landscape|terrain|complexity|environment)",
+      "replacement_rule": "Replace with concrete verb (e.g., 'figure out', 'get through', 'survive', 'work in').",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "unleash_potential": {
+      "regex": "(?i)unleash (the|your|its) (potential|power)",
+      "replacement_rule": "Cut. Mike doesn't 'unleash' anything.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "harness_the_power": {
+      "regex": "(?i)harness (the|its) (power|potential)",
+      "replacement_rule": "Replace with concrete verb (e.g., 'use', 'wire up', 'put to work').",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "in_conclusion": {
+      "regex": "(?i)\\bin conclusion\\b|\\bin summary\\b|\\bto summarize\\b|\\bto wrap up\\b",
+      "replacement_rule": "Cut. Mike's closes are verdict statements, not summaries.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "as_an_ai": {
+      "regex": "(?i)as an? (ai|large language model|assistant)",
+      "replacement_rule": "Cut entirely. This is a system tell.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "leverage_as_verb": {
+      "regex": "(?i)\\bleverage\\b(?! ratio| effect)",
+      "replacement_rule": "Replace with 'use', 'wire up', 'put to work', 'lean on'.",
+      "severity": "SOFT_REPLACE"
+    },
+    "utilize": {
+      "regex": "(?i)\\butili[sz]e[sd]?\\b",
+      "replacement_rule": "Replace with 'use'.",
+      "severity": "SOFT_REPLACE"
+    },
+    "robust": {
+      "regex": "(?i)\\brobust\\b",
+      "replacement_rule": "Replace with concrete claim. 'Robust system' means nothing. 'Survives a 3am API outage' means something.",
+      "severity": "SOFT_REPLACE"
+    },
+    "seamlessly": {
+      "regex": "(?i)\\bseamlessly\\b",
+      "replacement_rule": "Cut. If integration is truly seamless, prove it with detail. If not, don't claim it.",
+      "severity": "SOFT_REPLACE"
+    },
+    "synergy": {
+      "regex": "(?i)\\bsynerg(y|ies|istic)\\b",
+      "replacement_rule": "Cut. Always.",
+      "severity": "ZERO_TOLERANCE"
+    },
+    "decorative_triplet": {
+      "regex": "\\b\\w+,\\s+\\w+,?\\s+and\\s+\\w+\\b",
+      "replacement_rule": "Only flag if the three items are decorative/parallel (faster, better, stronger). Keep if they're concrete and load-bearing. Manual judgment.",
+      "severity": "FLAG"
+    },
+    "rhetorical_question_close": {
+      "regex": "\\?\\s*$",
+      "replacement_rule": "Mike's closes are verdict statements. Replace closing rhetorical question with a declarative line. Only at piece-end, not mid-piece.",
+      "severity": "FLAG",
+      "memory_ref": "feedback_linkedin_viral_mechanics"
+    }
+  }
+}

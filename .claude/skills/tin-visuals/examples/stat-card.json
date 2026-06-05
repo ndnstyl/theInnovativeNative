@@ -1,0 +1,12 @@
+{
+  "template_id": "TIN-StatCard-16x9",
+  "output_path": "/Users/makwa/theinnovativenative/content/unfuckYourData/visuals/example_stat-card.mov",
+  "props": {
+    "value": "64%",
+    "label": "of ad spend goes unattributed in multi-channel campaigns",
+    "footnote": "Source: TIN Data Audit, Q1 2025",
+    "transitionIn": "fade",
+    "transitionOut": "fade",
+    "durationFrames": 180
+  }
+}

@@ -26,7 +26,7 @@
 
 > "I'm going to ask you five questions. If you can't answer any of them in under sixty seconds, I want you to keep watching, because your Data is f*cked.
 >
-> Question one. What was your blended marketing efficiency ratio last month?
+> Question one. What was your blended marketing efficiency ratio last week?
 > Question two. What did one paying customer cost you last quarter, fully loaded?
 > Question three. Which of your channels has the best contribution margin? Not ROAS. Margin.
 > Question four. What's your CAC payback in months, broken out by acquisition source?
@@ -47,7 +47,7 @@
 
 > "Here's what I've watched happen a hundred times.
 >
-> A department gets a budget bump. They buy a new tool. That tool gets used by one person, generates a report, gets cited in a leadership meeting. Six months later, that tool is still being paid for. Nobody knows who owns it. The data inside it disagrees with two other reports. And the next budget cycle, somebody buys another tool to fix that tool the company is still paying for. That isn't a solution, that's pure chaos.
+> A department gets a budget bump. They buy a new tool. That tool gets used by one person, generates a report, gets cited in a leadership meeting. Six months later, that tool is still being paid for. Nobody knows who owns it. The data inside it disagrees with two other reports. And the next budget cycle, somebody buys another tool to fix that tool the company is still paying for that nobody uses. That isn't a solution, that's chaos and wasted spend.
 >
 > Most marketing stacks aren't designed. They're accumulated. Like IKEA furniture, built fast, with screws left over.
 >
@@ -335,7 +335,7 @@
 >
 > Four questions. One dashboard. Four numbers that mean what everyone agrees they mean. If your team can put that in the CFO's inbox before standup on Monday, you've done the work."
 
----
+---x`
 
 ## [27:30 — 28:30]  THE 30-DAY CHECKLIST
 

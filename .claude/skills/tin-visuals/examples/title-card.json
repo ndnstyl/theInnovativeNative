@@ -1,0 +1,12 @@
+{
+  "template_id": "TIN-TitleCard-16x9",
+  "output_path": "/Users/makwa/theinnovativenative/content/unfuckYourData/visuals/example_title-card.mov",
+  "props": {
+    "title": "Your Data Stack Is Lying to You",
+    "subtitle": "Five questions that expose broken attribution",
+    "eyebrow": "Chapter 1",
+    "transitionIn": "dip",
+    "transitionOut": "fade",
+    "durationFrames": 180
+  }
+}

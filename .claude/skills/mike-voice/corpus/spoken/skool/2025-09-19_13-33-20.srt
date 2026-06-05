@@ -1,0 +1,944 @@
+1
+00:00:00,000 --> 00:00:16,520
+All right, today we're going to go over brand documents.
+
+2
+00:00:16,940 --> 00:00:23,860
+This is going to be a collection of your brand tone, your style guide, your mood board, and
+
+3
+00:00:23,860 --> 00:00:24,740
+different things like that.
+
+4
+00:00:24,740 --> 00:00:31,740
+So if you're in the class, sorry, if you're in the community, just go to the classroom and
+
+5
+00:00:31,740 --> 00:00:34,980
+click on this very first one, Brand Vibe, How To.
+
+6
+00:00:35,820 --> 00:00:39,600
+I put this first just simply because this is going to be the guidance that you are going
+
+7
+00:00:39,600 --> 00:00:44,080
+to have for basically everything that you do with automation and AI.
+
+8
+00:00:44,800 --> 00:00:48,420
+So starting with the very first part, what are brand docs and why you need them.
+
+9
+00:00:49,100 --> 00:00:54,020
+I won't go through every single one of these, but I am going to walk you through essentially
+
+10
+00:00:54,020 --> 00:00:55,140
+how to set up your project.
+
+11
+00:00:55,420 --> 00:01:00,640
+I personally use and I advise to start off with ChatGPT.
+
+12
+00:01:01,140 --> 00:01:05,940
+If you're unfamiliar with a lot of the large language models, that is a really good place
+
+13
+00:01:05,940 --> 00:01:06,320
+to start.
+
+14
+00:01:07,420 --> 00:01:09,740
+Jumping over here, I can actually show you this.
+
+15
+00:01:09,860 --> 00:01:14,700
+This is actually the market share of how many users and the percentage of the market that
+
+16
+00:01:14,700 --> 00:01:16,280
+each LLM has.
+
+17
+00:01:16,280 --> 00:01:19,540
+So this is very recent as of September.
+
+18
+00:01:20,960 --> 00:01:24,700
+You can see 60.6 is ChatGPT, meaning they have the most users.
+
+19
+00:01:25,100 --> 00:01:28,460
+They also have the largest cash flow and equity.
+
+20
+00:01:28,680 --> 00:01:32,280
+Although, if you really take a look at their charts, they are underwater, but that's like
+
+21
+00:01:32,280 --> 00:01:34,020
+a whole nother conversation.
+
+22
+00:01:34,340 --> 00:01:38,920
+But second is Copilot through Microsoft and then Gemini, Perplexity, Claude.
+
+23
+00:01:38,920 --> 00:01:39,740
+You can take a look at here.
+
+24
+00:01:40,160 --> 00:01:42,580
+This is the URL, or you can even just do a quick search.
+
+25
+00:01:43,100 --> 00:01:48,580
+The only reason why I actually bring that up is simply because there are so many more searches
+
+26
+00:01:48,580 --> 00:01:50,240
+that happen on ChatGPT.
+
+27
+00:01:50,500 --> 00:01:55,300
+They have a lot more that they can actually retrain their models on.
+
+28
+00:01:55,820 --> 00:02:02,320
+Overall, every LLM has been basically trained on the entirety of human knowledge, and they pass
+
+29
+00:02:02,320 --> 00:02:06,520
+every single test with PhD-level statistics.
+
+30
+00:02:07,700 --> 00:02:11,320
+So overall, we're just going to jump right into it here.
+
+31
+00:02:11,420 --> 00:02:12,680
+These are the main pillars, though.
+
+32
+00:02:13,100 --> 00:02:17,400
+The number one reason is so that you actually have consistency across automated outputs.
+
+33
+00:02:18,720 --> 00:02:23,100
+If you take a look at any of my workflows, they're actually going to be over here in the
+
+34
+00:02:23,100 --> 00:02:23,480
+classroom.
+
+35
+00:02:23,660 --> 00:02:25,300
+You can actually go to the N&N templates.
+
+36
+00:02:25,920 --> 00:02:29,360
+Maybe you've watched one of my other videos, and I've actually shown you how they work.
+
+37
+00:02:29,360 --> 00:02:36,500
+But almost every single one of them, it centers around some sort of generative language, whether
+
+38
+00:02:36,500 --> 00:02:40,900
+it is a script, or a subject line, or an email, or a VSL ad.
+
+39
+00:02:41,420 --> 00:02:46,700
+When you actually create your brand document, you can upload how you think personally, your
+
+40
+00:02:46,700 --> 00:02:47,440
+tone of voice.
+
+41
+00:02:47,660 --> 00:02:50,020
+You can go over the type of language that you want to use.
+
+42
+00:02:50,420 --> 00:02:58,700
+Are you more of a marketing and salesperson, or are you more of an organic, using organic
+
+43
+00:02:58,700 --> 00:03:02,960
+tools to actually create your traffic and bring in your traffic?
+
+44
+00:03:03,920 --> 00:03:07,080
+You can actually put all of this into your brand documents.
+
+45
+00:03:07,240 --> 00:03:10,660
+I already have some tools that can help you with this, and we're going to be walking through
+
+46
+00:03:10,660 --> 00:03:10,920
+that.
+
+47
+00:03:11,180 --> 00:03:13,720
+The second is scaling human connection.
+
+48
+00:03:14,260 --> 00:03:21,280
+Despite what most people think and how robotic LLMs can actually spit out any sort of ad copy,
+
+49
+00:03:21,280 --> 00:03:24,960
+or email copy, or pretty much any copywriting at all.
+
+50
+00:03:25,440 --> 00:03:28,220
+The reason why that happens is because it has no direction.
+
+51
+00:03:28,540 --> 00:03:34,620
+And when you don't actually give it any sort of guidelines, or rules, or anything to adhere
+
+52
+00:03:34,620 --> 00:03:38,060
+to, it's just going to go based on its training.
+
+53
+00:03:38,300 --> 00:03:39,300
+And it's a robot.
+
+54
+00:03:39,420 --> 00:03:39,760
+It's AI.
+
+55
+00:03:40,020 --> 00:03:42,700
+So it's going to spit out very, very robotic answers.
+
+56
+00:03:42,700 --> 00:03:49,000
+It also has the tendency to speak circular, or it will be very dry and drab.
+
+57
+00:03:49,900 --> 00:03:52,820
+It'll reiterate sometimes the same points.
+
+58
+00:03:53,140 --> 00:03:58,100
+You can actually input multiple different prompts, and it sometimes has a tendency to
+
+59
+00:03:58,100 --> 00:04:03,200
+give you very similar and very un-unique, not distinctive answers.
+
+60
+00:04:03,740 --> 00:04:10,640
+So both of those things combined with the human element and human connection that you actually
+
+61
+00:04:10,640 --> 00:04:17,020
+bake into your document, you can tell it things like to sound less robotic, be more conversational,
+
+62
+00:04:17,640 --> 00:04:20,780
+don't worry about EM dashes or punctuation.
+
+63
+00:04:21,560 --> 00:04:27,680
+Heck, sometimes I even know people that purposely put, you know, make spelling errors here and
+
+64
+00:04:27,680 --> 00:04:27,820
+there.
+
+65
+00:04:27,900 --> 00:04:34,700
+It sounds weird, but that's how you use AI to actually keep and maintain the human connection
+
+66
+00:04:34,700 --> 00:04:36,840
+and the human scalability part of it.
+
+67
+00:04:37,820 --> 00:04:39,960
+And then alignment with your market positioning.
+
+68
+00:04:39,960 --> 00:04:41,980
+This is where you give it a lot of data.
+
+69
+00:04:42,120 --> 00:04:43,920
+You give it your FAQs.
+
+70
+00:04:44,000 --> 00:04:45,640
+You upload your website URL.
+
+71
+00:04:45,900 --> 00:04:51,520
+You upload your product information or your services so that it actually aligns with your
+
+72
+00:04:51,520 --> 00:04:51,860
+market.
+
+73
+00:04:52,120 --> 00:04:56,480
+And then you upload your avatars and it will stay in alignment with who you're speaking
+
+74
+00:04:56,480 --> 00:04:56,720
+to.
+
+75
+00:04:57,040 --> 00:05:00,040
+And it actually doesn't ever forget those things.
+
+76
+00:05:00,140 --> 00:05:03,420
+You put those in your project files and then you're all super good to go.
+
+77
+00:05:03,500 --> 00:05:08,080
+So once you start creating these materials, whether they're visual or written, it's going
+
+78
+00:05:08,080 --> 00:05:11,600
+to stay on brand and it's going to be on target for your market.
+
+79
+00:05:11,600 --> 00:05:16,520
+And then you can also use it for future proofing and for governance.
+
+80
+00:05:17,560 --> 00:05:24,400
+You know, a lot of lawyers use these things and they bake in liability issues or when they
+
+81
+00:05:24,400 --> 00:05:30,840
+put in the guardrails of what not to say along with what to say or HIPAA compliance.
+
+82
+00:05:30,840 --> 00:05:36,840
+Or if you have visual guidelines like WCAG 2.1 or whatever, and you want to base that into
+
+83
+00:05:36,840 --> 00:05:41,440
+whatever it is that you're designing, you can incorporate all of those into your brand
+
+84
+00:05:41,440 --> 00:05:41,980
+documents.
+
+85
+00:05:42,560 --> 00:05:48,400
+And once you actually upload that into ChatGPC and you create your project profile, then
+
+86
+00:05:48,400 --> 00:05:50,720
+it'll actually adhere to everything that you actually put in there.
+
+87
+00:05:51,700 --> 00:05:53,660
+So we're going to go ahead and jump in on the other side.
+
+88
+00:05:53,660 --> 00:06:00,080
+This is just a quick intro of kind of the overview of why you want to create your brand documents.
+
+89
+00:06:00,520 --> 00:06:04,640
+And it'll make a little bit more sense once we do get in there and I show you a couple
+
+90
+00:06:04,640 --> 00:06:05,040
+of things.
+
+91
+00:06:10,360 --> 00:06:13,900
+Now, the first part of it is creating your ChatGPT.
+
+92
+00:06:14,060 --> 00:06:18,560
+With your brand project and your brand documents, you do have to have the pro plan.
+
+93
+00:06:18,920 --> 00:06:22,820
+You can use ChatGPT for free and it'll give you a certain amount of searches.
+
+94
+00:06:22,820 --> 00:06:29,340
+But in order for you to create a custom project or other tools like, you know, uploading your
+
+95
+00:06:29,340 --> 00:06:33,180
+documents to that custom project or giving it instructions, different things like that,
+
+96
+00:06:33,460 --> 00:06:38,400
+if you don't have the paid plan, you're only going to be able to put instructions into that
+
+97
+00:06:38,400 --> 00:06:38,720
+chat.
+
+98
+00:06:38,940 --> 00:06:44,380
+And then if you've used ChatGPT or any other larger language model for that matter, once
+
+99
+00:06:44,380 --> 00:06:49,600
+you get to a certain amount of input and output, meaning tokens, you're going to run out
+
+100
+00:06:49,600 --> 00:06:49,880
+of room.
+
+101
+00:06:49,880 --> 00:06:52,420
+And then it's going to ask you to create a new chat.
+
+102
+00:06:52,520 --> 00:06:56,720
+And then once you create that new chat, it's going to forget everything that's in that old
+
+103
+00:06:56,720 --> 00:06:57,000
+chat.
+
+104
+00:06:57,140 --> 00:07:02,500
+And if you were to go back, copy and paste it into the new chat, then it's actually going
+
+105
+00:07:02,500 --> 00:07:05,180
+to take up a lot of your context tokens.
+
+106
+00:07:06,920 --> 00:07:10,800
+That is completely different than when you create a project, you upload your documents,
+
+107
+00:07:10,900 --> 00:07:15,520
+again, which will make a little bit more sense once I visually walk you through this here
+
+108
+00:07:15,520 --> 00:07:18,680
+so that you can see kind of the differences of that.
+
+109
+00:07:19,420 --> 00:07:23,840
+So I won't insult your guys's intelligence of trying to help you create an account.
+
+110
+00:07:24,000 --> 00:07:28,540
+But on this page, you can actually go to this website and there is a supporting article.
+
+111
+00:07:28,840 --> 00:07:29,760
+It's super simple.
+
+112
+00:07:29,920 --> 00:07:31,260
+You're going to sign up with your email address.
+
+113
+00:07:31,260 --> 00:07:32,540
+You're going to put in your billing information.
+
+114
+00:07:32,680 --> 00:07:33,600
+I'm not going to do all that.
+
+115
+00:07:33,600 --> 00:07:38,940
+But this is a walkthrough if you happen to get stuck on any of that.
+
+116
+00:07:39,900 --> 00:07:45,040
+And then overall, this will be your chat GPT project instructions.
+
+117
+00:07:45,180 --> 00:07:47,960
+And we'll get to that right on the other side of this.
+
+118
+00:07:47,960 --> 00:08:04,580
+So once you have put in your billing information, you actually create your project, yours is
+
+119
+00:08:04,580 --> 00:08:06,200
+actually going to look a little bit different than mine.
+
+120
+00:08:06,300 --> 00:08:10,660
+I already have different projects that I have for business and for personal and a whole bunch
+
+121
+00:08:10,660 --> 00:08:11,480
+of other things that I do.
+
+122
+00:08:11,800 --> 00:08:13,880
+So all of this stuff on the left side is going to be blank.
+
+123
+00:08:14,000 --> 00:08:15,540
+You're not really going to have anything in here.
+
+124
+00:08:15,540 --> 00:08:19,380
+It is going to be an absolute fresh start.
+
+125
+00:08:20,480 --> 00:08:25,120
+Now, in order for you to create your project, you just on the left side, there's going to
+
+126
+00:08:25,120 --> 00:08:27,100
+be this little folder icon you want to collect.
+
+127
+00:08:27,480 --> 00:08:28,400
+You want to click on that.
+
+128
+00:08:29,800 --> 00:08:34,700
+You name it whatever it is that you want to.
+
+129
+00:08:38,680 --> 00:08:41,340
+I'm just going to do a short walkthrough with you guys.
+
+130
+00:08:41,400 --> 00:08:44,680
+Even though I have all of this done, I just kind of want to show you how this is all going
+
+131
+00:08:44,680 --> 00:08:45,280
+to work out.
+
+132
+00:08:45,540 --> 00:08:48,540
+So you're going to create your new project.
+
+133
+00:08:48,740 --> 00:08:54,340
+We are in this test, build my tribe walkthrough, and it is going to be absolutely blank here.
+
+134
+00:08:55,140 --> 00:09:00,840
+Now, the very first thing that you want to do is you do want to copy all of this information
+
+135
+00:09:00,840 --> 00:09:01,180
+here.
+
+136
+00:09:01,480 --> 00:09:05,500
+You just highlight it all and scroll down.
+
+137
+00:09:05,800 --> 00:09:07,040
+It is a lot of information.
+
+138
+00:09:07,260 --> 00:09:10,260
+We'll go over all of this once I actually do get it in here.
+
+139
+00:09:10,260 --> 00:09:40,260
+
+
+140
+00:09:40,260 --> 00:09:42,340
+I'm only going to stick to ChatGPT.
+
+141
+00:09:43,060 --> 00:09:49,480
+With this, this will tell you your ChatGPT how to stay brand aligned.
+
+142
+00:09:49,940 --> 00:09:51,220
+You're going to give it a role.
+
+143
+00:09:51,620 --> 00:09:55,700
+In the role, this is what I actually put.
+
+144
+00:09:55,700 --> 00:09:56,780
+You are not a freelancer.
+
+145
+00:09:57,040 --> 00:09:58,820
+You're not helping a brand.
+
+146
+00:09:59,380 --> 00:10:00,420
+You are the brand.
+
+147
+00:10:00,500 --> 00:10:05,580
+Your job is to study the files, absorb the tone, and then create context that feels like
+
+148
+00:10:05,580 --> 00:10:08,800
+it's written, designed, or spoken from the inside of the brand's head.
+
+149
+00:10:08,880 --> 00:10:09,460
+No shortcuts.
+
+150
+00:10:09,660 --> 00:10:10,480
+No generic filters.
+
+151
+00:10:10,480 --> 00:10:11,760
+No AI voice.
+
+152
+00:10:12,060 --> 00:10:12,800
+All of this stuff.
+
+153
+00:10:12,920 --> 00:10:15,640
+Now, this is something that you want to personalize for you.
+
+154
+00:10:15,780 --> 00:10:19,100
+This is what I've created for myself, and I've told it how to think.
+
+155
+00:10:19,220 --> 00:10:23,940
+And I've gone, I've actually copied a whole bunch of different prompts that I've tried
+
+156
+00:10:23,940 --> 00:10:24,180
+to do.
+
+157
+00:10:24,300 --> 00:10:28,760
+I've also used ChatGPT to help me actually create this.
+
+158
+00:10:28,800 --> 00:10:29,580
+So you can iterate it.
+
+159
+00:10:29,660 --> 00:10:31,180
+You can come up with a couple of things.
+
+160
+00:10:31,660 --> 00:10:34,100
+Tell ChatGPT, say, hey, this is what I have.
+
+161
+00:10:34,160 --> 00:10:35,480
+Can you help me think of edge cases?
+
+162
+00:10:35,480 --> 00:10:41,740
+Can you tell me what my avatars are or explain them so that it understands these things?
+
+163
+00:10:41,800 --> 00:10:42,540
+So you can go through.
+
+164
+00:10:42,660 --> 00:10:45,060
+I have this template in here so that you have something to refer to.
+
+165
+00:10:46,020 --> 00:10:49,260
+Overall, every single one of yours is going to be wildly different.
+
+166
+00:10:49,420 --> 00:10:50,720
+Some of you are more conversational.
+
+167
+00:10:50,900 --> 00:10:54,460
+Some are your introverts trying to be extroverted.
+
+168
+00:10:54,600 --> 00:10:56,600
+Sometimes you are trying to tone it down a little bit.
+
+169
+00:10:57,300 --> 00:11:00,760
+Sometimes you want to have a little bit more of a professional brand vibe.
+
+170
+00:11:00,960 --> 00:11:05,460
+Whatever it is, this is where you want to give the instructions of how to use it.
+
+171
+00:11:05,480 --> 00:11:08,320
+So this is the very first part.
+
+172
+00:11:08,420 --> 00:11:09,280
+You copy that in there.
+
+173
+00:11:09,400 --> 00:11:10,020
+You paste it.
+
+174
+00:11:10,320 --> 00:11:15,360
+I wouldn't suggest that you just straight up copy pasta because this is going to end up
+
+175
+00:11:15,360 --> 00:11:16,440
+being my thing.
+
+176
+00:11:17,280 --> 00:11:22,940
+So now, that being said, we'll go back here just so that we are still on the same thing.
+
+177
+00:11:23,020 --> 00:11:25,580
+But that's the very first thing that you do is you walk through this.
+
+178
+00:11:25,660 --> 00:11:28,860
+You create your new project, and then we're going to start to upload the files.
+
+179
+00:11:28,940 --> 00:11:30,960
+The very first thing that we did were those instructions.
+
+180
+00:11:31,740 --> 00:11:35,860
+Now, on the next, we're going to jump into your brand vibe builder.
+
+181
+00:11:36,040 --> 00:11:39,800
+And I've built a tool that is going to help you guys do exactly this.
+
+182
+00:11:40,400 --> 00:11:42,600
+So I'll be right back at you in just a few seconds.
+
+183
+00:11:42,600 --> 00:11:54,880
+Now, this is the brand vibe builder.
+
+184
+00:11:55,060 --> 00:11:57,360
+So at the very top of it, you're going to see this link.
+
+185
+00:11:57,440 --> 00:12:02,660
+This link is actually going to take you directly to my brand vibe builder.
+
+186
+00:12:03,360 --> 00:12:06,200
+And what I've done is I've actually made it very easy.
+
+187
+00:12:06,600 --> 00:12:10,420
+So I've helped hundreds of clients build personalized brand vibe documents with the strategy and creative
+
+188
+00:12:10,420 --> 00:12:13,740
+flair. If you want to dive deeper, you can join my school community.
+
+189
+00:12:13,860 --> 00:12:18,680
+That's just the invitation that I actually have if they want to find my school community.
+
+190
+00:12:18,820 --> 00:12:19,880
+But you can use this tool.
+
+191
+00:12:20,020 --> 00:12:24,160
+Everybody that is in this group, you are going to have access to the classroom as well as
+
+192
+00:12:24,160 --> 00:12:26,960
+this document that links to this.
+
+193
+00:12:26,960 --> 00:12:33,660
+So when you click one of these, this one, when I, when you click this, help me define my brand's
+
+194
+00:12:33,660 --> 00:12:34,140
+personality.
+
+195
+00:12:35,020 --> 00:12:37,420
+These are the things that you're going to start to answer.
+
+196
+00:12:37,520 --> 00:12:38,560
+It's going to be a lot.
+
+197
+00:12:38,560 --> 00:12:43,520
+And I'm telling you, if you take your time doing this and you reiterate and you go line
+
+198
+00:12:43,520 --> 00:12:46,080
+by line, yes, it's a lot at first.
+
+199
+00:12:46,180 --> 00:12:50,840
+But if you do all of this up front, you're really, you're literally never going to have
+
+200
+00:12:50,840 --> 00:12:51,320
+to do it again.
+
+201
+00:12:51,320 --> 00:12:56,140
+You might come back if you have either a new product or a new service, or you maybe want
+
+202
+00:12:56,140 --> 00:13:00,260
+to shift alignment with where your brand and your brand direction is going.
+
+203
+00:13:00,560 --> 00:13:05,560
+But overall, once you have these documents, then you are absolutely good to go.
+
+204
+00:13:06,380 --> 00:13:10,000
+So we won't walk through every single one of these.
+
+205
+00:13:10,240 --> 00:13:12,620
+I'm going to jump back over to have it here.
+
+206
+00:13:12,660 --> 00:13:16,080
+I just wanted to show you the link that would come here.
+
+207
+00:13:16,540 --> 00:13:19,160
+So once you click this, we'll actually just do it.
+
+208
+00:13:19,160 --> 00:13:21,620
+It'll pop up a whole brand new chat.
+
+209
+00:13:21,920 --> 00:13:24,180
+If you're not signed in, it's going to tell you to sign in.
+
+210
+00:13:24,220 --> 00:13:26,640
+But if you have your account, then you're absolutely fine.
+
+211
+00:13:27,620 --> 00:13:31,640
+Now, overall, this is what I have come up with for mine.
+
+212
+00:13:33,680 --> 00:13:35,400
+So this is my brand essence.
+
+213
+00:13:35,540 --> 00:13:37,780
+This is going to tell you everything about me.
+
+214
+00:13:38,000 --> 00:13:42,220
+And the more you watch my videos or the more you consume my content, you can tell this is
+
+215
+00:13:42,220 --> 00:13:46,140
+essentially all of this copy is how I speak.
+
+216
+00:13:46,260 --> 00:13:47,220
+These are my values.
+
+217
+00:13:47,300 --> 00:13:48,260
+These are my ideals.
+
+218
+00:13:48,260 --> 00:13:50,980
+These are my client avatars.
+
+219
+00:13:51,100 --> 00:13:54,660
+We're going to walk through a lot of the workflows that I've had, or maybe you've already consumed
+
+220
+00:13:54,660 --> 00:13:56,740
+content that I've put out there and other videos.
+
+221
+00:13:57,360 --> 00:14:00,020
+But overall, these are my avatars.
+
+222
+00:14:00,140 --> 00:14:01,500
+This is my founder story.
+
+223
+00:14:02,260 --> 00:14:05,460
+This is the immersive brand feeling across all touch points.
+
+224
+00:14:05,640 --> 00:14:08,600
+This is my overall vibe strategy summary.
+
+225
+00:14:08,980 --> 00:14:10,960
+And this is my voice, my tone, my rhythm.
+
+226
+00:14:11,460 --> 00:14:12,540
+You guys can take a look at this.
+
+227
+00:14:12,700 --> 00:14:15,120
+Again, this is in the school community for you guys to reference.
+
+228
+00:14:15,120 --> 00:14:19,700
+I would not just copy and paste this, although I have seen people do that.
+
+229
+00:14:20,340 --> 00:14:26,260
+You want to make it your own because every single piece of literature, your copy, your ads, your titles,
+
+230
+00:14:26,260 --> 00:14:36,060
+this is what is going to be the instructions that your chat GPT follows and then this document.
+
+231
+00:14:36,600 --> 00:14:42,480
+So once you actually create this, you're going to be in here in chat GPT.
+
+232
+00:14:42,480 --> 00:14:52,180
+So just for kind of the sake of watching me do this so that you have the understanding of this.
+
+233
+00:14:52,560 --> 00:14:56,840
+Once you do all of this, it's going to spit an answer out like that.
+
+234
+00:14:56,960 --> 00:14:58,620
+I already have it pasted in there.
+
+235
+00:14:59,220 --> 00:15:02,060
+You just want to go to maybe Google Docs or something.
+
+236
+00:15:02,060 --> 00:15:32,040
+You just want to make it pasted in there.
+

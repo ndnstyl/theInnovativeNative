@@ -1,0 +1,1068 @@
+1
+00:00:00,000 --> 00:00:16,920
+check check check microphone check check
+
+2
+00:00:30,000 --> 00:00:41,900
+all right so as you guys can see on the screen this is a somewhat complicated workflow
+
+3
+00:00:41,900 --> 00:00:47,140
+although most of it is just labeling and unlabeling i'm going to go through
+
+4
+00:00:47,140 --> 00:00:54,000
+node by node and just kind of see how n8n works for some of these this might be the very first
+
+5
+00:00:54,000 --> 00:01:00,680
+time you've seen an orchestration layer like n8n so what i'm going to do is just give you a very
+
+6
+00:01:00,680 --> 00:01:10,040
+quick overview of what n8n is it is a node-based orchestration system so what these nodes are
+
+7
+00:01:10,040 --> 00:01:15,620
+there are hundreds of nodes there are even custom community nodes but without getting into the weeds
+
+8
+00:01:15,620 --> 00:01:22,300
+essentially you will have a trigger like in this case it is going to be a gmail trigger
+
+9
+00:01:22,300 --> 00:01:30,520
+and then you are going to have some sort of process um all the craze now is our ai agents so you can
+
+10
+00:01:30,520 --> 00:01:36,640
+have an ai agent that orchestrates a lot of things it remembers your chats it will go and pull information
+
+11
+00:01:36,640 --> 00:01:44,020
+from a database it will send out their output to different things like email or slack or post on
+
+12
+00:01:44,020 --> 00:01:51,600
+social media uh different things like that so um n8n is kind of the brains and the power behind
+
+13
+00:01:51,600 --> 00:01:57,340
+connecting all of these types of apps as you can see as this scrolls here and there are more apps
+
+14
+00:01:57,340 --> 00:02:03,480
+being added pretty much on a weekly or monthly basis especially with the advent of ai and all of these
+
+15
+00:02:03,480 --> 00:02:10,000
+companies um knowingly uh needing to integrate because there are so many people that are starting to
+
+16
+00:02:10,000 --> 00:02:19,220
+uh adopt ai so just a quick google trends we could even take a look at
+
+17
+00:02:19,220 --> 00:02:28,240
+n8n so we will take a look at what it looks like over the long period here
+
+18
+00:02:28,240 --> 00:02:40,860
+so as you can see it well it's been n8n has been around for quite some time as you can see n8n has
+
+19
+00:02:40,860 --> 00:02:47,940
+been around for quite some time all the way back uh you know in 2021 2022 2022 but this year and last
+
+20
+00:02:47,940 --> 00:02:55,280
+year it is just skyrocketed as you can see so um enough about that and that's just kind of a quick
+
+21
+00:02:55,280 --> 00:03:02,200
+introduction about n8n um it's one of the systems that you if you happen to know code and you implement
+
+22
+00:03:02,200 --> 00:03:07,820
+code in there then you're miles ahead but you don't need to know code at all if you can think
+
+23
+00:03:07,820 --> 00:03:13,460
+logically and you can actually map out your workflows uh you can get all of this done so uh again i'm
+
+24
+00:03:13,460 --> 00:03:20,500
+going to walk through this node by node here this one is a gmail trigger this is connected to my gmail
+
+25
+00:03:20,500 --> 00:03:26,340
+inbox uh i'll have a separate video of setting up your credentials here but this top part is um
+
+26
+00:03:26,340 --> 00:03:33,460
+credential to connect with and once you go in here and try to create your credentials for gmail itself
+
+27
+00:03:33,460 --> 00:03:37,600
+you're going to need your client id and your client secret you're going to get that through the google
+
+28
+00:03:37,600 --> 00:03:42,880
+cloud console but for the sake of brevity we're just going to skip that part and i will link a
+
+29
+00:03:42,880 --> 00:03:51,200
+different video so that you can actually do that so what that does is is it grabs a we'll just grab
+
+30
+00:03:51,200 --> 00:03:57,880
+it here we'll grab a test event this is one of the last emails that i got um into my inbox don't even
+
+31
+00:03:57,880 --> 00:04:04,780
+know what it is here so let's just take a quick look together so this is the snippet so when i executed
+
+32
+00:04:04,780 --> 00:04:10,980
+this it went out to gmail and it pulls back this information and this information will be able to be
+
+33
+00:04:10,980 --> 00:04:19,400
+passed through to here so to explain this on the left side over here this is the input for um uh from
+
+34
+00:04:19,400 --> 00:04:24,480
+or for whatever it is that you're using it could be an excel sheet it could be a database call it could
+
+35
+00:04:24,480 --> 00:04:32,100
+be a chat form it could be a chat bot it could be absolutely anything so this left side is the input
+
+36
+00:04:32,100 --> 00:04:40,340
+the middle here is what this node is telling it to do that is kind of the execution of what's going on
+
+37
+00:04:40,340 --> 00:04:46,140
+and then the right side it will be an output and in this case this is a text classifier i'll go back out of here
+
+38
+00:04:46,140 --> 00:04:54,420
+so what this does is using this node it'll have information to go into this node and then it'll synthesize this
+
+39
+00:04:54,420 --> 00:05:00,340
+information and then it'll execute and give an output so in this case it's going to take a snippet it's going to
+
+40
+00:05:00,340 --> 00:05:07,460
+take uh the to and the from and the subject and it's going to use uh in this case gemini
+
+41
+00:05:07,460 --> 00:05:14,740
+as the brains behind it it takes all the information it thinks about it and then it actually gives it the
+
+42
+00:05:14,740 --> 00:05:22,760
+category in this case it actually found social so we'll go to this next node here social is what it was
+
+43
+00:05:22,760 --> 00:05:30,000
+labeled so in your inbox another thing that you should have set up and i'll just show you for the sake of
+
+44
+00:05:30,000 --> 00:05:36,440
+you having a visual these already need to be built um again this is just kind of showing you the whole
+
+45
+00:05:36,440 --> 00:05:41,540
+overview of everything i'm going to break everything down of what is needed what are dependencies but
+
+46
+00:05:41,540 --> 00:05:47,380
+you want these labels that are already showing up in here so that when you go into this node
+
+47
+00:05:47,380 --> 00:05:52,740
+or you have an execution that it's actually going to create this label of school slash social
+
+48
+00:05:52,740 --> 00:05:59,040
+that's what it executes so the input from this one now has changed it takes the synthesis from the
+
+49
+00:05:59,040 --> 00:06:06,320
+previous node which was the text classifier and gemini and then we're telling it here to update
+
+50
+00:06:06,320 --> 00:06:11,620
+the label and in my case it's going to be school slash social when you set this up for your identifiers
+
+51
+00:06:11,620 --> 00:06:16,620
+your text classifiers this is all going to be custom to you your personal preferences your if you're if
+
+52
+00:06:16,620 --> 00:06:20,720
+you're doing this for uh for your own personal reasons and you are just trying to organize your
+
+53
+00:06:20,720 --> 00:06:24,940
+personal email box that's going to be different than having a business email box uh everybody's going to
+
+54
+00:06:24,940 --> 00:06:30,300
+have different kind of categories and you're going to have um different definitions as to what routes
+
+55
+00:06:30,300 --> 00:06:38,900
+to where so in this case uh it comes in here and i'm telling it to execute this time and this will add
+
+56
+00:06:38,900 --> 00:06:45,780
+that label and it will send this information over to this node um this template is downloadable you can
+
+57
+00:06:45,780 --> 00:06:51,280
+actually grab it in the school community and in the template you will have um all of these kind of
+
+58
+00:06:51,280 --> 00:06:56,720
+like broken down so what i would suggest is download the template just so that you get the idea of it
+
+59
+00:06:56,720 --> 00:07:03,080
+that you can kind of walk through and then from there i'll also have another video of of building this
+
+60
+00:07:03,080 --> 00:07:09,280
+node by node but that being said in this template it'll tell you why each one of these sections are
+
+61
+00:07:09,280 --> 00:07:16,680
+different um this one the top one it just labels it marks it as red and then it de-labels this one that
+
+62
+00:07:16,680 --> 00:07:23,360
+we're in for social it's going to label it and then send it over here to an actual summarizer
+
+63
+00:07:23,360 --> 00:07:30,460
+this is where you start to see the power of ai orchestration and workflows because you can actually
+
+64
+00:07:30,460 --> 00:07:38,700
+connect a llm or you know things like chat gpt anthropic um deep seek olama and in my cases i use
+
+65
+00:07:38,700 --> 00:07:45,340
+gemini here and it's going to synthesize the information from your not only your email inbox but the text
+
+66
+00:07:45,340 --> 00:07:53,640
+classifier and then it can actually start to do things like uh create another draft to where it's
+
+67
+00:07:53,640 --> 00:08:00,200
+going to execute this and it will go into my excel sheet so sometimes you're going to get promotional
+
+68
+00:08:00,200 --> 00:08:05,340
+things from social in this case we're just going to specifically talk about social um so in social
+
+69
+00:08:05,340 --> 00:08:10,320
+i'll get dm sometimes sometimes i'll get email notifications from slack sometimes i'll get
+
+70
+00:08:10,320 --> 00:08:16,920
+um like a new video upload from uh youtube or whatever so this is where it starts to become
+
+71
+00:08:16,920 --> 00:08:21,460
+powerful to where you'll start to get the signal to noise you're going to take a look at your inbox
+
+72
+00:08:21,460 --> 00:08:28,100
+and make your own rules and in my case i like to have that message synthesized down to like one or two
+
+73
+00:08:28,100 --> 00:08:35,620
+lines so i use the gemini model to do that and then i output it and this could be anywhere uh in this
+
+74
+00:08:35,620 --> 00:08:41,320
+case it's going to be google sheets so i'm going to get a summary of this and it's going to be put
+
+75
+00:08:41,320 --> 00:08:48,280
+into google sheets and then it's actually going to be uh emailed over to me so then what it does is
+
+76
+00:08:48,280 --> 00:08:57,580
+it goes down this route here and it delabels it so i have this whole entire route for social media
+
+77
+00:08:57,580 --> 00:09:05,460
+in and of itself then i have other ones that as you can see here are marketing personal opportunities
+
+78
+00:09:05,460 --> 00:09:14,440
+hiring receipts and other stuff um so just to give you uh another quick run through i'm going to do
+
+79
+00:09:14,440 --> 00:09:19,440
+one for opportunities and then i'll just kind of end it there because that will take you through
+
+80
+00:09:19,440 --> 00:09:25,780
+labeling delabeling um summarizing an email and the next one's going to be creating a draft this is also
+
+81
+00:09:25,780 --> 00:09:32,660
+another uh tool and use of a technique that will very much start to clean up your email inbox but
+
+82
+00:09:32,660 --> 00:09:38,940
+even more importantly uh it will start to do things like make sure you don't miss invoices you don't
+
+83
+00:09:38,940 --> 00:09:46,200
+miss contracts you don't make mistakes of missing emails that are uh revenue generation so i'm just
+
+84
+00:09:46,200 --> 00:09:47,540
+going to do a test email here
+
+85
+00:09:47,540 --> 00:10:11,160
+so this is also going to be based on your rules so when i go back over here to n8n
+
+86
+00:10:11,160 --> 00:10:17,740
+this one i'm going to trigger hopefully it has come through let me see if it's come through
+
+87
+00:10:17,740 --> 00:10:28,680
+so all right let's come through so now i can fetch it and it will be that question that i just sent
+
+88
+00:10:28,680 --> 00:10:34,500
+through um can you resend the proposal doc now the text classification that i have for it as you can read
+
+89
+00:10:34,500 --> 00:10:40,580
+and this and the more effort you put into your category and the description of it and then that
+
+90
+00:10:40,580 --> 00:10:51,300
+will hand off to your um your ai chatbot sorry your ai thinking portion of your system i just put in a
+
+91
+00:10:51,300 --> 00:10:55,960
+really simple one just for this test but uh anything driving revenue or clients sending over documents
+
+92
+00:10:55,960 --> 00:11:03,980
+sales proposals contracts cash flow etc so when i execute this step you see right here gemini is
+
+93
+00:11:03,980 --> 00:11:10,860
+thinking and it classifies it and then it's going to shoot it as an opportunity then it's going to
+
+94
+00:11:10,860 --> 00:11:18,160
+take this opportunity and again read what is in here so the first part is just categorizing it and
+
+95
+00:11:18,160 --> 00:11:23,920
+putting it into the proper workflow that it needs to go to now this part is going to be again where we
+
+96
+00:11:23,920 --> 00:11:31,000
+have i have a rev ops message here this is the user prompt this is the system prompt and again once we go
+
+97
+00:11:31,000 --> 00:11:37,340
+over the creation of all of it i will show you uh in uh step by step and in greater detail how to do
+
+98
+00:11:37,340 --> 00:11:43,380
+this but just as a a walk through i just want to keep this really really short and sweet it's going to
+
+99
+00:11:43,380 --> 00:11:49,960
+take this email it's going to come down here and route it to um opportunities for rev ops it's going to
+
+100
+00:11:49,960 --> 00:11:58,180
+take the subject line the body and i have these rules based on what that information is going to be
+
+101
+00:11:58,180 --> 00:12:02,300
+passed through of how it's going to treat it in this case it's actually going to create a draft
+
+102
+00:12:02,300 --> 00:12:07,780
+so i'm going to execute this that's going to do a little bit of thinking here and then it's going
+
+103
+00:12:07,780 --> 00:12:14,180
+to pass it over to gmail and this gmail node is where it is actually going to create the draft
+
+104
+00:12:14,180 --> 00:12:21,900
+um so once it's actually done uh we'll go back to the email my email inbox and we'll start will she
+
+105
+00:12:21,900 --> 00:12:27,060
+see the draft that's actually created for this particular workflow so just give it a second
+
+106
+00:12:27,060 --> 00:12:28,900
+okay
+
+107
+00:12:28,900 --> 00:12:53,460
+okay see this is the output from the last one it says okay i have attached a proposal for your review
+
+108
+00:12:53,460 --> 00:12:59,660
+and this is where the human in a loop part comes so if i go back in here and i go to my drafts
+
+109
+00:12:59,660 --> 00:13:03,460
+and i go here this is actually written up
+
+110
+00:13:03,460 --> 00:13:10,640
+okay let's see i'll make this correction
+
+111
+00:13:10,640 --> 00:13:17,640
+okay
+
+112
+00:13:17,640 --> 00:13:17,640
+
+
+113
+00:13:17,640 --> 00:13:17,640
+
+
+114
+00:13:17,640 --> 00:13:17,640
+
+
+115
+00:13:17,640 --> 00:13:17,640
+
+
+116
+00:13:17,640 --> 00:13:17,640
+
+
+117
+00:13:17,640 --> 00:13:17,640
+
+
+118
+00:13:17,640 --> 00:13:17,640
+
+
+119
+00:13:17,640 --> 00:13:17,640
+
+
+120
+00:13:17,640 --> 00:13:17,640
+
+
+121
+00:13:17,640 --> 00:13:17,640
+
+
+122
+00:13:17,640 --> 00:13:17,640
+
+
+123
+00:13:17,640 --> 00:13:17,640
+
+
+124
+00:13:17,640 --> 00:13:17,640
+
+
+125
+00:13:17,640 --> 00:13:17,640
+
+
+126
+00:13:17,640 --> 00:13:17,640
+
+
+127
+00:13:17,640 --> 00:13:17,640
+
+
+128
+00:13:17,640 --> 00:13:17,640
+
+
+129
+00:13:17,640 --> 00:13:17,640
+
+
+130
+00:13:17,640 --> 00:13:17,640
+
+
+131
+00:13:17,640 --> 00:13:17,640
+
+
+132
+00:13:17,640 --> 00:13:17,640
+
+
+133
+00:13:17,640 --> 00:13:17,640
+
+
+134
+00:13:17,640 --> 00:13:17,640
+
+
+135
+00:13:17,640 --> 00:13:17,640
+
+
+136
+00:13:17,640 --> 00:13:17,640
+
+
+137
+00:13:17,640 --> 00:13:17,640
+
+
+138
+00:13:17,640 --> 00:13:17,640
+
+
+139
+00:13:17,640 --> 00:13:17,640
+
+
+140
+00:13:17,640 --> 00:13:17,640
+
+
+141
+00:13:17,640 --> 00:13:17,640
+
+
+142
+00:13:17,640 --> 00:13:17,640
+
+
+143
+00:13:17,640 --> 00:13:17,640
+
+
+144
+00:13:17,640 --> 00:13:17,640
+
+
+145
+00:13:17,640 --> 00:13:17,640
+
+
+146
+00:13:17,640 --> 00:13:17,640
+
+
+147
+00:13:17,640 --> 00:13:17,640
+
+
+148
+00:13:17,640 --> 00:13:17,640
+
+
+149
+00:13:17,640 --> 00:13:17,640
+
+
+150
+00:13:17,640 --> 00:13:17,640
+
+
+151
+00:13:17,640 --> 00:13:17,640
+
+
+152
+00:13:17,640 --> 00:13:17,640
+
+
+153
+00:13:17,640 --> 00:13:17,640
+
+
+154
+00:13:17,640 --> 00:13:17,640
+
+
+155
+00:13:17,640 --> 00:13:17,640
+
+
+156
+00:13:17,640 --> 00:13:17,640
+
+
+157
+00:13:17,640 --> 00:13:17,640
+
+
+158
+00:13:17,640 --> 00:13:17,640
+
+
+159
+00:13:17,640 --> 00:13:17,640
+
+
+160
+00:13:17,640 --> 00:13:17,640
+
+
+161
+00:13:17,640 --> 00:13:17,640
+
+
+162
+00:13:17,640 --> 00:13:17,640
+
+
+163
+00:13:17,640 --> 00:13:17,640
+
+
+164
+00:13:17,640 --> 00:13:17,640
+
+
+165
+00:13:17,640 --> 00:13:17,640
+
+
+166
+00:13:17,640 --> 00:13:17,640
+
+
+167
+00:13:17,640 --> 00:13:17,640
+
+
+168
+00:13:17,640 --> 00:13:17,640
+
+
+169
+00:13:17,640 --> 00:13:17,640
+
+
+170
+00:13:17,640 --> 00:13:17,640
+
+
+171
+00:13:17,640 --> 00:13:17,640
+
+
+172
+00:13:17,640 --> 00:13:17,640
+
+
+173
+00:13:17,640 --> 00:13:17,640
+
+
+174
+00:13:17,640 --> 00:13:17,640
+
+
+175
+00:13:17,640 --> 00:13:17,640
+
+
+176
+00:13:17,640 --> 00:13:17,640
+
+
+177
+00:13:17,640 --> 00:13:17,640
+
+
+178
+00:13:17,640 --> 00:13:17,640
+
+
+179
+00:13:17,640 --> 00:13:17,640
+
+
+180
+00:13:17,640 --> 00:13:17,640
+
+
+181
+00:13:17,640 --> 00:13:17,640
+
+
+182
+00:13:17,640 --> 00:13:17,640
+
+
+183
+00:13:17,640 --> 00:13:17,640
+
+
+184
+00:13:17,640 --> 00:13:17,640
+
+
+185
+00:13:40,640 --> 00:13:47,640
+okay
+
+186
+00:13:47,640 --> 00:13:47,640
+
+
+187
+00:13:47,640 --> 00:13:47,640
+
+
+188
+00:13:47,640 --> 00:13:47,640
+
+
+189
+00:13:47,640 --> 00:13:47,640
+
+
+190
+00:13:47,640 --> 00:13:47,640
+
+
+191
+00:13:47,640 --> 00:13:47,640
+
+
+192
+00:13:47,640 --> 00:13:47,640
+
+
+193
+00:13:47,640 --> 00:13:47,640
+
+
+194
+00:13:47,640 --> 00:13:47,640
+
+
+195
+00:13:47,640 --> 00:13:47,640
+
+
+196
+00:13:47,640 --> 00:13:47,640
+
+
+197
+00:13:47,640 --> 00:13:47,640
+
+
+198
+00:13:47,640 --> 00:13:47,640
+
+
+199
+00:13:47,640 --> 00:13:47,640
+
+
+200
+00:13:47,640 --> 00:13:47,640
+
+
+201
+00:13:47,640 --> 00:13:47,640
+
+
+202
+00:13:47,640 --> 00:13:47,640
+
+
+203
+00:13:47,640 --> 00:13:47,640
+
+
+204
+00:13:47,640 --> 00:13:47,640
+
+
+205
+00:13:47,640 --> 00:13:47,640
+
+
+206
+00:13:47,640 --> 00:13:47,640
+
+
+207
+00:13:47,640 --> 00:13:47,640
+
+
+208
+00:13:47,640 --> 00:13:47,640
+
+
+209
+00:13:47,640 --> 00:13:47,640
+
+
+210
+00:13:47,640 --> 00:13:47,640
+
+
+211
+00:13:47,640 --> 00:13:47,640
+
+
+212
+00:13:47,640 --> 00:13:47,640
+
+
+213
+00:13:47,640 --> 00:13:47,640
+
+
+214
+00:13:47,640 --> 00:13:47,640
+
+
+215
+00:13:47,640 --> 00:13:47,640
+
+
+216
+00:13:47,640 --> 00:13:47,640
+
+
+217
+00:13:47,640 --> 00:13:47,640
+
+
+218
+00:13:47,640 --> 00:13:47,640
+
+
+219
+00:13:47,640 --> 00:13:47,640
+
+
+220
+00:13:47,640 --> 00:13:47,640
+
+
+221
+00:13:47,640 --> 00:13:47,640
+
+
+222
+00:13:47,640 --> 00:13:47,640
+
+
+223
+00:13:47,640 --> 00:13:47,640
+
+
+224
+00:13:47,640 --> 00:13:47,640
+
+
+225
+00:13:47,640 --> 00:13:47,640
+
+
+226
+00:13:47,640 --> 00:13:47,640
+
+
+227
+00:13:47,640 --> 00:13:47,640
+
+
+228
+00:13:47,640 --> 00:13:47,640
+
+
+229
+00:13:47,640 --> 00:13:47,640
+
+
+230
+00:13:47,640 --> 00:13:47,640
+
+
+231
+00:13:47,640 --> 00:13:47,640
+
+
+232
+00:13:47,640 --> 00:13:47,640
+
+
+233
+00:13:47,640 --> 00:13:47,640
+
+
+234
+00:13:47,640 --> 00:13:47,640
+
+
+235
+00:13:47,640 --> 00:13:47,640
+
+
+236
+00:13:47,640 --> 00:13:47,640
+
+
+237
+00:13:47,640 --> 00:13:49,640
+okay
+
+238
+00:13:49,640 --> 00:13:49,640
+
+
+239
+00:13:49,640 --> 00:13:49,640
+
+
+240
+00:13:49,640 --> 00:13:51,640
+okay
+
+241
+00:13:51,640 --> 00:13:51,640
+
+
+242
+00:13:51,640 --> 00:13:51,640
+
+
+243
+00:13:51,640 --> 00:13:51,640
+
+
+244
+00:13:51,640 --> 00:13:51,640
+
+
+245
+00:13:51,640 --> 00:13:53,640
+okay
+
+246
+00:13:53,640 --> 00:13:53,640
+
+
+247
+00:13:53,640 --> 00:13:53,640
+
+
+248
+00:13:53,640 --> 00:13:53,640
+
+
+249
+00:13:53,640 --> 00:13:53,640
+
+
+250
+00:13:53,640 --> 00:13:53,640
+
+
+251
+00:13:53,640 --> 00:13:53,640
+
+
+252
+00:13:53,640 --> 00:13:53,640
+
+
+253
+00:13:53,640 --> 00:13:54,640
+okay
+
+254
+00:13:54,640 --> 00:13:55,640
+okay
+
+255
+00:13:55,640 --> 00:13:55,640
+
+
+256
+00:13:55,640 --> 00:13:55,640
+
+
+257
+00:13:55,640 --> 00:13:55,640
+
+
+258
+00:13:55,640 --> 00:13:55,640
+
+
+259
+00:14:10,640 --> 00:14:25,640
+okay
+
+260
+00:14:25,640 --> 00:14:27,640
+okay
+
+261
+00:14:27,640 --> 00:14:29,640
+okay
+
+262
+00:14:29,640 --> 00:14:31,640
+okay
+
+263
+00:14:31,640 --> 00:14:33,640
+okay
+
+264
+00:14:33,640 --> 00:14:35,640
+okay
+
+265
+00:14:35,640 --> 00:14:37,640
+okay
+
+266
+00:14:37,640 --> 00:15:02,640
+okay
+
+267
+00:15:02,640 --> 00:15:04,640
+okay
+

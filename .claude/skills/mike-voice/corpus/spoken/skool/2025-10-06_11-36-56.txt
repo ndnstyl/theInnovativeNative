@@ -1,0 +1,267 @@
+check check check microphone check check
+all right so as you guys can see on the screen this is a somewhat complicated workflow
+although most of it is just labeling and unlabeling i'm going to go through
+node by node and just kind of see how n8n works for some of these this might be the very first
+time you've seen an orchestration layer like n8n so what i'm going to do is just give you a very
+quick overview of what n8n is it is a node-based orchestration system so what these nodes are
+there are hundreds of nodes there are even custom community nodes but without getting into the weeds
+essentially you will have a trigger like in this case it is going to be a gmail trigger
+and then you are going to have some sort of process um all the craze now is our ai agents so you can
+have an ai agent that orchestrates a lot of things it remembers your chats it will go and pull information
+from a database it will send out their output to different things like email or slack or post on
+social media uh different things like that so um n8n is kind of the brains and the power behind
+connecting all of these types of apps as you can see as this scrolls here and there are more apps
+being added pretty much on a weekly or monthly basis especially with the advent of ai and all of these
+companies um knowingly uh needing to integrate because there are so many people that are starting to
+uh adopt ai so just a quick google trends we could even take a look at
+n8n so we will take a look at what it looks like over the long period here
+so as you can see it well it's been n8n has been around for quite some time as you can see n8n has
+been around for quite some time all the way back uh you know in 2021 2022 2022 but this year and last
+year it is just skyrocketed as you can see so um enough about that and that's just kind of a quick
+introduction about n8n um it's one of the systems that you if you happen to know code and you implement
+code in there then you're miles ahead but you don't need to know code at all if you can think
+logically and you can actually map out your workflows uh you can get all of this done so uh again i'm
+going to walk through this node by node here this one is a gmail trigger this is connected to my gmail
+inbox uh i'll have a separate video of setting up your credentials here but this top part is um
+credential to connect with and once you go in here and try to create your credentials for gmail itself
+you're going to need your client id and your client secret you're going to get that through the google
+cloud console but for the sake of brevity we're just going to skip that part and i will link a
+different video so that you can actually do that so what that does is is it grabs a we'll just grab
+it here we'll grab a test event this is one of the last emails that i got um into my inbox don't even
+know what it is here so let's just take a quick look together so this is the snippet so when i executed
+this it went out to gmail and it pulls back this information and this information will be able to be
+passed through to here so to explain this on the left side over here this is the input for um uh from
+or for whatever it is that you're using it could be an excel sheet it could be a database call it could
+be a chat form it could be a chat bot it could be absolutely anything so this left side is the input
+the middle here is what this node is telling it to do that is kind of the execution of what's going on
+and then the right side it will be an output and in this case this is a text classifier i'll go back out of here
+so what this does is using this node it'll have information to go into this node and then it'll synthesize this
+information and then it'll execute and give an output so in this case it's going to take a snippet it's going to
+take uh the to and the from and the subject and it's going to use uh in this case gemini
+as the brains behind it it takes all the information it thinks about it and then it actually gives it the
+category in this case it actually found social so we'll go to this next node here social is what it was
+labeled so in your inbox another thing that you should have set up and i'll just show you for the sake of
+you having a visual these already need to be built um again this is just kind of showing you the whole
+overview of everything i'm going to break everything down of what is needed what are dependencies but
+you want these labels that are already showing up in here so that when you go into this node
+or you have an execution that it's actually going to create this label of school slash social
+that's what it executes so the input from this one now has changed it takes the synthesis from the
+previous node which was the text classifier and gemini and then we're telling it here to update
+the label and in my case it's going to be school slash social when you set this up for your identifiers
+your text classifiers this is all going to be custom to you your personal preferences your if you're if
+you're doing this for uh for your own personal reasons and you are just trying to organize your
+personal email box that's going to be different than having a business email box uh everybody's going to
+have different kind of categories and you're going to have um different definitions as to what routes
+to where so in this case uh it comes in here and i'm telling it to execute this time and this will add
+that label and it will send this information over to this node um this template is downloadable you can
+actually grab it in the school community and in the template you will have um all of these kind of
+like broken down so what i would suggest is download the template just so that you get the idea of it
+that you can kind of walk through and then from there i'll also have another video of of building this
+node by node but that being said in this template it'll tell you why each one of these sections are
+different um this one the top one it just labels it marks it as red and then it de-labels this one that
+we're in for social it's going to label it and then send it over here to an actual summarizer
+this is where you start to see the power of ai orchestration and workflows because you can actually
+connect a llm or you know things like chat gpt anthropic um deep seek olama and in my cases i use
+gemini here and it's going to synthesize the information from your not only your email inbox but the text
+classifier and then it can actually start to do things like uh create another draft to where it's
+going to execute this and it will go into my excel sheet so sometimes you're going to get promotional
+things from social in this case we're just going to specifically talk about social um so in social
+i'll get dm sometimes sometimes i'll get email notifications from slack sometimes i'll get
+um like a new video upload from uh youtube or whatever so this is where it starts to become
+powerful to where you'll start to get the signal to noise you're going to take a look at your inbox
+and make your own rules and in my case i like to have that message synthesized down to like one or two
+lines so i use the gemini model to do that and then i output it and this could be anywhere uh in this
+case it's going to be google sheets so i'm going to get a summary of this and it's going to be put
+into google sheets and then it's actually going to be uh emailed over to me so then what it does is
+it goes down this route here and it delabels it so i have this whole entire route for social media
+in and of itself then i have other ones that as you can see here are marketing personal opportunities
+hiring receipts and other stuff um so just to give you uh another quick run through i'm going to do
+one for opportunities and then i'll just kind of end it there because that will take you through
+labeling delabeling um summarizing an email and the next one's going to be creating a draft this is also
+another uh tool and use of a technique that will very much start to clean up your email inbox but
+even more importantly uh it will start to do things like make sure you don't miss invoices you don't
+miss contracts you don't make mistakes of missing emails that are uh revenue generation so i'm just
+going to do a test email here
+so this is also going to be based on your rules so when i go back over here to n8n
+this one i'm going to trigger hopefully it has come through let me see if it's come through
+so all right let's come through so now i can fetch it and it will be that question that i just sent
+through um can you resend the proposal doc now the text classification that i have for it as you can read
+and this and the more effort you put into your category and the description of it and then that
+will hand off to your um your ai chatbot sorry your ai thinking portion of your system i just put in a
+really simple one just for this test but uh anything driving revenue or clients sending over documents
+sales proposals contracts cash flow etc so when i execute this step you see right here gemini is
+thinking and it classifies it and then it's going to shoot it as an opportunity then it's going to
+take this opportunity and again read what is in here so the first part is just categorizing it and
+putting it into the proper workflow that it needs to go to now this part is going to be again where we
+have i have a rev ops message here this is the user prompt this is the system prompt and again once we go
+over the creation of all of it i will show you uh in uh step by step and in greater detail how to do
+this but just as a a walk through i just want to keep this really really short and sweet it's going to
+take this email it's going to come down here and route it to um opportunities for rev ops it's going to
+take the subject line the body and i have these rules based on what that information is going to be
+passed through of how it's going to treat it in this case it's actually going to create a draft
+so i'm going to execute this that's going to do a little bit of thinking here and then it's going
+to pass it over to gmail and this gmail node is where it is actually going to create the draft
+um so once it's actually done uh we'll go back to the email my email inbox and we'll start will she
+see the draft that's actually created for this particular workflow so just give it a second
+okay
+okay see this is the output from the last one it says okay i have attached a proposal for your review
+and this is where the human in a loop part comes so if i go back in here and i go to my drafts
+and i go here this is actually written up
+okay let's see i'll make this correction
+okay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+okay
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+okay
+
+
+okay
+
+
+
+
+okay
+
+
+
+
+
+
+
+okay
+okay
+
+
+
+
+okay
+okay
+okay
+okay
+okay
+okay
+okay
+okay
+okay

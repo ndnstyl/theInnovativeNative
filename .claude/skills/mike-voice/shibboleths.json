@@ -1,0 +1,113 @@
+{
+  "_doc": "Non-car patterns that signal 'this is Mike'. Extracted from his corpus (Chaos to Clarity lessons + voiceovers). Insert these liberally during humanize. Target density: 2-8 shibboleths per 1000 words.",
+  "_extraction_method": "Hand-curated from corpus 2026-06-03. Will grow as more corpus is added (especially after Skool transcription completes).",
+  "openers": {
+    "_use": "Cold-open patterns. Mike rarely opens with a generic claim. He opens with a quote, a confession, a sharp observation, or a concrete scene.",
+    "patterns": [
+      "There's a quote that broke something in me.",
+      "I want to start this lesson with a confession.",
+      "Real talk:",
+      "I spent two weeks convinced I had built X. Then I checked the data.",
+      "Here's the test I use for every {project|client|workflow} before I touch keyboard.",
+      "There's an experiment {teachers|operators|engineers} use to show why {X} matters.",
+      "I had built a system that LOOKED autonomous. It was not.",
+      "Stop reading and run this audit on whatever AI system you have built."
+    ]
+  },
+  "transitions": {
+    "_use": "Mike's mid-piece pivots. He uses single-word or short-phrase transitions, often with a hard period after.",
+    "patterns": [
+      "Then I checked the actual data.",
+      "Here's what actually happens:",
+      "That assumption is wrong.",
+      "The result:",
+      "But that's not the point.",
+      "The honest answer:",
+      "What actually moves the needle:",
+      "Question one. ... Question two. ... Question three.",
+      "Here's the trap.",
+      "And here's where it gets interesting."
+    ]
+  },
+  "verdict_lines": {
+    "_use": "Mike closes paragraphs (and pieces) with short, declarative verdict sentences. Often 3-7 words. Use these as paragraph-enders.",
+    "patterns": [
+      "It was not.",
+      "Decoration.",
+      "That's the test.",
+      "Most teams don't need more effort. They need less guessing.",
+      "Built it, never ran it.",
+      "Silently dead since the day I created it.",
+      "Your beautiful constitution becomes decoration.",
+      "Sometimes do X when convenient.",
+      "Hooks dead. Memory unread. Delegation routed by vibes. Rules ignored.",
+      "If a system requires constant narrative defense, it is already broken.",
+      "Garage queens get washed. Daily drivers get driven."
+    ]
+  },
+  "signature_phrases": {
+    "_use": "Phrases that ARE Mike. Use these where they fit naturally. Don't force.",
+    "patterns": [
+      "systems that survive contact with reality",
+      "I diagnose where systems are lying",
+      "if a system requires constant narrative defense, it is already broken",
+      "decoration",
+      "the gap between 'I designed it' and 'it actually runs'",
+      "advisory rule",
+      "silently dead",
+      "operating on what is in its current working memory, not on what you told it to do at the start",
+      "real autonomy is not 'the agent decides to do X'. real autonomy is 'X happens whether the agent decides to or not'",
+      "kitchen table"
+    ]
+  },
+  "structural_patterns": {
+    "_use": "Macro-structures Mike uses. Apply at the document level, not sentence level.",
+    "patterns": [
+      {
+        "name": "Confession-Diagnosis-Verdict",
+        "structure": "1. Confession: I built X believing Y. 2. Diagnosis: Then I checked the data. 3. Verdict: A short, definitive statement of what was actually true.",
+        "example_ref": "chaos-clarity-01-autonomous-ai.md"
+      },
+      {
+        "name": "Numbered Diagnostic Questions",
+        "structure": "Pose 3-5 sharp questions the reader runs on their own system. Each question starts 'Question N.' and asks them to verify a specific thing in their actual logs/data, not their intentions.",
+        "example_ref": "chaos-clarity-01-autonomous-ai.md"
+      },
+      {
+        "name": "Concrete-to-Abstract",
+        "structure": "Open with a concrete, often physical scene (PB&J sandwich, Jordan Peterson quote, a specific bug). Pivot to the abstract principle it demonstrates. End on a verdict that anchors back to the concrete.",
+        "example_ref": "mike-week-01-clarity-2026-04-07_clean.vtt"
+      },
+      {
+        "name": "Audit-the-reader",
+        "structure": "Don't tell the reader they have a problem. Hand them a 10-minute audit they can run on their own system. Let the audit tell them.",
+        "example_ref": "chaos-clarity-01-autonomous-ai.md"
+      }
+    ]
+  },
+  "register_markers": {
+    "operator": {
+      "_when": "Default register. Most LinkedIn, blog, technical writing, client comms.",
+      "tone": "Direct, no-fluff, confident without arrogance, comfortable saying no, plain language, short sentences",
+      "verbs_preferred": ["build", "wire", "run", "audit", "diagnose", "ship", "fix", "kill", "rewire"],
+      "verbs_avoided": ["leverage", "utilize", "navigate", "harness", "unleash", "empower", "facilitate"]
+    },
+    "kitchen-table": {
+      "_when": "Generational wealth content, family-to-family explainers, warmth-required pieces.",
+      "tone": "Warm, family-to-family, NOT sales/marketing, plain spoken, patient",
+      "memory_ref": "project_generational_wealth"
+    }
+  },
+  "anti_signatures": {
+    "_use": "Mike does NOT do these. If a draft has these, strip them.",
+    "patterns": [
+      "Generic rhetorical question closes ('What do you think? Drop a comment.')",
+      "Numbered listicles inside the middle of a narrative paragraph",
+      "Three-item parallel triplets for decoration ('faster, better, stronger')",
+      "Em dashes (ZERO TOLERANCE)",
+      "Hedging language ('it might be useful to consider', 'one could argue')",
+      "Inspirational-poster closers ('the future is bright', 'the journey begins')",
+      "AI tells ('as an AI', 'as a language model', 'I hope this helps')"
+    ]
+  }
+}

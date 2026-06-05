@@ -1,0 +1,28 @@
+{
+  "_description": "Example batch cue file produced by extract-pattern-cues.py. Pass to render-pattern-batch.sh.",
+  "project": "unfuckYourData",
+  "output_dir": "/Users/makwa/theinnovativenative/content/unfuckYourData/visuals/patterns/",
+  "cues": [
+    {
+      "timestamp": "00:01:12",
+      "template_id": "Pattern-NumberFlash-16x9",
+      "output_filename": "00-01-12_numberflash_64-percent.mov",
+      "props": { "value": "64%", "label": "untracked spend" },
+      "duration_frames": 45
+    },
+    {
+      "timestamp": "00:03:45",
+      "template_id": "Pattern-QuoteBurst-16x9",
+      "output_filename": "00-03-45_quoteburst_mer-truth.mov",
+      "props": { "text": "MER is the one number that doesn't lie.", "emphasis": "MER" },
+      "duration_frames": 60
+    },
+    {
+      "timestamp": "00:07:20",
+      "template_id": "Pattern-WordFlash-16x9",
+      "output_filename": "00-07-20_wordflash_audit.mov",
+      "props": { "word": "AUDIT", "position": "center" },
+      "duration_frames": 30
+    }
+  ]
+}

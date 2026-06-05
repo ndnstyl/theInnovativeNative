@@ -1,0 +1,236 @@
+{
+  "$schema": "./social-media-safe-zones.schema.json",
+  "version": "1.0.0",
+  "last_updated": "2026-04-05",
+  "notes": "Single source of truth for platform-specific safe zones (UI occlusion), content-safe zones (important visual elements), and caption-safe zones (text). All coordinates assume canonical resolutions (1080x1920 for 9:16, 1920x1080 for 16:9, 1080x1080 for 1:1, 1080x1350 for 4:5). Use with safe-zones.ts loader in remotion-videos. Platform UI overlays CAN change without notice — re-verify quarterly.",
+  "conventions": {
+    "coordinate_origin": "top-left (x=0, y=0)",
+    "units": "pixels at canonical resolution",
+    "ui_safe": "Rectangles OCCLUDED by platform UI chrome. Never place critical content here.",
+    "content_safe": "Recommended inner rectangle where important visual subject should live.",
+    "caption_safe": "Narrower inner rectangle where text overlays should live (tighter margins than content_safe to avoid text being clipped or too close to UI).",
+    "action_safe": "Outer tolerance zone — content near edges may be cropped on certain devices.",
+    "title_safe": "Broadcast-style inner boundary — headlines belong inside this."
+  },
+  "platforms": {
+    "instagram_reels": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 90,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "top": { "x": 0, "y": 0, "w": 1080, "h": 220, "reason": "status bar + profile/username header" },
+        "bottom": { "x": 0, "y": 1610, "w": 1080, "h": 310, "reason": "caption, audio pill, CTA, share buttons" },
+        "right_rail": { "x": 960, "y": 900, "w": 120, "h": 710, "reason": "like/comment/share/save icons column" }
+      },
+      "content_safe": { "x": 60, "y": 260, "w": 840, "h": 1310 },
+      "caption_safe": { "x": 100, "y": 320, "w": 880, "h": 1190 },
+      "hook_zone": { "x": 100, "y": 320, "w": 880, "h": 400, "reason": "first-3-second viewer-stopping text" },
+      "cta_zone": { "x": 100, "y": 1100, "w": 880, "h": 450, "reason": "end-of-reel CTA above bottom UI" }
+    },
+    "instagram_stories": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 60,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "top": { "x": 0, "y": 0, "w": 1080, "h": 250, "reason": "profile header + story progress bars" },
+        "bottom": { "x": 0, "y": 1670, "w": 1080, "h": 250, "reason": "reply bar + reactions" }
+      },
+      "content_safe": { "x": 60, "y": 280, "w": 960, "h": 1360 },
+      "caption_safe": { "x": 100, "y": 340, "w": 880, "h": 1240 }
+    },
+    "instagram_feed_square": {
+      "aspect": "1:1",
+      "canonical": { "width": 1080, "height": 1080 },
+      "fps_recommended": 30,
+      "max_duration_sec": 60,
+      "codec": "H.264",
+      "ui_occlusions": {},
+      "content_safe": { "x": 60, "y": 60, "w": 960, "h": 960 },
+      "caption_safe": { "x": 100, "y": 100, "w": 880, "h": 880 }
+    },
+    "instagram_feed_portrait": {
+      "aspect": "4:5",
+      "canonical": { "width": 1080, "height": 1350 },
+      "fps_recommended": 30,
+      "max_duration_sec": 60,
+      "codec": "H.264",
+      "ui_occlusions": {},
+      "content_safe": { "x": 60, "y": 60, "w": 960, "h": 1230 },
+      "caption_safe": { "x": 100, "y": 100, "w": 880, "h": 1150 }
+    },
+    "tiktok": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 600,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "top": { "x": 0, "y": 0, "w": 1080, "h": 150, "reason": "status bar + For You / Following tabs" },
+        "bottom": { "x": 0, "y": 1640, "w": 1080, "h": 280, "reason": "username, caption, music pill, navigation bar" },
+        "right_rail": { "x": 940, "y": 900, "w": 140, "h": 740, "reason": "profile/like/comment/share/music disc column" }
+      },
+      "content_safe": { "x": 60, "y": 180, "w": 820, "h": 1440 },
+      "caption_safe": { "x": 100, "y": 240, "w": 820, "h": 1340 },
+      "hook_zone": { "x": 100, "y": 240, "w": 820, "h": 450 },
+      "cta_zone": { "x": 100, "y": 1100, "w": 820, "h": 500 }
+    },
+    "youtube_shorts": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 60,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "top": { "x": 0, "y": 0, "w": 1080, "h": 180, "reason": "status bar + Shorts header + search icon" },
+        "bottom": { "x": 0, "y": 1550, "w": 1080, "h": 370, "reason": "title, channel, description, Shorts nav tab" },
+        "right_rail": { "x": 950, "y": 900, "w": 130, "h": 650, "reason": "like/dislike/comment/share/remix/menu column" }
+      },
+      "content_safe": { "x": 60, "y": 210, "w": 830, "h": 1310 },
+      "caption_safe": { "x": 100, "y": 260, "w": 820, "h": 1240 }
+    },
+    "youtube_16x9": {
+      "aspect": "16:9",
+      "canonical": { "width": 1920, "height": 1080 },
+      "fps_recommended": 30,
+      "max_duration_sec": 43200,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "bottom": { "x": 0, "y": 990, "w": 1920, "h": 90, "reason": "progress bar + controls on hover; end-screen cards spawn from bottom right" },
+        "end_screen_card_TR": { "x": 1490, "y": 60, "w": 380, "h": 220, "reason": "subscribe / card placement top-right" },
+        "end_screen_bottom": { "x": 0, "y": 820, "w": 1920, "h": 260, "reason": "end-screen video/playlist thumbnails occupy last 20s" }
+      },
+      "title_safe": { "x": 96, "y": 54, "w": 1728, "h": 972, "reason": "broadcast 90% title-safe" },
+      "action_safe": { "x": 48, "y": 27, "w": 1824, "h": 1026, "reason": "broadcast 95% action-safe" },
+      "content_safe": { "x": 96, "y": 54, "w": 1728, "h": 972 },
+      "caption_safe": { "x": 160, "y": 100, "w": 1600, "h": 880 }
+    },
+    "linkedin_16x9": {
+      "aspect": "16:9",
+      "canonical": { "width": 1920, "height": 1080 },
+      "fps_recommended": 30,
+      "max_duration_sec": 600,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "bottom": { "x": 0, "y": 1000, "w": 1920, "h": 80, "reason": "progress bar + audio icon on hover" }
+      },
+      "content_safe": { "x": 96, "y": 54, "w": 1728, "h": 972 },
+      "caption_safe": { "x": 160, "y": 100, "w": 1600, "h": 880 }
+    },
+    "linkedin_square": {
+      "aspect": "1:1",
+      "canonical": { "width": 1080, "height": 1080 },
+      "fps_recommended": 30,
+      "max_duration_sec": 600,
+      "codec": "H.264",
+      "ui_occlusions": {},
+      "content_safe": { "x": 60, "y": 60, "w": 960, "h": 960 },
+      "caption_safe": { "x": 100, "y": 100, "w": 880, "h": 880 }
+    },
+    "linkedin_vertical": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 600,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "bottom": { "x": 0, "y": 1780, "w": 1080, "h": 140, "reason": "feed UI on native mobile player" }
+      },
+      "content_safe": { "x": 60, "y": 80, "w": 960, "h": 1680 },
+      "caption_safe": { "x": 100, "y": 140, "w": 880, "h": 1560 }
+    },
+    "facebook_feed": {
+      "aspect": "4:5",
+      "canonical": { "width": 1080, "height": 1350 },
+      "fps_recommended": 30,
+      "max_duration_sec": 14400,
+      "codec": "H.264",
+      "ui_occlusions": {},
+      "content_safe": { "x": 60, "y": 60, "w": 960, "h": 1230 },
+      "caption_safe": { "x": 100, "y": 100, "w": 880, "h": 1150 }
+    },
+    "facebook_reels": {
+      "aspect": "9:16",
+      "canonical": { "width": 1080, "height": 1920 },
+      "fps_recommended": 30,
+      "max_duration_sec": 90,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "top": { "x": 0, "y": 0, "w": 1080, "h": 220 },
+        "bottom": { "x": 0, "y": 1610, "w": 1080, "h": 310 },
+        "right_rail": { "x": 960, "y": 900, "w": 120, "h": 710 }
+      },
+      "content_safe": { "x": 60, "y": 260, "w": 840, "h": 1310 },
+      "caption_safe": { "x": 100, "y": 320, "w": 820, "h": 1250 }
+    },
+    "x_twitter_16x9": {
+      "aspect": "16:9",
+      "canonical": { "width": 1920, "height": 1080 },
+      "fps_recommended": 30,
+      "max_duration_sec": 140,
+      "codec": "H.264",
+      "ui_occlusions": {
+        "bottom": { "x": 0, "y": 1010, "w": 1920, "h": 70 }
+      },
+      "content_safe": { "x": 96, "y": 54, "w": 1728, "h": 972 },
+      "caption_safe": { "x": 160, "y": 100, "w": 1600, "h": 880 }
+    }
+  },
+  "image_alignment_rules": {
+    "face_placement": {
+      "9:16": "Upper third rule — face should sit 25-40% from top. Eye line around y=600 on 1080x1920 canvas. Keeps face clear of bottom UI and hook text.",
+      "16:9": "Rule of thirds intersection — face at either left or right third, eye line at upper horizontal third (y=360 on 1920x1080).",
+      "1:1": "Center-weighted — face centered horizontally, eye line at 40% from top.",
+      "4:5": "Center-weighted — face centered horizontally, eye line at 35% from top."
+    },
+    "subject_padding": {
+      "minimum_px_from_edge": 60,
+      "recommended_px_from_edge": 100,
+      "reasoning": "Platform UI can shift by 20-40px across device sizes; 100px padding absorbs this."
+    },
+    "text_over_image": {
+      "hook_text_zone": "Upper third of content_safe (above subject's face for faceless talking-heads, below for POV/scene shots)",
+      "body_text_zone": "Center vertical within caption_safe",
+      "cta_text_zone": "Lower third of content_safe, ABOVE ui_occlusions.bottom + 40px buffer"
+    }
+  },
+  "video_alignment_rules": {
+    "cross_platform_master": {
+      "strategy": "Master at 1080x1920 (9:16) with ALL critical content inside intersection of content_safe zones for IG Reels, TikTok, YT Shorts, FB Reels. Export secondary crops for 1:1 and 16:9 from same master by center-cropping or reframing.",
+      "universal_safe_9x16": { "x": 100, "y": 320, "w": 820, "h": 1190, "reason": "Intersection of IG Reels + TikTok + YT Shorts caption_safe zones" }
+    },
+    "letterbox_vs_pillarbox": {
+      "rule": "NEVER letterbox 9:16 content for 16:9 feeds — platforms penalize. Export native aspect for each platform.",
+      "exception": "16:9 hero compositions can be center-cropped to 9:16 at cost of losing left/right thirds."
+    },
+    "motion_within_safe": {
+      "rule": "Animated elements that pan, scale, or transition MUST remain inside content_safe at ALL frames, not just start/end keyframes.",
+      "reason": "Mid-animation bounds are the most common safe-zone violation"
+    }
+  },
+  "caption_specific_rules": {
+    "font_size_minimums": {
+      "9:16_1080p": {
+        "hook": "90px minimum, 110-140px recommended",
+        "body": "54px minimum, 64-80px recommended",
+        "cta": "64px minimum, 80-100px recommended"
+      },
+      "16:9_1080p": {
+        "hook": "72px minimum, 88-110px recommended",
+        "body": "42px minimum, 48-64px recommended",
+        "cta": "48px minimum, 56-72px recommended"
+      },
+      "1:1_1080p": {
+        "hook": "72px minimum, 88-110px recommended",
+        "body": "48px minimum, 54-72px recommended",
+        "cta": "54px minimum, 64-80px recommended"
+      }
+    },
+    "contrast": "Always include text shadow, stroke, or semi-opaque background behind captions. Platforms auto-compress and low-contrast text disappears.",
+    "max_line_length": "Aim for 30 characters per line for hook text, 40 for body. Break mid-phrase not mid-word.",
+    "burned_in_vs_dynamic": "For IG/TikTok/Shorts, burn captions into video (auto-captions are unreliable and visually inconsistent). For YouTube 16:9 longform, upload SRT separately so viewers can toggle."
+  }
+}

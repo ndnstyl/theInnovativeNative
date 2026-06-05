@@ -1,0 +1,146 @@
+start	end	text
+0	14320	all right what's up everybody this is going to be the last module of this section i try to keep
+14320	18560	everything pretty short give you some walkthroughs teach you how to create your brand your brand
+18560	24360	documents your visual style guidelines the extractor tool i showed you a couple of prompts
+24360	29160	and how to create your your mood board and whatnot you guys have forever access to those
+29160	33660	custom chat gpt's that i made you so if you want to go back and reiterate or do anything
+33660	38500	along those lines of recreating your documents or maybe you lost them or you just want to make some
+38500	45620	fine tweaks you guys have access to that those custom gpt's use them use them a lot i do all the
+45620	51000	time they help me i reiterate every once in a while just to make sure that everything is still in
+51000	57680	alignment that being said we're going to jump into this next section vague prompts break everything
+57680	63180	don't be vague one of the reasons why we're creating all of these documents is so that
+63180	70640	chat gpt or any other llm that you so choose you can actually upload documents in those other places
+70640	76620	like cloud project or perplexity and you can give it context or you can give it your faqs or your website
+76620	82940	all of that is building context that context is the very first part of not being vague
+82940	92860	um most llms have about a 256 000 token window what does that mean to you guys that is around
+92860	97540	190 000 words or something like that i can't quite remember depending on the length of the word and
+97540	103400	whatnot but there is input and there is output the very first thing that you have to understand is what
+103400	110620	you input does start to create um the percentage of tokens that it can remember um so when you use
+110620	117180	projects and you and you want to refer to only one document say go to my brand vibe document and then
+117180	123380	read only the section about my brand tone or my brand voice or cadence and then write based on that
+123380	130740	that's a very specific prompt not vague at all and it has other documents to refer to with that in mind
+130740	136040	understand that the more documents that you have in it and the more documents you tell it to reference
+136040	143860	it's going to fill up that context window of 256 000 if you overfill it then you can actually start
+143860	149760	to get other things like hallucinations or mistakes or you just have too much context so there is kind
+149760	156800	of that fine line of under delivering and over delivering based on context you can fill up that
+156800	162300	window too much and then you finally get to asking it to execute the work or whatever and then it runs out
+162300	168600	of context and it starts to hallucinate the more of that context window you take up the more it has
+168600	176420	the tendency to make mistakes or to hallucinate but um that uh that being said it takes me into my favorite
+176420	184380	experiment which is to speak to ai like an extremely high intelligent child so uh if you've ever heard of
+184380	191140	savants or you know prodigy children um they can be extremely smart but they don't infer anything there is
+191140	198080	no common sense it's kind of like how chat gpt is or any ai it doesn't know what you don't tell them
+198080	203020	i don't know if you guys have ever done peanut butter and jelly uh experiment i have two girls
+203020	210380	and um at the time i did it they were six and eight they are now teenagers time flies it's crazy
+210380	217140	um but when i did it with them and i told them to they went to their own respective rooms and i gave
+217140	223920	them a very simple instruction i said pull out one of your notebooks and write on one page with every
+223920	231420	single step and tell daddy how to create or make a peanut butter and jelly sandwich while it sounds
+231420	240800	very very easy it is a fun and messy project because i do like i would do with with ai i do only the steps
+240800	246160	that they tell me just like my girls if you leave out information like when i was talking to my
+246160	251100	children and they we finally went downstairs and started creating our peanut butter and jelly
+251100	259120	sandwiches they they really start to have objections because they thought i should know what they were
+259120	265240	talking about um my youngest zover she didn't even tell me to get the bread she just told me to get
+265240	269900	the peanut butter and get the jelly and start putting it on the bread um she did tell me to get the
+269900	274320	peanut butter and to get the jelly i pulled that out i put that on the counter uh and then actually
+274320	278100	just started spreading both of them on the counter because i didn't have bread to start with so
+278100	286400	understand when you're talking to ai and it's not a human and you're not getting inferences of
+286400	292440	or to say that they're they're not really going to complete a lot of your thoughts they are llms and
+292440	298220	they do guess your next word but they cannot infer intent they don't know what the overall scope of
+298220	302720	what you're trying to say is unless you do have these things like brand documents or you do give
+302720	306960	them context and again you don't want to give them too much context but i use the peanut butter and
+306960	312940	jelly story um just to let you know that yeah these these ai these chat models they're extremely
+312940	318360	intelligent but again they don't know what you don't tell them and then also um as uh programmers
+318360	324980	would say garbage in is garbage out ai is going to amplify whatever it is that you give it
+324980	331400	if you give it trash it is going to output trash it doesn't matter how much context you give it if
+331400	337740	you give give it a ton of really crappy context your output is going to be terrible a lot of people feel
+337740	341860	that oh ai is just going to put everybody out of a job no it's going to put a lot of dumb people out
+341860	347580	of the job simply because they don't know what they don't know or they put very little effort into it or
+347580	353440	uh they just think it's kind of this all end all be all magic wand of i just give it the simplest
+353440	358680	prompts and just let it create whatever and they they don't do any of the thinking at all and they
+358680	370680	let ai just take the wheel so um with that being said you want to use your projects and your brand
+370680	377260	documents and your style guidelines where they fit and where it gives best context you don't want to
+377260	383640	just say hey read everything that are in there so because if we just go back to mine uh look at this
+383640	393540	i have what is it so i have 12 files in here um some of these like my sdr json and whatnot the
+393540	399260	ultimate scraper ad agencies some of the flows that you guys have seen um in my community
+399260	407580	uh those those things can be five ten fifteen pages long your brand document itself is going
+407580	413740	to be four or five six pages long you don't want to just give it some arbitrary uh you know
+413740	419880	direction like hey go read all of my documents and then output a blog for me like you don't really
+419880	424000	want to use it like that you want to have all of your documents in there you want to remember what's
+424000	429640	in there and you want to speak to chat gpt and say hey pull this one document try to look through this
+429640	435580	one section i think it's section five so understand and memorize your documents uh so that you can
+435580	443780	actually use them and give claude or chat gpt or gemini your specific context and try to reduce that
+443780	448480	down as much as possible so you want to have it all in here but you don't want to use all of it all
+448480	452920	the time because again you're going to fill up that context window and then it's going to start to
+452920	456820	hallucinate and you're going to be like hey uh you're going to blame mike for a lot of a lot of
+456820	460820	stuff because it's like you told me to create these documents and you're talking to chat gpt and
+460820	466540	you're getting really horrible output that's also because your input is bad it might have context but
+466540	473600	it might sometimes have too much context or it doesn't know what you don't tell it so um go through
+473600	478460	the other part of the workshop i have the whole chaos to clarity tells you how to map out your
+478460	485200	workflows to think about your bottlenecks to create systems and think of it in a systematic step-by-step
+485200	491760	approach that's why i have a lot of these custom chat gpt's as you can see on my screen here it'll
+491760	498240	walk you through question by question you want to do as much context engineering as you are doing
+498240	504300	prompt engineering i have a whole other video on context engineering as well as prompt engineering so
+504300	509040	if you want to search through and find those that will also help but this will get you started i think
+509040	513880	these three brand documents how to use these documents properly understanding context window
+513880	523280	and knowing which chat which sorry not chat gpt's which llms do what the best um like i said chat gpt has
+523280	529660	the largest overall market share and footprint it has the most users um so it has more information to
+529660	536180	go back and retrain and create better models than other models um but just to give you a very quick
+536180	543080	snapshot the generalized uh general ai that i use the most is probably chat gpt when i'm doing any sort of
+543080	552400	coding or uh scripting for n8n i will use claude um claude opus 4.1 i believe it's done as as of the
+552400	558040	making of this video i use claude for most of my coding but chat gpt has now come out with their
+558040	565080	newest codex and it kind of competes there if i want to do any marketing language or uh very high
+565080	570800	sales tactic conversational things um gemini is great gemini is also great because you can create
+570800	579800	video with vo3 you can you can um create and edit images in nano banana so start to use as many llms as
+579800	585880	you can again i would i would say start with chat gpt because it is uh like i said it's it's the most
+585880	591840	well used and i think it's one of the one of the better all around agents but they all have their
+591840	597460	specific functions perplexity perplexity ai when you do deep research i would i would advise to use
+597460	604160	that i mean chat gpt is good as well but perplexity ai is awesome um just don't get too in the in the
+604160	607860	woods of these things understand what their limitations are because again they're not perfect
+607860	612820	they still do make mistakes they hallucinate even when you give them great context um so try not to
+612820	617740	get frustrated i get frustrated at clod almost every single day i want to punch it in the face when
+617740	623440	i'm coding because i take two steps forward and then three steps back um because i even sometimes
+623440	630400	forget the principles of coding with clod or coding with ai and i get too in the vibe and i'm watching tv
+630400	635520	and i'm not paying attention to what it's doing or i'm not giving it enough context or i start to get
+635520	642320	tired myself i give it too little context so understand and make sure all of those things uh you're being
+642320	647720	mindful of because ai still isn't perfect uh that being said if you have any questions reach out in
+647720	653060	the community uh let me know if there is anything that i missed that you want me to go over i will
+653060	659200	be adding everything into the resources into the school community into uh the classrooms and there
+659200	667680	will be links for everything in here um so again do not be scared to to reach out um my lady jenna she
+667680	672360	will help you out with any questions we will both be in there uh it's just myself and her that's running
+672360	676960	this community um but hopefully we can get all of your questions answered and we can get you really
+676960	681020	on your journey of building your brand scaling your brand and creating your systems and this is just
+681020	682480	the very first part of it
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	682480	
+682480	691760	you
+691760	691760	
+691760	691760	
+691760	691760	
+691760	691760	
+691760	691760	
+691760	691760	
+691760	691760	
+691760	691760	

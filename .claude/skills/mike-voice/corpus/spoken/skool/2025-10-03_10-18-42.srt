@@ -1,0 +1,848 @@
+1
+00:00:00,000 --> 00:00:14,760
+Now, it connects you to your Google through OAuth, and then you actually have to set up
+
+2
+00:00:14,760 --> 00:00:16,000
+your client secret and different things.
+
+3
+00:00:16,000 --> 00:00:20,240
+So if you haven't set that up, I will create a separate video that will show you the walkthrough.
+
+4
+00:00:20,240 --> 00:00:24,880
+But for the sake of brevity, I'm just going to show you what this workflow does.
+
+5
+00:00:24,880 --> 00:00:28,160
+But in order to create your credentials, I'll just show you here.
+
+6
+00:00:28,160 --> 00:00:31,660
+You actually have to go through here, and you have to go through your Google Cloud Console
+
+7
+00:00:31,660 --> 00:00:35,180
+and your services to go grab your ID and your client secret.
+
+8
+00:00:35,180 --> 00:00:39,920
+And then once you actually connect it, it will be connected just like mine is here.
+
+9
+00:00:39,920 --> 00:00:46,300
+And then when you choose nodes like this, and you go into Gmail, you can actually have access
+
+10
+00:00:46,300 --> 00:00:47,820
+to a lot of these.
+
+11
+00:00:47,820 --> 00:00:55,180
+Message actions, label actions, draft actions, thread actions, so on and so forth.
+
+12
+00:00:55,180 --> 00:01:00,120
+But with this one particularly, before we break it down, before I go and show you with a
+
+13
+00:01:00,120 --> 00:01:04,640
+blank slate node by node, I just want to show you what's possible.
+
+14
+00:01:04,640 --> 00:01:07,640
+So with this trigger, it will actually run.
+
+15
+00:01:07,640 --> 00:01:11,980
+I have it running every one minute right now, just so that it can actually process things
+
+16
+00:01:11,980 --> 00:01:13,180
+while I'm on the video.
+
+17
+00:01:13,180 --> 00:01:14,740
+I don't usually do one minute.
+
+18
+00:01:14,740 --> 00:01:19,500
+Unless you are a very, very business, sorry, very busy business professional.
+
+19
+00:01:19,680 --> 00:01:24,960
+There are some people that are trying to get every single 60 seconds or 30 seconds, they
+
+20
+00:01:24,960 --> 00:01:25,940
+want to check their email.
+
+21
+00:01:26,120 --> 00:01:27,120
+That can be done as well.
+
+22
+00:01:27,600 --> 00:01:31,680
+But I usually get maybe five to 10 emails a day.
+
+23
+00:01:31,780 --> 00:01:35,240
+So I like to break it down in intervals of checking my email every hour.
+
+24
+00:01:35,480 --> 00:01:37,860
+I'm usually on top of my email box for the most part too.
+
+25
+00:01:37,860 --> 00:01:41,280
+But when I'm not, this is always running 24 seven.
+
+26
+00:01:41,280 --> 00:01:48,660
+So from this email node, sorry, this Gmail trigger, it will actually fetch an event.
+
+27
+00:01:48,660 --> 00:01:52,580
+And in this case, it's going to grab one of my last things right here.
+
+28
+00:01:53,300 --> 00:01:59,380
+I've changed it to unread only just that I can do this for the sake of being live and recording
+
+29
+00:01:59,380 --> 00:01:59,660
+this.
+
+30
+00:01:59,940 --> 00:02:03,600
+So what it does is actually goes to your email and it fetches this type of information.
+
+31
+00:02:03,600 --> 00:02:08,920
+It's going to grab the ID of it and then it's going to feed it into this text classifier.
+
+32
+00:02:09,120 --> 00:02:12,340
+This text classifier here, I have connected to it.
+
+33
+00:02:12,460 --> 00:02:14,580
+It is going to be a Gemini trap model.
+
+34
+00:02:15,280 --> 00:02:19,420
+For the classifier, I actually use Flash.
+
+35
+00:02:19,740 --> 00:02:26,700
+So if you haven't been familiarized with LLMs and token usage and different models that use
+
+36
+00:02:26,700 --> 00:02:31,000
+different tokens, there is for Gemini, there's a multitude of them.
+
+37
+00:02:31,000 --> 00:02:35,840
+There is Flash, there is Flashlight, there is Pro for Gemini.
+
+38
+00:02:36,440 --> 00:02:39,340
+For lighter tasks like this, they don't require a lot of reasoning.
+
+39
+00:02:39,580 --> 00:02:43,380
+I just use Flash simply because it uses the least amount of tokens.
+
+40
+00:02:44,180 --> 00:02:48,860
+I've tried Flashlight, but sometimes it gets it wrong and then it errors out and does things.
+
+41
+00:02:48,940 --> 00:02:53,620
+But anyways, so with this text classifier, it's going to take the input, which is what you
+
+42
+00:02:53,620 --> 00:02:55,280
+see over here on this left side.
+
+43
+00:02:55,440 --> 00:02:57,660
+It's going to take a look at things like your payload.
+
+44
+00:02:57,660 --> 00:03:00,540
+It's going to have the ID and the categories and the labels.
+
+45
+00:03:01,460 --> 00:03:04,260
+And then it's going to go through all of these categories.
+
+46
+00:03:04,560 --> 00:03:09,560
+So it's going to take this trigger, put it into this text classifier.
+
+47
+00:03:10,240 --> 00:03:15,520
+Your LLM node, your thinking part is what I like to call it.
+
+48
+00:03:15,740 --> 00:03:22,000
+This is the one that actually goes through and uses the information that's grabbed from
+
+49
+00:03:22,000 --> 00:03:22,620
+the email.
+
+50
+00:03:22,620 --> 00:03:26,240
+So the little snippet that's given, it'll actually take a look at that as well as subject
+
+51
+00:03:26,240 --> 00:03:26,760
+line and whatnot.
+
+52
+00:03:27,240 --> 00:03:33,240
+And then it will classify it and it will route it down whatever category you want.
+
+53
+00:03:33,380 --> 00:03:41,600
+So I have mine broken down into marketing, social, personal opportunities, hiring, receipts,
+
+54
+00:03:41,600 --> 00:03:43,000
+and just other stuff.
+
+55
+00:03:43,880 --> 00:03:53,220
+And you'll actually see this reflected in one of my other inboxes here.
+
+56
+00:03:53,560 --> 00:03:55,660
+So like other stuff.
+
+57
+00:03:56,820 --> 00:03:59,260
+It'll actually have all of this information here.
+
+58
+00:03:59,420 --> 00:04:05,300
+When it's unread, obviously it'll show you how many is unread per whatever it is that you're
+
+59
+00:04:05,300 --> 00:04:05,640
+looking for.
+
+60
+00:04:05,640 --> 00:04:12,540
+So it takes this, synthesizes the snippet, and then it routes it accordingly.
+
+61
+00:04:12,760 --> 00:04:14,600
+So let's see what this one is going to route it as.
+
+62
+00:04:19,400 --> 00:04:21,020
+So as you can see, it's thinking.
+
+63
+00:04:21,480 --> 00:04:25,140
+And then it routes it as, what is this?
+
+64
+00:04:25,180 --> 00:04:25,760
+It's hard to see.
+
+65
+00:04:25,760 --> 00:04:34,620
+So Slack account, this should be going to social.
+
+66
+00:04:35,140 --> 00:04:36,820
+So we'll just follow it down here.
+
+67
+00:04:43,040 --> 00:04:44,400
+Actually, this is other stuff.
+
+68
+00:04:44,600 --> 00:04:45,540
+So it's not going to go to social.
+
+69
+00:04:45,680 --> 00:04:47,800
+Sometimes Slack reads as social.
+
+70
+00:04:47,940 --> 00:04:49,940
+Sometimes it reads as just other stuff.
+
+71
+00:04:49,940 --> 00:04:55,600
+So it's going to go in here and I'm going to execute this node.
+
+72
+00:04:55,800 --> 00:05:00,740
+So based on that snippet, it's actually going to add the label of other stuff.
+
+73
+00:05:01,820 --> 00:05:14,060
+So when I execute it, it will push it through and go to this particular node, which is going
+
+74
+00:05:14,060 --> 00:05:15,780
+to remove the inbox label.
+
+75
+00:05:16,320 --> 00:05:17,800
+So Gmail works a little bit differently.
+
+76
+00:05:17,800 --> 00:05:20,700
+There's a lot of people that are, sorry, a lot of service providers that are starting
+
+77
+00:05:20,700 --> 00:05:21,400
+to do it like this.
+
+78
+00:05:21,900 --> 00:05:23,360
+Gmail is more of a cash all.
+
+79
+00:05:23,900 --> 00:05:26,760
+It doesn't actually have inbox with folders.
+
+80
+00:05:26,960 --> 00:05:28,680
+It's got inbox with labels.
+
+81
+00:05:29,220 --> 00:05:31,740
+So you can use labels as a type of folder.
+
+82
+00:05:32,240 --> 00:05:38,680
+So in order for you to actually remove it from your email inbox, you're actually going
+
+83
+00:05:38,680 --> 00:05:41,360
+to have to remove the inbox label itself.
+
+84
+00:05:41,360 --> 00:05:48,620
+So the logic for that is coming in here and showing, okay, so I'm looking for the ID that
+
+85
+00:05:48,620 --> 00:05:52,640
+came through from this original trigger all the way back there.
+
+86
+00:05:53,780 --> 00:05:56,120
+That's the ID of the email itself.
+
+87
+00:05:56,220 --> 00:06:00,880
+You can actually use threads, thread IDs if you have a very long thread and you specifically
+
+88
+00:06:00,880 --> 00:06:02,800
+want to label something with a thread.
+
+89
+00:06:02,800 --> 00:06:08,280
+But the ID is going to have the message ID that is connected to that email in particular.
+
+90
+00:06:08,940 --> 00:06:14,440
+And then I actually want to remove the label inbox and I'll execute that step.
+
+91
+00:06:14,440 --> 00:06:24,820
+Now, so I'm not going to go through all of them, but I just do want to go through a couple of
+
+92
+00:06:24,820 --> 00:06:24,940
+them.
+
+93
+00:06:25,040 --> 00:06:29,300
+And then what I'm going to do is I'm going to jump over here into my own personal email
+
+94
+00:06:29,300 --> 00:06:35,140
+box and I'm going to send my business email from my personal email.
+
+95
+00:06:35,320 --> 00:06:40,300
+And that one should actually route it correspondingly to my personal label.
+
+96
+00:06:41,000 --> 00:06:42,440
+So give me just a second while I do that.
+
+97
+00:06:42,440 --> 00:06:45,680
+And I'll jump in on the other side and I will show you that.
+
+98
+00:06:48,000 --> 00:06:49,840
+So I'm just going to go ahead and pull it up here.
+
+99
+00:06:52,100 --> 00:06:55,400
+And I am going to just keep it very generic.
+
+100
+00:06:55,740 --> 00:06:58,520
+I'm just going to put a subject line of, hey, how's it going?
+
+101
+00:06:58,820 --> 00:06:59,880
+What are you up to do today?
+
+102
+00:07:01,540 --> 00:07:03,460
+Just so that we can see it get routed.
+
+103
+00:07:12,440 --> 00:07:19,220
+So I've sent that and it should only take a few seconds to actually come through.
+
+104
+00:07:20,220 --> 00:07:21,080
+Let's see.
+
+105
+00:07:22,500 --> 00:07:24,240
+I actually forgot to turn this off.
+
+106
+00:07:24,340 --> 00:07:26,420
+So I hope, hopefully it doesn't get triggered.
+
+107
+00:07:26,420 --> 00:07:27,420
+Okay.
+
+108
+00:07:29,880 --> 00:07:30,440
+Okay.
+
+109
+00:07:30,620 --> 00:07:31,560
+So what are you up to?
+
+110
+00:07:33,160 --> 00:07:36,160
+So now we're going to pull this one.
+
+111
+00:07:36,160 --> 00:07:42,660
+So it fetched it.
+
+112
+00:07:42,880 --> 00:07:45,420
+It actually is labeled as important.
+
+113
+00:07:45,720 --> 00:07:50,100
+This one's labeled unread and it's going to go into my school personal.
+
+114
+00:07:50,360 --> 00:07:52,940
+So we should be able to see that execute from here.
+
+115
+00:07:53,200 --> 00:07:54,700
+It's going to a text classifier.
+
+116
+00:07:54,700 --> 00:07:59,840
+Again, this is the one that splits it out to whatever respective category it needs to go to.
+
+117
+00:08:02,820 --> 00:08:06,100
+So personal branch is where it went to.
+
+118
+00:08:07,600 --> 00:08:12,100
+It will go down here to the personal branch.
+
+119
+00:08:13,180 --> 00:08:17,700
+And this is one I chose because this one's different, as you can see with the notes,
+
+120
+00:08:17,880 --> 00:08:23,080
+is this is a human in the loop and it's not just going to label it and de-label it.
+
+121
+00:08:23,080 --> 00:08:25,260
+It's actually going to go into my personal.
+
+122
+00:08:25,800 --> 00:08:29,280
+It's going to synthesize the email of what has come through.
+
+123
+00:08:30,020 --> 00:08:31,820
+So this is grabbing the information.
+
+124
+00:08:32,660 --> 00:08:35,280
+And now this node is a Gmail.
+
+125
+00:08:35,780 --> 00:08:37,360
+Sorry, it's a Gemini chat node.
+
+126
+00:08:38,120 --> 00:08:45,400
+And it's going to take the information that is from this sequence prior to.
+
+127
+00:08:45,740 --> 00:08:46,700
+It's going to grab the subject.
+
+128
+00:08:46,840 --> 00:08:49,920
+It's going to grab the email and who it's from.
+
+129
+00:08:49,920 --> 00:08:54,300
+And it says, you are a personal email assistant for Mike.
+
+130
+00:08:54,440 --> 00:08:56,000
+You're a silo's casual, intelligent, approachable.
+
+131
+00:08:56,140 --> 00:09:01,220
+This is something that, as a prompt, you can tailor it to however you want it to speak.
+
+132
+00:09:01,340 --> 00:09:06,000
+So the way that I do it is when it's personal like this, I just keep it very casual.
+
+133
+00:09:06,000 --> 00:09:13,320
+This prompt is going to be whatever tone of voice that you want to use.
+
+134
+00:09:14,020 --> 00:09:24,540
+If you've gone through the other lessons in the class and you've created your brand documents
+
+135
+00:09:24,540 --> 00:09:32,580
+and your mood board and different things like that, that is where you're going to actually leverage
+
+136
+00:09:32,580 --> 00:09:37,160
+and utilize your brand documents so that your brand voice comes through.
+
+137
+00:09:37,280 --> 00:09:39,660
+Right here, I just kept it very simple, very casual.
+
+138
+00:09:40,240 --> 00:09:45,880
+But if it were something like an opportunity, like in this one, you can completely change that
+
+139
+00:09:45,880 --> 00:09:47,760
+to whatever it is that your brand voice is.
+
+140
+00:09:47,760 --> 00:09:51,480
+So it will come through and I'll synthesize this.
+
+141
+00:09:51,520 --> 00:09:52,920
+This is going to take a few seconds here.
+
+142
+00:09:53,280 --> 00:09:58,200
+But like I said, there's a difference between like opportunities and whatnot and your personal
+
+143
+00:09:58,200 --> 00:10:03,180
+or in this case, when we get to it, it's going to be a social email summarizer.
+
+144
+00:10:03,180 --> 00:10:08,260
+So let's see what this output was.
+
+145
+00:10:08,340 --> 00:10:09,020
+What are you up to do?
+
+146
+00:10:09,160 --> 00:10:09,520
+Sorry.
+
+147
+00:10:09,640 --> 00:10:10,640
+What are you up to?
+
+148
+00:10:11,460 --> 00:10:12,060
+Blah, blah, blah.
+
+149
+00:10:14,700 --> 00:10:16,240
+It's going to execute this step.
+
+150
+00:10:16,380 --> 00:10:24,840
+It's going to create a draft for me and it's going to remove the label of inbox.
+
+151
+00:10:26,300 --> 00:10:26,740
+No.
+
+152
+00:10:27,040 --> 00:10:28,700
+So it's getting a bad request.
+
+153
+00:10:29,260 --> 00:10:32,600
+So this is good to take a look through.
+
+154
+00:10:34,000 --> 00:10:35,820
+So invalid value.
+
+155
+00:10:36,360 --> 00:10:39,440
+This is actually let me work through this.
+
+156
+00:10:40,660 --> 00:10:45,700
+This seems like it's just because it doesn't actually have that personal label.
+
+157
+00:10:46,340 --> 00:10:47,320
+So let's see here.
+
+158
+00:10:47,320 --> 00:10:49,900
+So let me go to my inbox here.
+
+159
+00:10:52,060 --> 00:11:01,320
+And as you can see, it actually will be in my drafts.
+
+160
+00:11:03,180 --> 00:11:11,300
+I actually need to change this up.
+
+161
+00:11:11,460 --> 00:11:16,760
+This is actually putting a subject line in here, which shouldn't be.
+
+162
+00:11:16,760 --> 00:11:19,320
+So it'll just be in response to this.
+
+163
+00:11:19,620 --> 00:11:20,800
+So, hey, Michael, I'm doing well.
+
+164
+00:11:21,020 --> 00:11:21,560
+Thanks for asking.
+
+165
+00:11:21,660 --> 00:11:22,940
+Just plugging away at a few things here.
+
+166
+00:11:23,380 --> 00:11:24,420
+Hope you're having a good day too.
+
+167
+00:11:24,980 --> 00:11:25,880
+What's new with you?
+
+168
+00:11:26,480 --> 00:11:28,780
+So you can do whatever you can actually send it.
+
+169
+00:11:28,880 --> 00:11:31,440
+I'm just going to delete this because this is just me talking to myself.
+
+170
+00:11:31,440 --> 00:11:33,700
+And I don't want it to clutter up my inbox.
+
+171
+00:11:34,240 --> 00:11:37,140
+But let's come back to this remove.
+
+172
+00:11:42,140 --> 00:11:43,680
+Unvalid ID value.
+
+173
+00:11:43,680 --> 00:11:46,140
+So let's change this.
+
+174
+00:11:52,360 --> 00:11:56,720
+So we are going to go back to this node.
+
+175
+00:11:56,840 --> 00:11:57,800
+So it's Gmail trigger.
+
+176
+00:11:57,800 --> 00:12:12,800
+There we go.
+
+177
+00:12:13,000 --> 00:12:20,280
+So there are other times to where just because I kind of knew how that was going to, or sorry,
+
+178
+00:12:20,280 --> 00:12:30,100
+just because I actually knew what that error was, that JSON ID was trying to look from the immediate node that was directly before it.
+
+179
+00:12:30,400 --> 00:12:36,200
+And that error was happening because it wasn't finding the proper ID because it wasn't pulling it from the Gmail trigger.
+
+180
+00:12:37,560 --> 00:12:40,580
+If you ever run into things like that, I'm kind of glad we did on camera.
+
+181
+00:12:41,140 --> 00:12:42,040
+Those small things.
+
+182
+00:12:42,260 --> 00:12:46,680
+Another thing that you can actually do is, let me go back into executions here,
+
+183
+00:12:46,680 --> 00:12:49,960
+and I'll find another one that had, or this one that actually just had the error.
+
+184
+00:12:50,620 --> 00:12:54,940
+There's another thing that you can do, which is just go in here, if you ever get stuck on this,
+
+185
+00:12:55,000 --> 00:12:59,840
+and you actually click this copy, and then you go into ChatGPT, and you just paste it in and say,
+
+186
+00:12:59,960 --> 00:13:02,040
+hey, I'm in XYZ.
+
+187
+00:13:02,360 --> 00:13:04,480
+Cloud code, chat, N8N.
+
+188
+00:13:04,780 --> 00:13:06,800
+I'm connecting whatever it is that you are.
+
+189
+00:13:07,200 --> 00:13:08,500
+In this case, it's Gmail.
+
+190
+00:13:08,960 --> 00:13:10,080
+I've got this error code.
+
+191
+00:13:10,120 --> 00:13:11,460
+Can you help me work through it?
+
+192
+00:13:11,520 --> 00:13:13,640
+You don't actually need to really know any of it.
+
+193
+00:13:13,980 --> 00:13:17,980
+This also is something that is particular to cloud hosting.
+
+194
+00:13:18,160 --> 00:13:19,280
+I'm actually on Hostinger.
+
+195
+00:13:19,280 --> 00:13:29,460
+If you are hosted directly through N8N, you actually will have a built-in AI here, down at the bottom somewhere.
+
+196
+00:13:29,620 --> 00:13:29,840
+I forget.
+
+197
+00:13:29,960 --> 00:13:31,700
+It's been so long since I've actually used that one.
+
+198
+00:13:32,040 --> 00:13:38,240
+You can actually use Ask AI Assistant, and it will spit out an answer for you.
+
+199
+00:13:38,240 --> 00:13:43,380
+I usually just copy it, go to ChatGPT, and then paste in that error if you do run into errors.
+
+200
+00:13:45,120 --> 00:13:46,280
+So, yeah.
+
+201
+00:13:46,500 --> 00:13:48,240
+I mean, that's the way that I work through errors.
+
+202
+00:13:48,300 --> 00:13:51,780
+I'm actually glad that I did hit that error here.
+
+203
+00:13:51,780 --> 00:13:58,620
+So, we will do one more, and then we're going to jump in on the other side, and I'm just going to show you how to build this.
+
+204
+00:13:58,620 --> 00:14:17,640
+I just want to show you a couple of different iterations, and then a little bit more of the overview here, and then we're going to go into building it from scratch, so that you know how to think about it, walk through, set it up node by node, and get it all dialed into what you actually need.
+
+205
+00:14:17,640 --> 00:14:24,420
+So, I'm going to come back in the editor here, and just show you a few things here.
+
+206
+00:14:25,060 --> 00:14:28,700
+So, I have it all routed, and you guys can download it.
+
+207
+00:14:28,780 --> 00:14:34,060
+It's in the school community, but the reason why each one of these is different is I actually put it in here.
+
+208
+00:14:34,360 --> 00:14:37,900
+It labeled it and marks it as read, so it doesn't stand out in your inbox.
+
+209
+00:14:38,400 --> 00:14:41,800
+Sometimes, you might want to label it and keep it as unread.
+
+210
+00:14:41,800 --> 00:14:49,180
+This one's actually different because it's a social post, and it's going to summarize the social post, and it's going to put it into a Google Sheet.
+
+211
+00:14:49,180 --> 00:15:02,240
+This is something that you can actually change this Google Sheet out to an Airtable, or to a Superbase database, or to your CRM, like HubSpot, or Salesforce, or whatever it is if you're doing business,
+
+212
+00:15:02,360 --> 00:15:08,060
+and you get a lot of social private messages or social promotions, and you want to filter through.
+

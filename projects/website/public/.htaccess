@@ -8,6 +8,11 @@
 
 RewriteEngine On
 
+# Force trailing-slash strip for ALL paths (added 2026-06-01, must run BEFORE dynamic-route rules)
+# Without this, /marketingExpansion/ai-harness/ etc 404 because LiteSpeed doesn't serve DirectoryIndex
+# for these dirs and the default trailing-slash rule's !-d guard blocks the strip.
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
 # Next.js dynamic routes — serve the [slug].html shell for client-side routing
 # Classroom course pages: /classroom/<uuid> → classroom/[courseSlug].html
 RewriteCond %{REQUEST_FILENAME} !-f

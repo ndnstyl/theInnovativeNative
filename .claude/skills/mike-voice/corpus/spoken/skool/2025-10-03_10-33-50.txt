@@ -1,0 +1,111 @@
+them and label which ones that are the most important. So you can spin it out into a database.
+It doesn't have to just be labeled or delabeled. So that's another difference of what you can do.
+Now this one provides a growth opportunity. So it's going to be labeled as hiring.
+This one you can actually send emails just straight away. So I actually have one to where
+these are going to gather and synthesize any receipts and it's just automatically going to
+send it to my finance person, Jenna. She runs all of my books and does all of that stuff. So I don't
+even want to take a look at those. My receipts, they just go directly to her and then I've already
+showed you personal. The last one I'll show you here is opportunities. So I'm going to jump over to
+my personal again and say
+proposal. Hey dude, I don't think you sent over the proposal or maybe you did and I just didn't see it
+come through. Can you send again? Thanks, Michael. All right. So jumping over here, we will
+now see that this will execute. So Gmail.
+So this proposal comes through, as you can see, it hasn't actually run yet because it hasn't grabbed it.
+So I'm going to manually execute it. You don't have to manually execute it. If you have it active,
+it should automatically do this, but we're going to run it through again here. So, uh, hey dude,
+don't think you sent over the proposal? Yeah. So this is the right one. It's actually grabbing the
+right one. We're going to go through the text classifier. And again, this is going to be Gemini,
+the model synthesizing this information based on the subject line and the body, and then it's going to
+route it accordingly. So opportunities, bang, we're going to execute this. It'll spit that out. Another
+step again, it's going to go through subject from body. And then these are the requirements that I
+have for to reply. Again, this is going to be specific to you. Uh, if it's onboarding or client
+onboarding, or if you're a lawyer and, um, you are having them, uh, send over, um, case documents or
+anything like that, or a financial advisor, and you're looking for, uh, whatever it is,
+whether it's a proposal or a signed contract or different things like that, you can tailor this
+to whatever needs you have and ensure that it spits it out the proper way. So it's actually going to
+synthesize all this information, just like I said, and then it's going to de-label it and send it. But
+the other thing that's going to do, it's actually going to create that draft. So, and this, um, I'm using
+these dynamic fillers to create the subject, which is a response to the one that he sent me,
+that I just sent myself actually, um, the message itself, whatever it says. Um, and this is
+where it drafts it up by the chat bot itself. It said, hi, Michael, apologies if the original didn't
+make it into your inbox. I've attached a proposal again for your review. Please let me know if you
+have any questions once you've had a look and again, you can actually change out the tone of
+voice and all of this here. Um, I put very generic one here just for the sake of this. It's kind of
+similar to whatever, but I just kind of reduced it a little bit. It's not my on my full brand,
+brand voice. But anyways, when I go back into here and I go into my drafts,
+I can see this proposal and then I can just upload a document, whatever it is. That's not
+the correct document, obviously. And then just hit send. Obviously you want to read through it.
+You want to take a look and make sure it's on your, your brand, uh, voice and tone. And as you can see,
+it's, it's actually a very powerful thing to where you can create this automation and then it just sorts
+through everything. And then you'll ultimately have a very clean inbox going forward. I don't use
+this inbox very much other than just personal. So mine still looks super crazy and I actually don't
+handle a lot of my emails anyway, that most of them go to Jenna, but, um, I will jump in on the
+other side and I will break down how you create this, uh, from scratch step by step.
+So,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+uh,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,
+uh,

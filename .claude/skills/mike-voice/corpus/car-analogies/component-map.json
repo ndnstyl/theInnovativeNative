@@ -1,0 +1,38 @@
+{
+  "_doc": "Car system / component → AI / orchestration / business concept. Use for technical analogies. Each entry has the car concept, what it maps to in AI, and a one-line punchline ready to deploy.",
+  "_categories": ["mechanical", "electrical", "fuel", "software", "maintenance", "build_philosophy"],
+  "mappings": [
+    { "car": "Engine", "ai_concept": "LLM (Claude / GPT / Gemini)", "category": "mechanical", "punchline": "Different engines for different jobs. Honda K-series for daily reliability, LS swap for cheap horsepower, Ferrari V12 for sound. Same with models." },
+    { "car": "Chassis / Frame", "ai_concept": "Foundation IDE + base platform (Claude Code, Cursor, custom app)", "category": "mechanical", "punchline": "Engine swaps are easy. Chassis swaps are a rebuild. Pick your platform once." },
+    { "car": "Drivetrain", "ai_concept": "Orchestration layer (subagents + n8n + tool-using agents)", "category": "mechanical", "punchline": "1,000 horsepower at the crank means nothing if the drivetrain can't put it to the wheels." },
+    { "car": "Suspension", "ai_concept": "Error handling + retries + circuit breakers", "category": "mechanical", "punchline": "Cheap suspension over a pothole and the whole car shakes. Bad error handling in one workflow and the whole stack panics." },
+    { "car": "Brakes", "ai_concept": "Hard rules + hooks (NEVER do X)", "category": "mechanical", "punchline": "Brakes don't make you faster. They let you go faster, because you know you can stop." },
+    { "car": "Tires (contact patch)", "ai_concept": "Tools (the AI's actual interface to the world)", "category": "mechanical", "punchline": "Wrong tires = wrong performance. Doesn't matter what's under the hood." },
+
+    { "car": "Wiring harness", "ai_concept": "Hooks + MCP + tool routing", "category": "electrical", "punchline": "Every modern car problem is an electrical problem. Same with every modern AI problem." },
+    { "car": "ECU (Engine Control Unit)", "ai_concept": "The agent / orchestrator", "category": "electrical", "punchline": "The ECU doesn't make horsepower. It tells horsepower when to show up." },
+    { "car": "PCM / PCU", "ai_concept": "Higher-level coordinator agent (orchestrator managing subagents)", "category": "electrical", "punchline": "The PCM coordinates the engine, transmission, and everything else. The orchestrator does the same for subagents." },
+    { "car": "TCM (Transmission Control Module)", "ai_concept": "Workflow-level controller (n8n logic)", "category": "electrical", "punchline": "Wrong TCM tune and you ride the wrong gear forever." },
+    { "car": "BCM (Body Control Module)", "ai_concept": "UI / surface layer controllers", "category": "electrical", "punchline": "The body control module runs the lights and the locks. The UI runs the part the customer touches." },
+    { "car": "Sensors", "ai_concept": "Telemetry / instrumentation (token tracker, skill-usage logs, OB1 access counters)", "category": "electrical", "punchline": "A car without sensors runs blind. So does an AI stack without telemetry." },
+    { "car": "Dashboard", "ai_concept": "Monitoring + token budget + system health visibility", "category": "electrical", "punchline": "If you can't see the gauges, you don't know the engine's about to blow. Same with AI." },
+    { "car": "OBD-II port + DTCs", "ai_concept": "OB1 outcome logging + diagnostic codes", "category": "electrical", "punchline": "Plug in, read codes, find the problem. No guessing." },
+
+    { "car": "Fuel (gasoline or battery)", "ai_concept": "Tokens / API budget", "category": "fuel", "punchline": "The engine doesn't run on hope. It runs on fuel. And fuel costs money." },
+    { "car": "Octane rating", "ai_concept": "Model tier (Opus vs Sonnet vs Haiku)", "category": "fuel", "punchline": "Premium fuel in a Civic is wasted. Regular in a race car is a misfire. Match the model to the job." },
+    { "car": "Charging network", "ai_concept": "API providers + quotas", "category": "fuel", "punchline": "Range anxiety is real. So is rate-limit anxiety." },
+
+    { "car": "Stock ECU tune", "ai_concept": "Out-of-the-box AI (raw ChatGPT, no memory, no hooks)", "category": "software", "punchline": "Stock tune is safe for the manufacturer. It's never optimal for you." },
+    { "car": "Custom tune / chip", "ai_concept": "Custom prompts + memory + hooks", "category": "software", "punchline": "Same engine. Two completely different cars." },
+    { "car": "Piggyback ECU", "ai_concept": "Bolted-on retrofit (Zapier on top of legacy CRM)", "category": "software", "punchline": "Piggybacks work. They also lie to the stock ECU all day. Eventually something gives." },
+    { "car": "Spark plugs", "ai_concept": "Prompts", "category": "software", "punchline": "Wrong gap, misfire. Worn out, misfire. Replace them more often than you think." },
+    { "car": "Air filter", "ai_concept": "Context retrieval / RAG quality", "category": "software", "punchline": "Dirty air filter and the engine chokes. Bad RAG and the agent chokes the same way." },
+
+    { "car": "Oil + filter change", "ai_concept": "Memory cull / hygiene scripts", "category": "maintenance", "punchline": "Skip the oil change. Watch the engine seize. There's no warning, then there's no engine." },
+    { "car": "Coolant flush", "ai_concept": "Rate-limit / quota review", "category": "maintenance", "punchline": "Coolant looks fine until the day it doesn't. Same with API quotas." },
+    { "car": "Brake fluid", "ai_concept": "Hook config audits", "category": "maintenance", "punchline": "Old brake fluid is the day you find out the brakes don't work." },
+    { "car": "Tire rotation", "ai_concept": "Tool inventory + skill archive", "category": "maintenance", "punchline": "Front tires wear differently. So do your most-used skills. Rotate or lose tread." },
+    { "car": "Timing belt", "ai_concept": "Cron job audit (the thing that snaps and ruins the engine)", "category": "maintenance", "punchline": "Timing belt snaps, valves hit pistons, engine done. Cron job snaps, the whole stack drifts and nobody knows when it broke." },
+    { "car": "Detailing", "ai_concept": "Documentation + handout work", "category": "maintenance", "punchline": "Detailing doesn't make the car faster. It makes the car sellable." }
+  ]
+}

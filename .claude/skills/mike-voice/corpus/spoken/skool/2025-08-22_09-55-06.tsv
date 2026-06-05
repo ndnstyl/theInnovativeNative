@@ -1,0 +1,174 @@
+start	end	text
+0	29300	Okay, now if you guys are visual workers like I am, you kind of need to see some things.
+30000	47060	I am going to give you kind of the overall snapshot. I told you we're going to jump into Merrill here. This is a board that I've used to basically create and ideate workflows for beginning to end. You can even see some of these here that I have handwritten on a whiteboard previously.
+47060	54200	But overall, the first thing that we're going to do is take this essentially as much as we can step by step.
+54200	84200	
+84200	97420	People think they know about the automation that they want to do. They get into it. They start mapping it all out. And then once they create it, they realize that it solves nothing. Don't do that. I've done it before. It's just a complete waste of time.
+97420	127420	
+127420	157420	
+157420	165160	You want to keep the subject matter expert out of it, the business owner out of it. You want to keep the person that knows the most in the loop for the longest time possible so you get the best results.
+165160	178060	Now, that being said, this is also where you're going to just jot down all of the tools that you use. These are most of the tools that I use. Get everything out as much as you can.
+178060	186960	I would like to actually reduce this. The more that you do reduce this, you reduce your overhead, your subscriptions. You also reduce information islands and data silos.
+187420	194840	We'll talk about that. And if we haven't gone over that yet or you haven't seen any of my other videos, I do have one that's specifically about data silos.
+195380	204360	Because the other thing that you have to think about, the more you have, the more tools you have, the more information islands or data silos you're inevitably going to have.
+204360	213800	So each and every department, whether it's marketing, admin, sales, rev ops, sec ops, whatever it is, everybody uses their own set of tools.
+213980	221780	So that creates all of these data silos. So the more that you have and the larger of a business that you have, the more tools you're going to have, the more data silos you're going to have.
+222020	222900	But that's a whole different topic.
+225220	232160	Now, one of the reasons why you want to get this out of your brain is because essentially, like I brought up earlier, you might automate the wrong thing.
+232160	235260	Like this happens quite often.
+236040	243320	Maybe you have a meeting with your team and you guys are going over the concept of it or somebody missed that day or whatever it is.
+244040	252320	Having it out on a whiteboard or in notes keeps everybody on the same page of what you need to automate and why.
+253080	261220	There are many businesses that jump into automation and they're trying to reduce bottlenecks and be the most impactful that they can.
+261220	266140	But they somehow missed one of the steps or are completely automating the wrong thing.
+267540	270580	And mapping forces you to see where value leaks are.
+270800	274500	So you don't waste time building automations that save minutes instead of hours.
+275160	282160	Sometimes just a slight pivot in an automation, instead of only saving five minutes, it saves two hours.
+282160	288540	So once you actually put it all on paper, get it on a whiteboard, it'll give you a lot more clarity.
+289320	292600	Which moves on to step two, hidden dependencies.
+294540	296820	A workflow isn't just a set of tasks.
+297080	305920	There are things sometimes that have dependencies before it or that need to be worked out in order for the workflow to happen.
+305920	308180	Maybe it's a meeting.
+308360	312780	Maybe it is a tool that you have yet to use or pay for the subscription for.
+312940	320660	Or in some cases, like we talked about earlier, you want to integrate it into a piece of software that doesn't have API integration.
+321100	322240	So you have to rethink that.
+322360	325180	There are hidden dependencies that are out there all the time.
+325180	332800	And then without mapping, you don't see step two secretly depends on step zero or step one.
+333180	338720	Like uploading the right file format or client signing a document or anything along those lines.
+338720	346440	Or you're trying to automate something that requires credentials and prior verification like OAuth or passwords.
+346440	358420	Or you are trying to automate your Stripe invoices and you don't realize you have to convert from one file format to another before you can actually upload.
+358900	361960	So you have to think of these dependencies.
+362800	366980	They're not always going to be just bam, smack you in the face.
+367140	370120	It's just better to try to get it out on the front end.
+372820	374440	Next is garbage in, garbage out.
+374440	378320	But AI plus automation only amplifies what's already there.
+379040	382200	For a really simple example, ChatGPT.
+382580	389620	If you say, hey, ChatGPT, create a personalized email that I want to send to this new prospect.
+389760	390500	It's the first time.
+391840	392740	Give me that draft.
+393380	398780	That's completely different than saying, hey, this is the customer profile that I'm going after.
+398880	402380	It's the first time we have had zero in action.
+402520	403240	This is their company.
+403240	406700	This is a value proposition.
+406920	414120	And you actually build that prompt out instead of saying just send out a personalized email to Chris Hawkins.
+414300	415360	You can actually have a company.
+415600	416600	You can have enriched data.
+416800	418180	And you can give it over to ChatGPT.
+418800	420960	So better in is better out.
+421220	423840	In other words, garbage in, garbage out.
+423840	428120	The worse you either explain or you leave out details.
+428520	433480	ChatGPT, as well as AI and AI agents, they don't know anything that you don't tell them.
+434100	435940	So garbage in is always going to be garbage out.
+436880	441320	Mapping exposes where your data is created, validated, and passed along.
+441320	444620	So again, garbage in, garbage out.
+444940	446920	So education, a lot of people don't think about.
+447340	452100	What I just kind of mentioned before, humans intuitively, they handle exceptions here.
+452100	463940	Meaning, like, say we are, I don't know, sending an invoice to somebody that actually hasn't paid yet.
+463940	470920	And we know, oh, okay, looking at our calendar, I'm working with Jim Roof and Company.
+471260	473200	And they're actually on a project.
+473660	475620	And I know the hours that they work.
+476220	478240	And now they're on vacation.
+478380	480040	I see, oh, we talked.
+480200	480760	We had a meeting.
+480920	481780	We're going to reconvene.
+481900	483420	We've got another project that's coming up.
+483620	485100	They haven't paid their invoice yet.
+485780	486800	Humans can do that.
+487860	488660	Machines don't.
+488660	494960	They're not going to know Jim is on vacation or they're out of town or what it is.
+495680	498700	They're not going to intuit anything that isn't there.
+499060	501880	Only what is available to them will they be able to process.
+503060	508280	Mapping lets you identify the edge cases up front and decide whether you automate, delegate, or eliminate.
+510040	513800	And the next one, clarity for compliance and trust.
+514140	516140	This works in a multitude of ways.
+516220	517040	We talked about HIPAA.
+517040	519440	We talked about very risk-averse lawyers.
+519980	528880	Or maybe there's PCI compliance, payment card information, payment card industry, things that you have to actually be aware of.
+529720	539760	Mapping it out provides clarity and compliance and trust, especially in the regulated spaces, like I just said, and PCI compliance and HIPAA and all those things.
+540180	543340	And then six, it forces the process of discipline.
+543340	546740	Most businesses run on tribal knowledge.
+547280	549460	Like, oh, Jenna knows how to do that.
+549540	550700	We're just going to go give it to Jenna.
+551020	555060	And nobody really knows what Jenna does because she hasn't mapped it all out.
+555160	556640	There's no standard operating procedure.
+556800	558180	So that is a bottleneck.
+558480	559600	Oh, I don't know how to do it.
+559780	560200	Jenna does.
+560380	561740	I'm just going to pass it over to her.
+561740	572240	So it forces discipline to where you have to get this out of your brain or out of Jenna's brain and put it onto a particular document that you can create SOPs around.
+572240	581400	You start to discover opportunities and things to eliminate before or even after automation.
+582040	584160	Not every step deserves automation.
+584420	591940	Some things that you do still want to do manually because they're very high value situations.
+592220	596280	Sometimes I've had situations where people are selling very, very high ticket offers.
+596280	602760	You don't want to automate a lot of those cold outreaches or those sales calls.
+602980	604500	Like, you do have retail AI.
+604720	606040	Voice agents are getting great.
+606140	607300	They sound just like humans.
+607440	611360	Their knowledge base is deep because everything that you can train on is awesome.
+611700	616860	But you don't want an AI cold calling a potential $50,000 contract.
+617380	619100	Like, that's just not something you do.
+619220	621260	So not everything needs to be automated.
+621260	626560	You can automate everything all the way up into that call, but you don't want to automate that.
+626680	627400	And some people are.
+627500	627980	I can tell you.
+628060	636140	There are people out there that are using retail AI and a couple of other things, Vappy or whatever, and they're trying to do high ticket closes.
+636260	637100	Some of them are successful.
+637500	638420	I wouldn't trust it.
+638680	643740	But this is where you start to discover those opportunities or eliminate what you need to be automated.
+643740	655820	And then mapping often shows, like, redundant tools or overlap or whatever, like Notion plus Google Docs or, you know, using multiple Excel sheets or whatever it is.
+656360	661780	The bottom line, automation without mapping is like paving a cow path.
+661780	674200	If you just automation without mapping is just something that you don't want to do.
+674300	675300	Mapping gives you the clarity.
+676260	678380	It surfaces all of the edge cases.
+678680	683740	It allows you to look at all of the dependencies and just creates an overall cleaner flow.
+685560	688960	Now, that being said, that's kind of like the structure of how you want to do it.
+688960	697700	We'll go over quickly just a few things just so that you have some kind of material examples of getting your beak wet into N8N.
+697820	702740	These are little screen grabs of little nodes that are from N8N.
+703440	707080	So you have entry points, you have functions, and you have exit points.
+707820	709280	Entry points are things like triggers.
+709540	715920	Maybe it is a weekly trigger or a daily trigger or you just got an email and that starts the workflow.
+715920	720880	A trigger is something that actually starts the first part of the automation.
+721140	722800	So that is the input.
+723600	725360	And then there are all of the functions.
+725580	729620	Code nodes, custom nodes, edit fields, splitting out fields, filters.
+730740	733460	You have AI agents.
+733600	738940	Maybe those AI agents have access to your calendar or other tools like Perplexity or Google.
+738940	741720	Google, your Gmail and different things like that.
+741840	742860	Those are your functions.
+743080	745660	So there's the input.
+746100	750680	There are all of the functions, the meat and potatoes, the executions of what's happening with your AI.
+751040	753520	And then there is the exit, the out points.
+754360	763240	Those are things like updating spreadsheets or putting files into your Dropbox or to Airtable or to ClickUp or to your HubSpot or different things like that.
+763240	769780	So that's a very rudimentary way to kind of go over input, function, output.
+770240	777680	And these are some of the nodes that you're going to start to see and maybe you've worked with and it in already and you're kind of familiar with a few of these things.
+777680	785020	But overall, this is what something as a workflow starts to look like.
+785240	787320	You are listening for and collecting data.
+787500	790320	So like an RSS feed to an Airtable.
+790700	798680	There is an RSS feed that you're either listening to, it filters out and executes a sub-workflow and then it inputs it over into Airtable.
+800380	803600	For Zoom meetings, this is what I used to use for Zapier.
+803720	804580	I use a little bit different.
+804580	813160	This is a very old board, but in Zapier, you would have something like ReadAI, format it with date and time and then other formats.
+813260	817640	And then you inject it into Airtable or HubSpot or Salesforce or whatever it is.
+819740	822780	Another one, something like this, like LinkedIn content analytics.
+823160	833340	You have a schedule, you create a task in ClickUp, you send a message in Slack to whoever it is, maybe a channel or a specific team member or an overall team.
+833340	834700	You wait.
+835700	836420	Human in a loop.
+836880	840920	So the response from whoever it is, maybe it's like the sales director.
+841080	843940	You're saying, hey, we've got this task.
+844580	846140	This person needs to be onboarded.
+846540	847940	Have they already been onboarded?
+848000	848480	Yes or no?
+848800	851600	This little wait allows them to give a response.
+851700	856440	If no, then it'll get tasked and then it'll split it out for whatever operations that need to happen.
+856440	860360	Put it in an Airtable and send message and contact fields.
+860420	864100	And this is where you start to see a little bit of how things can work for you.
+864400	867100	Say you have like 15 of these that have stacked up.
+867260	870340	This little part right here, when you see this, it'll go through the loop.
+870340	872960	So it'll send it in one by one.
+873080	873500	It'll wait.
+873740	879720	And then this, again, like maybe the sales director or sales manager has it and they've got to work through all 15.
+880040	883660	Every time they either approve it, yes or no, it'll go through this filtration system.
+884120	886820	If there's no operation, you know, they'll just do whatever there is.
+887200	892340	If there is, then it'll execute whatever it is based on the if command that's right here in this.
+892340	896880	And then send a message through to Slack.
+897600	900220	And then it'll go again for another answer, human in the loop.
+900340	906000	And then the cycle either continues with more questions or it will go and execute whatever it is.

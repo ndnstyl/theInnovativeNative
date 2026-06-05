@@ -1,0 +1,40 @@
+{
+  "description": "Gap-only seed list with img2img references. Style A uses HF brain as anchor (guaranteed consistent look). Style B uses techsy/shield as anchor. Styles C/D text-only (no clean reference yet).",
+  "assets": [
+    {"style": "a", "subject": "lock", "variant": "cyan", "scale": "hero", "tags": ["security","privacy","protection"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "gear", "variant": "cyan", "scale": "hero", "tags": ["settings","config","engineering"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "chart bar", "variant": "cyan", "scale": "hero", "tags": ["analytics","growth","metrics"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "calendar", "variant": "cyan", "scale": "hero", "tags": ["scheduling","time","planning"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "chat bubble", "variant": "cyan", "scale": "hero", "tags": ["communication","messaging","chat"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "document", "variant": "cyan", "scale": "hero", "tags": ["content","files","document"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "shield with checkmark", "variant": "cyan", "scale": "hero", "tags": ["trust","verification","approved"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+    {"style": "a", "subject": "rocket", "variant": "cyan", "scale": "hero", "tags": ["launch","growth","speed"], "reference": ".claude/skills/3d-icon-forge/library/a-glass-tile/brain-cyan-hero.png"},
+
+    {"style": "b", "subject": "rocket launching upward with exhaust", "variant": "cyan", "scale": "hero", "tags": ["launch","growth","momentum"], "reference": "remotion-videos/iconSet/techsy/shield.png"},
+    {"style": "b", "subject": "brain with neural network connections", "variant": "cyan", "scale": "hero", "tags": ["ai","neural","intelligence"], "reference": "remotion-videos/iconSet/techsy/shield.png"},
+    {"style": "b", "subject": "globe with orbiting rings", "variant": "cyan", "scale": "hero", "tags": ["global","distribution","scale"], "reference": "remotion-videos/iconSet/techsy/shield.png"},
+    {"style": "b", "subject": "complex gear assembly with interlocking cogs", "variant": "cyan", "scale": "hero", "tags": ["engine","system","mechanics"], "reference": "remotion-videos/iconSet/techsy/shield.png"},
+
+    {"style": "c", "subject": "dollar sign coin", "variant": "cyan", "scale": "hero", "tags": ["money","revenue","payment"]},
+    {"style": "c", "subject": "diamond gem", "variant": "cyan", "scale": "hero", "tags": ["value","premium","quality"]},
+    {"style": "c", "subject": "rocket with dollar-sign coin in front", "variant": "cyan", "scale": "hero", "tags": ["monetization","launch","pmf"]},
+    {"style": "c", "subject": "brain with dollar-sign coin", "variant": "cyan", "scale": "hero", "tags": ["ai monetization","intelligence","value"]},
+    {"style": "c", "subject": "heart with ring around it", "variant": "cyan", "scale": "hero", "tags": ["community","care","love"]},
+    {"style": "c", "subject": "glowing mailbox", "variant": "cyan", "scale": "hero", "tags": ["inbox","email","opt-in"]},
+    {"style": "c", "subject": "medal badge with ribbon", "variant": "cyan", "scale": "hero", "tags": ["achievement","award","recognition"]},
+    {"style": "c", "subject": "clock with ring around it", "variant": "cyan", "scale": "hero", "tags": ["time","deadline","urgency"]},
+    {"style": "c", "subject": "key with halo", "variant": "magenta-rare", "scale": "hero", "tags": ["access","unlock","premium","hero-cta"]},
+    {"style": "c", "subject": "flame with ring around it", "variant": "cyan", "scale": "hero", "tags": ["trending","hot","viral"]},
+
+    {"style": "d", "subject": "admin dashboard", "variant": "cyan", "scale": "hero", "tags": ["dashboard","admin","overview"]},
+    {"style": "d", "subject": "shopping checkout interface", "variant": "cyan", "scale": "hero", "tags": ["ecommerce","checkout","payment"]},
+    {"style": "d", "subject": "video player interface", "variant": "cyan", "scale": "hero", "tags": ["video","media","content"]},
+    {"style": "d", "subject": "chat messaging interface", "variant": "cyan", "scale": "hero", "tags": ["chat","messaging","support"]},
+    {"style": "d", "subject": "kanban board with 3 columns", "variant": "cyan", "scale": "hero", "tags": ["project","kanban","management","airtable"]},
+    {"style": "d", "subject": "calendar scheduler interface", "variant": "cyan", "scale": "hero", "tags": ["calendar","scheduling","booking"]},
+    {"style": "d", "subject": "analytics charts dashboard", "variant": "cyan", "scale": "hero", "tags": ["analytics","charts","data"]},
+    {"style": "d", "subject": "workflow builder canvas with connected nodes", "variant": "cyan", "scale": "hero", "tags": ["automation","workflow","n8n","canvas"]},
+    {"style": "d", "subject": "profile settings panel", "variant": "cyan", "scale": "hero", "tags": ["profile","settings","account"]},
+    {"style": "d", "subject": "inbox email interface", "variant": "cyan", "scale": "hero", "tags": ["inbox","email","messages"]}
+  ]
+}

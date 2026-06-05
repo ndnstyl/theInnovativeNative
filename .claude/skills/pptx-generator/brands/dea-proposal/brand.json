@@ -1,0 +1,26 @@
+{
+  "name": "DEA Financial Proposal",
+  "description": "Corporate finance advisory aesthetic for DE Academy sales deck",
+  "colors": {
+    "background": "FFFFFF",
+    "background_alt": "0B1D3A",
+    "text": "0B1D3A",
+    "text_secondary": "4A5568",
+    "accent": "C9A84C",
+    "accent_secondary": "1A3A6B",
+    "accent_tertiary": "E8DCC8",
+    "code_bg": "F7F8FA",
+    "card_bg": "F2F4F8",
+    "card_bg_alt": "0F2847"
+  },
+  "fonts": {
+    "heading": "Georgia",
+    "body": "Calibri",
+    "code": "Consolas"
+  },
+  "assets": {
+    "logo": null,
+    "logo_dark": null,
+    "icon": null
+  }
+}

@@ -1,0 +1,456 @@
+1
+00:00:00,000 --> 00:00:01,740
+or service-based business.
+
+2
+00:00:03,780 --> 00:00:05,340
+Why did I relocate it to that?
+
+3
+00:00:06,500 --> 00:00:07,800
+That's where this course comes in.
+
+4
+00:00:07,880 --> 00:00:08,820
+It's a three-part course.
+
+5
+00:00:09,300 --> 00:00:10,920
+The foundation of it, part one,
+
+6
+00:00:11,200 --> 00:00:14,800
+is building automation for the grind.
+
+7
+00:00:15,640 --> 00:00:16,560
+What I mean by that,
+
+8
+00:00:16,760 --> 00:00:18,460
+a lot of repetitive tasks,
+
+9
+00:00:18,720 --> 00:00:19,920
+a lot of copy and paste,
+
+10
+00:00:20,380 --> 00:00:22,960
+a lot of very time-consuming tasks
+
+11
+00:00:22,960 --> 00:00:24,840
+that are essentially the same
+
+12
+00:00:24,840 --> 00:00:26,460
+over and over and over.
+
+13
+00:00:26,460 --> 00:00:28,640
+You can learn to automate those things.
+
+14
+00:00:29,300 --> 00:00:30,500
+The second part of it
+
+15
+00:00:30,500 --> 00:00:34,540
+is building systems around those automations.
+
+16
+00:00:35,140 --> 00:00:37,800
+You can actually have an end-to-end workflow
+
+17
+00:00:37,800 --> 00:00:39,460
+for your marketing department,
+
+18
+00:00:39,780 --> 00:00:40,880
+your analytics,
+
+19
+00:00:41,180 --> 00:00:42,380
+your marketing campaigns,
+
+20
+00:00:42,560 --> 00:00:44,800
+the ideation of your campaigns,
+
+21
+00:00:44,980 --> 00:00:45,840
+or for sales.
+
+22
+00:00:46,000 --> 00:00:47,760
+You can have something like a system
+
+23
+00:00:47,760 --> 00:00:49,040
+that I've built to where it automatically
+
+24
+00:00:49,040 --> 00:00:50,100
+connects to Calendly.
+
+25
+00:00:50,200 --> 00:00:51,280
+If somebody books a call,
+
+26
+00:00:52,240 --> 00:00:54,120
+that agent in the system,
+
+27
+00:00:54,280 --> 00:00:56,220
+it will actually put it on your calendar.
+
+28
+00:00:56,860 --> 00:00:58,440
+It will take the email
+
+29
+00:00:58,440 --> 00:00:59,780
+and company information.
+
+30
+00:01:00,260 --> 00:01:01,840
+It will go enrich that data,
+
+31
+00:01:02,420 --> 00:01:04,460
+prepare who you're going to be speaking toward,
+
+32
+00:01:05,000 --> 00:01:06,180
+put a Slack notification,
+
+33
+00:01:06,480 --> 00:01:07,660
+and then put it in the pipeline
+
+34
+00:01:07,660 --> 00:01:09,060
+of whatever salesperson
+
+35
+00:01:09,060 --> 00:01:09,820
+is actually going to do it
+
+36
+00:01:09,820 --> 00:01:11,500
+so it can actually act as an SDR.
+
+37
+00:01:11,500 --> 00:01:17,480
+Why did I go down that road?
+
+38
+00:01:17,480 --> 00:01:17,500
+Why did I go down that road?
+
+39
+00:01:17,500 --> 00:01:18,500
+Why did I go down that road?
+
+40
+00:01:18,500 --> 00:01:18,500
+
+
+41
+00:01:18,500 --> 00:01:18,500
+
+
+42
+00:01:18,500 --> 00:01:19,500
+Why did I go down that road?
+
+43
+00:01:19,500 --> 00:01:19,500
+
+
+44
+00:01:19,500 --> 00:01:20,500
+Why did I go down that road?
+
+45
+00:01:20,500 --> 00:01:20,500
+
+
+46
+00:01:20,500 --> 00:01:21,500
+Why did I go down that road?
+
+47
+00:01:21,500 --> 00:01:22,500
+Why did I go down that road?
+
+48
+00:01:22,500 --> 00:01:22,500
+
+
+49
+00:01:22,500 --> 00:01:23,500
+Why did I go down that road?
+
+50
+00:01:23,500 --> 00:01:24,500
+Why did I go down that road?
+
+51
+00:01:24,500 --> 00:01:25,500
+Why did I go down that road?
+
+52
+00:01:25,500 --> 00:01:26,500
+Why did I go down that road?
+
+53
+00:01:26,500 --> 00:01:27,500
+Why did I go down that road?
+
+54
+00:01:27,500 --> 00:01:28,500
+Why did I go down that road?
+
+55
+00:01:28,500 --> 00:01:29,500
+Why did I go down that road?
+
+56
+00:01:29,500 --> 00:01:30,500
+Why did I go down that road?
+
+57
+00:01:30,500 --> 00:01:31,500
+Why did I go down that road?
+
+58
+00:01:31,500 --> 00:01:33,500
+Welcome to buildmytribe.ai
+
+59
+00:01:35,500 --> 00:01:36,500
+I'm getting hot.
+
+60
+00:01:38,500 --> 00:01:39,500
+Welcome to buildmytribe.ai
+
+61
+00:01:39,500 --> 00:01:40,500
+My name is Mike,
+
+62
+00:01:40,500 --> 00:01:42,500
+and you're here because of one of two reasons.
+
+63
+00:01:43,500 --> 00:01:45,500
+Either you know very little about AI,
+
+64
+00:01:45,500 --> 00:01:46,500
+but you're hearing all the hype,
+
+65
+00:01:46,500 --> 00:01:48,500
+and you want to learn about it,
+
+66
+00:01:49,500 --> 00:01:51,500
+or you've started to use it,
+
+67
+00:01:51,500 --> 00:01:52,500
+but it's very basic.
+
+68
+00:01:52,500 --> 00:01:54,500
+It's like a chat GPT,
+
+69
+00:01:54,500 --> 00:01:55,500
+one prompt in,
+
+70
+00:01:55,500 --> 00:01:56,500
+you get one output,
+
+71
+00:01:56,500 --> 00:01:57,500
+and you want to really learn
+
+72
+00:01:57,500 --> 00:01:59,500
+how to build systems around it
+
+73
+00:01:59,500 --> 00:02:00,500
+and how powerful AI can be.
+
+74
+00:02:00,500 --> 00:02:03,500
+from all this hype that you're hearing,
+
+75
+00:02:03,500 --> 00:02:05,500
+but you don't have a strategic plan
+
+76
+00:02:05,500 --> 00:02:07,500
+to learn about it,
+
+77
+00:02:07,500 --> 00:02:09,500
+or a process to implement it
+
+78
+00:02:09,500 --> 00:02:10,500
+into your business.
+
+79
+00:02:12,500 --> 00:02:13,500
+That's where this course comes in.
+
+80
+00:02:13,500 --> 00:02:15,500
+I'm going to break it down into three parts.
+
+81
+00:02:16,500 --> 00:02:18,500
+The first part being the foundation.
+
+82
+00:02:18,500 --> 00:02:20,500
+Automating your grind.
+
+83
+00:02:20,500 --> 00:02:22,500
+That is repetitive tasks,
+
+84
+00:02:22,500 --> 00:02:24,500
+things that are very time consuming.
+
+85
+00:02:24,500 --> 00:02:27,500
+You can actually create workflows and systems
+
+86
+00:02:27,500 --> 00:02:29,500
+that buy back your time,
+
+87
+00:02:29,500 --> 00:02:32,500
+sometimes hours and hours of your time,
+
+88
+00:02:32,500 --> 00:02:34,500
+that you lose every single week.
+
+89
+00:02:34,500 --> 00:02:35,500
+You can automate that.
+
+90
+00:02:35,500 --> 00:02:36,500
+I'm going to teach you how to do that.
+
+91
+00:02:36,500 --> 00:02:38,500
+The second part is connecting the dots.
+
+92
+00:02:38,500 --> 00:02:42,500
+Not just automating simple tasks or a single workflow,
+
+93
+00:02:42,500 --> 00:02:47,500
+but having a system in place to where it does multiple tasks,
+
+94
+00:02:47,500 --> 00:02:52,500
+to where you can have like an SDR prep a meeting for sales agents,
+
+95
+00:02:52,500 --> 00:02:57,500
+or you can synthesize large amounts of data for your marketing team,
+
+96
+00:02:57,500 --> 00:03:00,500
+and have AI driven results,
+
+97
+00:03:00,500 --> 00:03:04,500
+and synthesis from marketing analysis of your Facebook ads,
+
+98
+00:03:04,500 --> 00:03:07,500
+or your Google ads, or your cold email outreach,
+
+99
+00:03:07,500 --> 00:03:10,500
+and then having systems that work it from end to end,
+
+100
+00:03:10,500 --> 00:03:15,500
+and then you can create entire systems around these things.
+
+101
+00:03:15,500 --> 00:03:19,500
+The last part is the elevation of all of it.
+
+102
+00:03:19,500 --> 00:03:22,500
+So not just building the basic,
+
+103
+00:03:22,500 --> 00:03:24,500
+oh, one agent does one task,
+
+104
+00:03:24,500 --> 00:03:28,500
+or even the basics of a system,
+
+105
+00:03:28,500 --> 00:03:34,500
+but an overall scalable system using what I call the software as a service mindset.
+
+106
+00:03:34,500 --> 00:03:41,500
+What I mean by that is there are principles that you can actually steal from software developers,
+
+107
+00:03:41,500 --> 00:03:43,500
+and once you understand these principles,
+
+108
+00:03:43,500 --> 00:03:46,500
+AI will make a lot more sense to you.
+
+109
+00:03:46,500 --> 00:03:50,500
+Software engineers, they really get AI the quickest.
+
+110
+00:03:50,500 --> 00:03:52,500
+They've actually been using it for probably the longest,
+
+111
+00:03:52,500 --> 00:03:55,500
+because all of them have been developing the LLMs and all that,
+
+112
+00:03:55,500 --> 00:04:00,500
+and they're creating all of the new shiny object toys.
+
+113
+00:04:00,500 --> 00:04:02,500
+Oh, Jesus.
+
+114
+00:04:02,500 --> 00:04:04,500
+I need some...
+

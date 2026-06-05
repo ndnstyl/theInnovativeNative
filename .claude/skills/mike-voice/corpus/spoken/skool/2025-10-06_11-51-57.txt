@@ -1,0 +1,549 @@
+Thank you.
+Thank you.
+Thank you.
+Thank you.
+
+Thank you.
+
+
+
+
+Thank you.
+Thank you.
+Thank you.
+
+Thank you.
+Thank you.
+Thank you.
+
+Thank you.
+Thank you.
+
+So it's going to grab this email, synthesize it after it's gotten labeled and now it will
+actually create the draft here.
+So I'll execute this.
+So this is the input and the synthesization from, this is the input and what was synthesized
+from Gemini.
+And now it is put it into my draft folder to which when we go back in here, you'll see
+it.
+And this is where you can start to see it becomes very powerful.
+Obviously, this is a very short email.
+This is just a test from myself to myself.
+But this is where I would just upload the proposal document and I would send it over.
+So it actually already has it written up and it has everything good to go where I would
+just click the attachment, put it in there and then shoot it off.
+And then the last part of this is it will, it will just send it over for it to be de-labeled.
+So it's no longer a red in my inbox.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So it's not going to be the same thing.
+So.
+All right.
+So that's kind of the overview of how all of this works.
+Again, this is a template that is in school.
+You can download it and you can go in either even greater detail than I have of going through each one of these.
+So if you have an email box that is completely out of control, this is a great way to reduce the clutter,
+to get everything marked categorized properly.
+It even synthesizes your emails and it can create drafts on your behalf.
+Then there's just minor things like human in the loop to where you either make minor edits to it.
+You take a look at the email, that draft that's been set up.
+You attach any documents and then you just send it off.
+This is just kind of a game changer when it comes to checking your email and being on top of your email box,
+especially for those that have a ton of like email notifications that are not money making things or that are newsletters that you signed up for.
+Or there's a lot of noise in your business to where you have three, four or five different departments.
+And you want to route either even based on department, based on task, based on the sender, the information that is in there.
+It becomes very, very powerful once you start to segment all of those things off and they all get labeled and categorized properly.
+Okay, now on the other side of this, we're going to jump back in and I'm just going to show you a very simple few steps to actually start to think through and build from end to end.
+Alright, jumping in on the other side, this is how your template is going to look when you very first create one.
+Actually, I'll just start completely from scratch.
+So, you, if you have workflows in here, you're going to actually see them labeled in here.
+If not, this will be completely bright.
+In the top right, you're just going to click create workflow.
+And then you are going to add a trigger.
+Right now, what I just do for the sake of actually getting through the whole test of it all, I usually start with just a manual trigger.
+But the Gmail node, the one that I was actually using for the trigger and the operation that you've just seen, the workflow that you've just seen, this is get messages from my account.
+So, when a message is received, you can put this on your workflow board as well.
+Now, setting up your credentials, it's not that hard.
+It does take a bit though, setting up testing.
+We'll just set up a test one here just so that I can show you the walkthrough of where to go.
+I'm also going to link the direct URL so that you can go to your Google Cloud console and grab all of this information.
+But, it's going to open up a new window.
+Type in Google Cloud console.
+Type in Google Cloud console.
+
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud.
+Type in Google Cloud.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+
+Type in Google Cloud console.
+!
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+
+!
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+Type in Google Cloud console.
+!

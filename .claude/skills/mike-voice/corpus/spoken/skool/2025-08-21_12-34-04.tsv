@@ -1,0 +1,60 @@
+start	end	text
+0	22700	Welcome to buildmytribe.ai. My name is Mike and the fact that you're here means one of two things.
+22920	29140	Either you're hearing all of this hype surrounding AI and you have yet to use it or you've actually
+29140	34440	started to use it a little bit and you want to learn more but you don't really have a plan or a
+34440	42320	strategy to do so. That's what this course aims to fulfill. Understanding AI, learning how to create
+42320	55240	agents, agentic systems, and incorporating AI into your business. Now in just three parts I'm going to
+55240	62960	show you how to go from manual, repetitive, chaotic tasks to absolute clarity using AI and incorporating
+62960	70640	it into your business. I can tell you this helps literally every type of business. It's not only
+70640	78960	for software as a service or for consumer packaged goods or for real estate agents or only for marketing
+78960	83960	companies. It's helped content creators. It's basically...
+88260	93780	Then I can tell you AI helps literally every type of business from small, medium to large,
+94360	101420	from service-based business to consumer packaged goods business to content creators alike. AI is
+101420	105640	powerful and as long as you understand it and how to incorporate it into your business,
+105640	110240	it's going to help you grow faster than any other tool on the market.
+114060	119720	And I can tell you it's not hype. I use it every day and it's not just a jump in a chat,
+119780	125720	you'll be cheap GPT, put in a single prompt, getting a single output. Like if you really start to learn AI,
+125980	132300	understand it, how you can create systems around AI agents, it'll really change the game of how you
+132300	137960	scale your business, how you create your content, how you generate leads, how you create your email
+137960	146660	campaigns, how you analyze your content marketing or your ad spend, all of it. AI can be the center
+146660	153000	of all of it and be the intelligence to your business that helps you scale further much, much faster.
+153000	164500	So part one is foundations. Automate the grind. Go from just putting in a chat GPT one input like,
+164660	171480	oh, create my next outbound email campaign or structure and it gives you the idea to having a
+171480	179960	full-blown sequence of personalizing data, enriching company profiles, creating SDR agent workflows that
+179960	185260	prep meetings and send synthesized data based on data enrichment over to your sales team.
+191620	198740	Part one is foundations. Automate the grind. Buy back your time by automating the really crappy
+198740	205260	repetitive tasks that you have to do every single week. But in order to do that, you first have to
+205260	213620	take inventory of your tools, your workflows, all of your tasks. And I like to tell people to just go
+213620	219900	through one week of everything that you're already doing and try to write down as much as possible.
+220420	227360	Write every tool you use down, what your CRM is, what all your tasks are, and just do that for one week.
+227480	233720	Once you have that out of your head and onto paper, then you can actually start to understand where AI can
+233720	242140	help you. That's the very first part of this. Now part two is the expansion of connecting the dots,
+242320	249720	not just what you're using, what tools you have, or access to, or using chat GPT. This is starting to
+249720	254820	build an end-to-end workflow using agentic AI or AI intelligence.
+254820	267420	This is where you start to integrate it into sales, into marketing, into your admin tasks, into
+267420	277620	email outreach, or content creation, content ideation, your podcast ideas. You can actually use AI to
+277620	285140	create entire workflows from end-to-end. And then part three is the elevation of all of that.
+285420	292880	Not just having one AI agent or one workflow, but trying to automate as much, if not every single
+292880	299100	part of your business and having an AI-first strategy to where you build your business on
+299100	309900	a great foundation of centralized AI intelligence.
+309900	317420	So by the end of this, what I hope to do is not just have you understand AI or create a specific
+317420	324020	agent or just one workflow. I actually want you to create a system for your business or your
+324020	331980	brand that you can actually scale and grow with. And I can tell you, this course is in theory.
+332880	338980	As an AI consultant, I've helped many people build systems, build agents, build workflows,
+338980	344440	from lawyers to content creators to real estate agents, marketing departments, agencies.
+345460	350620	Everybody knows they need AI. They just don't quite know how to implement it. And once you understand
+350620	355500	all of these core principles and you start to think about AI a little bit differently, you can then
+355500	361520	start to think about how to incorporate AI into your business to help you scale faster and go from chaos
+361520	371920	to clarity. So enough about what the course is. Let's just go ahead and dive right into it.
+371920	385080	So enough about what the course is. One last thing I just want to tell you. I built this course in a modular sense.
+385080	394320	So there's some of this stuff that you can skip if you are familiar and understand AI. Like you're not going to need to know what LLMs are or what an AI agent is.
+394320	402440	And you want to go straight to your systems or system building or end-to-end workflows using N8N. By all means, you can go ahead and jump forward and do that.
+402700	413440	But if you only have a very early understanding of what AI is, it's probably best to go module by module so that you can build the understanding of what AI is,
+413800	418800	what the terms are, how to use software, because there's a lot that goes into it.
+418800	427140	You have to understand endpoints and requests and security and what AI agents are, how to build workflows, things like make.com,
+427300	435080	N8N, all of that other stuff. We're going to have a whole bunch of other tutorials of how to build these AI agents, these systems,
+435240	439040	and these workflows. So like I said, feel more than free to jump around.
+439040	447460	But the best thing to do is to digest this module by module so you don't jump forward and then don't understand something
+447460	451860	and then have to go backwards and then, you know, you have the cycle of just not learning.
+458340	467100	So if you're ready to start building your own AI system, let's go ahead and jump right in. See you there.
+469040	471040	So

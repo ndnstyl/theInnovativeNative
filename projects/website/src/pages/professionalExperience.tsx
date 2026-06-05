@@ -38,36 +38,35 @@ interface RoleMatch {
 // Resume Data
 const experienceRoles: ExperienceRole[] = [
   {
-    title: "Senior AI & Growth Strategist",
+    title: "Senior AI + Growth Strategist",
     company: "Automation Station",
-    dates: "02/2024 - Present",
+    dates: "02/2024 - 05/2026 (contract, scope complete)",
     bullets: [
-      "Architected automated lead nurturing systems generating $1.2M+ incremental revenue in first year",
-      "Built end-to-end attribution pipeline using n8n, Airtable, HubSpot—reducing reporting time 80%",
-      "Improved lead-to-close rate 4X through automated qualification workflows",
+      "Designed the marketing-ops backbone (n8n, Airtable, HubSpot, GA4) replacing a 25-hour-per-week manual reporting cadence with a single source of truth for pipeline, spend, and attribution",
+      "Architected the AI lead-scoring and qualification layer running live against CRM signals; sales operates against it today with no SDR triage in front of it",
+      "Embedded as marketing-ops authority through a period of rapid revenue expansion; delivered full system documentation at scope end for clean internal handoff",
     ],
-    tech: ["n8n", "Supabase", "Airtable", "Gemini", "HubSpot", "Twilio"],
+    tech: ["n8n", "Supabase", "Airtable", "Gemini", "HubSpot", "GA4"],
   },
   {
-    title: "Digital Media Director",
-    company: "The Innovative Native",
+    title: "Founder / Chief Marketing Officer",
+    company: "The Innovative Native LLC",
     dates: "04/2015 - Present",
     bullets: [
-      "Drove 300% increase in qualified leads in 90 days for SaaS client through integrated PPC/SEO strategy",
-      "Managed $250K-$500K monthly ad budgets across Google, Meta, LinkedIn",
-      "Designed customer journey maps and retargeting frameworks",
-      "Scaled client portfolio 5.3x ($225K → $1.2M/month) via value-based pricing and data infrastructure",
+      "Scaled agency client portfolio 5.3x ($225K to $1.2M per month) over five years through structural improvements in measurement, attribution, and creative-system reuse",
+      "Held client P&L across SMB, legal, SaaS, and DTC; managed $250K to $500K in monthly ad spend across Google, Meta, LinkedIn, and YouTube",
+      "Built and operate the in-house earned-media engine placing coverage in CNN, Forbes, Wall Street Journal, Fortune, and BBC at an 18 percent reply rate (4-5x industry benchmark)",
+      "Shipped 80+ production AI workflows running the agency's marketing, sales, and ops backbone today; live proof that AI infrastructure compounds leverage in production",
     ],
   },
   {
     title: "Growth Marketing Manager",
     company: "Lawclerk",
-    dates: "01/2022 - 09/2024",
+    dates: "01/2022 - 09/2024 (role eliminated post-Smokeball acquisition)",
     bullets: [
-      "Owned $70K/month per platform budget (Google, LinkedIn, Meta, YouTube) for B2B SaaS legal marketplace",
-      "Achieved 10%+ month-over-month growth for 12+ consecutive months while reducing CPA by 52%",
-      "Led cross-functional growth initiatives across product, sales, and content teams",
-      "Named Employee of the Month 5 times",
+      "Owned paid acquisition across Google, LinkedIn, Meta, and YouTube at $70K monthly spend per platform for a B2B SaaS legal marketplace serving solo and small-firm attorneys",
+      "Led the measurement-layer rebuild that consolidated 120 reported marketing KPIs down to 45, eliminating reporting overhead and restoring decision-quality at the leadership level",
+      "Partnered cross-functionally with product, sales, and content to run integrated growth initiatives instead of siloed channel campaigns",
     ],
   },
   {
@@ -75,9 +74,27 @@ const experienceRoles: ExperienceRole[] = [
     company: "Performax Labs",
     dates: "01/2018 - 03/2020",
     bullets: [
-      "Directed full digital presence for sports nutrition CPG across paid, organic, and social channels",
-      "Built A/B testing frameworks for landing pages and creative",
-      "Produced all photo/video content in-house",
+      "Held full digital P&L for a sports nutrition DTC brand across paid, organic, social, lifecycle, and creative production",
+      "Built the A/B testing framework for landing pages, ad creative, and lifecycle email; produced photo and video content in-house, eliminating six-figure annual external creative spend",
+    ],
+  },
+  {
+    title: "Director of SEO + Content Marketing",
+    company: "Local Lighthouse",
+    dates: "07/2012 - 03/2017",
+    bullets: [
+      "Led SEO, SEM, and content strategy across the agency's own web properties; technical SEO, on-page optimization, search-intent architecture, and analytics all rolled up under this seat",
+      "Scaled monthly organic traffic 3.8x (5,000 to 19,000+ visitors) through search-intent restructuring and content expansion (an SEO agency trusting an internal director to grow their own organic is itself the credential)",
+      "Trained and enabled the sales team on SEO fundamentals and value-based positioning, lifting prospect-call quality and shortening new-business cycles",
+    ],
+  },
+  {
+    title: "Marketing Director (Concurrent Freelance)",
+    company: "Community Real Estate Company",
+    dates: "01/2014 - 12/2018 (Yorba Linda, CA, Hybrid)",
+    bullets: [
+      "Held the marketing director seat for a competitive real estate brokerage on a fractional retainer running concurrent to Local Lighthouse and Performax Labs tenures; full ownership of SEO, paid acquisition, events, and landing-page conversion infrastructure",
+      "Built the local-intent search and lead-generation stack: high-intent SEO targeting, community event-driven acquisition, and landing pages that converted paid traffic into qualified agent appointments",
     ],
   },
 ];
@@ -196,10 +213,10 @@ const roleMatches: RoleMatch[] = [
       "Align marketing efforts with business objectives and revenue targets",
     ],
     experienceMatch: [
-      "Scaled portfolio 5.3x ($225K → $1.2M/mo) through structural improvements",
-      "Led cross-functional initiatives across product, sales, and content",
-      "Managed $50M+ lifetime media spend with full budget ownership",
-      "Cut 120 KPIs to ~45 while improving efficiency 18-22%",
+      "Scaled agency portfolio 5.3x ($225K to $1.2M/mo) through structural improvements in measurement, attribution, and creative-system reuse",
+      "Led cross-functional initiatives across product, sales, and content at Lawclerk B2B SaaS marketplace",
+      "Managed $50M+ in lifetime media spend across Google, Meta, LinkedIn, YouTube with full budget ownership",
+      "Consolidated 120 reported KPIs down to 45 at Lawclerk, restoring leadership decision-quality",
     ],
   },
   {
@@ -213,10 +230,10 @@ const roleMatches: RoleMatch[] = [
       "Optimize CAC, LTV, and ROAS across channels",
     ],
     experienceMatch: [
-      "Achieved 10%+ MoM growth for 12+ consecutive months while reducing CPA 52%",
-      "Drove 300% increase in qualified leads in 90 days via integrated PPC/SEO",
-      "40% ROAS improvement through AI-optimized bidding strategies",
-      "Built A/B testing frameworks for landing pages and creative at scale",
+      "Owned paid acquisition across Google, LinkedIn, Meta, YouTube at $70K/month per platform on B2B SaaS marketplace",
+      "Managed $250K to $500K in monthly client ad spend across multiple verticals at The Innovative Native",
+      "Built A/B testing frameworks for landing pages, ad creative, and lifecycle email at Performax Labs",
+      "Designed the marketing-ops backbone (n8n, Airtable, HubSpot, GA4) replacing 25-hour-per-week manual reporting cadence",
     ],
   },
   {
@@ -231,8 +248,8 @@ const roleMatches: RoleMatch[] = [
     ],
     experienceMatch: [
       "$50M+ in lifetime managed media spend across Google, Meta, LinkedIn, YouTube",
-      "Scaled agency portfolio 5.3x ($225K to $1.2M/month) via measurement and automation",
-      "10%+ MoM growth for 12 consecutive months while cutting CPA 52% on B2B SaaS marketplace",
+      "Scaled agency portfolio 5.3x ($225K to $1.2M/month) via measurement, attribution, and creative-system reuse",
+      "Shipped 80+ production AI workflows running a live marketing, sales, and ops backbone today",
       "Tier-1 PR placements (CNN, Forbes, WSJ, Fortune, BBC) at 18% reply rate, 4-5x benchmark",
     ],
   },

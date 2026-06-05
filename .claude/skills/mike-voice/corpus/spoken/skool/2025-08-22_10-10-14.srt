@@ -1,0 +1,116 @@
+1
+00:00:00,000 --> 00:00:11,100
+you tell us to do. Now, again, another workflow. This is something that it comes through a webhook
+
+2
+00:00:11,100 --> 00:00:15,660
+or something that maybe through your website and it creates a filter and executes a sub workflow
+
+3
+00:00:15,660 --> 00:00:22,460
+that goes into Airtable. And then on a schedule, it'll actually go in and pull whatever it is to
+
+4
+00:00:22,460 --> 00:00:29,040
+use tasks from your Airtable. And then it'll actually filter them, go through Airtable again,
+
+5
+00:00:29,040 --> 00:00:35,060
+split them out, talk to an AI agent, maybe put it on a notion board and then notify whoever it needs
+
+6
+00:00:35,060 --> 00:00:43,620
+to be. So overall, it gives you kind of an idea of how all of this is mapped out, the ways that I like
+
+7
+00:00:43,620 --> 00:00:50,320
+to do it. You can get as granular as you would like to help you out and work through all of this stuff,
+
+8
+00:00:50,420 --> 00:00:57,540
+but overall, it just, it needs to be done. And I would venture to say that it needs to be done 100%
+
+9
+00:00:57,540 --> 00:01:03,240
+of every single workflow needs to be mapped out. Something like this, maybe not to the,
+
+10
+00:01:03,240 --> 00:01:09,580
+to the nth degree, but overall, as long as you have this or something similar to this,
+
+11
+00:01:10,100 --> 00:01:14,220
+whether it's a notepad or it's this mural board or whatever other tool that you're going to use,
+
+12
+00:01:14,440 --> 00:01:17,520
+this is going to provide so much clarity for your team because you can take this
+
+13
+00:01:17,520 --> 00:01:24,080
+and then you can put it into a Google drive or create a database in your CRM, like HubSpot,
+
+14
+00:01:24,080 --> 00:01:29,600
+or your custom database. And you can have all of these workflows to where if something breaks or
+
+15
+00:01:29,600 --> 00:01:34,260
+something is not working as intended, you can even just go back to the workflow and you can say,
+
+16
+00:01:34,360 --> 00:01:40,740
+Hey, okay, well we created it to do X, Y, Z. We need to change this node out for something else or add
+
+17
+00:01:40,740 --> 00:01:48,140
+another step. So say your workflow needs to grow over time or you hire onboard other teammates.
+
+18
+00:01:48,140 --> 00:01:56,480
+Um, this will give you where it's breaking, where you can add what you need to take out,
+
+19
+00:01:56,480 --> 00:02:04,120
+or maybe you've completely trained an AI to do something that is going to take over tasks to help
+
+20
+00:02:04,120 --> 00:02:09,280
+grow your, your application, your business or whatever. And you want to inject another step into
+
+21
+00:02:09,280 --> 00:02:15,200
+it so you can put in or remove or redo whatever, but without this, and if it's just stuck in somebody's
+
+22
+00:02:15,200 --> 00:02:20,120
+head, it's never going to make any sense to anybody else other than that one person.
+
+23
+00:02:21,080 --> 00:02:30,760
+Anyways, as I said, this is going to be something that is available for download. And, uh, I will try
+
+24
+00:02:30,760 --> 00:02:35,460
+to either create an image out of it. Um, and for the use, for, for those that do want to just copy it,
+
+25
+00:02:35,500 --> 00:02:40,640
+I will give you a link to copy that is going to be down below. Um, so that you have access to this,
+
+26
+00:02:40,640 --> 00:02:46,740
+this workflow here. Um, a couple of the things that I didn't go over here, but, uh, it's essentially
+
+27
+00:02:46,740 --> 00:02:51,100
+explaining kind of the same things of what we already went over. Um, so you can manipulate it,
+
+28
+00:02:51,100 --> 00:02:55,400
+make a copy of it, change it. Um, but this will give you the skeleton of how you need to actually
+
+29
+00:02:55,400 --> 00:03:01,100
+work through the flow. Uh, until next module, you guys have a good day.
+

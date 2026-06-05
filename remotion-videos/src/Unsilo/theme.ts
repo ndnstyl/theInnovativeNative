@@ -23,15 +23,15 @@ export const colors = {
 // ──────────────────────────────────────────────
 
 export const fonts = {
-  handwritten: 'Caveat',
+  handwritten: 'Bangers',
   mono: 'JetBrains Mono',
-  title: 'Space Grotesk',
+  title: 'Caveat',
   fallback: 'monospace',
 } as const;
 
 export const typography = {
   sceneTitle: {
-    fontFamily: fonts.handwritten,
+    fontFamily: fonts.title,
     fontSize: 64,
     fontWeight: 700 as const,
     color: colors.cyan,

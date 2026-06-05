@@ -1,0 +1,259 @@
+start	end	text
+0	3840	Take that, put it into your system, it enriches the data,
+3840	6940	and then it actually hands over to your sales agent
+6940	8580	or your senior salesperson,
+8580	10920	or it even delegates all of those leads
+10920	12820	to a round robin team.
+12820	14000	Whatever system you have,
+14000	16800	you actually create that intake system,
+16800	18760	and then you parse all of that information out
+18760	22200	or those leads out to whoever needs to actually receive it.
+22200	27200	Meeting summaries and next steps.
+30200	31940	There are lots of tools for this.
+31940	34500	There is Notebook LLM, sorry.
+46360	48240	Meeting summaries and next steps.
+48240	49580	There are many tools for this.
+49580	54580	Fireflies, Notebook LLM, Notion, Motion, a hundred of them.
+60940	63040	Meeting summaries and next steps.
+63040	64480	There are many apps for this.
+64480	67180	You can use N8N, you can use Fireflies,
+67180	69780	you can use Notebook LLM or Notion.
+69780	70700	Take your pick.
+70700	73560	The whole point is you have an AI assistant
+73560	74980	that remembers all of it,
+74980	78720	and it will actually put it into a very easy to comprehend
+78720	81660	note-taking system, and it'll send it over to your Slack,
+81660	85060	to your email, or put it in your pipeline for your CRM,
+85060	86980	and it doesn't miss a single note.
+86980	87820	I love it.
+87820	90220	I use it every single time I have a discovery call.
+93380	95820	Another is a content repurposing engine.
+95820	98680	Maybe you have a podcast channel,
+98680	101920	and you do very long form podcasts from one, two,
+101920	103360	or even three hours.
+103360	106520	You can actually get, even just from a one-hour podcast,
+106520	109200	anywhere from about 10 to 15 solid clips.
+109200	111520	You can use AI to parse them all out.
+111520	113760	You can use AI to actually schedule the posts
+113760	115800	to each one of your social media channels.
+115800	118860	So you take one long form of content,
+118860	121660	and then you repurpose it into smaller bit sizes,
+121660	124700	and for Reels, or for TikTok,
+124700	128360	or for your YouTube shorts, anything along those lines.
+128360	131300	So a content repurposing engine is great for people
+131300	133300	that are actually making long form content.
+136760	139820	And the next one is automated follow-ups.
+142560	143700	Automated follow-ups.
+143700	144600	This is great.
+144600	148520	Whether it's a email that is drafted by AI,
+148520	151300	and all you have to do is either make minor changes
+151300	152380	and then send it out,
+152380	154420	or maybe it's a contract proposal.
+154420	157420	Maybe it is a pitch deck,
+157420	159560	something that you can actually hand over to sales,
+159560	161660	and you're a designer.
+161660	162580	They've been waiting on it.
+162580	164620	You actually have the whole entire template
+164620	166520	and everything all created and ready.
+166520	168280	You just haven't actually sent it out.
+177220	178820	Automated follow-ups.
+178820	183080	Things like emails, contracts, proposals, pitch decks,
+183080	185680	designs, if you're a designer, you do design work.
+185680	187340	You can actually create a sequence
+187340	191480	to where at each human in the loop input,
+191480	193220	you can add either a document,
+193220	195580	or if needed criteria,
+195580	198540	and you actually have to ask questions to your client.
+198540	200160	You have to get back that information
+200160	202380	to make the next iteration on your design.
+202380	205920	You can actually process that in an automated workflow,
+205920	207580	and send out those notifications,
+207580	211000	either through email, or Slack, or Telegram.
+211000	213300	So your follow-up becomes automated,
+213300	216100	and every single milestone that you actually have to hit,
+216100	218240	it actually reaches out to your client,
+218240	220440	and then when they respond to you,
+220440	221760	it creates a draft,
+221760	223500	and then all you have to do is upload a document,
+223500	224800	and it gets sent out.
+224800	226600	So automated follow-up,
+226600	232700	so automated follow-up can actually save you hours and hours of time,
+232700	235360	and it actually can speed up the whole back and forth
+235360	240700	between client and requirements and dependencies and files.
+240700	241900	It's a no-brainer.
+241900	256200	Each and every one of these saves time,
+256200	257200	and then over time,
+257200	259200	it actually has a compounding effect.
+259200	261200	So if you're saving 15 minutes here,
+261200	263500	30 minutes there, or 45 minutes,
+263500	267700	over time, you're actually buying back an entire day,
+267700	270000	or an entire week of your year back,
+270000	271500	maybe even more,
+271500	273700	when you have all of these repetitive systems,
+273700	277700	all orchestrated by your AI and N8N.
+297700	308500	And here's the mental shift that I'd like you to try to make.
+308500	312500	Stop seeing AI as just another tool or another agent.
+312500	314500	Think of it just like a new hire,
+314500	316500	as a new teammate.
+320500	322500	If and when you hire a new person,
+322500	325500	you don't just dump all of your tasks on over to them,
+325500	329300	you give it to them in bite-sized, understandable chunks.
+329300	330700	And then you build on that.
+330700	332000	And then the more they learn,
+332000	333500	the more you can actually give them.
+333500	335700	AI is seemingly the same way.
+337300	339500	AI is thought about...
+340800	343000	AI should be thought about just like that.
+343000	345000	Every time you hand it off to them,
+345000	347000	and you actually see that it can create...
+349000	351000	Every time you hand off tasks to it,
+351000	353500	and you see that it can go from end to end,
+353500	355700	with 100% accuracy and completion,
+355700	356800	then add more,
+356800	359500	just like another Lego or a building block on top of it.
+359500	360800	And then before you know it,
+360800	362000	you'll have that system.
+362000	365000	You'll have that teammate that's running that system.
+365000	378000	And then what happens when the...
+379500	382000	And then what happens when these dots are connected,
+382000	383500	that compounding effect,
+383500	385500	you'll really start to see it.
+385500	386500	You're...
+386500	389000	There's not going to be any more information silos.
+389000	389700	That lead comes in,
+389700	390700	it's automatically handled.
+390700	392000	And then that compounding effect,
+392000	393000	you'll actually really start to see it.
+393000	395000	There's not going to be any more information silos.
+395000	396000	That lead comes in,
+396000	397000	it's automatically handled.
+397000	398500	That transcript comes in from a sales call,
+398500	399500	then it's actually synthesized.
+399500	400200	AI will take a look at it.
+400200	401200	It'll pull out important information,
+401200	402200	put it in bullet points,
+402200	403200	and then it's automatically handled.
+403200	404200	And then that compounding effect,
+404200	405200	you'll actually really start to see it.
+405200	406200	There's not going to be any more information silos.
+406200	407200	That lead comes in,
+407200	408200	it's automatically handled.
+408200	409200	That transcript comes in from a sales call,
+409200	410200	then it's actually synthesized.
+410200	411200	AI will take a look at it.
+411200	413200	It'll pull out important information,
+413200	414200	put it in bullet points,
+414200	415200	and then it's actually synthesized.
+415200	417400	And then it'll send it out and pass it over to the next person
+417400	419400	that either needs to make a closing call,
+419400	421400	or even onboard them if you've already closed them.
+421400	423400	And it'll synthesize all of that information
+423400	425400	and let you know what already has been transpired.
+425400	427400	And then it'll synthesize all of that information
+427400	429400	and let you know what already has been transpired.
+429400	431400	And then it'll synthesize all of that information
+431400	433400	and let you know what already has been transpired.
+433400	435400	And then it'll synthesize all of that information
+435400	437400	and let you know what already has been transpired.
+437400	439400	And then it'll synthesize all of that information
+439400	441400	and let you know what already has been transpired.
+441400	443400	And then it'll synthesize all of that information
+443400	448400	and then instead of siloed information,
+448400	450100	you actually get flow.
+450100	453100	That compounding effect, you'll see it immediately.
+453100	456700	Your lead comes in, it gets routed properly.
+456700	460400	Your sales calls, they get transcribed and passed over
+460400	462600	to either the closer or the onboarder.
+462600	464600	And it all happens seamlessly.
+464600	465600	So it's not...
+473400	483100	And instead of siloed tasks, you get automation.
+483100	485100	You get the compounding effect.
+485100	489100	The lead comes in, it gets routed properly.
+489100	491100	Notes come in, they get summarized.
+491100	494800	They get passed over to the next person that actually needs them.
+494800	508800	Instead of siloed tasks, you get a flow.
+508800	510800	A lead comes in, AI qualifies them.
+510800	512800	Automation routes them.
+512800	515800	Meetings get summarized and follow-ups go out.
+515800	521500	And content gets repurposed.
+521500	524500	And you're no longer the one that's holding it all together.
+524500	528500	Or you don't have one single person on your team that's holding it all together.
+528500	531500	You get flow and everything starts to synergize and work together.
+531500	543200	The system runs, you oversee, and then you start to expand.
+543200	544200	That's connecting the dots.
+544200	555200	That's compounding effect.
+555200	558200	And the real value here is that you actually start to think differently.
+558200	560200	You start to shift roles.
+560200	563900	You're delegating to teammates, to your AI system, to automation.
+563900	574700	And you're not just a hustler trying to keep things all together.
+574700	585000	You become an architect of your business and you actually create the flow of how things move.
+585000	589700	And that's exactly how you scale without burning out.
+589700	600700	And that's exactly how you scale without burning out or without drowning in tasks every day.
+600700	616400	And that's how you get ahead of tasks instead of getting inundated with emails and repetitive 5, 10, 15 minute tasks here and there.
+616400	619100	And that's how you scale without burning out.
+619100	623100	That's how you get ahead of business instead of being behind the eight ball.
+623100	625100	And then you start to scale your business.
+625100	642800	So just some final closing thoughts here.
+642800	646500	I know we went over a lot in this and I'm trying to get you to do a mindset shift.
+646500	651500	Like AI not just being the new hire and actually being a teammate.
+651500	654500	And your next new hire shouldn't always just be a person.
+654500	656500	It actually could be your agent.
+656500	663200	A few closing thoughts here.
+663200	670200	And just to kind of recap, we went over changing your mindset over to your new hire being AI.
+670200	679200	Or using AI in an existing team and actually amplifying their work, reducing their time and creating more flow.
+679200	687900	Expansion is about connecting those dots.
+687900	692900	It's about setting AI up as your first hire.
+692900	699900	Building workflows that save time almost instantly as soon as you implement them.
+699900	702900	And letting automation do all of the heavy lifting for you.
+702900	707900	That 80-20 of 20% of your work.
+707900	713600	That 80-20, 80% of your profits come from 20% of your work.
+713600	718600	And you actually automating a huge portion of those repetitive tasks.
+718600	723600	So that means your 80-20 starts to compound on top of itself.
+723600	730600	If chaos to clarity was about gaining control.
+730600	746300	If chaos to clarity was about gaining control.
+746300	749000	If chaos to clarity was about getting control.
+749000	751000	Expansion is about building leverage.
+751000	756000	It's about designing a system that actually scales with you.
+756000	758000	Without needing more hustle.
+758000	759000	Or more hours.
+759000	762000	Or more of a head count in your business.
+762000	766000	Because at the end of the day, the fastest way to grow isn't by working harder.
+766000	770000	It's by expanding your capacity with systems that never stop working for you.
+770000	771700	That's how you scale smarter.
+771700	773700	And that's how you win.
+773700	798400	If chaos to clarity was about getting control.
+798400	803400	Expansion is about building leverage.
+803400	806100	It's about designing a system that actually scales with you.
+806100	809100	Without needing more hustle.
+809100	810100	Without needing more hours.
+810100	815100	Or without adding to your head count.
+815100	823800	Because at the end of the day, the fastest way to grow isn't by working any harder.
+823800	828800	It's about working smarter.
+828800	842000	It's by expanding your capacity with winning systems that never stop working for you.
+842000	855000	That never stop working for you.
+855000	857000	And that's how you scale smarter.
+857000	861000	And that's how you win.
+861000	862000	That's how you scale smarter.
+862000	862000	
+862000	863000	You can't even get more.
+863000	864000	You can't even get more.
+864000	864000	
+864000	865000	You can't even get more.
+865000	866000	You can't even get more.
+866000	867000	You can't even get more.
+867000	868000	You can't even get more.
+868000	869000	You can't even get more.
+869000	870000	You can't even get more.
+870000	871000	You can't even get more.
+871000	872000	You can't even get more.
+872000	873000	You can't even get more.
+873000	874000	You can't even get more.
+874000	875000	You can't even get more.
+875000	876000	You can't even get more.
+876000	877000	You can't even get more.
+877000	878000	You can't even get more.
+878000	879000	You can't even get more.
+879000	880000	You can't even get more.
+880000	881000	You can't even get more.
+881000	882000	You can't even get more.
+882000	883000	You can't even get more.

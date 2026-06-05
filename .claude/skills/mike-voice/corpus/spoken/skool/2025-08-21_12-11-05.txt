@@ -1,0 +1,128 @@
+okay for the 600th time so welcome to buildmytribe.ai my name's mike yay
+welcome to buildmytribe.ai my name is mike and you fall in one of two camps if you're here
+either you are hearing all this hype about ai and you've never used it or you've started to use it
+and you want to incorporate it more into your business or your content creation
+but you're a little bit overwhelmed because you don't have a plan or a strategy
+that's sort of what this course is aimed to solve is either for the newbies or the people that have
+kind of an understanding of it but they really want to use ai the right way and incorporate it
+into their business and start to create systems so this course is going to break it down into three
+parts so this course is broken down into three parts it's pretty simple it's going to be the
+the foundations the the automate the grind part
+we'll start by mapping out your workflows checking out what tools you're doing getting everything out
+all on on one sheet of paper so that you know we'll start by mapping out your jesus christ
+part one is foundations automate the grind overall you want to automate as much as you can that are
+repetitive copy and paste tasks but before we can even do that we'll want to start mapping out
+your workflows your tasks your tools and tech stack so that you actually have the larger picture of
+everything i can tell you whether you're a solopreneur or you are a business owner or a content creator
+not everybody actually has all of their tech stack written written out
+doing this will provide clarity and it'll also start to show you where your gaps are and then once you have
+everything all out on paper you can actually start to figure out how to create a system or an agentic system around it with ai
+and then part two is the expansion it's the connecting of the dots it's okay i understand ai
+i'm not just using chat gpt for a prompt in and a prompt out like oh go create my next email or ideate
+uh a side hustle or something like that this is for the people that want to create a system for their
+business or their brand or their content creation that works from end to end
+and then lastly part three is elevation it's the software as a service mindset as i like to call it
+when you start to think about your agentic systems and you start to get these workflows working from end
+and you start to think of how can i scale this for my brand or my business
+you see software as a service engineers or software engineers in general they think of productizing
+intelligence and automating as much if not all of the work that you can do manually by an ai agent or an
+ai system or workflow now whether you run a software as a service business or not that's not the point
+here we just want you to kind of adjust your thinking just a little bit so that when you are working
+your tasks from end to end you're starting to think ai first and what can be automated what should be
+automated and then having a system that will actually scale with your business
+and i can tell you from experience this course isn't theory i use ai every day in my business
+maybe you've seen some of my videos i've created a ton of n8n automations
+and this course is in theory i actually use this every day in my day-to-day business
+i have created a software as a service platform i've published a lot of videos
+moomoo cow and i can tell you this course is in theory i use ai every day and i've been on a huge ai
+run over the last couple of years diving as deeply as i possibly can into it understanding llms chat gpt
+code and a whole slew of other tools and i've started to create all of these workflows in these systems
+not only for myself i do consultative work for lawyers for content creators for real estate agents
+and i've created all kind of flows in n8n which is the orchestration software that i use
+if you're familiar with it props to you you already got a leg up but overall i have created probably more
+than a hundred automated workflows end-to-end agentic workflows rag systems database systems chat bots
+a whole bunch of other things and throughout the courses not only this course but others i'm going
+to start to explain how you can create your own system for you that scales with your brand or your
+business or it helps you scale your content creation and remove all of those repetitive tasks and stop
+the copy and paste and stop the redundant over and over repetitive tasks that can actually be handed out
+to ai now you don't want to build ai systems that are completely autonomous that is something that a
+lot of people push on youtube it's like oh automate your whole business one click i don't like those
+systems those to me are not systems it removes you as the brain or the person that actually keeps
+the guardrails of ai and the system itself in play but all that being said that's what's in this first
+three-part course it is the foundation it is connecting the dots but that is what is in this
+three-part course it's the foundation of what ai is understanding it and then part two is connecting the
+dots building actual systems and then part three is the mindset shift of learning how to scale that business
+sorry learning how to scale that agentic system for your business as your business grows so let's go
+ahead and jump right into it
+welcome to build my tribe.ai my name is mike and if you're here that means you're in one of two camps
+you hear all of this ai hype and you've actually never really used ai or you've kind of dipped your toe in it
+you've used chat gpt maybe you use gemini and you've put in a couple of prompts you've got some outputs
+but you don't really have a plan or a system in place to really work with ai or incorporate it into
+your daily tasks or your business or your brand that's what this course aims to do it shines light
+on how to use ai properly how to incorporate it into your business and most of all how to make agentic ai
+systems not just one-off tools
+and i can tell you from my consultative experience my marketing experience and running my business
+currently it's for every type of business software as a service a service based business a cpg business
+content creation you name it it can actually help every type of business out there so don't think you
+only have to be one or the other software as a service or consumer practice goods whatever
+or whatever hype that you kind of have heard it's not only for one type of business
+and i can also tell you that is not overhyped overall ai is very very powerful but i can also tell
+you that there's a lot of people that are using ai wildly incorrectly or they're using it way too simply
+they're just putting in prompts for chat gpt or for grok or for gemini or whatever you know insert
+whatever llm you're using and they're just using it as a prompt based one input in one one output and
+if you want to incorporate that into your brand or your business that's not the proper way to do it you
+want to create an agentic system with ai intelligence that scales with you as you start to scale and grow
+so part one is foundations basically your first automation or your first ai agent part two is
+elevating that to connecting the dots of creating actual systems from end to end and then part three
+is going to take those systems and scale those systems with your business
+now all that being said this course is a theory it's not just some fly by night oh my god i'm going to
+create a course i've actually built my business around it i'm an ai consultant right now and i've helped lawyers
+marketers content creators automate many parts of if not their entire business around systems that are designed
+specifically for their business so it's not just tool stacking it's not just searching the latest
+ai agent or ai software or ads software it's actually trying to create your own implementing into your
+business or your brand or your content creation that's designed specifically for your own business
+and that's kind of the last part of all of this so that it it grows and scales with you
+as your business and brand grows and scales itself
+welcome to build my tribe.ai my name is mike and you're here for one of two reasons you have either
+heard all of this hype around ai and you have yet to start using it or you've actually started using
+it but you don't really have a strategy or a plan in place to really utilize ai to its fullest and build
+systems around it that's what this course is aimed to that's what i aim to do with this course demystify it
+help you understand ai start to incorporate it into your business
+and actually strategically think about ai first systems and how to build your brand around ai
+that's not what we're doing
+this course is three parts the first part is building the foundation automating the grind
+how a lot of people start to use ai it's usually through chat gpt or another llm model they'll put
+one input and they'll get one output like write me a cold outreach email or generate an idea for a
+new side hustle it's very prompt based in part one i want to kind of give you the theory behind
+automating a lot of simple tasks repetitive tasks and also in part one we're going to be mapping out
+all the tasks that are in your day we're going to be mapping out all of the tools that you currently use
+to get it all out on one pip on one piece of paper that helps you provide clarity for what you're already
+using what your software is what your crm is and then seeing where ai can actually help you out with
+your business and reducing a lot of those repetitive tasks part two that is like connecting the dots
+that's not just the one prompt in one prompt out or a simple workflow that reduces some repetitive task
+we're starting to create a system from end to end of automating an entire workflow like the email cold
+outreach campaign personalization of the cold out meet uh cold outreach uh data enrichment on companies
+that you're actually going to be reaching out to or prospects that you're going to be selling to or
+cold calling or whatever you actually think through a whole end-to-end system and then the last one part
+three that is kind of the foundational structural change of thinking like a sas founder the sas mindset
+whether you're running a service space uh sorry that takes me to part three part three that's where
+part one and two are going to come together not just a single input or output not just one agent not just a
+single
+part three is the software as a service mindset whether you're running a software as a service business or not
+you're running a software as a service business or you're running a software as a service business
+as a service business or you're running a software as a service business or you're running a software
+as a service business or you're running a software as a service business or you're running a software
+as a service business or you're running a software as a service business or you're running a software
+as a service business or you're running a software as a service business or you're running a software
+as a service business or you're running a software business or you're running a software business
+as a service business or you're running a software business or you're running a software business
+as a service business or you're running a software business or you're running a software business
+as a service business or you're running a software business or you're running a software business or you're running a software business
+!
+that scales with your business so if you're ready to jump in let's get right to it
+welcome to buildmytribe.ai my name is mike and being that you're here it's for one of two reasons
+either you know very little about ai or nothing at all you're hearing all the hype and you want to learn more
+about it or you've kind of dipped your toe in the pool you've used chat gpt you sort of understand
+what ai is but you don't really know how to create systems or tools or workflows around them
+that's why i created this course it's for the people that know they don't want to get left behind
+but they don't really have a structured plan on learning how to implement it in their either task-based business

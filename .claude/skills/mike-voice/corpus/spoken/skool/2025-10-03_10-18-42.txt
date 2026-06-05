@@ -1,0 +1,212 @@
+Now, it connects you to your Google through OAuth, and then you actually have to set up
+your client secret and different things.
+So if you haven't set that up, I will create a separate video that will show you the walkthrough.
+But for the sake of brevity, I'm just going to show you what this workflow does.
+But in order to create your credentials, I'll just show you here.
+You actually have to go through here, and you have to go through your Google Cloud Console
+and your services to go grab your ID and your client secret.
+And then once you actually connect it, it will be connected just like mine is here.
+And then when you choose nodes like this, and you go into Gmail, you can actually have access
+to a lot of these.
+Message actions, label actions, draft actions, thread actions, so on and so forth.
+But with this one particularly, before we break it down, before I go and show you with a
+blank slate node by node, I just want to show you what's possible.
+So with this trigger, it will actually run.
+I have it running every one minute right now, just so that it can actually process things
+while I'm on the video.
+I don't usually do one minute.
+Unless you are a very, very business, sorry, very busy business professional.
+There are some people that are trying to get every single 60 seconds or 30 seconds, they
+want to check their email.
+That can be done as well.
+But I usually get maybe five to 10 emails a day.
+So I like to break it down in intervals of checking my email every hour.
+I'm usually on top of my email box for the most part too.
+But when I'm not, this is always running 24 seven.
+So from this email node, sorry, this Gmail trigger, it will actually fetch an event.
+And in this case, it's going to grab one of my last things right here.
+I've changed it to unread only just that I can do this for the sake of being live and recording
+this.
+So what it does is actually goes to your email and it fetches this type of information.
+It's going to grab the ID of it and then it's going to feed it into this text classifier.
+This text classifier here, I have connected to it.
+It is going to be a Gemini trap model.
+For the classifier, I actually use Flash.
+So if you haven't been familiarized with LLMs and token usage and different models that use
+different tokens, there is for Gemini, there's a multitude of them.
+There is Flash, there is Flashlight, there is Pro for Gemini.
+For lighter tasks like this, they don't require a lot of reasoning.
+I just use Flash simply because it uses the least amount of tokens.
+I've tried Flashlight, but sometimes it gets it wrong and then it errors out and does things.
+But anyways, so with this text classifier, it's going to take the input, which is what you
+see over here on this left side.
+It's going to take a look at things like your payload.
+It's going to have the ID and the categories and the labels.
+And then it's going to go through all of these categories.
+So it's going to take this trigger, put it into this text classifier.
+Your LLM node, your thinking part is what I like to call it.
+This is the one that actually goes through and uses the information that's grabbed from
+the email.
+So the little snippet that's given, it'll actually take a look at that as well as subject
+line and whatnot.
+And then it will classify it and it will route it down whatever category you want.
+So I have mine broken down into marketing, social, personal opportunities, hiring, receipts,
+and just other stuff.
+And you'll actually see this reflected in one of my other inboxes here.
+So like other stuff.
+It'll actually have all of this information here.
+When it's unread, obviously it'll show you how many is unread per whatever it is that you're
+looking for.
+So it takes this, synthesizes the snippet, and then it routes it accordingly.
+So let's see what this one is going to route it as.
+So as you can see, it's thinking.
+And then it routes it as, what is this?
+It's hard to see.
+So Slack account, this should be going to social.
+So we'll just follow it down here.
+Actually, this is other stuff.
+So it's not going to go to social.
+Sometimes Slack reads as social.
+Sometimes it reads as just other stuff.
+So it's going to go in here and I'm going to execute this node.
+So based on that snippet, it's actually going to add the label of other stuff.
+So when I execute it, it will push it through and go to this particular node, which is going
+to remove the inbox label.
+So Gmail works a little bit differently.
+There's a lot of people that are, sorry, a lot of service providers that are starting
+to do it like this.
+Gmail is more of a cash all.
+It doesn't actually have inbox with folders.
+It's got inbox with labels.
+So you can use labels as a type of folder.
+So in order for you to actually remove it from your email inbox, you're actually going
+to have to remove the inbox label itself.
+So the logic for that is coming in here and showing, okay, so I'm looking for the ID that
+came through from this original trigger all the way back there.
+That's the ID of the email itself.
+You can actually use threads, thread IDs if you have a very long thread and you specifically
+want to label something with a thread.
+But the ID is going to have the message ID that is connected to that email in particular.
+And then I actually want to remove the label inbox and I'll execute that step.
+Now, so I'm not going to go through all of them, but I just do want to go through a couple of
+them.
+And then what I'm going to do is I'm going to jump over here into my own personal email
+box and I'm going to send my business email from my personal email.
+And that one should actually route it correspondingly to my personal label.
+So give me just a second while I do that.
+And I'll jump in on the other side and I will show you that.
+So I'm just going to go ahead and pull it up here.
+And I am going to just keep it very generic.
+I'm just going to put a subject line of, hey, how's it going?
+What are you up to do today?
+Just so that we can see it get routed.
+So I've sent that and it should only take a few seconds to actually come through.
+Let's see.
+I actually forgot to turn this off.
+So I hope, hopefully it doesn't get triggered.
+Okay.
+Okay.
+So what are you up to?
+So now we're going to pull this one.
+So it fetched it.
+It actually is labeled as important.
+This one's labeled unread and it's going to go into my school personal.
+So we should be able to see that execute from here.
+It's going to a text classifier.
+Again, this is the one that splits it out to whatever respective category it needs to go to.
+So personal branch is where it went to.
+It will go down here to the personal branch.
+And this is one I chose because this one's different, as you can see with the notes,
+is this is a human in the loop and it's not just going to label it and de-label it.
+It's actually going to go into my personal.
+It's going to synthesize the email of what has come through.
+So this is grabbing the information.
+And now this node is a Gmail.
+Sorry, it's a Gemini chat node.
+And it's going to take the information that is from this sequence prior to.
+It's going to grab the subject.
+It's going to grab the email and who it's from.
+And it says, you are a personal email assistant for Mike.
+You're a silo's casual, intelligent, approachable.
+This is something that, as a prompt, you can tailor it to however you want it to speak.
+So the way that I do it is when it's personal like this, I just keep it very casual.
+This prompt is going to be whatever tone of voice that you want to use.
+If you've gone through the other lessons in the class and you've created your brand documents
+and your mood board and different things like that, that is where you're going to actually leverage
+and utilize your brand documents so that your brand voice comes through.
+Right here, I just kept it very simple, very casual.
+But if it were something like an opportunity, like in this one, you can completely change that
+to whatever it is that your brand voice is.
+So it will come through and I'll synthesize this.
+This is going to take a few seconds here.
+But like I said, there's a difference between like opportunities and whatnot and your personal
+or in this case, when we get to it, it's going to be a social email summarizer.
+So let's see what this output was.
+What are you up to do?
+Sorry.
+What are you up to?
+Blah, blah, blah.
+It's going to execute this step.
+It's going to create a draft for me and it's going to remove the label of inbox.
+No.
+So it's getting a bad request.
+So this is good to take a look through.
+So invalid value.
+This is actually let me work through this.
+This seems like it's just because it doesn't actually have that personal label.
+So let's see here.
+So let me go to my inbox here.
+And as you can see, it actually will be in my drafts.
+I actually need to change this up.
+This is actually putting a subject line in here, which shouldn't be.
+So it'll just be in response to this.
+So, hey, Michael, I'm doing well.
+Thanks for asking.
+Just plugging away at a few things here.
+Hope you're having a good day too.
+What's new with you?
+So you can do whatever you can actually send it.
+I'm just going to delete this because this is just me talking to myself.
+And I don't want it to clutter up my inbox.
+But let's come back to this remove.
+Unvalid ID value.
+So let's change this.
+So we are going to go back to this node.
+So it's Gmail trigger.
+There we go.
+So there are other times to where just because I kind of knew how that was going to, or sorry,
+just because I actually knew what that error was, that JSON ID was trying to look from the immediate node that was directly before it.
+And that error was happening because it wasn't finding the proper ID because it wasn't pulling it from the Gmail trigger.
+If you ever run into things like that, I'm kind of glad we did on camera.
+Those small things.
+Another thing that you can actually do is, let me go back into executions here,
+and I'll find another one that had, or this one that actually just had the error.
+There's another thing that you can do, which is just go in here, if you ever get stuck on this,
+and you actually click this copy, and then you go into ChatGPT, and you just paste it in and say,
+hey, I'm in XYZ.
+Cloud code, chat, N8N.
+I'm connecting whatever it is that you are.
+In this case, it's Gmail.
+I've got this error code.
+Can you help me work through it?
+You don't actually need to really know any of it.
+This also is something that is particular to cloud hosting.
+I'm actually on Hostinger.
+If you are hosted directly through N8N, you actually will have a built-in AI here, down at the bottom somewhere.
+I forget.
+It's been so long since I've actually used that one.
+You can actually use Ask AI Assistant, and it will spit out an answer for you.
+I usually just copy it, go to ChatGPT, and then paste in that error if you do run into errors.
+So, yeah.
+I mean, that's the way that I work through errors.
+I'm actually glad that I did hit that error here.
+So, we will do one more, and then we're going to jump in on the other side, and I'm just going to show you how to build this.
+I just want to show you a couple of different iterations, and then a little bit more of the overview here, and then we're going to go into building it from scratch, so that you know how to think about it, walk through, set it up node by node, and get it all dialed into what you actually need.
+So, I'm going to come back in the editor here, and just show you a few things here.
+So, I have it all routed, and you guys can download it.
+It's in the school community, but the reason why each one of these is different is I actually put it in here.
+It labeled it and marks it as read, so it doesn't stand out in your inbox.
+Sometimes, you might want to label it and keep it as unread.
+This one's actually different because it's a social post, and it's going to summarize the social post, and it's going to put it into a Google Sheet.
+This is something that you can actually change this Google Sheet out to an Airtable, or to a Superbase database, or to your CRM, like HubSpot, or Salesforce, or whatever it is if you're doing business,
+and you get a lot of social private messages or social promotions, and you want to filter through.

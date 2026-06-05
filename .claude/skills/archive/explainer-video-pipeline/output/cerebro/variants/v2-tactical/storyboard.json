@@ -1,0 +1,151 @@
+{
+  "slug": "cerebro-v2",
+  "title": "Cerebro — Heppner Protection (V2 Tactical)",
+  "target_length_sec": 85,
+  "vo_file": "../../../../../../remotion-videos/public/audio/cerebro-v2-vo.mp3",
+  "music_file": "../../../../../../remotion-videos/public/audio/cerebro-bg-music.mp3",
+  "music_level_db": -18,
+  "background_gradient": ["#0A1628", "#05080F"],
+  "caption_style": {
+    "font": "Inter, system-ui, sans-serif",
+    "weight": 700,
+    "color": "#FFFFFF",
+    "highlight_color": "#00BCD4",
+    "magenta_highlight_color": "#E91E63",
+    "size_px": 56,
+    "position": "bottom-safe",
+    "bg": "rgba(10, 22, 40, 0.75)",
+    "padding_px": 24,
+    "border_radius_px": 12
+  },
+  "cues": [
+    {
+      "t0": 0.0, "t1": 3.0, "type": "intro_card",
+      "title": "THE INNOVATIVE NATIVE",
+      "subtitle": "CEREBRO — PRIVATE AI FOR LAW FIRMS",
+      "icon": "icons-forge/a-glass-tile/brain-cyan-hero.png",
+      "animation": "logo-zoom"
+    },
+    {
+      "t0": 3.0, "t1": 7.5, "beat": 1,
+      "caption": "Your associates use ChatGPT to draft motions right now.",
+      "highlight": "ChatGPT",
+      "icon": "icons-techsy/computer.png",
+      "animation": "scale-in-spring"
+    },
+    {
+      "t0": 7.5, "t1": 12.0, "beat": 1,
+      "caption": "February 2026 — a federal court called that a MALPRACTICE TRAP.",
+      "highlight": "MALPRACTICE TRAP",
+      "icon": "icons-forge/a-glass-tile/shield-with-checkmark-cyan-hero.png",
+      "animation": "shield-shake"
+    },
+    {
+      "t0": 12.0, "t1": 17.0, "beat": 2,
+      "caption": "US v. HEPPNER — SDNY",
+      "highlight": "US v. HEPPNER",
+      "icon": "icons-forge/a-glass-tile/document-cyan-hero.png",
+      "animation": "stamp-in"
+    },
+    {
+      "t0": 17.0, "t1": 23.0, "beat": 2,
+      "caption": "Consumer AI-generated docs = NOT PRIVILEGED",
+      "highlight": "NOT PRIVILEGED",
+      "icon": "icons-techsy/pipe.png",
+      "animation": "leak-drip"
+    },
+    {
+      "t0": 23.0, "t1": 28.0, "beat": 2,
+      "caption": "69% of lawyers use AI · 43% have no policy",
+      "highlight": "69% · 43%",
+      "icon": "icons-techsy/graph.png",
+      "animation": "counter-up"
+    },
+    {
+      "t0": 28.0, "t1": 33.0, "beat": 3,
+      "caption": "CEREBRO — Private AI for Law Firms",
+      "highlight": "CEREBRO",
+      "icon": "icons-forge/b-techsy-machine/brain-with-neural-network-connections-cyan-hero.png",
+      "animation": "assemble-in"
+    },
+    {
+      "t0": 33.0, "t1": 37.0, "beat": 3,
+      "caption": "Your files. Your system. Your firm.",
+      "highlight": "YOUR firm",
+      "icon": "icons-techsy/safe.png",
+      "animation": "vault-close"
+    },
+    {
+      "t0": 37.0, "t1": 41.0, "beat": 3,
+      "caption": "ZERO exposure · ZERO hallucinations",
+      "highlight": "ZERO · ZERO",
+      "icon": "icons-techsy/shield.png",
+      "animation": "shield-seal"
+    },
+    {
+      "t0": 41.0, "t1": 47.0, "beat": 4,
+      "caption": "1. Upload your files",
+      "highlight": "Upload",
+      "icon": "icons-techsy/upload.png",
+      "animation": "arrow-up-bounce"
+    },
+    {
+      "t0": 47.0, "t1": 53.0, "beat": 4,
+      "caption": "2. Query in plain English",
+      "highlight": "plain English",
+      "icon": "icons-techsy/message.png",
+      "animation": "chat-type-in"
+    },
+    {
+      "t0": 53.0, "t1": 59.0, "beat": 4,
+      "caption": "3. Every answer CITED",
+      "highlight": "CITED",
+      "icon": "icons-techsy/files.png",
+      "animation": "citation-pop"
+    },
+    {
+      "t0": 59.0, "t1": 63.0, "beat": 4,
+      "caption": "Associates: SPEED",
+      "highlight": "SPEED",
+      "icon": "icons-techsy/user.png",
+      "animation": "user-zoom-in"
+    },
+    {
+      "t0": 63.0, "t1": 66.0, "beat": 4,
+      "caption": "Partners: CONTROL",
+      "highlight": "CONTROL",
+      "icon": "icons-techsy/trophy.png",
+      "animation": "trophy-raise"
+    },
+    {
+      "t0": 66.0, "t1": 72.0, "beat": 5,
+      "caption": "$2,500 setup · $500/month · NO contracts",
+      "highlight": "$2,500 · $500/mo",
+      "icon": "icons-forge/a-glass-tile/chart-bar-cyan-hero.png",
+      "animation": "price-stack-in"
+    },
+    {
+      "t0": 72.0, "t1": 76.0, "beat": 5,
+      "caption": "15-min strategic review",
+      "highlight": "15 min",
+      "icon": "icons-forge/a-glass-tile/calendar-cyan-hero.png",
+      "animation": "calendar-flip-in"
+    },
+    {
+      "t0": 76.0, "t1": 79.0, "beat": 5,
+      "caption": "Link ↓ First comment",
+      "highlight": "LINK",
+      "magenta": true,
+      "icon": "icons-forge/c-cripsy-orbit/key-with-halo-magenta-rare-hero.png",
+      "animation": "magenta-pulse"
+    },
+    {
+      "t0": 79.0, "t1": 85.0, "type": "outro_card",
+      "title": "theinnovativenative.com/cerebro",
+      "subtitle": "PRIVATE AI · FOR LAW FIRMS",
+      "icon": "icons-forge/a-glass-tile/brain-cyan-hero.png",
+      "cta_url": "https://theinnovativenative.com/cerebro",
+      "animation": "logo-settle"
+    }
+  ]
+}

@@ -306,3 +306,12 @@ scripts/n8n-workflows/_backups/
 .specify/memory/ob1-hygiene-*.md
 .specify/memory/prompt-mutation-*.md
 .specify/memory/rework-scan-*.md
+
+
+# Runtime / lockfiles (added 2026-06-05)
+.claude/scheduled_tasks.lock
+.claude/diary/
+.specify/memory/_logs-archive/
+.specify/memory/reports/
+.playwright-mcp/
+.deploy-history/

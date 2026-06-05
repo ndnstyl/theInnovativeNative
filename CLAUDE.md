@@ -17,6 +17,7 @@
 @.claude/rules/airtable-schema.md
 @.claude/rules/supabase-rules.md
 @.claude/rules/prompt-engineering.md
+@.claude/rules/learning-capture.md
 
 ## Project Structure
 ```

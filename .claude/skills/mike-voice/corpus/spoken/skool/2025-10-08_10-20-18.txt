@@ -1,0 +1,258 @@
+Take that, put it into your system, it enriches the data,
+and then it actually hands over to your sales agent
+or your senior salesperson,
+or it even delegates all of those leads
+to a round robin team.
+Whatever system you have,
+you actually create that intake system,
+and then you parse all of that information out
+or those leads out to whoever needs to actually receive it.
+Meeting summaries and next steps.
+There are lots of tools for this.
+There is Notebook LLM, sorry.
+Meeting summaries and next steps.
+There are many tools for this.
+Fireflies, Notebook LLM, Notion, Motion, a hundred of them.
+Meeting summaries and next steps.
+There are many apps for this.
+You can use N8N, you can use Fireflies,
+you can use Notebook LLM or Notion.
+Take your pick.
+The whole point is you have an AI assistant
+that remembers all of it,
+and it will actually put it into a very easy to comprehend
+note-taking system, and it'll send it over to your Slack,
+to your email, or put it in your pipeline for your CRM,
+and it doesn't miss a single note.
+I love it.
+I use it every single time I have a discovery call.
+Another is a content repurposing engine.
+Maybe you have a podcast channel,
+and you do very long form podcasts from one, two,
+or even three hours.
+You can actually get, even just from a one-hour podcast,
+anywhere from about 10 to 15 solid clips.
+You can use AI to parse them all out.
+You can use AI to actually schedule the posts
+to each one of your social media channels.
+So you take one long form of content,
+and then you repurpose it into smaller bit sizes,
+and for Reels, or for TikTok,
+or for your YouTube shorts, anything along those lines.
+So a content repurposing engine is great for people
+that are actually making long form content.
+And the next one is automated follow-ups.
+Automated follow-ups.
+This is great.
+Whether it's a email that is drafted by AI,
+and all you have to do is either make minor changes
+and then send it out,
+or maybe it's a contract proposal.
+Maybe it is a pitch deck,
+something that you can actually hand over to sales,
+and you're a designer.
+They've been waiting on it.
+You actually have the whole entire template
+and everything all created and ready.
+You just haven't actually sent it out.
+Automated follow-ups.
+Things like emails, contracts, proposals, pitch decks,
+designs, if you're a designer, you do design work.
+You can actually create a sequence
+to where at each human in the loop input,
+you can add either a document,
+or if needed criteria,
+and you actually have to ask questions to your client.
+You have to get back that information
+to make the next iteration on your design.
+You can actually process that in an automated workflow,
+and send out those notifications,
+either through email, or Slack, or Telegram.
+So your follow-up becomes automated,
+and every single milestone that you actually have to hit,
+it actually reaches out to your client,
+and then when they respond to you,
+it creates a draft,
+and then all you have to do is upload a document,
+and it gets sent out.
+So automated follow-up,
+so automated follow-up can actually save you hours and hours of time,
+and it actually can speed up the whole back and forth
+between client and requirements and dependencies and files.
+It's a no-brainer.
+Each and every one of these saves time,
+and then over time,
+it actually has a compounding effect.
+So if you're saving 15 minutes here,
+30 minutes there, or 45 minutes,
+over time, you're actually buying back an entire day,
+or an entire week of your year back,
+maybe even more,
+when you have all of these repetitive systems,
+all orchestrated by your AI and N8N.
+And here's the mental shift that I'd like you to try to make.
+Stop seeing AI as just another tool or another agent.
+Think of it just like a new hire,
+as a new teammate.
+If and when you hire a new person,
+you don't just dump all of your tasks on over to them,
+you give it to them in bite-sized, understandable chunks.
+And then you build on that.
+And then the more they learn,
+the more you can actually give them.
+AI is seemingly the same way.
+AI is thought about...
+AI should be thought about just like that.
+Every time you hand it off to them,
+and you actually see that it can create...
+Every time you hand off tasks to it,
+and you see that it can go from end to end,
+with 100% accuracy and completion,
+then add more,
+just like another Lego or a building block on top of it.
+And then before you know it,
+you'll have that system.
+You'll have that teammate that's running that system.
+And then what happens when the...
+And then what happens when these dots are connected,
+that compounding effect,
+you'll really start to see it.
+You're...
+There's not going to be any more information silos.
+That lead comes in,
+it's automatically handled.
+And then that compounding effect,
+you'll actually really start to see it.
+There's not going to be any more information silos.
+That lead comes in,
+it's automatically handled.
+That transcript comes in from a sales call,
+then it's actually synthesized.
+AI will take a look at it.
+It'll pull out important information,
+put it in bullet points,
+and then it's automatically handled.
+And then that compounding effect,
+you'll actually really start to see it.
+There's not going to be any more information silos.
+That lead comes in,
+it's automatically handled.
+That transcript comes in from a sales call,
+then it's actually synthesized.
+AI will take a look at it.
+It'll pull out important information,
+put it in bullet points,
+and then it's actually synthesized.
+And then it'll send it out and pass it over to the next person
+that either needs to make a closing call,
+or even onboard them if you've already closed them.
+And it'll synthesize all of that information
+and let you know what already has been transpired.
+And then it'll synthesize all of that information
+and let you know what already has been transpired.
+And then it'll synthesize all of that information
+and let you know what already has been transpired.
+And then it'll synthesize all of that information
+and let you know what already has been transpired.
+And then it'll synthesize all of that information
+and let you know what already has been transpired.
+And then it'll synthesize all of that information
+and then instead of siloed information,
+you actually get flow.
+That compounding effect, you'll see it immediately.
+Your lead comes in, it gets routed properly.
+Your sales calls, they get transcribed and passed over
+to either the closer or the onboarder.
+And it all happens seamlessly.
+So it's not...
+And instead of siloed tasks, you get automation.
+You get the compounding effect.
+The lead comes in, it gets routed properly.
+Notes come in, they get summarized.
+They get passed over to the next person that actually needs them.
+Instead of siloed tasks, you get a flow.
+A lead comes in, AI qualifies them.
+Automation routes them.
+Meetings get summarized and follow-ups go out.
+And content gets repurposed.
+And you're no longer the one that's holding it all together.
+Or you don't have one single person on your team that's holding it all together.
+You get flow and everything starts to synergize and work together.
+The system runs, you oversee, and then you start to expand.
+That's connecting the dots.
+That's compounding effect.
+And the real value here is that you actually start to think differently.
+You start to shift roles.
+You're delegating to teammates, to your AI system, to automation.
+And you're not just a hustler trying to keep things all together.
+You become an architect of your business and you actually create the flow of how things move.
+And that's exactly how you scale without burning out.
+And that's exactly how you scale without burning out or without drowning in tasks every day.
+And that's how you get ahead of tasks instead of getting inundated with emails and repetitive 5, 10, 15 minute tasks here and there.
+And that's how you scale without burning out.
+That's how you get ahead of business instead of being behind the eight ball.
+And then you start to scale your business.
+So just some final closing thoughts here.
+I know we went over a lot in this and I'm trying to get you to do a mindset shift.
+Like AI not just being the new hire and actually being a teammate.
+And your next new hire shouldn't always just be a person.
+It actually could be your agent.
+A few closing thoughts here.
+And just to kind of recap, we went over changing your mindset over to your new hire being AI.
+Or using AI in an existing team and actually amplifying their work, reducing their time and creating more flow.
+Expansion is about connecting those dots.
+It's about setting AI up as your first hire.
+Building workflows that save time almost instantly as soon as you implement them.
+And letting automation do all of the heavy lifting for you.
+That 80-20 of 20% of your work.
+That 80-20, 80% of your profits come from 20% of your work.
+And you actually automating a huge portion of those repetitive tasks.
+So that means your 80-20 starts to compound on top of itself.
+If chaos to clarity was about gaining control.
+If chaos to clarity was about gaining control.
+If chaos to clarity was about getting control.
+Expansion is about building leverage.
+It's about designing a system that actually scales with you.
+Without needing more hustle.
+Or more hours.
+Or more of a head count in your business.
+Because at the end of the day, the fastest way to grow isn't by working harder.
+It's by expanding your capacity with systems that never stop working for you.
+That's how you scale smarter.
+And that's how you win.
+If chaos to clarity was about getting control.
+Expansion is about building leverage.
+It's about designing a system that actually scales with you.
+Without needing more hustle.
+Without needing more hours.
+Or without adding to your head count.
+Because at the end of the day, the fastest way to grow isn't by working any harder.
+It's about working smarter.
+It's by expanding your capacity with winning systems that never stop working for you.
+That never stop working for you.
+And that's how you scale smarter.
+And that's how you win.
+That's how you scale smarter.
+
+You can't even get more.
+You can't even get more.
+
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.
+You can't even get more.

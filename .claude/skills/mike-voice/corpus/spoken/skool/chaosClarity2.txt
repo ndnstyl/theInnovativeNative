@@ -1,0 +1,39 @@
+is all prepared for them and they can send it out on that same closing call or within five minutes
+of actually closing that prospective client simply because they have all of that repetitive tasks and
+everything else already done for them with an end-to-end working system. Now go through your
+own sales process if you are in sales, sales manager, director, or the you know an actual
+high volume sales rep or high ticket or whatever it is. Imagine how much time that actually saves you
+every single cycle, every single new contact, new lead, new closed one, or even if it was closed,
+lost, and you go through all of those transcripts and you have you put it into an AI and say
+where did I go wrong? Where was I not sticking to my own script or where did I miss cadence or flow or
+they asked a buying question and I didn't capitalize on that. Like you can have agents synthesize all of
+this information for you so that you can actually get better and prepare for the next call. What
+does that save you? 10 minutes every single task? 15? Maybe an hour? Sometimes sales cycles are you
+know two, three, four phone calls. Sometimes every every single one of those calls is 10 to 15 or 30
+minutes each. You do the math. That's a lot of repetitive work that you can actually streamline
+into one single system. Now what's the takeaway there? Systems aren't always just to streamline
+your business or just to cut you know 15 hours of work down to 10. It's also to make you better.
+It's to synthesize information. It's to take long form content and shorten it without missing the meat
+potatoes of everything that you're trying to accomplish. So every single time you do it and
+you reiterate and then you either train yourself or you train your agent or you update your system
+with where the bottleneck is. It soon goes from all up and down like a roller coaster to a straight A,
+B, C and then you just knock it out of the park. And the more repetitions you get, the better you get at
+it and the quality of your work no matter what it is. Whether it's service-based or sales or CPG
+market, you just get better every single time you do it with a system opposed to just pure hustle.
+Which brings us to the best news ever. Pause. Which brings us to the best news ever. Today,
+systems are easier to create than ever before. A long time ago, we used to have these macros that
+were in like Microsoft Office and you had to build them out and they didn't work all the time or even
+Zapier was good and it was king of this for quite some time to where you can take information from
+other websites, port it into other. But right now we have N8N and that can orchestrate pretty much
+anything you can think of with any software or website or endpoint. It can take information as input,
+synthesize, do whatever tasks you're actually telling your agent to do. And as output, it can do
+anything. It can schedule emails. It can update your calendar. It can send out your proposals.
+It can spit feedback into you. You can have a rag system to where you have all of your knowledge
+base into one place and you can have that agent go through and actually go through a checklist of
+things like, oh, okay. Step one, two, three, and four, we're done. Grab all of that information from
+the meetings or sales calls, put that into a proposal document and spit it all out. All of
+these things can actually come together very, very easily with N8N. So we're going to go ahead and jump
+in on the other side of this and I will show you a specific SDR workflow that will give you some
+tangible ideas of what you can actually build yourself. Whether you're in sales or not, this is
+also going to be another useful walkthrough just to show you how to build these things.
+So I'll see you on the other side.

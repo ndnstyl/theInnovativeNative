@@ -1,0 +1,268 @@
+start	end	text
+0	16920	check check check microphone check check
+30000	41900	all right so as you guys can see on the screen this is a somewhat complicated workflow
+41900	47140	although most of it is just labeling and unlabeling i'm going to go through
+47140	54000	node by node and just kind of see how n8n works for some of these this might be the very first
+54000	60680	time you've seen an orchestration layer like n8n so what i'm going to do is just give you a very
+60680	70040	quick overview of what n8n is it is a node-based orchestration system so what these nodes are
+70040	75620	there are hundreds of nodes there are even custom community nodes but without getting into the weeds
+75620	82300	essentially you will have a trigger like in this case it is going to be a gmail trigger
+82300	90520	and then you are going to have some sort of process um all the craze now is our ai agents so you can
+90520	96640	have an ai agent that orchestrates a lot of things it remembers your chats it will go and pull information
+96640	104020	from a database it will send out their output to different things like email or slack or post on
+104020	111600	social media uh different things like that so um n8n is kind of the brains and the power behind
+111600	117340	connecting all of these types of apps as you can see as this scrolls here and there are more apps
+117340	123480	being added pretty much on a weekly or monthly basis especially with the advent of ai and all of these
+123480	130000	companies um knowingly uh needing to integrate because there are so many people that are starting to
+130000	139220	uh adopt ai so just a quick google trends we could even take a look at
+139220	148240	n8n so we will take a look at what it looks like over the long period here
+148240	160860	so as you can see it well it's been n8n has been around for quite some time as you can see n8n has
+160860	167940	been around for quite some time all the way back uh you know in 2021 2022 2022 but this year and last
+167940	175280	year it is just skyrocketed as you can see so um enough about that and that's just kind of a quick
+175280	182200	introduction about n8n um it's one of the systems that you if you happen to know code and you implement
+182200	187820	code in there then you're miles ahead but you don't need to know code at all if you can think
+187820	193460	logically and you can actually map out your workflows uh you can get all of this done so uh again i'm
+193460	200500	going to walk through this node by node here this one is a gmail trigger this is connected to my gmail
+200500	206340	inbox uh i'll have a separate video of setting up your credentials here but this top part is um
+206340	213460	credential to connect with and once you go in here and try to create your credentials for gmail itself
+213460	217600	you're going to need your client id and your client secret you're going to get that through the google
+217600	222880	cloud console but for the sake of brevity we're just going to skip that part and i will link a
+222880	231200	different video so that you can actually do that so what that does is is it grabs a we'll just grab
+231200	237880	it here we'll grab a test event this is one of the last emails that i got um into my inbox don't even
+237880	244780	know what it is here so let's just take a quick look together so this is the snippet so when i executed
+244780	250980	this it went out to gmail and it pulls back this information and this information will be able to be
+250980	259400	passed through to here so to explain this on the left side over here this is the input for um uh from
+259400	264480	or for whatever it is that you're using it could be an excel sheet it could be a database call it could
+264480	272100	be a chat form it could be a chat bot it could be absolutely anything so this left side is the input
+272100	280340	the middle here is what this node is telling it to do that is kind of the execution of what's going on
+280340	286140	and then the right side it will be an output and in this case this is a text classifier i'll go back out of here
+286140	294420	so what this does is using this node it'll have information to go into this node and then it'll synthesize this
+294420	300340	information and then it'll execute and give an output so in this case it's going to take a snippet it's going to
+300340	307460	take uh the to and the from and the subject and it's going to use uh in this case gemini
+307460	314740	as the brains behind it it takes all the information it thinks about it and then it actually gives it the
+314740	322760	category in this case it actually found social so we'll go to this next node here social is what it was
+322760	330000	labeled so in your inbox another thing that you should have set up and i'll just show you for the sake of
+330000	336440	you having a visual these already need to be built um again this is just kind of showing you the whole
+336440	341540	overview of everything i'm going to break everything down of what is needed what are dependencies but
+341540	347380	you want these labels that are already showing up in here so that when you go into this node
+347380	352740	or you have an execution that it's actually going to create this label of school slash social
+352740	359040	that's what it executes so the input from this one now has changed it takes the synthesis from the
+359040	366320	previous node which was the text classifier and gemini and then we're telling it here to update
+366320	371620	the label and in my case it's going to be school slash social when you set this up for your identifiers
+371620	376620	your text classifiers this is all going to be custom to you your personal preferences your if you're if
+376620	380720	you're doing this for uh for your own personal reasons and you are just trying to organize your
+380720	384940	personal email box that's going to be different than having a business email box uh everybody's going to
+384940	390300	have different kind of categories and you're going to have um different definitions as to what routes
+390300	398900	to where so in this case uh it comes in here and i'm telling it to execute this time and this will add
+398900	405780	that label and it will send this information over to this node um this template is downloadable you can
+405780	411280	actually grab it in the school community and in the template you will have um all of these kind of
+411280	416720	like broken down so what i would suggest is download the template just so that you get the idea of it
+416720	423080	that you can kind of walk through and then from there i'll also have another video of of building this
+423080	429280	node by node but that being said in this template it'll tell you why each one of these sections are
+429280	436680	different um this one the top one it just labels it marks it as red and then it de-labels this one that
+436680	443360	we're in for social it's going to label it and then send it over here to an actual summarizer
+443360	450460	this is where you start to see the power of ai orchestration and workflows because you can actually
+450460	458700	connect a llm or you know things like chat gpt anthropic um deep seek olama and in my cases i use
+458700	465340	gemini here and it's going to synthesize the information from your not only your email inbox but the text
+465340	473640	classifier and then it can actually start to do things like uh create another draft to where it's
+473640	480200	going to execute this and it will go into my excel sheet so sometimes you're going to get promotional
+480200	485340	things from social in this case we're just going to specifically talk about social um so in social
+485340	490320	i'll get dm sometimes sometimes i'll get email notifications from slack sometimes i'll get
+490320	496920	um like a new video upload from uh youtube or whatever so this is where it starts to become
+496920	501460	powerful to where you'll start to get the signal to noise you're going to take a look at your inbox
+501460	508100	and make your own rules and in my case i like to have that message synthesized down to like one or two
+508100	515620	lines so i use the gemini model to do that and then i output it and this could be anywhere uh in this
+515620	521320	case it's going to be google sheets so i'm going to get a summary of this and it's going to be put
+521320	528280	into google sheets and then it's actually going to be uh emailed over to me so then what it does is
+528280	537580	it goes down this route here and it delabels it so i have this whole entire route for social media
+537580	545460	in and of itself then i have other ones that as you can see here are marketing personal opportunities
+545460	554440	hiring receipts and other stuff um so just to give you uh another quick run through i'm going to do
+554440	559440	one for opportunities and then i'll just kind of end it there because that will take you through
+559440	565780	labeling delabeling um summarizing an email and the next one's going to be creating a draft this is also
+565780	572660	another uh tool and use of a technique that will very much start to clean up your email inbox but
+572660	578940	even more importantly uh it will start to do things like make sure you don't miss invoices you don't
+578940	586200	miss contracts you don't make mistakes of missing emails that are uh revenue generation so i'm just
+586200	587540	going to do a test email here
+587540	611160	so this is also going to be based on your rules so when i go back over here to n8n
+611160	617740	this one i'm going to trigger hopefully it has come through let me see if it's come through
+617740	628680	so all right let's come through so now i can fetch it and it will be that question that i just sent
+628680	634500	through um can you resend the proposal doc now the text classification that i have for it as you can read
+634500	640580	and this and the more effort you put into your category and the description of it and then that
+640580	651300	will hand off to your um your ai chatbot sorry your ai thinking portion of your system i just put in a
+651300	655960	really simple one just for this test but uh anything driving revenue or clients sending over documents
+655960	663980	sales proposals contracts cash flow etc so when i execute this step you see right here gemini is
+663980	670860	thinking and it classifies it and then it's going to shoot it as an opportunity then it's going to
+670860	678160	take this opportunity and again read what is in here so the first part is just categorizing it and
+678160	683920	putting it into the proper workflow that it needs to go to now this part is going to be again where we
+683920	691000	have i have a rev ops message here this is the user prompt this is the system prompt and again once we go
+691000	697340	over the creation of all of it i will show you uh in uh step by step and in greater detail how to do
+697340	703380	this but just as a a walk through i just want to keep this really really short and sweet it's going to
+703380	709960	take this email it's going to come down here and route it to um opportunities for rev ops it's going to
+709960	718180	take the subject line the body and i have these rules based on what that information is going to be
+718180	722300	passed through of how it's going to treat it in this case it's actually going to create a draft
+722300	727780	so i'm going to execute this that's going to do a little bit of thinking here and then it's going
+727780	734180	to pass it over to gmail and this gmail node is where it is actually going to create the draft
+734180	741900	um so once it's actually done uh we'll go back to the email my email inbox and we'll start will she
+741900	747060	see the draft that's actually created for this particular workflow so just give it a second
+747060	748900	okay
+748900	773460	okay see this is the output from the last one it says okay i have attached a proposal for your review
+773460	779660	and this is where the human in a loop part comes so if i go back in here and i go to my drafts
+779660	783460	and i go here this is actually written up
+783460	790640	okay let's see i'll make this correction
+790640	797640	okay
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+797640	797640	
+820640	827640	okay
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	827640	
+827640	829640	okay
+829640	829640	
+829640	829640	
+829640	831640	okay
+831640	831640	
+831640	831640	
+831640	831640	
+831640	831640	
+831640	833640	okay
+833640	833640	
+833640	833640	
+833640	833640	
+833640	833640	
+833640	833640	
+833640	833640	
+833640	833640	
+833640	834640	okay
+834640	835640	okay
+835640	835640	
+835640	835640	
+835640	835640	
+835640	835640	
+850640	865640	okay
+865640	867640	okay
+867640	869640	okay
+869640	871640	okay
+871640	873640	okay
+873640	875640	okay
+875640	877640	okay
+877640	902640	okay
+902640	904640	okay

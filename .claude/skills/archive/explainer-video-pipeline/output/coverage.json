@@ -1,0 +1,80 @@
+{
+  "version": "1.1.0",
+  "updated": "2026-04-15",
+  "total_videos_for_100pct": 450,
+  "note": "450 = 150 content pieces × 3 variants each (prestige/tactical/value). Tournament tracker at scripts/explainer-pipeline/tournament.py declares winner per piece.",
+  "content_pieces": [
+    {
+      "slug": "cerebro",
+      "category": "product",
+      "priority": 1,
+      "audience": "law firm partners/solos under 100 attorneys",
+      "variants": {
+        "v1-prestige": {
+          "stage": "rendered",
+          "angle": "emotional/cinematic — institutional knowledge trapped",
+          "composition": "CerebroExplainer",
+          "final_mp4": ".claude/skills/explainer-video-pipeline/output/cerebro/variants/v1-prestige/final.mp4",
+          "duration_sec": 76.76,
+          "size_mb": 27,
+          "published": false
+        },
+        "v2-tactical": {
+          "stage": "rendered",
+          "angle": "Heppner/malpractice fear — icon-driven",
+          "composition": "CerebroExplainerV2",
+          "final_mp4": ".claude/skills/explainer-video-pipeline/output/cerebro/variants/v2-tactical/final.mp4",
+          "duration_sec": 85.06,
+          "size_mb": 5.6,
+          "published": false
+        },
+        "v3-value": {
+          "stage": "rendered",
+          "angle": "price/value wedge — Harvey vs Cerebro comparison",
+          "composition": "CerebroExplainerV3",
+          "final_mp4": ".claude/skills/explainer-video-pipeline/output/cerebro/variants/v3-value/final.mp4",
+          "duration_sec": 80.04,
+          "size_mb": 4.6,
+          "published": false
+        }
+      },
+      "tournament": {
+        "status": "ready-to-publish",
+        "next_step": "publish all 3 with unique UTMs → ingest analytics after 7 days → run tournament.py --round 1"
+      }
+    },
+    { "slug": "ai-fluency-weekend", "category": "course", "priority": 2, "lessons": 10, "variants": {}, "note": "100% content ready, 0/10 videos per variant" },
+    { "slug": "twingen", "category": "course", "priority": 3, "lessons": 33, "variants": {}, "note": "100% content ready, 0/33 videos per variant" },
+    { "slug": "n8n-templates", "category": "course", "priority": 4, "lessons": 10, "content_ready_pct": 80, "variants": {} },
+    { "slug": "trendpilot-pro", "category": "product", "priority": 5, "variants": {} },
+    { "slug": "youtube-workflows", "category": "course", "priority": 6, "lessons": 6, "content_ready_pct": 17, "variants": {} },
+    { "slug": "growth-marketing-masterclass", "category": "course", "priority": 7, "lessons": 72, "content_ready_pct": 21, "variants": {} },
+    { "slug": "classroom-onboarding", "category": "onboarding", "priority": 8, "variants": {} },
+    { "slug": "visionspark-re", "category": "product", "priority": 9, "variants": {} },
+    { "slug": "wf-ig-publisher", "category": "workflow", "priority": 10, "variants": {} },
+    { "slug": "wf-cerebro-digest", "category": "workflow", "priority": 11, "variants": {} },
+    { "slug": "wf-cerebro-leadgen", "category": "workflow", "priority": 12, "variants": {} },
+    { "slug": "wf-cerebro-inbox-ai", "category": "workflow", "priority": 13, "variants": {} },
+    { "slug": "wf-jobhunter", "category": "workflow", "priority": 14, "variants": {} },
+    { "slug": "wf-trading-engine", "category": "workflow", "priority": 15, "variants": {} },
+    { "slug": "wf-ob1-brain", "category": "workflow", "priority": 16, "variants": {} },
+    { "slug": "wf-trendpilot-airtable", "category": "workflow", "priority": 17, "variants": {} }
+  ],
+  "coverage_summary": {
+    "content_pieces_tracked": 17,
+    "content_pieces_needed_for_full": "~40 (including per-lesson treatment of GMM et al.)",
+    "variants_shipped": 3,
+    "content_pieces_with_full_variant_coverage": 1,
+    "progress_pct": "2.0% (3 of ~150 videos, 1 of 17 pieces complete on variants)"
+  },
+  "pipeline_assets_built_this_session": [
+    ".claude/skills/explainer-video-pipeline/ — pipeline skill",
+    ".claude/skills/3d-icon-forge/ — 62 icon assets (30 techsy + 32 Gemini-baked)",
+    "remotion-videos/src/Cerebro/CerebroExplainerV2.tsx — data-driven composition",
+    "remotion-videos/src/Cerebro/CerebroExplainerV3.tsx — comparison-card composition",
+    "scripts/icon-forge/bake.py — icon generation",
+    "scripts/explainer-pipeline/render_vo.py — ElevenLabs Kal Jones VO",
+    "scripts/explainer-pipeline/tournament.py — 1v1 variant tournament tracker",
+    "remotion-videos/public/icons-techsy + icons-forge — symlinks to asset libraries"
+  ]
+}

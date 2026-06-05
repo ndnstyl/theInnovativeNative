@@ -1,0 +1,9 @@
+{
+  "template_id": "Pattern-NumberFlash-16x9",
+  "output_path": "/Users/makwa/theinnovativenative/content/unfuckYourData/visuals/patterns/example_numberflash_64pct.mov",
+  "props": {
+    "value": "64%",
+    "label": "of spend untracked"
+  },
+  "duration_frames": 45
+}

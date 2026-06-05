@@ -1,0 +1,15 @@
+{
+  "template_id": "TIN-WorkflowMap-16x9",
+  "output_path": "/Users/makwa/theinnovativenative/content/unfuckYourData/visuals/example_workflow-map.mov",
+  "props": {
+    "steps": [
+      { "n": 1, "label": "Raw Events" },
+      { "n": 2, "label": "Normalize IDs" },
+      { "n": 3, "label": "Canonical Schema" },
+      { "n": 4, "label": "CFO Dashboard" }
+    ],
+    "transitionIn": "fade",
+    "transitionOut": "fade",
+    "durationFrames": 240
+  }
+}

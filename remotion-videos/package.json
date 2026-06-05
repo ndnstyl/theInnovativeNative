@@ -62,6 +62,7 @@
   "dependencies": {
     "@remotion/captions": "4.0.417",
     "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "4.0.417",
     "@remotion/transitions": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

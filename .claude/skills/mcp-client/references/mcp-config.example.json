@@ -1,0 +1,93 @@
+{
+  "mcpServers": {
+    "archon": {
+      "transport": "http",
+      "url": "http://localhost:8051/mcp"
+    },
+    "n8n": {
+      "command": "npx",
+      "args": ["n8n-mcp"],
+      "env": {
+        "N8N_API_URL": "https://YOUR_N8N_INSTANCE.hstgr.cloud/",
+        "N8N_API_KEY": "YOUR_N8N_API_KEY"
+      }
+    },
+    "playwright-mcp": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "env": {
+        "MCP_MODE": "stdio"
+      }
+    },
+    "airtable-mcp": {
+      "command": "npx",
+      "args": ["-y", "airtable-mcp-server"],
+      "env": {
+        "AIRTABLE_API_KEY": "YOUR_AIRTABLE_PAT"
+      }
+    },
+    "notion-mcp": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": {
+        "NOTION_TOKEN": "YOUR_NOTION_TOKEN"
+      }
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=YOUR_PROJECT_REF"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "YOUR_SUPABASE_ACCESS_TOKEN"
+      }
+    },
+    "relevanceai-mcp-server": {
+      "command": "npx",
+      "args": [
+        "@relevanceai/relevanceai-mcp-server@latest",
+        "--region",
+        "YOUR_REGION",
+        "--tools",
+        "YOUR_TOOL_IDS"
+      ],
+      "env": {
+        "RELEVANCE_AUTH_TOKEN": "YOUR_RELEVANCE_AUTH_TOKEN"
+      }
+    },
+    "hostinger-api": {
+      "command": "npx",
+      "args": ["-y", "hostinger-api-mcp"],
+      "env": {
+        "DEBUG": "false",
+        "APITOKEN": "YOUR_HOSTINGER_API_TOKEN"
+      }
+    },
+    "slack-mcp": {
+      "command": "npx",
+      "args": ["-y", "@kazuph/mcp-slack"],
+      "env": {
+        "SLACK_MCP_XOXB_TOKEN": "YOUR_SLACK_BOT_TOKEN",
+        "SLACK_TEAM_ID": "YOUR_SLACK_TEAM_ID"
+      }
+    },
+    "google-drive-mcp": {
+      "command": "npx",
+      "args": ["-y", "mcp-google-drive"],
+      "env": {
+        "GOOGLE_CLIENT_ID": "YOUR_GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET": "YOUR_GOOGLE_CLIENT_SECRET",
+        "GOOGLE_REFRESH_TOKEN": "YOUR_GOOGLE_REFRESH_TOKEN"
+      }
+    },
+    "apify": {
+      "transport": "http",
+      "url": "https://mcp.apify.com",
+      "headers": {
+        "Authorization": "Bearer YOUR_APIFY_API_TOKEN"
+      }
+    }
+  }
+}

@@ -1,0 +1,236 @@
+All right, today we're going to go over brand documents.
+This is going to be a collection of your brand tone, your style guide, your mood board, and
+different things like that.
+So if you're in the class, sorry, if you're in the community, just go to the classroom and
+click on this very first one, Brand Vibe, How To.
+I put this first just simply because this is going to be the guidance that you are going
+to have for basically everything that you do with automation and AI.
+So starting with the very first part, what are brand docs and why you need them.
+I won't go through every single one of these, but I am going to walk you through essentially
+how to set up your project.
+I personally use and I advise to start off with ChatGPT.
+If you're unfamiliar with a lot of the large language models, that is a really good place
+to start.
+Jumping over here, I can actually show you this.
+This is actually the market share of how many users and the percentage of the market that
+each LLM has.
+So this is very recent as of September.
+You can see 60.6 is ChatGPT, meaning they have the most users.
+They also have the largest cash flow and equity.
+Although, if you really take a look at their charts, they are underwater, but that's like
+a whole nother conversation.
+But second is Copilot through Microsoft and then Gemini, Perplexity, Claude.
+You can take a look at here.
+This is the URL, or you can even just do a quick search.
+The only reason why I actually bring that up is simply because there are so many more searches
+that happen on ChatGPT.
+They have a lot more that they can actually retrain their models on.
+Overall, every LLM has been basically trained on the entirety of human knowledge, and they pass
+every single test with PhD-level statistics.
+So overall, we're just going to jump right into it here.
+These are the main pillars, though.
+The number one reason is so that you actually have consistency across automated outputs.
+If you take a look at any of my workflows, they're actually going to be over here in the
+classroom.
+You can actually go to the N&N templates.
+Maybe you've watched one of my other videos, and I've actually shown you how they work.
+But almost every single one of them, it centers around some sort of generative language, whether
+it is a script, or a subject line, or an email, or a VSL ad.
+When you actually create your brand document, you can upload how you think personally, your
+tone of voice.
+You can go over the type of language that you want to use.
+Are you more of a marketing and salesperson, or are you more of an organic, using organic
+tools to actually create your traffic and bring in your traffic?
+You can actually put all of this into your brand documents.
+I already have some tools that can help you with this, and we're going to be walking through
+that.
+The second is scaling human connection.
+Despite what most people think and how robotic LLMs can actually spit out any sort of ad copy,
+or email copy, or pretty much any copywriting at all.
+The reason why that happens is because it has no direction.
+And when you don't actually give it any sort of guidelines, or rules, or anything to adhere
+to, it's just going to go based on its training.
+And it's a robot.
+It's AI.
+So it's going to spit out very, very robotic answers.
+It also has the tendency to speak circular, or it will be very dry and drab.
+It'll reiterate sometimes the same points.
+You can actually input multiple different prompts, and it sometimes has a tendency to
+give you very similar and very un-unique, not distinctive answers.
+So both of those things combined with the human element and human connection that you actually
+bake into your document, you can tell it things like to sound less robotic, be more conversational,
+don't worry about EM dashes or punctuation.
+Heck, sometimes I even know people that purposely put, you know, make spelling errors here and
+there.
+It sounds weird, but that's how you use AI to actually keep and maintain the human connection
+and the human scalability part of it.
+And then alignment with your market positioning.
+This is where you give it a lot of data.
+You give it your FAQs.
+You upload your website URL.
+You upload your product information or your services so that it actually aligns with your
+market.
+And then you upload your avatars and it will stay in alignment with who you're speaking
+to.
+And it actually doesn't ever forget those things.
+You put those in your project files and then you're all super good to go.
+So once you start creating these materials, whether they're visual or written, it's going
+to stay on brand and it's going to be on target for your market.
+And then you can also use it for future proofing and for governance.
+You know, a lot of lawyers use these things and they bake in liability issues or when they
+put in the guardrails of what not to say along with what to say or HIPAA compliance.
+Or if you have visual guidelines like WCAG 2.1 or whatever, and you want to base that into
+whatever it is that you're designing, you can incorporate all of those into your brand
+documents.
+And once you actually upload that into ChatGPC and you create your project profile, then
+it'll actually adhere to everything that you actually put in there.
+So we're going to go ahead and jump in on the other side.
+This is just a quick intro of kind of the overview of why you want to create your brand documents.
+And it'll make a little bit more sense once we do get in there and I show you a couple
+of things.
+Now, the first part of it is creating your ChatGPT.
+With your brand project and your brand documents, you do have to have the pro plan.
+You can use ChatGPT for free and it'll give you a certain amount of searches.
+But in order for you to create a custom project or other tools like, you know, uploading your
+documents to that custom project or giving it instructions, different things like that,
+if you don't have the paid plan, you're only going to be able to put instructions into that
+chat.
+And then if you've used ChatGPT or any other larger language model for that matter, once
+you get to a certain amount of input and output, meaning tokens, you're going to run out
+of room.
+And then it's going to ask you to create a new chat.
+And then once you create that new chat, it's going to forget everything that's in that old
+chat.
+And if you were to go back, copy and paste it into the new chat, then it's actually going
+to take up a lot of your context tokens.
+That is completely different than when you create a project, you upload your documents,
+again, which will make a little bit more sense once I visually walk you through this here
+so that you can see kind of the differences of that.
+So I won't insult your guys's intelligence of trying to help you create an account.
+But on this page, you can actually go to this website and there is a supporting article.
+It's super simple.
+You're going to sign up with your email address.
+You're going to put in your billing information.
+I'm not going to do all that.
+But this is a walkthrough if you happen to get stuck on any of that.
+And then overall, this will be your chat GPT project instructions.
+And we'll get to that right on the other side of this.
+So once you have put in your billing information, you actually create your project, yours is
+actually going to look a little bit different than mine.
+I already have different projects that I have for business and for personal and a whole bunch
+of other things that I do.
+So all of this stuff on the left side is going to be blank.
+You're not really going to have anything in here.
+It is going to be an absolute fresh start.
+Now, in order for you to create your project, you just on the left side, there's going to
+be this little folder icon you want to collect.
+You want to click on that.
+You name it whatever it is that you want to.
+I'm just going to do a short walkthrough with you guys.
+Even though I have all of this done, I just kind of want to show you how this is all going
+to work out.
+So you're going to create your new project.
+We are in this test, build my tribe walkthrough, and it is going to be absolutely blank here.
+Now, the very first thing that you want to do is you do want to copy all of this information
+here.
+You just highlight it all and scroll down.
+It is a lot of information.
+We'll go over all of this once I actually do get it in here.
+
+I'm only going to stick to ChatGPT.
+With this, this will tell you your ChatGPT how to stay brand aligned.
+You're going to give it a role.
+In the role, this is what I actually put.
+You are not a freelancer.
+You're not helping a brand.
+You are the brand.
+Your job is to study the files, absorb the tone, and then create context that feels like
+it's written, designed, or spoken from the inside of the brand's head.
+No shortcuts.
+No generic filters.
+No AI voice.
+All of this stuff.
+Now, this is something that you want to personalize for you.
+This is what I've created for myself, and I've told it how to think.
+And I've gone, I've actually copied a whole bunch of different prompts that I've tried
+to do.
+I've also used ChatGPT to help me actually create this.
+So you can iterate it.
+You can come up with a couple of things.
+Tell ChatGPT, say, hey, this is what I have.
+Can you help me think of edge cases?
+Can you tell me what my avatars are or explain them so that it understands these things?
+So you can go through.
+I have this template in here so that you have something to refer to.
+Overall, every single one of yours is going to be wildly different.
+Some of you are more conversational.
+Some are your introverts trying to be extroverted.
+Sometimes you are trying to tone it down a little bit.
+Sometimes you want to have a little bit more of a professional brand vibe.
+Whatever it is, this is where you want to give the instructions of how to use it.
+So this is the very first part.
+You copy that in there.
+You paste it.
+I wouldn't suggest that you just straight up copy pasta because this is going to end up
+being my thing.
+So now, that being said, we'll go back here just so that we are still on the same thing.
+But that's the very first thing that you do is you walk through this.
+You create your new project, and then we're going to start to upload the files.
+The very first thing that we did were those instructions.
+Now, on the next, we're going to jump into your brand vibe builder.
+And I've built a tool that is going to help you guys do exactly this.
+So I'll be right back at you in just a few seconds.
+Now, this is the brand vibe builder.
+So at the very top of it, you're going to see this link.
+This link is actually going to take you directly to my brand vibe builder.
+And what I've done is I've actually made it very easy.
+So I've helped hundreds of clients build personalized brand vibe documents with the strategy and creative
+flair. If you want to dive deeper, you can join my school community.
+That's just the invitation that I actually have if they want to find my school community.
+But you can use this tool.
+Everybody that is in this group, you are going to have access to the classroom as well as
+this document that links to this.
+So when you click one of these, this one, when I, when you click this, help me define my brand's
+personality.
+These are the things that you're going to start to answer.
+It's going to be a lot.
+And I'm telling you, if you take your time doing this and you reiterate and you go line
+by line, yes, it's a lot at first.
+But if you do all of this up front, you're really, you're literally never going to have
+to do it again.
+You might come back if you have either a new product or a new service, or you maybe want
+to shift alignment with where your brand and your brand direction is going.
+But overall, once you have these documents, then you are absolutely good to go.
+So we won't walk through every single one of these.
+I'm going to jump back over to have it here.
+I just wanted to show you the link that would come here.
+So once you click this, we'll actually just do it.
+It'll pop up a whole brand new chat.
+If you're not signed in, it's going to tell you to sign in.
+But if you have your account, then you're absolutely fine.
+Now, overall, this is what I have come up with for mine.
+So this is my brand essence.
+This is going to tell you everything about me.
+And the more you watch my videos or the more you consume my content, you can tell this is
+essentially all of this copy is how I speak.
+These are my values.
+These are my ideals.
+These are my client avatars.
+We're going to walk through a lot of the workflows that I've had, or maybe you've already consumed
+content that I've put out there and other videos.
+But overall, these are my avatars.
+This is my founder story.
+This is the immersive brand feeling across all touch points.
+This is my overall vibe strategy summary.
+And this is my voice, my tone, my rhythm.
+You guys can take a look at this.
+Again, this is in the school community for you guys to reference.
+I would not just copy and paste this, although I have seen people do that.
+You want to make it your own because every single piece of literature, your copy, your ads, your titles,
+this is what is going to be the instructions that your chat GPT follows and then this document.
+So once you actually create this, you're going to be in here in chat GPT.
+So just for kind of the sake of watching me do this so that you have the understanding of this.
+Once you do all of this, it's going to spit an answer out like that.
+I already have it pasted in there.
+You just want to go to maybe Google Docs or something.
+You just want to make it pasted in there.

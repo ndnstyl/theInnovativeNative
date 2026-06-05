@@ -1,0 +1,576 @@
+1
+00:00:00,000 --> 00:00:02,880
+return and this new one, this new package going out.
+
+2
+00:00:02,880 --> 00:00:04,900
+And which one do I prioritize?
+
+3
+00:00:04,900 --> 00:00:06,600
+When you have all of these things done
+
+4
+00:00:06,600 --> 00:00:08,060
+and you hit that flow state,
+
+5
+00:00:08,060 --> 00:00:10,340
+you actually start to get this compounding effect.
+
+6
+00:00:10,340 --> 00:00:11,720
+You don't have siloed data.
+
+7
+00:00:11,720 --> 00:00:13,560
+You don't have siloed tasks.
+
+8
+00:00:13,560 --> 00:00:15,460
+Everything is in your CRM.
+
+9
+00:00:15,460 --> 00:00:19,080
+Everything is labeled and everything starts to really happen
+
+10
+00:00:19,080 --> 00:00:20,680
+at a much faster pace.
+
+11
+00:00:26,260 --> 00:00:27,980
+And the cherry on top,
+
+12
+00:00:27,980 --> 00:00:31,660
+you don't have that bottleneck person in each department
+
+13
+00:00:31,660 --> 00:00:33,760
+that is resting on tribal knowledge
+
+14
+00:00:33,760 --> 00:00:36,620
+or resting on the CEO for their vision
+
+15
+00:00:36,620 --> 00:00:39,160
+or any one particular person in any department
+
+16
+00:00:39,160 --> 00:00:42,780
+in your organization that you have to go to
+
+17
+00:00:42,780 --> 00:00:44,440
+to get the information.
+
+18
+00:00:44,440 --> 00:00:47,000
+Yeah, you're still gonna have your subject matter experts.
+
+19
+00:00:47,000 --> 00:00:49,160
+There's gonna be the ones that are the go-to people
+
+20
+00:00:49,160 --> 00:00:50,880
+for specific tasks,
+
+21
+00:00:50,880 --> 00:00:55,380
+but all the repetitive and redundant tasks
+
+22
+00:00:55,380 --> 00:00:57,960
+that you need to actually execute and get done,
+
+23
+00:00:57,960 --> 00:01:00,640
+most of it is being done through automation,
+
+24
+00:01:00,640 --> 00:01:03,140
+through N8N, through your AI agents.
+
+25
+00:01:03,140 --> 00:01:05,740
+And then the really challenging problems,
+
+26
+00:01:05,740 --> 00:01:07,240
+you have your subject matter experts,
+
+27
+00:01:07,240 --> 00:01:08,240
+you have your directors,
+
+28
+00:01:08,240 --> 00:01:09,840
+you have your C-level people
+
+29
+00:01:09,840 --> 00:01:11,640
+that you can actually fall back on,
+
+30
+00:01:11,640 --> 00:01:13,640
+but they're no longer the bottleneck.
+
+31
+00:01:13,640 --> 00:01:15,640
+You are no longer the bottleneck.
+
+32
+00:01:15,640 --> 00:01:28,520
+Ultimately, that's how you scale and everybody gets to scale
+
+33
+00:01:28,520 --> 00:01:30,320
+in your business and grow with your business.
+
+34
+00:01:30,320 --> 00:01:33,320
+And if you have profit sharing or performance-based reviews,
+
+35
+00:01:33,320 --> 00:01:36,320
+everybody does better through the orchestration
+
+36
+00:01:36,320 --> 00:01:39,760
+of all of these automations, reducing repetitive tasks,
+
+37
+00:01:39,760 --> 00:01:43,960
+reducing human error and mistakes that happen with data entry,
+
+38
+00:01:43,960 --> 00:01:47,140
+or somebody forgot to send out a package or whatnot.
+
+39
+00:01:47,140 --> 00:01:52,740
+Like this really starts to create this unity within your company,
+
+40
+00:01:52,740 --> 00:01:56,240
+this streamlined focus, and everybody working toward the same goal.
+
+41
+00:01:56,240 --> 00:02:05,020
+So overall closing thoughts.
+
+42
+00:02:05,020 --> 00:02:08,520
+Overall, a few closing thoughts here.
+
+43
+00:02:08,520 --> 00:02:12,020
+We'll kind of try to jump back and go through what we talked about,
+
+44
+00:02:12,020 --> 00:02:13,420
+which are connecting the dots.
+
+45
+00:02:13,420 --> 00:02:14,420
+It's about expansion.
+
+46
+00:02:14,420 --> 00:02:21,200
+It's about labeling your dashboard, your workflows, your tools,
+
+47
+00:02:21,200 --> 00:02:25,200
+how you communicate, and then also how all of these systems
+
+48
+00:02:25,200 --> 00:02:28,600
+start to come together and you eliminate the data silos.
+
+49
+00:02:28,600 --> 00:02:31,500
+And this is where you really start to see expansion come in.
+
+50
+00:02:31,500 --> 00:02:33,100
+This is where you see growth come in.
+
+51
+00:02:33,100 --> 00:02:38,740
+This is where you see revenue start to grow the way that you want it to.
+
+52
+00:02:38,740 --> 00:02:50,120
+This AI-first thinking and how to think AI-first is and should be the core
+
+53
+00:02:50,120 --> 00:02:52,920
+of how everybody thinks in your organization.
+
+54
+00:02:52,920 --> 00:02:55,280
+Because AI, it's not going anywhere.
+
+55
+00:02:55,280 --> 00:02:56,760
+It's not the shiny new tool.
+
+56
+00:02:56,760 --> 00:02:59,000
+I keep saying this like a broken record.
+
+57
+00:02:59,200 --> 00:03:00,540
+And it's going to change.
+
+58
+00:03:01,160 --> 00:03:03,100
+Your SOPs are going to change.
+
+59
+00:03:04,020 --> 00:03:05,520
+AI is going to get smarter.
+
+60
+00:03:05,520 --> 00:03:10,120
+It's going to disrupt things maybe in the next 6 to 10 or 12 months,
+
+61
+00:03:10,120 --> 00:03:14,640
+even for your own organization, even for the people that are AI-first thinkers.
+
+62
+00:03:15,160 --> 00:03:18,160
+So if you start to do that and incorporate all of these systems
+
+63
+00:03:18,160 --> 00:03:22,040
+and AI-first thinking now, when those pattern interrupts
+
+64
+00:03:22,040 --> 00:03:25,620
+or those disruptions come, because you all are on the same page
+
+65
+00:03:25,620 --> 00:03:30,360
+and you have been using AI for 3, 6, 9, 12 months or 2 years,
+
+66
+00:03:30,820 --> 00:03:33,740
+then you can start to think through all of the theory
+
+67
+00:03:33,740 --> 00:03:35,780
+and everything that you've built throughout the business
+
+68
+00:03:35,780 --> 00:03:36,940
+and the systems that scale.
+
+69
+00:03:37,280 --> 00:03:40,320
+And it'll continue to scale with you without disruption.
+
+70
+00:03:48,480 --> 00:03:50,840
+If chaos to clarity was about control,
+
+71
+00:03:52,240 --> 00:03:54,480
+expansion is about building leverage,
+
+72
+00:03:55,020 --> 00:03:56,540
+buying your time back,
+
+73
+00:03:56,860 --> 00:03:58,040
+creating flow states,
+
+74
+00:03:58,040 --> 00:04:01,060
+and creating the growth you want to see in your company.
+
+75
+00:04:04,060 --> 00:04:06,960
+It's about designing the systems that scale with you.
+
+76
+00:04:07,340 --> 00:04:09,500
+That even if they do break,
+
+77
+00:04:09,620 --> 00:04:10,820
+you know how to fix it.
+
+78
+00:04:11,020 --> 00:04:12,960
+And it's just one small little chink.
+
+79
+00:04:13,300 --> 00:04:16,720
+And it doesn't actually completely collapse your company.
+
+80
+00:04:16,720 --> 00:04:20,200
+Like if a person that was a great salesperson
+
+81
+00:04:20,200 --> 00:04:22,080
+that you actually had a performer that leaves.
+
+82
+00:04:22,080 --> 00:04:39,060
+If chaos to clarity is about control,
+
+83
+00:04:39,720 --> 00:04:42,200
+expansion is about connecting the dots
+
+84
+00:04:42,200 --> 00:04:45,160
+and actually leveraging systems.
+
+85
+00:04:45,160 --> 00:04:52,020
+It's about designing them in a way that scales with you
+
+86
+00:04:52,020 --> 00:04:53,200
+and your business.
+
+87
+00:04:53,700 --> 00:04:56,040
+And no matter how small or large your team is,
+
+88
+00:04:56,300 --> 00:04:58,420
+it continues that growth and that scale.
+
+89
+00:05:01,420 --> 00:05:04,720
+And that's without having to hustle harder
+
+90
+00:05:04,720 --> 00:05:06,320
+or work more hours
+
+91
+00:05:06,320 --> 00:05:08,800
+or really burn the midnight oil.
+
+92
+00:05:09,440 --> 00:05:11,520
+Automation takes care of so much of it
+
+93
+00:05:11,520 --> 00:05:13,000
+and then systems and then people
+
+94
+00:05:13,000 --> 00:05:14,660
+that are using AI-first systems
+
+95
+00:05:14,660 --> 00:05:16,400
+all take care of the rest.
+
+96
+00:05:35,880 --> 00:05:39,000
+Because at the end of the day,
+
+97
+00:05:39,080 --> 00:05:40,160
+the fastest way to grow
+
+98
+00:05:40,160 --> 00:05:43,040
+isn't just by working harder or hustling more.
+
+99
+00:05:43,600 --> 00:05:45,440
+It's actually about building all of these systems
+
+100
+00:05:45,440 --> 00:05:46,620
+that scale with you.
+
+101
+00:05:55,200 --> 00:05:56,280
+At the end of the day,
+
+102
+00:06:05,280 --> 00:06:06,700
+because at the end of the day,
+
+103
+00:06:07,460 --> 00:06:09,120
+scaling and growing your company
+
+104
+00:06:09,120 --> 00:06:10,940
+isn't about the tools,
+
+105
+00:06:11,440 --> 00:06:12,600
+it isn't about the people,
+
+106
+00:06:12,920 --> 00:06:14,400
+it's about the systems overall
+
+107
+00:06:14,400 --> 00:06:17,440
+that you guys use to actually scale and implement
+
+108
+00:06:17,440 --> 00:06:19,100
+that grow with you.
+
+109
+00:06:24,160 --> 00:06:25,360
+Because at the end of the day,
+
+110
+00:06:25,440 --> 00:06:26,260
+the fastest growth
+
+111
+00:06:26,260 --> 00:06:27,820
+isn't about who hustles the hardest.
+
+112
+00:06:28,100 --> 00:06:30,640
+It's about who does it the smartest way possible,
+
+113
+00:06:30,860 --> 00:06:32,500
+who has the most elegant solutions,
+
+114
+00:06:32,980 --> 00:06:35,440
+who has systems that scale with them
+
+115
+00:06:35,440 --> 00:06:37,380
+and their business no matter the headcount.
+
+116
+00:06:37,380 --> 00:06:41,240
+You want to have systems that grow with your company
+
+117
+00:06:41,240 --> 00:06:43,180
+and scale with your company.
+
+118
+00:06:43,500 --> 00:06:45,180
+It's always about working smarter,
+
+119
+00:06:45,500 --> 00:06:46,120
+not harder.
+
+120
+00:06:46,120 --> 00:06:46,720
+It's about how you're doing.
+
+121
+00:06:46,720 --> 00:06:47,120
+It's about how you're doing.
+
+122
+00:06:47,120 --> 00:06:47,440
+It's about how you're doing.
+
+123
+00:06:47,440 --> 00:06:47,940
+It's about how you're doing.
+
+124
+00:06:47,940 --> 00:06:48,440
+It's about how you're doing.
+
+125
+00:06:48,440 --> 00:06:48,940
+It's about how you're doing.
+
+126
+00:06:48,940 --> 00:06:49,440
+It's about how you're doing.
+
+127
+00:06:49,440 --> 00:06:49,940
+It's about how you're doing.
+
+128
+00:06:49,940 --> 00:06:50,440
+It's about how you're doing.
+
+129
+00:06:50,440 --> 00:06:50,940
+It's about how you're doing.
+
+130
+00:06:50,940 --> 00:06:51,440
+It's about how you're doing.
+
+131
+00:06:51,440 --> 00:06:51,940
+It's about how you're doing.
+
+132
+00:06:51,940 --> 00:06:52,440
+It's about how you're doing.
+
+133
+00:06:52,440 --> 00:06:52,940
+It's about how you're doing.
+
+134
+00:06:52,940 --> 00:06:53,440
+It's about how you're doing.
+
+135
+00:06:53,440 --> 00:06:53,940
+It's about how you're doing.
+
+136
+00:06:53,940 --> 00:06:53,940
+
+
+137
+00:06:53,940 --> 00:06:54,440
+It's about how you're doing.
+
+138
+00:06:54,440 --> 00:06:54,940
+It's about how you're doing.
+
+139
+00:06:54,940 --> 00:06:54,940
+
+
+140
+00:06:54,940 --> 00:06:55,940
+It's about how you're doing.
+
+141
+00:06:55,940 --> 00:06:55,940
+
+
+142
+00:06:55,940 --> 00:06:56,940
+It's about how you're doing.
+
+143
+00:06:56,940 --> 00:06:56,940
+
+
+144
+00:06:56,940 --> 00:07:26,920
+It's about how you're doing.
+

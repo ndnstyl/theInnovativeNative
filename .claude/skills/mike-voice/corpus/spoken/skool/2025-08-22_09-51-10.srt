@@ -1,0 +1,204 @@
+1
+00:00:00,000 --> 00:00:07,920
+to end. The automation is N8N orchestrating all of that. Where AI fits in is the data enrichment
+
+2
+00:00:07,920 --> 00:00:15,120
+or the intelligence. That's where say you have like an SDR workflow. When you get that Calendly,
+
+3
+00:00:15,360 --> 00:00:20,100
+that Calendly triggers the Zoom call, it books a meeting, it puts it onto your calendar. Well,
+
+4
+00:00:20,620 --> 00:00:26,540
+in the back end, an AI agent connected to something like ChatGPT 4.1 mini or something,
+
+5
+00:00:26,540 --> 00:00:32,900
+it will go and it'll scrape their company website. It'll go on LinkedIn, try to find their
+
+6
+00:00:32,900 --> 00:00:39,000
+profile. It will enrich that data and give you intelligence about that business, that contact,
+
+7
+00:00:39,100 --> 00:00:44,300
+that person or whoever it is. It'll give you the sentiment analysis, package it up and then directly
+
+8
+00:00:44,300 --> 00:00:53,440
+inject it into your CRM. That's where AI fits in. That is something that is priceless, essentially.
+
+9
+00:00:53,440 --> 00:00:59,540
+That work sometimes would take two, three, four hours for an SDR agent to try to surf the web,
+
+10
+00:00:59,640 --> 00:01:05,720
+find all this stuff, get the right profiles and enrich this personal contact or this business contact.
+
+11
+00:01:05,720 --> 00:01:18,040
+So just a short recap, automation moves the pieces and AI adds the intelligence.
+
+12
+00:01:18,040 --> 00:01:29,780
+That is how you move from chaos to clarity. That's the combo that's actually going to change the game for you
+
+13
+00:01:29,780 --> 00:01:36,140
+and provide structure and then also create the leverage that you need to grow bigger and better.
+
+14
+00:01:36,140 --> 00:01:46,500
+Now, we went over a lot. We talked about the foundation of it, thinking about your workflows,
+
+15
+00:01:46,840 --> 00:01:53,400
+thinking about all your tools, thinking about how AI is incorporated into all of it to enrich and to grow
+
+16
+00:01:53,400 --> 00:01:58,920
+your data and your database and your intelligence. This is going to start to give you the foundations of
+
+17
+00:01:58,920 --> 00:02:05,020
+working smarter and not harder. It's going to smooth out your operations. So there's less bottlenecks.
+
+18
+00:02:05,020 --> 00:02:09,960
+It's a cleaner workflow. There is cleaner data in and there is cleaner data out.
+
+19
+00:02:12,180 --> 00:02:17,840
+If you don't think in a systematized way or productizing your knowledge,
+
+20
+00:02:18,000 --> 00:02:22,340
+then you're always going to be stuck doing the same exact things over and over and over
+
+21
+00:02:22,340 --> 00:02:28,760
+without the ability to scale, leverage your time, or even delegate and hand off to other people.
+
+22
+00:02:29,140 --> 00:02:33,380
+It can't all live in your brain. You have to get it out. You have to create these systems.
+
+23
+00:02:33,380 --> 00:02:35,220
+You have to create these SOPs.
+
+24
+00:02:37,320 --> 00:02:43,320
+All that being said, I'm going to actually walk you through a working example of how I use Miro.
+
+25
+00:02:43,580 --> 00:02:46,580
+So we're going to jump into Miro. I'm going to walk you through this Miro board.
+
+26
+00:02:47,100 --> 00:02:50,180
+And this is going to be a template that you can actually download. I'll put it in the
+
+27
+00:02:50,860 --> 00:02:54,820
+description below. It'll be a link to a Miro board. If you don't have Miro,
+
+28
+00:02:54,820 --> 00:02:59,320
+I'll also try to create an image for it just so that you can actually see the image.
+
+29
+00:02:59,800 --> 00:03:03,300
+If you plan on using Miro, I'll leave a link down below. You can actually sign that up.
+
+30
+00:03:03,700 --> 00:03:05,620
+We're going to jump over there. I'll see you on the other side.
+
+31
+00:03:05,620 --> 00:03:13,000
+So, let's go.
+
+32
+00:03:13,000 --> 00:03:13,500
+So, let's go.
+
+33
+00:03:13,500 --> 00:03:14,500
+So, let's go.
+
+34
+00:03:14,500 --> 00:03:15,500
+So, let's go.
+
+35
+00:03:15,500 --> 00:03:16,500
+So, let's go.
+
+36
+00:03:16,500 --> 00:03:17,500
+So, let's go.
+
+37
+00:03:17,500 --> 00:03:18,500
+So, let's go.
+
+38
+00:03:18,500 --> 00:03:19,500
+So, let's go.
+
+39
+00:03:19,500 --> 00:03:20,500
+So, let's go.
+
+40
+00:03:20,500 --> 00:03:21,500
+So, let's go.
+
+41
+00:03:21,500 --> 00:03:22,500
+So, let's go.
+
+42
+00:03:22,500 --> 00:03:23,500
+So, let's go.
+
+43
+00:03:23,500 --> 00:03:24,500
+So, let's go.
+
+44
+00:03:24,500 --> 00:03:25,500
+So, let's go.
+
+45
+00:03:25,500 --> 00:03:26,500
+So, let's go.
+
+46
+00:03:26,500 --> 00:03:27,500
+So, let's go.
+
+47
+00:03:27,500 --> 00:03:28,500
+So, let's go.
+
+48
+00:03:28,500 --> 00:03:29,500
+So, let's go.
+
+49
+00:03:29,500 --> 00:03:30,500
+So, let's go.
+
+50
+00:03:30,500 --> 00:03:31,500
+So, let's go.
+
+51
+00:03:31,500 --> 00:03:32,500
+So, let's go.
+

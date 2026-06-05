@@ -1,0 +1,29 @@
+{
+  "name": "VisionSpark RE",
+  "description": "Real estate AI marketing product — AI staging, generative video, branded reel assembly for property listings",
+
+  "colors": {
+    "background": "#F5F0EB",
+    "background_alt": "#EDE7E0",
+    "text": "#1B3A4B",
+    "text_secondary": "#4A6B7A",
+    "accent": "#D4956A",
+    "accent_secondary": "#1B3A4B",
+    "accent_tertiary": "#8B6F5C",
+    "code_bg": "#1B3A4B",
+    "card_bg": "#FFFFFF",
+    "card_bg_alt": "#F5F0EB"
+  },
+
+  "fonts": {
+    "heading": "DM Serif Display",
+    "body": "Inter",
+    "code": "JetBrains Mono"
+  },
+
+  "assets": {
+    "logo": null,
+    "logo_dark": null,
+    "icon": null
+  }
+}

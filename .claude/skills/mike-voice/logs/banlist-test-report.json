@@ -1,0 +1,72 @@
+{
+  "total_changes": 11,
+  "patterns": [
+    {
+      "pattern": "em_dashes",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "its_not_x_its_y",
+      "severity": "FLAG",
+      "matches": 1,
+      "samples": [
+        [
+          "just ",
+          "a",
+          "a"
+        ]
+      ]
+    },
+    {
+      "pattern": "delve",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "moreover",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "in_today_fast_paced_world",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "navigate_the_landscape",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "unleash_potential",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "as_an_ai",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    },
+    {
+      "pattern": "leverage_as_verb",
+      "severity": "SOFT_REPLACE",
+      "replacements": 1
+    },
+    {
+      "pattern": "utilize",
+      "severity": "SOFT_REPLACE",
+      "replacements": 1
+    },
+    {
+      "pattern": "seamlessly",
+      "severity": "SOFT_REPLACE",
+      "replacements": 1
+    },
+    {
+      "pattern": "synergy",
+      "severity": "ZERO_TOLERANCE",
+      "replacements": 1
+    }
+  ]
+}

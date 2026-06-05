@@ -1,0 +1,131 @@
+start	end	text
+0	4560	This one is what you want to grab as the message and the subject line.
+6280	13040	So, can't actually do that yet, and what I'll do is see if we can go...
+13040	15740	I'm going to have to create one here. Give me just a second.
+28740	29460	Proposal.
+30000	31000	Proposal.
+45420	48000	Sent. Okay, so we'll jump over in the other one.
+50300	51900	Now, we're going to trigger this again.
+54900	56400	Nope, that's not the right one.
+57260	58480	Did it come through yet?
+58480	60480	That's why it didn't.
+60480	61480	So now...
+64480	65480	Fetch.
+65480	69480	So this one. Make money, send contract, thanks Mike.
+69480	73480	I just did that just to make sure that it did classify as an opportunity.
+73480	74480	We're going to execute this.
+74480	80480	So the output branch goes to the opportunity branch, as you can see it does here.
+80480	82480	Then it's going to spit it out here.
+82480	93480	Then, what we just put in here, it's going to grab all of the information, again, from the previous text classifier and the previous Gmail trigger.
+93480	95480	These are going to be grabbed.
+95480	96480	These are going to be grabbed.
+96480	104480	It's going to synthesize the information and then it's going to execute the output.
+104480	105480	The output.
+105480	109480	The output on this side is everything that it's going to synthesize through AI.
+109480	111480	The subject, the body, the context of it.
+111480	113480	It's going to write up a reply.
+113480	120480	This may be a little bit weird, but just simply because it wasn't a real email.
+120480	126480	But it's still going to give some sort of an output that is on par with money making.
+126480	135480	So the subject, I want to go in here to the Gmail trigger and I'll just put in re.
+135480	139480	You can do fixed with expressions.
+139480	144480	So I'm in the Gmail trigger now and the subject was here.
+144480	152480	Now, as you can see, it will be regarding prop just because that's what I sent with the email.
+152480	155480	Now, this is going to be text type.
+155480	158480	My key business text, sometimes you want to create HTML.
+158480	159480	You want it.
+159480	162480	You're going to have to put an output parser in your model.
+162480	168480	If you want to output it in HTML, I actually just leave it.
+168480	174480	So now I want to go to the previous node, which is my message or model.
+174480	180480	So text output, I'm just going to drag it over here.
+180480	181480	Execute setup.
+181480	185480	It's going to be that output as a draft.
+185480	196480	And now I'm going to connect it to this node, which is going to remove it from my inbox.
+196480	209480	So now just to kind of recap, we grab the email and classified it, label it as an opportunity, created the output from this input on the left side.
+209480	216480	Again, output from this model based on this input.
+216480	225480	Put it into this Gmail draft and then it de-labeled it from inbox.
+225480	226480	So drafts.
+226480	235480	Oh, actually, here's one step I forgot.
+235480	239480	So what you also want to do, taking a look in here, there's no recipient.
+239480	249480	So I'm going to go back into here and I want to add an option, which is to email.
+249480	256480	I want to go back over here to the Gmail trigger and I want to go find who it's from, which is here.
+256480	263480	And this expression will now dynamically pull whoever sent it.
+263480	272480	So now when I execute this a second time, it will create another draft.
+272480	274480	Put it in here.
+274480	278480	And this one will have the from.
+278480	286480	So this is a good thing that you want to do is check, double check and recheck your work, especially once the flows start to get complicated.
+286480	294480	So hopefully this gives you some ideas as to how to create an email box filtration system.
+294480	297480	This can be as simple or as complicated as you want to.
+297480	299480	Again, you can start to attach agents.
+299480	301480	You can attach agents with tools.
+301480	308480	You can go do research with her tools like perplexity or tablet to do research on an email prospect.
+308480	314480	Say you are you're running an email campaign or you're running Google ads or you're running meta ads.
+314480	326480	And you're getting output from those ads or you're getting responses from those ads that go to either a slack or your Gmail in your Gmail inbox from an email campaign.
+326480	329480	And you want to not only classify it and label it.
+329480	335480	You want to go out there and do research or to send a DM or to do anything.
+335480	337480	I mean, it could do absolutely anything.
+337480	344480	Once you start to get familiar with and then you have so, so many.
+344480	349480	So HTTP requests, webhooks, chat triggers.
+349480	352480	There's things like phantom buster.
+352480	360480	So where you can get information, go and use phantom buster and send connections and DMs on LinkedIn, relevance, AI.
+360480	361480	I don't know.
+361480	362480	The world is your oyster.
+362480	376480	The more that you can start to creatively think through this and systematically process all of this using N8N as your orchestrator to use triggers, to use nodes, to split and classify text, to synthesize information.
+376480	385480	You can start to see how powerful this can very much be for personal or business, your side hustle, or if you're a solopreneur, whatever it is.
+385480	388480	This can save so much time.
+388480	405480	I mean, again, the study was done with Radicati to where most business professionals save about 3.1 hours or sorry, lose about 3.1 hours almost every single day to their email inbox.
+405480	410480	So overall, this can be a very, very useful tool.
+410480	416480	Now, all that being said, you don't have to create this unless you wanted this and you wanted to walk through this.
+416480	418480	This is the only reason why I actually created this video.
+418480	421480	I'm actually going to delete everything because I don't need it.
+421480	429480	This right here will be in the community.
+429480	431480	You can download this template.
+431480	433480	It'll already have the nodes in there.
+433480	437480	And then all you have to do is plug in your credentials and your authorization into it.
+437480	439480	Make your tweaks.
+439480	443480	Ensure you do go through it and make sure it's on your brand voice.
+443480	448480	It has all of your credentials and you want it to classify and do the things that you say.
+448480	452480	If you have any questions or if you're stuck on anything, just post it in the community.
+452480	455480	I think I touched on just about everything.
+455480	459480	I just want you to think about how you can start to create these workflows.
+459480	471480	Again, this was kind of instigated, not instigated, but this was an idea from the school community that was based on Chris here.
+471480	473480	Chris asked that question.
+473480	475480	He was trying to use ChatGPT.
+475480	482480	So the next time I'm actually going to jump into it, I'm going to use Anthropics Claude.
+482480	488480	Claude is another very powerful tool that you can connect to as you're doing it live.
+488480	495480	And I'll kind of show you those workflows, how to connect through MCP, which is model context protocol.
+495480	498480	Again, any questions, just post it in the school community.
+498480	499480	I'll be happy to answer them.
+499480	500480	DM me if needed.
+500480	504480	If you are thinking through or want a system like this, just hit me up.
+504480	508480	I do work like this all the time for many different clients.
+508480	516480	And if it's something very simple, I could just help you through it, walk you through it, debug it, do whatever, and get you on your way.
+516480	520480	As always, like, subscribe, share, invite people.
+520480	526480	This community, it's only as great as everybody actually inputs into it.
+526480	534480	So I rely on you for ideas and to come together and make sure that everybody is learning at their own pace.
+534480	537480	Everybody has different things that they're working through.
+537480	541480	And this was Chris's, so I did go ahead and put that out here.
+541480	543480	See you on the other side.
+543480	545480	Peace, love and hair grease.
+545480	545480	
+545480	545480	
+545480	545480	
+545480	546480	Peace, love and hair grease.
+546480	547480	Peace, love and hair grease.
+547480	548480	Peace, love and hair grease.
+548480	549480	Peace, love and hair grease.
+549480	550480	Peace, love and hair grease.
+550480	551480	Peace, love and hair grease.
+551480	552480	Peace, love and hair grease.
+552480	553480	Peace, love and hair grease.
+553480	554480	Peace, love and hair grease.
+554480	555480	Peace, love and hair grease.
+555480	556480	Peace, love and hair grease.
+556480	557480	Peace, love and hair grease.
+557480	558480	Peace, love and hair grease.
+558480	559480	Peace, love and hair grease.
+559480	560480	Peace, love and hair grease.
+560480	561480	Peace, love and hair grease.
+561480	562480	Peace, love and hair grease.
+562480	563480	Peace, love and hair grease.
+563480	564480	Peace, love and hair grease.
+564480	565480	Peace, love and hair grease.

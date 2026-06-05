@@ -1,0 +1,103 @@
+{
+  "_doc": "Vehicle archetype → business type mapping. Use when framing client types, market segments, or AI use-case categories. Pull the archetype that matches the client's actual business posture, not what they wish they were.",
+  "archetypes": [
+    {
+      "vehicle": "Race car (F1, NASCAR, drag)",
+      "business_type": "Performance-first SaaS, high-volume B2C, speed-to-revenue",
+      "characteristics": "Light, hot, expensive, breaks often, needs pit crew",
+      "ai_implication": "Massive parallelization, throughput > breadth, redundancy critical",
+      "punchline": "You're not running a race car, you're running a fleet of them and pretending each one is the same driver."
+    },
+    {
+      "vehicle": "Off-road / overland (Wrangler, Bronco, Land Cruiser, 4Runner)",
+      "business_type": "Durable business, weathers downturns, low-maintenance long haul",
+      "characteristics": "Slow but rock-solid, ground clearance, redundant systems",
+      "ai_implication": "Deterministic + fault-tolerant, batched processes, can't be the prettiest",
+      "punchline": "You don't put a Land Cruiser on a quarter-mile strip. You take it where the road ends."
+    },
+    {
+      "vehicle": "Drift car (Silvia, AE86, GR86, S15)",
+      "business_type": "Agile mid-market, controlled chaos, pivots on a dime",
+      "characteristics": "RWD = bias toward action, hand brake = manual override gate, takes skill to drive well",
+      "ai_implication": "Wide capability per agent, requires an operator who can read the slide and counter",
+      "punchline": "A drift car looks chaotic from the outside. The driver knows exactly where the back end is going."
+    },
+    {
+      "vehicle": "Electric vehicle (Tesla, Rivian, Lucid)",
+      "business_type": "Modern AI-native business, software-defined, instant torque",
+      "characteristics": "Smaller engine, instant torque, regenerative braking, depends on charging network",
+      "ai_implication": "Tight integration, recursive learning capture (regen), dependent on API quotas (charging)",
+      "punchline": "EVs don't need a transmission. AI-native businesses don't need the old gear stack either."
+    },
+    {
+      "vehicle": "Economy car (Civic, Corolla, Sentra)",
+      "business_type": "SMB / bootstrapped",
+      "characteristics": "Cost-per-mile is everything, parts cheap, reliability > performance",
+      "ai_implication": "Smaller models (Haiku), fewer integrations, durability > performance ceiling",
+      "punchline": "A Civic doesn't lose to a Lambo at the office. It wins on the only metric that matters: showing up every day for ten years."
+    },
+    {
+      "vehicle": "Luxury (S-Class, 7-Series, LS)",
+      "business_type": "Enterprise with deep pockets, slow decisions",
+      "characteristics": "Comfort layer thick, redundancy, support infrastructure heavy",
+      "ai_implication": "UX layer thick, governance heavy, change cycles measured in quarters",
+      "punchline": "An S-Class doesn't accelerate hard because it's slow. It accelerates hard because the passengers shouldn't notice it accelerating at all."
+    },
+    {
+      "vehicle": "Truck (F-150, Sierra, Ram, Silverado)",
+      "business_type": "Operations-heavy business, towing + hauling",
+      "characteristics": "Capacity > elegance, work-first, payload over polish",
+      "ai_implication": "Bulk batch processing, throughput-heavy, single-purpose pipelines",
+      "punchline": "Trucks aren't fast. They don't need to be. They move the thing nobody else can move."
+    },
+    {
+      "vehicle": "Show car / Restomod",
+      "business_type": "Brand-driven, looks > performance",
+      "characteristics": "Front-end polish, garage queen risk, doesn't get driven hard",
+      "ai_implication": "Front-end / content / design AI over operations AI. Doesn't actually do much real work.",
+      "punchline": "Show cars win trophies. They don't win races. Most 'AI strategies' are show cars."
+    },
+    {
+      "vehicle": "Stock build",
+      "business_type": "Out-of-the-box AI use (raw ChatGPT)",
+      "characteristics": "No memory, no hooks, no harness",
+      "ai_implication": "What 95% of businesses are running. Works for nothing serious.",
+      "punchline": "Stock is fine until you ask it to do anything stock wasn't built for."
+    },
+    {
+      "vehicle": "Mild build",
+      "business_type": "Light customization (basic memory + a few hooks)",
+      "characteristics": "Same engine, slightly more usable",
+      "ai_implication": "Most 'custom GPT' setups",
+      "punchline": "A cold air intake doesn't make a Civic a race car. A few hooks don't make ChatGPT autonomous."
+    },
+    {
+      "vehicle": "Full build",
+      "business_type": "Custom everything (what Mike has built)",
+      "characteristics": "Engine, harness, ECU, dashboard, telemetry, maintenance schedule",
+      "ai_implication": "Production-grade autonomous AI stack",
+      "punchline": "A full build isn't more horsepower. It's every system on the car talking to every other system."
+    },
+    {
+      "vehicle": "Restomod",
+      "business_type": "Legacy business retrofitted with modern AI infrastructure",
+      "characteristics": "Classic body, modern drivetrain — analog soul, digital guts",
+      "ai_implication": "Mike's sweet spot for many client engagements",
+      "punchline": "A restomod looks like 1969 and drives like 2025. That's exactly what most businesses need their AI to do."
+    },
+    {
+      "vehicle": "Garage queen",
+      "business_type": "Stuff you built and never use (the 92% unused skills problem)",
+      "characteristics": "Beautiful, expensive, never driven",
+      "ai_implication": "Workflows / agents / skills built once, used zero times",
+      "punchline": "Every garage queen is somebody's monument to a Saturday they had time and a problem they didn't have."
+    },
+    {
+      "vehicle": "Daily driver",
+      "business_type": "Production AI running every day",
+      "characteristics": "Reliable, owned, broken-in, fits the driver",
+      "ai_implication": "The workflow you actually use, that pays for itself in opens",
+      "punchline": "Garage queens get washed. Daily drivers get driven."
+    }
+  ]
+}

@@ -1,0 +1,464 @@
+1
+00:00:00,000 --> 00:00:12,320
+all right all right jumping in on all right okay okay all right so jumping in on
+
+2
+00:00:12,320 --> 00:00:19,000
+all right now we have a blank slate
+
+3
+00:00:19,000 --> 00:00:26,780
+all right now we have a blank slate here and we are going to work through doing this
+
+4
+00:00:26,780 --> 00:00:35,280
+node by node so again I'll create a separate video of how to connect your gmail account and whatnot
+
+5
+00:00:35,280 --> 00:00:40,440
+so that you can actually follow along
+
+6
+00:00:40,440 --> 00:00:51,900
+all right as you can see here we have a blank slate and we are just going to do a test gmail
+
+7
+00:00:51,900 --> 00:00:54,560
+sorting
+
+8
+00:00:56,780 --> 00:01:06,720
+so the very first thing that you want to do is I do a couple of things I actually add a manual
+
+9
+00:01:06,720 --> 00:01:15,200
+trigger because the other ones that I always use it's either a cron trigger a schedule trigger or
+
+10
+00:01:15,200 --> 00:01:21,560
+something along the lines of that gmail trigger that you saw before but before I get into the
+
+11
+00:01:21,560 --> 00:01:27,320
+scheduling of it I want to be able to execute the workflow right away sometimes when you use the
+
+12
+00:01:27,320 --> 00:01:33,860
+schedule nodes as the trigger when you're working in it you go into it it will just delay a long time
+
+13
+00:01:33,860 --> 00:01:42,620
+this execute it just automatically goes through it but the other one that I was using which is gmail
+
+14
+00:01:42,620 --> 00:01:45,300
+as a trigger
+
+15
+00:01:45,300 --> 00:01:53,840
+so you enter in the information here like I said the gmail account itself if you don't have the
+
+16
+00:01:53,840 --> 00:01:58,860
+credentials and you want to connect to your gmail in order to do so you have to go to your cloud
+
+17
+00:01:58,860 --> 00:02:04,800
+services I will create a whole separate video to create the credentials so that you can walk through
+
+18
+00:02:04,800 --> 00:02:11,800
+and follow through here so look up for that in the classroom or a link somewhere on the youtube and it'll
+
+19
+00:02:11,800 --> 00:02:16,740
+take you directly to that so that you can see how to do that
+
+20
+00:02:22,040 --> 00:02:35,160
+actually we will go ahead and do this now so just because it's a full end to end we will jump in so this is the
+
+21
+00:02:35,160 --> 00:02:48,100
+gmail trigger that we had before so as you can see you won't see anything here if this is one of your first workflows and you haven't connected anything you're going to have to connect it to your google cloud services
+
+22
+00:02:48,100 --> 00:02:55,160
+so I'll just for the sake of showing it go through this right now so you want to create credentials
+
+23
+00:02:55,160 --> 00:02:57,160
+so you want to create credentials
+
+24
+00:02:57,160 --> 00:03:09,160
+google cloud console you can just google it it'll be the google cloud console if you haven't set it up you're going to have to do all of this and set it up for yourself
+
+25
+00:03:09,160 --> 00:03:16,160
+I will also link direct documents of how google says you should do it so you have a step-by-step in doing so
+
+26
+00:03:16,160 --> 00:03:30,160
+and don't feel overwhelmed if you haven't connected these things it can seem sort of complicated but once you actually start to set it up then and you've done it once or twice then you're going to have no problem with doing it
+
+27
+00:03:30,160 --> 00:03:44,160
+so you're going to have to do enable apis and services this is where you're going to click on this so it's the top left hamburger you're going to click enable apis and services and then you are going to go through
+
+28
+00:03:44,160 --> 00:03:48,160
+and search for whatever it is that you need to do
+
+29
+00:03:48,160 --> 00:04:04,160
+okay and
+
+30
+00:04:04,160 --> 00:04:08,160
+okay and
+
+31
+00:04:08,160 --> 00:04:24,160
+so once you get here you are going to do one of two things you can actually just try to search for it there but it doesn't always find it so I'm going to go into
+
+32
+00:04:24,160 --> 00:04:36,160
+pin products apis services and library in this library what you're going to look for is whatever you're trying to connect to in this case it's going to be gmail
+
+33
+00:04:36,160 --> 00:05:02,160
+so I will actually just type in gmail here so this is your gmail api and you are going to enable it
+
+34
+00:05:02,160 --> 00:05:30,160
+and then in your credentials is where you're actually going to get your client id and your secret as you can see I have multiple here because I have instances that I have for test accounts and I've done this over and over and over just to show people and have created videos for clients and different things like that I need to delete some but I'm actually afraid I'll delete the wrong ones and I just leave them up here anyway what you want to do here is actually create your
+
+35
+00:05:30,160 --> 00:05:34,160
+oauth client id
+
+36
+00:05:34,160 --> 00:05:36,160
+and this will walk you through
+
+37
+00:05:36,160 --> 00:05:40,160
+it's going to be a web application because you are a web application
+
+38
+00:05:40,160 --> 00:05:44,160
+you want to name it something that is going to be for whatever it is that you're using
+
+39
+00:05:44,160 --> 00:05:50,160
+so gmail or google drive or whatever
+
+40
+00:05:50,160 --> 00:05:52,160
+you want to name it something that is going to be for you
+
+41
+00:05:52,160 --> 00:06:18,160
+now this this authorized javascript origins you don't have to worry about this one just click this add your i and you're going to go back here and you're going to click this to copy it's automatically going to be in here so it's not something that you have to generate but you do have to put it in here so you're going to add that you're going to create it and then once you create it this is going to give you your client id and your client id and your client
+
+42
+00:06:18,160 --> 00:06:48,160
+secret this is what you copy and paste over here so that's client id that is client secret bang i'm not going to do it again because i've already have it set up it's going to click on this sign in with google it's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you just sign in with your credentials and then you will actually see it here so that's going to pop up a screen and then you will actually see it here so that
+
+43
+00:06:48,160 --> 00:07:18,140
+this is my gmail account obviously as we've seen it here so this is my gmail account obviously as we've seen it before and then you're all good to go so now once you have that the very next step is we are going to ensure it works so i am going to change this to custom sorry not custom every minute whatever it is that you want to do if you receive a ton of emails and it's high priority
+
+44
+00:07:18,140 --> 00:07:45,400
+every single day and you are like in a sales environment or you know a boiler room or something and you need them instantly you can actually do it all the way down to one minute i thought you could actually do it every 30 seconds but i can't quite remember um i think you can do it down to 30 seconds but i haven't used it in a while so we'll just leave it at this so every minute and then we want to fast fetch test event
+
+45
+00:07:45,400 --> 00:07:50,300
+no gmail found jesus let me see
+
+46
+00:07:50,300 --> 00:07:59,240
+message received okay actually this is why
+
+47
+00:07:59,240 --> 00:08:11,420
+unread and unread emails so um i had no new emails so when i tried to fetch it the first time it didn't actually go through
+
+48
+00:08:11,420 --> 00:08:20,460
+so the next one is text classifier
+
+49
+00:08:20,460 --> 00:08:25,960
+and then
+
+50
+00:08:25,960 --> 00:08:30,660
+gemini chat model
+
+51
+00:08:30,660 --> 00:08:37,120
+now this is again where if you don't have your credentials for your
+
+52
+00:08:37,120 --> 00:08:47,660
+chat model whatever it is you're going to have to find your choice a lot of people use open router if you go to open router you can actually choose whatever llm
+
+53
+00:08:47,660 --> 00:08:52,700
+um it's just kind of a third party that you can uh that aggregates all of the
+
+54
+00:08:52,700 --> 00:09:02,080
+anthropic google olama deep sea chat gpt whatever it is um i personally use uh google gemini for a lot of the
+
+55
+00:09:02,080 --> 00:09:12,620
+not heavy lifting that i have to do um i use claude code uh obviously for coding um and i use claude uh my desktop for different things
+
+56
+00:09:12,620 --> 00:09:20,940
+but the reason why i use google gemini and a lot of you should too i personally uh would say is just because it's free
+
+57
+00:09:20,940 --> 00:09:26,780
+you can go to google as long as you have a google gmail you can go to
+
+58
+00:09:26,780 --> 00:09:28,700
+google
+
+59
+00:09:28,700 --> 00:09:30,640
+gemini
+
+60
+00:09:30,640 --> 00:09:32,480
+studio
+
+61
+00:09:32,480 --> 00:09:40,880
+and then uh if you haven't already signed it up as you can see there's an api key here even when you google it
+
+62
+00:09:40,880 --> 00:09:48,320
+um and then you can get your api key and that is what
+
+63
+00:09:48,320 --> 00:09:59,640
+allows you access to your google gemini uh and this one i use the less the lesser of the two there's pro and there's well there's more
+
+64
+00:09:59,640 --> 00:10:04,920
+of them but the ones that i usually go back and forth between are pro and flash um
+
+65
+00:10:04,920 --> 00:10:13,120
+so you connect this this is your brain without this um you can actually try to do your text classifier
+
+66
+00:10:13,120 --> 00:10:20,400
+but it won't be very reliable i mean if you're if you're not if you're not going to try to use this or
+
+67
+00:10:20,400 --> 00:10:28,880
+something smart with it then what a lot of people may try to do are uh if nodes so this is another way
+
+68
+00:10:28,880 --> 00:10:33,680
+to route it so you can take one of these um but this is going to be a whole different rabbit hole and
+
+69
+00:10:33,680 --> 00:10:40,000
+different tangent uh we'll just do it with what we have here so we're going to create a text classifier
+
+70
+00:10:40,000 --> 00:10:45,040
+so once we do this text to classify
+
+71
+00:10:45,040 --> 00:11:11,480
+so um i have a copy and pasted but if you don't it's really easy so um actually you know what we will do
+
+72
+00:11:11,480 --> 00:11:12,940
+it the absolute scratch way
+
+73
+00:11:12,940 --> 00:11:25,200
+so we will do subject and then one of three things i always use json you can use whichever one of these
+
+74
+00:11:25,200 --> 00:11:31,380
+uh at different times you're going to need different things um i usually mainly stick with json
+
+75
+00:11:31,380 --> 00:11:39,380
+so i'm looking for subject i will go down here you can grab either one of these and then you drop it in
+
+76
+00:11:39,380 --> 00:11:46,760
+and then it will turn it into an expression so that subject is one that you want to grab
+
+77
+00:11:46,760 --> 00:11:53,900
+and then
+
+78
+00:11:53,900 --> 00:11:58,140
+you want to grab
+
+79
+00:11:58,140 --> 00:12:05,520
+you want to grab
+
+80
+00:12:05,520 --> 00:12:08,520
+you want to grab
+
+81
+00:12:08,520 --> 00:12:09,520
+email body
+
+82
+00:12:09,520 --> 00:12:13,140
+which is this snippet
+
+83
+00:12:13,140 --> 00:12:15,840
+it's not actually going to say email body
+
+84
+00:12:15,840 --> 00:12:20,620
+so once you have those things that's what you want to use to classify
+
+85
+00:12:20,620 --> 00:12:25,580
+um and once you get deeper into the woods and you start to actually do these customized
+
+86
+00:12:25,580 --> 00:12:30,780
+specific to your own business you might need to go and grab your thread id or
+
+87
+00:12:30,780 --> 00:12:34,620
+um whatever category that you're looking for for specifically
+
+88
+00:12:34,620 --> 00:12:39,980
+or you want to grab only unread or uh different things like that or you're going to look for a
+
+89
+00:12:39,980 --> 00:12:40,700
+specific label
+
+90
+00:12:40,700 --> 00:12:46,460
+um so you can use there's sometimes where i have flows to where i have multiple different text
+
+91
+00:12:46,460 --> 00:12:51,260
+uh classifiers so uh but again that's that's kind of getting too deep in the woods
+
+92
+00:12:51,260 --> 00:12:55,740
+now you want to add a category we're just going to start with personal
+
+93
+00:12:55,740 --> 00:12:59,900
+and you write your own description
+
+94
+00:12:59,900 --> 00:13:06,060
+these are emails and this description is what you're talking to
+
+95
+00:13:06,060 --> 00:13:09,100
+this llm to be
+
+96
+00:13:09,100 --> 00:13:12,260
+we'll just connect this just so that we have it
+
+97
+00:13:12,260 --> 00:13:18,260
+uh sorry
+
+98
+00:13:19,860 --> 00:13:22,260
+we'll just connect this and uh sorry like i said
+
+99
+00:13:24,020 --> 00:13:32,500
+this category you can do it either dynamically i just leave it as a fixed uh the expression is when
+
+100
+00:13:32,500 --> 00:13:37,780
+you grab it over here um but i like to leave it just regular fix so that you know what it is
+
+101
+00:13:37,780 --> 00:13:42,500
+every single time you don't have to update it dynamically and this description is also going to be fixed
+
+102
+00:13:42,500 --> 00:13:47,860
+um this is something that you can create an expression for um but we'll just keep it basic
+
+103
+00:13:47,860 --> 00:13:59,220
+basic for now these are emails that are of personal in nature from friends family
+
+104
+00:13:59,220 --> 00:14:08,260
+family family and contacts that are already in my database
+
+105
+00:14:10,740 --> 00:14:11,380
+database
+
+106
+00:14:13,220 --> 00:14:21,700
+now the better of a description you give here the more reliably it will actually classify this but for
+
+107
+00:14:21,700 --> 00:14:27,380
+the sake of brevity i'm just going to be setting it up with these uh you know very very short one-liners
+
+108
+00:14:27,380 --> 00:14:28,100
+so
+
+109
+00:14:31,460 --> 00:14:36,900
+then we are going to do this so as you can see this personal is going to go to a particular one
+
+110
+00:14:36,900 --> 00:14:40,100
+and then i will create one more because
+
+111
+00:14:42,420 --> 00:14:43,220
+other stuff
+
+112
+00:14:45,860 --> 00:14:53,300
+this will be for any email that you cannot classify
+
+113
+00:14:53,300 --> 00:14:58,900
+this is going to be for any email that you can see this is going to be for any email that you can
+
+114
+00:14:58,900 --> 00:15:00,020
+see this is going to be for any email that you can see this is going to be for any email that you can
+
+115
+00:15:00,020 --> 00:15:00,980
+see this is going to be for any email that you can see this is going to be for any email that you can see
+
+116
+00:15:00,980 --> 00:15:06,780
+this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be for any email that you can see this is going to be
+

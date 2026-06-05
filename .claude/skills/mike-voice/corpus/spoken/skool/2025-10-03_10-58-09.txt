@@ -1,0 +1,967 @@
+So the next thing that you want to think through is what do you want to do with it?
+When you're in here in this text classifier, you're going to grab this subject, you're going to grab this email,
+and the category that you're doing, you want to really put some thought into it.
+Do you want to just label an email?
+Do you want to grab the body of this, as in this snippet, and you have the LLM take a look at this, synthesize it,
+and then you want to create a draft?
+Do you want it to immediately forward to somewhere else?
+Do you want it to just create a message without you being the human in the loop and just send it off?
+You have a lot of things that you can actually do.
+In this case, what I'm going to do is connect a Gmail node,
+and what we are going to do is we are going to add a label to the message.
+So the very first thing that we want to do, again, this left side is input.
+We want to take the input from this previous, which is, in this case, message ID.
+This message ID is the identifier of the original message.
+As you can see here, this was the very first node that was triggered, which is a Gmail trigger.
+It populates all of this information.
+And in order to go through here, the filtration system, and then come out on the other end,
+you have to be able to identify it.
+Every single one of these is going to have a unique identifier.
+This ID is going to be that identifier.
+And then when you're connected to your Gmail account, this is going to be something that you have to have already set up.
+So in my Gmail account, as you can see, I have different things for different reasons.
+So my lead generation, my emails that I have through instantly, it will actually go here.
+These are my different avatars for that.
+And then my school community, as a test with all of the workflow that you previously seen me go through,
+I set all of this up.
+I'm actually going to be deleting a lot of this after this demo that is kind of teaching you guys how to go through this
+because I don't really need it.
+I've already had it set up.
+So if you don't have this set up, these are just going to be default categories that you're going to see from your Gmail.
+In this case, I created the school personal.
+I actually want to label it personal because it came through or it's going to come through.
+So we'll execute it.
+Should label this as personal.
+Or sorry, this one's not going to be labeled as personal.
+This one's going to be labeled as other.
+So we will create the other.
+Gmail.
+Add label to message.
+Again, drag this ID over here so that you're identifying the proper email.
+And then I'm going to label this other stuff.
+Execute setup.
+Bang.
+And then simply because of the way that Gmail is structured, old emails, older email service providers used to have folders.
+Gmail is basically a catch-all.
+It doesn't actually have folders.
+You use labels as folders.
+And every single email that comes through is given the inbox label.
+So what I am going to start doing now, I actually haven't done it before because I wanted to keep duplicates.
+And then it just started getting too cluttered.
+But you want to go ahead and remove.
+So go through your actions.
+Go down here.
+Look at what you want to do.
+In this case, I want to remove the label.
+So again, make sure you're always grabbing it from the original node.
+Message ID.
+We are going to remove inbox.
+Execute setup.
+Now, what it did, it grabbed that last email that came through.
+In this case, I actually had to put unread emails only, as you saw when I was previously doing it.
+I didn't have a filter there.
+Went through the text classifier.
+Which, as you can see, Gemini worked through it.
+Kicked it out into other stuff.
+And then it added that label.
+And then it removed that label.
+And then it's done.
+So, now, anything that I add, I can actually just add to here.
+This is what's great about a proper orchestration flow to where when you create a node, you can actually just connect everything to it.
+If they're all doing the same operation.
+If they're doing different operations.
+Obviously, you want to create its own instance and do that.
+So, we are going to set up another one.
+So, let's do add category.
+Which are opportunity.
+To do add category.
+
+
+To add category.
+To add category.
+
+To add category.
+To add category.
+
+To add category.
+
+To add category.
+
+To add category.
+To add category.
+
+To add category.
+To create agents as well.
+
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+
+
+
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+To add category.
+And then you can actually.
+Even give it tools.
+Like.
+If you want to give it.
+A research tool.
+Like perplexity.
+Or something.
+This is.
+A scraper.
+So.
+You can have.
+An email.
+Come through.
+Get classified.
+Like if it's an opportunity.
+And then.
+It'll be connected to.
+A large language model.
+And then.
+It can go out.
+On.
+In the web.
+And if you want to put.
+Other.
+Information.
+That's front.
+In here.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+
+To.
+
+
+To.
+
+To.
+
+
+To.
+
+
+To.
+
+
+To.
+
+To.
+To.
+
+
+To.
+
+To.
+
+To.
+To.
+
+
+To.
+
+To.
+
+
+
+To.
+To.
+
+
+To.
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+To.
+To.
+
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+To.
+
+
+To.
+
+To.
+
+
+To.
+To.
+
+
+To.
+To.
+
+
+
+To.
+To.
+
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+
+To.
+
+To.
+
+To.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+To.
+To.
+To.
+
+To.
+To.
+
+
+
+
+
+
+
+
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+
+To.
+To.
+
+To.
+To.
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+
+To.
+To.
+
+To.
+
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+
+To.
+To.
+
+
+To.
+To.
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+
+To.
+To.
+
+
+
+
+
+
+
+
+
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+To.
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+To.
+To.
+
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+
+
+
+
+
+
+
+
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+
+To.
+To.
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+
+
+
+
+
+
+
+
+To.
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+
+
+To.
+
+To.
+
+
+To.
+To.
+
+
+To.
+To.
+
+
+
+To.
+To.
+
+To.
+To.
+To.
+To.
+To.
+
+To.
+
+To.
+To.
+To.
+
+To.
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+
+To.
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+
+To.
+To.
+
+
+To.
+To.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,130 @@
+This one is what you want to grab as the message and the subject line.
+So, can't actually do that yet, and what I'll do is see if we can go...
+I'm going to have to create one here. Give me just a second.
+Proposal.
+Proposal.
+Sent. Okay, so we'll jump over in the other one.
+Now, we're going to trigger this again.
+Nope, that's not the right one.
+Did it come through yet?
+That's why it didn't.
+So now...
+Fetch.
+So this one. Make money, send contract, thanks Mike.
+I just did that just to make sure that it did classify as an opportunity.
+We're going to execute this.
+So the output branch goes to the opportunity branch, as you can see it does here.
+Then it's going to spit it out here.
+Then, what we just put in here, it's going to grab all of the information, again, from the previous text classifier and the previous Gmail trigger.
+These are going to be grabbed.
+These are going to be grabbed.
+It's going to synthesize the information and then it's going to execute the output.
+The output.
+The output on this side is everything that it's going to synthesize through AI.
+The subject, the body, the context of it.
+It's going to write up a reply.
+This may be a little bit weird, but just simply because it wasn't a real email.
+But it's still going to give some sort of an output that is on par with money making.
+So the subject, I want to go in here to the Gmail trigger and I'll just put in re.
+You can do fixed with expressions.
+So I'm in the Gmail trigger now and the subject was here.
+Now, as you can see, it will be regarding prop just because that's what I sent with the email.
+Now, this is going to be text type.
+My key business text, sometimes you want to create HTML.
+You want it.
+You're going to have to put an output parser in your model.
+If you want to output it in HTML, I actually just leave it.
+So now I want to go to the previous node, which is my message or model.
+So text output, I'm just going to drag it over here.
+Execute setup.
+It's going to be that output as a draft.
+And now I'm going to connect it to this node, which is going to remove it from my inbox.
+So now just to kind of recap, we grab the email and classified it, label it as an opportunity, created the output from this input on the left side.
+Again, output from this model based on this input.
+Put it into this Gmail draft and then it de-labeled it from inbox.
+So drafts.
+Oh, actually, here's one step I forgot.
+So what you also want to do, taking a look in here, there's no recipient.
+So I'm going to go back into here and I want to add an option, which is to email.
+I want to go back over here to the Gmail trigger and I want to go find who it's from, which is here.
+And this expression will now dynamically pull whoever sent it.
+So now when I execute this a second time, it will create another draft.
+Put it in here.
+And this one will have the from.
+So this is a good thing that you want to do is check, double check and recheck your work, especially once the flows start to get complicated.
+So hopefully this gives you some ideas as to how to create an email box filtration system.
+This can be as simple or as complicated as you want to.
+Again, you can start to attach agents.
+You can attach agents with tools.
+You can go do research with her tools like perplexity or tablet to do research on an email prospect.
+Say you are you're running an email campaign or you're running Google ads or you're running meta ads.
+And you're getting output from those ads or you're getting responses from those ads that go to either a slack or your Gmail in your Gmail inbox from an email campaign.
+And you want to not only classify it and label it.
+You want to go out there and do research or to send a DM or to do anything.
+I mean, it could do absolutely anything.
+Once you start to get familiar with and then you have so, so many.
+So HTTP requests, webhooks, chat triggers.
+There's things like phantom buster.
+So where you can get information, go and use phantom buster and send connections and DMs on LinkedIn, relevance, AI.
+I don't know.
+The world is your oyster.
+The more that you can start to creatively think through this and systematically process all of this using N8N as your orchestrator to use triggers, to use nodes, to split and classify text, to synthesize information.
+You can start to see how powerful this can very much be for personal or business, your side hustle, or if you're a solopreneur, whatever it is.
+This can save so much time.
+I mean, again, the study was done with Radicati to where most business professionals save about 3.1 hours or sorry, lose about 3.1 hours almost every single day to their email inbox.
+So overall, this can be a very, very useful tool.
+Now, all that being said, you don't have to create this unless you wanted this and you wanted to walk through this.
+This is the only reason why I actually created this video.
+I'm actually going to delete everything because I don't need it.
+This right here will be in the community.
+You can download this template.
+It'll already have the nodes in there.
+And then all you have to do is plug in your credentials and your authorization into it.
+Make your tweaks.
+Ensure you do go through it and make sure it's on your brand voice.
+It has all of your credentials and you want it to classify and do the things that you say.
+If you have any questions or if you're stuck on anything, just post it in the community.
+I think I touched on just about everything.
+I just want you to think about how you can start to create these workflows.
+Again, this was kind of instigated, not instigated, but this was an idea from the school community that was based on Chris here.
+Chris asked that question.
+He was trying to use ChatGPT.
+So the next time I'm actually going to jump into it, I'm going to use Anthropics Claude.
+Claude is another very powerful tool that you can connect to as you're doing it live.
+And I'll kind of show you those workflows, how to connect through MCP, which is model context protocol.
+Again, any questions, just post it in the school community.
+I'll be happy to answer them.
+DM me if needed.
+If you are thinking through or want a system like this, just hit me up.
+I do work like this all the time for many different clients.
+And if it's something very simple, I could just help you through it, walk you through it, debug it, do whatever, and get you on your way.
+As always, like, subscribe, share, invite people.
+This community, it's only as great as everybody actually inputs into it.
+So I rely on you for ideas and to come together and make sure that everybody is learning at their own pace.
+Everybody has different things that they're working through.
+And this was Chris's, so I did go ahead and put that out here.
+See you on the other side.
+Peace, love and hair grease.
+
+
+
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.
+Peace, love and hair grease.

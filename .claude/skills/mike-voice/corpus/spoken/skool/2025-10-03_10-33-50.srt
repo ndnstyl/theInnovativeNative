@@ -1,0 +1,444 @@
+1
+00:00:00,000 --> 00:00:05,040
+them and label which ones that are the most important. So you can spin it out into a database.
+
+2
+00:00:05,040 --> 00:00:08,880
+It doesn't have to just be labeled or delabeled. So that's another difference of what you can do.
+
+3
+00:00:09,840 --> 00:00:15,360
+Now this one provides a growth opportunity. So it's going to be labeled as hiring.
+
+4
+00:00:18,000 --> 00:00:24,400
+This one you can actually send emails just straight away. So I actually have one to where
+
+5
+00:00:24,400 --> 00:00:29,280
+these are going to gather and synthesize any receipts and it's just automatically going to
+
+6
+00:00:29,280 --> 00:00:37,600
+send it to my finance person, Jenna. She runs all of my books and does all of that stuff. So I don't
+
+7
+00:00:37,600 --> 00:00:42,240
+even want to take a look at those. My receipts, they just go directly to her and then I've already
+
+8
+00:00:42,240 --> 00:00:47,280
+showed you personal. The last one I'll show you here is opportunities. So I'm going to jump over to
+
+9
+00:00:49,760 --> 00:00:51,360
+my personal again and say
+
+10
+00:00:51,360 --> 00:01:09,040
+proposal. Hey dude, I don't think you sent over the proposal or maybe you did and I just didn't see it
+
+11
+00:01:09,040 --> 00:01:24,160
+come through. Can you send again? Thanks, Michael. All right. So jumping over here, we will
+
+12
+00:01:24,160 --> 00:01:32,480
+now see that this will execute. So Gmail.
+
+13
+00:01:38,480 --> 00:01:43,680
+So this proposal comes through, as you can see, it hasn't actually run yet because it hasn't grabbed it.
+
+14
+00:01:43,680 --> 00:01:47,840
+So I'm going to manually execute it. You don't have to manually execute it. If you have it active,
+
+15
+00:01:47,840 --> 00:01:54,800
+it should automatically do this, but we're going to run it through again here. So, uh, hey dude,
+
+16
+00:01:54,800 --> 00:01:57,840
+don't think you sent over the proposal? Yeah. So this is the right one. It's actually grabbing the
+
+17
+00:01:57,840 --> 00:02:03,040
+right one. We're going to go through the text classifier. And again, this is going to be Gemini,
+
+18
+00:02:03,040 --> 00:02:09,040
+the model synthesizing this information based on the subject line and the body, and then it's going to
+
+19
+00:02:09,040 --> 00:02:16,400
+route it accordingly. So opportunities, bang, we're going to execute this. It'll spit that out. Another
+
+20
+00:02:17,840 --> 00:02:23,760
+step again, it's going to go through subject from body. And then these are the requirements that I
+
+21
+00:02:23,760 --> 00:02:28,640
+have for to reply. Again, this is going to be specific to you. Uh, if it's onboarding or client
+
+22
+00:02:28,640 --> 00:02:36,960
+onboarding, or if you're a lawyer and, um, you are having them, uh, send over, um, case documents or
+
+23
+00:02:36,960 --> 00:02:40,720
+anything like that, or a financial advisor, and you're looking for, uh, whatever it is,
+
+24
+00:02:40,720 --> 00:02:45,040
+whether it's a proposal or a signed contract or different things like that, you can tailor this
+
+25
+00:02:45,040 --> 00:02:50,880
+to whatever needs you have and ensure that it spits it out the proper way. So it's actually going to
+
+26
+00:02:50,880 --> 00:02:56,160
+synthesize all this information, just like I said, and then it's going to de-label it and send it. But
+
+27
+00:02:56,160 --> 00:03:01,840
+the other thing that's going to do, it's actually going to create that draft. So, and this, um, I'm using
+
+28
+00:03:01,840 --> 00:03:08,480
+these dynamic fillers to create the subject, which is a response to the one that he sent me,
+
+29
+00:03:08,480 --> 00:03:14,320
+that I just sent myself actually, um, the message itself, whatever it says. Um, and this is
+
+30
+00:03:15,440 --> 00:03:21,600
+where it drafts it up by the chat bot itself. It said, hi, Michael, apologies if the original didn't
+
+31
+00:03:21,600 --> 00:03:25,440
+make it into your inbox. I've attached a proposal again for your review. Please let me know if you
+
+32
+00:03:25,440 --> 00:03:31,440
+have any questions once you've had a look and again, you can actually change out the tone of
+
+33
+00:03:31,440 --> 00:03:40,080
+voice and all of this here. Um, I put very generic one here just for the sake of this. It's kind of
+
+34
+00:03:40,080 --> 00:03:44,400
+similar to whatever, but I just kind of reduced it a little bit. It's not my on my full brand,
+
+35
+00:03:44,400 --> 00:03:47,840
+brand voice. But anyways, when I go back into here and I go into my drafts,
+
+36
+00:03:48,800 --> 00:03:56,960
+I can see this proposal and then I can just upload a document, whatever it is. That's not
+
+37
+00:03:56,960 --> 00:04:00,880
+the correct document, obviously. And then just hit send. Obviously you want to read through it.
+
+38
+00:04:00,880 --> 00:04:05,920
+You want to take a look and make sure it's on your, your brand, uh, voice and tone. And as you can see,
+
+39
+00:04:05,920 --> 00:04:10,320
+it's, it's actually a very powerful thing to where you can create this automation and then it just sorts
+
+40
+00:04:10,320 --> 00:04:17,200
+through everything. And then you'll ultimately have a very clean inbox going forward. I don't use
+
+41
+00:04:17,200 --> 00:04:24,400
+this inbox very much other than just personal. So mine still looks super crazy and I actually don't
+
+42
+00:04:24,400 --> 00:04:30,320
+handle a lot of my emails anyway, that most of them go to Jenna, but, um, I will jump in on the
+
+43
+00:04:30,320 --> 00:04:43,520
+other side and I will break down how you create this, uh, from scratch step by step.
+
+44
+00:04:43,520 --> 00:04:56,720
+So,
+
+45
+00:04:56,720 --> 00:04:56,720
+
+
+46
+00:04:56,720 --> 00:04:56,720
+
+
+47
+00:04:56,720 --> 00:04:56,720
+
+
+48
+00:04:56,720 --> 00:04:56,720
+
+
+49
+00:04:56,720 --> 00:04:56,720
+
+
+50
+00:04:56,720 --> 00:04:56,720
+
+
+51
+00:04:56,720 --> 00:04:56,720
+
+
+52
+00:04:56,720 --> 00:04:56,720
+
+
+53
+00:04:56,720 --> 00:04:56,720
+
+
+54
+00:04:56,720 --> 00:04:56,720
+
+
+55
+00:04:56,720 --> 00:04:56,720
+
+
+56
+00:04:56,720 --> 00:04:56,720
+
+
+57
+00:04:56,720 --> 00:04:56,720
+
+
+58
+00:04:56,720 --> 00:04:56,720
+
+
+59
+00:04:56,720 --> 00:04:56,720
+
+
+60
+00:04:56,720 --> 00:04:56,720
+
+
+61
+00:04:56,720 --> 00:04:56,720
+
+
+62
+00:04:56,720 --> 00:04:56,720
+
+
+63
+00:04:56,720 --> 00:04:56,720
+
+
+64
+00:04:56,720 --> 00:04:56,720
+
+
+65
+00:04:56,720 --> 00:04:57,220
+uh,
+
+66
+00:04:57,220 --> 00:04:57,220
+
+
+67
+00:04:57,220 --> 00:04:57,220
+
+
+68
+00:04:57,220 --> 00:04:57,220
+
+
+69
+00:04:57,220 --> 00:04:57,220
+
+
+70
+00:04:57,220 --> 00:04:57,220
+
+
+71
+00:04:57,220 --> 00:04:57,220
+
+
+72
+00:04:57,220 --> 00:04:57,220
+
+
+73
+00:04:57,220 --> 00:04:57,220
+
+
+74
+00:04:57,220 --> 00:04:57,220
+
+
+75
+00:04:57,220 --> 00:04:57,220
+
+
+76
+00:04:57,220 --> 00:04:57,220
+
+
+77
+00:04:57,220 --> 00:04:57,220
+
+
+78
+00:04:57,220 --> 00:04:57,220
+
+
+79
+00:04:57,220 --> 00:04:57,220
+
+
+80
+00:04:57,220 --> 00:04:57,220
+
+
+81
+00:04:57,220 --> 00:04:57,220
+
+
+82
+00:04:57,220 --> 00:04:57,220
+
+
+83
+00:04:57,220 --> 00:04:57,220
+
+
+84
+00:04:57,220 --> 00:04:57,220
+
+
+85
+00:04:57,220 --> 00:04:57,220
+
+
+86
+00:04:57,220 --> 00:04:57,220
+
+
+87
+00:04:57,220 --> 00:04:57,220
+
+
+88
+00:04:57,220 --> 00:04:57,220
+
+
+89
+00:04:57,220 --> 00:04:57,220
+
+
+90
+00:04:57,220 --> 00:04:57,220
+
+
+91
+00:04:57,220 --> 00:04:57,220
+
+
+92
+00:04:57,220 --> 00:04:57,220
+
+
+93
+00:04:57,220 --> 00:04:57,220
+
+
+94
+00:04:57,220 --> 00:04:57,220
+
+
+95
+00:04:57,220 --> 00:04:57,220
+
+
+96
+00:04:57,220 --> 00:04:57,220
+
+
+97
+00:04:57,220 --> 00:05:10,420
+uh,
+
+98
+00:05:10,420 --> 00:05:12,420
+uh,
+
+99
+00:05:12,420 --> 00:05:14,420
+uh,
+
+100
+00:05:14,420 --> 00:05:16,420
+uh,
+
+101
+00:05:16,420 --> 00:05:18,420
+uh,
+
+102
+00:05:18,420 --> 00:05:20,420
+uh,
+
+103
+00:05:20,420 --> 00:05:22,420
+uh,
+
+104
+00:05:22,420 --> 00:05:35,620
+uh,
+
+105
+00:05:35,620 --> 00:05:37,620
+uh,
+
+106
+00:05:37,620 --> 00:05:39,620
+uh,
+
+107
+00:05:39,620 --> 00:05:41,620
+uh,
+
+108
+00:05:41,620 --> 00:05:43,620
+uh,
+
+109
+00:05:43,620 --> 00:05:45,620
+uh,
+
+110
+00:05:45,620 --> 00:05:47,620
+uh,
+
+111
+00:05:47,620 --> 00:05:49,620
+uh,
+

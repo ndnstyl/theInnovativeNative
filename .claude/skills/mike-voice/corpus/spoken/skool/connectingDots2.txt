@@ -1,0 +1,812 @@
+But overall, this is what adds the intelligence, the data enrichment, the synthesizing huge, huge, huge amounts of information or transcripts or invoices.
+So AI is your thinking layer. It's your synthesization. It is how you get large groups of data distilled down into very consumable chunks so that either you or your team can actually make actionable plans around that source of data.
+Lastly is your communication layer. Do you use Slack? Do you use email within your team? Or is it only outbound for email? Do you communicate through Notion or anything else? WhatsApp, whatever. Pick your poison.
+But understand that your communication layer is also one of those things that can create data silos.
+If you have too many channels on Slack or if you're using Slack and email and Google Teams or something like that, you can really have a lot of redundancy and you want to think through what your communication layer is.
+Distill it down. Try to have just one. Most people can't really just have only one, but one or two, and then you're good to go.
+Distill it down.
+
+Distill it down.
+Distill it down.
+Distill it down.
+
+Distill it down.
+Distill it down.
+
+Distill it down.
+Distill it down.
+
+Distill it down.
+
+Distill it down.
+
+Distill it down.
+
+Distill it down.
+
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+
+Distill it down.
+Distill it down.
+
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+Distill it down.
+CRM and manually add leads.
+Putting in first name.
+Last name.
+And all the city state zip code.
+Phone number for sales teams to call.
+You can actually automate all of this.
+If you have your orchestration layer set up.
+Which you should through AI.
+And through chat GPT.
+Or whatever else that you have access to these systems.
+And the next something very tangible could be meeting notes.
+Or it could be.
+You know.
+Monthly analytics.
+Or something that has to be done on a daily or a weekly basis.
+You can have this step by step broken down.
+And then you can actually spit that into your CRM.
+And you can create dashboards around that.
+What I often do is I take a look at my ads on a weekly basis.
+Whether it's from Google ads.
+Or meta ads or whatever.
+And I take a look at the weekly spin.
+How many impressions it's got.
+The KPIs and the metrics that I actually want to take a look at.
+It spits it into a dashboard.
+And that's on my executive dashboard.
+Very easy.
+All done and orchestrated with N8N on the back end.
+And putting it into my own database.
+So I can actually just log in every Monday morning.
+I can take a look at.
+Oh okay.
+Over this last seven days.
+This is what we spend.
+This is how many impressions we got.
+How many customers that we've actually tried to either sell or onboard.
+These are the discovery calls that have come from it.
+I see what's on my calendar.
+And what's in my pipeline.
+That saves hours and hours of time.
+Another one can be a content repurposing engine.
+I may have mentioned it before.
+And I've talked about it a lot.
+But if you have.
+If you're a content creator.
+You're doing long form content.
+Or short form content.
+You can actually repurpose that content.
+And have it apply to whatever channel.
+Is that you want.
+You know.
+Tick tock.
+Or X.
+Or YouTube.
+Instagram reels.
+YouTube shorts.
+You can have the orchestration layer.
+Speaking to your CRM.
+Or your database.
+Or whatever it is.
+Also connected to your content calendar.
+And then it deploys.
+Whatever it is that you've created.
+On multiple channels.
+And multiple different formats.
+All automated.
+That you don't even have to touch.
+Next something practical.
+Is something like.
+Automated follow ups.
+Whether you're a service based business.
+
+Or CPG store.
+Or whatever it is.
+If you're sending out emails.
+Or confirmation texts.
+Or you had a sales call.
+And you're sending out a proposal.
+You can automate your follow ups.
+You can actually have.
+Templates that are created.
+You can have.
+AI that's working in on the back end.
+Whenever.
+A package has been.
+Labeled.
+Updated.
+And then shipped out.
+It'll send a notification.
+To your.
+Your client.
+Or your customers.
+Or whatever.
+Or if you're on a sales call.
+And.
+You're supposed to reconvene.
+In a week or so.
+You can have.
+Kind of a warm up.
+As.
+Hey.
+On the.
+You know.
+Two or three days prior.
+To your sales meeting.
+Just.
+Get in touch with them.
+Hey.
+Don't.
+If you are.
+A sales person.
+And you.
+Are trying to.
+Push out.
+A meeting.
+Seven days.
+Sometimes people.
+Can forget.
+You can actually have a follow up.
+Two days prior.
+Or even.
+Twenty hour.
+Twenty four hours prior.
+Through SMS.
+Or through an email.
+Just a friendly reminder.
+Hey.
+We're going to eat.
+We're going to.
+Meet this Friday.
+Or.
+You're.
+A sales professional.
+And you.
+Have.
+A meeting.
+A lot.
+Can happen.
+In ten days.
+People.
+Will forget.
+Sometimes.
+They.
+Will not show up.
+That's where.
+Follow up.
+And personalized.
+Follow up.
+Is great.
+You actually send.
+A sequence.
+Of either emails.
+Or text messages.
+Say.
+Because it's ten days out.
+Five days before.
+You.
+Just send a follow up.
+Still meeting this Friday.
+Has anything changed.
+If not.
+Let me know.
+Blah blah blah.
+Whatever.
+Okay.
+So that sequence.
+Can be automated.
+Through your email.
+Or telegram.
+Or.
+Whatever it is.
+That you actually have.
+In your CRM.
+And database.
+And it'll prime them.
+And get them ready.
+For their meeting.
+Automated follow ups.
+Like for.
+A sales rep.
+Potentially.
+
+You booked.
+That first discovery call.
+It went.
+Swimmingly.
+And.
+You.
+Plan on.
+Trying to close them.
+The next time.
+You've already sent them.
+A proposal.
+Maybe they got too busy.
+You can't really meet.
+Right away.
+You can actually send out.
+Personalized follow up.
+Requests.
+Or emails.
+Or text messages.
+SMS.
+Through.
+This.
+And then orchestration.
+So you can be like.
+Hey Bill.
+Following up with you.
+Per our.
+Scope of work.
+Through the discovery call.
+Here's what I propose.
+This is the timeline.
+And it gives them.
+A.
+Idea.
+Of what's going to happen.
+Or what's going to be in the contract.
+You know.
+Two or three days.
+Two or three days.
+Before the next meeting.
+You can say.
+Hey Bill.
+Just reaching out.
+Making sure everything's still good.
+Personalized message.
+Whatever it is.
+That's synthesized from AI.
+Injects it into that email.
+We still good to go for this Friday?
+Yep.
+Okay.
+And then what that does.
+Is.
+It.
+Keeps that.
+Momentum going.
+Especially in sales.
+Or whatever.
+Whatever other sequence.
+You have for a touch point.
+For emails.
+Or newsletter.
+When you have automated follow up.
+Especially when it's hyper personalized.
+And you don't have to go through manually.
+Through.
+You know.
+A hundred.
+Or two.
+Or three hundred leads.
+For that month.
+And they're all done.
+Specific to.
+That organization.
+Or that person.
+Or that point of contact.
+With what your conversations were.
+With your scope of work.
+Or.
+You even.
+Just jump on LinkedIn.
+And say.
+Hey.
+Hey Bill.
+I noticed this last post.
+That you were talking about that.
+I'm super interested in it too.
+Maybe we can talk about.
+Blah blah blah.
+That hyper personalization.
+Doesn't have to be done.
+Or researched by you.
+That can be done.
+By N8N.
+And your agents.
+And your workflows.
+To where it automatically sends out.
+Those text messages.
+Or those emails.
+And it keeps that.
+That glue going.
+It keeps that rapport.
+To where you can actually.
+Continue that business relationship.
+Even better.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.
+Okay.

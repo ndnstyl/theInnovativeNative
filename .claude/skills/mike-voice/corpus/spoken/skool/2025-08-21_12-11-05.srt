@@ -1,0 +1,512 @@
+1
+00:00:00,000 --> 00:00:16,720
+okay for the 600th time so welcome to buildmytribe.ai my name's mike yay
+
+2
+00:00:16,720 --> 00:00:31,920
+welcome to buildmytribe.ai my name is mike and you fall in one of two camps if you're here
+
+3
+00:00:31,920 --> 00:00:39,040
+either you are hearing all this hype about ai and you've never used it or you've started to use it
+
+4
+00:00:39,040 --> 00:00:42,560
+and you want to incorporate it more into your business or your content creation
+
+5
+00:00:42,560 --> 00:00:47,040
+but you're a little bit overwhelmed because you don't have a plan or a strategy
+
+6
+00:00:48,880 --> 00:00:55,280
+that's sort of what this course is aimed to solve is either for the newbies or the people that have
+
+7
+00:00:55,280 --> 00:01:00,960
+kind of an understanding of it but they really want to use ai the right way and incorporate it
+
+8
+00:01:00,960 --> 00:01:09,360
+into their business and start to create systems so this course is going to break it down into three
+
+9
+00:01:09,360 --> 00:01:18,480
+parts so this course is broken down into three parts it's pretty simple it's going to be the
+
+10
+00:01:19,360 --> 00:01:22,320
+the foundations the the automate the grind part
+
+11
+00:01:31,040 --> 00:01:36,480
+we'll start by mapping out your workflows checking out what tools you're doing getting everything out
+
+12
+00:01:36,480 --> 00:01:44,480
+all on on one sheet of paper so that you know we'll start by mapping out your jesus christ
+
+13
+00:01:47,760 --> 00:01:54,640
+part one is foundations automate the grind overall you want to automate as much as you can that are
+
+14
+00:01:54,640 --> 00:02:00,720
+repetitive copy and paste tasks but before we can even do that we'll want to start mapping out
+
+15
+00:02:00,720 --> 00:02:06,720
+your workflows your tasks your tools and tech stack so that you actually have the larger picture of
+
+16
+00:02:06,720 --> 00:02:13,200
+everything i can tell you whether you're a solopreneur or you are a business owner or a content creator
+
+17
+00:02:14,240 --> 00:02:17,680
+not everybody actually has all of their tech stack written written out
+
+18
+00:02:19,760 --> 00:02:26,000
+doing this will provide clarity and it'll also start to show you where your gaps are and then once you have
+
+19
+00:02:26,000 --> 00:02:33,280
+everything all out on paper you can actually start to figure out how to create a system or an agentic system around it with ai
+
+20
+00:02:36,560 --> 00:02:42,160
+and then part two is the expansion it's the connecting of the dots it's okay i understand ai
+
+21
+00:02:42,160 --> 00:02:50,240
+i'm not just using chat gpt for a prompt in and a prompt out like oh go create my next email or ideate
+
+22
+00:02:50,240 --> 00:02:56,640
+uh a side hustle or something like that this is for the people that want to create a system for their
+
+23
+00:02:56,640 --> 00:03:01,520
+business or their brand or their content creation that works from end to end
+
+24
+00:03:04,960 --> 00:03:10,400
+and then lastly part three is elevation it's the software as a service mindset as i like to call it
+
+25
+00:03:10,960 --> 00:03:15,760
+when you start to think about your agentic systems and you start to get these workflows working from end
+
+26
+00:03:15,760 --> 00:03:20,560
+and you start to think of how can i scale this for my brand or my business
+
+27
+00:03:27,440 --> 00:03:33,520
+you see software as a service engineers or software engineers in general they think of productizing
+
+28
+00:03:33,520 --> 00:03:41,520
+intelligence and automating as much if not all of the work that you can do manually by an ai agent or an
+
+29
+00:03:41,520 --> 00:03:49,200
+ai system or workflow now whether you run a software as a service business or not that's not the point
+
+30
+00:03:49,200 --> 00:03:55,760
+here we just want you to kind of adjust your thinking just a little bit so that when you are working
+
+31
+00:03:55,760 --> 00:04:03,120
+your tasks from end to end you're starting to think ai first and what can be automated what should be
+
+32
+00:04:03,120 --> 00:04:07,200
+automated and then having a system that will actually scale with your business
+
+33
+00:04:11,520 --> 00:04:17,120
+and i can tell you from experience this course isn't theory i use ai every day in my business
+
+34
+00:04:17,120 --> 00:04:23,120
+maybe you've seen some of my videos i've created a ton of n8n automations
+
+35
+00:04:25,360 --> 00:04:29,680
+and this course is in theory i actually use this every day in my day-to-day business
+
+36
+00:04:29,680 --> 00:04:34,320
+i have created a software as a service platform i've published a lot of videos
+
+37
+00:04:34,320 --> 00:04:46,800
+moomoo cow and i can tell you this course is in theory i use ai every day and i've been on a huge ai
+
+38
+00:04:46,800 --> 00:04:53,520
+run over the last couple of years diving as deeply as i possibly can into it understanding llms chat gpt
+
+39
+00:04:53,520 --> 00:04:59,680
+code and a whole slew of other tools and i've started to create all of these workflows in these systems
+
+40
+00:04:59,680 --> 00:05:06,240
+not only for myself i do consultative work for lawyers for content creators for real estate agents
+
+41
+00:05:06,240 --> 00:05:12,240
+and i've created all kind of flows in n8n which is the orchestration software that i use
+
+42
+00:05:12,880 --> 00:05:18,640
+if you're familiar with it props to you you already got a leg up but overall i have created probably more
+
+43
+00:05:18,640 --> 00:05:25,600
+than a hundred automated workflows end-to-end agentic workflows rag systems database systems chat bots
+
+44
+00:05:25,600 --> 00:05:30,960
+a whole bunch of other things and throughout the courses not only this course but others i'm going
+
+45
+00:05:30,960 --> 00:05:36,800
+to start to explain how you can create your own system for you that scales with your brand or your
+
+46
+00:05:36,800 --> 00:05:43,120
+business or it helps you scale your content creation and remove all of those repetitive tasks and stop
+
+47
+00:05:43,120 --> 00:05:50,320
+the copy and paste and stop the redundant over and over repetitive tasks that can actually be handed out
+
+48
+00:05:50,320 --> 00:05:57,600
+to ai now you don't want to build ai systems that are completely autonomous that is something that a
+
+49
+00:05:57,600 --> 00:06:03,040
+lot of people push on youtube it's like oh automate your whole business one click i don't like those
+
+50
+00:06:03,040 --> 00:06:08,800
+systems those to me are not systems it removes you as the brain or the person that actually keeps
+
+51
+00:06:08,800 --> 00:06:15,920
+the guardrails of ai and the system itself in play but all that being said that's what's in this first
+
+52
+00:06:15,920 --> 00:06:22,800
+three-part course it is the foundation it is connecting the dots but that is what is in this
+
+53
+00:06:22,800 --> 00:06:29,600
+three-part course it's the foundation of what ai is understanding it and then part two is connecting the
+
+54
+00:06:29,600 --> 00:06:36,480
+dots building actual systems and then part three is the mindset shift of learning how to scale that business
+
+55
+00:06:37,360 --> 00:06:44,400
+sorry learning how to scale that agentic system for your business as your business grows so let's go
+
+56
+00:06:44,400 --> 00:06:46,400
+ahead and jump right into it
+
+57
+00:06:55,120 --> 00:07:00,080
+welcome to build my tribe.ai my name is mike and if you're here that means you're in one of two camps
+
+58
+00:07:00,800 --> 00:07:07,920
+you hear all of this ai hype and you've actually never really used ai or you've kind of dipped your toe in it
+
+59
+00:07:07,920 --> 00:07:13,920
+you've used chat gpt maybe you use gemini and you've put in a couple of prompts you've got some outputs
+
+60
+00:07:13,920 --> 00:07:20,240
+but you don't really have a plan or a system in place to really work with ai or incorporate it into
+
+61
+00:07:20,240 --> 00:07:27,600
+your daily tasks or your business or your brand that's what this course aims to do it shines light
+
+62
+00:07:27,600 --> 00:07:34,480
+on how to use ai properly how to incorporate it into your business and most of all how to make agentic ai
+
+63
+00:07:34,480 --> 00:07:37,360
+systems not just one-off tools
+
+64
+00:07:41,280 --> 00:07:45,760
+and i can tell you from my consultative experience my marketing experience and running my business
+
+65
+00:07:45,760 --> 00:07:55,520
+currently it's for every type of business software as a service a service based business a cpg business
+
+66
+00:07:55,520 --> 00:08:01,360
+content creation you name it it can actually help every type of business out there so don't think you
+
+67
+00:08:01,360 --> 00:08:06,080
+only have to be one or the other software as a service or consumer practice goods whatever
+
+68
+00:08:06,080 --> 00:08:11,520
+or whatever hype that you kind of have heard it's not only for one type of business
+
+69
+00:08:13,440 --> 00:08:19,840
+and i can also tell you that is not overhyped overall ai is very very powerful but i can also tell
+
+70
+00:08:19,840 --> 00:08:26,560
+you that there's a lot of people that are using ai wildly incorrectly or they're using it way too simply
+
+71
+00:08:26,560 --> 00:08:32,560
+they're just putting in prompts for chat gpt or for grok or for gemini or whatever you know insert
+
+72
+00:08:32,560 --> 00:08:40,160
+whatever llm you're using and they're just using it as a prompt based one input in one one output and
+
+73
+00:08:40,720 --> 00:08:46,240
+if you want to incorporate that into your brand or your business that's not the proper way to do it you
+
+74
+00:08:46,240 --> 00:08:53,200
+want to create an agentic system with ai intelligence that scales with you as you start to scale and grow
+
+75
+00:08:53,200 --> 00:09:05,760
+so part one is foundations basically your first automation or your first ai agent part two is
+
+76
+00:09:05,760 --> 00:09:13,600
+elevating that to connecting the dots of creating actual systems from end to end and then part three
+
+77
+00:09:13,600 --> 00:09:18,320
+is going to take those systems and scale those systems with your business
+
+78
+00:09:23,200 --> 00:09:30,560
+now all that being said this course is a theory it's not just some fly by night oh my god i'm going to
+
+79
+00:09:30,560 --> 00:09:37,200
+create a course i've actually built my business around it i'm an ai consultant right now and i've helped lawyers
+
+80
+00:09:37,760 --> 00:09:45,280
+marketers content creators automate many parts of if not their entire business around systems that are designed
+
+81
+00:09:45,280 --> 00:09:51,440
+specifically for their business so it's not just tool stacking it's not just searching the latest
+
+82
+00:09:52,240 --> 00:10:00,400
+ai agent or ai software or ads software it's actually trying to create your own implementing into your
+
+83
+00:10:00,400 --> 00:10:07,360
+business or your brand or your content creation that's designed specifically for your own business
+
+84
+00:10:07,360 --> 00:10:12,880
+and that's kind of the last part of all of this so that it it grows and scales with you
+
+85
+00:10:12,880 --> 00:10:27,680
+as your business and brand grows and scales itself
+
+86
+00:10:31,600 --> 00:10:38,480
+welcome to build my tribe.ai my name is mike and you're here for one of two reasons you have either
+
+87
+00:10:38,480 --> 00:10:44,560
+heard all of this hype around ai and you have yet to start using it or you've actually started using
+
+88
+00:10:44,560 --> 00:10:51,280
+it but you don't really have a strategy or a plan in place to really utilize ai to its fullest and build
+
+89
+00:10:51,280 --> 00:11:01,520
+systems around it that's what this course is aimed to that's what i aim to do with this course demystify it
+
+90
+00:11:01,520 --> 00:11:05,280
+help you understand ai start to incorporate it into your business
+
+91
+00:11:05,280 --> 00:11:11,760
+and actually strategically think about ai first systems and how to build your brand around ai
+
+92
+00:11:13,680 --> 00:11:14,640
+that's not what we're doing
+
+93
+00:11:23,520 --> 00:11:28,640
+this course is three parts the first part is building the foundation automating the grind
+
+94
+00:11:28,640 --> 00:11:36,240
+how a lot of people start to use ai it's usually through chat gpt or another llm model they'll put
+
+95
+00:11:36,240 --> 00:11:46,080
+one input and they'll get one output like write me a cold outreach email or generate an idea for a
+
+96
+00:11:46,080 --> 00:11:53,200
+new side hustle it's very prompt based in part one i want to kind of give you the theory behind
+
+97
+00:11:53,760 --> 00:12:01,280
+automating a lot of simple tasks repetitive tasks and also in part one we're going to be mapping out
+
+98
+00:12:01,280 --> 00:12:06,160
+all the tasks that are in your day we're going to be mapping out all of the tools that you currently use
+
+99
+00:12:06,880 --> 00:12:12,720
+to get it all out on one pip on one piece of paper that helps you provide clarity for what you're already
+
+100
+00:12:12,720 --> 00:12:18,880
+using what your software is what your crm is and then seeing where ai can actually help you out with
+
+101
+00:12:18,880 --> 00:12:27,040
+your business and reducing a lot of those repetitive tasks part two that is like connecting the dots
+
+102
+00:12:27,040 --> 00:12:35,280
+that's not just the one prompt in one prompt out or a simple workflow that reduces some repetitive task
+
+103
+00:12:36,400 --> 00:12:46,080
+we're starting to create a system from end to end of automating an entire workflow like the email cold
+
+104
+00:12:46,080 --> 00:12:52,160
+outreach campaign personalization of the cold out meet uh cold outreach uh data enrichment on companies
+
+105
+00:12:52,160 --> 00:12:56,160
+that you're actually going to be reaching out to or prospects that you're going to be selling to or
+
+106
+00:12:56,160 --> 00:13:02,560
+cold calling or whatever you actually think through a whole end-to-end system and then the last one part
+
+107
+00:13:02,560 --> 00:13:11,280
+three that is kind of the foundational structural change of thinking like a sas founder the sas mindset
+
+108
+00:13:11,280 --> 00:13:21,760
+whether you're running a service space uh sorry that takes me to part three part three that's where
+
+109
+00:13:21,760 --> 00:13:28,240
+part one and two are going to come together not just a single input or output not just one agent not just a
+
+110
+00:13:28,240 --> 00:13:28,640
+single
+
+111
+00:13:33,040 --> 00:13:40,080
+part three is the software as a service mindset whether you're running a software as a service business or not
+
+112
+00:13:40,080 --> 00:13:45,120
+you're running a software as a service business or you're running a software as a service business
+
+113
+00:13:45,120 --> 00:13:47,680
+as a service business or you're running a software as a service business or you're running a software
+
+114
+00:13:47,680 --> 00:13:49,680
+as a service business or you're running a software as a service business or you're running a software
+
+115
+00:13:49,680 --> 00:13:51,680
+as a service business or you're running a software as a service business or you're running a software
+
+116
+00:13:51,680 --> 00:13:53,680
+as a service business or you're running a software as a service business or you're running a software
+
+117
+00:13:53,680 --> 00:13:55,680
+as a service business or you're running a software business or you're running a software business
+
+118
+00:13:55,680 --> 00:13:57,680
+as a service business or you're running a software business or you're running a software business
+
+119
+00:13:57,680 --> 00:13:59,680
+as a service business or you're running a software business or you're running a software business
+
+120
+00:13:59,680 --> 00:14:03,680
+as a service business or you're running a software business or you're running a software business or you're running a software business
+
+121
+00:14:03,680 --> 00:13:51,680
+!
+
+122
+00:14:10,080 --> 00:14:16,080
+that scales with your business so if you're ready to jump in let's get right to it
+
+123
+00:14:27,760 --> 00:14:34,080
+welcome to buildmytribe.ai my name is mike and being that you're here it's for one of two reasons
+
+124
+00:14:34,080 --> 00:14:39,840
+either you know very little about ai or nothing at all you're hearing all the hype and you want to learn more
+
+125
+00:14:39,840 --> 00:14:45,520
+about it or you've kind of dipped your toe in the pool you've used chat gpt you sort of understand
+
+126
+00:14:45,520 --> 00:14:50,400
+what ai is but you don't really know how to create systems or tools or workflows around them
+
+127
+00:14:51,600 --> 00:14:56,640
+that's why i created this course it's for the people that know they don't want to get left behind
+
+128
+00:14:56,640 --> 00:15:03,440
+but they don't really have a structured plan on learning how to implement it in their either task-based business
+

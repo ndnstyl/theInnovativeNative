@@ -27,11 +27,11 @@ Cross-agent discoveries and patterns that apply to multiple agents.
 - "Slower is Faster" - methodical execution beats rushed mistakes
 - **MANDATORY: Log time, tasks, tokens, and skills gaps after EVERY session - no exceptions**
 - Airtable is the single source of truth for all agent work tracking
-- **DOCUMENTATION IS EVERYTHING**: Without .md files in `.specify/features/`, work cannot be tracked or continued across sessions
+- **DOCUMENTATION IS EVERYTHING**: Without .md files in `specs/`, work cannot be tracked or continued across sessions
 - **Skills gaps feed training priorities**: If you lacked a capability, log it so we can improve
 
 ## Spec Kit Model (MANDATORY)
-Every feature/project MUST have these files in `.specify/features/<project-name>/`:
+Every feature/project MUST have these files in `specs/<project-name>/`:
 - `spec.md` - User stories, requirements, success criteria
 - `plan.md` - Implementation approach, timeline, dependencies
 - `tasks.md` - Task breakdown with IDs, agents, status checkboxes
@@ -304,7 +304,7 @@ N8N_API_KEY = mcp['mcpServers']['n8n']['env']['N8N_API_KEY']
 - **VTT Cleaning**: Auto-generated subtitles need Python cleaning script (consolidate by minute, remove dupes)
 - **Marketing Arm Structure**: Mike (CMO) → Drew (PM) → Adler (Paid Ads) + Creative (Graphics + Video)
 - **Campaign Asset Organization**:
-  - Plans/tasks: `.specify/features/<campaign-name>/`
+  - Plans/tasks: `specs/<campaign-name>/`
   - Marketing copy: `.claude/skills/marketing/`
   - Platform specs: `.claude/skills/marketing/platforms/`
   - SOPs: `.claude/skills/marketing/sops/`
@@ -450,7 +450,7 @@ Credibility comes from **building for** experts, not being them.
 - Email escalation: Only for client-facing issues and CEO-level concerns
 
 ## File Organization
-- Specs live in `.specify/features/<project-name>/`
+- Specs live in `specs/<project-name>/`
 - Skills live in `.claude/skills/<category>/<agent-name>/`
 - Learnings live in `.specify/memory/learnings/`
 - Reports live in `.specify/memory/reports/`
@@ -627,7 +627,7 @@ Builder:        recBuilderXXXXXXX
    - `airtable-tasks.md`: Full task breakdown with acceptance criteria
    - `standup-template.md`: Async standup format, blocker escalation
    - `launch-checklist.md`: Technical, business, legal gates with sign-off
-   - All in `.specify/features/<project-name>/`
+   - All in `specs/<project-name>/`
 
 4. **Dependency Mapping**
    - Create visual dependency graph in tasks.md
@@ -713,3 +713,192 @@ Builder:        recBuilderXXXXXXX
    - "TBD (Drew to assign)" for unassigned work
    - Drew resolves TBD before sprint starts
    - No ambiguous ownership
+
+## Airtable trash 7-day soft-delete (2026-05-24)
+
+**Symptom**: Mike deleted ~10 tables + ~75% of records but "Records per base" counter still showed >50K.
+
+**Cause**: Airtable holds deleted records and deleted tables in TRASH for 7 days before permanent purge. Trashed items continue to count toward the base's record limit during that window. The dashboard counter is "live + trashed," not "live only."
+
+**Fix**: Empty the trash manually instead of waiting 7 days. Base → "..." menu → Manage trash → permanently delete tables and records in bulk. Counter refreshes within minutes to ~1 hour.
+
+**Apply when**: Anyone deleting Airtable records to free quota, hitting "I deleted X but counter didn't drop" confusion, or evaluating whether record cleanup actually freed budget for plan downgrade.
+
+## n8n zombie workflows fire after VPS rebuild despite `active=false` flag (2026-05-24)
+
+**Symptom**: `n8n_list_workflows` showed Trading Monitor workflows `YybZL1nXtEldZg7Z` and `NdsBJ3cmq0xIn08Z` as `active=false`, yet `n8n_executions` showed them firing every 30 seconds alongside the canonical `4SDKWzQURr6pzB1W`. Three duplicate workflows = ~778K monthly executions = the bulk of Airtable API quota burn.
+
+**Cause**: After n8n VPS rebuilds (per existing memory `n8n_executions_unreliable`), SQLite metadata can drift from runtime state. The `active` flag becomes unreliable; executions data is the truth. Same pattern previously caused the 35K-zombie jam from `n8n_fleet_hardening_2026-04-15`.
+
+**Diagnostic rule**: Trust `n8n_executions` listings over `n8n_list_workflows` active flags. If a workflow shows execution rows recently, it's running regardless of the flag. Cross-reference workflow names — duplicates with identical names = post-rebuild orphans, deactivate all but the canonical (which is documented in `n8n_fleet_hardening` memory).
+
+**Deactivation gotcha**: n8n MCP `deactivateWorkflow` operation can fail with "missing conditions.options.version" validation errors on workflows with older IF/Switch nodes. Workaround: deactivate via n8n UI toggle directly, or patch the IF node config first.
+
+## PostToolUse Airtable audit hook = silent API quota burn (2026-05-24)
+
+**Symptom**: Airtable workspace at 1.56M API calls/month against 100K limit. Most invisible source: a PostToolUse hook (`scripts/hooks/audit-log.sh`) writing one record to Airtable Agent Actions table for every non-read tool call by Claude Code.
+
+**Cause**: Per-tool-call instrumentation feels harmless because each call is async and fire-and-forget. But Claude makes 50-200 tool calls per active session. Across multiple sessions per day = 5K-50K API calls/month from this hook alone. Mike never saw the burn because the writes are silent.
+
+**Fix pattern**: Write to local JSONL FIRST (always succeeds, never hits quotas). Make the Airtable POST optional and easy to disable via single config flag. The hook should already have local fallback (audit-log.sh did) — just don't make Airtable the primary path. Better: don't write per-event audit logs to Airtable AT ALL. Use Postgres or local files; Airtable is for human-facing data.
+
+**Apply when**: Designing any per-event logging to Airtable. Anything that fires per-tool-call, per-webhook, per-message, per-cron-tick. Default architecture: Postgres/JSONL for machine logs, Airtable only for human-interaction surfaces.
+
+## High-volume operational tables don't belong in Airtable (2026-05-24)
+
+**Rule**: Airtable is the wrong storage for append-only operational logs (heartbeats, action logs, health snapshots, time-series data, daily research dumps). It hits record limits fast AND burns API quota for every write. Postgres/Supabase handles millions of rows + millions of queries for free or near-free.
+
+**Architecture split**:
+- **Airtable**: Things humans interact with in the UI. Publishing Calendar, Contacts (manually curated), Tasks, Subscriptions, Payments, Leads (until volume forces migration).
+- **Supabase/Postgres**: Heartbeats, Agent Actions, Health Snapshots, Time Entries (historical), Daily Research Items, Interactions older than 30 days, anything append-forever.
+
+**Why this matters**: Airtable's per-record cost is high (record limit + API call quota). Postgres's per-record cost is approximately zero. Putting machine logs in Airtable means paying premium prices for commodity workload.
+
+**Apply when**: Designing any new system that produces logs. Any table that grows append-only. Any data the human won't interact with directly in the Airtable UI. Question "does a human ever need to click on individual rows?" — if no, it shouldn't be in Airtable.
+
+## Senior marketing job hunt: channel reality vs ATS conversion (2026-05-24)
+
+**Rule**: Director-of-Marketing roles are filled ~70% through network + recruiter relationships, ~30% through job boards/ATS. Cold ATS conversion for senior roles is 1-3% callback. Senior candidates optimizing primarily for ATS volume are optimizing the lowest-converting channel.
+
+**Channel conversion rates (approx)** for Director/VP marketing hires:
+- Warm intros via mutual connections: 30-50%
+- Direct hiring manager DMs (personalized): 10-25%
+- Marketing-leadership recruiters (Daversa, Cowen Partners, etc.): 5-15%
+- LinkedIn Easy Apply: 1-3%
+- ATS company careers page: 1-3%
+
+**Math**: ~8 cold ATS apps/month at 1-3% conversion = statistically zero interviews. Same effort redirected to warm-intro outreach + hiring-manager DMs produces interviews.
+
+**System implication**: Job hunt automation for senior candidates should optimize for finding hiring managers + drafting personalized DMs, NOT for high-volume ATS submission. The n8n pipeline that "discovers + auto-submits" is the wrong architecture for Director+ levels.
+
+**Apply when**: Anyone designing a job-hunt system for senior roles ($150K+ Director-equivalent). Or evaluating "why no interviews despite many applications" — first question is channel mix, not resume quality.
+
+## Reference protocol for senior hires with NDAs/ethical constraints (2026-05-24)
+
+**Rule**: Default reference protocol for senior candidates with NDAs (or candidates ethically constrained from asking former contacts):
+1. NEVER provide references during recruiter screens or first interviews
+2. Provide references ONLY at offer stage
+3. Use public artifacts (LinkedIn endorsements, case studies, Loom walkthroughs) as primary verification path
+4. Deflect early-stage reference requests with: "I direct early verification to my case studies — happy to provide formal references at offer stage"
+
+**Why**: Mid-tier marketing recruiters use "budget managed" as lazy seniority proxy and fish references for confidential client numbers. References get burned by pushy questioning. Reference pool shrinks faster than it can grow. Candidates with NDA constraints or values-based reluctance to engage former contacts can't refresh the pool.
+
+**Mitigation pattern**:
+- Public artifacts (case studies on personal site, anonymized) replace verbal reference verification
+- Existing written LORs (PDF) attached when applications explicitly require references — kills the phone-fishing problem
+- Trial work pitch (paid 2-week consulting trial) for late-stage opportunities where company really needs verification
+
+**Apply when**: Senior candidate uncomfortable asking former contacts for references. Or candidate has NDAs preventing reference disclosure of specifics. Or candidate has been burned by reference-fishing in past hunts.
+
+## Metric defensibility on senior resumes: work-attribution layer not forensic (2026-05-24)
+
+**Rule**: Senior candidates can carry company-reported metrics on the resume IF they can answer normal recruiter follow-ups at the work-attribution level. Company-reported numbers ARE defensible without owning the underlying math.
+
+**Two different bars**:
+- **Normal recruiter follow-up** ("what drove this growth?"): Answer with YOUR specific work (channels you optimized, KPIs you cut, campaigns you launched). Doesn't require defending upstream company math.
+- **Forensic audit demand** ("prove the underlying customer success math"): Bad-fit signal. Senior hires should signal trust on reported metrics. Demanding line-item proof of every old company's math = micro-management red flag. Welcome the filter.
+
+**When to strip a metric from the resume**: If the only honest answer to "what drove this" requires Mike to call out his former employer's manipulation — strip it. If Mike can credibly attribute to his own work even when upstream math was off, keep it.
+
+**Integrity story (when math was actually inflated)**: Reserve for second-round depth play, never resume or screens. Frame as skill ("I run unit economics on every system I inherit; twice it surfaced material issues that ended engagements"), not accusation ("Company X was a fraud"). Never name former employers.
+
+**Apply when**: Senior candidate worried former employer's inflated numbers will surface in references. Reframe: company numbers on the resume + work-attribution answers in screens + integrity skill story in late rounds = bulletproof. Forensic-dig employers filter themselves out.
+
+## Resume positioning: receipts beat mirror-the-JD (2026-05-24)
+
+**Rule**: A senior candidate whose resume mirrors the target JD verbatim signals AI generation and overclaim. The strongest positioning leads with the candidate's actual receipts (verifiable past work) AND uses the target role's vocabulary as a wedge, not as the entire pitch.
+
+**Anti-pattern**: 20-year marketing operator claims "AI Engineer with 19+ years of production AI systems" because JD says AI Engineer. Recruiter googles candidate, sees founder/marketing background, math doesn't add up, moves on.
+
+**Better pattern**: "Marketing operator who ships AI" — 20 years of receipts in marketing + AI as the genuine differentiator. The wedge is AI; the body is marketing. Believable, differentiated, defensible.
+
+**Resume construction order**:
+1. Extract master CV from actual work history (Phase 1, one-time per career)
+2. Tailor per JD using receipts that map to their needs (Phase 2, per application)
+3. Verify with 5-persona critique + fact-check + AI fingerprint scan (Phase 3, before send)
+
+**Apply when**: Helping anyone with a resume that's been "tailored" with AI to match JD language. Question: does the candidate's actual public footprint (LinkedIn, GitHub, portfolio) support the resume's claims? If no — strip overclaims, lead with verified receipts, frame the gap as wedge not as job title.
+
+## AI ↔ Car Glossary — Core Component Mapping (2026-05-25)
+
+When explaining AI infrastructure to a client or in content, map to car components. Mike loves classic cars; this is the shared vocabulary. Engine = LLM (Claude/GPT/Gemini, swappable). Chassis = foundation (IDE + base platform). Wiring harness = hooks + MCP + tool routing (the communication backbone — without it every module is deaf). ECU = orchestrator agent. PCM = top-level orchestrator. TCM = workflow controller (n8n). Sensors = telemetry/instrumentation. Dashboard = monitoring (speed = throughput, RPM = request rate, oil pressure = system health, engine temp = rate-limit headroom). OBD-II + DTCs = OB1 + outcome logging. Apply when: writing for Mike, drafting client-facing content, explaining technical AI concepts. Canonical source: `content/glossaries/ai-car-glossary.md`.
+
+## AI ↔ Car Glossary — Subsystem Deep Dives (2026-05-25)
+
+Four major subsystems map cleanly. Cooling system = rate management (radiator/water pump/thermostat = queue/orchestrator/auto-scaling, coolant = token budget itself). Ignition system = prompt engineering (spark plugs = prompts, wrong gap = misfires; distributor = prompt routing; timing = scheduling vs data availability). Fuel delivery = context + tokens (fuel tank = quota, injectors = how prompts get delivered, air-fuel ratio = context-to-instruction ratio — lean starves the engine, rich burns tokens for no payoff, narrow stoichiometric band is where the engine makes power). Transmissions = orchestration patterns (manual = direct user control, automatic = traditional automation, CVT = adaptive AI, DCT = agentic with pre-staged options). Use these as anchors when diagnosing AI infrastructure problems.
+
+## AI ↔ Car Glossary — Maintenance Schedule (2026-05-25)
+
+Mileage-based service intervals map directly to cron cadence. Pre-trip walk-around = daily Stop-hook token-budget log. Every 3,000-5,000 mi (oil + filter) = weekly memory cull (`cull-memory.sh`). Every 5,000-7,500 mi (tire rotation) = weekly skill-usage review. Every 15,000 mi (air filter, brake check) = monthly context-retrieval audit. Every 30,000 mi (trans fluid, spark plugs) = quarterly prompt refresh + hook audit. Every 60,000 mi (timing belt, water pump) = annual full harness audit. 100,000 mi = consider model upgrade or stack pivot. Pro tip: most owners skip cheap stuff (oil) and pay for expensive stuff later (engine rebuild). Same with AI — skip memory cull, pay for API overage + rebuilt context architecture.
+
+## AI ↔ Car Glossary — Tuning Philosophy + Maturity Stages (2026-05-25)
+
+AI maturity progression maps to engine tuning stages. Factory tune = stock ChatGPT, conservative, never embarrassing/never amazing ($20/seat). Chip / canned tune = pre-built skill packs (few hundred $, generic to your situation). Piggyback ECU = Zapier/no-code AI layer on existing system ($50-500/mo, limited authority). Standalone ECU = custom AI infrastructure from scratch (real engineering time, full authority, requires maintenance expertise). Dyno tuning = iterative refinement based on measured output (recursive learning loop, compounds over time). Race tune vs street tune = specialist agent vs general-purpose assistant. Most owners over-tune the wrong things first — a factory ECU + good fuel + tires beats a half-finished standalone every time. Anti-pattern: bolting a $5K turbo on a stock 1.4L economy motor with stock internals.
+
+## AI ↔ Car Glossary — Racing Class Analogies for LLM Strategies (2026-05-25)
+
+LLM augmentation strategies map to engine build classes. NA (naturally aspirated) = vanilla LLM no augmentation — predictable, honest, ceiling is real. Forced induction turbo = RAG (pumps more context per cycle, way more power, adds heat + complexity). Forced induction supercharger = always-on context injection (instant response, no lag, costs fuel constantly). Nitrous oxide = expensive parallel tool-use bursts (massive temporary boost, can blow the engine if abused). Hybrid (gas + electric) = LLM + deterministic code (Python helpers, best of both). All-electric = newest frontier models needing less scaffolding. Spec class = standardized AI deployment (predictable, comparable, less differentiation). Unlimited class = custom-everything (whatever wins is allowed). Class restrictions exist for a reason — your industry's compliance regime determines what mods are allowed.
+
+## AI ↔ Car Glossary — Common Owner Mistakes / Anti-Patterns (2026-05-25)
+
+12 mistakes map clean. Over-tuning a stock motor = adding heavy custom prompts to basic setup. Wrong octane fuel = wrong model tier (Opus on triage, Haiku on reasoning). Deferred maintenance = ignoring memory cull / skill archive / OB1 hygiene. Mismatched mods = bolting on AI tools from incompatible vendors that don't talk. Skipping the dyno = no measurement just adding more. Badge engineering = slapping "AI-powered" on the same product without architectural change. Not breaking it in = launching at full throttle on a fresh build. Ignoring the dashboard = warning lights ON, driver ignoring them. Overheating = sustained high load with no thermal management. Garage queen = building elaborate AI you never use (the 92% unused skills problem). Aftermarket without integration = bolted parts that don't talk to the ECU. Cheap parts on critical systems = free-tier APIs on production decisions. Punchline: most owners think the engine is the problem; it rarely is. The problems live in cooling, ignition, fuel, and maintenance — the boring parts they ignored.
+
+## AI ↔ Car Glossary — Driving Philosophy / Work Patterns (2026-05-25)
+
+Driving disciplines map to AI work patterns. Autocross = short intense high-precision sessions (deep agent dives, complex single problems). Road racing = sustained performance over time (production AI daily). Drag racing = single all-out burst (one-shot use cases). Rally = adapting to unknown terrain (research, exploratory work). Touring = long-haul reliability (multi-hour agentic workflows). Off-roading = improvised navigation, low-speed/high-traction (manual oversight + AI assist for messy domains). Daily commute = mundane reliable usage (email triage, calendar). Cruise night = AI you show off but barely drive (demo skills, marketing content). Track day = controlled experimentation. Bracket racing = consistent output > peak performance. Pro tip: pick the discipline before you build the car. A drag car is a terrible daily driver. Most AI failures are categorical mismatches — building a touring car for a drag application.
+
+## AI ↔ Car Glossary — Vehicle Archetypes for Business Types (2026-05-25)
+
+12 business archetypes map to vehicles. Race car (F1/NASCAR/drag) = performance-first B2C, speed-to-revenue, needs pit crew. Off-road/overland (Wrangler/Bronco/Land Cruiser) = durable biz weathering downturns, deterministic + fault-tolerant. Drift car (Silvia/AE86/GR86) = agile mid-market with controlled chaos, RWD bias = action over deliberation, hand brake = manual override gate. EV (Tesla/Rivian/Lucid) = modern AI-native business, smaller engine + instant torque, regen = recursive learning capture. Economy car (Civic/Corolla) = SMB/bootstrapped, cost-per-mile is everything. Luxury (S-Class/7-Series) = enterprise with deep pockets + slow decisions. Truck (F-150/Sierra) = operations-heavy, towing + hauling, capacity > elegance. Show car/restomod = brand-driven, looks > performance. Hot rod (60s muscle restomod) = legacy business + modern AI retrofitted (likely sweet spot for many client engagements). JDM tuner build = tight-margin precision biz, owner is technical. The right opening with a client isn't "let's talk about your AI stack." It's "show me what you're driving and tell me where it hurts."
+
+## AI ↔ Car Glossary — Client Diagnostic Questions (2026-05-25)
+
+When sizing up a client engagement, ask: what kind of car are they building? Eight questions: (1) What are you driving today? Stock/mild/restomod/project car/garage queen. (2) What kind of car do you want this to be? Race/off-road/drift/EV/economy/luxury/truck. (3) What's broken right now? Engine/cooling/ignition/fuel/electrical/suspension/brakes/drivetrain. (4) What's the maintenance schedule look like? Or is the oil black? (5) What's the dashboard telling you? Or is half the dash dark? (6) Daily driver or weekend toy? Production vs experimental. (7) Stock fuel or premium? Model tier matching workload. (8) Who's doing the wrench work? In-house mechanic vs vendor garage. Use these on discovery calls instead of generic "tell me about your AI stack" — gets to specifics faster and frames the conversation in shared vocabulary.
+
+## Directional hex hover pattern (2026-06-03)
+
+SVG radial hover visualizations (hex flowers, node clusters, sector pies) must use per-position translate + transform-origin center, not a single generic scale. Default transform-origin pushes all elements toward bottom-right corner when scaled, making them collide with neighbors. Fix is two CSS rules per direction: (1) transform-origin: center + transform-box: fill-box (grow from element's own center, not bounding-box corner). (2) Per-position className with directional translate(unit-vector * 17px) scale(1.3) on hover. For flat-top hex flower: top translate(0,-20), bottom translate(0,20), top-right translate(17,-10), top-left translate(-17,-10), bottom-right translate(17,10), bottom-left translate(-17,10) — each direction is 60-degree outward unit vector scaled to 17-20px push. Easing cubic-bezier(0.4, 0, 0.2, 1) at 0.28s feels right; default-ease feels mechanical. Without directional translate, scale 1.3 (30%) forces overlap and you have to dial down to 1.2, losing the pop. Discovered Ox Floors brand-consolidation cost-of-splinter slide. Mike caught: "when hover they all move in the down and right direction which then make it hard to read. I think each of them should have their on directional movement and size." Applies to any clustered visualization where elements share a common center and must expand outward without collision.
+
+## Autonomous viz iteration loop pattern (2026-06-03)
+
+Proven 5-phase loop for converting text-heavy multi-page decks to visual-dense in one autonomous session. Validated on Ox Floors marketingExpansion deck (7 pages, ~15 min wall clock). Phase 1 parallel viz conversion: dispatch one viz-designer agent per text-heavy page in a single message (agents are independent per-page). Each reads file, runs decision tree chart/flow/matrix/stack/timeline/icon-array, converts card grids to visualizations, builds + verifies independently, does NOT deploy. Phase 2 unified build + rsync deploy after all viz agents return — cheaper than N partial deploys and avoids CF cache chunk trap. Phase 3 reviewer /toughlove pass with explicit memory rules baked into prompt (palette discipline, em-dash hard rule, structure-before-lift, operator voice, 5-second scan, Lift Ledger framing). Output format: Verdict + Page-by-page issues + Cross-page issues + Top-N fixes + Anything good (counterbalance critique). Phase 4 parallel implementer agents clustered by file or concern fixing reviewer findings (3-4 implementers in parallel handles 10-15 issues). Phase 5 verification reviewer pass confirming each flagged item resolved + checking regressions. Termination: PASS verdict with zero CRITICAL or WARNING, OR remaining items are explicitly INFO-only and standing rules allow them. Anti-patterns: sequential viz conversion (do all parallel), per-agent deploys (single batch deploy per round), skipping verification pass (regressions slip in), treating all reviewer findings as same priority. Mike: "work autonomously with all directives given, then test retest /toughlove QA and iterate until goals met. I have other work."
+
+## AI is the pillar, not the moat (2026-06-05)
+
+In any AI-related pitch, internal brief, or deliverable, never frame AI as the moat. The moat is the system underneath (clean data pipeline, attribution, CRM hygiene, pixel ownership), insourced execution (no agency middleman holding data hostage), customer trust accumulated over time, and operating consistency. AI is the pillar that exercises the moat. In craft-based / heavily relational industries (concrete coatings, hurricane windows, home services), the early-adopter advantage of building real AI-first systems CAN compound into a moat over 12-24 months, but the AI itself is never the moat — capability is commoditizing. Replace "AI moat" language with "pillar," "operating layer that exercises the moat," or "early-adopter advantage that could become a moat." Discovered Ox Floors execution prep. Mike corrected: "AI Operator layer is never the moat, the systems we build and lay AI on top of is the moat that we can potentially become the AI-first operators."
+
+## Agents can be built before the human seat exists (2026-06-05)
+
+The earlier "agents amplify existing teams" framing requires existing teams. When the team is a vacuum (1-2 marketing FTE for a $30-40M operation), the framing flips: build agents anyway, the human seat shows up when the agent is ready, or the principal co-owns during build. This is consistent with agent purposes still needing to solve real problems TODAY and still needing a human owner — but the owner during the build can be the principal (Mike + Vince in Ox case), not the eventual functional lead. The hire cycle is longer than the agent build cycle (60-90 days vs 2-6 weeks), so waiting on the human seat to exist before building delays everything. The agent's existence helps SHAPE the human seat — role description, workflow, metrics — making the eventual hire faster and clearer.
+
+## Sandy and Riley positioning depends on funnel shape (2026-06-05)
+
+The 24/7 SDR / reset agents in Mike's harness don't have fixed mechanisms. Their mechanism depends entirely on whether the operator's funnel is inbound-heavy or outbound-heavy. Inbound-heavy: Sandy = 24/7 SDR with <30 sec response to inbound forms, Riley = first-hour speed + 7-day reset window. Outbound-heavy (dialer-driven): Sandy = post-call nurture + appointment confirmation + cancel-window engagement + no-show recovery, Riley = 24-72hr cancel-window reinforcement (pre-appointment ROI reinforcement, buyer's-remorse intervention). Same agent architecture, completely different jobs. If you pitch Sandy as 24/7 inbound SDR to an operator whose funnel is 90% outbound dialing, you solved the wrong leak. For Ox Floors: 100K outbound dials with 35% set rate and extreme cancel rate means the leak is the cancel window, not inbound speed-to-call. Repositioned Sandy to post-call nurture + cancel recovery and Riley to cancel-window reinforcement.
+
+## Pixel control is the Day 1 move in agency-managed paid media (2026-06-05)
+
+When stepping into a marketing role at a company where an outside agency manages paid media, the SINGLE most important Day 1 move is taking pixel + Meta Business Manager + Google Ads admin control. Not the audit. Not the stakeholder map. Not data pulls. Pixel control. Until pixel control is yours, every baseline number is filtered through the agency, you can't measure the lift of any change, and the agency has structural leverage in the exit conversation. Common agency hostage patterns: agency-owned Meta Business Manager with client added as employee not admin, agency-owned Google Ads MCC with client as read-only, agency-installed pixels on agency-controlled landing pages, conversion tracking in agency-controlled GTM containers. Day 1 ask: "What's the agency contract term and notice period? I want pixel control transferred to a Meta Business Manager [client] owns within 7 days, regardless of when we formally exit the agency." Discovered: Ox Floors paying ~$600K/yr in agency fees with no pixel control.
+
+## A company can sit across multiple Hormozi stages simultaneously (2026-06-05)
+
+Hormozi's $100M Scaling Roadmap stages (Categorize → Specialize → Optimize → Scale) are useful as anchors but don't always map to a single stage for a real company. Different DIMENSIONS can sit at different stages: process maturity (follow-up systems, playbooks), data maturity (single source of truth, attribution, cleanliness), org maturity (role clarity, middle-manager bench, multi-location coordination). Ox Floors example: revenue scale suggests Specialize, but they have working dashboards (Categorize-stage data accumulation) and weak follow-up systems (Optimize-stage process gaps). When briefing the operator, name all dimensions explicitly. The Year 1 plan needs three sub-plans, not one. Anti-pattern: anchoring on single stage because revenue or headcount suggests it, then proposing one-dimensional plan. Operators at $30-40M revenue rarely have ONE binding constraint — they have multiple semi-binding constraints at different stages.
+
+## Brand splintering can be intentional CAC/CPL experimentation (2026-06-05)
+
+When you see an operator running multiple parallel brands / domains / funnel variants for the same product, DO NOT default to "this is accidental splintering that needs consolidation." Read the operator's intent. Common deliberate-splinter reasons: A/B testing CAC and CPL across variants, insurance/liability/tax-entity separation, sandboxing an outside agency while running internal as control, channel-specific differentiation, geographic brand resonance. The right reframe: not "fix the splinter problem" but "you ran the experiment. The data is your asset. Let's read results, kill underperformers, lock in winners, stop paying for parallel tests." Sub-rule: parallel brands that don't cannibalize Meta auctions or organic search terms or share customer ICP can coexist. Verify before recommending consolidation. Discovered: Ox Floors brand splinter was Lee deliberately testing ClickFunnels variant + outside agency + Ox + FloorTek to baseline CAC/CPL.
+
+## First-hire timing flips when marketing team is a vacuum (2026-06-05)
+
+The default operator-grade advice is "don't hire FTE in first 30 days, audit first, build trust, then hire on data." That advice assumes an existing functional team to absorb leadership during audit. When team is a vacuum (≤2 marketing FTE for $20M+ ops, $200K+/mo ad spend with no in-house performance lead, $300K+/yr agency contracts with no in-house counterpart), the default flips. First hires move to Week 2-3 because there's no one to delegate to during audit, agency-exit requires in-house lead to absorb the function within 30-60 days, audit findings need immediate execution not 30-day deferred response. Priority hire order in vacuum scenario: Senior Performance Marketing Lead first (absorbs agency function), Marketing Operations / Data Engineer second (builds pixel + attribution + CRM pipeline). Both typically funded by agency-exit savings. Ox Floors: 1 marketer + 1 content/social for $30-40M op = vacuum.
+
+## "Bust demand at the seams" is the right operator preference (2026-06-05)
+
+When marketing-vs-capacity tension is foreseeable, choose the side that maximizes demand and creates VISIBLE capacity pressure. Under-producing demand eats blame personally (you missed your numbers), is invisible to the rest of the org, and is hard to renegotiate scope/comp around. Over-producing creates "good problem to have" pressure visible to ops + leadership, is plannable (operator can hire ops, expand crews), and shifts political risk OFF marketing onto ops planning. How to apply: set marketing demand-gen targets at upper bound of system absorption, brief operator in writing by Week 2 ("I'm building toward demand that may bust install capacity in months 4-6, we should plan ahead"), when capacity strains frame as planned outcome. Mike's quote: "I would rather prove my demand actually busts them at the seams opposed to under deliver on the demandGen side of things."
+
+## Co-builder Tier 0 vs Tier 1 stakeholder (2026-06-05)
+
+When the client's legal/financial principal (Managing Member, CFO, COO, Chairman) has technical capacity AND wants to co-iterate on builds, the relationship physics change from standard Tier 1 stakeholder management. Tier 0 co-builder dynamics: shared spec ownership on agent/system/pipeline builds, weekly working sessions not monthly approval meetings, joint commits on direction AND technical decisions, both names on the build (not "Mike built, Principal approved"), surface up risks and tradeoffs in real time. Treating a co-builder as Tier 1 approver slows iteration (every spec needs sign-off cycle), misses technical contribution, creates wrong dynamic (approval-seeking instead of co-iteration), risks parallel building without sync. Identify by asking directly Week 1: "Do you want to be a co-builder on this — weekly working sessions, joint spec ownership — or do you prefer to review at end of each phase?" Discovered: Vince Harris (Managing Member at Ox) is a co-builder partner with technical capacity on AI agents, not just a legal/financial approver.
+
+## Cancel-window vs reset-window for high-cancel-rate operators (2026-06-05)
+
+Riley-style reset agents have a default frame: 7-day post-no-show reset window, first-hour speed advantage, stalled-estimate re-engagement. Correct when funnel leak is between in-home appointment and close. When funnel leak is between SET and APPOINTMENT (high cancel rate before in-home), retarget Riley to 24-72hr cancel window: hours 0-24 confirmation + value reinforcement, hours 24-48 buyer's-remorse intervention, hours 48-72 friction-removal. High-pressure / truth-force / one-call-close sales cultures generate high set rates AND high buyer's-remorse cancellations. Industry benchmark: set → showed-up should be 75-85% for healthy ops. Below 65% = pathological cancel rate, retarget Riley to cancel window. Ox Floors: 100K dials × 35% set × extreme cancel × 3.4% net recapture proves cancel-window is the binding leak.

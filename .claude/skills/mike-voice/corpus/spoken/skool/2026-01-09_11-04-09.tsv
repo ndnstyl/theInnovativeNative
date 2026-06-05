@@ -1,0 +1,95 @@
+start	end	text
+0	9500	all right hey Dan it's Mike here I just wanted to do a quick walkthrough for you so like we spoke
+9500	15360	about we're gonna do this by milestones so right now I have milestones one and two that are coming
+15360	19320	to completion I'm gonna need your feedback that's why I'm making this recording for you so we're
+19320	26520	gonna do a walkthrough of the system so I am going to also attach the notion board when I
+26520	34740	actually respond to this up work that is going to be looking like this so you'll see this I'm just
+34740	38820	going to show it to you but for the sake of brevity I'm not going to go through this entire thing I'm
+38820	44540	going to give you a walkthrough of this and also turn over this so that you can actually go piece
+44540	50940	by piece along with this video and take a look at things but essentially how this works is with
+50940	56680	Airtable and with N8N then I have scrapers on the background so the first part that I'm going to
+56680	62220	actually do is I'm going to start with the front end and what it looks like through Airtable with
+62220	66860	Airtable this is your overview I'm not sure how familiar you are with Airtable but Airtable is
+66860	72580	basically like Google Sheets or Excel Sheets like on steroids it does everything you need it does all
+72580	78580	the functionality there's automation built into it not only within Airtable itself but you can do APIs
+78580	85320	and plug into things like N8N to which I'm going to show you so this is where you're primarily going
+85320	88880	to live this is when you're going to be updating your contacts obviously what I'm working through
+88880	96160	right now is just getting you getting your beak wet to show you what can and can't be done with
+96160	100800	systems and we're going to make tweaks so this will allow you to go straight into your control panel
+100800	102860	you can either click here or you can click here
+102860	111560	and also go back for just a second this notion board as well that's actually linked to the notion
+111560	116180	board that I'm going to be sending over to you so clicking and going into the control panel it's
+116180	124080	actually pretty simple so there are multiple parts to this because it is a functioning ecosystem as a
+124080	129100	whole so I actually had to break down several different workflows to get everything working
+129100	134140	together and importing into the database properly so the very first thing that we do is generate
+134140	138440	seeds the generating seeds is based on all of the keywords and the keyword combinations and the
+138440	143660	locations that you've given me before that I incorporated into this that's also going to be
+143660	149440	included in the notion board but generate seeds you're going to generate a combination of how
+149440	155160	Google actually goes out and scrapes to find raw unenriched businesses
+155160	162300	and then when you click that button what it'll do is it'll actually go back here on the back end
+162300	166900	in N8N and it will
+166900	178300	go into this batch seeds generator which I believe I already have open so let's take a look here no I
+178300	184940	don't so this batch seeds generator this is the workflow for it it'll generate a combination
+184940	190440	of phrases this is a code with all of the phrases as you can see here it's also going to be like I
+190440	194440	said in the notion board so if you want to go back into it we kind of spoke a little bit about it I
+194440	198680	don't know you did have a chance to look at the first notion board that I did send over to you but
+198680	204940	this is going to contain a lot of how this breaks down so I broke it down into three separate tiers like
+204940	210720	this is the A tier this is the one and it's heavily weighted based on population obviously with the
+210720	214840	higher population size there's going to be more businesses with more businesses populated we're
+214840	220240	going to be able to enrich more business businesses for your geo directory and then we can actually
+220240	225340	score and dedupe later but this is just the first step this is just getting the combinations of cities
+225340	232580	and keywords that will actually execute and go down the chain of command here to see the records to
+232580	238320	actually get it prepared to go out and search Google so that would be your very first phase one
+238320	246240	so you click that button it'll create the combinations and different things and then it'll go to a discovery
+246240	252540	workflow this is where it's actually going to discover I have all of these open I should have
+252540	254800	actually closed them but just give me one sec
+254800	267120	so now this is your discovery workflow so once the combination has
+267120	274820	been created and then it goes through the Google scrape what we then do is go out and discover
+274820	281760	those businesses based on the service location based on the keyword combination and I'm not going
+281760	286920	to go too deep in the woods because I'll show you what the execution here sometimes these can take
+286920	292080	anywhere from about two minutes all the way up to about six minutes we don't really have that long to
+292080	296220	sit here and wait and go through the whole entire rotation but just to give you a quick overview
+296220	303060	what it'll do is it'll get the seed records through this node it'll update the seed status it'll create
+303060	311820	within the code node what to look for this is Appify this is what goes out and actually scrapes in the
+311820	317460	world Google places amongst other things and we'll get a little bit deeper into that of how it scrapes but
+317460	324980	this is the workflow so it's going to check for results it's going to check for the places and IDs it's going to filter and map
+324980	354980	here as you can see all of the new businesses and it's going to split it up so that it actually creates a new record in your business here for the record so this is your actual businesses with the records here something you probably won't look at but I'll show you just for the peace of mind here going into the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data here on the back end these are all of the tables that actually talk to each other
+354980	384980	there's workflow executions there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's
+384980	414980	there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there
+414980	444960	based on the keywords that you've given me then the next workflow is enrichment that enrichment is where really all of the magic happens so the enrichment for what we were doing we I have a couple of stages obviously to do the free which is Google and find Google places and also your geo coordinates but then the full enrichment comes here and this one actually if you take a look at the executions this one takes 17 minutes and it goes out and I actually have it to where it does
+444960	474940	batches of 50 it does 50 at a time this is another kind of key point to a walkthrough if you do more than 50 then essentially what's going to happen is it can start to create some hiccups I know it seems like oh you know let's do 100 or let's do a thousand at a time but the larger the number that means the more website it scrapes and the more websites it scrapes then the more it has the possibility to either get hung up or time out and then it doesn't actually bring back any records but even with going to grab 50 records it still takes anywhere from 50
+474960	503280	to 20 to 20 minutes and this obviously as you know this saves hours and hours and hours just as a human going to click around typing in keywords trying to find things and updating it but once you hit this social enrichment this will come back as enriched so you will have a record like this to where now it actually starts to populate some of the other data if you can actually find it so and then then the last part will actually be the validated
+503280	510280	so the validation again just a button click and then it will go in here and it will run
+510280	532280	your validation which is this workflow here it'll go through grab the records and it'll run through a lot of code formulations to create scores to create completeness matching and and everything's like that so that is what you're going to see here
+532280	539280	which is you're going to get a completeness score and a completeness score color in that uk notion board for the geodirectory i do actually have it broken down of how that completeness score is weighted but it's very heavily weighted to the business name matching the phone number matching the domain and then having multiple other points so the more points that it actually has the better it is obviously so
+539280	569280	let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores
+569280	599260	because they actually have social media because they actually have social media the actual domain email and multiple social media links to get up there now for the geodirectory I mean I put a score of around 70 between 65 to 70 and I've also color coded it just so that you can see if you're a visual person like me of which ones have good scores and which ones don't so I would say about 70 is usable and that will be at 95% accuracy or so
+599280	623280	again you're still gonna have to go back and human in the loop check all of these things but essentially I think 70 is a good thing and it's a good score weighted heavily toward validated information the next on the control panel because what happens is there's a lot of overlap after it validates and after you run the score this is actually out of order let me sort this
+629280	656140	okay so because of the way that it works because we're starting with keywords we're starting with areas and we're we're we're running a size of probably about a 25 mile radius give or take a few miles there's going to be a lot of duplicates originally when we go through it so I do also have a deduplication and kind of a housekeeping step to where it will go through and find any sort of exact matches
+656140	674520	and it will actually delete them so you have a true number of records and then this last one is going to be an automated export so when you click this button it will actually go through and run this automation and then you can download it and it'll be in your local files
+674520	682080	and then you can just check your downloads for that and then that's completely formatted in what you told me to do which is utf-8
+682080	691260	it's going to remove all special characters and it's also going to have the information that you need for your geocode WordPress directory
+691260	700700	so overall that is basically the system I want you to walk through this video take a look I know I speak a little bit fast so you can pause
+700700	710340	do things refer to the notion board and then take a look at this but this is the system as a whole I've tried to make it as simple as possible for you
+710340	718800	essentially it's just one click button executions every once in a while it'll have just kind of a timeout error sometimes when you're scraping websites
+718800	727460	they'll have blockers or different things like that but essentially as you can see for the businesses and I'll actually even show you this business here
+727460	737980	this business panel here so we have about 698 records because I'm doing a lot of testing and I haven't been doing a lot of cleanup and I've been leaving a lot of things in here
+737980	746700	just to show me where I need to make tweaks and how to make the system better you are going to see a little bit of funky things right now because it's actually in the build phase
+746700	754300	so you are going to see some things to where you know it says enriched but it's not fully enriched or it says validated and it's not fully validated
+754300	762300	validated I'm leaving those records in there for now once you get it and clean and I've actually fully cleaned it up to 100% you won't see minor things like that
+762300	770940	but I'm leaving it in there now so that I can actually have something to reference and I can check when of the last executions were and debug and do sorts of things like that
+770940	780280	so just kind of be mindful of that when you're kind of going through the video and looking at things this isn't 100% yet I'd say it's about 80 to 90% there
+780280	788000	then with your feedback I'll do the last 10 to 20% based on whatever it is that we actually need to do
+788000	797480	and once we do the export and confirm the export that export that I just did right now I will be attaching that and sending it to you in the message for Upwork again
+797480	808200	all of this the notion board will be linked the video will be in there the only things you won't have access to because it's all hosted on my business
+808200	815200	servers are my air table and the back end workflows of n8n but this is essentially how the system works
+815200	824500	it's n8n front end sorry it's air table front end n8n back end and a lot of different data scrapers between
+824500	832720	google apify house api companies api and nominated api
+832720	840860	and we'll get into the weeds if you so choose and you have those questions you really want to break down the system of how it works on it from a technical standpoint
+840860	847600	standpoint but at this point this is your system this is where we're at for milestones one and two
+847600	853360	if you have any questions just email me hit me up let me know what those questions are
+853360	860340	uh what you're seeing in here and if any of it does or does not make sense uh just shoot it over
+860340	867300	we'll go back and get some iterations done and then we'll get to finalization and then you'll have an actual working system
+867300	875840	to get to your 10 000 records um again i'll message you through Upwork but if you need to email me directly
+875840	883860	it's mike at buildmytribe.ai you also have access to the slack channel that i created for you you can do it there or
+883860	889940	uh through Upwork um outside of that i'll see you on the other side once you give me your feedback have a good day

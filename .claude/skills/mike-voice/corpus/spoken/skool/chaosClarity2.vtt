@@ -1,0 +1,119 @@
+WEBVTT
+
+00:00.000 --> 00:05.340
+is all prepared for them and they can send it out on that same closing call or within five minutes
+
+00:05.340 --> 00:11.440
+of actually closing that prospective client simply because they have all of that repetitive tasks and
+
+00:11.440 --> 00:20.180
+everything else already done for them with an end-to-end working system. Now go through your
+
+00:20.180 --> 00:25.820
+own sales process if you are in sales, sales manager, director, or the you know an actual
+
+00:25.820 --> 00:30.940
+high volume sales rep or high ticket or whatever it is. Imagine how much time that actually saves you
+
+00:30.940 --> 00:37.600
+every single cycle, every single new contact, new lead, new closed one, or even if it was closed,
+
+00:37.600 --> 00:41.380
+lost, and you go through all of those transcripts and you have you put it into an AI and say
+
+00:41.380 --> 00:48.140
+where did I go wrong? Where was I not sticking to my own script or where did I miss cadence or flow or
+
+00:48.140 --> 00:54.100
+they asked a buying question and I didn't capitalize on that. Like you can have agents synthesize all of
+
+00:54.100 --> 00:58.380
+this information for you so that you can actually get better and prepare for the next call. What
+
+00:58.380 --> 01:06.140
+does that save you? 10 minutes every single task? 15? Maybe an hour? Sometimes sales cycles are you
+
+01:06.140 --> 01:10.800
+know two, three, four phone calls. Sometimes every every single one of those calls is 10 to 15 or 30
+
+01:10.800 --> 01:15.960
+minutes each. You do the math. That's a lot of repetitive work that you can actually streamline
+
+01:15.960 --> 01:28.240
+into one single system. Now what's the takeaway there? Systems aren't always just to streamline
+
+01:28.240 --> 01:33.320
+your business or just to cut you know 15 hours of work down to 10. It's also to make you better.
+
+01:33.740 --> 01:40.160
+It's to synthesize information. It's to take long form content and shorten it without missing the meat
+
+01:40.160 --> 01:45.320
+potatoes of everything that you're trying to accomplish. So every single time you do it and
+
+01:45.320 --> 01:51.040
+you reiterate and then you either train yourself or you train your agent or you update your system
+
+01:51.040 --> 01:57.660
+with where the bottleneck is. It soon goes from all up and down like a roller coaster to a straight A,
+
+01:57.860 --> 02:04.180
+B, C and then you just knock it out of the park. And the more repetitions you get, the better you get at
+
+02:04.180 --> 02:09.780
+it and the quality of your work no matter what it is. Whether it's service-based or sales or CPG
+
+02:09.780 --> 02:15.440
+market, you just get better every single time you do it with a system opposed to just pure hustle.
+
+02:26.700 --> 02:35.340
+Which brings us to the best news ever. Pause. Which brings us to the best news ever. Today,
+
+02:35.340 --> 02:41.140
+systems are easier to create than ever before. A long time ago, we used to have these macros that
+
+02:41.140 --> 02:46.440
+were in like Microsoft Office and you had to build them out and they didn't work all the time or even
+
+02:46.440 --> 02:52.500
+Zapier was good and it was king of this for quite some time to where you can take information from
+
+02:52.500 --> 02:57.420
+other websites, port it into other. But right now we have N8N and that can orchestrate pretty much
+
+02:57.420 --> 03:04.100
+anything you can think of with any software or website or endpoint. It can take information as input,
+
+03:04.100 --> 03:09.280
+synthesize, do whatever tasks you're actually telling your agent to do. And as output, it can do
+
+03:09.280 --> 03:14.640
+anything. It can schedule emails. It can update your calendar. It can send out your proposals.
+
+03:15.200 --> 03:22.020
+It can spit feedback into you. You can have a rag system to where you have all of your knowledge
+
+03:22.020 --> 03:27.020
+base into one place and you can have that agent go through and actually go through a checklist of
+
+03:27.020 --> 03:31.520
+things like, oh, okay. Step one, two, three, and four, we're done. Grab all of that information from
+
+03:31.520 --> 03:35.880
+the meetings or sales calls, put that into a proposal document and spit it all out. All of
+
+03:35.880 --> 03:41.480
+these things can actually come together very, very easily with N8N. So we're going to go ahead and jump
+
+03:41.480 --> 03:47.420
+in on the other side of this and I will show you a specific SDR workflow that will give you some
+
+03:47.420 --> 03:52.940
+tangible ideas of what you can actually build yourself. Whether you're in sales or not, this is
+
+03:52.940 --> 03:57.380
+also going to be another useful walkthrough just to show you how to build these things.
+
+03:57.380 --> 03:58.620
+So I'll see you on the other side.
+

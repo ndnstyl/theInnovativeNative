@@ -1,0 +1,114 @@
+or service-based business.
+Why did I relocate it to that?
+That's where this course comes in.
+It's a three-part course.
+The foundation of it, part one,
+is building automation for the grind.
+What I mean by that,
+a lot of repetitive tasks,
+a lot of copy and paste,
+a lot of very time-consuming tasks
+that are essentially the same
+over and over and over.
+You can learn to automate those things.
+The second part of it
+is building systems around those automations.
+You can actually have an end-to-end workflow
+for your marketing department,
+your analytics,
+your marketing campaigns,
+the ideation of your campaigns,
+or for sales.
+You can have something like a system
+that I've built to where it automatically
+connects to Calendly.
+If somebody books a call,
+that agent in the system,
+it will actually put it on your calendar.
+It will take the email
+and company information.
+It will go enrich that data,
+prepare who you're going to be speaking toward,
+put a Slack notification,
+and then put it in the pipeline
+of whatever salesperson
+is actually going to do it
+so it can actually act as an SDR.
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+
+
+Why did I go down that road?
+
+Why did I go down that road?
+
+Why did I go down that road?
+Why did I go down that road?
+
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Why did I go down that road?
+Welcome to buildmytribe.ai
+I'm getting hot.
+Welcome to buildmytribe.ai
+My name is Mike,
+and you're here because of one of two reasons.
+Either you know very little about AI,
+but you're hearing all the hype,
+and you want to learn about it,
+or you've started to use it,
+but it's very basic.
+It's like a chat GPT,
+one prompt in,
+you get one output,
+and you want to really learn
+how to build systems around it
+and how powerful AI can be.
+from all this hype that you're hearing,
+but you don't have a strategic plan
+to learn about it,
+or a process to implement it
+into your business.
+That's where this course comes in.
+I'm going to break it down into three parts.
+The first part being the foundation.
+Automating your grind.
+That is repetitive tasks,
+things that are very time consuming.
+You can actually create workflows and systems
+that buy back your time,
+sometimes hours and hours of your time,
+that you lose every single week.
+You can automate that.
+I'm going to teach you how to do that.
+The second part is connecting the dots.
+Not just automating simple tasks or a single workflow,
+but having a system in place to where it does multiple tasks,
+to where you can have like an SDR prep a meeting for sales agents,
+or you can synthesize large amounts of data for your marketing team,
+and have AI driven results,
+and synthesis from marketing analysis of your Facebook ads,
+or your Google ads, or your cold email outreach,
+and then having systems that work it from end to end,
+and then you can create entire systems around these things.
+The last part is the elevation of all of it.
+So not just building the basic,
+oh, one agent does one task,
+or even the basics of a system,
+but an overall scalable system using what I call the software as a service mindset.
+What I mean by that is there are principles that you can actually steal from software developers,
+and once you understand these principles,
+AI will make a lot more sense to you.
+Software engineers, they really get AI the quickest.
+They've actually been using it for probably the longest,
+because all of them have been developing the LLMs and all that,
+and they're creating all of the new shiny object toys.
+Oh, Jesus.
+I need some...

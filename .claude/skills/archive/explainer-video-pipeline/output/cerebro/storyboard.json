@@ -1,0 +1,235 @@
+{
+  "slug": "cerebro",
+  "title": "Cerebro — Private AI for Law Firms",
+  "target_length_sec": 85,
+  "aspect_ratios": ["1:1", "16:9"],
+  "vo_file": "vo.mp3",
+  "music": {
+    "file": "music-bed.mp3",
+    "level_db": -18,
+    "fade_in_sec": 1.5,
+    "fade_out_sec": 2.0
+  },
+  "cues": [
+    {
+      "t0": 0.0,
+      "t1": 3.0,
+      "type": "intro_card",
+      "title": "THE INNOVATIVE NATIVE",
+      "subtitle": "CEREBRO — PRIVATE AI FOR LAW FIRMS",
+      "icon_path": "remotion-videos/iconSet/techsy/brain.png",
+      "animation": "logo-zoom",
+      "caption": null
+    },
+
+    {
+      "t0": 3.0,
+      "t1": 7.5,
+      "beat": 1,
+      "vo_line": "Your associates are using ChatGPT to draft motions right now.",
+      "caption": "Your associates are using ChatGPT to draft motions right now.",
+      "caption_highlight": "ChatGPT to draft motions",
+      "icon_path": "remotion-videos/iconSet/techsy/computer.png",
+      "animation": "scale-in-spring",
+      "notes": "Desktop icon represents the associate's daily tool."
+    },
+    {
+      "t0": 7.5,
+      "t1": 12.0,
+      "beat": 1,
+      "vo_line": "In February, a federal court ruled that's a malpractice trap.",
+      "caption": "In February, a federal court ruled that's a MALPRACTICE TRAP.",
+      "caption_highlight": "MALPRACTICE TRAP",
+      "icon_path": ".claude/skills/3d-icon-forge/library/a-glass-tile/shield-with-checkmark-cyan-hero.png",
+      "animation": "shield-crack",
+      "notes": "Shield icon with animated crack overlay (indicates broken protection)."
+    },
+
+    {
+      "t0": 12.0,
+      "t1": 17.0,
+      "beat": 2,
+      "vo_line": "US v. Heppner. Southern District of New York.",
+      "caption": "US v. HEPPNER — SDNY (Feb 2026)",
+      "caption_highlight": "US v. HEPPNER",
+      "icon_path": ".claude/skills/3d-icon-forge/library/a-glass-tile/document-cyan-hero.png",
+      "animation": "stamp-in",
+      "notes": "Legal document icon; caption anchors the actual citation."
+    },
+    {
+      "t0": 17.0,
+      "t1": 23.0,
+      "beat": 2,
+      "vo_line": "The court held that any document created using consumer AI tools — ChatGPT, Gemini, Claude, whatever — is not privileged.",
+      "caption": "Consumer AI-generated docs = NOT PRIVILEGED",
+      "caption_highlight": "NOT PRIVILEGED",
+      "icon_path": "remotion-videos/iconSet/techsy/pipe.png",
+      "animation": "leak-drip",
+      "notes": "Pipe icon repurposed as data-leak metaphor — ToS leaks protect-ability."
+    },
+    {
+      "t0": 23.0,
+      "t1": 28.0,
+      "beat": 2,
+      "vo_line": "Their terms of service allow logging, training, third-party disclosure. Sixty-nine percent of lawyers already use AI. Forty-three percent have no policy.",
+      "caption": "69% of lawyers use AI · 43% have no policy",
+      "caption_highlight": "69% · 43%",
+      "icon_path": "remotion-videos/iconSet/techsy/graph.png",
+      "animation": "counter-up",
+      "notes": "Chart icon with counter animation showing the two stats."
+    },
+
+    {
+      "t0": 28.0,
+      "t1": 33.0,
+      "beat": 3,
+      "vo_line": "Cerebro is private AI built for law firms.",
+      "caption": "CEREBRO — Private AI for Law Firms",
+      "caption_highlight": "CEREBRO",
+      "icon_path": ".claude/skills/3d-icon-forge/library/b-techsy-machine/brain-with-neural-network-connections-cyan-hero.png",
+      "animation": "assemble-in",
+      "notes": "Hero Cerebro visual — branded brain with neural network connections."
+    },
+    {
+      "t0": 33.0,
+      "t1": 37.0,
+      "beat": 3,
+      "vo_line": "Your case files stay in your system. Your institutional knowledge stays in your firm.",
+      "caption": "Your files. Your system. Your firm.",
+      "caption_highlight": "YOUR firm",
+      "icon_path": "remotion-videos/iconSet/techsy/safe.png",
+      "animation": "vault-close",
+      "notes": "Safe icon represents private vault — reinforces closed-system architecture."
+    },
+    {
+      "t0": 37.0,
+      "t1": 41.0,
+      "beat": 3,
+      "vo_line": "Zero privilege exposure. Zero hallucinations.",
+      "caption": "ZERO exposure · ZERO hallucinations",
+      "caption_highlight": "ZERO · ZERO",
+      "icon_path": "remotion-videos/iconSet/techsy/shield.png",
+      "animation": "shield-seal",
+      "notes": "Shield lock-in animation — protection restored after the crack in Beat 1."
+    },
+
+    {
+      "t0": 41.0,
+      "t1": 47.0,
+      "beat": 4,
+      "vo_line": "Upload your files.",
+      "caption": "1. Upload your files",
+      "caption_highlight": "Upload",
+      "icon_path": "remotion-videos/iconSet/techsy/upload.png",
+      "animation": "arrow-up-bounce",
+      "notes": "Step 1 of 3-step how-it-works."
+    },
+    {
+      "t0": 47.0,
+      "t1": 53.0,
+      "beat": 4,
+      "vo_line": "Query in plain English.",
+      "caption": "2. Query in plain English",
+      "caption_highlight": "plain English",
+      "icon_path": "remotion-videos/iconSet/techsy/message.png",
+      "animation": "chat-type-in",
+      "notes": "Step 2 — chat interface with typing indicator."
+    },
+    {
+      "t0": 53.0,
+      "t1": 59.0,
+      "beat": 4,
+      "vo_line": "Every answer comes back with full citations to your documents. Not guesses. Not made-up case law.",
+      "caption": "3. Every answer CITED",
+      "caption_highlight": "CITED",
+      "icon_path": "remotion-videos/iconSet/techsy/files.png",
+      "animation": "citation-pop",
+      "notes": "Step 3 — files/documents with citation highlights."
+    },
+    {
+      "t0": 59.0,
+      "t1": 63.0,
+      "beat": 4,
+      "vo_line": "Associates get the speed they need.",
+      "caption": "Associates: SPEED",
+      "caption_highlight": "SPEED",
+      "icon_path": "remotion-videos/iconSet/techsy/user.png",
+      "animation": "user-zoom-in",
+      "notes": "Associate persona — speed arrow overlay."
+    },
+    {
+      "t0": 63.0,
+      "t1": 66.0,
+      "beat": 4,
+      "vo_line": "Partners get the audit trail they need.",
+      "caption": "Partners: CONTROL",
+      "caption_highlight": "CONTROL",
+      "icon_path": "remotion-videos/iconSet/techsy/trophy.png",
+      "animation": "trophy-raise",
+      "notes": "Partner outcome — audit trail + oversight. Trophy = command."
+    },
+
+    {
+      "t0": 66.0,
+      "t1": 72.0,
+      "beat": 5,
+      "vo_line": "Twenty-five hundred to deploy. Five hundred a month. No contracts.",
+      "caption": "$2,500 setup · $500/month · NO contracts",
+      "caption_highlight": "$2,500 · $500/mo",
+      "icon_path": ".claude/skills/3d-icon-forge/library/a-glass-tile/chart-bar-cyan-hero.png",
+      "animation": "price-stack-in",
+      "notes": "Chart-bar icon as pricing stack — transparent pricing is the wedge vs Harvey."
+    },
+    {
+      "t0": 72.0,
+      "t1": 76.0,
+      "beat": 5,
+      "vo_line": "Book a fifteen-minute strategic review.",
+      "caption": "15-min strategic review",
+      "caption_highlight": "15 min",
+      "icon_path": ".claude/skills/3d-icon-forge/library/a-glass-tile/calendar-cyan-hero.png",
+      "animation": "calendar-flip-in",
+      "notes": "Calendar → CTA pivot."
+    },
+    {
+      "t0": 76.0,
+      "t1": 79.0,
+      "beat": 5,
+      "vo_line": "Link in the first comment.",
+      "caption": "Link ↓ First comment",
+      "caption_highlight": "LINK",
+      "icon_path": ".claude/skills/3d-icon-forge/library/c-cripsy-orbit/key-with-halo-magenta-rare-hero.png",
+      "animation": "magenta-pulse",
+      "notes": "MAGENTA-RARE accent moment. Once per video — this is it. Key-with-halo = unlock access."
+    },
+
+    {
+      "t0": 79.0,
+      "t1": 85.0,
+      "type": "outro_card",
+      "title": "theinnovativenative.com/cerebro",
+      "subtitle": "PRIVATE AI · FOR LAW FIRMS · BUILT BY THE INNOVATIVE NATIVE",
+      "icon_path": "remotion-videos/iconSet/techsy/brain.png",
+      "animation": "logo-settle",
+      "cta_url": "https://theinnovativenative.com/cerebro"
+    }
+  ],
+  "caption_style": {
+    "font": "Inter",
+    "weight": 700,
+    "color": "#FFFFFF",
+    "highlight_color": "#00BCD4",
+    "magenta_highlight_color": "#E91E63",
+    "size_px": 64,
+    "position": "bottom-safe",
+    "background": "rgba(10, 22, 40, 0.75)",
+    "padding_px": 24,
+    "border_radius_px": 12
+  },
+  "brand_frame": {
+    "background_gradient": ["#0A1628", "#05080F"],
+    "corner_logo_path": "remotion-videos/iconSet/techsy/brain.png",
+    "progress_bar": true,
+    "progress_bar_color": "#00BCD4"
+  }
+}

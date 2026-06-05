@@ -1,0 +1,112 @@
+start	end	text
+0	5040	them and label which ones that are the most important. So you can spin it out into a database.
+5040	8880	It doesn't have to just be labeled or delabeled. So that's another difference of what you can do.
+9840	15360	Now this one provides a growth opportunity. So it's going to be labeled as hiring.
+18000	24400	This one you can actually send emails just straight away. So I actually have one to where
+24400	29280	these are going to gather and synthesize any receipts and it's just automatically going to
+29280	37600	send it to my finance person, Jenna. She runs all of my books and does all of that stuff. So I don't
+37600	42240	even want to take a look at those. My receipts, they just go directly to her and then I've already
+42240	47280	showed you personal. The last one I'll show you here is opportunities. So I'm going to jump over to
+49760	51360	my personal again and say
+51360	69040	proposal. Hey dude, I don't think you sent over the proposal or maybe you did and I just didn't see it
+69040	84160	come through. Can you send again? Thanks, Michael. All right. So jumping over here, we will
+84160	92480	now see that this will execute. So Gmail.
+98480	103680	So this proposal comes through, as you can see, it hasn't actually run yet because it hasn't grabbed it.
+103680	107840	So I'm going to manually execute it. You don't have to manually execute it. If you have it active,
+107840	114800	it should automatically do this, but we're going to run it through again here. So, uh, hey dude,
+114800	117840	don't think you sent over the proposal? Yeah. So this is the right one. It's actually grabbing the
+117840	123040	right one. We're going to go through the text classifier. And again, this is going to be Gemini,
+123040	129040	the model synthesizing this information based on the subject line and the body, and then it's going to
+129040	136400	route it accordingly. So opportunities, bang, we're going to execute this. It'll spit that out. Another
+137840	143760	step again, it's going to go through subject from body. And then these are the requirements that I
+143760	148640	have for to reply. Again, this is going to be specific to you. Uh, if it's onboarding or client
+148640	156960	onboarding, or if you're a lawyer and, um, you are having them, uh, send over, um, case documents or
+156960	160720	anything like that, or a financial advisor, and you're looking for, uh, whatever it is,
+160720	165040	whether it's a proposal or a signed contract or different things like that, you can tailor this
+165040	170880	to whatever needs you have and ensure that it spits it out the proper way. So it's actually going to
+170880	176160	synthesize all this information, just like I said, and then it's going to de-label it and send it. But
+176160	181840	the other thing that's going to do, it's actually going to create that draft. So, and this, um, I'm using
+181840	188480	these dynamic fillers to create the subject, which is a response to the one that he sent me,
+188480	194320	that I just sent myself actually, um, the message itself, whatever it says. Um, and this is
+195440	201600	where it drafts it up by the chat bot itself. It said, hi, Michael, apologies if the original didn't
+201600	205440	make it into your inbox. I've attached a proposal again for your review. Please let me know if you
+205440	211440	have any questions once you've had a look and again, you can actually change out the tone of
+211440	220080	voice and all of this here. Um, I put very generic one here just for the sake of this. It's kind of
+220080	224400	similar to whatever, but I just kind of reduced it a little bit. It's not my on my full brand,
+224400	227840	brand voice. But anyways, when I go back into here and I go into my drafts,
+228800	236960	I can see this proposal and then I can just upload a document, whatever it is. That's not
+236960	240880	the correct document, obviously. And then just hit send. Obviously you want to read through it.
+240880	245920	You want to take a look and make sure it's on your, your brand, uh, voice and tone. And as you can see,
+245920	250320	it's, it's actually a very powerful thing to where you can create this automation and then it just sorts
+250320	257200	through everything. And then you'll ultimately have a very clean inbox going forward. I don't use
+257200	264400	this inbox very much other than just personal. So mine still looks super crazy and I actually don't
+264400	270320	handle a lot of my emails anyway, that most of them go to Jenna, but, um, I will jump in on the
+270320	283520	other side and I will break down how you create this, uh, from scratch step by step.
+283520	296720	So,
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	296720	
+296720	297220	uh,
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	297220	
+297220	310420	uh,
+310420	312420	uh,
+312420	314420	uh,
+314420	316420	uh,
+316420	318420	uh,
+318420	320420	uh,
+320420	322420	uh,
+322420	335620	uh,
+335620	337620	uh,
+337620	339620	uh,
+339620	341620	uh,
+341620	343620	uh,
+343620	345620	uh,
+345620	347620	uh,
+347620	349620	uh,

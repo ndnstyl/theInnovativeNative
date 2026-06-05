@@ -1,0 +1,376 @@
+1
+00:00:00,000 --> 00:00:09,500
+all right hey Dan it's Mike here I just wanted to do a quick walkthrough for you so like we spoke
+
+2
+00:00:09,500 --> 00:00:15,360
+about we're gonna do this by milestones so right now I have milestones one and two that are coming
+
+3
+00:00:15,360 --> 00:00:19,320
+to completion I'm gonna need your feedback that's why I'm making this recording for you so we're
+
+4
+00:00:19,320 --> 00:00:26,520
+gonna do a walkthrough of the system so I am going to also attach the notion board when I
+
+5
+00:00:26,520 --> 00:00:34,740
+actually respond to this up work that is going to be looking like this so you'll see this I'm just
+
+6
+00:00:34,740 --> 00:00:38,820
+going to show it to you but for the sake of brevity I'm not going to go through this entire thing I'm
+
+7
+00:00:38,820 --> 00:00:44,540
+going to give you a walkthrough of this and also turn over this so that you can actually go piece
+
+8
+00:00:44,540 --> 00:00:50,940
+by piece along with this video and take a look at things but essentially how this works is with
+
+9
+00:00:50,940 --> 00:00:56,680
+Airtable and with N8N then I have scrapers on the background so the first part that I'm going to
+
+10
+00:00:56,680 --> 00:01:02,220
+actually do is I'm going to start with the front end and what it looks like through Airtable with
+
+11
+00:01:02,220 --> 00:01:06,860
+Airtable this is your overview I'm not sure how familiar you are with Airtable but Airtable is
+
+12
+00:01:06,860 --> 00:01:12,580
+basically like Google Sheets or Excel Sheets like on steroids it does everything you need it does all
+
+13
+00:01:12,580 --> 00:01:18,580
+the functionality there's automation built into it not only within Airtable itself but you can do APIs
+
+14
+00:01:18,580 --> 00:01:25,320
+and plug into things like N8N to which I'm going to show you so this is where you're primarily going
+
+15
+00:01:25,320 --> 00:01:28,880
+to live this is when you're going to be updating your contacts obviously what I'm working through
+
+16
+00:01:28,880 --> 00:01:36,160
+right now is just getting you getting your beak wet to show you what can and can't be done with
+
+17
+00:01:36,160 --> 00:01:40,800
+systems and we're going to make tweaks so this will allow you to go straight into your control panel
+
+18
+00:01:40,800 --> 00:01:42,860
+you can either click here or you can click here
+
+19
+00:01:42,860 --> 00:01:51,560
+and also go back for just a second this notion board as well that's actually linked to the notion
+
+20
+00:01:51,560 --> 00:01:56,180
+board that I'm going to be sending over to you so clicking and going into the control panel it's
+
+21
+00:01:56,180 --> 00:02:04,080
+actually pretty simple so there are multiple parts to this because it is a functioning ecosystem as a
+
+22
+00:02:04,080 --> 00:02:09,100
+whole so I actually had to break down several different workflows to get everything working
+
+23
+00:02:09,100 --> 00:02:14,140
+together and importing into the database properly so the very first thing that we do is generate
+
+24
+00:02:14,140 --> 00:02:18,440
+seeds the generating seeds is based on all of the keywords and the keyword combinations and the
+
+25
+00:02:18,440 --> 00:02:23,660
+locations that you've given me before that I incorporated into this that's also going to be
+
+26
+00:02:23,660 --> 00:02:29,440
+included in the notion board but generate seeds you're going to generate a combination of how
+
+27
+00:02:29,440 --> 00:02:35,160
+Google actually goes out and scrapes to find raw unenriched businesses
+
+28
+00:02:35,160 --> 00:02:42,300
+and then when you click that button what it'll do is it'll actually go back here on the back end
+
+29
+00:02:42,300 --> 00:02:46,900
+in N8N and it will
+
+30
+00:02:46,900 --> 00:02:58,300
+go into this batch seeds generator which I believe I already have open so let's take a look here no I
+
+31
+00:02:58,300 --> 00:03:04,940
+don't so this batch seeds generator this is the workflow for it it'll generate a combination
+
+32
+00:03:04,940 --> 00:03:10,440
+of phrases this is a code with all of the phrases as you can see here it's also going to be like I
+
+33
+00:03:10,440 --> 00:03:14,440
+said in the notion board so if you want to go back into it we kind of spoke a little bit about it I
+
+34
+00:03:14,440 --> 00:03:18,680
+don't know you did have a chance to look at the first notion board that I did send over to you but
+
+35
+00:03:18,680 --> 00:03:24,940
+this is going to contain a lot of how this breaks down so I broke it down into three separate tiers like
+
+36
+00:03:24,940 --> 00:03:30,720
+this is the A tier this is the one and it's heavily weighted based on population obviously with the
+
+37
+00:03:30,720 --> 00:03:34,840
+higher population size there's going to be more businesses with more businesses populated we're
+
+38
+00:03:34,840 --> 00:03:40,240
+going to be able to enrich more business businesses for your geo directory and then we can actually
+
+39
+00:03:40,240 --> 00:03:45,340
+score and dedupe later but this is just the first step this is just getting the combinations of cities
+
+40
+00:03:45,340 --> 00:03:52,580
+and keywords that will actually execute and go down the chain of command here to see the records to
+
+41
+00:03:52,580 --> 00:03:58,320
+actually get it prepared to go out and search Google so that would be your very first phase one
+
+42
+00:03:58,320 --> 00:04:06,240
+so you click that button it'll create the combinations and different things and then it'll go to a discovery
+
+43
+00:04:06,240 --> 00:04:12,540
+workflow this is where it's actually going to discover I have all of these open I should have
+
+44
+00:04:12,540 --> 00:04:14,800
+actually closed them but just give me one sec
+
+45
+00:04:14,800 --> 00:04:27,120
+so now this is your discovery workflow so once the combination has
+
+46
+00:04:27,120 --> 00:04:34,820
+been created and then it goes through the Google scrape what we then do is go out and discover
+
+47
+00:04:34,820 --> 00:04:41,760
+those businesses based on the service location based on the keyword combination and I'm not going
+
+48
+00:04:41,760 --> 00:04:46,920
+to go too deep in the woods because I'll show you what the execution here sometimes these can take
+
+49
+00:04:46,920 --> 00:04:52,080
+anywhere from about two minutes all the way up to about six minutes we don't really have that long to
+
+50
+00:04:52,080 --> 00:04:56,220
+sit here and wait and go through the whole entire rotation but just to give you a quick overview
+
+51
+00:04:56,220 --> 00:05:03,060
+what it'll do is it'll get the seed records through this node it'll update the seed status it'll create
+
+52
+00:05:03,060 --> 00:05:11,820
+within the code node what to look for this is Appify this is what goes out and actually scrapes in the
+
+53
+00:05:11,820 --> 00:05:17,460
+world Google places amongst other things and we'll get a little bit deeper into that of how it scrapes but
+
+54
+00:05:17,460 --> 00:05:24,980
+this is the workflow so it's going to check for results it's going to check for the places and IDs it's going to filter and map
+
+55
+00:05:24,980 --> 00:05:54,980
+here as you can see all of the new businesses and it's going to split it up so that it actually creates a new record in your business here for the record so this is your actual businesses with the records here something you probably won't look at but I'll show you just for the peace of mind here going into the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data on the back end these are all of the tables that actually talk to each other so there's a seeds table there's raw businesses there's a lot of the data here on the back end these are all of the tables that actually talk to each other
+
+56
+00:05:54,980 --> 00:06:24,980
+there's workflow executions there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's
+
+57
+00:06:24,980 --> 00:06:54,980
+there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there's there
+
+58
+00:06:54,980 --> 00:07:24,960
+based on the keywords that you've given me then the next workflow is enrichment that enrichment is where really all of the magic happens so the enrichment for what we were doing we I have a couple of stages obviously to do the free which is Google and find Google places and also your geo coordinates but then the full enrichment comes here and this one actually if you take a look at the executions this one takes 17 minutes and it goes out and I actually have it to where it does
+
+59
+00:07:24,960 --> 00:07:54,940
+batches of 50 it does 50 at a time this is another kind of key point to a walkthrough if you do more than 50 then essentially what's going to happen is it can start to create some hiccups I know it seems like oh you know let's do 100 or let's do a thousand at a time but the larger the number that means the more website it scrapes and the more websites it scrapes then the more it has the possibility to either get hung up or time out and then it doesn't actually bring back any records but even with going to grab 50 records it still takes anywhere from 50
+
+60
+00:07:54,960 --> 00:08:23,280
+to 20 to 20 minutes and this obviously as you know this saves hours and hours and hours just as a human going to click around typing in keywords trying to find things and updating it but once you hit this social enrichment this will come back as enriched so you will have a record like this to where now it actually starts to populate some of the other data if you can actually find it so and then then the last part will actually be the validated
+
+61
+00:08:23,280 --> 00:08:30,280
+so the validation again just a button click and then it will go in here and it will run
+
+62
+00:08:30,280 --> 00:08:52,280
+your validation which is this workflow here it'll go through grab the records and it'll run through a lot of code formulations to create scores to create completeness matching and and everything's like that so that is what you're going to see here
+
+63
+00:08:52,280 --> 00:08:59,280
+which is you're going to get a completeness score and a completeness score color in that uk notion board for the geodirectory i do actually have it broken down of how that completeness score is weighted but it's very heavily weighted to the business name matching the phone number matching the domain and then having multiple other points so the more points that it actually has the better it is obviously so
+
+64
+00:08:59,280 --> 00:09:29,280
+let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores and then the more points that it actually has the better it is obviously so let me take this filter off here so there will be ones that have much higher scores
+
+65
+00:09:29,280 --> 00:09:59,260
+because they actually have social media because they actually have social media the actual domain email and multiple social media links to get up there now for the geodirectory I mean I put a score of around 70 between 65 to 70 and I've also color coded it just so that you can see if you're a visual person like me of which ones have good scores and which ones don't so I would say about 70 is usable and that will be at 95% accuracy or so
+
+66
+00:09:59,280 --> 00:10:23,280
+again you're still gonna have to go back and human in the loop check all of these things but essentially I think 70 is a good thing and it's a good score weighted heavily toward validated information the next on the control panel because what happens is there's a lot of overlap after it validates and after you run the score this is actually out of order let me sort this
+
+67
+00:10:29,280 --> 00:10:56,140
+okay so because of the way that it works because we're starting with keywords we're starting with areas and we're we're we're running a size of probably about a 25 mile radius give or take a few miles there's going to be a lot of duplicates originally when we go through it so I do also have a deduplication and kind of a housekeeping step to where it will go through and find any sort of exact matches
+
+68
+00:10:56,140 --> 00:11:14,520
+and it will actually delete them so you have a true number of records and then this last one is going to be an automated export so when you click this button it will actually go through and run this automation and then you can download it and it'll be in your local files
+
+69
+00:11:14,520 --> 00:11:22,080
+and then you can just check your downloads for that and then that's completely formatted in what you told me to do which is utf-8
+
+70
+00:11:22,080 --> 00:11:31,260
+it's going to remove all special characters and it's also going to have the information that you need for your geocode WordPress directory
+
+71
+00:11:31,260 --> 00:11:40,700
+so overall that is basically the system I want you to walk through this video take a look I know I speak a little bit fast so you can pause
+
+72
+00:11:40,700 --> 00:11:50,340
+do things refer to the notion board and then take a look at this but this is the system as a whole I've tried to make it as simple as possible for you
+
+73
+00:11:50,340 --> 00:11:58,800
+essentially it's just one click button executions every once in a while it'll have just kind of a timeout error sometimes when you're scraping websites
+
+74
+00:11:58,800 --> 00:12:07,460
+they'll have blockers or different things like that but essentially as you can see for the businesses and I'll actually even show you this business here
+
+75
+00:12:07,460 --> 00:12:17,980
+this business panel here so we have about 698 records because I'm doing a lot of testing and I haven't been doing a lot of cleanup and I've been leaving a lot of things in here
+
+76
+00:12:17,980 --> 00:12:26,700
+just to show me where I need to make tweaks and how to make the system better you are going to see a little bit of funky things right now because it's actually in the build phase
+
+77
+00:12:26,700 --> 00:12:34,300
+so you are going to see some things to where you know it says enriched but it's not fully enriched or it says validated and it's not fully validated
+
+78
+00:12:34,300 --> 00:12:42,300
+validated I'm leaving those records in there for now once you get it and clean and I've actually fully cleaned it up to 100% you won't see minor things like that
+
+79
+00:12:42,300 --> 00:12:50,940
+but I'm leaving it in there now so that I can actually have something to reference and I can check when of the last executions were and debug and do sorts of things like that
+
+80
+00:12:50,940 --> 00:13:00,280
+so just kind of be mindful of that when you're kind of going through the video and looking at things this isn't 100% yet I'd say it's about 80 to 90% there
+
+81
+00:13:00,280 --> 00:13:08,000
+then with your feedback I'll do the last 10 to 20% based on whatever it is that we actually need to do
+
+82
+00:13:08,000 --> 00:13:17,480
+and once we do the export and confirm the export that export that I just did right now I will be attaching that and sending it to you in the message for Upwork again
+
+83
+00:13:17,480 --> 00:13:28,200
+all of this the notion board will be linked the video will be in there the only things you won't have access to because it's all hosted on my business
+
+84
+00:13:28,200 --> 00:13:35,200
+servers are my air table and the back end workflows of n8n but this is essentially how the system works
+
+85
+00:13:35,200 --> 00:13:44,500
+it's n8n front end sorry it's air table front end n8n back end and a lot of different data scrapers between
+
+86
+00:13:44,500 --> 00:13:52,720
+google apify house api companies api and nominated api
+
+87
+00:13:52,720 --> 00:14:00,860
+and we'll get into the weeds if you so choose and you have those questions you really want to break down the system of how it works on it from a technical standpoint
+
+88
+00:14:00,860 --> 00:14:07,600
+standpoint but at this point this is your system this is where we're at for milestones one and two
+
+89
+00:14:07,600 --> 00:14:13,360
+if you have any questions just email me hit me up let me know what those questions are
+
+90
+00:14:13,360 --> 00:14:20,340
+uh what you're seeing in here and if any of it does or does not make sense uh just shoot it over
+
+91
+00:14:20,340 --> 00:14:27,300
+we'll go back and get some iterations done and then we'll get to finalization and then you'll have an actual working system
+
+92
+00:14:27,300 --> 00:14:35,840
+to get to your 10 000 records um again i'll message you through Upwork but if you need to email me directly
+
+93
+00:14:35,840 --> 00:14:43,860
+it's mike at buildmytribe.ai you also have access to the slack channel that i created for you you can do it there or
+
+94
+00:14:43,860 --> 00:14:49,940
+uh through Upwork um outside of that i'll see you on the other side once you give me your feedback have a good day
+

@@ -1,0 +1,59 @@
+okay so we're going to jump right into it this is a sdr sales rep workflow that that i've created
+helps myself out i actually built it quite some time ago it's one of the first ones that i built for
+sales specifically marketing sales works together and this is something that i knew that a lot of
+sales people would need so jumping in here um it looks a little bit complicated but if you are in
+the class you will actually have this in the resources as an sdr workflow so there are multiple
+phases to it the first phase is lead capture and pre-meeting intelligence um i'm just going to kind
+of lightly go through these and then i'm just going to show it in action and then we'll go from there
+but i just wanted to walk you through what an end-to-end system looks like for something very
+specific and since i used uh sales as kind of a storytelling in the previous module um i wanted
+to keep it kind of all sales related so it just connects all the dots here so the this first one
+this is actually this is uh so well actually let me take a step back so this is n8n this is what um
+all of
+the hype is about here um if you haven't been familiarized with n8n um i'm sure you can just
+do a quick google search or jump on youtube and learn about it and i'm going to teach you throughout
+this this course but n8n is the back-end orchestrator of carrying out all of this these tasks so um these
+are what are called nodes and when you open up each node it will have uh information so it's always going
+to be the same layout on this left side you're going to have input uh the middle is going to be
+whatever it is that you are telling us to do or the agent or the processes and then there is going
+to be an output so to um just break this down as simply as possible i actually prepared a um
+discovery call that is going to be going through my calendly and this trigger here which is the first
+node that's going to capture that information and put that on over through the sequence is going to be
+um push through to my back end um so we are just going to pull something that i've prepared here
+off camera so name neil patel if you guys haven't checked him out please go follow him that dude is
+kind of one of the resources when it comes to organic seo
+and i'm just going to put this information here this is what i have on my discovery um lead capture
+form this gives me scope uh before i even go into the meeting this doesn't always uh work as plain
+sometimes people will be like oh i tried to do it but there was too much and a lot of information but i
+asked three basic questions here so um obviously the information is just so that i can actually book
+it is the name the email and the website url but this is going to look different for each one of you
+guys and then you're going to program the back end to accept whatever it is that you're putting in here
+so this first one is what is your biggest friction point and what are you trying to solve with workflows
+this is just fictitious data i'm just i'm just making this up just so that we can actually go
+through this walkthrough honestly the biggest friction point i'm trying to solve in ai workflows
+is constant context switching and manual follow-up my team wastes so much time copying information from
+one system to another yada yada yada um the next question is uh what are they looking to achieve
+with this automation um because this is going to give you uh basically kind of the scope of work and
+what they want from the outcome of this this a lot of the times is overlooked especially with
+discovery calls there you people are just trying to get these people on a phone call like i like to
+do a lot of heavy heavy qualifying before ever even getting on a on a phone call i'm some people and i've
+been marketing a long time the longer the form usually the less submissions you actually get
+and some people want to open that up it's just like name name phone email that's it and they want
+that lead to go through so they can get in contact with them as soon as possible i like to weed out all
+the bs uh so again your answers and your questions might be uh your mileage may vary but these are the
+three that i like to ask the most i want the website url so i can actually research them like you can
+research them off of email and name too but sometimes that's not always the most efficient nor does it
+pull back results but the second question what do you want to achieve with your automation success or
+what does what a success look like for your business for us automation success would mean
+cutting our lead response time from hours down to just a few minutes if we have every inquiry got an
+immediate personalized follow-up and the details were automatically logged into our crm without anyone
+touching it that alone would make it feel like a huge win so we you kind of have the first preliminary
+step of over delivering so you know what they want before you even get on the phone call and this last
+question is um when would they like have like to have the automation up and running anyways long
+explanation just to show you what my discovery call and my lead capture actually looks like so
+i'm going to schedule the event this is going to push information over to n8n here
+so
+so
+so
+so
+so

@@ -1,0 +1,213 @@
+start	end	text
+0	14760	Now, it connects you to your Google through OAuth, and then you actually have to set up
+14760	16000	your client secret and different things.
+16000	20240	So if you haven't set that up, I will create a separate video that will show you the walkthrough.
+20240	24880	But for the sake of brevity, I'm just going to show you what this workflow does.
+24880	28160	But in order to create your credentials, I'll just show you here.
+28160	31660	You actually have to go through here, and you have to go through your Google Cloud Console
+31660	35180	and your services to go grab your ID and your client secret.
+35180	39920	And then once you actually connect it, it will be connected just like mine is here.
+39920	46300	And then when you choose nodes like this, and you go into Gmail, you can actually have access
+46300	47820	to a lot of these.
+47820	55180	Message actions, label actions, draft actions, thread actions, so on and so forth.
+55180	60120	But with this one particularly, before we break it down, before I go and show you with a
+60120	64640	blank slate node by node, I just want to show you what's possible.
+64640	67640	So with this trigger, it will actually run.
+67640	71980	I have it running every one minute right now, just so that it can actually process things
+71980	73180	while I'm on the video.
+73180	74740	I don't usually do one minute.
+74740	79500	Unless you are a very, very business, sorry, very busy business professional.
+79680	84960	There are some people that are trying to get every single 60 seconds or 30 seconds, they
+84960	85940	want to check their email.
+86120	87120	That can be done as well.
+87600	91680	But I usually get maybe five to 10 emails a day.
+91780	95240	So I like to break it down in intervals of checking my email every hour.
+95480	97860	I'm usually on top of my email box for the most part too.
+97860	101280	But when I'm not, this is always running 24 seven.
+101280	108660	So from this email node, sorry, this Gmail trigger, it will actually fetch an event.
+108660	112580	And in this case, it's going to grab one of my last things right here.
+113300	119380	I've changed it to unread only just that I can do this for the sake of being live and recording
+119380	119660	this.
+119940	123600	So what it does is actually goes to your email and it fetches this type of information.
+123600	128920	It's going to grab the ID of it and then it's going to feed it into this text classifier.
+129120	132340	This text classifier here, I have connected to it.
+132460	134580	It is going to be a Gemini trap model.
+135280	139420	For the classifier, I actually use Flash.
+139740	146700	So if you haven't been familiarized with LLMs and token usage and different models that use
+146700	151000	different tokens, there is for Gemini, there's a multitude of them.
+151000	155840	There is Flash, there is Flashlight, there is Pro for Gemini.
+156440	159340	For lighter tasks like this, they don't require a lot of reasoning.
+159580	163380	I just use Flash simply because it uses the least amount of tokens.
+164180	168860	I've tried Flashlight, but sometimes it gets it wrong and then it errors out and does things.
+168940	173620	But anyways, so with this text classifier, it's going to take the input, which is what you
+173620	175280	see over here on this left side.
+175440	177660	It's going to take a look at things like your payload.
+177660	180540	It's going to have the ID and the categories and the labels.
+181460	184260	And then it's going to go through all of these categories.
+184560	189560	So it's going to take this trigger, put it into this text classifier.
+190240	195520	Your LLM node, your thinking part is what I like to call it.
+195740	202000	This is the one that actually goes through and uses the information that's grabbed from
+202000	202620	the email.
+202620	206240	So the little snippet that's given, it'll actually take a look at that as well as subject
+206240	206760	line and whatnot.
+207240	213240	And then it will classify it and it will route it down whatever category you want.
+213380	221600	So I have mine broken down into marketing, social, personal opportunities, hiring, receipts,
+221600	223000	and just other stuff.
+223880	233220	And you'll actually see this reflected in one of my other inboxes here.
+233560	235660	So like other stuff.
+236820	239260	It'll actually have all of this information here.
+239420	245300	When it's unread, obviously it'll show you how many is unread per whatever it is that you're
+245300	245640	looking for.
+245640	252540	So it takes this, synthesizes the snippet, and then it routes it accordingly.
+252760	254600	So let's see what this one is going to route it as.
+259400	261020	So as you can see, it's thinking.
+261480	265140	And then it routes it as, what is this?
+265180	265760	It's hard to see.
+265760	274620	So Slack account, this should be going to social.
+275140	276820	So we'll just follow it down here.
+283040	284400	Actually, this is other stuff.
+284600	285540	So it's not going to go to social.
+285680	287800	Sometimes Slack reads as social.
+287940	289940	Sometimes it reads as just other stuff.
+289940	295600	So it's going to go in here and I'm going to execute this node.
+295800	300740	So based on that snippet, it's actually going to add the label of other stuff.
+301820	314060	So when I execute it, it will push it through and go to this particular node, which is going
+314060	315780	to remove the inbox label.
+316320	317800	So Gmail works a little bit differently.
+317800	320700	There's a lot of people that are, sorry, a lot of service providers that are starting
+320700	321400	to do it like this.
+321900	323360	Gmail is more of a cash all.
+323900	326760	It doesn't actually have inbox with folders.
+326960	328680	It's got inbox with labels.
+329220	331740	So you can use labels as a type of folder.
+332240	338680	So in order for you to actually remove it from your email inbox, you're actually going
+338680	341360	to have to remove the inbox label itself.
+341360	348620	So the logic for that is coming in here and showing, okay, so I'm looking for the ID that
+348620	352640	came through from this original trigger all the way back there.
+353780	356120	That's the ID of the email itself.
+356220	360880	You can actually use threads, thread IDs if you have a very long thread and you specifically
+360880	362800	want to label something with a thread.
+362800	368280	But the ID is going to have the message ID that is connected to that email in particular.
+368940	374440	And then I actually want to remove the label inbox and I'll execute that step.
+374440	384820	Now, so I'm not going to go through all of them, but I just do want to go through a couple of
+384820	384940	them.
+385040	389300	And then what I'm going to do is I'm going to jump over here into my own personal email
+389300	395140	box and I'm going to send my business email from my personal email.
+395320	400300	And that one should actually route it correspondingly to my personal label.
+401000	402440	So give me just a second while I do that.
+402440	405680	And I'll jump in on the other side and I will show you that.
+408000	409840	So I'm just going to go ahead and pull it up here.
+412100	415400	And I am going to just keep it very generic.
+415740	418520	I'm just going to put a subject line of, hey, how's it going?
+418820	419880	What are you up to do today?
+421540	423460	Just so that we can see it get routed.
+432440	439220	So I've sent that and it should only take a few seconds to actually come through.
+440220	441080	Let's see.
+442500	444240	I actually forgot to turn this off.
+444340	446420	So I hope, hopefully it doesn't get triggered.
+446420	447420	Okay.
+449880	450440	Okay.
+450620	451560	So what are you up to?
+453160	456160	So now we're going to pull this one.
+456160	462660	So it fetched it.
+462880	465420	It actually is labeled as important.
+465720	470100	This one's labeled unread and it's going to go into my school personal.
+470360	472940	So we should be able to see that execute from here.
+473200	474700	It's going to a text classifier.
+474700	479840	Again, this is the one that splits it out to whatever respective category it needs to go to.
+482820	486100	So personal branch is where it went to.
+487600	492100	It will go down here to the personal branch.
+493180	497700	And this is one I chose because this one's different, as you can see with the notes,
+497880	503080	is this is a human in the loop and it's not just going to label it and de-label it.
+503080	505260	It's actually going to go into my personal.
+505800	509280	It's going to synthesize the email of what has come through.
+510020	511820	So this is grabbing the information.
+512660	515280	And now this node is a Gmail.
+515780	517360	Sorry, it's a Gemini chat node.
+518120	525400	And it's going to take the information that is from this sequence prior to.
+525740	526700	It's going to grab the subject.
+526840	529920	It's going to grab the email and who it's from.
+529920	534300	And it says, you are a personal email assistant for Mike.
+534440	536000	You're a silo's casual, intelligent, approachable.
+536140	541220	This is something that, as a prompt, you can tailor it to however you want it to speak.
+541340	546000	So the way that I do it is when it's personal like this, I just keep it very casual.
+546000	553320	This prompt is going to be whatever tone of voice that you want to use.
+554020	564540	If you've gone through the other lessons in the class and you've created your brand documents
+564540	572580	and your mood board and different things like that, that is where you're going to actually leverage
+572580	577160	and utilize your brand documents so that your brand voice comes through.
+577280	579660	Right here, I just kept it very simple, very casual.
+580240	585880	But if it were something like an opportunity, like in this one, you can completely change that
+585880	587760	to whatever it is that your brand voice is.
+587760	591480	So it will come through and I'll synthesize this.
+591520	592920	This is going to take a few seconds here.
+593280	598200	But like I said, there's a difference between like opportunities and whatnot and your personal
+598200	603180	or in this case, when we get to it, it's going to be a social email summarizer.
+603180	608260	So let's see what this output was.
+608340	609020	What are you up to do?
+609160	609520	Sorry.
+609640	610640	What are you up to?
+611460	612060	Blah, blah, blah.
+614700	616240	It's going to execute this step.
+616380	624840	It's going to create a draft for me and it's going to remove the label of inbox.
+626300	626740	No.
+627040	628700	So it's getting a bad request.
+629260	632600	So this is good to take a look through.
+634000	635820	So invalid value.
+636360	639440	This is actually let me work through this.
+640660	645700	This seems like it's just because it doesn't actually have that personal label.
+646340	647320	So let's see here.
+647320	649900	So let me go to my inbox here.
+652060	661320	And as you can see, it actually will be in my drafts.
+663180	671300	I actually need to change this up.
+671460	676760	This is actually putting a subject line in here, which shouldn't be.
+676760	679320	So it'll just be in response to this.
+679620	680800	So, hey, Michael, I'm doing well.
+681020	681560	Thanks for asking.
+681660	682940	Just plugging away at a few things here.
+683380	684420	Hope you're having a good day too.
+684980	685880	What's new with you?
+686480	688780	So you can do whatever you can actually send it.
+688880	691440	I'm just going to delete this because this is just me talking to myself.
+691440	693700	And I don't want it to clutter up my inbox.
+694240	697140	But let's come back to this remove.
+702140	703680	Unvalid ID value.
+703680	706140	So let's change this.
+712360	716720	So we are going to go back to this node.
+716840	717800	So it's Gmail trigger.
+717800	732800	There we go.
+733000	740280	So there are other times to where just because I kind of knew how that was going to, or sorry,
+740280	750100	just because I actually knew what that error was, that JSON ID was trying to look from the immediate node that was directly before it.
+750400	756200	And that error was happening because it wasn't finding the proper ID because it wasn't pulling it from the Gmail trigger.
+757560	760580	If you ever run into things like that, I'm kind of glad we did on camera.
+761140	762040	Those small things.
+762260	766680	Another thing that you can actually do is, let me go back into executions here,
+766680	769960	and I'll find another one that had, or this one that actually just had the error.
+770620	774940	There's another thing that you can do, which is just go in here, if you ever get stuck on this,
+775000	779840	and you actually click this copy, and then you go into ChatGPT, and you just paste it in and say,
+779960	782040	hey, I'm in XYZ.
+782360	784480	Cloud code, chat, N8N.
+784780	786800	I'm connecting whatever it is that you are.
+787200	788500	In this case, it's Gmail.
+788960	790080	I've got this error code.
+790120	791460	Can you help me work through it?
+791520	793640	You don't actually need to really know any of it.
+793980	797980	This also is something that is particular to cloud hosting.
+798160	799280	I'm actually on Hostinger.
+799280	809460	If you are hosted directly through N8N, you actually will have a built-in AI here, down at the bottom somewhere.
+809620	809840	I forget.
+809960	811700	It's been so long since I've actually used that one.
+812040	818240	You can actually use Ask AI Assistant, and it will spit out an answer for you.
+818240	823380	I usually just copy it, go to ChatGPT, and then paste in that error if you do run into errors.
+825120	826280	So, yeah.
+826500	828240	I mean, that's the way that I work through errors.
+828300	831780	I'm actually glad that I did hit that error here.
+831780	838620	So, we will do one more, and then we're going to jump in on the other side, and I'm just going to show you how to build this.
+838620	857640	I just want to show you a couple of different iterations, and then a little bit more of the overview here, and then we're going to go into building it from scratch, so that you know how to think about it, walk through, set it up node by node, and get it all dialed into what you actually need.
+857640	864420	So, I'm going to come back in the editor here, and just show you a few things here.
+865060	868700	So, I have it all routed, and you guys can download it.
+868780	874060	It's in the school community, but the reason why each one of these is different is I actually put it in here.
+874360	877900	It labeled it and marks it as read, so it doesn't stand out in your inbox.
+878400	881800	Sometimes, you might want to label it and keep it as unread.
+881800	889180	This one's actually different because it's a social post, and it's going to summarize the social post, and it's going to put it into a Google Sheet.
+889180	902240	This is something that you can actually change this Google Sheet out to an Airtable, or to a Superbase database, or to your CRM, like HubSpot, or Salesforce, or whatever it is if you're doing business,
+902360	908060	and you get a lot of social private messages or social promotions, and you want to filter through.

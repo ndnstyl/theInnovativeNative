@@ -1,0 +1,1032 @@
+1
+00:00:00,000 --> 00:00:03,840
+Take that, put it into your system, it enriches the data,
+
+2
+00:00:03,840 --> 00:00:06,940
+and then it actually hands over to your sales agent
+
+3
+00:00:06,940 --> 00:00:08,580
+or your senior salesperson,
+
+4
+00:00:08,580 --> 00:00:10,920
+or it even delegates all of those leads
+
+5
+00:00:10,920 --> 00:00:12,820
+to a round robin team.
+
+6
+00:00:12,820 --> 00:00:14,000
+Whatever system you have,
+
+7
+00:00:14,000 --> 00:00:16,800
+you actually create that intake system,
+
+8
+00:00:16,800 --> 00:00:18,760
+and then you parse all of that information out
+
+9
+00:00:18,760 --> 00:00:22,200
+or those leads out to whoever needs to actually receive it.
+
+10
+00:00:22,200 --> 00:00:27,200
+Meeting summaries and next steps.
+
+11
+00:00:30,200 --> 00:00:31,940
+There are lots of tools for this.
+
+12
+00:00:31,940 --> 00:00:34,500
+There is Notebook LLM, sorry.
+
+13
+00:00:46,360 --> 00:00:48,240
+Meeting summaries and next steps.
+
+14
+00:00:48,240 --> 00:00:49,580
+There are many tools for this.
+
+15
+00:00:49,580 --> 00:00:54,580
+Fireflies, Notebook LLM, Notion, Motion, a hundred of them.
+
+16
+00:01:00,940 --> 00:01:03,040
+Meeting summaries and next steps.
+
+17
+00:01:03,040 --> 00:01:04,480
+There are many apps for this.
+
+18
+00:01:04,480 --> 00:01:07,180
+You can use N8N, you can use Fireflies,
+
+19
+00:01:07,180 --> 00:01:09,780
+you can use Notebook LLM or Notion.
+
+20
+00:01:09,780 --> 00:01:10,700
+Take your pick.
+
+21
+00:01:10,700 --> 00:01:13,560
+The whole point is you have an AI assistant
+
+22
+00:01:13,560 --> 00:01:14,980
+that remembers all of it,
+
+23
+00:01:14,980 --> 00:01:18,720
+and it will actually put it into a very easy to comprehend
+
+24
+00:01:18,720 --> 00:01:21,660
+note-taking system, and it'll send it over to your Slack,
+
+25
+00:01:21,660 --> 00:01:25,060
+to your email, or put it in your pipeline for your CRM,
+
+26
+00:01:25,060 --> 00:01:26,980
+and it doesn't miss a single note.
+
+27
+00:01:26,980 --> 00:01:27,820
+I love it.
+
+28
+00:01:27,820 --> 00:01:30,220
+I use it every single time I have a discovery call.
+
+29
+00:01:33,380 --> 00:01:35,820
+Another is a content repurposing engine.
+
+30
+00:01:35,820 --> 00:01:38,680
+Maybe you have a podcast channel,
+
+31
+00:01:38,680 --> 00:01:41,920
+and you do very long form podcasts from one, two,
+
+32
+00:01:41,920 --> 00:01:43,360
+or even three hours.
+
+33
+00:01:43,360 --> 00:01:46,520
+You can actually get, even just from a one-hour podcast,
+
+34
+00:01:46,520 --> 00:01:49,200
+anywhere from about 10 to 15 solid clips.
+
+35
+00:01:49,200 --> 00:01:51,520
+You can use AI to parse them all out.
+
+36
+00:01:51,520 --> 00:01:53,760
+You can use AI to actually schedule the posts
+
+37
+00:01:53,760 --> 00:01:55,800
+to each one of your social media channels.
+
+38
+00:01:55,800 --> 00:01:58,860
+So you take one long form of content,
+
+39
+00:01:58,860 --> 00:02:01,660
+and then you repurpose it into smaller bit sizes,
+
+40
+00:02:01,660 --> 00:02:04,700
+and for Reels, or for TikTok,
+
+41
+00:02:04,700 --> 00:02:08,360
+or for your YouTube shorts, anything along those lines.
+
+42
+00:02:08,360 --> 00:02:11,300
+So a content repurposing engine is great for people
+
+43
+00:02:11,300 --> 00:02:13,300
+that are actually making long form content.
+
+44
+00:02:16,760 --> 00:02:19,820
+And the next one is automated follow-ups.
+
+45
+00:02:22,560 --> 00:02:23,700
+Automated follow-ups.
+
+46
+00:02:23,700 --> 00:02:24,600
+This is great.
+
+47
+00:02:24,600 --> 00:02:28,520
+Whether it's a email that is drafted by AI,
+
+48
+00:02:28,520 --> 00:02:31,300
+and all you have to do is either make minor changes
+
+49
+00:02:31,300 --> 00:02:32,380
+and then send it out,
+
+50
+00:02:32,380 --> 00:02:34,420
+or maybe it's a contract proposal.
+
+51
+00:02:34,420 --> 00:02:37,420
+Maybe it is a pitch deck,
+
+52
+00:02:37,420 --> 00:02:39,560
+something that you can actually hand over to sales,
+
+53
+00:02:39,560 --> 00:02:41,660
+and you're a designer.
+
+54
+00:02:41,660 --> 00:02:42,580
+They've been waiting on it.
+
+55
+00:02:42,580 --> 00:02:44,620
+You actually have the whole entire template
+
+56
+00:02:44,620 --> 00:02:46,520
+and everything all created and ready.
+
+57
+00:02:46,520 --> 00:02:48,280
+You just haven't actually sent it out.
+
+58
+00:02:57,220 --> 00:02:58,820
+Automated follow-ups.
+
+59
+00:02:58,820 --> 00:03:03,080
+Things like emails, contracts, proposals, pitch decks,
+
+60
+00:03:03,080 --> 00:03:05,680
+designs, if you're a designer, you do design work.
+
+61
+00:03:05,680 --> 00:03:07,340
+You can actually create a sequence
+
+62
+00:03:07,340 --> 00:03:11,480
+to where at each human in the loop input,
+
+63
+00:03:11,480 --> 00:03:13,220
+you can add either a document,
+
+64
+00:03:13,220 --> 00:03:15,580
+or if needed criteria,
+
+65
+00:03:15,580 --> 00:03:18,540
+and you actually have to ask questions to your client.
+
+66
+00:03:18,540 --> 00:03:20,160
+You have to get back that information
+
+67
+00:03:20,160 --> 00:03:22,380
+to make the next iteration on your design.
+
+68
+00:03:22,380 --> 00:03:25,920
+You can actually process that in an automated workflow,
+
+69
+00:03:25,920 --> 00:03:27,580
+and send out those notifications,
+
+70
+00:03:27,580 --> 00:03:31,000
+either through email, or Slack, or Telegram.
+
+71
+00:03:31,000 --> 00:03:33,300
+So your follow-up becomes automated,
+
+72
+00:03:33,300 --> 00:03:36,100
+and every single milestone that you actually have to hit,
+
+73
+00:03:36,100 --> 00:03:38,240
+it actually reaches out to your client,
+
+74
+00:03:38,240 --> 00:03:40,440
+and then when they respond to you,
+
+75
+00:03:40,440 --> 00:03:41,760
+it creates a draft,
+
+76
+00:03:41,760 --> 00:03:43,500
+and then all you have to do is upload a document,
+
+77
+00:03:43,500 --> 00:03:44,800
+and it gets sent out.
+
+78
+00:03:44,800 --> 00:03:46,600
+So automated follow-up,
+
+79
+00:03:46,600 --> 00:03:52,700
+so automated follow-up can actually save you hours and hours of time,
+
+80
+00:03:52,700 --> 00:03:55,360
+and it actually can speed up the whole back and forth
+
+81
+00:03:55,360 --> 00:04:00,700
+between client and requirements and dependencies and files.
+
+82
+00:04:00,700 --> 00:04:01,900
+It's a no-brainer.
+
+83
+00:04:01,900 --> 00:04:16,200
+Each and every one of these saves time,
+
+84
+00:04:16,200 --> 00:04:17,200
+and then over time,
+
+85
+00:04:17,200 --> 00:04:19,200
+it actually has a compounding effect.
+
+86
+00:04:19,200 --> 00:04:21,200
+So if you're saving 15 minutes here,
+
+87
+00:04:21,200 --> 00:04:23,500
+30 minutes there, or 45 minutes,
+
+88
+00:04:23,500 --> 00:04:27,700
+over time, you're actually buying back an entire day,
+
+89
+00:04:27,700 --> 00:04:30,000
+or an entire week of your year back,
+
+90
+00:04:30,000 --> 00:04:31,500
+maybe even more,
+
+91
+00:04:31,500 --> 00:04:33,700
+when you have all of these repetitive systems,
+
+92
+00:04:33,700 --> 00:04:37,700
+all orchestrated by your AI and N8N.
+
+93
+00:04:57,700 --> 00:05:08,500
+And here's the mental shift that I'd like you to try to make.
+
+94
+00:05:08,500 --> 00:05:12,500
+Stop seeing AI as just another tool or another agent.
+
+95
+00:05:12,500 --> 00:05:14,500
+Think of it just like a new hire,
+
+96
+00:05:14,500 --> 00:05:16,500
+as a new teammate.
+
+97
+00:05:20,500 --> 00:05:22,500
+If and when you hire a new person,
+
+98
+00:05:22,500 --> 00:05:25,500
+you don't just dump all of your tasks on over to them,
+
+99
+00:05:25,500 --> 00:05:29,300
+you give it to them in bite-sized, understandable chunks.
+
+100
+00:05:29,300 --> 00:05:30,700
+And then you build on that.
+
+101
+00:05:30,700 --> 00:05:32,000
+And then the more they learn,
+
+102
+00:05:32,000 --> 00:05:33,500
+the more you can actually give them.
+
+103
+00:05:33,500 --> 00:05:35,700
+AI is seemingly the same way.
+
+104
+00:05:37,300 --> 00:05:39,500
+AI is thought about...
+
+105
+00:05:40,800 --> 00:05:43,000
+AI should be thought about just like that.
+
+106
+00:05:43,000 --> 00:05:45,000
+Every time you hand it off to them,
+
+107
+00:05:45,000 --> 00:05:47,000
+and you actually see that it can create...
+
+108
+00:05:49,000 --> 00:05:51,000
+Every time you hand off tasks to it,
+
+109
+00:05:51,000 --> 00:05:53,500
+and you see that it can go from end to end,
+
+110
+00:05:53,500 --> 00:05:55,700
+with 100% accuracy and completion,
+
+111
+00:05:55,700 --> 00:05:56,800
+then add more,
+
+112
+00:05:56,800 --> 00:05:59,500
+just like another Lego or a building block on top of it.
+
+113
+00:05:59,500 --> 00:06:00,800
+And then before you know it,
+
+114
+00:06:00,800 --> 00:06:02,000
+you'll have that system.
+
+115
+00:06:02,000 --> 00:06:05,000
+You'll have that teammate that's running that system.
+
+116
+00:06:05,000 --> 00:06:18,000
+And then what happens when the...
+
+117
+00:06:19,500 --> 00:06:22,000
+And then what happens when these dots are connected,
+
+118
+00:06:22,000 --> 00:06:23,500
+that compounding effect,
+
+119
+00:06:23,500 --> 00:06:25,500
+you'll really start to see it.
+
+120
+00:06:25,500 --> 00:06:26,500
+You're...
+
+121
+00:06:26,500 --> 00:06:29,000
+There's not going to be any more information silos.
+
+122
+00:06:29,000 --> 00:06:29,700
+That lead comes in,
+
+123
+00:06:29,700 --> 00:06:30,700
+it's automatically handled.
+
+124
+00:06:30,700 --> 00:06:32,000
+And then that compounding effect,
+
+125
+00:06:32,000 --> 00:06:33,000
+you'll actually really start to see it.
+
+126
+00:06:33,000 --> 00:06:35,000
+There's not going to be any more information silos.
+
+127
+00:06:35,000 --> 00:06:36,000
+That lead comes in,
+
+128
+00:06:36,000 --> 00:06:37,000
+it's automatically handled.
+
+129
+00:06:37,000 --> 00:06:38,500
+That transcript comes in from a sales call,
+
+130
+00:06:38,500 --> 00:06:39,500
+then it's actually synthesized.
+
+131
+00:06:39,500 --> 00:06:40,200
+AI will take a look at it.
+
+132
+00:06:40,200 --> 00:06:41,200
+It'll pull out important information,
+
+133
+00:06:41,200 --> 00:06:42,200
+put it in bullet points,
+
+134
+00:06:42,200 --> 00:06:43,200
+and then it's automatically handled.
+
+135
+00:06:43,200 --> 00:06:44,200
+And then that compounding effect,
+
+136
+00:06:44,200 --> 00:06:45,200
+you'll actually really start to see it.
+
+137
+00:06:45,200 --> 00:06:46,200
+There's not going to be any more information silos.
+
+138
+00:06:46,200 --> 00:06:47,200
+That lead comes in,
+
+139
+00:06:47,200 --> 00:06:48,200
+it's automatically handled.
+
+140
+00:06:48,200 --> 00:06:49,200
+That transcript comes in from a sales call,
+
+141
+00:06:49,200 --> 00:06:50,200
+then it's actually synthesized.
+
+142
+00:06:50,200 --> 00:06:51,200
+AI will take a look at it.
+
+143
+00:06:51,200 --> 00:06:53,200
+It'll pull out important information,
+
+144
+00:06:53,200 --> 00:06:54,200
+put it in bullet points,
+
+145
+00:06:54,200 --> 00:06:55,200
+and then it's actually synthesized.
+
+146
+00:06:55,200 --> 00:06:57,400
+And then it'll send it out and pass it over to the next person
+
+147
+00:06:57,400 --> 00:06:59,400
+that either needs to make a closing call,
+
+148
+00:06:59,400 --> 00:07:01,400
+or even onboard them if you've already closed them.
+
+149
+00:07:01,400 --> 00:07:03,400
+And it'll synthesize all of that information
+
+150
+00:07:03,400 --> 00:07:05,400
+and let you know what already has been transpired.
+
+151
+00:07:05,400 --> 00:07:07,400
+And then it'll synthesize all of that information
+
+152
+00:07:07,400 --> 00:07:09,400
+and let you know what already has been transpired.
+
+153
+00:07:09,400 --> 00:07:11,400
+And then it'll synthesize all of that information
+
+154
+00:07:11,400 --> 00:07:13,400
+and let you know what already has been transpired.
+
+155
+00:07:13,400 --> 00:07:15,400
+And then it'll synthesize all of that information
+
+156
+00:07:15,400 --> 00:07:17,400
+and let you know what already has been transpired.
+
+157
+00:07:17,400 --> 00:07:19,400
+And then it'll synthesize all of that information
+
+158
+00:07:19,400 --> 00:07:21,400
+and let you know what already has been transpired.
+
+159
+00:07:21,400 --> 00:07:23,400
+And then it'll synthesize all of that information
+
+160
+00:07:23,400 --> 00:07:28,400
+and then instead of siloed information,
+
+161
+00:07:28,400 --> 00:07:30,100
+you actually get flow.
+
+162
+00:07:30,100 --> 00:07:33,100
+That compounding effect, you'll see it immediately.
+
+163
+00:07:33,100 --> 00:07:36,700
+Your lead comes in, it gets routed properly.
+
+164
+00:07:36,700 --> 00:07:40,400
+Your sales calls, they get transcribed and passed over
+
+165
+00:07:40,400 --> 00:07:42,600
+to either the closer or the onboarder.
+
+166
+00:07:42,600 --> 00:07:44,600
+And it all happens seamlessly.
+
+167
+00:07:44,600 --> 00:07:45,600
+So it's not...
+
+168
+00:07:53,400 --> 00:08:03,100
+And instead of siloed tasks, you get automation.
+
+169
+00:08:03,100 --> 00:08:05,100
+You get the compounding effect.
+
+170
+00:08:05,100 --> 00:08:09,100
+The lead comes in, it gets routed properly.
+
+171
+00:08:09,100 --> 00:08:11,100
+Notes come in, they get summarized.
+
+172
+00:08:11,100 --> 00:08:14,800
+They get passed over to the next person that actually needs them.
+
+173
+00:08:14,800 --> 00:08:28,800
+Instead of siloed tasks, you get a flow.
+
+174
+00:08:28,800 --> 00:08:30,800
+A lead comes in, AI qualifies them.
+
+175
+00:08:30,800 --> 00:08:32,800
+Automation routes them.
+
+176
+00:08:32,800 --> 00:08:35,800
+Meetings get summarized and follow-ups go out.
+
+177
+00:08:35,800 --> 00:08:41,500
+And content gets repurposed.
+
+178
+00:08:41,500 --> 00:08:44,500
+And you're no longer the one that's holding it all together.
+
+179
+00:08:44,500 --> 00:08:48,500
+Or you don't have one single person on your team that's holding it all together.
+
+180
+00:08:48,500 --> 00:08:51,500
+You get flow and everything starts to synergize and work together.
+
+181
+00:08:51,500 --> 00:09:03,200
+The system runs, you oversee, and then you start to expand.
+
+182
+00:09:03,200 --> 00:09:04,200
+That's connecting the dots.
+
+183
+00:09:04,200 --> 00:09:15,200
+That's compounding effect.
+
+184
+00:09:15,200 --> 00:09:18,200
+And the real value here is that you actually start to think differently.
+
+185
+00:09:18,200 --> 00:09:20,200
+You start to shift roles.
+
+186
+00:09:20,200 --> 00:09:23,900
+You're delegating to teammates, to your AI system, to automation.
+
+187
+00:09:23,900 --> 00:09:34,700
+And you're not just a hustler trying to keep things all together.
+
+188
+00:09:34,700 --> 00:09:45,000
+You become an architect of your business and you actually create the flow of how things move.
+
+189
+00:09:45,000 --> 00:09:49,700
+And that's exactly how you scale without burning out.
+
+190
+00:09:49,700 --> 00:10:00,700
+And that's exactly how you scale without burning out or without drowning in tasks every day.
+
+191
+00:10:00,700 --> 00:10:16,400
+And that's how you get ahead of tasks instead of getting inundated with emails and repetitive 5, 10, 15 minute tasks here and there.
+
+192
+00:10:16,400 --> 00:10:19,100
+And that's how you scale without burning out.
+
+193
+00:10:19,100 --> 00:10:23,100
+That's how you get ahead of business instead of being behind the eight ball.
+
+194
+00:10:23,100 --> 00:10:25,100
+And then you start to scale your business.
+
+195
+00:10:25,100 --> 00:10:42,800
+So just some final closing thoughts here.
+
+196
+00:10:42,800 --> 00:10:46,500
+I know we went over a lot in this and I'm trying to get you to do a mindset shift.
+
+197
+00:10:46,500 --> 00:10:51,500
+Like AI not just being the new hire and actually being a teammate.
+
+198
+00:10:51,500 --> 00:10:54,500
+And your next new hire shouldn't always just be a person.
+
+199
+00:10:54,500 --> 00:10:56,500
+It actually could be your agent.
+
+200
+00:10:56,500 --> 00:11:03,200
+A few closing thoughts here.
+
+201
+00:11:03,200 --> 00:11:10,200
+And just to kind of recap, we went over changing your mindset over to your new hire being AI.
+
+202
+00:11:10,200 --> 00:11:19,200
+Or using AI in an existing team and actually amplifying their work, reducing their time and creating more flow.
+
+203
+00:11:19,200 --> 00:11:27,900
+Expansion is about connecting those dots.
+
+204
+00:11:27,900 --> 00:11:32,900
+It's about setting AI up as your first hire.
+
+205
+00:11:32,900 --> 00:11:39,900
+Building workflows that save time almost instantly as soon as you implement them.
+
+206
+00:11:39,900 --> 00:11:42,900
+And letting automation do all of the heavy lifting for you.
+
+207
+00:11:42,900 --> 00:11:47,900
+That 80-20 of 20% of your work.
+
+208
+00:11:47,900 --> 00:11:53,600
+That 80-20, 80% of your profits come from 20% of your work.
+
+209
+00:11:53,600 --> 00:11:58,600
+And you actually automating a huge portion of those repetitive tasks.
+
+210
+00:11:58,600 --> 00:12:03,600
+So that means your 80-20 starts to compound on top of itself.
+
+211
+00:12:03,600 --> 00:12:10,600
+If chaos to clarity was about gaining control.
+
+212
+00:12:10,600 --> 00:12:26,300
+If chaos to clarity was about gaining control.
+
+213
+00:12:26,300 --> 00:12:29,000
+If chaos to clarity was about getting control.
+
+214
+00:12:29,000 --> 00:12:31,000
+Expansion is about building leverage.
+
+215
+00:12:31,000 --> 00:12:36,000
+It's about designing a system that actually scales with you.
+
+216
+00:12:36,000 --> 00:12:38,000
+Without needing more hustle.
+
+217
+00:12:38,000 --> 00:12:39,000
+Or more hours.
+
+218
+00:12:39,000 --> 00:12:42,000
+Or more of a head count in your business.
+
+219
+00:12:42,000 --> 00:12:46,000
+Because at the end of the day, the fastest way to grow isn't by working harder.
+
+220
+00:12:46,000 --> 00:12:50,000
+It's by expanding your capacity with systems that never stop working for you.
+
+221
+00:12:50,000 --> 00:12:51,700
+That's how you scale smarter.
+
+222
+00:12:51,700 --> 00:12:53,700
+And that's how you win.
+
+223
+00:12:53,700 --> 00:13:18,400
+If chaos to clarity was about getting control.
+
+224
+00:13:18,400 --> 00:13:23,400
+Expansion is about building leverage.
+
+225
+00:13:23,400 --> 00:13:26,100
+It's about designing a system that actually scales with you.
+
+226
+00:13:26,100 --> 00:13:29,100
+Without needing more hustle.
+
+227
+00:13:29,100 --> 00:13:30,100
+Without needing more hours.
+
+228
+00:13:30,100 --> 00:13:35,100
+Or without adding to your head count.
+
+229
+00:13:35,100 --> 00:13:43,800
+Because at the end of the day, the fastest way to grow isn't by working any harder.
+
+230
+00:13:43,800 --> 00:13:48,800
+It's about working smarter.
+
+231
+00:13:48,800 --> 00:14:02,000
+It's by expanding your capacity with winning systems that never stop working for you.
+
+232
+00:14:02,000 --> 00:14:15,000
+That never stop working for you.
+
+233
+00:14:15,000 --> 00:14:17,000
+And that's how you scale smarter.
+
+234
+00:14:17,000 --> 00:14:21,000
+And that's how you win.
+
+235
+00:14:21,000 --> 00:14:22,000
+That's how you scale smarter.
+
+236
+00:14:22,000 --> 00:14:22,000
+
+
+237
+00:14:22,000 --> 00:14:23,000
+You can't even get more.
+
+238
+00:14:23,000 --> 00:14:24,000
+You can't even get more.
+
+239
+00:14:24,000 --> 00:14:24,000
+
+
+240
+00:14:24,000 --> 00:14:25,000
+You can't even get more.
+
+241
+00:14:25,000 --> 00:14:26,000
+You can't even get more.
+
+242
+00:14:26,000 --> 00:14:27,000
+You can't even get more.
+
+243
+00:14:27,000 --> 00:14:28,000
+You can't even get more.
+
+244
+00:14:28,000 --> 00:14:29,000
+You can't even get more.
+
+245
+00:14:29,000 --> 00:14:30,000
+You can't even get more.
+
+246
+00:14:30,000 --> 00:14:31,000
+You can't even get more.
+
+247
+00:14:31,000 --> 00:14:32,000
+You can't even get more.
+
+248
+00:14:32,000 --> 00:14:33,000
+You can't even get more.
+
+249
+00:14:33,000 --> 00:14:34,000
+You can't even get more.
+
+250
+00:14:34,000 --> 00:14:35,000
+You can't even get more.
+
+251
+00:14:35,000 --> 00:14:36,000
+You can't even get more.
+
+252
+00:14:36,000 --> 00:14:37,000
+You can't even get more.
+
+253
+00:14:37,000 --> 00:14:38,000
+You can't even get more.
+
+254
+00:14:38,000 --> 00:14:39,000
+You can't even get more.
+
+255
+00:14:39,000 --> 00:14:40,000
+You can't even get more.
+
+256
+00:14:40,000 --> 00:14:41,000
+You can't even get more.
+
+257
+00:14:41,000 --> 00:14:42,000
+You can't even get more.
+
+258
+00:14:42,000 --> 00:14:43,000
+You can't even get more.
+

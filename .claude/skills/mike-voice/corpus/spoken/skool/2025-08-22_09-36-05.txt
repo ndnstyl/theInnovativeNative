@@ -1,0 +1,336 @@
+okay today we're going to go over the basics of AI and automation
+this is the foundation that lets you stop
+that helps you stop
+alright let's talk about AI and automation we're going to go over the basics
+we're going to go over what helps you stop drowning in repetitive tasks
+start to actually create the automations and let you focus on things that help you scale and grow your business
+here's the truth you really don't need to be a tech person
+for the most part as long as you can copy and paste you're actually in there
+here's the truth you don't really need to be a tech person as long as you can copy and paste you can get most of this stuff done
+you don't know how to code that's great whatever I don't either not really I use chat GPT for that or clog code
+what you really need to do is just sit down
+map out all of your workflows
+map out all of your tools
+get it out of your head
+so that you can create a foundation to where you can actually build on
+why this matters?
+well most business professionals that I have consulted for
+they have it all in their head
+and that's where the bottlenecks happen
+when they don't have anything written down
+no standard operating procedures
+when they don't have anything written down
+no standard operating procedures
+they can't hand it off
+they can't delegate anything
+and all the questions have to come to them
+for them to be answered
+so that means
+every email
+every lead
+every prospect
+especially if you're running a small business
+when that has to go through one person
+there's no way to actually scale that
+or if you're a solopreneur or a content creator yourself
+all of this stuff
+all of this stuff
+needs to be automated
+that's where automation comes in
+it actually fixes things
+it gives you time back
+it allows you to scale
+and it creates a lot more clarity in your business
+you can turn hours and hours of grunt work
+you can eliminate hours and hours of grunt work
+you can eliminate hours and hours of grunt work
+
+you can eliminate hours and hours of grunt work
+and actually get to the things that matter
+instead of doing these redundant and repetitive tasks
+many times these systems will actually work
+in some cases
+while you sleep
+so you wake up
+and you actually have all of your leads
+processed from the previous day
+that were booked through calendar
+or calendly or cal.com
+and it's already automatically summarized
+the research has been done
+intelligence has been created
+and then you just get an email
+or a slack notification
+from the previous day
+letting you know what's on your day to day
+but before you even touch a tool
+you have to see every single workflow
+in your business
+you have to map it all out
+you have to make sure
+what you're doing is for the right reasons
+because garbage in equals garbage out
+think of a workflow like a recipe
+step one you capture a lead
+step two you qualify that lead
+and then step three you maybe put it into a nurture sequence
+or you hand it off to a salesperson
+and they do some sort of outreach
+and try to close them
+overall that's a very broad way to think about things
+and it does at least get it out in steps
+but that's very topical
+you have to get granular
+what are the steps in between?
+what are the tools?
+who's handing off to whom?
+and why?
+the first win is going to be mapping it all out
+getting it on a piece of paper
+putting it on a white board
+I actually use Miro.com and have for quite some time
+this helps provide clarity
+it gets it out of your brain
+and onto whatever it is that you use
+maybe notion
+maybe Miro like I do
+or just a notepad that you write down
+people still love to do that as well
+the point is
+is that's where you can actually see the whole entire map
+and you can start to map it out from beginning to end
+and then you can start to make adjustments
+well I can use X tool instead of this
+or if I actually create this workflow
+this is going to eliminate the subscription
+so you can save time
+you can save money
+and you can actually build this automation to work for you
+overnight
+or on weekly triggers
+or daily triggers
+but you have to map it out
+essentially the rule of thumb is
+if you spend more than 15 minutes on it
+every single time you do it
+and you do it more than three times a week
+that task can be automated
+and that's where all of your repetitive tasks should live
+in automation
+now let's talk tools
+like I mentioned earlier
+I love Superbase
+I love Airtable
+I love NNN
+NNN is the orchestrator
+a lot of these other things are platforms as well as tools
+but what you want to do is map all of them out
+know which ones you have access to
+know which ones you want to use
+know which ones are easier to use than others
+or if you want to make a replacement to something
+this is where you want to make that decision
+once you start to create your workflows
+you have to understand your tools
+and the ones that you have access to
+now the one thing that
+NNN and automations actually are built around
+are API integrations
+for people that don't know
+that's an application programming interface
+it is a URL or an endpoint
+think of it like this
+you're going to mail something out from California to Florida
+and you go to the post office
+you actually have to have your from address
+and your to address
+and you have to put the post a stamp on it
+a lot of what the internet works on
+is basically around that same principle
+you see web URLs like HubSpot.com
+well that's how you get to the website
+but there are back-end interfaces to where
+you can actually use connections like API
+to connect to these programs
+well the reason why I bring it up
+is because not every single one of these programs
+or platforms can actually have API integration
+sometimes you have lawyers with very sensitive data
+and information and or HIPAA compliance
+or the healthcare industry has a ton of situations like this
+to where you can't directly go into it
+and that's where Zapier comes in
+it connects apps that don't actually have API integration
+this is another reason why you want to map out all of your tools
+because you can see these gaps
+and you can figure out security compliance
+does it have an API does it not
+and then you can actually make your workflow flow a little bit cleaner
+now the main one that I'm going to talk about today
+and basically throughout the entirety of this course is N8N
+N8N is the back-end orchestrator
+this is the one that talks to and translate information
+and connects to all of the apps
+it is kind of the behind the scenes centralized focused orchestrator
+so someone goes to your website and fills out a form
+what N8N does is it grabs that information
+it actually puts it into your CRM
+it maybe enriches some data for that contact or that company
+then it sends out a slack notification
+or it enriches it with artificial intelligence
+maybe from chat GPT or Gemini or something like that
+and then it puts it onto your to-do list
+the one orchestrating all of that is N8N in the background
+now that's the basic concept
+it's just there's an input
+N8N takes that input
+and then it creates an output
+sometimes many outputs
+I can tell you the simpler the better
+once you start to get an N8N
+we start to go in there
+and you take a look at all of the triggers
+all of the nodes
+all of the tools
+all of the connections
+you can actually go down a rabbit hole
+and start to build wildly
+and then you have to think about debugging
+and breaking things
+and it just timing out on you
+or there's a plethora of things
+but simpler and more elegant solutions
+are always going to be better
+there's going to be these times where you see
+an NNN workflow with like 47 nodes
+and if you really know what you're doing
+you know how to work through your console logs
+or debugging
+or it just works end to end
+then great
+that's awesome
+but if you get into that area of 39, 40, 45 nodes
+or sub flows
+and then it hands it off to other things
+basically what I'm trying to say is
+the more you have in there
+the easier it is for it to break
+and then you're spending time on fixing your workflow
+opposed to the automation that should be helping you
+buy your time back
+and leverage your time for better things
+so let's go over some quick ones that we can build in a single day
+or over a weekend
+the first one would be something like a lead intake system
+you mentioned earlier
+you maybe get a Calendly booking
+and that books your Zoom call
+and then you have NNN grab it
+it puts it into your CRM
+and then it actually puts it either on a to-do list
+or in an email nurture sequence
+or something along those lines
+that's one of them
+very easy
+you can actually do that in a day
+maybe two days max
+and that will start to give you a lot of your time back
+imagine how much time you will actually get back with that
+you have to go check your Calendly
+maybe a couple of minutes
+synthesize that information
+where are you going to put it
+okay it goes into my CRM
+another couple of minutes
+you manually input that data
+another couple of minutes
+so that one sequence with maybe two to three parts
+is going to save you about five maybe ten minutes every single time
+and if you are a successful business person
+you should be getting these multiple times a week
+so that stacks up two times a day
+three times a day
+five times a week
+whatever it is
+you can actually start to see in a time sequence
+how much time you're saving yourself
+the next one is like
+I would say the easy
+another easy one is a content repurposing system
+maybe you're a content creator
+maybe you run a podcast
+and you have an hour long podcast
+you can actually have an it and orchestrate a system
+to where you take that podcast
+and then you cut it up into individual smaller pieces
+and then you post that on tick tock on Instagram or Twitter
+whatever it is
+and then you actually have it schedule
+auto post and auto publish it yourself
+puts it into a spreadsheet or air table or your favorite database
+and it lets you know what was scheduled
+it gives you the URLs
+and that's all from one piece of content
+one long form content that's cut up into multiple smaller
+and then published onto whatever social networks you need
+that time
+that's almost infinite savings
+that one podcast to edit
+you hand over to your editor
+sometimes takes two or three hours to edit that
+and to put it into the formats that you need
+for each individual platform
+and it then can do that for you
+another one
+follow-up sequences
+maybe email or nurture campaigns
+or SMS text campaigns
+you have a person that goes onto your website
+that signs up for a code or a newsletter
+or whatever it is
+and it then grabs that information
+and puts it into whatever sequence that it needs to
+maybe a first time first touch SMS campaign
+or an email nurture campaign
+or they clicked a buyer form
+and they have buying questions
+and that hands it off directly to a salesperson
+this is another quick win that you can create in a day
+maybe two
+not very complicated
+and I'll show you how to do all of these things
+and that buys back more of your time
+but the other part about it
+say that that form did have buying questions in it
+and they're ready to purchase right now
+that hands it off to one of your top salespeople
+speed to lead
+that's hugely important
+I think the stat is
+if you respond to your sales call
+your sales leads
+with a call or a text
+within 30 to 60 seconds
+you increase your sales by more than 400%
+it's something ridiculously crazy like that
+so speed to lead is a huge thing
+now as you can see as I'm talking about these workflows and whatnot
+I want to give you the principles of how to think of these things
+while we will walk through some workflows
+and I'll show you some things
+and I'll actually give you guys templates
+I want you to think about your own business
+every single one of you are going to use a different tech stack
+a different CRM
+you're going to have a different workflow
+because you guys all have different businesses
+so I'm trying to give you the principles of how to think through these things
+so that you can create workflows that are specifically designed for you
+now the next part is where AI fits in
+we just spoke about automation
+we spoke about the tools
+and mapping out your workflows
+now the workflow I kind of mentioned a little bit in there
+glossed over it
+but your workflow is
+and

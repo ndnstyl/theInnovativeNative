@@ -1,0 +1,224 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Agent",
+      "WebSearch",
+      "WebFetch",
+      "Bash(npm run *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git diff)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git log *)",
+      "Bash(git log)",
+      "Bash(git branch *)",
+      "Bash(git branch)",
+      "Bash(git checkout *)",
+      "Bash(git stash *)",
+      "Bash(git show *)",
+      "Bash(git rev-parse *)",
+      "Bash(python3 *)",
+      "Bash(uv *)",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(which *)",
+      "Bash(echo *)",
+      "Bash(date *)",
+      "Bash(pwd)",
+      "Bash(chmod *)",
+      "Bash(test *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(tr *)",
+      "Bash(cut *)",
+      "Bash(jq *)",
+      "Bash(gh *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(curl * | sh)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | sh)",
+      "Bash(ssh *delikate@75.98.175.76*rm *)"
+    ]
+  },
+  "autoMode": {
+    "environment": [
+      "Source control: github.com/ndnstyl and all repos under it",
+      "Trusted domains: *.supabase.co, *.airtable.com, api.elevenlabs.io, api.pexels.com"
+    ],
+    "allow": [
+      "File editing within the project directory is always allowed",
+      "Running npm scripts and test commands is allowed",
+      "Git commits and branch operations are allowed",
+      "Reading any file in the project is allowed"
+    ],
+    "soft_deny": [
+      "Never run database migrations without explicit user approval",
+      "Never push to main/master without explicit user approval",
+      "Never delete git branches without explicit user approval",
+      "Never modify .env files without explicit user approval"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/auto-lint.sh \"$CLAUDE_TOOL_INPUT_FILE_PATH\"",
+            "timeout": 10000
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/type-check.sh",
+            "timeout": 15000
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/audit-log.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch|WebSearch|mcp__airtable__.*|mcp__supabase__.*|mcp__claude_ai_Gmail__.*|mcp__claude_ai_Notion__.*|mcp__n8n__n8n_get_workflow|mcp__n8n__n8n_executions|mcp__yahoo-finance__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/inject-untrusted-warning.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/block-destructive.sh",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/conflict-check.sh",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "scripts/hooks/block-sensitive-write.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/block-sensitive-mcp.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/ob1-inject.sh",
+            "timeout": 8000
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/startup-load.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/precompact-save.sh",
+            "timeout": 10000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/session-log.sh",
+            "timeout": 10000
+          },
+          {
+            "type": "command",
+            "command": "scripts/budget/token-budget.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/hooks/outcome-capture.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  },
+  "enableAllProjectMcpServers": false,
+  "effortLevel": "high"
+}

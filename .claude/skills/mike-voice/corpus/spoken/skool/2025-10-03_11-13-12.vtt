@@ -1,0 +1,392 @@
+WEBVTT
+
+00:00.000 --> 00:04.560
+This one is what you want to grab as the message and the subject line.
+
+00:06.280 --> 00:13.040
+So, can't actually do that yet, and what I'll do is see if we can go...
+
+00:13.040 --> 00:15.740
+I'm going to have to create one here. Give me just a second.
+
+00:28.740 --> 00:29.460
+Proposal.
+
+00:30.000 --> 00:31.000
+Proposal.
+
+00:45.420 --> 00:48.000
+Sent. Okay, so we'll jump over in the other one.
+
+00:50.300 --> 00:51.900
+Now, we're going to trigger this again.
+
+00:54.900 --> 00:56.400
+Nope, that's not the right one.
+
+00:57.260 --> 00:58.480
+Did it come through yet?
+
+00:58.480 --> 01:00.480
+That's why it didn't.
+
+01:00.480 --> 01:01.480
+So now...
+
+01:04.480 --> 01:05.480
+Fetch.
+
+01:05.480 --> 01:09.480
+So this one. Make money, send contract, thanks Mike.
+
+01:09.480 --> 01:13.480
+I just did that just to make sure that it did classify as an opportunity.
+
+01:13.480 --> 01:14.480
+We're going to execute this.
+
+01:14.480 --> 01:20.480
+So the output branch goes to the opportunity branch, as you can see it does here.
+
+01:20.480 --> 01:22.480
+Then it's going to spit it out here.
+
+01:22.480 --> 01:33.480
+Then, what we just put in here, it's going to grab all of the information, again, from the previous text classifier and the previous Gmail trigger.
+
+01:33.480 --> 01:35.480
+These are going to be grabbed.
+
+01:35.480 --> 01:36.480
+These are going to be grabbed.
+
+01:36.480 --> 01:44.480
+It's going to synthesize the information and then it's going to execute the output.
+
+01:44.480 --> 01:45.480
+The output.
+
+01:45.480 --> 01:49.480
+The output on this side is everything that it's going to synthesize through AI.
+
+01:49.480 --> 01:51.480
+The subject, the body, the context of it.
+
+01:51.480 --> 01:53.480
+It's going to write up a reply.
+
+01:53.480 --> 02:00.480
+This may be a little bit weird, but just simply because it wasn't a real email.
+
+02:00.480 --> 02:06.480
+But it's still going to give some sort of an output that is on par with money making.
+
+02:06.480 --> 02:15.480
+So the subject, I want to go in here to the Gmail trigger and I'll just put in re.
+
+02:15.480 --> 02:19.480
+You can do fixed with expressions.
+
+02:19.480 --> 02:24.480
+So I'm in the Gmail trigger now and the subject was here.
+
+02:24.480 --> 02:32.480
+Now, as you can see, it will be regarding prop just because that's what I sent with the email.
+
+02:32.480 --> 02:35.480
+Now, this is going to be text type.
+
+02:35.480 --> 02:38.480
+My key business text, sometimes you want to create HTML.
+
+02:38.480 --> 02:39.480
+You want it.
+
+02:39.480 --> 02:42.480
+You're going to have to put an output parser in your model.
+
+02:42.480 --> 02:48.480
+If you want to output it in HTML, I actually just leave it.
+
+02:48.480 --> 02:54.480
+So now I want to go to the previous node, which is my message or model.
+
+02:54.480 --> 03:00.480
+So text output, I'm just going to drag it over here.
+
+03:00.480 --> 03:01.480
+Execute setup.
+
+03:01.480 --> 03:05.480
+It's going to be that output as a draft.
+
+03:05.480 --> 03:16.480
+And now I'm going to connect it to this node, which is going to remove it from my inbox.
+
+03:16.480 --> 03:29.480
+So now just to kind of recap, we grab the email and classified it, label it as an opportunity, created the output from this input on the left side.
+
+03:29.480 --> 03:36.480
+Again, output from this model based on this input.
+
+03:36.480 --> 03:45.480
+Put it into this Gmail draft and then it de-labeled it from inbox.
+
+03:45.480 --> 03:46.480
+So drafts.
+
+03:46.480 --> 03:55.480
+Oh, actually, here's one step I forgot.
+
+03:55.480 --> 03:59.480
+So what you also want to do, taking a look in here, there's no recipient.
+
+03:59.480 --> 04:09.480
+So I'm going to go back into here and I want to add an option, which is to email.
+
+04:09.480 --> 04:16.480
+I want to go back over here to the Gmail trigger and I want to go find who it's from, which is here.
+
+04:16.480 --> 04:23.480
+And this expression will now dynamically pull whoever sent it.
+
+04:23.480 --> 04:32.480
+So now when I execute this a second time, it will create another draft.
+
+04:32.480 --> 04:34.480
+Put it in here.
+
+04:34.480 --> 04:38.480
+And this one will have the from.
+
+04:38.480 --> 04:46.480
+So this is a good thing that you want to do is check, double check and recheck your work, especially once the flows start to get complicated.
+
+04:46.480 --> 04:54.480
+So hopefully this gives you some ideas as to how to create an email box filtration system.
+
+04:54.480 --> 04:57.480
+This can be as simple or as complicated as you want to.
+
+04:57.480 --> 04:59.480
+Again, you can start to attach agents.
+
+04:59.480 --> 05:01.480
+You can attach agents with tools.
+
+05:01.480 --> 05:08.480
+You can go do research with her tools like perplexity or tablet to do research on an email prospect.
+
+05:08.480 --> 05:14.480
+Say you are you're running an email campaign or you're running Google ads or you're running meta ads.
+
+05:14.480 --> 05:26.480
+And you're getting output from those ads or you're getting responses from those ads that go to either a slack or your Gmail in your Gmail inbox from an email campaign.
+
+05:26.480 --> 05:29.480
+And you want to not only classify it and label it.
+
+05:29.480 --> 05:35.480
+You want to go out there and do research or to send a DM or to do anything.
+
+05:35.480 --> 05:37.480
+I mean, it could do absolutely anything.
+
+05:37.480 --> 05:44.480
+Once you start to get familiar with and then you have so, so many.
+
+05:44.480 --> 05:49.480
+So HTTP requests, webhooks, chat triggers.
+
+05:49.480 --> 05:52.480
+There's things like phantom buster.
+
+05:52.480 --> 06:00.480
+So where you can get information, go and use phantom buster and send connections and DMs on LinkedIn, relevance, AI.
+
+06:00.480 --> 06:01.480
+I don't know.
+
+06:01.480 --> 06:02.480
+The world is your oyster.
+
+06:02.480 --> 06:16.480
+The more that you can start to creatively think through this and systematically process all of this using N8N as your orchestrator to use triggers, to use nodes, to split and classify text, to synthesize information.
+
+06:16.480 --> 06:25.480
+You can start to see how powerful this can very much be for personal or business, your side hustle, or if you're a solopreneur, whatever it is.
+
+06:25.480 --> 06:28.480
+This can save so much time.
+
+06:28.480 --> 06:45.480
+I mean, again, the study was done with Radicati to where most business professionals save about 3.1 hours or sorry, lose about 3.1 hours almost every single day to their email inbox.
+
+06:45.480 --> 06:50.480
+So overall, this can be a very, very useful tool.
+
+06:50.480 --> 06:56.480
+Now, all that being said, you don't have to create this unless you wanted this and you wanted to walk through this.
+
+06:56.480 --> 06:58.480
+This is the only reason why I actually created this video.
+
+06:58.480 --> 07:01.480
+I'm actually going to delete everything because I don't need it.
+
+07:01.480 --> 07:09.480
+This right here will be in the community.
+
+07:09.480 --> 07:11.480
+You can download this template.
+
+07:11.480 --> 07:13.480
+It'll already have the nodes in there.
+
+07:13.480 --> 07:17.480
+And then all you have to do is plug in your credentials and your authorization into it.
+
+07:17.480 --> 07:19.480
+Make your tweaks.
+
+07:19.480 --> 07:23.480
+Ensure you do go through it and make sure it's on your brand voice.
+
+07:23.480 --> 07:28.480
+It has all of your credentials and you want it to classify and do the things that you say.
+
+07:28.480 --> 07:32.480
+If you have any questions or if you're stuck on anything, just post it in the community.
+
+07:32.480 --> 07:35.480
+I think I touched on just about everything.
+
+07:35.480 --> 07:39.480
+I just want you to think about how you can start to create these workflows.
+
+07:39.480 --> 07:51.480
+Again, this was kind of instigated, not instigated, but this was an idea from the school community that was based on Chris here.
+
+07:51.480 --> 07:53.480
+Chris asked that question.
+
+07:53.480 --> 07:55.480
+He was trying to use ChatGPT.
+
+07:55.480 --> 08:02.480
+So the next time I'm actually going to jump into it, I'm going to use Anthropics Claude.
+
+08:02.480 --> 08:08.480
+Claude is another very powerful tool that you can connect to as you're doing it live.
+
+08:08.480 --> 08:15.480
+And I'll kind of show you those workflows, how to connect through MCP, which is model context protocol.
+
+08:15.480 --> 08:18.480
+Again, any questions, just post it in the school community.
+
+08:18.480 --> 08:19.480
+I'll be happy to answer them.
+
+08:19.480 --> 08:20.480
+DM me if needed.
+
+08:20.480 --> 08:24.480
+If you are thinking through or want a system like this, just hit me up.
+
+08:24.480 --> 08:28.480
+I do work like this all the time for many different clients.
+
+08:28.480 --> 08:36.480
+And if it's something very simple, I could just help you through it, walk you through it, debug it, do whatever, and get you on your way.
+
+08:36.480 --> 08:40.480
+As always, like, subscribe, share, invite people.
+
+08:40.480 --> 08:46.480
+This community, it's only as great as everybody actually inputs into it.
+
+08:46.480 --> 08:54.480
+So I rely on you for ideas and to come together and make sure that everybody is learning at their own pace.
+
+08:54.480 --> 08:57.480
+Everybody has different things that they're working through.
+
+08:57.480 --> 09:01.480
+And this was Chris's, so I did go ahead and put that out here.
+
+09:01.480 --> 09:03.480
+See you on the other side.
+
+09:03.480 --> 09:05.480
+Peace, love and hair grease.
+
+09:05.480 --> 09:05.480
+
+
+09:05.480 --> 09:05.480
+
+
+09:05.480 --> 09:05.480
+
+
+09:05.480 --> 09:06.480
+Peace, love and hair grease.
+
+09:06.480 --> 09:07.480
+Peace, love and hair grease.
+
+09:07.480 --> 09:08.480
+Peace, love and hair grease.
+
+09:08.480 --> 09:09.480
+Peace, love and hair grease.
+
+09:09.480 --> 09:10.480
+Peace, love and hair grease.
+
+09:10.480 --> 09:11.480
+Peace, love and hair grease.
+
+09:11.480 --> 09:12.480
+Peace, love and hair grease.
+
+09:12.480 --> 09:13.480
+Peace, love and hair grease.
+
+09:13.480 --> 09:14.480
+Peace, love and hair grease.
+
+09:14.480 --> 09:15.480
+Peace, love and hair grease.
+
+09:15.480 --> 09:16.480
+Peace, love and hair grease.
+
+09:16.480 --> 09:17.480
+Peace, love and hair grease.
+
+09:17.480 --> 09:18.480
+Peace, love and hair grease.
+
+09:18.480 --> 09:19.480
+Peace, love and hair grease.
+
+09:19.480 --> 09:20.480
+Peace, love and hair grease.
+
+09:20.480 --> 09:21.480
+Peace, love and hair grease.
+
+09:21.480 --> 09:22.480
+Peace, love and hair grease.
+
+09:22.480 --> 09:23.480
+Peace, love and hair grease.
+
+09:23.480 --> 09:24.480
+Peace, love and hair grease.
+
+09:24.480 --> 09:25.480
+Peace, love and hair grease.
+

@@ -1,0 +1,221 @@
+WEBVTT
+
+00:01.580 --> 00:06.600
+In U.S. vs. Hepner, a federal judge ruled that consumer chat GPT for legal research
+
+00:06.600 --> 00:08.500
+can waive attorney client privilege.
+
+00:09.700 --> 00:12.700
+The model logs your queries, stores them, and trains on them.
+
+00:13.000 --> 00:13.980
+That's not privileged communication.
+
+00:14.820 --> 00:17.440
+That's actually a public filing you didn't even know you made.
+
+00:23.400 --> 00:28.360
+Consumer AI logs your queries, trains on your data, and then shares it with third parties.
+
+00:29.000 --> 00:32.040
+Enterprise AI keeps everything inside your own walls.
+
+00:32.620 --> 00:36.420
+If you're using AI without knowing which kind, you're not making a decision.
+
+00:37.040 --> 00:38.920
+You're making a gamble with client's data.
+
+00:42.140 --> 00:45.000
+Judge Rakoff didn't ban AI from legal work.
+
+00:45.520 --> 00:46.380
+He just drew a line.
+
+00:46.900 --> 00:51.360
+If your AI tools, terms of service, allow data retention, sharing, or model training,
+
+00:51.820 --> 00:54.400
+anything you type into it is no longer protected.
+
+00:54.940 --> 00:58.680
+And 69% of lawyers use consumer AI tools right now.
+
+00:59.380 --> 01:01.260
+Most of them have never read the terms of service.
+
+01:01.720 --> 01:02.920
+That's not a technology problem.
+
+01:03.440 --> 01:04.560
+That's a governance failure.
+
+01:09.500 --> 01:13.720
+Before you put another client's question in the chat GPT, read the terms of service.
+
+01:14.240 --> 01:16.660
+Not the marketing page, the actual terms.
+
+01:17.260 --> 01:21.240
+If it says, we may use your inputs to improve our models, congratulations.
+
+01:21.800 --> 01:24.380
+You just published your client's privileged communication.
+
+01:29.680 --> 01:32.820
+LexisNexis AI hallucinates 70% of the time.
+
+01:33.700 --> 01:35.340
+Westlaw's tool? 34%.
+
+01:36.120 --> 01:37.760
+These aren't experimental toys.
+
+01:38.460 --> 01:41.380
+These are tools lawyers are citing in court filings right now.
+
+01:42.400 --> 01:47.040
+Verify every citation you need to, every single one.
+
+01:52.000 --> 01:56.140
+You wouldn't let a first year associate file a brief without checking every citation, would you?
+
+01:56.800 --> 01:59.760
+So why are you letting an AI model do exactly that?
+
+02:00.520 --> 02:06.120
+With a hallucination rate north of 70%, the tool doesn't replace the due diligence you need.
+
+02:06.840 --> 02:07.680
+It adds to it.
+
+02:14.200 --> 02:20.660
+Private RAG means your AI searches your own briefs, your own motions, your own case history,
+
+02:21.240 --> 02:23.420
+the data never leaves your infrastructure.
+
+02:24.140 --> 02:25.700
+No third party terms of service apply.
+
+02:26.380 --> 02:27.640
+No privilege questions exist.
+
+02:28.280 --> 02:31.080
+Public AI means your data goes to someone else's server,
+
+02:31.720 --> 02:34.500
+gets logged, and maybe gets used to train the next model.
+
+02:35.740 --> 02:38.180
+Same search, completely different liability.
+
+02:44.220 --> 02:46.740
+When I have conversations around AI with newbies,
+
+02:46.900 --> 02:49.820
+I always get the question, which AI tool should I use?
+
+02:50.300 --> 02:51.380
+And that's the wrong question.
+
+02:51.960 --> 02:55.520
+The right question is, where does my data go after I press enter?
+
+02:56.000 --> 03:00.620
+Or what tools do I need to give my AI in order for it to be efficient?
+
+03:01.380 --> 03:05.900
+The architecture behind it determines whether you actually have privilege or lose it,
+
+03:06.180 --> 03:08.740
+or whether AI works or it doesn't.
+
+03:12.400 --> 03:17.320
+In 2025 and 2026, lawyers have been sanctioned over $100,000
+
+03:17.980 --> 03:22.880
+for AI misused in court filings, fake citations, hallucinated case law,
+
+03:23.200 --> 03:25.320
+unverified outputs presented as fact.
+
+03:26.200 --> 03:30.260
+The courts aren't anti-AI, they're anti-careless, there's a difference.
+
+03:35.180 --> 03:39.200
+Most legal malpractice policies have an exclusion you've never read.
+
+03:39.880 --> 03:42.980
+If the error was caused by a tool you used without proper verification,
+
+03:42.980 --> 03:47.600
+and you can't prove you checked, coverage gets complicated fast.
+
+03:48.240 --> 03:51.520
+AI isn't the risk, skipping the verification step, those.
+
+03:56.420 --> 04:00.420
+Nearly 47% of law firms have zero AI governance policy.
+
+04:01.180 --> 04:06.700
+No usage guidelines, no approval tool list, no audit trail, and that's not a gap.
+
+04:07.300 --> 04:09.140
+That's an open door to a malpractice claim.
+
+04:09.990 --> 04:12.120
+The fix? It's not even that complicated.
+
+04:13.140 --> 04:16.280
+Just have an AI governance policy that covers all of this.
+
+04:17.020 --> 04:18.200
+It's not optional anymore.
+
+04:22.920 --> 04:28.920
+If your firm doesn't have an AI policy, every attorney who uses AI is making up their own rules,
+
+04:29.280 --> 04:30.340
+every single one.
+
+04:31.560 --> 04:32.540
+That's not innovation.
+
+04:33.500 --> 04:37.060
+That's uncontrolled risk distributed across every desk in the building.
+
+04:42.800 --> 04:46.160
+I built my software because the head no ruling showed me what was coming.
+
+04:46.720 --> 04:50.660
+Law firms need AI that search their own work, not the internet's work,
+
+04:51.280 --> 04:56.520
+trained on their own briefs, their motions, their outcomes, no third-party data retention,
+
+04:57.180 --> 05:00.740
+no privileged questions, the research stays inside your walls.
+
+05:01.260 --> 05:03.640
+That's not a feature, that's the entire point.
+
+05:07.820 --> 05:10.400
+I'm not building the software because the market told me to.
+
+05:10.900 --> 05:13.760
+I'm building it because I watch firms expose privileged data
+
+05:13.760 --> 05:16.300
+using tools that weren't designed for them.
+
+05:16.780 --> 05:19.100
+The technology exists to do this right.
+
+05:19.780 --> 05:22.340
+Someone just needs to build it for the people that actually need it,
+
+05:22.580 --> 05:23.500
+and that's what I'm doing.
+

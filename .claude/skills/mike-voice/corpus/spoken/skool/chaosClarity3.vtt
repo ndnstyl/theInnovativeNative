@@ -1,0 +1,179 @@
+WEBVTT
+
+00:00.000 --> 00:25.920
+okay so we're going to jump right into it this is a sdr sales rep workflow that that i've created
+
+00:25.920 --> 00:31.360
+helps myself out i actually built it quite some time ago it's one of the first ones that i built for
+
+00:32.400 --> 00:39.440
+sales specifically marketing sales works together and this is something that i knew that a lot of
+
+00:39.440 --> 00:48.720
+sales people would need so jumping in here um it looks a little bit complicated but if you are in
+
+00:48.720 --> 00:56.400
+the class you will actually have this in the resources as an sdr workflow so there are multiple
+
+00:56.400 --> 01:02.480
+phases to it the first phase is lead capture and pre-meeting intelligence um i'm just going to kind
+
+01:02.480 --> 01:07.440
+of lightly go through these and then i'm just going to show it in action and then we'll go from there
+
+01:08.080 --> 01:13.440
+but i just wanted to walk you through what an end-to-end system looks like for something very
+
+01:13.440 --> 01:20.640
+specific and since i used uh sales as kind of a storytelling in the previous module um i wanted
+
+01:20.640 --> 01:26.080
+to keep it kind of all sales related so it just connects all the dots here so the this first one
+
+01:26.080 --> 01:32.640
+this is actually this is uh so well actually let me take a step back so this is n8n this is what um
+
+01:33.920 --> 01:34.480
+all of
+
+01:36.880 --> 01:43.040
+the hype is about here um if you haven't been familiarized with n8n um i'm sure you can just
+
+01:43.040 --> 01:47.360
+do a quick google search or jump on youtube and learn about it and i'm going to teach you throughout
+
+01:47.360 --> 01:56.800
+this this course but n8n is the back-end orchestrator of carrying out all of this these tasks so um these
+
+01:56.800 --> 02:04.320
+are what are called nodes and when you open up each node it will have uh information so it's always going
+
+02:04.320 --> 02:09.840
+to be the same layout on this left side you're going to have input uh the middle is going to be
+
+02:09.840 --> 02:14.960
+whatever it is that you are telling us to do or the agent or the processes and then there is going
+
+02:14.960 --> 02:23.680
+to be an output so to um just break this down as simply as possible i actually prepared a um
+
+02:23.680 --> 02:31.520
+discovery call that is going to be going through my calendly and this trigger here which is the first
+
+02:31.520 --> 02:36.480
+node that's going to capture that information and put that on over through the sequence is going to be
+
+02:36.480 --> 02:45.040
+um push through to my back end um so we are just going to pull something that i've prepared here
+
+02:46.160 --> 02:56.960
+off camera so name neil patel if you guys haven't checked him out please go follow him that dude is
+
+02:56.960 --> 03:02.000
+kind of one of the resources when it comes to organic seo
+
+03:05.440 --> 03:11.600
+and i'm just going to put this information here this is what i have on my discovery um lead capture
+
+03:11.600 --> 03:19.200
+form this gives me scope uh before i even go into the meeting this doesn't always uh work as plain
+
+03:19.200 --> 03:24.000
+sometimes people will be like oh i tried to do it but there was too much and a lot of information but i
+
+03:24.000 --> 03:29.520
+asked three basic questions here so um obviously the information is just so that i can actually book
+
+03:29.520 --> 03:34.560
+it is the name the email and the website url but this is going to look different for each one of you
+
+03:34.560 --> 03:38.320
+guys and then you're going to program the back end to accept whatever it is that you're putting in here
+
+03:38.960 --> 03:43.600
+so this first one is what is your biggest friction point and what are you trying to solve with workflows
+
+03:45.040 --> 03:49.040
+this is just fictitious data i'm just i'm just making this up just so that we can actually go
+
+03:49.040 --> 03:53.520
+through this walkthrough honestly the biggest friction point i'm trying to solve in ai workflows
+
+03:53.520 --> 03:59.280
+is constant context switching and manual follow-up my team wastes so much time copying information from
+
+03:59.280 --> 04:06.800
+one system to another yada yada yada um the next question is uh what are they looking to achieve
+
+04:06.800 --> 04:13.040
+with this automation um because this is going to give you uh basically kind of the scope of work and
+
+04:13.040 --> 04:20.320
+what they want from the outcome of this this a lot of the times is overlooked especially with
+
+04:20.320 --> 04:25.360
+discovery calls there you people are just trying to get these people on a phone call like i like to
+
+04:25.360 --> 04:32.720
+do a lot of heavy heavy qualifying before ever even getting on a on a phone call i'm some people and i've
+
+04:32.720 --> 04:36.880
+been marketing a long time the longer the form usually the less submissions you actually get
+
+04:36.880 --> 04:43.040
+and some people want to open that up it's just like name name phone email that's it and they want
+
+04:43.040 --> 04:47.920
+that lead to go through so they can get in contact with them as soon as possible i like to weed out all
+
+04:47.920 --> 04:55.280
+the bs uh so again your answers and your questions might be uh your mileage may vary but these are the
+
+04:55.280 --> 05:00.320
+three that i like to ask the most i want the website url so i can actually research them like you can
+
+05:00.320 --> 05:05.120
+research them off of email and name too but sometimes that's not always the most efficient nor does it
+
+05:05.120 --> 05:09.360
+pull back results but the second question what do you want to achieve with your automation success or
+
+05:09.360 --> 05:14.080
+what does what a success look like for your business for us automation success would mean
+
+05:14.080 --> 05:19.760
+cutting our lead response time from hours down to just a few minutes if we have every inquiry got an
+
+05:19.760 --> 05:24.880
+immediate personalized follow-up and the details were automatically logged into our crm without anyone
+
+05:24.880 --> 05:30.480
+touching it that alone would make it feel like a huge win so we you kind of have the first preliminary
+
+05:30.480 --> 05:36.960
+step of over delivering so you know what they want before you even get on the phone call and this last
+
+05:36.960 --> 05:43.440
+question is um when would they like have like to have the automation up and running anyways long
+
+05:43.440 --> 05:48.080
+explanation just to show you what my discovery call and my lead capture actually looks like so
+
+05:48.080 --> 05:56.720
+i'm going to schedule the event this is going to push information over to n8n here
+
+06:00.480 --> 06:06.960
+so
+
+06:06.960 --> 06:10.960
+so
+
+06:10.960 --> 06:14.960
+so
+
+06:14.960 --> 06:18.960
+so
+
+06:18.960 --> 06:22.960
+so
+
