@@ -25,8 +25,10 @@
 .specify/memory/       — Constitution, learnings, agent roster
 .claude/agents/        — Subagent definitions (researcher, implementer, reviewer, deployer, logger)
 .claude/rules/         — Modular rules (loaded by file path match)
-.claude/skills/        — User-invocable skills (speckit, toughlove, remotion, pptx, etc.)
+.claude/skills/        — User-invocable skills (speckit, toughlove, remotion, pptx, goal, etc.)
+.claude/systems/       — System Packs: domain → skills+workflows+memory+rules+agents (read by /goal)
 scripts/hooks/         — Deterministic lifecycle hooks
+scripts/systems/       — build-fleet.sh (n8n→registry) + sync-vault.sh (manifests→Obsidian mirror)
 scripts/autoresearch/  — Autonomous iteration loop (Karpathy pattern)
 ```
 

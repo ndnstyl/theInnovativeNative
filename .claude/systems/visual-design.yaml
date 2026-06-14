@@ -1,0 +1,45 @@
+domain: visual-design
+title: Visual Design
+description: >
+  Slides, carousels, diagrams, data-viz, icons, and brand-coherent static visuals. Run the
+  chart/flow/matrix decision tree before writing another card grid; severity via tone-shifting
+  within a 2-3 color brand palette, not new colors.
+autonomy: full_ship
+gates: [outward_send, prod_deploy]
+
+brand_rules:
+  - feedback_brand_palette_discipline
+  - feedback_visual_density_over_text_density
+  - feedback_directional_hex_hover_pattern
+  - feedback_inn_native_cyan_primary
+  - feedback_no_em_dashes
+
+skills:
+  primary: [pptx-generator, excalidraw-diagram, tin-visuals]
+  support: [gemini-image, distill]
+
+agents: [orchestrator, viz-designer, implementer, reviewer]
+
+n8n_workflows:
+  - qBGC2vYWsLQQTapj   # combine images nano
+  - uSO6UPpsnhNdLoMC   # edit images nano
+
+memory_anchors:
+  - reference_3d_icon_library
+  - reference_gemini_key_cc
+  - feedback_directional_hex_hover_pattern
+  - feedback_autonomous_viz_iteration_loop
+
+verification:
+  - "ran the chart/flow/matrix decision tree before any new card grid (feedback_visual_density_over_text_density)"
+  - "2-3 brand colors max; severity via tone-shift within the family (feedback_brand_palette_discipline)"
+  - "cyan primary, magenta rare (feedback_inn_native_cyan_primary)"
+  - "no em dashes incl &mdash;"
+
+entrypoints:
+  - "make slides / a deck for X"
+  - "design a LinkedIn carousel"
+  - "create a diagram of X"
+  - "build a data-viz / chart"
+  - "generate icons / images"
+  - "make this wall of text visual"

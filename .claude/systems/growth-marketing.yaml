@@ -1,0 +1,63 @@
+domain: growth-marketing
+title: Growth Marketing
+description: >
+  Lead sourcing + enrichment, outreach cadences (email + LinkedIn), funnels, demand generation,
+  social distribution, and the closed-loop analytics behind them. The execution muscle is the
+  Cerebro outreach fleet in n8n; the brain drafts the copy + strategy and hands sends to Mike.
+autonomy: full_ship
+gates: [n8n_activation, outward_send, prod_deploy]
+
+brand_rules:
+  - feedback_linkedin_viral_mechanics
+  - feedback_riley_pattern
+  - feedback_no_em_dashes
+  - feedback_sandy_riley_funnel_shape
+  - feedback_pixel_control_day_1
+  - feedback_outside_in_calibration
+
+skills:
+  primary: [deep-research, mike-voice]
+  support: [ingest, distill, mcp-client]
+
+agents: [orchestrator, researcher, implementer, reviewer]
+
+# Active Cerebro outreach fleet (resolved against n8n-fleet.json).
+n8n_workflows:
+  - 76ZmsMqUYMsr397j   # Cerebro — Lead Capture
+  - 2Jgg7MoKTdYjAA0L   # Cerebro — Lead Sourcing (Apify, In-Scope)
+  - 7SK2OhvDkNsPdvlq   # Cerebro — PhantomBuster LinkedIn Connect
+  - JAUGjjme3fJroTeE   # Cerebro — LinkedIn Warmth Scorer
+  - jkcT0okhldb1wRTW   # Cerebro — Lead Scoring
+  - I9AsM9a4cKEpK4Nq   # Cerebro — Contact Enrichment Loop
+  - KE4qKzENtfGNP68A   # Cerebro — Outreach Engine
+  - UCQHsPbbC6rWcJVA   # Cerebro — Outreach Kill-Switch
+  - 0xX7kqaspZrPITSQ   # Cerebro — Reply Classifier
+  - gK6DcJzUE1hsIDUf   # Cerebro — Daily Health Check
+  - RukUGf5ctsgvx5Di   # Cerebro — Daily Ops Dashboard
+  - iXLTnTbvk0MACjur   # Cerebro — Fleet Alert Relay
+  - 4iqs92G6xkAPRjcd   # Cerebro RAG — Query API
+
+memory_anchors:
+  - outreach_machine
+  - revenue_content_engine
+  - project_dea_growth_audit
+  - feedback_bust_demand_at_seams
+  - feedback_napkin_math_until_data_access
+  - n8n_workflow_status
+
+verification:
+  - "outreach copy passes the mike-voice fingerprint; no em dashes incl &mdash;"
+  - "outbound funnel shape per feedback_sandy_riley_funnel_shape (post-call nurture + cancel recovery, NOT 24/7 inbound SDR)"
+  - "lead claims are operator-scale signals, not unverified specific numbers (feedback_researcher_data_fallible)"
+  - "every send is GATED to Mike; nothing auto-activates (n8n-rules: Mike is the only tester)"
+  - "any workflow change scored 8+/10 via n8n-check before hand-off"
+
+entrypoints:
+  - "source N leads in <niche>"
+  - "draft a cold email / outreach sequence"
+  - "build a funnel for X"
+  - "score and prioritize these leads"
+  - "research this prospect / company"
+  - "reactivate dead leads"
+  - "write a LinkedIn outreach / connection message"
+  - "audit the outreach fleet health"

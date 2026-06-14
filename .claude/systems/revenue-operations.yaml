@@ -1,0 +1,47 @@
+domain: revenue-operations
+title: Revenue Operations
+description: >
+  Billing, subscriptions, CRM sync, payment webhooks, attribution, margin + invoice ops. Touches
+  money and customer records — keep gates tight: always check existing data before any migration,
+  never auto-mutate payments, reconcile against the source of record.
+autonomy: full_ship
+gates: [n8n_activation, outward_send, payment_mutation, db_migration, prod_deploy]
+
+brand_rules:
+  - feedback_no_em_dashes
+  - feedback_earn_capex_via_lift_proof
+  - feedback_napkin_math_until_data_access
+  - feedback_built_is_not_operational
+
+skills:
+  primary: [margin-analyzer, invoice-chaser, contract-reviewer]
+  support: [ingest, distill]
+
+agents: [orchestrator, researcher, implementer, reviewer]
+
+n8n_workflows:
+  - R2X8f0rAgTAvRXo7   # DEA - Stripe Webhook Receiver
+  - OyRk00H1gRXFH1rn   # DEA - Close CRM to Supabase Sync
+  - J3GLsNJWaA9ZniVO   # DEA - Keap to Supabase Sync
+  - TQvAj88MRt3B9jNG   # Brevo Analytics Webhook Receiver
+  - wndiAP0UgusVZsGY   # DEA WF6 - Airtable Audit Write-Back to Supabase
+
+memory_anchors:
+  - stripe_products
+  - analytics_dashboard_credentials
+  - project_dea_growth_audit
+  - feedback_earn_capex_via_lift_proof
+
+verification:
+  - "checked existing data before any DB migration (Hostinger/n8n/Supabase) — security-rules"
+  - "no payment mutation runs without explicit confirmation (payment_mutation gate)"
+  - "numbers reconcile against the source of record; pre-data-access figures labeled blended estimates"
+  - "no em dashes incl &mdash;"
+
+entrypoints:
+  - "chase overdue invoices"
+  - "analyze margins by product / client"
+  - "reconcile the CRM / billing data"
+  - "review this contract / SOW / MSA"
+  - "build a billing / attribution / revenue report"
+  - "audit subscription + payment state"

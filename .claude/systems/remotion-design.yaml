@@ -1,0 +1,44 @@
+domain: remotion-design
+title: Remotion Design
+description: >
+  Mike-directed Remotion video — React compositions, ProRes 4444 masters, reusable templates,
+  motion graphics. Distinct from agent-end-to-end video (that routes to HyperFrames under Content
+  Creation). ProRes 4444 is Remotion only.
+autonomy: full_ship
+gates: [outward_send, prod_deploy]
+
+brand_rules:
+  - feedback_video_tool_routing
+  - feedback_inn_native_cyan_primary
+  - feedback_reel_critique_round1
+  - feedback_no_em_dashes
+
+skills:
+  primary: [remotion, tin-visuals]
+  support: [elevenlabs, distill]
+
+agents: [orchestrator, implementer, reviewer]
+
+n8n_workflows:
+  - 5yEPYq626Kv6lDt6   # WF-THT-REEL — Reel Assembly
+  - BefCfx7WAzEfXT2v   # WF-THT-VIDEO — Video Generator
+  - 7xT9Ezu6wHHZ0Z3S   # WF-006 Haven FFMPEG Assembler
+
+memory_anchors:
+  - feedback_video_tool_routing
+  - reference_3d_icon_library
+  - masterclass_module5_advanced_autonomy
+  - content_factory
+
+verification:
+  - "routing correct: Mike-directed + ProRes 4444 = Remotion (feedback_video_tool_routing)"
+  - "remotion-check passes before render"
+  - "palette + reel structure per brand rules (no text before VO, b-roll matches, music always)"
+  - "no em dashes in on-screen copy incl &mdash;"
+
+entrypoints:
+  - "build a Remotion composition for X"
+  - "make a Mike-directed video"
+  - "create a motion-graphics template"
+  - "render a hero / brand video"
+  - "edit the timing / scenes of this Remotion video"

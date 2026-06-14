@@ -1,0 +1,67 @@
+domain: content-creation
+title: Content Creation
+description: >
+  Reels, shorts, carousels, blog posts, captions, scripts, quote cards, content calendars —
+  written and produced in Mike's voice and brand. Covers the TIN marketing content machine and
+  the social/blog publishing fleet. Video routing splits HyperFrames (agent end-to-end) vs
+  Remotion (Mike-directed); deep Remotion work belongs to the remotion-design pack.
+autonomy: full_ship
+gates: [n8n_activation, outward_send, prod_deploy]
+
+brand_rules:
+  - feedback_no_em_dashes
+  - feedback_inn_native_cyan_primary
+  - feedback_video_tool_routing
+  - feedback_reel_critique_round1
+  - feedback_linkedin_viral_mechanics
+  - feedback_visual_density_over_text_density
+
+skills:
+  primary: [mike-voice, hyperframes, tin-visuals, pptx-generator, brand-voice-generator]
+  support: [elevenlabs, ingest, distill]
+
+agents: [orchestrator, researcher, implementer, reviewer]
+
+# Active content/social/blog workflows (resolved against n8n-fleet.json).
+# BowTie* (the Pitbull cartoon series) is a self-contained sub-pipeline — see hard-rules.md
+# before touching it; not listed here to keep the pilot focused on marketing content.
+n8n_workflows:
+  - 9WJvczLs1npwcKdr   # Linkedin & Instagram Automation (flagship social poster)
+  - 35okkSwMNRTfOkkL   # SEO - Blog to GitHub (v2)
+  - 5vNADdcyLK7GrO39   # Blog → Micro Content Repurposer
+  - 5riIpJw4K4KiN1sg   # Cerebro Blog Generator — Weekly SEO Blog Post
+  - INfiz0WHAvoGwkHF   # Cerebro Content Engine — Daily IG Generator
+  - nUccOZU1aUAiJOHK   # Cerebro IG Publisher
+  - PcREHwTOYRbD18cF   # Cerebro — LinkedIn Post Publisher
+  - tAbJShdDNBcuPgmS   # Cerebro -- Content Auto-Poster
+  - Xna7lDE6JlAG0B5U   # Revenue Content Engine — Daily Funnel Posts
+  - HeDbNyIXvpyHGg7p   # IG Media Publisher
+  - 6kuVeraEQ43Gsczu   # IG Insights Poller (performance signal)
+  - 5yEPYq626Kv6lDt6   # WF-THT-REEL — Reel Assembly
+  - BefCfx7WAzEfXT2v   # WF-THT-VIDEO — Video Generator
+
+memory_anchors:
+  - content_factory
+  - revenue_content_engine
+  - blog_pipeline_architecture
+  - blog_architecture
+  - project_ob1_seeded_content_engine
+  - project_manychat_roadmap
+
+verification:
+  - "no em dashes anywhere, including &mdash; / &#8212; entities on the LIVE render"
+  - "video routed per feedback_video_tool_routing (HyperFrames agent-end-to-end vs Remotion Mike-directed)"
+  - "palette per feedback_inn_native_cyan_primary (cyan primary, magenta rare); caption highlight = cyan + 1.18x"
+  - "copy passes the mike-voice fingerprint (car-analogy cornerstone, no LLM tells)"
+  - "reel structure per feedback_reel_critique_round1 (no text before VO, b-roll matches content, music always)"
+
+entrypoints:
+  - "make a reel / short about X"
+  - "write a LinkedIn carousel"
+  - "write a LinkedIn / IG post"
+  - "write a blog post about X"
+  - "repurpose this blog/video into micro content"
+  - "write an IG caption"
+  - "generate a quote card from this OB1 thought"
+  - "draft a content calendar"
+  - "humanize / Mike-ify this draft"

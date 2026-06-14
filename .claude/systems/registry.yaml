@@ -1,0 +1,57 @@
+# System Pack registry — the index /goal reads first.
+# Canonical, git-versioned. Vault mirror: memory/_Systems.md (generated).
+# Schema: ./SCHEMA.md
+#
+# status: pilot  = manifest authored + proven end-to-end
+#         stub   = registered, manifest is a template awaiting fill
+version: 1
+updated: 2026-06-14
+
+# Global defaults inherited by every pack unless overridden in its manifest.
+defaults:
+  autonomy: full_ship
+  gates: [n8n_activation, outward_send, payment_mutation, prod_deploy, db_migration]
+  agents: [orchestrator, researcher, implementer, reviewer]
+
+domains:
+  content-creation:
+    title: Content Creation
+    manifest: content-creation.yaml
+    status: pilot
+    blurb: Reels, carousels, blog posts, captions, scripts — written + produced in Mike's voice.
+
+  growth-marketing:
+    title: Growth Marketing
+    manifest: growth-marketing.yaml
+    status: pilot
+    blurb: Lead sourcing, outreach cadences, funnels, paid + organic demand, social distribution.
+
+  revenue-operations:
+    title: Revenue Operations
+    manifest: revenue-operations.yaml
+    status: authored
+    blurb: Billing, subscriptions, CRM sync, attribution, margin + invoice ops. Touches money — keep gates tight.
+
+  market-research:
+    title: Market Research
+    manifest: market-research.yaml
+    status: authored
+    blurb: Deep web research, competitor + pain-point mapping, niche validation, cited reports.
+
+  uiux-web-design:
+    title: UI/UX Web Design
+    manifest: uiux-web-design.yaml
+    status: authored
+    blurb: Production frontend, 3D web experiences, landing pages, design-to-code, web security.
+
+  visual-design:
+    title: Visual Design
+    manifest: visual-design.yaml
+    status: authored
+    blurb: Slides, carousels, diagrams, data-viz, brand-coherent static visuals.
+
+  remotion-design:
+    title: Remotion Design
+    manifest: remotion-design.yaml
+    status: authored
+    blurb: Mike-directed Remotion video (React, ProRes 4444), templates, motion graphics.

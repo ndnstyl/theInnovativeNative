@@ -1,0 +1,4 @@
+# Generated n8n IP maps — full fleet architecture + credential account-names.
+# Public repo: do NOT commit. Regenerate locally via scripts/systems/build-fleet.sh + enrich-fleet.sh.
+n8n-fleet.json
+n8n-detail.json
